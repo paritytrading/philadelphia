@@ -31,6 +31,18 @@ public class FIXMessageBenchmark {
     public void prepare() {
         message = new FIXMessage(32, 32);
 
+        format();
+
+        buffer = ByteBuffer.allocate(1024);
+
+        message.put(buffer);
+
+        buffer.flip();
+    }
+
+    private void format() {
+        message.reset();
+
         message.addField(MsgType).setChar(OrderSingle);
         message.addField(SenderCompID).setString("initiator");
         message.addField(TargetCompID).setString("acceptor");
@@ -43,12 +55,6 @@ public class FIXMessageBenchmark {
         message.addField(TransactTime).setString("20150924-09:30:05.250");
         message.addField(OrdType).setChar(OrdTypeValues.Limit);
         message.addField(Price).setFloat(150.25, 2);
-
-        buffer = ByteBuffer.allocate(1024);
-
-        message.put(buffer);
-
-        buffer.flip();
     }
 
     @Benchmark
@@ -64,6 +70,16 @@ public class FIXMessageBenchmark {
     @Benchmark
     @BenchmarkMode(Mode.SampleTime)
     public void put() {
+        message.put(buffer);
+
+        buffer.flip();
+    }
+
+    @Benchmark
+    @BenchmarkMode(Mode.SampleTime)
+    public void formatAndPut() {
+        format();
+
         message.put(buffer);
 
         buffer.flip();
