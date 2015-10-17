@@ -26,21 +26,22 @@ public class FIXTagsBenchmark {
         buffer = ByteBuffer.wrap("123=".getBytes(US_ASCII));
     }
 
-    @TearDown(Level.Invocation)
-    public void tearDown() {
-        buffer.flip();
-    }
-
     @Benchmark
     @BenchmarkMode(Mode.SampleTime)
     public long get() {
-        return FIXTags.get(buffer);
+        long tag = FIXTags.get(buffer);
+
+        buffer.flip();
+
+        return tag;
     }
 
     @Benchmark
     @BenchmarkMode(Mode.SampleTime)
     public void put() {
         FIXTags.put(buffer, 123);
+
+        buffer.flip();
     }
 
 }
