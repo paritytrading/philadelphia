@@ -1,4 +1,4 @@
-package org.jvirtanen.philadelphia.benchmark;
+package org.jvirtanen.philadelphia.perf;
 
 import java.util.concurrent.TimeUnit;
 import org.joda.time.MutableDateTime;

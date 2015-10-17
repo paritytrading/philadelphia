@@ -1,4 +1,4 @@
-package org.jvirtanen.philadelphia.benchmark;
+package org.jvirtanen.philadelphia.perf;
 
 import static java.nio.charset.StandardCharsets.*;
 
