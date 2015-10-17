@@ -1,6 +1,7 @@
 package org.jvirtanen.philadelphia;
 
 import static org.junit.Assert.*;
+import static org.jvirtanen.philadelphia.fix42.FIX42Enumerations.*;
 import static org.jvirtanen.philadelphia.fix42.FIX42Tags.*;
 
 import java.nio.ByteBuffer;
@@ -22,12 +23,12 @@ public class FIXMessageTest {
         MutableDateTime timestamp = new MutableDateTime(2015, 9, 24, 9, 30, 5, 250);
 
         message.addField(ClOrdID).setString("123");
-        message.addField(HandlInst).setChar('1');
+        message.addField(HandlInst).setChar(HandlInstValues.AutomatedExecutionNoIntervention);
         message.addField(Symbol).setString("FOO");
-        message.addField(Side).setChar('1');
+        message.addField(Side).setChar(SideValues.Buy);
         message.addField(TransactTime).setTimestamp(timestamp, true);
         message.addField(OrderQty).setInt(100);
-        message.addField(OrdType).setChar('2');
+        message.addField(OrdType).setChar(OrdTypeValues.Limit);
         message.addField(Price).setFloat(150.25, 2);
 
         ByteBuffer buffer = ByteBuffer.allocate(256);
