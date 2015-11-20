@@ -83,10 +83,10 @@ public class FIXSession implements Closeable {
         this.rxMsgSeqNum = config.getIncomingMsgSeqNum();
         this.txMsgSeqNum = config.getOutgoingMsgSeqNum();
 
-        this.rxBuffer = ByteBuffer.allocate(1024);
+        this.rxBuffer = ByteBuffer.allocate(config.getRxBufferCapacity());
 
-        this.txHeaderBuffer = ByteBuffer.allocate(1024);
-        this.txBodyBuffer = ByteBuffer.allocate(1024);
+        this.txHeaderBuffer = ByteBuffer.allocate(config.getTxBufferCapacity());
+        this.txBodyBuffer = ByteBuffer.allocate(config.getTxBufferCapacity());
 
         this.txBuffers = new ByteBuffer[2];
 
