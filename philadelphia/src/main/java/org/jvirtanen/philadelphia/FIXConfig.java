@@ -15,6 +15,8 @@ public class FIXConfig {
     private long       outgoingMsgSeqNum;
     private int        maxFieldCount;
     private int        fieldCapacity;
+    private int        rxBufferCapacity;
+    private int        txBufferCapacity;
 
     /**
      * Create a session configuration.
@@ -27,12 +29,14 @@ public class FIXConfig {
      * @param outgoingMsgSeqNum the outgoing MsgSeqNum(34)
      * @param maxFieldCount the maximum number of fields in a message
      * @param fieldCapacity the field capacity
+     * @param rxBufferCapacity the receive buffer capacity
+     * @param txBufferCapacity the transmit buffer capacity
      * @see Builder
      */
     public FIXConfig(FIXVersion version, String senderCompId,
             String targetCompId, int heartBtInt,
             long incomingMsgSeqNum, long outgoingMsgSeqNum,
-            int maxFieldCount, int fieldCapacity) {
+            int maxFieldCount, int fieldCapacity, int rxBufferCapacity, int txBufferCapacity) {
         this.version           = version;
         this.senderCompId      = senderCompId;
         this.targetCompId      = targetCompId;
@@ -41,6 +45,8 @@ public class FIXConfig {
         this.outgoingMsgSeqNum = outgoingMsgSeqNum;
         this.maxFieldCount     = maxFieldCount;
         this.fieldCapacity     = fieldCapacity;
+        this.rxBufferCapacity  = rxBufferCapacity;
+        this.txBufferCapacity  = txBufferCapacity;
     }
 
     /**
@@ -116,6 +122,25 @@ public class FIXConfig {
     }
 
     /**
+     * Get the receive buffer capacity.
+     *
+     * @return the receive buffer capacity
+     */
+
+    public int getRxBufferCapacity() {
+        return rxBufferCapacity;
+    }
+
+    /**
+     * Get the transmit buffer capacity.
+     *
+     * @return the transmit buffer capacity
+     */
+    public int getTxBufferCapacity() {
+        return txBufferCapacity;
+    }
+
+    /**
      * <p>A session configuration builder. The builder uses the following
      * default values:</p>
      * <ul>
@@ -127,6 +152,8 @@ public class FIXConfig {
      *   <li>outgoing MsgSeqNum(34): 1</li>
      *   <li>maximum number of fields in a message: 64</li>
      *   <li>field capacity: 64</li>
+     *   <li>receive buffer capacity: 1024</li>
+     *   <li>transmit buffer capacity: 1024</li>
      * </ul>
      */
     public static class Builder {
@@ -139,6 +166,8 @@ public class FIXConfig {
         private long       outgoingMsgSeqNum;
         private int        maxFieldCount;
         private int        fieldCapacity;
+        private int        rxBufferCapacity;
+        private int        txBufferCapacity;
 
         /**
          * Create a session configuration builder.
@@ -152,6 +181,8 @@ public class FIXConfig {
             outgoingMsgSeqNum = 1;
             maxFieldCount     = 64;
             fieldCapacity     = 64;
+            rxBufferCapacity  = 1024;
+            txBufferCapacity  = 1024;
         }
 
         /**
@@ -251,6 +282,30 @@ public class FIXConfig {
         }
 
         /**
+         * Set the receive buffer capacity.
+         *
+         * @param rxBufferCapacity the receive buffer capacity
+         * @return this instance
+         */
+        public Builder setRxBufferCapacity(int rxBufferCapacity) {
+            this.rxBufferCapacity = rxBufferCapacity;
+            
+            return this;
+        }
+
+        /**
+         * Set the transmit buffer capacity.
+         *
+         * @param txBufferCapacity the transmit buffer capacity
+         * @return this instance
+         */
+        public Builder setTxBufferCapacity(int txBufferCapacity) {
+            this.txBufferCapacity = txBufferCapacity;
+            
+            return this;
+        }
+
+        /**
          * Build the session configuration.
          *
          * @return the session configuration
@@ -258,7 +313,7 @@ public class FIXConfig {
         public FIXConfig build() {
             return new FIXConfig(version, senderCompId, targetCompId,
                     heartBtInt, incomingMsgSeqNum, outgoingMsgSeqNum,
-                    maxFieldCount, fieldCapacity);
+                    maxFieldCount, fieldCapacity, rxBufferCapacity, txBufferCapacity);
         }
 
     }
