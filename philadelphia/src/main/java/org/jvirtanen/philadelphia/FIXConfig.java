@@ -289,7 +289,7 @@ public class FIXConfig {
          */
         public Builder setRxBufferCapacity(int rxBufferCapacity) {
             this.rxBufferCapacity = rxBufferCapacity;
-            
+
             return this;
         }
 
@@ -301,7 +301,7 @@ public class FIXConfig {
          */
         public Builder setTxBufferCapacity(int txBufferCapacity) {
             this.txBufferCapacity = txBufferCapacity;
-            
+
             return this;
         }
 
