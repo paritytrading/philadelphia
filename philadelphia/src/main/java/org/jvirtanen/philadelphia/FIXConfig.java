@@ -287,8 +287,10 @@ public class FIXConfig {
          * @param rxBufferCapacity the receive buffer capacity
          * @return this instance
          */
-        public void setRxBufferCapacity(int rxBufferCapacity) {
+        public Builder setRxBufferCapacity(int rxBufferCapacity) {
             this.rxBufferCapacity = rxBufferCapacity;
+            
+            return this;
         }
 
         /**
@@ -297,8 +299,10 @@ public class FIXConfig {
          * @param txBufferCapacity the transmit buffer capacity
          * @return this instance
          */
-        public void setTxBufferCapacity(int txBufferCapacity) {
+        public Builder setTxBufferCapacity(int txBufferCapacity) {
             this.txBufferCapacity = txBufferCapacity;
+            
+            return this;
         }
 
         /**
