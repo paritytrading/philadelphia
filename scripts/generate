@@ -140,7 +140,8 @@ ${body}
 
 def format_msg_types(version, messages):
     name_width = max(len(message.name) for message in messages)
-    body = '\n'.join('{}{}'.format(INDENT, format_msg_type(message, name_width))
+    msg_type_width = max(len(message.msg_type) for message in messages)
+    body = '\n'.join('{}{}'.format(INDENT, format_msg_type(message, name_width, msg_type_width))
         for message in messages)
     return MSG_TYPES_TEMPLATE.substitute({
             'package_name': package_name(version),
@@ -149,9 +150,13 @@ def format_msg_types(version, messages):
             'body': body,
         })
 
-def format_msg_type(message, name_width):
-    return 'public static final char {:<{}} = \'{}\';'.format(message.name,
-        name_width, message.msg_type)
+def format_msg_type(message, name_width, msg_type_width):
+    if len(message.msg_type) > 1:
+        return 'public static final String {:<{}} = "{}";'.format(message.name,
+            name_width, message.msg_type)
+    else:
+        return 'public static final {} {:<{}} = \'{}\';'.format('char' if msg_type_width == 1
+            else 'char  ', message.name, name_width, message.msg_type)
 
 TAGS_TEMPLATE = string.Template('''\
 package org.jvirtanen.philadelphia.${package_name};
