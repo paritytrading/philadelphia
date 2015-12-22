@@ -219,7 +219,8 @@ def enumerations(indir):
     fields = {field.tag: field for field in read_fields(fields_path(indir))}
     enumerations = [Enumeration(fields[tag], list(enums)) for tag, enums
         in itertools.groupby(enums, lambda enum: enum.tag)
-        if fields[tag].type != 'Boolean' and fields[tag].name != 'MsgType']
+        if tag in fields and fields[tag].type != 'Boolean'
+        and fields[tag].name != 'MsgType']
     sys.stdout.write(format_enumerations(version, enumerations))
 
 def msg_types(indir):
