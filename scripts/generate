@@ -69,7 +69,7 @@ def format_enumerations(version, enumerations):
     body = '\n\n'.join(format_enumeration(enumeration) for enumeration in enumerations)
     return ENUMERATIONS_TEMPLATE.substitute({
             'package_name': package_name(version),
-            'class_name': enumerations_class_name(version),
+            'class_name': class_name(version, 'Enumerations'),
             'version_name': version_name(version),
             'body': body,
         })
@@ -144,7 +144,7 @@ def format_msg_types(version, messages):
         for message in messages)
     return MSG_TYPES_TEMPLATE.substitute({
             'package_name': package_name(version),
-            'class_name': msg_types_class_name(version),
+            'class_name': class_name(version, 'MsgTypes'),
             'version_name': version_name(version),
             'body': body,
         })
@@ -176,7 +176,7 @@ def format_tags(version, fields):
         for field in fields)
     return TAGS_TEMPLATE.substitute({
             'package_name': package_name(version),
-            'class_name': tags_class_name(version),
+            'class_name': class_name(version, 'Tags'),
             'version_name': version_name(version),
             'body': body,
         })
@@ -188,20 +188,11 @@ def format_tag(field, name_width, tag_width):
 def version_name(version):
     return '{} {}.{}'.format(version.protocol, version.major, version.minor)
 
-def class_name_prefix(version):
-    return '{}{}{}'.format(version.protocol, version.major, version.minor)
+def class_name(version, suffix=''):
+    return ''.join([version.protocol, version.major, version.minor, suffix])
 
 def package_name(version):
-    return class_name_prefix(version).lower()
-
-def enumerations_class_name(version):
-    return '{}{}'.format(class_name_prefix(version), 'Enumerations')
-
-def msg_types_class_name(version):
-    return '{}{}'.format(class_name_prefix(version), 'MsgTypes')
-
-def tags_class_name(version):
-    return '{}{}'.format(class_name_prefix(version), 'Tags')
+    return class_name(version).lower()
 
 def field_name(field):
     return '{}({})'.format(field.name, field.tag)
