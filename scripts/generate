@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import collections
+import itertools
 import os.path
 import re
 import string
@@ -9,13 +10,25 @@ import xml.etree.ElementTree
 
 INDENT = '    '
 
-Field = collections.namedtuple('Field', ['tag', 'name'])
+Enum = collections.namedtuple('Enum', ['tag', 'value', 'symbolic_name'])
+
+def read_enums(infile):
+    def enum(elem):
+        tag = elem.find('Tag').text
+        value = elem.find('Value').text
+        symbolic_name = elem.find('SymbolicName').text
+        return Enum(tag, value, symbolic_name)
+    tree = xml.etree.ElementTree.parse(infile)
+    return [enum(elem) for elem in tree.findall('Enum')]
+
+Field = collections.namedtuple('Field', ['tag', 'name', 'type'])
 
 def read_fields(infile):
     def field(elem):
         tag = elem.find('Tag').text
         name = elem.find('Name').text
-        return Field(tag, name)
+        type = elem.find('Type').text
+        return Field(tag, name, type)
     tree = xml.etree.ElementTree.parse(infile)
     return [field(elem) for elem in tree.findall('Field')]
 
@@ -35,6 +48,79 @@ def read_version(infile):
     version = xml.etree.ElementTree.parse(infile).getroot().get('version')
     match = re.match(r'(?P<protocol>.+)\.(?P<major>.+)\.(?P<minor>.+)', version)
     return Version(match.group('protocol'), match.group('major'), match.group('minor'))
+
+ENUMERATIONS_TEMPLATE = string.Template('''\
+package org.jvirtanen.philadelphia.${package_name};
+
+/**
+ * Enumerations for ${version_name}.
+ */
+public class ${class_name} {
+
+${body}
+
+    private ${class_name}() {
+    }
+
+}
+''')
+
+def format_enumerations(version, enumerations):
+    body = '\n\n'.join(format_enumeration(enumeration) for enumeration in enumerations)
+    return ENUMERATIONS_TEMPLATE.substitute({
+            'package_name': package_name(version),
+            'class_name': enumerations_class_name(version),
+            'version_name': version_name(version),
+            'body': body,
+        })
+
+ENUMERATION_TEMPLATE = string.Template('''\
+    /**
+     * Values for ${field_name}.
+     */
+    public static class ${class_name} {
+
+${body}
+
+        private ${class_name}() {
+        }
+
+    }\
+''')
+
+def format_char(value, value_width):
+    return '\'{}\''.format(value)
+
+def format_string(value, value_width):
+    return '"{}"'.format(value)
+
+def format_int(value, value_width):
+    return '{:>{}}'.format(value, value_width)
+
+FIELD_TYPES = {
+    'Char': ('char', str, format_char),
+    'char': ('char', str, format_char),
+    'int': ('int', int, format_int),
+    'MultipleValueString': ('String', str, format_string),
+    'String': ('String', str, format_string),
+}
+
+def format_enumeration(enumeration):
+    symbolic_name_width = max(len(enum.symbolic_name) for enum in enumeration.enums)
+    value_width = max(len(enum.value) for enum in enumeration.enums)
+    type, sort_type, format_type = FIELD_TYPES[enumeration.field.type]
+    body = '\n'.join('{}{}'.format(2 * INDENT, format_enum(enum, type, symbolic_name_width,
+      format_type, value_width)) for enum
+      in sorted(enumeration.enums, key=lambda enum: sort_type(enum.value)))
+    return ENUMERATION_TEMPLATE.substitute({
+            'field_name': field_name(enumeration.field),
+            'class_name': '{}Values'.format(enumeration.field.name),
+            'body': body,
+        })
+
+def format_enum(enum, type, symbolic_name_width, format_type, value_width):
+    return 'public static final {} {:<{}} = {};'.format(type, enum.symbolic_name,
+        symbolic_name_width, format_type(enum.value, value_width))
 
 MSG_TYPES_TEMPLATE = string.Template('''\
 package org.jvirtanen.philadelphia.${package_name};
@@ -108,17 +194,37 @@ def class_name_prefix(version):
 def package_name(version):
     return class_name_prefix(version).lower()
 
+def enumerations_class_name(version):
+    return '{}{}'.format(class_name_prefix(version), 'Enumerations')
+
 def msg_types_class_name(version):
     return '{}{}'.format(class_name_prefix(version), 'MsgTypes')
 
 def tags_class_name(version):
     return '{}{}'.format(class_name_prefix(version), 'Tags')
 
+def field_name(field):
+    return '{}({})'.format(field.name, field.tag)
+
+def enums_path(indir):
+    return os.path.join(indir, 'Enums.xml')
+
 def fields_path(indir):
     return os.path.join(indir, 'Fields.xml')
 
 def messages_path(indir):
     return os.path.join(indir, 'Messages.xml')
+
+Enumeration = collections.namedtuple('Enumeration', ['field', 'enums'])
+
+def enumerations(indir):
+    version = read_version(enums_path(indir))
+    enums = read_enums(enums_path(indir))
+    fields = {field.tag: field for field in read_fields(fields_path(indir))}
+    enumerations = [Enumeration(fields[tag], list(enums)) for tag, enums
+        in itertools.groupby(enums, lambda enum: enum.tag)
+        if fields[tag].type != 'Boolean' and fields[tag].name != 'MsgType']
+    sys.stdout.write(format_enumerations(version, enumerations))
 
 def msg_types(indir):
     version = read_version(messages_path(indir))
@@ -134,11 +240,13 @@ USAGE = '''\
 Usage: {} <command> <input-directory>
 
 Commands:
-  msg-types  Generate message types
-  tags       Generate tags
+  enumerations  Generate enumerations
+  msg-types     Generate message types
+  tags          Generate tags
 '''
 
 COMMANDS = {
+    'enumerations': enumerations,
     'msg-types': msg_types,
     'tags': tags,
 }
