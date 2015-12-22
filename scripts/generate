@@ -100,8 +100,10 @@ def format_int(value, value_width):
 FIELD_TYPES = {
     'Char': ('char', str, format_char),
     'char': ('char', str, format_char),
+    'Int': ('int', int, format_int),
     'int': ('int', int, format_int),
     'MultipleValueString': ('String', str, format_string),
+    'NumInGroup': ('int', int, format_int),
     'String': ('String', str, format_string),
 }
 
