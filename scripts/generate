@@ -19,12 +19,53 @@ def read_fields(infile):
     tree = xml.etree.ElementTree.parse(infile)
     return [field(elem) for elem in tree.findall('Field')]
 
+Message = collections.namedtuple('Message', ['msg_type', 'name'])
+
+def read_messages(infile):
+    def message(elem):
+        msg_type = elem.find('MsgType').text
+        name = elem.find('Name').text
+        return Message(msg_type, name)
+    tree = xml.etree.ElementTree.parse(infile)
+    return [message(elem) for elem in tree.findall('Message')]
+
 Version = collections.namedtuple('Version', ['protocol', 'major', 'minor'])
 
 def read_version(infile):
     version = xml.etree.ElementTree.parse(infile).getroot().get('version')
     match = re.match(r'(?P<protocol>.+)\.(?P<major>.+)\.(?P<minor>.+)', version)
     return Version(match.group('protocol'), match.group('major'), match.group('minor'))
+
+MSG_TYPES_TEMPLATE = string.Template('''\
+package org.jvirtanen.philadelphia.${package_name};
+
+/**
+ * Message types for ${version_name}.
+ */
+public class ${class_name} {
+
+${body}
+
+    private ${class_name}() {
+    }
+
+}
+''')
+
+def format_msg_types(version, messages):
+    name_width = max(len(message.name) for message in messages)
+    body = '\n'.join('{}{}'.format(INDENT, format_msg_type(message, name_width))
+        for message in messages)
+    return MSG_TYPES_TEMPLATE.substitute({
+            'package_name': package_name(version),
+            'class_name': msg_types_class_name(version),
+            'version_name': version_name(version),
+            'body': body,
+        })
+
+def format_msg_type(message, name_width):
+    return 'public static final char {:<{}} = \'{}\';'.format(message.name,
+        name_width, message.msg_type)
 
 TAGS_TEMPLATE = string.Template('''\
 package org.jvirtanen.philadelphia.${package_name};
@@ -67,11 +108,22 @@ def class_name_prefix(version):
 def package_name(version):
     return class_name_prefix(version).lower()
 
+def msg_types_class_name(version):
+    return '{}{}'.format(class_name_prefix(version), 'MsgTypes')
+
 def tags_class_name(version):
     return '{}{}'.format(class_name_prefix(version), 'Tags')
 
 def fields_path(indir):
     return os.path.join(indir, 'Fields.xml')
+
+def messages_path(indir):
+    return os.path.join(indir, 'Messages.xml')
+
+def msg_types(indir):
+    version = read_version(messages_path(indir))
+    messages = read_messages(messages_path(indir))
+    sys.stdout.write(format_msg_types(version, messages))
 
 def tags(indir):
     version = read_version(fields_path(indir))
@@ -82,10 +134,12 @@ USAGE = '''\
 Usage: {} <command> <input-directory>
 
 Commands:
-  tags  Generate tags
+  msg-types  Generate message types
+  tags       Generate tags
 '''
 
 COMMANDS = {
+    'msg-types': msg_types,
     'tags': tags,
 }
 
