@@ -111,6 +111,8 @@ def format_enumeration(enumeration):
     symbolic_name_width = max(len(enum.symbolic_name) for enum in enumeration.enums)
     value_width = max(len(enum.value) for enum in enumeration.enums)
     type, sort_type, format_type = FIELD_TYPES[enumeration.field.type]
+    if type == 'char' and value_width > 1:
+        type, sort_type, format_type = FIELD_TYPES['String']
     body = '\n'.join('{}{}'.format(2 * INDENT, format_enum(enum, type, symbolic_name_width,
       format_type, value_width)) for enum
       in sorted(enumeration.enums, key=lambda enum: sort_type(enum.value)))
