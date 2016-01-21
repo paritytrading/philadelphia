@@ -17,37 +17,37 @@ class FIXStatus implements FIXStatusListener {
     }
 
     @Override
-    public void close(String message) {
+    public void close(FIXSession session, String message) {
         events.add(new Close(message));
     }
 
     @Override
-    public void sequenceReset() {
+    public void sequenceReset(FIXSession session) {
         events.add(new SequenceReset());
     }
 
     @Override
-    public void tooLowMsgSeqNum(long receivedMsgSeqNum, long expectedMsgSeqNum) {
+    public void tooLowMsgSeqNum(FIXSession session, long receivedMsgSeqNum, long expectedMsgSeqNum) {
         events.add(new TooLowMsgSeqNum(receivedMsgSeqNum, expectedMsgSeqNum));
     }
 
     @Override
-    public void heartbeatTimeout() {
+    public void heartbeatTimeout(FIXSession session) {
         events.add(new HeartbeatTimeout());
     }
 
     @Override
-    public void reject(FIXMessage message) {
+    public void reject(FIXSession session, FIXMessage message) {
         events.add(new Reject());
     }
 
     @Override
-    public void logon(FIXMessage message) {
+    public void logon(FIXSession session, FIXMessage message) {
         events.add(new Logon());
     }
 
     @Override
-    public void logout(FIXMessage message) {
+    public void logout(FIXSession session, FIXMessage message) {
         events.add(new Logout());
     }
 

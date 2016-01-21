@@ -297,7 +297,7 @@ public class FIXSession implements Closeable {
             }
         } else {
             if (currentTimeMillis - testRequestTxMillis > testRequestMillis) {
-                statusListener.heartbeatTimeout();
+                statusListener.heartbeatTimeout(this);
 
                 testRequestTxMillis = 0;
             }
@@ -462,7 +462,7 @@ public class FIXSession implements Closeable {
 
             FIXValue msgType = message.getMsgType();
             if (msgType == null) {
-                statusListener.close("MsgType(35) not found");
+                statusListener.close(FIXSession.this, "MsgType(35) not found");
                 return;
             }
 
@@ -485,7 +485,7 @@ public class FIXSession implements Closeable {
                     FIXValue possDupFlag = message.findField(PossDupFlag);
 
                     if (possDupFlag == null || possDupFlag.asChar() != 'Y')
-                        statusListener.tooLowMsgSeqNum(msgSeqNum, rxMsgSeqNum);
+                        statusListener.tooLowMsgSeqNum(FIXSession.this, msgSeqNum, rxMsgSeqNum);
                 }
 
                 return;
@@ -563,7 +563,7 @@ public class FIXSession implements Closeable {
         }
 
         private void handleReject(FIXMessage message) throws IOException {
-            statusListener.reject(message);
+            statusListener.reject(FIXSession.this, message);
         }
 
         private void handleSequenceReset(FIXMessage message, boolean reset) throws IOException {
@@ -582,18 +582,18 @@ public class FIXSession implements Closeable {
             rxMsgSeqNum = newSeqNo;
 
             if (reset)
-                statusListener.sequenceReset();
+                statusListener.sequenceReset(FIXSession.this);
         }
 
         private void handleLogout(FIXMessage message) throws IOException {
-            statusListener.logout(message);
+            statusListener.logout(FIXSession.this, message);
         }
 
         private void handleLogon(FIXMessage message) throws IOException {
             if (senderCompId.isEmpty()) {
                 FIXValue value = message.findField(TargetCompID);
                 if (value == null) {
-                    statusListener.close("SenderCompID(49) not found");
+                    statusListener.close(FIXSession.this, "SenderCompID(49) not found");
                     return;
                 }
 
@@ -603,14 +603,14 @@ public class FIXSession implements Closeable {
             if (targetCompId.isEmpty()) {
                 FIXValue value = message.findField(SenderCompID);
                 if (value == null) {
-                    statusListener.close("TargetCompID(56) not found");
+                    statusListener.close(FIXSession.this, "TargetCompID(56) not found");
                     return;
                 }
 
                 targetCompId = value.asString();
             }
 
-            statusListener.logon(message);
+            statusListener.logon(FIXSession.this, message);
         }
 
     }
