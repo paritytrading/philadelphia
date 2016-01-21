@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.SocketAddress;
 import java.net.StandardSocketOptions;
 import java.nio.channels.SocketChannel;
-
 import org.HdrHistogram.Histogram;
 import org.jvirtanen.philadelphia.FIXConfig;
 import org.jvirtanen.philadelphia.FIXMessage;
