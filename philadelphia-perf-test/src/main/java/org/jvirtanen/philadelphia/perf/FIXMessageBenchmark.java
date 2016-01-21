@@ -1,28 +1,14 @@
 package org.jvirtanen.philadelphia.perf;
 
-import static org.jvirtanen.philadelphia.fix42.FIX42MsgTypes.OrderSingle;
-import static org.jvirtanen.philadelphia.fix42.FIX42Tags.ClOrdID;
-import static org.jvirtanen.philadelphia.fix42.FIX42Tags.HandlInst;
-import static org.jvirtanen.philadelphia.fix42.FIX42Tags.MsgSeqNum;
-import static org.jvirtanen.philadelphia.fix42.FIX42Tags.MsgType;
-import static org.jvirtanen.philadelphia.fix42.FIX42Tags.OrdType;
-import static org.jvirtanen.philadelphia.fix42.FIX42Tags.Price;
-import static org.jvirtanen.philadelphia.fix42.FIX42Tags.SenderCompID;
-import static org.jvirtanen.philadelphia.fix42.FIX42Tags.SendingTime;
-import static org.jvirtanen.philadelphia.fix42.FIX42Tags.Side;
-import static org.jvirtanen.philadelphia.fix42.FIX42Tags.Symbol;
-import static org.jvirtanen.philadelphia.fix42.FIX42Tags.TargetCompID;
-import static org.jvirtanen.philadelphia.fix42.FIX42Tags.TransactTime;
+import static org.jvirtanen.philadelphia.fix42.FIX42Enumerations.*;
+import static org.jvirtanen.philadelphia.fix42.FIX42MsgTypes.*;
+import static org.jvirtanen.philadelphia.fix42.FIX42Tags.*;
 
 import java.nio.ByteBuffer;
 import java.util.concurrent.TimeUnit;
-
 import org.jvirtanen.philadelphia.FIXMessage;
 import org.jvirtanen.philadelphia.FIXMessageOverflowException;
 import org.jvirtanen.philadelphia.FIXValueOverflowException;
-import org.jvirtanen.philadelphia.fix42.FIX42Enumerations.HandlInstValues;
-import org.jvirtanen.philadelphia.fix42.FIX42Enumerations.OrdTypeValues;
-import org.jvirtanen.philadelphia.fix42.FIX42Enumerations.SideValues;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Level;
@@ -31,6 +17,7 @@ import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.TearDown;
 
 @State(Scope.Thread)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
