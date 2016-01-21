@@ -1,12 +1,10 @@
 package org.jvirtanen.philadelphia.initiator;
 
-import static org.jvirtanen.philadelphia.fix42.FIX42MsgTypes.*;
-import static org.jvirtanen.philadelphia.fix42.FIX42Tags.*;
-
 import java.io.IOException;
 import java.net.SocketAddress;
 import java.net.StandardSocketOptions;
 import java.nio.channels.SocketChannel;
+
 import org.HdrHistogram.Histogram;
 import org.jvirtanen.philadelphia.FIXConfig;
 import org.jvirtanen.philadelphia.FIXMessage;
@@ -33,34 +31,34 @@ class Initiator implements FIXMessageListener {
         transport = new FIXSession(channel, CONFIG, this, new FIXStatusListener() {
 
             @Override
-            public void close(String message) throws IOException {
-                transport.close();
+            public void close(FIXSession session, String message) throws IOException {
+                session.close();
             }
 
             @Override
-            public void sequenceReset() {
+            public void sequenceReset(FIXSession session) {
             }
 
             @Override
-            public void tooLowMsgSeqNum(long receivedMsgSeqNum, long expectedMsgSeqNum) {
+            public void tooLowMsgSeqNum(FIXSession session, long receivedMsgSeqNum, long expectedMsgSeqNum) {
             }
 
             @Override
-            public void heartbeatTimeout() throws IOException {
-                transport.close();
+            public void heartbeatTimeout(FIXSession session) throws IOException {
+                session.close();
             }
 
             @Override
-            public void reject(FIXMessage message) throws IOException {
+            public void reject(FIXSession session, FIXMessage message) throws IOException {
             }
 
             @Override
-            public void logon(FIXMessage message) throws IOException {
+            public void logon(FIXSession session, FIXMessage message) throws IOException {
             }
 
             @Override
-            public void logout(FIXMessage message) throws IOException {
-                transport.sendLogout();
+            public void logout(FIXSession session, FIXMessage message) throws IOException {
+                session.sendLogout();
             }
 
         });
