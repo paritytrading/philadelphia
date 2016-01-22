@@ -38,37 +38,37 @@ class Session implements FIXMessageListener {
         transport = new FIXSession(channel, CONFIG, this, new FIXStatusListener() {
 
             @Override
-            public void close(String message) throws IOException {
-                transport.close();
+            public void close(FIXSession session, String message) throws IOException {
+                session.close();
             }
 
             @Override
-            public void sequenceReset() {
+            public void sequenceReset(FIXSession session) {
             }
 
             @Override
-            public void tooLowMsgSeqNum(long receivedMsgSeqNum, long expectedMsgSeqNum) {
+            public void tooLowMsgSeqNum(FIXSession session, long receivedMsgSeqNum, long expectedMsgSeqNum) {
             }
 
             @Override
-            public void heartbeatTimeout() throws IOException {
-                transport.close();
+            public void heartbeatTimeout(FIXSession session) throws IOException {
+                session.close();
             }
 
             @Override
-            public void reject(FIXMessage message) throws IOException {
+            public void reject(FIXSession session, FIXMessage message) throws IOException {
             }
 
             @Override
-            public void logon(FIXMessage message) throws IOException {
-                transport.sendLogon(true);
+            public void logon(FIXSession session, FIXMessage message) throws IOException {
+                session.sendLogon(true);
 
-                transport.updateCompID(report);
+                session.updateCompID(report);
             }
 
             @Override
-            public void logout(FIXMessage message) throws IOException {
-                transport.sendLogout();
+            public void logout(FIXSession session, FIXMessage message) throws IOException {
+                session.sendLogout();
             }
 
         });
