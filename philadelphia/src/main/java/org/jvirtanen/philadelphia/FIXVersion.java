@@ -7,7 +7,8 @@ public enum FIXVersion {
 
     FIX_4_2("FIX.4.2"),
     FIX_4_3("FIX.4.3"),
-    FIX_4_4("FIX.4.4");
+    FIX_4_4("FIX.4.4"),
+    FIXT_1_1("FIXT.1.1");
 
     private String beginString;
 
