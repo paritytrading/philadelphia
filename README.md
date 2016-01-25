@@ -18,6 +18,7 @@ Philadelphia implements the following FIX protocol versions:
   - **FIX 4.2**
   - **FIX 4.3**
   - **FIX 4.4**
+  - **FIXT 1.1**
 
 Besides the library, Philadelphia contains the following applications:
 
