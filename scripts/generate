@@ -102,6 +102,8 @@ FIELD_TYPES = {
     'char': ('char', str, format_char),
     'Int': ('int', int, format_int),
     'int': ('int', int, format_int),
+    'MultipleCharValue': ('char', str, format_char),
+    'MultipleStringValue': ('String', str, format_string),
     'MultipleValueString': ('String', str, format_string),
     'NumInGroup': ('int', int, format_int),
     'String': ('String', str, format_string),
