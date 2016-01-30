@@ -19,6 +19,10 @@
       <artifactId>philadelphia</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.jvirtanen.util</groupId>
+      <artifactId>util-extras</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
