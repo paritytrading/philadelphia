@@ -70,6 +70,11 @@
         <version>2.1.4</version>
       </dependency>
       <dependency>
+        <groupId>org.jvirtanen.util</groupId>
+        <artifactId>util-extras</artifactId>
+        <version>0.1.0</version>
+      </dependency>
+      <dependency>
         <groupId>org.jvirtanen.value</groupId>
         <artifactId>value</artifactId>
         <version>0.1.0</version>
