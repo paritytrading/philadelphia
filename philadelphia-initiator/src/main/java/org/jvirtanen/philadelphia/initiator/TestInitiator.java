@@ -3,6 +3,7 @@ package org.jvirtanen.philadelphia.initiator;
 import static org.jvirtanen.philadelphia.fix42.FIX42Enumerations.*;
 import static org.jvirtanen.philadelphia.fix42.FIX42MsgTypes.*;
 import static org.jvirtanen.philadelphia.fix42.FIX42Tags.*;
+import static org.jvirtanen.util.Applications.*;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -11,9 +12,11 @@ import org.jvirtanen.philadelphia.FIXValue;
 
 class TestInitiator {
 
+    private static final String USAGE = "philadelphia-initiator <host> <port> <orders>";
+
     public static void main(String[] args) {
         if (args.length != 3)
-            usage();
+            usage(USAGE);
 
         try {
             String host   = args[0];
@@ -22,7 +25,7 @@ class TestInitiator {
 
             main(new InetSocketAddress(host, port), orders);
         } catch (IllegalArgumentException e) {
-            usage();
+            usage(USAGE);
         } catch (IOException e) {
             fatal(e);
         }
@@ -83,19 +86,6 @@ class TestInitiator {
         System.out.printf("   99.99%%: %10.2f µs\n", initiator.getHistogram().getValueAtPercentile( 99.99) / 1000.0);
         System.out.printf("  100.00%%: %10.2f µs\n", initiator.getHistogram().getValueAtPercentile(100.00) / 1000.0);
         System.out.printf("\n");
-    }
-
-    private static void fatal(Throwable throwable) {
-        System.err.println("fatal: " + throwable.getMessage());
-        System.err.println();
-        throwable.printStackTrace(System.err);
-        System.err.println();
-        System.exit(1);
-    }
-
-    private static void usage() {
-        System.err.println("Usage: philadelphia-initiator <host> <port> <orders>");
-        System.exit(2);
     }
 
 }
