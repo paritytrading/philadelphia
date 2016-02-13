@@ -20,9 +20,11 @@ Philadelphia implements the following FIX protocol versions:
   - **FIX 4.4**
   - **FIXT 1.1**
 
-See the [FIX Trading Community][] for the protocol specifications.
+See the [FIX Trading Community][] for the protocol specifications and
+[Philadelphia Extras][] for additional FIX dialects.
 
   [FIX Trading Community]: http://www.fixtradingcommunity.org
+  [Philadelphia Extras]: https://github.com/jvirtanen/philadelphia-extras
 
 Besides the library, Philadelphia contains the following applications:
 
