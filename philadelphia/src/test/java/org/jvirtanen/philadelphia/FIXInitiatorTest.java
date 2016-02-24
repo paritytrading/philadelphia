@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import static org.jvirtanen.philadelphia.FIXMsgTypes.*;
 import static org.jvirtanen.philadelphia.FIXStatus.*;
 import static org.jvirtanen.philadelphia.FIXTags.*;
+import static org.jvirtanen.philadelphia.Strings.*;
 
 import java.io.IOException;
 import java.nio.channels.ServerSocketChannel;
@@ -316,6 +317,16 @@ public class FIXInitiatorTest {
         Event  status  = new Logout();
 
         acceptorMessageInitiatorStatus(message, status);
+    }
+
+    @Test
+    public void receiveTooLongMessage() throws IOException {
+        exception.expect(FIXMessageOverflowException.class);
+
+        acceptor.send("35=5|34=1|58=" + repeat('A', 1024));
+
+        while (true)
+            initiator.receive();
     }
 
     @Test
