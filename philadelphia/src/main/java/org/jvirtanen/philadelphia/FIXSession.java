@@ -332,6 +332,9 @@ public class FIXSession implements Closeable {
 
         while (parser.parse(rxBuffer));
 
+        if (rxBuffer.limit() == rxBuffer.capacity())
+            throw new FIXMessageOverflowException("Too long message");
+
         rxBuffer.compact();
 
         lastRxMillis = currentTimeMillis;
