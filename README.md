@@ -28,6 +28,9 @@ See the [FIX Trading Community][] for the protocol specifications and
 
 Besides the library, Philadelphia contains the following applications:
 
+  - [**Terminal Client**](philadelphia-client) is a simple console
+    application for interacting with a FIX acceptor.
+
   - [**Test Acceptor**](philadelphia-acceptor) is an example application
     implementing a simple FIX acceptor
 

@@ -40,6 +40,7 @@
   </scm>
 
   <properties>
+    <eclipse.collections.version>7.0.0</eclipse.collections.version>
     <java.version>1.7</java.version>
     <jmh.version>1.10.3</jmh.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -47,6 +48,7 @@
 
   <modules>
     <module>philadelphia-acceptor</module>
+    <module>philadelphia-client</module>
     <module>philadelphia-initiator</module>
     <module>philadelphia-perf-test</module>
     <module>philadelphia</module>
@@ -54,6 +56,16 @@
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>com.typesafe</groupId>
+        <artifactId>config</artifactId>
+        <version>1.3.0</version>
+      </dependency>
+      <dependency>
+        <groupId>jline</groupId>
+        <artifactId>jline</artifactId>
+        <version>2.12</version>
+      </dependency>
       <dependency>
         <groupId>joda-time</groupId>
         <artifactId>joda-time</artifactId>
@@ -65,9 +77,24 @@
         <version>4.11</version>
       </dependency>
       <dependency>
+        <groupId>org.eclipse.collections</groupId>
+        <artifactId>eclipse-collections-api</artifactId>
+        <version>${eclipse.collections.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.collections</groupId>
+        <artifactId>eclipse-collections</artifactId>
+        <version>${eclipse.collections.version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.hdrhistogram</groupId>
         <artifactId>HdrHistogram</artifactId>
         <version>2.1.4</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jvirtanen.config</groupId>
+        <artifactId>config-extras</artifactId>
+        <version>0.1.0</version>
       </dependency>
       <dependency>
         <groupId>org.jvirtanen.util</groupId>
@@ -149,7 +176,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
-          <excludePackageNames>org.jvirtanen.philadelphia.acceptor:org.jvirtanen.philadelphia.initiator:*.perf</excludePackageNames>
+          <excludePackageNames>org.jvirtanen.philadelphia.acceptor:org.jvirtanen.philadelphia.client:org.jvirtanen.philadelphia.initiator:*.perf</excludePackageNames>
           <links>
             <link>http://www.joda.org/joda-time/apidocs/</link>
           </links>
