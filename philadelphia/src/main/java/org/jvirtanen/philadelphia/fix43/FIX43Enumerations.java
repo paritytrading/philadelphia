@@ -12,8 +12,8 @@ public class FIX43Enumerations {
 
         public static final char Buy   = 'B';
         public static final char Sell  = 'S';
-        public static final char Trade = 'T';
         public static final char Cross = 'X';
+        public static final char Trade = 'T';
 
         private AdvSideValues() {
         }
@@ -25,8 +25,8 @@ public class FIX43Enumerations {
      */
     public static class AdvTransTypeValues {
 
-        public static final String Cancel  = "C";
         public static final String New     = "N";
+        public static final String Cancel  = "C";
         public static final String Replace = "R";
 
         private AdvTransTypeValues() {
@@ -39,12 +39,12 @@ public class FIX43Enumerations {
      */
     public static class CommTypeValues {
 
+        public static final char PointsPerBondOrContract       = '6';
         public static final char PerUnit                       = '1';
         public static final char Percent                       = '2';
         public static final char Absolute                      = '3';
-        public static final char PercentageWaivedCashDiscount  = '4';
         public static final char PercentageWaivedEnhancedUnits = '5';
-        public static final char PointsPerBondOrContract       = '6';
+        public static final char PercentageWaivedCashDiscount  = '4';
 
         private CommTypeValues() {
         }
@@ -56,31 +56,8 @@ public class FIX43Enumerations {
      */
     public static class ExecInstValues {
 
-        public static final String StayOnOfferSide            = "0";
-        public static final String NotHeld                    = "1";
-        public static final String Work                       = "2";
-        public static final String GoAlong                    = "3";
-        public static final String OverTheDay                 = "4";
-        public static final String Held                       = "5";
-        public static final String ParticipateDoNotInitiate   = "6";
-        public static final String StrictScale                = "7";
-        public static final String TryToScale                 = "8";
-        public static final String StayOnBidSide              = "9";
-        public static final String NoCross                    = "A";
-        public static final String OKToCross                  = "B";
-        public static final String CallFirst                  = "C";
-        public static final String PercentOfVolume            = "D";
-        public static final String DoNotIncrease              = "E";
-        public static final String DoNotReduce                = "F";
-        public static final String AllOrNone                  = "G";
-        public static final String ReinstateOnSystemFailure   = "H";
-        public static final String InstitutionsOnly           = "I";
-        public static final String ReinstateOnTradingHalt     = "J";
-        public static final String CancelOnTradingHalt        = "K";
-        public static final String LastPeg                    = "L";
+        public static final String TryToStop                  = "Y";
         public static final String MidPricePeg                = "M";
-        public static final String NonNegotiable              = "N";
-        public static final String OpeningPeg                 = "O";
         public static final String MarketPeg                  = "P";
         public static final String CancelOnSystemFailure      = "Q";
         public static final String PrimaryPeg                 = "R";
@@ -89,7 +66,30 @@ public class FIX43Enumerations {
         public static final String Netting                    = "V";
         public static final String PegToVWAP                  = "W";
         public static final String TradeAlong                 = "X";
-        public static final String TryToStop                  = "Y";
+        public static final String PercentOfVolume            = "D";
+        public static final String StayOnOfferSide            = "0";
+        public static final String Work                       = "2";
+        public static final String OverTheDay                 = "4";
+        public static final String Held                       = "5";
+        public static final String ParticipateDoNotInitiate   = "6";
+        public static final String StrictScale                = "7";
+        public static final String TryToScale                 = "8";
+        public static final String StayOnBidSide              = "9";
+        public static final String NoCross                    = "A";
+        public static final String OpeningPeg                 = "O";
+        public static final String CallFirst                  = "C";
+        public static final String NonNegotiable              = "N";
+        public static final String DoNotIncrease              = "E";
+        public static final String DoNotReduce                = "F";
+        public static final String AllOrNone                  = "G";
+        public static final String ReinstateOnSystemFailure   = "H";
+        public static final String InstitutionsOnly           = "I";
+        public static final String ReinstateOnTradingHalt     = "J";
+        public static final String CancelOnTradingHalt        = "K";
+        public static final String LastPeg                    = "L";
+        public static final String GoAlong                    = "3";
+        public static final String OKToCross                  = "B";
+        public static final String NotHeld                    = "1";
 
         private ExecInstValues() {
         }
@@ -115,21 +115,21 @@ public class FIX43Enumerations {
      */
     public static class SecurityIDSourceValues {
 
-        public static final String CUSIP                       = "1";
-        public static final String SEDOL                       = "2";
-        public static final String QUIK                        = "3";
-        public static final String ISINNumber                  = "4";
-        public static final String RICCode                     = "5";
-        public static final String ISOCurrencyCode             = "6";
-        public static final String ISOCountryCode              = "7";
-        public static final String ExchangeSymbol              = "8";
-        public static final String ConsolidatedTapeAssociation = "9";
-        public static final String BloombergSymbol             = "A";
-        public static final String Wertpapier                  = "B";
-        public static final String Dutch                       = "C";
-        public static final String Valoren                     = "D";
         public static final String Sicovam                     = "E";
+        public static final String SEDOL                       = "2";
+        public static final String CUSIP                       = "1";
+        public static final String QUIK                        = "3";
         public static final String Belgian                     = "F";
+        public static final String Valoren                     = "D";
+        public static final String Dutch                       = "C";
+        public static final String Wertpapier                  = "B";
+        public static final String BloombergSymbol             = "A";
+        public static final String ConsolidatedTapeAssociation = "9";
+        public static final String ExchangeSymbol              = "8";
+        public static final String ISOCountryCode              = "7";
+        public static final String ISOCurrencyCode             = "6";
+        public static final String RICCode                     = "5";
+        public static final String ISINNumber                  = "4";
         public static final String Common                      = "G";
 
         private SecurityIDSourceValues() {
@@ -142,9 +142,9 @@ public class FIX43Enumerations {
      */
     public static class IOIQltyIndValues {
 
+        public static final char Medium = 'M';
         public static final char High   = 'H';
         public static final char Low    = 'L';
-        public static final char Medium = 'M';
 
         private IOIQltyIndValues() {
         }
@@ -184,10 +184,10 @@ public class FIX43Enumerations {
      */
     public static class LastCapacityValues {
 
+        public static final char Principal        = '4';
+        public static final char CrossAsPrincipal = '3';
         public static final char Agent            = '1';
         public static final char CrossAsAgent     = '2';
-        public static final char CrossAsPrincipal = '3';
-        public static final char Principal        = '4';
 
         private LastCapacityValues() {
         }
@@ -201,10 +201,8 @@ public class FIX43Enumerations {
 
         public static final char New                = '0';
         public static final char PartiallyFilled    = '1';
-        public static final char Filled             = '2';
-        public static final char DoneForDay         = '3';
-        public static final char Canceled           = '4';
         public static final char Replaced           = '5';
+        public static final char Filled             = '2';
         public static final char PendingCancel      = '6';
         public static final char Stopped            = '7';
         public static final char Rejected           = '8';
@@ -214,6 +212,8 @@ public class FIX43Enumerations {
         public static final char Expired            = 'C';
         public static final char AcceptedForBidding = 'D';
         public static final char PendingReplace     = 'E';
+        public static final char DoneForDay         = '3';
+        public static final char Canceled           = '4';
 
         private OrdStatusValues() {
         }
@@ -225,7 +225,7 @@ public class FIX43Enumerations {
      */
     public static class OrdTypeValues {
 
-        public static final char Market                     = '1';
+        public static final char PreviouslyQuoted           = 'D';
         public static final char Limit                      = '2';
         public static final char Stop                       = '3';
         public static final char StopLimit                  = '4';
@@ -235,19 +235,19 @@ public class FIX43Enumerations {
         public static final char LimitWithOrWithout         = '8';
         public static final char OnBasis                    = '9';
         public static final char OnClose                    = 'A';
-        public static final char LimitOnClose               = 'B';
+        public static final char Market                     = '1';
         public static final char ForexMarket                = 'C';
-        public static final char PreviouslyQuoted           = 'D';
-        public static final char PreviouslyIndicated        = 'E';
         public static final char ForexLimit                 = 'F';
+        public static final char PreviouslyIndicated        = 'E';
         public static final char ForexSwap                  = 'G';
-        public static final char ForexPreviouslyQuoted      = 'H';
         public static final char Funari                     = 'I';
         public static final char MarketIfTouched            = 'J';
         public static final char MarketWithLeftOverAsLimit  = 'K';
         public static final char PreviousFundValuationPoint = 'L';
         public static final char NextFundValuationPoint     = 'M';
         public static final char Pegged                     = 'P';
+        public static final char LimitOnClose               = 'B';
+        public static final char ForexPreviouslyQuoted      = 'H';
 
         private OrdTypeValues() {
         }
@@ -259,9 +259,8 @@ public class FIX43Enumerations {
      */
     public static class Rule80AValues {
 
-        public static final char AgencySingleOrder                        = 'A';
+        public static final char AgentForOtherMember                      = 'N';
         public static final char ShortExemptTransactionAType              = 'B';
-        public static final char ProprietaryNonAlgo                       = 'C';
         public static final char ProgramOrderMember                       = 'D';
         public static final char ShortExemptTransactionForPrincipal       = 'E';
         public static final char ShortExemptTransactionWType              = 'F';
@@ -269,9 +268,8 @@ public class FIX43Enumerations {
         public static final char IndividualInvestor                       = 'I';
         public static final char ProprietaryAlgo                          = 'J';
         public static final char AgencyAlgo                               = 'K';
-        public static final char ShortExemptTransactionMemberAffliated    = 'L';
         public static final char ProgramOrderOtherMember                  = 'M';
-        public static final char AgentForOtherMember                      = 'N';
+        public static final char AgencySingleOrder                        = 'A';
         public static final char ProprietaryTransactionAffiliated         = 'O';
         public static final char Principal                                = 'P';
         public static final char TransactionNonMember                     = 'R';
@@ -282,6 +280,8 @@ public class FIX43Enumerations {
         public static final char ShortExemptTransactionMemberNotAffliated = 'X';
         public static final char AgencyNonAlgo                            = 'Y';
         public static final char ShortExemptTransactionNonMember          = 'Z';
+        public static final char ShortExemptTransactionMemberAffliated    = 'L';
+        public static final char ProprietaryNonAlgo                       = 'C';
 
         private Rule80AValues() {
         }
@@ -293,18 +293,18 @@ public class FIX43Enumerations {
      */
     public static class SideValues {
 
+        public static final char SellShortExempt  = '6';
+        public static final char AsDefined        = 'B';
+        public static final char Opposite         = 'C';
+        public static final char Cross            = '8';
+        public static final char CrossShort       = '9';
         public static final char Buy              = '1';
         public static final char Sell             = '2';
         public static final char BuyMinus         = '3';
         public static final char SellPlus         = '4';
-        public static final char SellShort        = '5';
-        public static final char SellShortExempt  = '6';
-        public static final char Undisclosed      = '7';
-        public static final char Cross            = '8';
-        public static final char CrossShort       = '9';
         public static final char CrossShortExempt = 'A';
-        public static final char AsDefined        = 'B';
-        public static final char Opposite         = 'C';
+        public static final char SellShort        = '5';
+        public static final char Undisclosed      = '7';
 
         private SideValues() {
         }
@@ -316,6 +316,7 @@ public class FIX43Enumerations {
      */
     public static class TimeInForceValues {
 
+        public static final char AtTheClose        = '7';
         public static final char Day               = '0';
         public static final char GoodTillCancel    = '1';
         public static final char AtTheOpening      = '2';
@@ -323,7 +324,6 @@ public class FIX43Enumerations {
         public static final char FillOrKill        = '4';
         public static final char GoodTillCrossing  = '5';
         public static final char GoodTillDate      = '6';
-        public static final char AtTheClose        = '7';
 
         private TimeInForceValues() {
         }
@@ -335,9 +335,9 @@ public class FIX43Enumerations {
      */
     public static class UrgencyValues {
 
-        public static final char Normal     = '0';
         public static final char Flash      = '1';
         public static final char Background = '2';
+        public static final char Normal     = '0';
 
         private UrgencyValues() {
         }
@@ -349,17 +349,17 @@ public class FIX43Enumerations {
      */
     public static class SettlmntTypValues {
 
-        public static final char Regular         = '0';
-        public static final char Cash            = '1';
-        public static final char NextDay         = '2';
-        public static final char TPlus2          = '3';
-        public static final char TPlus3          = '4';
         public static final char TPlus4          = '5';
-        public static final char Future          = '6';
-        public static final char WhenAndIfIssued = '7';
-        public static final char SellersOption   = '8';
-        public static final char TPlus5          = '9';
         public static final char T1              = 'A';
+        public static final char Future          = '6';
+        public static final char TPlus2          = '3';
+        public static final char NextDay         = '2';
+        public static final char SellersOption   = '8';
+        public static final char Cash            = '1';
+        public static final char WhenAndIfIssued = '7';
+        public static final char Regular         = '0';
+        public static final char TPlus5          = '9';
+        public static final char TPlus3          = '4';
 
         private SettlmntTypValues() {
         }
@@ -371,12 +371,12 @@ public class FIX43Enumerations {
      */
     public static class AllocTransTypeValues {
 
-        public static final char New                          = '0';
-        public static final char Replace                      = '1';
-        public static final char Cancel                       = '2';
-        public static final char Preliminary                  = '3';
-        public static final char Calculated                   = '4';
         public static final char CalculatedWithoutPreliminary = '5';
+        public static final char Calculated                   = '4';
+        public static final char Preliminary                  = '3';
+        public static final char Cancel                       = '2';
+        public static final char Replace                      = '1';
+        public static final char New                          = '0';
 
         private AllocTransTypeValues() {
         }
@@ -388,10 +388,10 @@ public class FIX43Enumerations {
      */
     public static class PositionEffectValues {
 
-        public static final char Close  = 'C';
         public static final char FIFO   = 'F';
-        public static final char Open   = 'O';
         public static final char Rolled = 'R';
+        public static final char Close  = 'C';
+        public static final char Open   = 'O';
 
         private PositionEffectValues() {
         }
@@ -403,13 +403,13 @@ public class FIX43Enumerations {
      */
     public static class ProcessCodeValues {
 
+        public static final char PlanSponsor       = '6';
         public static final char Regular           = '0';
         public static final char SoftDollar        = '1';
         public static final char StepIn            = '2';
         public static final char StepOut           = '3';
         public static final char SoftDollarStepIn  = '4';
         public static final char SoftDollarStepOut = '5';
-        public static final char PlanSponsor       = '6';
 
         private ProcessCodeValues() {
         }
@@ -421,10 +421,10 @@ public class FIX43Enumerations {
      */
     public static class AllocStatusValues {
 
-        public static final int Accepted           = 0;
         public static final int BlockLevelReject   = 1;
         public static final int AccountLevelReject = 2;
         public static final int Received           = 3;
+        public static final int Accepted           = 0;
 
         private AllocStatusValues() {
         }
@@ -437,13 +437,13 @@ public class FIX43Enumerations {
     public static class AllocRejCodeValues {
 
         public static final int UnknownAccount                 = 0;
+        public static final int UnknownListID                  = 6;
+        public static final int UnknownExecutingBrokerMnemonic = 3;
+        public static final int UnknownOrderID                 = 5;
+        public static final int OtherSeeText                   = 7;
+        public static final int CommissionDifference           = 4;
         public static final int IncorrectQuantity              = 1;
         public static final int IncorrectAveragegPrice         = 2;
-        public static final int UnknownExecutingBrokerMnemonic = 3;
-        public static final int CommissionDifference           = 4;
-        public static final int UnknownOrderID                 = 5;
-        public static final int UnknownListID                  = 6;
-        public static final int OtherSeeText                   = 7;
 
         private AllocRejCodeValues() {
         }
@@ -469,13 +469,13 @@ public class FIX43Enumerations {
      */
     public static class EncryptMethodValues {
 
+        public static final int DES       = 2;
+        public static final int PEM       = 6;
+        public static final int PGPDESMD5 = 5;
+        public static final int PKCSDES   = 3;
         public static final int None      = 0;
         public static final int PKCS      = 1;
-        public static final int DES       = 2;
-        public static final int PKCSDES   = 3;
         public static final int PGPDES    = 4;
-        public static final int PGPDESMD5 = 5;
-        public static final int PEM       = 6;
 
         private EncryptMethodValues() {
         }
@@ -487,13 +487,13 @@ public class FIX43Enumerations {
      */
     public static class CxlRejReasonValues {
 
-        public static final int TooLateToCancel                       = 0;
         public static final int UnknownOrder                          = 1;
-        public static final int BrokerCredit                          = 2;
-        public static final int OrderAlreadyInPendingStatus           = 3;
-        public static final int UnableToProcessOrderMassCancelRequest = 4;
-        public static final int OrigOrdModTime                        = 5;
+        public static final int TooLateToCancel                       = 0;
         public static final int DuplicateClOrdID                      = 6;
+        public static final int OrigOrdModTime                        = 5;
+        public static final int UnableToProcessOrderMassCancelRequest = 4;
+        public static final int OrderAlreadyInPendingStatus           = 3;
+        public static final int BrokerCredit                          = 2;
 
         private CxlRejReasonValues() {
         }
@@ -505,19 +505,19 @@ public class FIX43Enumerations {
      */
     public static class OrdRejReasonValues {
 
-        public static final int BrokerCredit                          =  0;
-        public static final int UnknownSymbol                         =  1;
         public static final int ExchangeClosed                        =  2;
+        public static final int UnknownSymbol                         =  1;
         public static final int OrderExceedsLimit                     =  3;
         public static final int TooLateToEnter                        =  4;
         public static final int UnknownOrder                          =  5;
-        public static final int DuplicateOrder                        =  6;
         public static final int DuplicateOfAVerballyCommunicatedOrder =  7;
-        public static final int StaleOrder                            =  8;
         public static final int TradeAlongRequired                    =  9;
         public static final int InvalidInvestorID                     = 10;
+        public static final int DuplicateOrder                        =  6;
         public static final int UnsupportedOrderCharacteristic        = 11;
         public static final int SurveillenceOption                    = 12;
+        public static final int BrokerCredit                          =  0;
+        public static final int StaleOrder                            =  8;
 
         private OrdRejReasonValues() {
         }
@@ -529,22 +529,22 @@ public class FIX43Enumerations {
      */
     public static class IOIQualifierValues {
 
-        public static final char AllOrNone           = 'A';
-        public static final char MarketOnClose       = 'B';
-        public static final char AtTheClose          = 'C';
-        public static final char VWAP                = 'D';
-        public static final char InTouchWith         = 'I';
-        public static final char Limit               = 'L';
-        public static final char MoreBehind          = 'M';
         public static final char AtTheOpen           = 'O';
-        public static final char TakingAPosition     = 'P';
-        public static final char AtTheMarket         = 'Q';
-        public static final char ReadyToTrade        = 'R';
-        public static final char PortfolioShown      = 'S';
-        public static final char ThroughTheDay       = 'T';
-        public static final char Versus              = 'V';
-        public static final char Indication          = 'W';
         public static final char CrossingOpportunity = 'X';
+        public static final char Indication          = 'W';
+        public static final char Versus              = 'V';
+        public static final char ThroughTheDay       = 'T';
+        public static final char PortfolioShown      = 'S';
+        public static final char ReadyToTrade        = 'R';
+        public static final char AllOrNone           = 'A';
+        public static final char TakingAPosition     = 'P';
+        public static final char MoreBehind          = 'M';
+        public static final char Limit               = 'L';
+        public static final char InTouchWith         = 'I';
+        public static final char VWAP                = 'D';
+        public static final char AtTheClose          = 'C';
+        public static final char MarketOnClose       = 'B';
+        public static final char AtTheMarket         = 'Q';
         public static final char AtTheMidpoint       = 'Y';
         public static final char PreOpen             = 'Z';
 
@@ -558,12 +558,12 @@ public class FIX43Enumerations {
      */
     public static class DKReasonValues {
 
-        public static final char UnknownSymbol        = 'A';
         public static final char WrongSide            = 'B';
         public static final char QuantityExceedsOrder = 'C';
         public static final char NoMatchingOrder      = 'D';
         public static final char PriceExceedsLimit    = 'E';
         public static final char Other                = 'Z';
+        public static final char UnknownSymbol        = 'A';
 
         private DKReasonValues() {
         }
@@ -575,8 +575,6 @@ public class FIX43Enumerations {
      */
     public static class MiscFeeTypeValues {
 
-        public static final char Regulatory      = '1';
-        public static final char Tax             = '2';
         public static final char LocalCommission = '3';
         public static final char ExchangeFees    = '4';
         public static final char Stamp           = '5';
@@ -584,6 +582,8 @@ public class FIX43Enumerations {
         public static final char Other           = '7';
         public static final char Markup          = '8';
         public static final char ConsumptionTax  = '9';
+        public static final char Regulatory      = '1';
+        public static final char Tax             = '2';
 
         private MiscFeeTypeValues() {
         }
@@ -595,14 +595,12 @@ public class FIX43Enumerations {
      */
     public static class ExecTypeValues {
 
+        public static final char PendingCancel  = '6';
         public static final char New            = '0';
         public static final char PartialFill    = '1';
         public static final char Fill           = '2';
-        public static final char DoneForDay     = '3';
         public static final char Canceled       = '4';
         public static final char Replaced       = '5';
-        public static final char PendingCancel  = '6';
-        public static final char Stopped        = '7';
         public static final char Rejected       = '8';
         public static final char Suspended      = '9';
         public static final char PendingNew     = 'A';
@@ -614,6 +612,8 @@ public class FIX43Enumerations {
         public static final char TradeCorrect   = 'G';
         public static final char TradeCancel    = 'H';
         public static final char OrderStatus    = 'I';
+        public static final char DoneForDay     = '3';
+        public static final char Stopped        = '7';
 
         private ExecTypeValues() {
         }
@@ -639,10 +639,10 @@ public class FIX43Enumerations {
     public static class SettlInstModeValues {
 
         public static final char Default                             = '0';
+        public static final char SpecificOrderForASingleAccount      = '4';
+        public static final char SpecificAllocationAccountStanding   = '3';
         public static final char StandingInstructionsProvided        = '1';
         public static final char SpecificAllocationAccountOverriding = '2';
-        public static final char SpecificAllocationAccountStanding   = '3';
-        public static final char SpecificOrderForASingleAccount      = '4';
 
         private SettlInstModeValues() {
         }
@@ -654,9 +654,9 @@ public class FIX43Enumerations {
      */
     public static class SettlInstTransTypeValues {
 
-        public static final char Cancel  = 'C';
         public static final char New     = 'N';
         public static final char Replace = 'R';
+        public static final char Cancel  = 'C';
 
         private SettlInstTransTypeValues() {
         }
@@ -668,9 +668,9 @@ public class FIX43Enumerations {
      */
     public static class SettlInstSourceValues {
 
-        public static final char BrokerCredit = '1';
         public static final char Institution  = '2';
         public static final char Investor     = '3';
+        public static final char BrokerCredit = '1';
 
         private SettlInstSourceValues() {
         }
@@ -682,88 +682,88 @@ public class FIX43Enumerations {
      */
     public static class SecurityTypeValues {
 
-        public static final String Wildcard                                 = "?";
-        public static final String AssetBackedSecurities                    = "ABS";
+        public static final String CommercialPaper                          = "CP";
+        public static final String VariableRateDemandNote                   = "VRDN";
+        public static final String PlazosFijos                              = "PZFJ";
+        public static final String PromissoryNote                           = "PN";
+        public static final String Overnight                                = "ONITE";
+        public static final String MediumTermNotes                          = "MTN";
+        public static final String TaxExemptCommercialPaper                 = "TECP";
         public static final String Amended                                  = "AMENDED";
-        public static final String OtherAnticipationNotes                   = "AN";
+        public static final String BridgeLoan                               = "BRIDGE";
+        public static final String LetterOfCredit                           = "LOFC";
+        public static final String SwingLineFacility                        = "SWING";
+        public static final String DebtorInPossession                       = "DINP";
+        public static final String Defaulted                                = "DEFLTED";
+        public static final String Withdrawn                                = "WITHDRN";
+        public static final String LiquidityNote                            = "LQN";
+        public static final String Matured                                  = "MATURED";
+        public static final String DepositNotes                             = "DN";
+        public static final String Retired                                  = "RETIRED";
         public static final String BankersAcceptance                        = "BA";
         public static final String BankNotes                                = "BN";
         public static final String BillOfExchanges                          = "BOX";
-        public static final String BradyBond                                = "BRADY";
-        public static final String BridgeLoan                               = "BRIDGE";
-        public static final String ConvertibleBond                          = "CB";
         public static final String CertificateOfDeposit                     = "CD";
         public static final String CallLoans                                = "CL";
-        public static final String Corp                                     = "CMBS";
-        public static final String CollateralizedMortgageObligation         = "CMO";
-        public static final String CertificateOfObligation                  = "COFO";
-        public static final String CertificateOfParticipation               = "COFP";
-        public static final String CorporateBond                            = "CORP";
-        public static final String CommercialPaper                          = "CP";
-        public static final String CorporatePrivatePlacement                = "CPP";
-        public static final String CommonStock                              = "CS";
-        public static final String Defaulted                                = "DEFLTED";
-        public static final String DebtorInPossession                       = "DINP";
-        public static final String DepositNotes                             = "DN";
-        public static final String DualCurrency                             = "DUAL";
-        public static final String FederalAgencyCoupon                      = "FAC";
-        public static final String FederalAgencyDiscountNote                = "FADN";
-        public static final String ForeignExchangeContract                  = "FOR";
-        public static final String GeneralObligationBonds                   = "GO";
-        public static final String IOETTEMortgage                           = "IET";
-        public static final String LetterOfCredit                           = "LOFC";
-        public static final String LiquidityNote                            = "LQN";
-        public static final String Matured                                  = "MATURED";
-        public static final String MortgageBackedSecurities                 = "MBS";
-        public static final String MutualFund                               = "MF";
-        public static final String MortgageInterestOnly                     = "MIO";
-        public static final String MultilegInstrument                       = "MLEG";
-        public static final String MortgagePrincipalOnly                    = "MPO";
-        public static final String MortgagePrivatePlacement                 = "MPP";
-        public static final String MiscellaneousPassThrough                 = "MPT";
-        public static final String MandatoryTender                          = "MT";
-        public static final String MediumTermNotes                          = "MTN";
-        public static final String NoSecurityType                           = "NONE";
-        public static final String Overnight                                = "ONITE";
-        public static final String PrivateExportFunding                     = "PEF";
-        public static final String PromissoryNote                           = "PN";
-        public static final String AgencyPools                              = "POOL";
-        public static final String PreferredStock                           = "PS";
-        public static final String PlazosFijos                              = "PZFJ";
-        public static final String RevenueAnticipationNote                  = "RAN";
         public static final String Replaced                                 = "REPLACD";
-        public static final String Retired                                  = "RETIRED";
-        public static final String RevenueBonds                             = "REV";
-        public static final String RepurchaseAgreement                      = "RP";
-        public static final String RevolverLoan                             = "RVLV";
+        public static final String MandatoryTender                          = "MT";
         public static final String Revolver                                 = "RVLVTRM";
-        public static final String ReverseRepurchaseAgreement               = "RVRP";
+        public static final String MortgagePrivatePlacement                 = "MPP";
+        public static final String ShortTermLoanNote                        = "STN";
+        public static final String MiscellaneousPassThrough                 = "MPT";
+        public static final String ToBeAnnounced                            = "TBA";
+        public static final String OtherAnticipationNotes                   = "AN";
+        public static final String MortgageInterestOnly                     = "MIO";
+        public static final String CertificateOfParticipation               = "COFP";
+        public static final String MortgageBackedSecurities                 = "MBS";
+        public static final String RevenueBonds                             = "REV";
         public static final String SpecialAssessment                        = "SPCLA";
         public static final String SpecialObligation                        = "SPCLO";
         public static final String SpecialTax                               = "SPCLT";
-        public static final String ShortTermLoanNote                        = "STN";
-        public static final String StructuredNotes                          = "STRUCT";
-        public static final String SwingLineFacility                        = "SWING";
         public static final String TaxAnticipationNote                      = "TAN";
         public static final String TaxAllocation                            = "TAXA";
-        public static final String ToBeAnnounced                            = "TBA";
-        public static final String USTreasuryBond                           = "TBOND";
-        public static final String PrincipalStripOfACallableBondOrNote      = "TCAL";
+        public static final String CertificateOfObligation                  = "COFO";
         public static final String TimeDeposit                              = "TD";
-        public static final String TaxExemptCommercialPaper                 = "TECP";
-        public static final String TermLoan                                 = "TERM";
-        public static final String InterestStripFromAnyBondOrNote           = "TINT";
-        public static final String TreasuryInflationProtectedSecurities     = "TIPS";
-        public static final String PrincipalStripFromANonCallableBondOrNote = "TPRN";
-        public static final String TaxRevenueAnticipationNote               = "TRAN";
-        public static final String USTreasuryNoteOld                        = "UST";
-        public static final String USTreasuryBillOld                        = "USTB";
-        public static final String VariableRateDemandNote                   = "VRDN";
+        public static final String GeneralObligationBonds                   = "GO";
+        public static final String Wildcard                                 = "?";
         public static final String Warrant                                  = "WAR";
-        public static final String Withdrawn                                = "WITHDRN";
+        public static final String MutualFund                               = "MF";
+        public static final String MultilegInstrument                       = "MLEG";
+        public static final String TaxRevenueAnticipationNote               = "TRAN";
+        public static final String MortgagePrincipalOnly                    = "MPO";
+        public static final String RepurchaseAgreement                      = "RP";
+        public static final String NoSecurityType                           = "NONE";
         public static final String ExtendedCommNote                         = "XCN";
+        public static final String AgencyPools                              = "POOL";
+        public static final String AssetBackedSecurities                    = "ABS";
+        public static final String Corp                                     = "CMBS";
+        public static final String CollateralizedMortgageObligation         = "CMO";
+        public static final String IOETTEMortgage                           = "IET";
+        public static final String ReverseRepurchaseAgreement               = "RVRP";
+        public static final String ForeignExchangeContract                  = "FOR";
+        public static final String RevenueAnticipationNote                  = "RAN";
+        public static final String RevolverLoan                             = "RVLV";
+        public static final String FederalAgencyCoupon                      = "FAC";
+        public static final String FederalAgencyDiscountNote                = "FADN";
+        public static final String PrivateExportFunding                     = "PEF";
+        public static final String CorporateBond                            = "CORP";
+        public static final String CorporatePrivatePlacement                = "CPP";
+        public static final String ConvertibleBond                          = "CB";
+        public static final String DualCurrency                             = "DUAL";
         public static final String IndexedLinked                            = "XLINKD";
         public static final String YankeeCorporateBond                      = "YANK";
+        public static final String CommonStock                              = "CS";
+        public static final String PreferredStock                           = "PS";
+        public static final String BradyBond                                = "BRADY";
+        public static final String USTreasuryBond                           = "TBOND";
+        public static final String InterestStripFromAnyBondOrNote           = "TINT";
+        public static final String TreasuryInflationProtectedSecurities     = "TIPS";
+        public static final String PrincipalStripOfACallableBondOrNote      = "TCAL";
+        public static final String PrincipalStripFromANonCallableBondOrNote = "TPRN";
+        public static final String USTreasuryNoteOld                        = "UST";
+        public static final String USTreasuryBillOld                        = "USTB";
+        public static final String TermLoan                                 = "TERM";
+        public static final String StructuredNotes                          = "STRUCT";
 
         private SecurityTypeValues() {
         }
@@ -777,8 +777,8 @@ public class FIX43Enumerations {
 
         public static final int Other            = 0;
         public static final int DTCSID           = 1;
-        public static final int ThomsonALERT     = 2;
         public static final int AGlobalCustodian = 3;
+        public static final int ThomsonALERT     = 2;
 
         private StandInstDbTypeValues() {
         }
@@ -790,8 +790,8 @@ public class FIX43Enumerations {
      */
     public static class SettlDeliveryTypeValues {
 
-        public static final int Versus = 0;
         public static final int Free   = 1;
+        public static final int Versus = 0;
 
         private SettlDeliveryTypeValues() {
         }
@@ -816,8 +816,8 @@ public class FIX43Enumerations {
      */
     public static class CoveredOrUncoveredValues {
 
-        public static final int Covered   = 0;
         public static final int Uncovered = 1;
+        public static final int Covered   = 0;
 
         private CoveredOrUncoveredValues() {
         }
@@ -829,9 +829,9 @@ public class FIX43Enumerations {
      */
     public static class AllocHandlInstValues {
 
-        public static final int Match           = 1;
-        public static final int Forward         = 2;
         public static final int ForwardAndMatch = 3;
+        public static final int Forward         = 2;
+        public static final int Match           = 1;
 
         private AllocHandlInstValues() {
         }
@@ -858,15 +858,15 @@ public class FIX43Enumerations {
      */
     public static class BenchmarkValues {
 
+        public static final char OLD10        = '5';
         public static final char CURVE        = '1';
         public static final char FiveYR       = '2';
-        public static final char OLD5         = '3';
         public static final char TenYR        = '4';
-        public static final char OLD10        = '5';
         public static final char ThirtyYR     = '6';
         public static final char OLD30        = '7';
         public static final char ThreeMOLIBOR = '8';
         public static final char SixMOLIBOR   = '9';
+        public static final char OLD5         = '3';
 
         private BenchmarkValues() {
         }
@@ -878,15 +878,15 @@ public class FIX43Enumerations {
      */
     public static class BenchmarkCurveNameValues {
 
-        public static final String Euribor     = "Euribor";
-        public static final String FutureSWAP  = "FutureSWAP";
-        public static final String LIBID       = "LIBID";
-        public static final String LIBOR       = "LIBOR";
-        public static final String MuniAAA     = "MuniAAA";
-        public static final String OTHER       = "OTHER";
-        public static final String Pfandbriefe = "Pfandbriefe";
         public static final String SWAP        = "SWAP";
+        public static final String LIBID       = "LIBID";
+        public static final String OTHER       = "OTHER";
         public static final String Treasury    = "Treasury";
+        public static final String Euribor     = "Euribor";
+        public static final String Pfandbriefe = "Pfandbriefe";
+        public static final String FutureSWAP  = "FutureSWAP";
+        public static final String MuniAAA     = "MuniAAA";
+        public static final String LIBOR       = "LIBOR";
 
         private BenchmarkCurveNameValues() {
         }
@@ -899,30 +899,30 @@ public class FIX43Enumerations {
     public static class StipulationTypeValues {
 
         public static final String AbsolutePrepaymentSpeed                     = "ABS";
-        public static final String ConstantPrepaymentPenalty                   = "CPP";
-        public static final String ConstantPrepaymentRate                      = "CPR";
-        public static final String ConstantPrepaymentYield                     = "CPY";
-        public static final String Geographics                                 = "GEOG";
-        public static final String FinalCPROfHomeEquityPrepaymentCurve         = "HEP";
-        public static final String IssueDate                                   = "ISSUE";
-        public static final String LotVariance                                 = "LOTVAR";
-        public static final String MaturityYearAndMonth                        = "MAT";
-        public static final String PercentOfManufacturedHousingPrepaymentCurve = "MHP";
-        public static final String MonthlyPrepaymentRate                       = "MPR";
-        public static final String NumberOfPieces                              = "PIECES";
-        public static final String PoolsMaximum                                = "PMAX";
-        public static final String PercentOfProspectusPrepaymentCurve          = "PPC";
-        public static final String PoolsPerLot                                 = "PPL";
-        public static final String PoolsPerMillion                             = "PPM";
-        public static final String PoolsPerTrade                               = "PPT";
-        public static final String ProductionYear                              = "PROD";
-        public static final String PercentOfBMAPrepaymentCurve                 = "PSA";
-        public static final String SingleMonthlyMortality                      = "SMM";
-        public static final String TradeVariance                               = "TRDVAR";
-        public static final String WeightedAverageCoupon                       = "WAC";
-        public static final String WeightedAverageLifeCoupon                   = "WAL";
         public static final String WeightedAverageLoanAge                      = "WALA";
         public static final String WeightedAverageMaturity                     = "WAM";
+        public static final String ConstantPrepaymentRate                      = "CPR";
+        public static final String FinalCPROfHomeEquityPrepaymentCurve         = "HEP";
+        public static final String WeightedAverageLifeCoupon                   = "WAL";
+        public static final String PercentOfManufacturedHousingPrepaymentCurve = "MHP";
+        public static final String SingleMonthlyMortality                      = "SMM";
+        public static final String MonthlyPrepaymentRate                       = "MPR";
+        public static final String PercentOfBMAPrepaymentCurve                 = "PSA";
+        public static final String PercentOfProspectusPrepaymentCurve          = "PPC";
+        public static final String ConstantPrepaymentPenalty                   = "CPP";
+        public static final String LotVariance                                 = "LOTVAR";
+        public static final String ConstantPrepaymentYield                     = "CPY";
+        public static final String WeightedAverageCoupon                       = "WAC";
+        public static final String IssueDate                                   = "ISSUE";
+        public static final String MaturityYearAndMonth                        = "MAT";
+        public static final String NumberOfPieces                              = "PIECES";
+        public static final String PoolsMaximum                                = "PMAX";
+        public static final String PoolsPerMillion                             = "PPM";
+        public static final String PoolsPerLot                                 = "PPL";
+        public static final String PoolsPerTrade                               = "PPT";
+        public static final String ProductionYear                              = "PROD";
+        public static final String TradeVariance                               = "TRDVAR";
+        public static final String Geographics                                 = "GEOG";
 
         private StipulationTypeValues() {
         }
@@ -934,43 +934,43 @@ public class FIX43Enumerations {
      */
     public static class YieldTypeValues {
 
-        public static final String AfterTaxYield                 = "AFTERTAX";
+        public static final String TrueYield                     = "TRUE";
+        public static final String PreviousCloseYield            = "PREVCLOSE";
+        public static final String YieldToLongestAverage         = "LONGEST";
+        public static final String YieldToLongestAverageLife     = "LONGAVGLIFE";
+        public static final String YieldToMaturity               = "MATURITY";
+        public static final String MarkToMarketYield             = "MARK";
+        public static final String OpenAverageYield              = "OPENAVG";
+        public static final String YieldToNextPut                = "PUT";
+        public static final String ProceedsYield                 = "PROCEEDS";
+        public static final String SemiAnnualYield               = "SEMIANNUAL";
+        public static final String YieldToShortestAverageLife    = "SHORTAVGLIFE";
+        public static final String YieldToShortestAverage        = "SHORTEST";
+        public static final String SimpleYield                   = "SIMPLE";
+        public static final String YieldToTenderDate             = "TENDER";
+        public static final String YieldValueOf32nds             = "VALUE1/32";
+        public static final String YieldToWorst                  = "WORST";
+        public static final String TaxEquivalentYield            = "TAXEQUIV";
         public static final String AnnualYield                   = "ANNUAL";
+        public static final String ClosingYieldMostRecentYear    = "LASTYEAR";
+        public static final String YieldToNextRefund             = "NEXTREFUND";
+        public static final String AfterTaxYield                 = "AFTERTAX";
         public static final String YieldAtIssue                  = "ATISSUE";
         public static final String YieldToAverageLife            = "AVGLIFE";
         public static final String YieldToAverageMaturity        = "AVGMATURITY";
         public static final String BookYield                     = "BOOK";
         public static final String YieldToNextCall               = "CALL";
         public static final String YieldChangeSinceClose         = "CHANGE";
-        public static final String ClosingYield                  = "CLOSE";
         public static final String CompoundYield                 = "COMPOUND";
         public static final String CurrentYield                  = "CURRENT";
-        public static final String GvntEquivalentYield           = "GOVTEQUIV";
         public static final String TrueGrossYield                = "GROSS";
+        public static final String GvntEquivalentYield           = "GOVTEQUIV";
         public static final String YieldWithInflationAssumption  = "INFLATION";
         public static final String InverseFloaterBondYield       = "INVERSEFLOATER";
+        public static final String ClosingYieldMostRecentQuarter = "LASTQUARTER";
         public static final String MostRecentClosingYield        = "LASTCLOSE";
         public static final String ClosingYieldMostRecentMonth   = "LASTMONTH";
-        public static final String ClosingYieldMostRecentQuarter = "LASTQUARTER";
-        public static final String ClosingYieldMostRecentYear    = "LASTYEAR";
-        public static final String YieldToLongestAverageLife     = "LONGAVGLIFE";
-        public static final String YieldToLongestAverage         = "LONGEST";
-        public static final String MarkToMarketYield             = "MARK";
-        public static final String YieldToMaturity               = "MATURITY";
-        public static final String YieldToNextRefund             = "NEXTREFUND";
-        public static final String OpenAverageYield              = "OPENAVG";
-        public static final String PreviousCloseYield            = "PREVCLOSE";
-        public static final String ProceedsYield                 = "PROCEEDS";
-        public static final String YieldToNextPut                = "PUT";
-        public static final String SemiAnnualYield               = "SEMIANNUAL";
-        public static final String YieldToShortestAverageLife    = "SHORTAVGLIFE";
-        public static final String YieldToShortestAverage        = "SHORTEST";
-        public static final String SimpleYield                   = "SIMPLE";
-        public static final String TaxEquivalentYield            = "TAXEQUIV";
-        public static final String YieldToTenderDate             = "TENDER";
-        public static final String TrueYield                     = "TRUE";
-        public static final String YieldValueOf32nds             = "VALUE1/32";
-        public static final String YieldToWorst                  = "WORST";
+        public static final String ClosingYield                  = "CLOSE";
 
         private YieldTypeValues() {
         }
@@ -982,9 +982,9 @@ public class FIX43Enumerations {
      */
     public static class SubscriptionRequestTypeValues {
 
-        public static final char Snapshot                = '0';
         public static final char SnapshotAndUpdates      = '1';
         public static final char DisablePreviousSnapshot = '2';
+        public static final char Snapshot                = '0';
 
         private SubscriptionRequestTypeValues() {
         }
@@ -1009,17 +1009,17 @@ public class FIX43Enumerations {
      */
     public static class MDEntryTypeValues {
 
-        public static final char Bid                     = '0';
+        public static final char TradingSessionHighPrice = '7';
         public static final char Offer                   = '1';
+        public static final char Imbalance               = 'A';
+        public static final char TradingSessionVWAPPrice = '9';
+        public static final char TradingSessionLowPrice  = '8';
+        public static final char ClosingPrice            = '5';
+        public static final char OpeningPrice            = '4';
+        public static final char Bid                     = '0';
         public static final char Trade                   = '2';
         public static final char IndexValue              = '3';
-        public static final char OpeningPrice            = '4';
-        public static final char ClosingPrice            = '5';
         public static final char SettlementPrice         = '6';
-        public static final char TradingSessionHighPrice = '7';
-        public static final char TradingSessionLowPrice  = '8';
-        public static final char TradingSessionVWAPPrice = '9';
-        public static final char Imbalance               = 'A';
 
         private MDEntryTypeValues() {
         }
@@ -1046,15 +1046,15 @@ public class FIX43Enumerations {
      */
     public static class QuoteConditionValues {
 
-        public static final String Open             = "A";
-        public static final String Closed           = "B";
-        public static final String ExchangeBest     = "C";
-        public static final String ConsolidatedBest = "D";
         public static final String Locked           = "E";
-        public static final String Crossed          = "F";
-        public static final String Depth            = "G";
-        public static final String FastTrading      = "H";
         public static final String NonFirm          = "I";
+        public static final String FastTrading      = "H";
+        public static final String Crossed          = "F";
+        public static final String ConsolidatedBest = "D";
+        public static final String ExchangeBest     = "C";
+        public static final String Closed           = "B";
+        public static final String Open             = "A";
+        public static final String Depth            = "G";
 
         private QuoteConditionValues() {
         }
@@ -1066,23 +1066,23 @@ public class FIX43Enumerations {
      */
     public static class TradeConditionValues {
 
-        public static final String Cash                 = "A";
-        public static final String AveragePriceTrade    = "B";
-        public static final String CashTrade            = "C";
-        public static final String NextDay              = "D";
-        public static final String Opening              = "E";
-        public static final String IntradayTradeDetail  = "F";
-        public static final String Rule127Trade         = "G";
-        public static final String Rule155Trade         = "H";
-        public static final String SoldLast             = "I";
         public static final String NextDayTrade         = "J";
         public static final String Opened               = "K";
         public static final String Seller               = "L";
+        public static final String AveragePriceTrade    = "B";
         public static final String Sold                 = "M";
+        public static final String Rule155Trade         = "H";
         public static final String StoppedStock         = "N";
         public static final String ImbalanceMoreBuyers  = "P";
         public static final String ImbalanceMoreSellers = "Q";
         public static final String OpeningPrice         = "R";
+        public static final String SoldLast             = "I";
+        public static final String Cash                 = "A";
+        public static final String CashTrade            = "C";
+        public static final String Opening              = "E";
+        public static final String IntradayTradeDetail  = "F";
+        public static final String Rule127Trade         = "G";
+        public static final String NextDay              = "D";
 
         private TradeConditionValues() {
         }
@@ -1108,19 +1108,19 @@ public class FIX43Enumerations {
      */
     public static class MDReqRejReasonValues {
 
-        public static final char UnknownSymbol                      = '0';
-        public static final char DuplicateMDReqID                   = '1';
-        public static final char InsufficientBandwidth              = '2';
-        public static final char InsufficientPermissions            = '3';
-        public static final char UnsupportedSubscriptionRequestType = '4';
-        public static final char UnsupportedMarketDepth             = '5';
-        public static final char UnsupportedMDUpdateType            = '6';
         public static final char UnsupportedAggregatedBook          = '7';
-        public static final char UnsupportedMDEntryType             = '8';
-        public static final char UnsupportedTradingSessionID        = '9';
-        public static final char UnsupportedScope                   = 'A';
-        public static final char UnsupportedOpenCloseSettleFlag     = 'B';
+        public static final char DuplicateMDReqID                   = '1';
         public static final char UnsupportedMDImplicitDelete        = 'C';
+        public static final char UnsupportedOpenCloseSettleFlag     = 'B';
+        public static final char UnsupportedScope                   = 'A';
+        public static final char UnsupportedTradingSessionID        = '9';
+        public static final char UnsupportedMDEntryType             = '8';
+        public static final char UnsupportedMDUpdateType            = '6';
+        public static final char UnsupportedMarketDepth             = '5';
+        public static final char UnsupportedSubscriptionRequestType = '4';
+        public static final char InsufficientBandwidth              = '2';
+        public static final char UnknownSymbol                      = '0';
+        public static final char InsufficientPermissions            = '3';
 
         private MDReqRejReasonValues() {
         }
@@ -1145,11 +1145,11 @@ public class FIX43Enumerations {
      */
     public static class OpenCloseSettleFlagValues {
 
-        public static final String DailyOpen                    = "0";
         public static final String SessionOpen                  = "1";
         public static final String DeliverySettlementEntry      = "2";
         public static final String ExpectedEntry                = "3";
         public static final String EntryFromPreviousBusinessDay = "4";
+        public static final String DailyOpen                    = "0";
 
         private OpenCloseSettleFlagValues() {
         }
@@ -1174,11 +1174,11 @@ public class FIX43Enumerations {
      */
     public static class CorporateActionValues {
 
-        public static final String ExDividend     = "A";
         public static final String ExDistribution = "B";
-        public static final String ExRights       = "C";
-        public static final String New            = "D";
         public static final String ExInterest     = "E";
+        public static final String ExRights       = "C";
+        public static final String ExDividend     = "A";
+        public static final String New            = "D";
 
         private CorporateActionValues() {
         }
@@ -1190,17 +1190,17 @@ public class FIX43Enumerations {
      */
     public static class QuoteStatusValues {
 
-        public static final int Accepted                =  0;
-        public static final int CancelForSymbol         =  1;
-        public static final int CanceledForSecurityType =  2;
-        public static final int CanceledForUnderlying   =  3;
-        public static final int CanceledAll             =  4;
-        public static final int Rejected                =  5;
         public static final int RemovedFromMarket       =  6;
-        public static final int Expired                 =  7;
-        public static final int Query                   =  8;
-        public static final int QuoteNotFound           =  9;
+        public static final int CancelForSymbol         =  1;
         public static final int Pending                 = 10;
+        public static final int QuoteNotFound           =  9;
+        public static final int Query                   =  8;
+        public static final int Expired                 =  7;
+        public static final int Rejected                =  5;
+        public static final int CanceledAll             =  4;
+        public static final int CanceledForUnderlying   =  3;
+        public static final int CanceledForSecurityType =  2;
+        public static final int Accepted                =  0;
 
         private QuoteStatusValues() {
         }
@@ -1212,10 +1212,10 @@ public class FIX43Enumerations {
      */
     public static class QuoteCancelTypeValues {
 
-        public static final int CancelForOneOrMoreSecurities = 1;
-        public static final int CancelForSecurityType        = 2;
-        public static final int CancelForUnderlyingSecurity  = 3;
         public static final int CancelAllQuotes              = 4;
+        public static final int CancelForSecurityType        = 2;
+        public static final int CancelForOneOrMoreSecurities = 1;
+        public static final int CancelForUnderlyingSecurity  = 3;
 
         private QuoteCancelTypeValues() {
         }
@@ -1227,6 +1227,7 @@ public class FIX43Enumerations {
      */
     public static class QuoteRejectReasonValues {
 
+        public static final int NotAuthorizedToQuoteSecurity = 9;
         public static final int UnknownSymbol                = 1;
         public static final int Exchange                     = 2;
         public static final int QuoteRequestExceedsLimit     = 3;
@@ -1235,7 +1236,6 @@ public class FIX43Enumerations {
         public static final int DuplicateQuote               = 6;
         public static final int InvalidBid                   = 7;
         public static final int InvalidPrice                 = 8;
-        public static final int NotAuthorizedToQuoteSecurity = 9;
 
         private QuoteRejectReasonValues() {
         }
@@ -1247,8 +1247,8 @@ public class FIX43Enumerations {
      */
     public static class QuoteResponseLevelValues {
 
-        public static final int NoAcknowledgement                        = 0;
         public static final int AcknowledgeOnlyNegativeOrErroneousQuotes = 1;
+        public static final int NoAcknowledgement                        = 0;
         public static final int AcknowledgeEachQuoteMessage              = 2;
 
         private QuoteResponseLevelValues() {
@@ -1261,8 +1261,8 @@ public class FIX43Enumerations {
      */
     public static class QuoteRequestTypeValues {
 
-        public static final int Manual    = 1;
         public static final int Automatic = 2;
+        public static final int Manual    = 1;
 
         private QuoteRequestTypeValues() {
         }
@@ -1289,12 +1289,12 @@ public class FIX43Enumerations {
      */
     public static class SecurityResponseTypeValues {
 
-        public static final int AcceptAsIs                            = 1;
-        public static final int AcceptWithRevisions                   = 2;
-        public static final int ListOfSecurityTypesReturnedPerRequest = 3;
-        public static final int ListOfSecuritiesReturnedPerRequest    = 4;
         public static final int RejectSecurityProposal                = 5;
+        public static final int AcceptAsIs                            = 1;
         public static final int CannotMatchSelectionCriteria          = 6;
+        public static final int AcceptWithRevisions                   = 2;
+        public static final int ListOfSecuritiesReturnedPerRequest    = 4;
+        public static final int ListOfSecurityTypesReturnedPerRequest = 3;
 
         private SecurityResponseTypeValues() {
         }
@@ -1306,27 +1306,27 @@ public class FIX43Enumerations {
      */
     public static class SecurityTradingStatusValues {
 
-        public static final int OpeningDelay               =  1;
-        public static final int TradingHalt                =  2;
-        public static final int Resume                     =  3;
-        public static final int NoOpen                     =  4;
-        public static final int PriceIndication            =  5;
-        public static final int TradingRangeIndication     =  6;
-        public static final int MarketImbalanceBuy         =  7;
-        public static final int MarketImbalanceSell        =  8;
-        public static final int MarketOnCloseImbalanceBuy  =  9;
-        public static final int MarketOnCloseImbalanceSell = 10;
-        public static final int NoMarketImbalance          = 12;
+        public static final int UnknownOrInvalid           = 20;
         public static final int NoMarketOnCloseImbalance   = 13;
         public static final int ITSPreOpening              = 14;
         public static final int NewPriceIndication         = 15;
         public static final int TradeDisseminationTime     = 16;
         public static final int ReadyToTrade               = 17;
-        public static final int NotAvailableForTrading     = 18;
         public static final int NotTradedOnThisMarket      = 19;
-        public static final int UnknownOrInvalid           = 20;
-        public static final int PreOpen                    = 21;
         public static final int OpeningRotation            = 22;
+        public static final int PreOpen                    = 21;
+        public static final int NoMarketImbalance          = 12;
+        public static final int NotAvailableForTrading     = 18;
+        public static final int MarketOnCloseImbalanceSell = 10;
+        public static final int MarketOnCloseImbalanceBuy  =  9;
+        public static final int MarketImbalanceSell        =  8;
+        public static final int MarketImbalanceBuy         =  7;
+        public static final int TradingRangeIndication     =  6;
+        public static final int PriceIndication            =  5;
+        public static final int NoOpen                     =  4;
+        public static final int Resume                     =  3;
+        public static final int OpeningDelay               =  1;
+        public static final int TradingHalt                =  2;
         public static final int FastMarket                 = 23;
 
         private SecurityTradingStatusValues() {
@@ -1339,12 +1339,12 @@ public class FIX43Enumerations {
      */
     public static class HaltReasonValues {
 
-        public static final char NewsDissemination     = 'D';
-        public static final char OrderInflux           = 'E';
-        public static final char OrderImbalance        = 'I';
-        public static final char AdditionalInformation = 'M';
-        public static final char NewsPending           = 'P';
         public static final char EquipmentChangeover   = 'X';
+        public static final char AdditionalInformation = 'M';
+        public static final char OrderInflux           = 'E';
+        public static final char NewsPending           = 'P';
+        public static final char OrderImbalance        = 'I';
+        public static final char NewsDissemination     = 'D';
 
         private HaltReasonValues() {
         }
@@ -1370,9 +1370,9 @@ public class FIX43Enumerations {
      */
     public static class TradSesMethodValues {
 
+        public static final int TwoParty   = 3;
         public static final int Electronic = 1;
         public static final int OpenOutcry = 2;
-        public static final int TwoParty   = 3;
 
         private TradSesMethodValues() {
         }
@@ -1384,9 +1384,9 @@ public class FIX43Enumerations {
      */
     public static class TradSesModeValues {
 
+        public static final int Production = 3;
         public static final int Testing    = 1;
         public static final int Simulated  = 2;
-        public static final int Production = 3;
 
         private TradSesModeValues() {
         }
@@ -1398,13 +1398,13 @@ public class FIX43Enumerations {
      */
     public static class TradSesStatusValues {
 
-        public static final int Unknown         = 0;
-        public static final int Halted          = 1;
-        public static final int Open            = 2;
-        public static final int Closed          = 3;
-        public static final int PreOpen         = 4;
         public static final int PreClose        = 5;
         public static final int RequestRejected = 6;
+        public static final int PreOpen         = 4;
+        public static final int Closed          = 3;
+        public static final int Open            = 2;
+        public static final int Halted          = 1;
+        public static final int Unknown         = 0;
 
         private TradSesStatusValues() {
         }
@@ -1416,10 +1416,10 @@ public class FIX43Enumerations {
      */
     public static class MessageEncodingValues {
 
-        public static final String EUCJP     = "EUC-JP";
-        public static final String ISO2022JP = "ISO-2022-JP";
-        public static final String ShiftJIS  = "Shift_JIS";
         public static final String UTF8      = "UTF-8";
+        public static final String ISO2022JP = "ISO-2022-JP";
+        public static final String EUCJP     = "EUC-JP";
+        public static final String ShiftJIS  = "Shift_JIS";
 
         private MessageEncodingValues() {
         }
@@ -1431,24 +1431,24 @@ public class FIX43Enumerations {
      */
     public static class SessionRejectReasonValues {
 
-        public static final int InvalidTagNumber                          =  0;
-        public static final int RequiredTagMissing                        =  1;
-        public static final int TagNotDefinedForThisMessageType           =  2;
-        public static final int UndefinedTag                              =  3;
-        public static final int TagSpecifiedWithoutAValue                 =  4;
-        public static final int ValueIsIncorrect                          =  5;
-        public static final int IncorrectDataFormatForValue               =  6;
-        public static final int DecryptionProblem                         =  7;
-        public static final int SignatureProblem                          =  8;
-        public static final int CompIDProblem                             =  9;
-        public static final int SendingTimeAccuracyProblem                = 10;
-        public static final int InvalidMsgType                            = 11;
         public static final int XMLValidationError                        = 12;
-        public static final int TagAppearsMoreThanOnce                    = 13;
-        public static final int TagSpecifiedOutOfRequiredOrder            = 14;
-        public static final int RepeatingGroupFieldsOutOfOrder            = 15;
-        public static final int IncorrectNumInGroupCountForRepeatingGroup = 16;
         public static final int Non                                       = 17;
+        public static final int IncorrectNumInGroupCountForRepeatingGroup = 16;
+        public static final int RepeatingGroupFieldsOutOfOrder            = 15;
+        public static final int TagSpecifiedOutOfRequiredOrder            = 14;
+        public static final int InvalidMsgType                            = 11;
+        public static final int InvalidTagNumber                          =  0;
+        public static final int CompIDProblem                             =  9;
+        public static final int SignatureProblem                          =  8;
+        public static final int DecryptionProblem                         =  7;
+        public static final int IncorrectDataFormatForValue               =  6;
+        public static final int ValueIsIncorrect                          =  5;
+        public static final int TagSpecifiedWithoutAValue                 =  4;
+        public static final int UndefinedTag                              =  3;
+        public static final int SendingTimeAccuracyProblem                = 10;
+        public static final int TagAppearsMoreThanOnce                    = 13;
+        public static final int TagNotDefinedForThisMessageType           =  2;
+        public static final int RequiredTagMissing                        =  1;
 
         private SessionRejectReasonValues() {
         }
@@ -1460,8 +1460,8 @@ public class FIX43Enumerations {
      */
     public static class BidRequestTransTypeValues {
 
-        public static final char Cancel = 'C';
         public static final char New    = 'N';
+        public static final char Cancel = 'C';
 
         private BidRequestTransTypeValues() {
         }
@@ -1473,15 +1473,15 @@ public class FIX43Enumerations {
      */
     public static class ExecRestatementReasonValues {
 
+        public static final int CancelOnSystemFailure    = 7;
         public static final int GTCorporateAction        = 0;
+        public static final int Market                   = 8;
+        public static final int CancelOnTradingHalt      = 6;
+        public static final int PartialDeclineOfOrderQty = 5;
+        public static final int BrokerOption             = 4;
+        public static final int RepricingOfOrder         = 3;
         public static final int GTRenewal                = 1;
         public static final int VerbalChange             = 2;
-        public static final int RepricingOfOrder         = 3;
-        public static final int BrokerOption             = 4;
-        public static final int PartialDeclineOfOrderQty = 5;
-        public static final int CancelOnTradingHalt      = 6;
-        public static final int CancelOnSystemFailure    = 7;
-        public static final int Market                   = 8;
 
         private ExecRestatementReasonValues() {
         }
@@ -1493,14 +1493,14 @@ public class FIX43Enumerations {
      */
     public static class BusinessRejectReasonValues {
 
+        public static final int UnsupportedMessageType              = 3;
+        public static final int DeliverToFirmNotAvailableAtThisTime = 7;
+        public static final int ApplicationNotAvailable             = 4;
+        public static final int NotAuthorized                       = 6;
         public static final int Other                               = 0;
+        public static final int ConditionallyRequiredFieldMissing   = 5;
         public static final int UnknownID                           = 1;
         public static final int UnknownSecurity                     = 2;
-        public static final int UnsupportedMessageType              = 3;
-        public static final int ApplicationNotAvailable             = 4;
-        public static final int ConditionallyRequiredFieldMissing   = 5;
-        public static final int NotAuthorized                       = 6;
-        public static final int DeliverToFirmNotAvailableAtThisTime = 7;
 
         private BusinessRejectReasonValues() {
         }
@@ -1512,8 +1512,8 @@ public class FIX43Enumerations {
      */
     public static class MsgDirectionValues {
 
-        public static final char Receive = 'R';
         public static final char Send    = 'S';
+        public static final char Receive = 'R';
 
         private MsgDirectionValues() {
         }
@@ -1556,9 +1556,9 @@ public class FIX43Enumerations {
      */
     public static class BidDescriptorTypeValues {
 
-        public static final int Sector  = 1;
-        public static final int Country = 2;
         public static final int Index   = 3;
+        public static final int Country = 2;
+        public static final int Sector  = 1;
 
         private BidDescriptorTypeValues() {
         }
@@ -1583,10 +1583,10 @@ public class FIX43Enumerations {
      */
     public static class LiquidityIndTypeValues {
 
-        public static final int FiveDayMovingAverage   = 1;
-        public static final int TwentyDayMovingAverage = 2;
         public static final int NormalMarketSize       = 3;
         public static final int Other                  = 4;
+        public static final int TwentyDayMovingAverage = 2;
+        public static final int FiveDayMovingAverage   = 1;
 
         private LiquidityIndTypeValues() {
         }
@@ -1598,9 +1598,9 @@ public class FIX43Enumerations {
      */
     public static class ProgRptReqsValues {
 
-        public static final int BuySideRequests          = 1;
-        public static final int SellSideSends            = 2;
         public static final int RealTimeExecutionReports = 3;
+        public static final int SellSideSends            = 2;
+        public static final int BuySideRequests          = 1;
 
         private ProgRptReqsValues() {
         }
@@ -1612,8 +1612,8 @@ public class FIX43Enumerations {
      */
     public static class IncTaxIndValues {
 
-        public static final int Net   = 1;
         public static final int Gross = 2;
+        public static final int Net   = 1;
 
         private IncTaxIndValues() {
         }
@@ -1625,8 +1625,8 @@ public class FIX43Enumerations {
      */
     public static class TradeTypeValues {
 
-        public static final char Agency          = 'A';
         public static final char VWAPGuarantee   = 'G';
+        public static final char Agency          = 'A';
         public static final char GuaranteedClose = 'J';
         public static final char RiskTrade       = 'R';
 
@@ -1640,19 +1640,19 @@ public class FIX43Enumerations {
      */
     public static class BasisPxTypeValues {
 
-        public static final char ClosingPriceAtMorningSession        = '2';
-        public static final char ClosingPrice                        = '3';
-        public static final char CurrentPrice                        = '4';
-        public static final char SQ                                  = '5';
-        public static final char VWAPThroughADay                     = '6';
-        public static final char VWAPThroughAMorningSession          = '7';
         public static final char VWAPThroughAnAfternoonSession       = '8';
-        public static final char VWAPThroughADayExcept               = '9';
-        public static final char VWAPThroughAMorningSessionExcept    = 'A';
-        public static final char VWAPThroughAnAfternoonSessionExcept = 'B';
-        public static final char Strike                              = 'C';
         public static final char Open                                = 'D';
         public static final char Others                              = 'Z';
+        public static final char Strike                              = 'C';
+        public static final char VWAPThroughAnAfternoonSessionExcept = 'B';
+        public static final char VWAPThroughADayExcept               = '9';
+        public static final char VWAPThroughAMorningSession          = '7';
+        public static final char VWAPThroughADay                     = '6';
+        public static final char SQ                                  = '5';
+        public static final char CurrentPrice                        = '4';
+        public static final char ClosingPrice                        = '3';
+        public static final char ClosingPriceAtMorningSession        = '2';
+        public static final char VWAPThroughAMorningSessionExcept    = 'A';
 
         private BasisPxTypeValues() {
         }
@@ -1664,14 +1664,14 @@ public class FIX43Enumerations {
      */
     public static class PriceTypeValues {
 
-        public static final int Percentage  = 1;
-        public static final int PerUnit     = 2;
         public static final int FixedAmount = 3;
+        public static final int Percentage  = 1;
         public static final int Discount    = 4;
-        public static final int Premium     = 5;
         public static final int Spread      = 6;
         public static final int TEDPrice    = 7;
         public static final int TEDYield    = 8;
+        public static final int Premium     = 5;
+        public static final int PerUnit     = 2;
 
         private PriceTypeValues() {
         }
@@ -1684,8 +1684,8 @@ public class FIX43Enumerations {
     public static class GTBookingInstValues {
 
         public static final int BookOutAllTradesOnDayOfExecution          = 0;
-        public static final int AccumulateUntilFilledOrExpired            = 1;
         public static final int AccumulateUntilVerballlyNotifiedOtherwise = 2;
+        public static final int AccumulateUntilFilledOrExpired            = 1;
 
         private GTBookingInstValues() {
         }
@@ -1697,12 +1697,12 @@ public class FIX43Enumerations {
      */
     public static class ListStatusTypeValues {
 
-        public static final int Ack         = 1;
-        public static final int Response    = 2;
-        public static final int Timed       = 3;
-        public static final int ExecStarted = 4;
-        public static final int AllDone     = 5;
         public static final int Alert       = 6;
+        public static final int ExecStarted = 4;
+        public static final int Timed       = 3;
+        public static final int Response    = 2;
+        public static final int Ack         = 1;
+        public static final int AllDone     = 5;
 
         private ListStatusTypeValues() {
         }
@@ -1727,13 +1727,13 @@ public class FIX43Enumerations {
      */
     public static class ListOrderStatusValues {
 
-        public static final int InBiddingProcess     = 1;
-        public static final int ReceivedForExecution = 2;
-        public static final int Executing            = 3;
         public static final int Cancelling           = 4;
-        public static final int Alert                = 5;
-        public static final int AllDone              = 6;
+        public static final int Executing            = 3;
         public static final int Reject               = 7;
+        public static final int AllDone              = 6;
+        public static final int Alert                = 5;
+        public static final int ReceivedForExecution = 2;
+        public static final int InBiddingProcess     = 1;
 
         private ListOrderStatusValues() {
         }
@@ -1745,11 +1745,11 @@ public class FIX43Enumerations {
      */
     public static class ListExecInstTypeValues {
 
-        public static final char Immediate             = '1';
-        public static final char WaitForInstruction    = '2';
-        public static final char SellDriven            = '3';
-        public static final char BuyDrivenCashTopUp    = '4';
         public static final char BuyDrivenCashWithdraw = '5';
+        public static final char BuyDrivenCashTopUp    = '4';
+        public static final char WaitForInstruction    = '2';
+        public static final char Immediate             = '1';
+        public static final char SellDriven            = '3';
 
         private ListExecInstTypeValues() {
         }
@@ -1761,8 +1761,8 @@ public class FIX43Enumerations {
      */
     public static class CxlRejResponseToValues {
 
-        public static final char OrderCancelRequest = '1';
         public static final char OrderCancel        = '2';
+        public static final char OrderCancelRequest = '1';
 
         private CxlRejResponseToValues() {
         }
@@ -1788,21 +1788,21 @@ public class FIX43Enumerations {
      */
     public static class PartyIDSourceValues {
 
+        public static final char ChineseInvestorID                  = '5';
+        public static final char USEmployerOrTaxIDNumber            = '8';
+        public static final char AustralianTaxFileNumber            = 'A';
+        public static final char AustralianBusinessNumber           = '9';
+        public static final char ISOCountryCode                     = 'E';
+        public static final char BIC                                = 'B';
+        public static final char USSocialSecurityNumber             = '7';
+        public static final char Proprietary                        = 'D';
+        public static final char SettlementEntityLocation           = 'F';
         public static final char KoreanInvestorID                   = '1';
         public static final char TaiwaneseForeignInvestorID         = '2';
         public static final char TaiwaneseTradingAcct               = '3';
         public static final char MalaysianCentralDepository         = '4';
-        public static final char ChineseInvestorID                  = '5';
         public static final char UKNationalInsuranceOrPensionNumber = '6';
-        public static final char USSocialSecurityNumber             = '7';
-        public static final char USEmployerOrTaxIDNumber            = '8';
-        public static final char AustralianBusinessNumber           = '9';
-        public static final char AustralianTaxFileNumber            = 'A';
-        public static final char BIC                                = 'B';
         public static final char GeneralIdentifier                  = 'C';
-        public static final char Proprietary                        = 'D';
-        public static final char ISOCountryCode                     = 'E';
-        public static final char SettlementEntityLocation           = 'F';
 
         private PartyIDSourceValues() {
         }
@@ -1814,26 +1814,26 @@ public class FIX43Enumerations {
      */
     public static class PartyRoleValues {
 
+        public static final int CorrespondantClearingFirm = 15;
+        public static final int ClientID                  =  3;
+        public static final int UnderlyingContraFirm      = 20;
+        public static final int SponsoringFirm            = 19;
+        public static final int ContraClearingFirm        = 18;
+        public static final int ContraFirm                = 17;
+        public static final int ExecutingSystem           = 16;
+        public static final int EnteringFirm              =  7;
         public static final int ExecutingFirm             =  1;
         public static final int BrokerOfCredit            =  2;
-        public static final int ClientID                  =  3;
-        public static final int ClearingFirm              =  4;
         public static final int InvestorID                =  5;
         public static final int IntroducingFirm           =  6;
-        public static final int EnteringFirm              =  7;
+        public static final int GiveupClearingFirm        = 14;
         public static final int Locate                    =  8;
         public static final int FundManagerClientID       =  9;
         public static final int SettlementLocation        = 10;
         public static final int OrderOriginationTrader    = 11;
         public static final int ExecutingTrader           = 12;
         public static final int OrderOriginationFirm      = 13;
-        public static final int GiveupClearingFirm        = 14;
-        public static final int CorrespondantClearingFirm = 15;
-        public static final int ExecutingSystem           = 16;
-        public static final int ContraFirm                = 17;
-        public static final int ContraClearingFirm        = 18;
-        public static final int SponsoringFirm            = 19;
-        public static final int UnderlyingContraFirm      = 20;
+        public static final int ClearingFirm              =  4;
 
         private PartyRoleValues() {
         }
@@ -1845,18 +1845,18 @@ public class FIX43Enumerations {
      */
     public static class ProductValues {
 
+        public static final int LOAN        =  8;
+        public static final int OTHER       = 12;
+        public static final int MUNICIPAL   = 11;
         public static final int AGENCY      =  1;
-        public static final int COMMODITY   =  2;
         public static final int CORPORATE   =  3;
         public static final int CURRENCY    =  4;
-        public static final int EQUITY      =  5;
+        public static final int COMMODITY   =  2;
         public static final int GOVERNMENT  =  6;
-        public static final int INDEX       =  7;
-        public static final int LOAN        =  8;
-        public static final int MONEYMARKET =  9;
         public static final int MORTGAGE    = 10;
-        public static final int MUNICIPAL   = 11;
-        public static final int OTHER       = 12;
+        public static final int INDEX       =  7;
+        public static final int MONEYMARKET =  9;
+        public static final int EQUITY      =  5;
 
         private ProductValues() {
         }
@@ -1868,13 +1868,13 @@ public class FIX43Enumerations {
      */
     public static class QuantityTypeValues {
 
-        public static final int SHARES       = 1;
-        public static final int BONDS        = 2;
-        public static final int CURRENTFACE  = 3;
-        public static final int ORIGINALFACE = 4;
-        public static final int CURRENCY     = 5;
         public static final int CONTRACTS    = 6;
         public static final int OTHER        = 7;
+        public static final int CURRENCY     = 5;
+        public static final int ORIGINALFACE = 4;
+        public static final int CURRENTFACE  = 3;
+        public static final int BONDS        = 2;
+        public static final int SHARES       = 1;
         public static final int PAR          = 8;
 
         private QuantityTypeValues() {
@@ -1903,8 +1903,8 @@ public class FIX43Enumerations {
 
         public static final char NoWaiverAgreement = 'M';
         public static final char NoExecutionOnly   = 'N';
-        public static final char NoInstitutional   = 'O';
         public static final char Yes               = 'Y';
+        public static final char NoInstitutional   = 'O';
 
         private CancellationRightsValues() {
         }
@@ -1916,11 +1916,11 @@ public class FIX43Enumerations {
      */
     public static class MoneyLaunderingStatusValues {
 
-        public static final char ExemptBelowLimit = '1';
-        public static final char ExemptMoneyType  = '2';
         public static final char ExemptAuthorised = '3';
-        public static final char NotChecked       = 'N';
+        public static final char ExemptMoneyType  = '2';
+        public static final char ExemptBelowLimit = '1';
         public static final char Passed           = 'Y';
+        public static final char NotChecked       = 'N';
 
         private MoneyLaunderingStatusValues() {
         }
@@ -1932,14 +1932,14 @@ public class FIX43Enumerations {
      */
     public static class ExecPriceTypeValues {
 
-        public static final char BidPrice                           = 'B';
-        public static final char CreationPrice                      = 'C';
-        public static final char CreationPricePlusAdjustmentPercent = 'D';
-        public static final char CreationPricePlusAdjustmentAmount  = 'E';
-        public static final char OfferPrice                         = 'O';
-        public static final char OfferPriceMinusAdjustmentPercent   = 'P';
-        public static final char OfferPriceMinusAdjustmentAmount    = 'Q';
         public static final char SinglePrice                        = 'S';
+        public static final char OfferPriceMinusAdjustmentAmount    = 'Q';
+        public static final char OfferPriceMinusAdjustmentPercent   = 'P';
+        public static final char OfferPrice                         = 'O';
+        public static final char CreationPricePlusAdjustmentAmount  = 'E';
+        public static final char CreationPricePlusAdjustmentPercent = 'D';
+        public static final char CreationPrice                      = 'C';
+        public static final char BidPrice                           = 'B';
 
         private ExecPriceTypeValues() {
         }
@@ -1951,9 +1951,9 @@ public class FIX43Enumerations {
      */
     public static class TradeReportTransTypeValues {
 
-        public static final char Cancel  = 'C';
         public static final char New     = 'N';
         public static final char Replace = 'R';
+        public static final char Cancel  = 'C';
 
         private TradeReportTransTypeValues() {
         }
@@ -1965,21 +1965,21 @@ public class FIX43Enumerations {
      */
     public static class PaymentMethodValues {
 
+        public static final int BPAY                    = 14;
+        public static final int ACHCredit               = 13;
+        public static final int ACHDebit                = 12;
+        public static final int CreditCard              = 11;
+        public static final int DirectCredit            = 10;
+        public static final int DirectDebit             =  9;
+        public static final int DebitCard               =  8;
+        public static final int FedWire                 =  7;
+        public static final int HighValueClearingSystem = 15;
+        public static final int Euroclear               =  3;
+        public static final int TelegraphicTransfer     =  6;
+        public static final int Clearstream             =  4;
         public static final int CREST                   =  1;
         public static final int NSCC                    =  2;
-        public static final int Euroclear               =  3;
-        public static final int Clearstream             =  4;
         public static final int Cheque                  =  5;
-        public static final int TelegraphicTransfer     =  6;
-        public static final int FedWire                 =  7;
-        public static final int DebitCard               =  8;
-        public static final int DirectDebit             =  9;
-        public static final int DirectCredit            = 10;
-        public static final int CreditCard              = 11;
-        public static final int ACHDebit                = 12;
-        public static final int ACHCredit               = 13;
-        public static final int BPAY                    = 14;
-        public static final int HighValueClearingSystem = 15;
 
         private PaymentMethodValues() {
         }
@@ -1991,29 +1991,27 @@ public class FIX43Enumerations {
      */
     public static class TaxAdvantageTypeValues {
 
-        public static final int None                          =  0;
-        public static final int MaxiISA                       =  1;
-        public static final int TESSA                         =  2;
-        public static final int MiniCashISA                   =  3;
-        public static final int MiniStocksAndSharesISA        =  4;
-        public static final int MiniInsuranceISA              =  5;
-        public static final int CurrentYearPayment            =  6;
-        public static final int PriorYearPayment              =  7;
-        public static final int AssetTransfer                 =  8;
-        public static final int EmployeePriorYear             =  9;
-        public static final int EmployeeCurrentYear           = 10;
+        public static final int ProfitSharingPlan             = 19;
         public static final int EmployerPriorYear             = 11;
         public static final int EmployerCurrentYear           = 12;
         public static final int NonFundPrototypeIRA           = 13;
         public static final int NonFundQualifiedPlan          = 14;
         public static final int DefinedContributionPlan       = 15;
-        public static final int IRA                           = 16;
+        public static final int EmployeeCurrentYear           = 10;
         public static final int IRARollover                   = 17;
-        public static final int KEOGH                         = 18;
-        public static final int ProfitSharingPlan             = 19;
-        public static final int US401K                        = 20;
+        public static final int MiniInsuranceISA              =  5;
+        public static final int IRA                           = 16;
+        public static final int EmployeePriorYear             =  9;
+        public static final int AssetTransfer                 =  8;
         public static final int SelfDirectedIRA               = 21;
-        public static final int US403b                        = 22;
+        public static final int CurrentYearPayment            =  6;
+        public static final int US401K                        = 20;
+        public static final int MiniStocksAndSharesISA        =  4;
+        public static final int MiniCashISA                   =  3;
+        public static final int TESSA                         =  2;
+        public static final int MaxiISA                       =  1;
+        public static final int None                          =  0;
+        public static final int PriorYearPayment              =  7;
         public static final int US457                         = 23;
         public static final int RothIRAPrototype              = 24;
         public static final int RothIRANonPrototype           = 25;
@@ -2021,6 +2019,8 @@ public class FIX43Enumerations {
         public static final int RothConversionIRANonPrototype = 27;
         public static final int EducationIRAPrototype         = 28;
         public static final int EducationIRANonPrototype      = 29;
+        public static final int KEOGH                         = 18;
+        public static final int US403b                        = 22;
 
         private TaxAdvantageTypeValues() {
         }
@@ -2046,9 +2046,9 @@ public class FIX43Enumerations {
     public static class RegistStatusValues {
 
         public static final char Accepted = 'A';
-        public static final char Held     = 'H';
         public static final char Reminder = 'N';
         public static final char Rejected = 'R';
+        public static final char Held     = 'H';
 
         private RegistStatusValues() {
         }
@@ -2060,24 +2060,24 @@ public class FIX43Enumerations {
      */
     public static class RegistRejReasonCodeValues {
 
-        public static final int InvalidAccountType         =  1;
-        public static final int InvalidTaxExemptType       =  2;
-        public static final int InvalidOwnershipType       =  3;
-        public static final int NoRegDetails               =  4;
-        public static final int InvalidRegSeqNo            =  5;
-        public static final int InvalidRegDetails          =  6;
-        public static final int InvalidMailingDetails      =  7;
-        public static final int InvalidMailingInstructions =  8;
-        public static final int InvalidInvestorID          =  9;
-        public static final int InvalidInvestorIDSource    = 10;
-        public static final int InvalidDateOfBirth         = 11;
-        public static final int InvalidCountry             = 12;
         public static final int InvalidDistribInstns       = 13;
-        public static final int InvalidPercentage          = 14;
-        public static final int InvalidPaymentMethod       = 15;
-        public static final int InvalidAccountName         = 16;
         public static final int InvalidAgentCode           = 17;
+        public static final int InvalidAccountName         = 16;
+        public static final int NoRegDetails               =  4;
+        public static final int InvalidPaymentMethod       = 15;
+        public static final int InvalidPercentage          = 14;
+        public static final int InvalidOwnershipType       =  3;
+        public static final int InvalidTaxExemptType       =  2;
+        public static final int InvalidCountry             = 12;
+        public static final int InvalidDateOfBirth         = 11;
+        public static final int InvalidInvestorIDSource    = 10;
+        public static final int InvalidInvestorID          =  9;
+        public static final int InvalidMailingInstructions =  8;
+        public static final int InvalidMailingDetails      =  7;
+        public static final int InvalidRegSeqNo            =  5;
+        public static final int InvalidAccountType         =  1;
         public static final int InvalidAccountNum          = 18;
+        public static final int InvalidRegDetails          =  6;
 
         private RegistRejReasonCodeValues() {
         }
@@ -2089,9 +2089,9 @@ public class FIX43Enumerations {
      */
     public static class RegistTransTypeValues {
 
+        public static final char Cancel  = '2';
         public static final char New     = '0';
         public static final char Replace = '1';
-        public static final char Cancel  = '2';
 
         private RegistTransTypeValues() {
         }
@@ -2103,6 +2103,7 @@ public class FIX43Enumerations {
      */
     public static class ContAmtTypeValues {
 
+        public static final int NetSettlementAmount               = 15;
         public static final int CommissionAmount                  =  1;
         public static final int CommissionPercent                 =  2;
         public static final int InitialChargeAmount               =  3;
@@ -2115,9 +2116,8 @@ public class FIX43Enumerations {
         public static final int ExitChargePercent                 = 10;
         public static final int FundBasedRenewalCommissionPercent = 11;
         public static final int ProjectedFundValue                = 12;
-        public static final int FundBasedRenewalCommissionOnOrder = 13;
         public static final int FundBasedRenewalCommissionOnFund  = 14;
-        public static final int NetSettlementAmount               = 15;
+        public static final int FundBasedRenewalCommissionOnOrder = 13;
 
         private ContAmtTypeValues() {
         }
@@ -2129,19 +2129,19 @@ public class FIX43Enumerations {
      */
     public static class OwnerTypeValues {
 
-        public static final int IndividualInvestor             =  1;
+        public static final int CompanyTrustee                 =  5;
+        public static final int Nominee                        = 13;
+        public static final int CorporateBody                  = 12;
+        public static final int NonProfitOrganization          = 11;
+        public static final int NetworkingSubAccount           = 10;
+        public static final int Fiduciaries                    =  9;
+        public static final int Trusts                         =  8;
+        public static final int PensionPlan                    =  6;
+        public static final int IndividualTrustee              =  4;
         public static final int PublicCompany                  =  2;
         public static final int PrivateCompany                 =  3;
-        public static final int IndividualTrustee              =  4;
-        public static final int CompanyTrustee                 =  5;
-        public static final int PensionPlan                    =  6;
+        public static final int IndividualInvestor             =  1;
         public static final int CustodianUnderGiftsToMinorsAct =  7;
-        public static final int Trusts                         =  8;
-        public static final int Fiduciaries                    =  9;
-        public static final int NetworkingSubAccount           = 10;
-        public static final int NonProfitOrganization          = 11;
-        public static final int CorporateBody                  = 12;
-        public static final int Nominee                        = 13;
 
         private OwnerTypeValues() {
         }
@@ -2153,12 +2153,12 @@ public class FIX43Enumerations {
      */
     public static class OrderCapacityValues {
 
-        public static final char Agency              = 'A';
-        public static final char Proprietary         = 'G';
+        public static final char RisklessPrincipal   = 'R';
         public static final char Individual          = 'I';
         public static final char Principal           = 'P';
-        public static final char RisklessPrincipal   = 'R';
         public static final char AgentForOtherMember = 'W';
+        public static final char Agency              = 'A';
+        public static final char Proprietary         = 'G';
 
         private OrderCapacityValues() {
         }
@@ -2170,16 +2170,16 @@ public class FIX43Enumerations {
      */
     public static class OrderRestrictionsValues {
 
-        public static final String ProgramTrade                                = "1";
-        public static final String IndexArbitrage                              = "2";
-        public static final String NonIndexArbitrage                           = "3";
-        public static final String CompetingMarketMaker                        = "4";
-        public static final String ActingAsMarketMakerOrSpecialistInSecurity   = "5";
-        public static final String ActingAsMarketMakerOrSpecialistInUnderlying = "6";
         public static final String ForeignEntity                               = "7";
-        public static final String ExternalMarketParticipant                   = "8";
-        public static final String ExternalInterConnectedMarketLinkage         = "9";
         public static final String RisklessArbitrage                           = "A";
+        public static final String ProgramTrade                                = "1";
+        public static final String ExternalMarketParticipant                   = "8";
+        public static final String ActingAsMarketMakerOrSpecialistInUnderlying = "6";
+        public static final String ActingAsMarketMakerOrSpecialistInSecurity   = "5";
+        public static final String NonIndexArbitrage                           = "3";
+        public static final String IndexArbitrage                              = "2";
+        public static final String CompetingMarketMaker                        = "4";
+        public static final String ExternalInterConnectedMarketLinkage         = "9";
 
         private OrderRestrictionsValues() {
         }
@@ -2192,12 +2192,12 @@ public class FIX43Enumerations {
     public static class MassCancelRequestTypeValues {
 
         public static final char CancelOrdersForASecurity            = '1';
+        public static final char CancelAllOrders                     = '7';
+        public static final char CancelOrdersForATradingSession      = '6';
+        public static final char CancelOrdersForASecurityType        = '5';
+        public static final char CancelOrdersForACFICode             = '4';
         public static final char CancelOrdersForAnUnderlyingSecurity = '2';
         public static final char CancelOrdersForAProduct             = '3';
-        public static final char CancelOrdersForACFICode             = '4';
-        public static final char CancelOrdersForASecurityType        = '5';
-        public static final char CancelOrdersForATradingSession      = '6';
-        public static final char CancelAllOrders                     = '7';
 
         private MassCancelRequestTypeValues() {
         }
@@ -2209,14 +2209,14 @@ public class FIX43Enumerations {
      */
     public static class MassCancelResponseValues {
 
+        public static final char CancelOrdersForATradingSession      = '6';
         public static final char CancelRequestRejected               = '0';
+        public static final char CancelAllOrders                     = '7';
+        public static final char CancelOrdersForAProduct             = '3';
+        public static final char CancelOrdersForASecurityType        = '5';
+        public static final char CancelOrdersForACFICode             = '4';
         public static final char CancelOrdersForASecurity            = '1';
         public static final char CancelOrdersForAnUnderlyingSecurity = '2';
-        public static final char CancelOrdersForAProduct             = '3';
-        public static final char CancelOrdersForACFICode             = '4';
-        public static final char CancelOrdersForASecurityType        = '5';
-        public static final char CancelOrdersForATradingSession      = '6';
-        public static final char CancelAllOrders                     = '7';
 
         private MassCancelResponseValues() {
         }
@@ -2228,13 +2228,13 @@ public class FIX43Enumerations {
      */
     public static class MassCancelRejectReasonValues {
 
-        public static final char MassCancelNotSupported            = '0';
-        public static final char InvalidOrUnknownSecurity          = '1';
         public static final char InvalidOrUnkownUnderlyingSecurity = '2';
-        public static final char InvalidOrUnknownProduct           = '3';
-        public static final char InvalidOrUnknownCFICode           = '4';
-        public static final char InvalidOrUnknownSecurityType      = '5';
         public static final char InvalidOrUnknownTradingSession    = '6';
+        public static final char InvalidOrUnknownSecurityType      = '5';
+        public static final char InvalidOrUnknownProduct           = '3';
+        public static final char InvalidOrUnknownSecurity          = '1';
+        public static final char MassCancelNotSupported            = '0';
+        public static final char InvalidOrUnknownCFICode           = '4';
 
         private MassCancelRejectReasonValues() {
         }
@@ -2260,9 +2260,9 @@ public class FIX43Enumerations {
      */
     public static class CashMarginValues {
 
-        public static final char Cash        = '1';
         public static final char MarginOpen  = '2';
         public static final char MarginClose = '3';
+        public static final char Cash        = '1';
 
         private CashMarginValues() {
         }
@@ -2303,9 +2303,9 @@ public class FIX43Enumerations {
      */
     public static class CrossPrioritizationValues {
 
+        public static final int SellSideIsPrioritized = 2;
         public static final int None                  = 0;
         public static final int BuySideIsPrioritized  = 1;
-        public static final int SellSideIsPrioritized = 2;
 
         private CrossPrioritizationValues() {
         }
@@ -2330,11 +2330,11 @@ public class FIX43Enumerations {
      */
     public static class SecurityListRequestTypeValues {
 
-        public static final int Symbol           = 0;
         public static final int SecurityTypeAnd  = 1;
         public static final int Product          = 2;
         public static final int TradingSessionID = 3;
         public static final int AllSecurities    = 4;
+        public static final int Symbol           = 0;
 
         private SecurityListRequestTypeValues() {
         }
@@ -2346,12 +2346,12 @@ public class FIX43Enumerations {
      */
     public static class SecurityRequestResultValues {
 
+        public static final int InstrumentDataTemporarilyUnavailable  = 4;
         public static final int ValidRequest                          = 0;
         public static final int InvalidOrUnsupportedRequest           = 1;
-        public static final int NoInstrumentsFound                    = 2;
-        public static final int NotAuthorizedToRetrieveInstrumentData = 3;
-        public static final int InstrumentDataTemporarilyUnavailable  = 4;
         public static final int RequestForInstrumentDataNotSupported  = 5;
+        public static final int NotAuthorizedToRetrieveInstrumentData = 3;
+        public static final int NoInstrumentsFound                    = 2;
 
         private SecurityRequestResultValues() {
         }
@@ -2375,11 +2375,11 @@ public class FIX43Enumerations {
      */
     public static class TradeRequestTypeValues {
 
-        public static final int AllTrades                         = 0;
-        public static final int MatchedTradesMatchingCriteria     = 1;
-        public static final int UnmatchedTradesThatMatchCriteria  = 2;
-        public static final int UnreportedTradesThatMatchCriteria = 3;
         public static final int AdvisoriesThatMatchCriteria       = 4;
+        public static final int UnreportedTradesThatMatchCriteria = 3;
+        public static final int UnmatchedTradesThatMatchCriteria  = 2;
+        public static final int MatchedTradesMatchingCriteria     = 1;
+        public static final int AllTrades                         = 0;
 
         private TradeRequestTypeValues() {
         }
@@ -2405,24 +2405,24 @@ public class FIX43Enumerations {
      */
     public static class MatchTypeValues {
 
-        public static final String ExactMatchPlus4BadgesExecTime        = "A1";
-        public static final String ExactMatchPlus4Badges                = "A2";
-        public static final String ExactMatchPlus2BadgesExecTime        = "A3";
-        public static final String ExactMatchPlus2Badges                = "A4";
-        public static final String ExactMatchPlusExecTime               = "A5";
-        public static final String StampedAdvisoriesOrSpecialistAccepts = "AQ";
+        public static final String A5ExactMatchSummarizedQuantity       = "S5";
         public static final String ExactMatchMinusBadgesTimes           = "M1";
-        public static final String SummarizedMatchMinusBadgesTimes      = "M2";
-        public static final String ACTAcceptedTrade                     = "M3";
-        public static final String ACTDefaultTrade                      = "M4";
-        public static final String ACTDefaultAfterM2                    = "M5";
         public static final String ACTM6Match                           = "M6";
-        public static final String OCSLockedIn                          = "MT";
-        public static final String A1ExactMatchSummarizedQuantity       = "S1";
+        public static final String ACTDefaultAfterM2                    = "M5";
+        public static final String ACTAcceptedTrade                     = "M3";
         public static final String A2ExactMatchSummarizedQuantity       = "S2";
         public static final String A3ExactMatchSummarizedQuantity       = "S3";
         public static final String A4ExactMatchSummarizedQuantity       = "S4";
-        public static final String A5ExactMatchSummarizedQuantity       = "S5";
+        public static final String SummarizedMatchMinusBadgesTimes      = "M2";
+        public static final String ExactMatchPlus4Badges                = "A2";
+        public static final String ExactMatchPlus2BadgesExecTime        = "A3";
+        public static final String ExactMatchPlus2Badges                = "A4";
+        public static final String StampedAdvisoriesOrSpecialistAccepts = "AQ";
+        public static final String OCSLockedIn                          = "MT";
+        public static final String ACTDefaultTrade                      = "M4";
+        public static final String ExactMatchPlus4BadgesExecTime        = "A1";
+        public static final String A1ExactMatchSummarizedQuantity       = "S1";
+        public static final String ExactMatchPlusExecTime               = "A5";
 
         private MatchTypeValues() {
         }
@@ -2434,17 +2434,17 @@ public class FIX43Enumerations {
      */
     public static class ClearingInstructionValues {
 
-        public static final int ProcessNormally                 =  0;
-        public static final int ExcludeFromAllNetting           =  1;
-        public static final int BilateralNettingOnly            =  2;
-        public static final int ExClearing                      =  3;
-        public static final int SpecialTrade                    =  4;
-        public static final int MultilateralNetting             =  5;
-        public static final int ClearAgainstCentralCounterparty =  6;
-        public static final int ExcludeFromCentralCounterparty  =  7;
         public static final int ManualMode                      =  8;
+        public static final int MultilateralNetting             =  5;
         public static final int AutomaticPostingMode            =  9;
+        public static final int BilateralNettingOnly            =  2;
+        public static final int ClearAgainstCentralCounterparty =  6;
         public static final int AutomaticGiveUpMode             = 10;
+        public static final int SpecialTrade                    =  4;
+        public static final int ExClearing                      =  3;
+        public static final int ProcessNormally                 =  0;
+        public static final int ExcludeFromCentralCounterparty  =  7;
+        public static final int ExcludeFromAllNetting           =  1;
 
         private ClearingInstructionValues() {
         }
@@ -2456,12 +2456,12 @@ public class FIX43Enumerations {
      */
     public static class AccountTypeValues {
 
-        public static final int CarriedCustomerSide                 = 1;
-        public static final int CarriedNonCustomerSide              = 2;
         public static final int HouseTrader                         = 3;
-        public static final int FloorTrader                         = 4;
-        public static final int CarriedNonCustomerSideCrossMargined = 6;
         public static final int HouseTraderCrossMargined            = 7;
+        public static final int CarriedNonCustomerSideCrossMargined = 6;
+        public static final int FloorTrader                         = 4;
+        public static final int CarriedNonCustomerSide              = 2;
+        public static final int CarriedCustomerSide                 = 1;
         public static final int JointBackOfficeAccount              = 8;
 
         private AccountTypeValues() {
@@ -2480,8 +2480,8 @@ public class FIX43Enumerations {
         public static final int StatusForOrdersForACFICode             = 4;
         public static final int StatusForOrdersForASecurityType        = 5;
         public static final int StatusForOrdersForATradingSession      = 6;
-        public static final int StatusForAllOrders                     = 7;
         public static final int StatusForOrdersForAPartyID             = 8;
+        public static final int StatusForAllOrders                     = 7;
 
         private MassStatusReqTypeValues() {
         }
@@ -2506,9 +2506,9 @@ public class FIX43Enumerations {
      */
     public static class BookingUnitValues {
 
-        public static final char EachPartialExecutionIsABookableUnit   = '0';
         public static final char AggregatePartialExecutionsOnThisOrder = '1';
         public static final char AggregateExecutionsForThisSymbol      = '2';
+        public static final char EachPartialExecutionIsABookableUnit   = '0';
 
         private BookingUnitValues() {
         }
@@ -2533,12 +2533,12 @@ public class FIX43Enumerations {
      */
     public static class AllocTypeValues {
 
-        public static final int Calculated                           = 1;
+        public static final int BuysideReadyToBook                   = 6;
         public static final int Preliminary                          = 2;
         public static final int SellsideCalculatedUsingPreliminary   = 3;
-        public static final int SellsideCalculatedWithoutPreliminary = 4;
         public static final int ReadyToBook                          = 5;
-        public static final int BuysideReadyToBook                   = 6;
+        public static final int Calculated                           = 1;
+        public static final int SellsideCalculatedWithoutPreliminary = 4;
 
         private AllocTypeValues() {
         }
@@ -2550,20 +2550,20 @@ public class FIX43Enumerations {
      */
     public static class ClearingFeeIndicatorValues {
 
-        public static final String FirstYearDelegate             = "1";
-        public static final String SecondYearDelegate            = "2";
-        public static final String ThirdYearDelegate             = "3";
-        public static final String FourthYearDelegate            = "4";
-        public static final String FifthYearDelegate             = "5";
-        public static final String SixthYearDelegate             = "9";
-        public static final String CBOEMember                    = "B";
-        public static final String NonMemberAndCustomer          = "C";
-        public static final String EquityMemberAndClearingMember = "E";
-        public static final String FullAndAssociateMember        = "F";
         public static final String Firms106HAnd106J              = "H";
-        public static final String GIM                           = "I";
-        public static final String Lessee106FEmployees           = "L";
+        public static final String FifthYearDelegate             = "5";
+        public static final String FourthYearDelegate            = "4";
+        public static final String ThirdYearDelegate             = "3";
+        public static final String SecondYearDelegate            = "2";
+        public static final String FirstYearDelegate             = "1";
         public static final String AllOtherOwnershipTypes        = "M";
+        public static final String GIM                           = "I";
+        public static final String SixthYearDelegate             = "9";
+        public static final String FullAndAssociateMember        = "F";
+        public static final String EquityMemberAndClearingMember = "E";
+        public static final String NonMemberAndCustomer          = "C";
+        public static final String CBOEMember                    = "B";
+        public static final String Lessee106FEmployees           = "L";
 
         private ClearingFeeIndicatorValues() {
         }
