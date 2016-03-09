@@ -20,6 +20,7 @@ Philadelphia implements the following FIX protocol versions:
   - **FIX 4.4**
   - **FIX 5.0**
   - **FIX 5.0 Service Pack 1**
+  - **FIX 5.0 Service Pack 2**
   - **FIXT 1.1**
 
 See the [FIX Trading Community][] for the protocol specifications and
