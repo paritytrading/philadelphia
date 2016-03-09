@@ -10,14 +10,15 @@ import xml.etree.ElementTree
 
 INDENT = '    '
 
-Enum = collections.namedtuple('Enum', ['tag', 'value', 'symbolic_name'])
+Enum = collections.namedtuple('Enum', ['tag', 'value', 'symbolic_name', 'sort'])
 
 def read_enums(infile):
     def enum(elem):
         tag = elem.find('Tag').text
         value = elem.find('Value').text
         symbolic_name = elem.find('SymbolicName').text
-        return Enum(tag, value, symbolic_name)
+        sort = int(elem.find('Sort').text) if elem.find('Sort') is not None else None
+        return Enum(tag, value, symbolic_name, sort)
     tree = xml.etree.ElementTree.parse(infile)
     return [enum(elem) for elem in tree.findall('Enum')]
 
@@ -222,12 +223,18 @@ def enumerations(indir):
     version = read_version(enums_path(indir))
     enums = read_enums(enums_path(indir))
     fields = {field.tag: field for field in read_fields(fields_path(indir))}
-    enumerations = [Enumeration(fields[tag], fix_symbolic_names(list(enums)))
+    enumerations = [Enumeration(fields[tag], fix_symbolic_names(sort_by_sort_key(list(enums))))
         for tag, enums
         in itertools.groupby(enums, lambda enum: enum.tag)
         if tag in fields and fields[tag].type != 'Boolean'
         and fields[tag].name != 'MsgType']
     sys.stdout.write(format_enumerations(version, enumerations))
+
+def sort_by_sort_key(enums):
+    if all(enum.sort is not None for enum in enums):
+        return sorted(enums, key=lambda enum: enum.sort)
+    else:
+        return enums
 
 def fix_symbolic_names(enums):
     counts = collections.Counter(enum.symbolic_name for enum in enums)
