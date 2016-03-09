@@ -230,7 +230,7 @@ Enumeration = collections.namedtuple('Enumeration', ['field', 'enums'])
 
 def enumerations(indir):
     version = read_version(enums_path(indir))
-    enums = read_enums(enums_path(indir))
+    enums = sorted(read_enums(enums_path(indir)), key=lambda enum: int(enum.tag))
     fields = {field.tag: field for field in read_fields(fields_path(indir))}
     enumerations = [Enumeration(fields[tag], fix_symbolic_names(sort_by_sort_key(list(enums))))
         for tag, enums
