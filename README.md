@@ -18,6 +18,7 @@ Philadelphia implements the following FIX protocol versions:
   - **FIX 4.2**
   - **FIX 4.3**
   - **FIX 4.4**
+  - **FIX 5.0**
   - **FIXT 1.1**
 
 See the [FIX Trading Community][] for the protocol specifications and
