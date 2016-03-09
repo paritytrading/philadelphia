@@ -10,14 +10,15 @@ import xml.etree.ElementTree
 
 INDENT = '    '
 
-Enum = collections.namedtuple('Enum', ['tag', 'value', 'symbolic_name'])
+Enum = collections.namedtuple('Enum', ['tag', 'value', 'symbolic_name', 'sort'])
 
 def read_enums(infile):
     def enum(elem):
         tag = elem.find('Tag').text
         value = elem.find('Value').text
         symbolic_name = elem.find('SymbolicName').text
-        return Enum(tag, value, symbolic_name)
+        sort = int(elem.find('Sort').text) if elem.find('Sort') is not None else None
+        return Enum(tag, value, symbolic_name, sort)
     tree = xml.etree.ElementTree.parse(infile)
     return [enum(elem) for elem in tree.findall('Enum')]
 
@@ -98,24 +99,25 @@ def format_int(value, value_width):
     return '{:>{}}'.format(value, value_width)
 
 FIELD_TYPES = {
-    'Char': ('char', str, format_char),
-    'char': ('char', str, format_char),
-    'Int': ('int', int, format_int),
-    'int': ('int', int, format_int),
-    'MultipleValueString': ('String', str, format_string),
-    'NumInGroup': ('int', int, format_int),
-    'String': ('String', str, format_string),
+    'Char': ('char', format_char),
+    'char': ('char', format_char),
+    'Int': ('int', format_int),
+    'int': ('int', format_int),
+    'MultipleCharValue': ('char', format_char),
+    'MultipleStringValue': ('String', format_string),
+    'MultipleValueString': ('String', format_string),
+    'NumInGroup': ('int', format_int),
+    'String': ('String', format_string),
 }
 
 def format_enumeration(enumeration):
     symbolic_name_width = max(len(enum.symbolic_name) for enum in enumeration.enums)
     value_width = max(len(enum.value) for enum in enumeration.enums)
-    type, sort_type, format_type = FIELD_TYPES[enumeration.field.type]
+    type, format_type = FIELD_TYPES[enumeration.field.type]
     if type == 'char' and value_width > 1:
-        type, sort_type, format_type = FIELD_TYPES['String']
+        type, format_type = FIELD_TYPES['String']
     body = '\n'.join('{}{}'.format(2 * INDENT, format_enum(enum, type, symbolic_name_width,
-      format_type, value_width)) for enum
-      in sorted(enumeration.enums, key=lambda enum: sort_type(enum.value)))
+      format_type, value_width)) for enum in enumeration.enums)
     return ENUMERATION_TEMPLATE.substitute({
             'field_name': field_name(enumeration.field),
             'class_name': '{}Values'.format(enumeration.field.name),
@@ -221,11 +223,30 @@ def enumerations(indir):
     version = read_version(enums_path(indir))
     enums = read_enums(enums_path(indir))
     fields = {field.tag: field for field in read_fields(fields_path(indir))}
-    enumerations = [Enumeration(fields[tag], list(enums)) for tag, enums
+    enumerations = [Enumeration(fields[tag], fix_symbolic_names(sort_by_sort_key(list(enums))))
+        for tag, enums
         in itertools.groupby(enums, lambda enum: enum.tag)
         if tag in fields and fields[tag].type != 'Boolean'
         and fields[tag].name != 'MsgType']
     sys.stdout.write(format_enumerations(version, enumerations))
+
+def sort_by_sort_key(enums):
+    if all(enum.sort is not None for enum in enums):
+        return sorted(enums, key=lambda enum: enum.sort)
+    else:
+        return enums
+
+def fix_symbolic_names(enums):
+    counts = collections.Counter(enum.symbolic_name for enum in enums)
+    indexes = collections.Counter()
+    def fix_symbolic_name(enum):
+        if counts[enum.symbolic_name] > 1:
+            indexes[enum.symbolic_name] += 1
+            symbolic_name = enum.symbolic_name + str(indexes[enum.symbolic_name])
+            return enum._replace(symbolic_name=symbolic_name)
+        else:
+            return enum
+    return [fix_symbolic_name(enum) for enum in enums]
 
 def msg_types(indir):
     version = read_version(messages_path(indir))
