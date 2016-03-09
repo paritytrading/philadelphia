@@ -222,11 +222,24 @@ def enumerations(indir):
     version = read_version(enums_path(indir))
     enums = read_enums(enums_path(indir))
     fields = {field.tag: field for field in read_fields(fields_path(indir))}
-    enumerations = [Enumeration(fields[tag], list(enums)) for tag, enums
+    enumerations = [Enumeration(fields[tag], fix_symbolic_names(list(enums)))
+        for tag, enums
         in itertools.groupby(enums, lambda enum: enum.tag)
         if tag in fields and fields[tag].type != 'Boolean'
         and fields[tag].name != 'MsgType']
     sys.stdout.write(format_enumerations(version, enumerations))
+
+def fix_symbolic_names(enums):
+    counts = collections.Counter(enum.symbolic_name for enum in enums)
+    indexes = collections.Counter()
+    def fix_symbolic_name(enum):
+        if counts[enum.symbolic_name] > 1:
+            indexes[enum.symbolic_name] += 1
+            symbolic_name = enum.symbolic_name + str(indexes[enum.symbolic_name])
+            return enum._replace(symbolic_name=symbolic_name)
+        else:
+            return enum
+    return [fix_symbolic_name(enum) for enum in enums]
 
 def msg_types(indir):
     version = read_version(messages_path(indir))
