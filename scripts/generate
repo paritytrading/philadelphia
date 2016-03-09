@@ -98,26 +98,25 @@ def format_int(value, value_width):
     return '{:>{}}'.format(value, value_width)
 
 FIELD_TYPES = {
-    'Char': ('char', str, format_char),
-    'char': ('char', str, format_char),
-    'Int': ('int', int, format_int),
-    'int': ('int', int, format_int),
-    'MultipleCharValue': ('char', str, format_char),
-    'MultipleStringValue': ('String', str, format_string),
-    'MultipleValueString': ('String', str, format_string),
-    'NumInGroup': ('int', int, format_int),
-    'String': ('String', str, format_string),
+    'Char': ('char', format_char),
+    'char': ('char', format_char),
+    'Int': ('int', format_int),
+    'int': ('int', format_int),
+    'MultipleCharValue': ('char', format_char),
+    'MultipleStringValue': ('String', format_string),
+    'MultipleValueString': ('String', format_string),
+    'NumInGroup': ('int', format_int),
+    'String': ('String', format_string),
 }
 
 def format_enumeration(enumeration):
     symbolic_name_width = max(len(enum.symbolic_name) for enum in enumeration.enums)
     value_width = max(len(enum.value) for enum in enumeration.enums)
-    type, sort_type, format_type = FIELD_TYPES[enumeration.field.type]
+    type, format_type = FIELD_TYPES[enumeration.field.type]
     if type == 'char' and value_width > 1:
-        type, sort_type, format_type = FIELD_TYPES['String']
+        type, format_type = FIELD_TYPES['String']
     body = '\n'.join('{}{}'.format(2 * INDENT, format_enum(enum, type, symbolic_name_width,
-      format_type, value_width)) for enum
-      in sorted(enumeration.enums, key=lambda enum: sort_type(enum.value)))
+      format_type, value_width)) for enum in enumeration.enums)
     return ENUMERATION_TEMPLATE.substitute({
             'field_name': field_name(enumeration.field),
             'class_name': '{}Values'.format(enumeration.field.name),
