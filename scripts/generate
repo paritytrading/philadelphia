@@ -43,12 +43,13 @@ def read_messages(infile):
     tree = xml.etree.ElementTree.parse(infile)
     return [message(elem) for elem in tree.findall('Message')]
 
-Version = collections.namedtuple('Version', ['protocol', 'major', 'minor'])
+Version = collections.namedtuple('Version', ['protocol', 'major', 'minor', 'sp'])
 
 def read_version(infile):
     version = xml.etree.ElementTree.parse(infile).getroot().get('version')
-    match = re.match(r'(?P<protocol>.+)\.(?P<major>.+)\.(?P<minor>.+)', version)
-    return Version(match.group('protocol'), match.group('major'), match.group('minor'))
+    match = re.match(r'(?P<protocol>.+)\.(?P<major>\d+)\.(?P<minor>\d+)(SP(?P<sp>\d+))?', version)
+    return Version(match.group('protocol'), match.group('major'), match.group('minor'),
+        match.group('sp'))
 
 ENUMERATIONS_TEMPLATE = string.Template('''\
 package org.jvirtanen.philadelphia.${package_name};
@@ -197,10 +198,18 @@ def format_tag(field, name_width, tag_width):
         name_width, field.tag, tag_width)
 
 def version_name(version):
-    return '{} {}.{}'.format(version.protocol, version.major, version.minor)
+    base = '{} {}.{}'.format(version.protocol, version.major, version.minor)
+    if version.sp:
+        return '{} Service Pack {}'.format(base, version.sp)
+    else:
+        return base
 
 def class_name(version, suffix=''):
-    return ''.join([version.protocol, version.major, version.minor, suffix])
+    base = ''.join([version.protocol, version.major, version.minor])
+    if version.sp:
+        return '{}SP{}{}'.format(base, version.sp, suffix)
+    else:
+        return '{}{}'.format(base, suffix)
 
 def package_name(version):
     return class_name(version).lower()
