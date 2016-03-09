@@ -12,8 +12,8 @@ public class FIX44Enumerations {
 
         public static final char Buy   = 'B';
         public static final char Sell  = 'S';
-        public static final char Trade = 'T';
         public static final char Cross = 'X';
+        public static final char Trade = 'T';
 
         private AdvSideValues() {
         }
@@ -25,8 +25,8 @@ public class FIX44Enumerations {
      */
     public static class AdvTransTypeValues {
 
-        public static final String Cancel  = "C";
         public static final String New     = "N";
+        public static final String Cancel  = "C";
         public static final String Replace = "R";
 
         private AdvTransTypeValues() {
@@ -56,7 +56,6 @@ public class FIX44Enumerations {
      */
     public static class ExecInstValues {
 
-        public static final String StayOnOfferSide            = "0";
         public static final String NotHeld                    = "1";
         public static final String Work                       = "2";
         public static final String GoAlong                    = "3";
@@ -66,6 +65,7 @@ public class FIX44Enumerations {
         public static final String StrictScale                = "7";
         public static final String TryToScale                 = "8";
         public static final String StayOnBidSide              = "9";
+        public static final String StayOnOfferSide            = "0";
         public static final String NoCross                    = "A";
         public static final String OKToCross                  = "B";
         public static final String CallFirst                  = "C";
@@ -151,9 +151,9 @@ public class FIX44Enumerations {
      */
     public static class IOIQltyIndValues {
 
-        public static final char High   = 'H';
         public static final char Low    = 'L';
         public static final char Medium = 'M';
+        public static final char High   = 'H';
 
         private IOIQltyIndValues() {
         }
@@ -165,9 +165,9 @@ public class FIX44Enumerations {
      */
     public static class IOIQtyValues {
 
-        public static final String Large  = "L";
-        public static final String Medium = "M";
         public static final String Small  = "S";
+        public static final String Medium = "M";
+        public static final String Large  = "L";
 
         private IOIQtyValues() {
         }
@@ -179,8 +179,8 @@ public class FIX44Enumerations {
      */
     public static class IOITransTypeValues {
 
-        public static final char Cancel  = 'C';
         public static final char New     = 'N';
+        public static final char Cancel  = 'C';
         public static final char Replace = 'R';
 
         private IOITransTypeValues() {
@@ -356,10 +356,10 @@ public class FIX44Enumerations {
      */
     public static class PositionEffectValues {
 
-        public static final char Close  = 'C';
-        public static final char FIFO   = 'F';
         public static final char Open   = 'O';
+        public static final char Close  = 'C';
         public static final char Rolled = 'R';
+        public static final char FIFO   = 'F';
 
         private PositionEffectValues() {
         }
@@ -557,9 +557,6 @@ public class FIX44Enumerations {
     public static class MiscFeeTypeValues {
 
         public static final String Regulatory      = "1";
-        public static final String PerTransaction  = "10";
-        public static final String Conversion      = "11";
-        public static final String Agent           = "12";
         public static final String Tax             = "2";
         public static final String LocalCommission = "3";
         public static final String ExchangeFees    = "4";
@@ -568,6 +565,9 @@ public class FIX44Enumerations {
         public static final String Other           = "7";
         public static final String Markup          = "8";
         public static final String ConsumptionTax  = "9";
+        public static final String PerTransaction  = "10";
+        public static final String Conversion      = "11";
+        public static final String Agent           = "12";
 
         private MiscFeeTypeValues() {
         }
@@ -607,8 +607,8 @@ public class FIX44Enumerations {
      */
     public static class SettlCurrFxRateCalcValues {
 
-        public static final char Divide   = 'D';
         public static final char Multiply = 'M';
+        public static final char Divide   = 'D';
 
         private SettlCurrFxRateCalcValues() {
         }
@@ -634,8 +634,8 @@ public class FIX44Enumerations {
      */
     public static class SettlInstTransTypeValues {
 
-        public static final char Cancel  = 'C';
         public static final char New     = 'N';
+        public static final char Cancel  = 'C';
         public static final char Replace = 'R';
         public static final char Restate = 'T';
 
@@ -663,101 +663,101 @@ public class FIX44Enumerations {
      */
     public static class SecurityTypeValues {
 
-        public static final String AssetBackedSecurities                    = "ABS";
-        public static final String Amended                                  = "AMENDED";
-        public static final String OtherAnticipationNotes                   = "AN";
-        public static final String BankersAcceptance                        = "BA";
-        public static final String BankNotes                                = "BN";
-        public static final String BillOfExchanges                          = "BOX";
-        public static final String BradyBond                                = "BRADY";
-        public static final String BridgeLoan                               = "BRIDGE";
-        public static final String BuySellback                              = "BUYSELL";
-        public static final String ConvertibleBond                          = "CB";
-        public static final String CertificateOfDeposit                     = "CD";
-        public static final String CallLoans                                = "CL";
-        public static final String Corp                                     = "CMBS";
-        public static final String CollateralizedMortgageObligation         = "CMO";
-        public static final String CertificateOfObligation                  = "COFO";
-        public static final String CertificateOfParticipation               = "COFP";
-        public static final String CorporateBond                            = "CORP";
-        public static final String CommercialPaper                          = "CP";
-        public static final String CorporatePrivatePlacement                = "CPP";
-        public static final String CommonStock                              = "CS";
-        public static final String Defaulted                                = "DEFLTED";
-        public static final String DebtorInPossession                       = "DINP";
-        public static final String DepositNotes                             = "DN";
-        public static final String DualCurrency                             = "DUAL";
-        public static final String EuroCertificateOfDeposit                 = "EUCD";
-        public static final String EuroCorporateBond                        = "EUCORP";
-        public static final String EuroCommercialPaper                      = "EUCP";
-        public static final String EuroSovereigns                           = "EUSOV";
+        public static final String Future                                   = "FUT";
+        public static final String Option                                   = "OPT";
         public static final String EuroSupranationalCoupons                 = "EUSUPRA";
         public static final String FederalAgencyCoupon                      = "FAC";
         public static final String FederalAgencyDiscountNote                = "FADN";
+        public static final String PrivateExportFunding                     = "PEF";
+        public static final String USDSupranationalCoupons                  = "SUPRA";
+        public static final String CorporateBond                            = "CORP";
+        public static final String CorporatePrivatePlacement                = "CPP";
+        public static final String ConvertibleBond                          = "CB";
+        public static final String DualCurrency                             = "DUAL";
+        public static final String EuroCorporateBond                        = "EUCORP";
+        public static final String IndexedLinked                            = "XLINKD";
+        public static final String StructuredNotes                          = "STRUCT";
+        public static final String YankeeCorporateBond                      = "YANK";
         public static final String ForeignExchangeContract                  = "FOR";
+        public static final String CommonStock                              = "CS";
+        public static final String PreferredStock                           = "PS";
+        public static final String BradyBond                                = "BRADY";
+        public static final String EuroSovereigns                           = "EUSOV";
+        public static final String USTreasuryBond                           = "TBOND";
+        public static final String InterestStripFromAnyBondOrNote           = "TINT";
+        public static final String TreasuryInflationProtectedSecurities     = "TIPS";
+        public static final String PrincipalStripOfACallableBondOrNote      = "TCAL";
+        public static final String PrincipalStripFromANonCallableBondOrNote = "TPRN";
+        public static final String USTreasuryNoteOld                        = "UST";
+        public static final String USTreasuryBillOld                        = "USTB";
+        public static final String USTreasuryNote                           = "TNOTE";
+        public static final String USTreasuryBill                           = "TBILL";
+        public static final String Repurchase                               = "REPO";
         public static final String Forward                                  = "FORWARD";
-        public static final String Future                                   = "FUT";
-        public static final String GeneralObligationBonds                   = "GO";
-        public static final String IOETTEMortgage                           = "IET";
+        public static final String BuySellback                              = "BUYSELL";
+        public static final String SecuritiesLoan                           = "SECLOAN";
+        public static final String SecuritiesPledge                         = "SECPLEDGE";
+        public static final String TermLoan                                 = "TERM";
+        public static final String RevolverLoan                             = "RVLV";
+        public static final String Revolver                                 = "RVLVTRM";
+        public static final String BridgeLoan                               = "BRIDGE";
         public static final String LetterOfCredit                           = "LOFC";
-        public static final String LiquidityNote                            = "LQN";
+        public static final String SwingLineFacility                        = "SWING";
+        public static final String DebtorInPossession                       = "DINP";
+        public static final String Defaulted                                = "DEFLTED";
+        public static final String Withdrawn                                = "WITHDRN";
+        public static final String Replaced                                 = "REPLACD";
         public static final String Matured                                  = "MATURED";
+        public static final String Amended                                  = "AMENDED";
+        public static final String Retired                                  = "RETIRED";
+        public static final String BankersAcceptance                        = "BA";
+        public static final String BankNotes                                = "BN";
+        public static final String BillOfExchanges                          = "BOX";
+        public static final String CertificateOfDeposit                     = "CD";
+        public static final String CallLoans                                = "CL";
+        public static final String CommercialPaper                          = "CP";
+        public static final String DepositNotes                             = "DN";
+        public static final String EuroCertificateOfDeposit                 = "EUCD";
+        public static final String EuroCommercialPaper                      = "EUCP";
+        public static final String LiquidityNote                            = "LQN";
+        public static final String MediumTermNotes                          = "MTN";
+        public static final String Overnight                                = "ONITE";
+        public static final String PromissoryNote                           = "PN";
+        public static final String PlazosFijos                              = "PZFJ";
+        public static final String ShortTermLoanNote                        = "STN";
+        public static final String TimeDeposit                              = "TD";
+        public static final String ExtendedCommNote                         = "XCN";
+        public static final String YankeeCertificateOfDeposit               = "YCD";
+        public static final String AssetBackedSecurities                    = "ABS";
+        public static final String Corp                                     = "CMBS";
+        public static final String CollateralizedMortgageObligation         = "CMO";
+        public static final String IOETTEMortgage                           = "IET";
         public static final String MortgageBackedSecurities                 = "MBS";
-        public static final String MutualFund                               = "MF";
         public static final String MortgageInterestOnly                     = "MIO";
-        public static final String MultilegInstrument                       = "MLEG";
         public static final String MortgagePrincipalOnly                    = "MPO";
         public static final String MortgagePrivatePlacement                 = "MPP";
         public static final String MiscellaneousPassThrough                 = "MPT";
-        public static final String MandatoryTender                          = "MT";
-        public static final String MediumTermNotes                          = "MTN";
-        public static final String NoSecurityType                           = "NONE";
-        public static final String Overnight                                = "ONITE";
-        public static final String Option                                   = "OPT";
-        public static final String PrivateExportFunding                     = "PEF";
         public static final String Pfandbriefe                              = "PFAND";
-        public static final String PromissoryNote                           = "PN";
-        public static final String PreferredStock                           = "PS";
-        public static final String PlazosFijos                              = "PZFJ";
+        public static final String ToBeAnnounced                            = "TBA";
+        public static final String OtherAnticipationNotes                   = "AN";
+        public static final String CertificateOfObligation                  = "COFO";
+        public static final String CertificateOfParticipation               = "COFP";
+        public static final String GeneralObligationBonds                   = "GO";
+        public static final String MandatoryTender                          = "MT";
         public static final String RevenueAnticipationNote                  = "RAN";
-        public static final String Replaced                                 = "REPLACD";
-        public static final String Repurchase                               = "REPO";
-        public static final String Retired                                  = "RETIRED";
         public static final String RevenueBonds                             = "REV";
-        public static final String RevolverLoan                             = "RVLV";
-        public static final String Revolver                                 = "RVLVTRM";
-        public static final String SecuritiesLoan                           = "SECLOAN";
-        public static final String SecuritiesPledge                         = "SECPLEDGE";
         public static final String SpecialAssessment                        = "SPCLA";
         public static final String SpecialObligation                        = "SPCLO";
         public static final String SpecialTax                               = "SPCLT";
-        public static final String ShortTermLoanNote                        = "STN";
-        public static final String StructuredNotes                          = "STRUCT";
-        public static final String USDSupranationalCoupons                  = "SUPRA";
-        public static final String SwingLineFacility                        = "SWING";
         public static final String TaxAnticipationNote                      = "TAN";
         public static final String TaxAllocation                            = "TAXA";
-        public static final String ToBeAnnounced                            = "TBA";
-        public static final String USTreasuryBill                           = "TBILL";
-        public static final String USTreasuryBond                           = "TBOND";
-        public static final String PrincipalStripOfACallableBondOrNote      = "TCAL";
-        public static final String TimeDeposit                              = "TD";
         public static final String TaxExemptCommercialPaper                 = "TECP";
-        public static final String TermLoan                                 = "TERM";
-        public static final String InterestStripFromAnyBondOrNote           = "TINT";
-        public static final String TreasuryInflationProtectedSecurities     = "TIPS";
-        public static final String USTreasuryNote                           = "TNOTE";
-        public static final String PrincipalStripFromANonCallableBondOrNote = "TPRN";
         public static final String TaxRevenueAnticipationNote               = "TRAN";
-        public static final String USTreasuryNoteOld                        = "UST";
-        public static final String USTreasuryBillOld                        = "USTB";
         public static final String VariableRateDemandNote                   = "VRDN";
         public static final String Warrant                                  = "WAR";
-        public static final String Withdrawn                                = "WITHDRN";
-        public static final String ExtendedCommNote                         = "XCN";
-        public static final String IndexedLinked                            = "XLINKD";
-        public static final String YankeeCorporateBond                      = "YANK";
-        public static final String YankeeCertificateOfDeposit               = "YCD";
+        public static final String MutualFund                               = "MF";
+        public static final String MultilegInstrument                       = "MLEG";
+        public static final String NoSecurityType                           = "NONE";
 
         private SecurityTypeValues() {
         }
@@ -887,14 +887,14 @@ public class FIX44Enumerations {
         public static final String MaturityYearAndMonth           = "MAT";
         public static final String MaturityRange                  = "MATURITY";
         public static final String MaximumSubstitutions           = "MAXSUBS";
-        public static final String MinimumDenomination            = "MINDNOM";
-        public static final String MinimumIncrement               = "MININCR";
         public static final String MinimumQuantity                = "MINQTY";
+        public static final String MinimumIncrement               = "MININCR";
+        public static final String MinimumDenomination            = "MINDNOM";
         public static final String PaymentFrequency               = "PAYFREQ";
         public static final String NumberOfPieces                 = "PIECES";
         public static final String PoolsMaximum                   = "PMAX";
-        public static final String PoolsPerLot                    = "PPL";
         public static final String PoolsPerMillion                = "PPM";
+        public static final String PoolsPerLot                    = "PPL";
         public static final String PoolsPerTrade                  = "PPT";
         public static final String PriceRange                     = "PRICE";
         public static final String PricingFrequency               = "PRICEFREQ";
@@ -939,8 +939,8 @@ public class FIX44Enumerations {
         public static final String ClosingYield                  = "CLOSE";
         public static final String CompoundYield                 = "COMPOUND";
         public static final String CurrentYield                  = "CURRENT";
-        public static final String GvntEquivalentYield           = "GOVTEQUIV";
         public static final String TrueGrossYield                = "GROSS";
+        public static final String GvntEquivalentYield           = "GOVTEQUIV";
         public static final String YieldWithInflationAssumption  = "INFLATION";
         public static final String InverseFloaterBondYield       = "INVERSEFLOATER";
         public static final String MostRecentClosingYield        = "LASTCLOSE";
@@ -952,9 +952,9 @@ public class FIX44Enumerations {
         public static final String YieldToMaturity               = "MATURITY";
         public static final String YieldToNextRefund             = "NEXTREFUND";
         public static final String OpenAverageYield              = "OPENAVG";
+        public static final String YieldToNextPut                = "PUT";
         public static final String PreviousCloseYield            = "PREVCLOSE";
         public static final String ProceedsYield                 = "PROCEEDS";
-        public static final String YieldToNextPut                = "PUT";
         public static final String SemiAnnualYield               = "SEMIANNUAL";
         public static final String YieldToShortestAverageLife    = "SHORTAVGLIFE";
         public static final String SimpleYield                   = "SIMPLE";
@@ -1338,12 +1338,12 @@ public class FIX44Enumerations {
      */
     public static class HaltReasonValues {
 
+        public static final char OrderImbalance        = 'I';
+        public static final char EquipmentChangeover   = 'X';
+        public static final char NewsPending           = 'P';
         public static final char NewsDissemination     = 'D';
         public static final char OrderInflux           = 'E';
-        public static final char OrderImbalance        = 'I';
         public static final char AdditionalInformation = 'M';
-        public static final char NewsPending           = 'P';
-        public static final char EquipmentChangeover   = 'X';
 
         private HaltReasonValues() {
         }
@@ -1415,8 +1415,8 @@ public class FIX44Enumerations {
      */
     public static class MessageEncodingValues {
 
-        public static final String EUCJP     = "EUC-JP";
         public static final String ISO2022JP = "ISO-2022-JP";
+        public static final String EUCJP     = "EUC-JP";
         public static final String ShiftJIS  = "Shift_JIS";
         public static final String UTF8      = "UTF-8";
 
@@ -1460,8 +1460,8 @@ public class FIX44Enumerations {
      */
     public static class BidRequestTransTypeValues {
 
-        public static final char Cancel = 'C';
         public static final char New    = 'N';
+        public static final char Cancel = 'C';
 
         private BidRequestTransTypeValues() {
         }
@@ -1515,8 +1515,8 @@ public class FIX44Enumerations {
      */
     public static class MsgDirectionValues {
 
-        public static final char Receive = 'R';
         public static final char Send    = 'S';
+        public static final char Receive = 'R';
 
         private MsgDirectionValues() {
         }
@@ -1629,10 +1629,10 @@ public class FIX44Enumerations {
      */
     public static class BidTradeTypeValues {
 
-        public static final char Agency          = 'A';
-        public static final char VWAPGuarantee   = 'G';
-        public static final char GuaranteedClose = 'J';
         public static final char RiskTrade       = 'R';
+        public static final char VWAPGuarantee   = 'G';
+        public static final char Agency          = 'A';
+        public static final char GuaranteedClose = 'J';
 
         private BidTradeTypeValues() {
         }
@@ -1795,6 +1795,13 @@ public class FIX44Enumerations {
      */
     public static class PartyIDSourceValues {
 
+        public static final char BIC                                = 'B';
+        public static final char GeneralIdentifier                  = 'C';
+        public static final char Proprietary                        = 'D';
+        public static final char ISOCountryCode                     = 'E';
+        public static final char SettlementEntityLocation           = 'F';
+        public static final char MIC                                = 'G';
+        public static final char CSDParticipant                     = 'H';
         public static final char KoreanInvestorID                   = '1';
         public static final char TaiwaneseForeignInvestorID         = '2';
         public static final char TaiwaneseTradingAcct               = '3';
@@ -1805,13 +1812,6 @@ public class FIX44Enumerations {
         public static final char USEmployerOrTaxIDNumber            = '8';
         public static final char AustralianBusinessNumber           = '9';
         public static final char AustralianTaxFileNumber            = 'A';
-        public static final char BIC                                = 'B';
-        public static final char GeneralIdentifier                  = 'C';
-        public static final char Proprietary                        = 'D';
-        public static final char ISOCountryCode                     = 'E';
-        public static final char SettlementEntityLocation           = 'F';
-        public static final char MIC                                = 'G';
-        public static final char CSDParticipant                     = 'H';
         public static final char ISITCAcronym                       = 'I';
 
         private PartyIDSourceValues() {
@@ -1933,10 +1933,10 @@ public class FIX44Enumerations {
      */
     public static class CancellationRightsValues {
 
-        public static final char NoWaiverAgreement = 'M';
-        public static final char NoExecutionOnly   = 'N';
-        public static final char NoInstitutional   = 'O';
         public static final char Yes               = 'Y';
+        public static final char NoExecutionOnly   = 'N';
+        public static final char NoWaiverAgreement = 'M';
+        public static final char NoInstitutional   = 'O';
 
         private CancellationRightsValues() {
         }
@@ -1948,11 +1948,11 @@ public class FIX44Enumerations {
      */
     public static class MoneyLaunderingStatusValues {
 
+        public static final char Passed           = 'Y';
+        public static final char NotChecked       = 'N';
         public static final char ExemptBelowLimit = '1';
         public static final char ExemptMoneyType  = '2';
         public static final char ExemptAuthorised = '3';
-        public static final char NotChecked       = 'N';
-        public static final char Passed           = 'Y';
 
         private MoneyLaunderingStatusValues() {
         }
@@ -2050,8 +2050,8 @@ public class FIX44Enumerations {
      */
     public static class FundRenewWaivValues {
 
-        public static final char No  = 'N';
         public static final char Yes = 'Y';
+        public static final char No  = 'N';
 
         private FundRenewWaivValues() {
         }
@@ -2064,9 +2064,9 @@ public class FIX44Enumerations {
     public static class RegistStatusValues {
 
         public static final char Accepted = 'A';
+        public static final char Rejected = 'R';
         public static final char Held     = 'H';
         public static final char Reminder = 'N';
-        public static final char Rejected = 'R';
 
         private RegistStatusValues() {
         }
@@ -2122,9 +2122,9 @@ public class FIX44Enumerations {
      */
     public static class OwnershipTypeValues {
 
-        public static final char JointTrustees   = '2';
         public static final char JointInvestors  = 'J';
         public static final char TenantsInCommon = 'T';
+        public static final char JointTrustees   = '2';
 
         private OwnershipTypeValues() {
         }
@@ -2461,18 +2461,18 @@ public class FIX44Enumerations {
         public static final String ExactMatchPlus2Badges                = "A4";
         public static final String ExactMatchPlusExecTime               = "A5";
         public static final String StampedAdvisoriesOrSpecialistAccepts = "AQ";
-        public static final String ExactMatchMinusBadgesTimes           = "M1";
-        public static final String SummarizedMatchMinusBadgesTimes      = "M2";
-        public static final String ACTAcceptedTrade                     = "M3";
-        public static final String ACTDefaultTrade                      = "M4";
-        public static final String ACTDefaultAfterM2                    = "M5";
-        public static final String ACTM6Match                           = "M6";
-        public static final String OCSLockedIn                          = "MT";
         public static final String A1ExactMatchSummarizedQuantity       = "S1";
         public static final String A2ExactMatchSummarizedQuantity       = "S2";
         public static final String A3ExactMatchSummarizedQuantity       = "S3";
         public static final String A4ExactMatchSummarizedQuantity       = "S4";
         public static final String A5ExactMatchSummarizedQuantity       = "S5";
+        public static final String ExactMatchMinusBadgesTimes           = "M1";
+        public static final String SummarizedMatchMinusBadgesTimes      = "M2";
+        public static final String OCSLockedIn                          = "MT";
+        public static final String ACTAcceptedTrade                     = "M3";
+        public static final String ACTDefaultTrade                      = "M4";
+        public static final String ACTDefaultAfterM2                    = "M5";
+        public static final String ACTM6Match                           = "M6";
 
         private MatchTypeValues() {
         }
@@ -2618,12 +2618,6 @@ public class FIX44Enumerations {
      */
     public static class ClearingFeeIndicatorValues {
 
-        public static final String FirstYearDelegate             = "1";
-        public static final String SecondYearDelegate            = "2";
-        public static final String ThirdYearDelegate             = "3";
-        public static final String FourthYearDelegate            = "4";
-        public static final String FifthYearDelegate             = "5";
-        public static final String SixthYearDelegate             = "9";
         public static final String CBOEMember                    = "B";
         public static final String NonMemberAndCustomer          = "C";
         public static final String EquityMemberAndClearingMember = "E";
@@ -2632,6 +2626,12 @@ public class FIX44Enumerations {
         public static final String GIM                           = "I";
         public static final String Lessee106FEmployees           = "L";
         public static final String AllOtherOwnershipTypes        = "M";
+        public static final String FirstYearDelegate             = "1";
+        public static final String SecondYearDelegate            = "2";
+        public static final String ThirdYearDelegate             = "3";
+        public static final String FourthYearDelegate            = "4";
+        public static final String FifthYearDelegate             = "5";
+        public static final String SixthYearDelegate             = "9";
 
         private ClearingFeeIndicatorValues() {
         }
@@ -2791,25 +2791,25 @@ public class FIX44Enumerations {
      */
     public static class PosTypeValues {
 
-        public static final String AllocationTradeQty        = "ALC";
-        public static final String OptionAssignment          = "AS";
-        public static final String AsOfTradeQty              = "ASF";
-        public static final String DeliveryQty               = "DLV";
-        public static final String ElectronicTradeQty        = "ETR";
-        public static final String OptionExerciseQty         = "EX";
-        public static final String EndOfDayQty               = "FIN";
+        public static final String TransactionQuantity       = "TQ";
         public static final String IntraSpreadQty            = "IAS";
         public static final String InterSpreadQty            = "IES";
-        public static final String AdjustmentQty             = "PA";
-        public static final String PitTradeQty               = "PIT";
+        public static final String EndOfDayQty               = "FIN";
         public static final String StartOfDayQty             = "SOD";
-        public static final String IntegralSplit             = "SPL";
-        public static final String TransactionFromAssignment = "TA";
-        public static final String TotalTransactionQty       = "TOT";
-        public static final String TransactionQuantity       = "TQ";
-        public static final String TransferTradeQty          = "TRF";
+        public static final String OptionExerciseQty         = "EX";
+        public static final String OptionAssignment          = "AS";
         public static final String TransactionFromExercise   = "TX";
+        public static final String TransactionFromAssignment = "TA";
+        public static final String PitTradeQty               = "PIT";
+        public static final String TransferTradeQty          = "TRF";
+        public static final String ElectronicTradeQty        = "ETR";
+        public static final String AllocationTradeQty        = "ALC";
+        public static final String AdjustmentQty             = "PA";
+        public static final String AsOfTradeQty              = "ASF";
+        public static final String DeliveryQty               = "DLV";
+        public static final String TotalTransactionQty       = "TOT";
         public static final String CrossMarginQty            = "XM";
+        public static final String IntegralSplit             = "SPL";
 
         private PosTypeValues() {
         }
@@ -2835,13 +2835,13 @@ public class FIX44Enumerations {
      */
     public static class PosAmtTypeValues {
 
-        public static final String CashAmount                    = "CASH";
-        public static final String CashResidualAmount            = "CRES";
         public static final String FinalMarkToMarketAmount       = "FMTM";
         public static final String IncrementalMarkToMarketAmount = "IMTM";
-        public static final String PremiumAmount                 = "PREM";
-        public static final String StartOfDayMarkToMarketAmount  = "SMTM";
         public static final String TradeVariationAmount          = "TVAR";
+        public static final String StartOfDayMarkToMarketAmount  = "SMTM";
+        public static final String PremiumAmount                 = "PREM";
+        public static final String CashResidualAmount            = "CRES";
+        public static final String CashAmount                    = "CASH";
         public static final String ValueAdjustedAmount           = "VADJ";
 
         private PosAmtTypeValues() {
@@ -2884,9 +2884,9 @@ public class FIX44Enumerations {
      */
     public static class SettlSessIDValues {
 
-        public static final String ElectronicTradingHours = "ETH";
         public static final String Intraday               = "ITD";
         public static final String RegularTradingHours    = "RTH";
+        public static final String ElectronicTradingHours = "ETH";
 
         private SettlSessIDValues() {
         }
@@ -3015,8 +3015,8 @@ public class FIX44Enumerations {
      */
     public static class AssignmentMethodValues {
 
-        public static final char ProRata = 'P';
         public static final char Random  = 'R';
+        public static final char ProRata = 'P';
 
         private AssignmentMethodValues() {
         }
@@ -3180,8 +3180,8 @@ public class FIX44Enumerations {
      */
     public static class DlvyInstTypeValues {
 
-        public static final char Cash       = 'C';
         public static final char Securities = 'S';
+        public static final char Cash       = 'C';
 
         private DlvyInstTypeValues() {
         }
