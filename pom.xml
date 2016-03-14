@@ -41,7 +41,7 @@
 
   <properties>
     <eclipse.collections.version>7.0.0</eclipse.collections.version>
-    <java.version>1.7</java.version>
+    <java.version>1.8</java.version>
     <jmh.version>1.10.3</jmh.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
