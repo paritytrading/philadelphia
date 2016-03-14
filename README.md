@@ -7,7 +7,7 @@ You can use Philadelphia to connect to stock exchanges, brokerage firms, and
 other network endpoints that use the FIX protocol. You can also use it to
 provide your own services using the FIX protocol.
 
-Philadelphia requires Java Runtime Environment (JRE) 7 or newer.
+Philadelphia requires Java Runtime Environment (JRE) 8 or newer.
 
 
 Features
