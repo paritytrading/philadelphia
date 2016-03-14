@@ -1,7 +1,6 @@
 package org.jvirtanen.philadelphia.client.command;
 
 import java.util.Scanner;
-import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.jvirtanen.philadelphia.client.TerminalClient;
 
 class HelpCommand implements Command {
@@ -39,14 +38,7 @@ class HelpCommand implements Command {
     }
 
     private int calculateMaxCommandNameLength() {
-        return Commands.all().collectInt(new IntFunction<Command>() {
-
-            @Override
-            public int intValueOf(Command command) {
-                return command.getName().length();
-            }
-
-        }).max();
+        return Commands.all().collectInt(c -> c.getName().length()).max();
     }
 
     @Override
