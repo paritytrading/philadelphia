@@ -4,7 +4,7 @@ Developer Guide
 Welcome to Philadelphia Developer Guide. The purpose of this document is to
 help you get started with developing Philadelphia on your own workstation.
 
-Developing Philadelphia requires Java Development Kit (JDK) 7 or newer and
+Developing Philadelphia requires Java Development Kit (JDK) 8 or newer and
 Maven.
 
 
