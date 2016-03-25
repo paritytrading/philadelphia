@@ -3,7 +3,7 @@ package org.jvirtanen.philadelphia;
 import org.junit.Test;
 
 public class FIXConfigTest {
-    
+
     @Test
     public void beginStringLength() {
         FIXConfig config = new FIXConfig.Builder()
