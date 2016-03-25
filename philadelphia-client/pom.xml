@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.jvirtanen.philadelphia</groupId>
     <artifactId>philadelphia-parent</artifactId>
-    <version>0.2.1-SNAPSHOT</version>
+    <version>0.2.1</version>
   </parent>
 
   <artifactId>philadelphia-client</artifactId>
