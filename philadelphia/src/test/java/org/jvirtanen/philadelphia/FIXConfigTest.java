@@ -11,4 +11,5 @@ public class FIXConfigTest {
                 .build();
         new FIXSession(null, config, null, null);
     }
+
 }
