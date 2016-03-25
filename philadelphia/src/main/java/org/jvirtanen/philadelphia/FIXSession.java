@@ -65,10 +65,10 @@ public class FIXSession implements Closeable {
         this.channel = channel;
 
         this.config = config;
-
-        this.beginString = new FIXValue(8);
-        this.bodyLength  = new FIXValue(8);
-        this.checkSum    = new FIXValue(8);
+        
+        this.beginString = new FIXValue(config.getFieldCapacity());
+        this.bodyLength  = new FIXValue(config.getFieldCapacity());
+        this.checkSum    = new FIXValue(config.getFieldCapacity());
 
         this.beginString.setString(config.getVersion().getBeginString());
 
