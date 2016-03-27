@@ -38,8 +38,20 @@ public class FIXSession implements Closeable {
 
     private ByteBuffer[] txBuffers;
 
-    private long lastRxMillis;
+    /*
+     * This variable is written on data reception and read on session
+     * keep-alive. These two functions can run on different threads
+     * without locking.
+     */
+    private volatile long lastRxMillis;
+
+    /*
+     * This variable is written on data transmission and read on session
+     * keep-alive. These two functions can run on different threads but
+     * require locking.
+     */
     private long lastTxMillis;
+
     private long testRequestTxMillis;
 
     private final long heartbeatMillis;
