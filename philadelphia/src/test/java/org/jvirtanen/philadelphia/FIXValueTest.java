@@ -25,6 +25,17 @@ public class FIXValueTest {
     }
 
     @Test
+    public void set() {
+        FIXValue anotherValue = new FIXValue(32);
+
+        anotherValue.setString("FOO");
+
+        value.set(anotherValue);
+
+        assertPutEquals("FOO\u0001");
+    }
+
+    @Test
     public void asChar() throws FIXValueOverflowException {
         get("Y\u0001");
 

@@ -58,7 +58,7 @@ public class FIXValue {
         offset = 0;
         length = value.length();
 
-        for (int i = 0; i < length; i++)
+        for (int i = 0; i <= length; i++)
             bytes[i] = value.bytes[i];
     }
 
