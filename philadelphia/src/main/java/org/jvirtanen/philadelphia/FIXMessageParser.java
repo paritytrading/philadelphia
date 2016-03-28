@@ -1,5 +1,6 @@
 package org.jvirtanen.philadelphia;
 
+import static org.jvirtanen.philadelphia.FIX.*;
 import static org.jvirtanen.philadelphia.FIXTags.*;
 
 import java.io.IOException;
@@ -20,9 +21,9 @@ class FIXMessageParser {
 
         this.message = message;
 
-        this.beginString = new FIXField(8);
-        this.bodyLength  = new FIXField(8);
-        this.checkSum    = new FIXField(8);
+        this.beginString = new FIXField(BEGIN_STRING_FIELD_CAPACITY);
+        this.bodyLength  = new FIXField(BODY_LENGTH_FIELD_CAPACITY);
+        this.checkSum    = new FIXField(CHECK_SUM_FIELD_CAPACITY);
     }
 
     public boolean parse(ByteBuffer buffer) throws IOException {

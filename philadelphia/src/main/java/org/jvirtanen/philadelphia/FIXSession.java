@@ -1,5 +1,6 @@
 package org.jvirtanen.philadelphia;
 
+import static org.jvirtanen.philadelphia.FIX.*;
 import static org.jvirtanen.philadelphia.FIXMsgTypes.*;
 import static org.jvirtanen.philadelphia.FIXTags.*;
 
@@ -78,9 +79,9 @@ public class FIXSession implements Closeable {
 
         this.config = config;
 
-        this.beginString = new FIXValue(config.getFieldCapacity());
-        this.bodyLength  = new FIXValue(config.getFieldCapacity());
-        this.checkSum    = new FIXValue(config.getFieldCapacity());
+        this.beginString = new FIXValue(BEGIN_STRING_FIELD_CAPACITY);
+        this.bodyLength  = new FIXValue(BODY_LENGTH_FIELD_CAPACITY);
+        this.checkSum    = new FIXValue(CHECK_SUM_FIELD_CAPACITY);
 
         this.beginString.setString(config.getVersion().getBeginString());
 

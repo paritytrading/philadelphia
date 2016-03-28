@@ -111,6 +111,17 @@ public class FIXMessageParserTest {
         assertEquals(asList("35=D\u0001"), messages.collect());
     }
 
+    @Test
+    public void readFixt11() throws IOException {
+        ByteBuffer buffer = ByteBuffers.wrap("8=FIXT.1.1\u00019=5\u000135=D\u000110=005\u0001");
+
+        assertEquals(true, parser.parse(buffer));
+
+        assertEquals(0, buffer.remaining());
+
+        assertEquals(asList("35=D\u0001"), messages.collect());
+    }
+
     private void readPartial(String input) throws IOException {
         readGarbledOrPartial(input, input.length());
     }
