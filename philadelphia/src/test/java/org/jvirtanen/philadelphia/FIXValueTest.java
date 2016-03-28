@@ -36,6 +36,13 @@ public class FIXValueTest {
     }
 
     @Test
+    public void get() throws FIXValueOverflowException {
+        get("FOO\u0001");
+
+        assertPutEquals("FOO\u0001");
+    }
+
+    @Test
     public void asChar() throws FIXValueOverflowException {
         get("Y\u0001");
 
