@@ -2,10 +2,16 @@ Release Notes
 =============
 
 
+0.2.2 (2016-03-28)
+------------------
+
+- Fix FIXT 1.1 support for inbound messages
+
+
 0.2.1 (2016-03-25)
 ------------------
 
-- Fix FIXT 1.1 support
+- Fix FIXT 1.1 support for outbound messages
 
 
 0.2.0 (2016-03-15)
