@@ -5,7 +5,7 @@ Release Notes
 0.2.2 (2016-03-28)
 ------------------
 
-- Support running data reception and transmission on different threads
+- Add support for running data reception and transmission on different threads
 - Fix FIXT 1.1 support for inbound messages
 
 
