@@ -50,7 +50,7 @@ Download
 Add a Maven dependency to Philadelphia:
 
     <dependency>
-      <groupId>org.jvirtanen.philadelphia</groupId>
+      <groupId>com.paritytrading.philadelphia</groupId>
       <artifactId>philadelphia</artifactId>
       <version><!-- latest version --></version>
     </dependency>

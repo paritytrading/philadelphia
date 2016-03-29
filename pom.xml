@@ -9,14 +9,14 @@
     <version>7</version>
   </parent>
 
-  <groupId>org.jvirtanen.philadelphia</groupId>
+  <groupId>com.paritytrading.philadelphia</groupId>
   <artifactId>philadelphia-parent</artifactId>
   <version>0.2.3-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Philadelphia (Parent)</name>
   <description>FIX engine for the JVM.</description>
-  <url>https://github.com/jvirtanen/philadelphia</url>
+  <url>https://github.com/paritytrading/philadelphia</url>
 
   <licenses>
     <license>
@@ -28,14 +28,14 @@
   <developers>
     <developer>
       <name>Jussi Virtanen</name>
-      <email>jussi.k.virtanen@gmail.com</email>
+      <email>jussi.virtanen@paritytrading.com</email>
     </developer>
   </developers>
 
   <scm>
-    <connection>scm:git:git@github.com:jvirtanen/philadelphia.git</connection>
-    <developerConnection>scm:git:git@github.com:jvirtanen/philadelphia.git</developerConnection>
-    <url>https://github.com/jvirtanen/philadelphia</url>
+    <connection>scm:git:git@github.com:paritytrading/philadelphia.git</connection>
+    <developerConnection>scm:git:git@github.com:paritytrading/philadelphia.git</developerConnection>
+    <url>https://github.com/paritytrading/philadelphia</url>
     <tag>HEAD</tag>
   </scm>
 
@@ -177,7 +177,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
-          <excludePackageNames>org.jvirtanen.philadelphia.acceptor:org.jvirtanen.philadelphia.client:org.jvirtanen.philadelphia.initiator:*.perf</excludePackageNames>
+          <excludePackageNames>com.paritytrading.philadelphia.acceptor:com.paritytrading.philadelphia.client:com.paritytrading.philadelphia.initiator:*.perf</excludePackageNames>
           <links>
             <link>http://www.joda.org/joda-time/apidocs/</link>
           </links>
