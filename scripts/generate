@@ -52,7 +52,7 @@ def read_version(infile):
         match.group('sp'))
 
 ENUMERATIONS_TEMPLATE = string.Template('''\
-package org.jvirtanen.philadelphia.${package_name};
+package com.paritytrading.philadelphia.${package_name};
 
 /**
  * Enumerations for ${version_name}.
@@ -130,7 +130,7 @@ def format_enum(enum, type, symbolic_name_width, format_type, value_width):
         symbolic_name_width, format_type(enum.value, value_width))
 
 MSG_TYPES_TEMPLATE = string.Template('''\
-package org.jvirtanen.philadelphia.${package_name};
+package com.paritytrading.philadelphia.${package_name};
 
 /**
  * Message types for ${version_name}.
@@ -166,7 +166,7 @@ def format_msg_type(message, name_width, msg_type_width):
             else 'char  ', message.name, name_width, message.msg_type)
 
 TAGS_TEMPLATE = string.Template('''\
-package org.jvirtanen.philadelphia.${package_name};
+package com.paritytrading.philadelphia.${package_name};
 
 /**
  * Tags for ${version_name}.

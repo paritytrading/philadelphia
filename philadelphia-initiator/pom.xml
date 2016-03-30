@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.jvirtanen.philadelphia</groupId>
+    <groupId>com.paritytrading.philadelphia</groupId>
     <artifactId>philadelphia-parent</artifactId>
     <version>0.2.3-SNAPSHOT</version>
   </parent>
@@ -37,7 +37,7 @@
         <configuration>
           <transformers>
             <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-              <mainClass>org.jvirtanen.philadelphia.initiator.TestInitiator</mainClass>
+              <mainClass>com.paritytrading.philadelphia.initiator.TestInitiator</mainClass>
             </transformer>
           </transformers>
         </configuration>
