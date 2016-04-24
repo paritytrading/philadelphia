@@ -65,7 +65,7 @@ See the [Developer Guide](HACKING.md).
 Links
 -----
 
-For more information about Philadelphia:
+For more information on Philadelphia:
 
   - Follow [@paritytrading](https://twitter.com/paritytrading) on Twitter for
     news and announcements
