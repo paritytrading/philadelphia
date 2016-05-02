@@ -198,7 +198,7 @@ public class FIXInitiatorTest {
 
     @Test
     public void receiveMessageWithTooLowMsgSeqNum() throws IOException {
-        initiator.setInboundMsgSeqNum(2);
+        initiator.setIncomingMsgSeqNum(2);
 
         String message = "35=0|34=1|";
         Event status   = new TooLowMsgSeqNum(1, 2);
@@ -270,7 +270,7 @@ public class FIXInitiatorTest {
 
     @Test
     public void receiveSequenceResetResetWithTooLowMsgSeqNum() throws IOException {
-        initiator.setInboundMsgSeqNum(2);
+        initiator.setIncomingMsgSeqNum(2);
 
         String message = "35=4|34=1|36=5|";
         Event  status  = new SequenceReset();
@@ -299,7 +299,7 @@ public class FIXInitiatorTest {
     public void receiveSequenceResetGapFill() throws IOException {
         acceptor.send("35=4|34=1|123=Y|36=5|");
 
-        while (initiator.getInboundMsgSeqNum() != 5)
+        while (initiator.getIncomingMsgSeqNum() != 5)
             initiator.receive();
     }
 

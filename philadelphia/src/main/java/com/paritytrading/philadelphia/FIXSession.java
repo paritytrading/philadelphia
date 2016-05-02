@@ -150,6 +150,28 @@ public class FIXSession implements Closeable {
     }
 
     /**
+     * Get the next incoming MsgSeqNum(34).
+     *
+     * @return the next incoming MsgSeqNum(34)
+     */
+    public long getIncomingMsgSeqNum() {
+        return rxMsgSeqNum;
+    }
+
+    void setIncomingMsgSeqNum(long incomingMsgSeqNum) {
+        rxMsgSeqNum = incomingMsgSeqNum;
+    }
+
+    /**
+     * Get the next outgoing MsgSeqNum(34).
+     *
+     * @return the next outgoing MsgSeqNum(34)
+     */
+    public long getOutgoingMsgSeqNum() {
+        return txMsgSeqNum;
+    }
+
+    /**
      * Create a message container.
      *
      * @return a message container
@@ -629,14 +651,6 @@ public class FIXSession implements Closeable {
             statusListener.logon(FIXSession.this, message);
         }
 
-    }
-
-    long getInboundMsgSeqNum() {
-        return rxMsgSeqNum;
-    }
-
-    void setInboundMsgSeqNum(long inboundMsgSeqNum) {
-        rxMsgSeqNum = inboundMsgSeqNum;
     }
 
     void sendHeartbeat() throws IOException {
