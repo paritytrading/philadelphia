@@ -172,6 +172,24 @@ public class FIXSession implements Closeable {
     }
 
     /**
+     * Get the SenderCompID(49).
+     *
+     * @return the SenderCompID(49)
+     */
+    public String getSenderCompID() {
+        return senderCompId;
+    }
+
+    /**
+     * Get the TargetCompID(56).
+     *
+     * @return the TargetCompID(56)
+     */
+    public String getTargetCompID() {
+        return targetCompId;
+    }
+
+    /**
      * Create a message container.
      *
      * @return a message container
