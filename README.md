@@ -59,7 +59,9 @@ Add a Maven dependency to Philadelphia:
 Development
 -----------
 
-See the [Developer Guide](HACKING.md).
+See [Parity Guide][].
+
+  [Parity Guide]: https://github.com/paritytrading/documentation
 
 
 Links
