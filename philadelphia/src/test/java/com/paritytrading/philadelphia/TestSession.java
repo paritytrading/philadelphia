@@ -1,11 +1,13 @@
 package com.paritytrading.philadelphia;
 
 import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
 
 import java.io.Closeable;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
+import java.util.List;
 
 class TestSession implements Closeable {
 
@@ -41,8 +43,15 @@ class TestSession implements Closeable {
     }
 
     public void send(String message) throws IOException {
+        send(asList(message));
+    }
+
+    public void send(List<String> messages) throws IOException {
         txBuffer.clear();
-        txBuffer.put(format(message).getBytes(US_ASCII));
+
+        for (String message : messages)
+            txBuffer.put(format(message).getBytes(US_ASCII));
+
         txBuffer.flip();
 
         while (txBuffer.hasRemaining())

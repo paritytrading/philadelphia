@@ -28,6 +28,7 @@ public class FIXInitiatorTest {
     private static final FIXConfig initiatorConfig = new FIXConfig.Builder()
         .setSenderCompID("initiator")
         .setTargetCompID("acceptor")
+        .setFieldCapacity(1024)
         .build();
 
     private FIXMessage message;
@@ -317,6 +318,19 @@ public class FIXInitiatorTest {
         Event  status  = new Logout();
 
         acceptorMessageInitiatorStatus(message, status);
+    }
+
+    @Test
+    public void receiveFullBuffer() throws IOException {
+        acceptor.send(asList("35=5|34=1|58=" + repeat('A', 512) + "|",
+                "35=5|34=2|58=" + repeat('A', 512) + "|"));
+
+        while (initiator.getIncomingMsgSeqNum() != 3)
+            initiator.receive();
+
+        assertEquals(asList(), acceptorMessages.collect());
+        assertEquals(asList(), initiatorMessages.collect());
+        assertEquals(asList(new Logout(), new Logout()), initiatorStatus.collect());
     }
 
     @Test
