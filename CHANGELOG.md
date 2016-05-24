@@ -2,6 +2,14 @@ Release Notes
 =============
 
 
+0.4.0 (2016-05-24)
+------------------
+
+- Expose next incoming and outgoing MsgSeqNum(34)
+- Expose SenderCompID(49) and TargetCompID(56)
+- Fix handling of incoming message too long to fit into receive buffer
+
+
 0.3.0 (2016-03-30)
 ------------------
 
