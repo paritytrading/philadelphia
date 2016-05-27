@@ -19,7 +19,9 @@ Single message and receiving an Execution Report message.
 Build
 -----
 
-See the [Developer Guide](../HACKING.md).
+See [Parity Guide][].
+
+  [Parity Guide]: https://github.com/paritytrading/documentation
 
 
 License
