@@ -17,14 +17,6 @@ port. After a FIX session is established, it responds to Order Single messages
 with Execution Report messages.
 
 
-Build
------
-
-See [Parity Guide][].
-
-  [Parity Guide]: https://github.com/paritytrading/documentation
-
-
 License
 -------
 

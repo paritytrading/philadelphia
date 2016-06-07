@@ -16,14 +16,6 @@ The application measures the round-trip time (RTT) between sending an Order
 Single message and receiving an Execution Report message.
 
 
-Build
------
-
-See [Parity Guide][].
-
-  [Parity Guide]: https://github.com/paritytrading/documentation
-
-
 License
 -------
 

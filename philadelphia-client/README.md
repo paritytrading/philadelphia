@@ -32,14 +32,6 @@ To list received messages, use the `messages` command:
 Use the `help` command to see a list of all available commands.
 
 
-Build
------
-
-See [Parity Guide][].
-
-  [Parity Guide]: https://github.com/paritytrading/documentation
-
-
 License
 -------
 
