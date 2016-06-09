@@ -15,13 +15,13 @@ Features
 
 Philadelphia implements the following FIX protocol versions:
 
-  - **FIX 4.2**
-  - **FIX 4.3**
-  - **FIX 4.4**
-  - **FIX 5.0**
-  - **FIX 5.0 Service Pack 1**
-  - **FIX 5.0 Service Pack 2**
-  - **FIXT 1.1**
+- **FIX 4.2**
+- **FIX 4.3**
+- **FIX 4.4**
+- **FIX 5.0**
+- **FIX 5.0 Service Pack 1**
+- **FIX 5.0 Service Pack 2**
+- **FIXT 1.1**
 
 See the [FIX Trading Community][] for the protocol specifications and
 [Philadelphia Extras][] for additional FIX dialects.
@@ -31,17 +31,17 @@ See the [FIX Trading Community][] for the protocol specifications and
 
 Besides the library, Philadelphia contains the following applications:
 
-  - [**Terminal Client**](philadelphia-client) is a simple console
-    application for interacting with a FIX acceptor
+- [**Terminal Client**](philadelphia-client) is a simple console application
+  for interacting with a FIX acceptor
 
-  - [**Test Acceptor**](philadelphia-acceptor) is an example application
-    implementing a simple FIX acceptor
+- [**Test Acceptor**](philadelphia-acceptor) is an example application
+  implementing a simple FIX acceptor
 
-  - [**Test Initiator**](philadelphia-initiator) is an example application
-    implementing a simple FIX initiator
+- [**Test Initiator**](philadelphia-initiator) is an example application
+  implementing a simple FIX initiator
 
-  - [**Performance Test**](philadelphia-perf-test) contains microbenchmarks
-    for the FIX protocol implementation
+- [**Performance Test**](philadelphia-perf-test) contains microbenchmarks
+  for the FIX protocol implementation
 
 
 Download
@@ -61,12 +61,12 @@ Links
 
 For more information on Philadelphia:
 
-  - See [Parity Guide](https://github.com/paritytrading/documentation) for
-    the user and developer documentation
-  - Follow [@paritytrading](https://twitter.com/paritytrading) on Twitter for
-    news and announcements
-  - Join [paritytrading/chat](https://gitter.im/paritytrading/chat) on Gitter
-    for discussions
+- See [Parity Guide](https://github.com/paritytrading/documentation) for the
+  user and developer documentation
+- Follow [@paritytrading](https://twitter.com/paritytrading) on Twitter for
+  news and announcements
+- Join [paritytrading/chat](https://gitter.im/paritytrading/chat) on Gitter
+  for discussions
 
 
 License
