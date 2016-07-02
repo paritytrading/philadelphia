@@ -14,6 +14,7 @@ import org.openjdk.jmh.annotations.State;
 
 @State(Scope.Thread)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
+@BenchmarkMode(Mode.SampleTime)
 public class FIXValueBenchmark {
 
     private StringBuilder string;
@@ -71,43 +72,36 @@ public class FIXValueBenchmark {
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public char asChar() {
         return charValue.asChar();
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public void setChar() {
         charValue.setChar('Y');
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public long asInt() {
         return intValue.asInt();
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public void setInt() {
         intValue.setInt(123);
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public double asFloat() {
         return floatValue.asFloat();
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public void setFloat() {
         floatValue.setFloat(12.30, 2);
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public StringBuilder asString() {
         stringValue.asString(string);
 
@@ -115,13 +109,11 @@ public class FIXValueBenchmark {
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public void setString() {
         stringValue.setString("FOO");
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public MutableDateTime asDate() {
         dateValue.asDate(date);
 
@@ -129,13 +121,11 @@ public class FIXValueBenchmark {
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public void setDate() {
         dateValue.setDate(date);
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public MutableDateTime asTimeOnly() {
         timeOnlyValue.asTimeOnly(timeOnly);
 
@@ -143,13 +133,11 @@ public class FIXValueBenchmark {
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public void setTimeOnly() {
         timeOnlyValue.setTimeOnly(timeOnly, true);
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public MutableDateTime asTimestamp() {
         timestampValue.asTimestamp(timestamp);
 
@@ -157,7 +145,6 @@ public class FIXValueBenchmark {
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public void setTimestamp() {
         timestampValue.setTimestamp(timestamp, true);
     }

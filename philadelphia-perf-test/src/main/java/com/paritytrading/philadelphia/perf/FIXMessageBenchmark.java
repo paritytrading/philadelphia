@@ -21,6 +21,7 @@ import org.openjdk.jmh.annotations.TearDown;
 
 @State(Scope.Thread)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
+@BenchmarkMode(Mode.SampleTime)
 public class FIXMessageBenchmark {
 
     private FIXMessage message;
@@ -58,7 +59,6 @@ public class FIXMessageBenchmark {
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public FIXMessage get() throws FIXMessageOverflowException, FIXValueOverflowException {
         message.get(buffer);
 
@@ -68,7 +68,6 @@ public class FIXMessageBenchmark {
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public void put() {
         message.put(buffer);
 
@@ -76,7 +75,6 @@ public class FIXMessageBenchmark {
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public void formatAndPut() {
         format();
 

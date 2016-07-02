@@ -14,6 +14,7 @@ import org.openjdk.jmh.annotations.State;
 
 @State(Scope.Thread)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
+@BenchmarkMode(Mode.SampleTime)
 public class FIXTimestampsBenchmark {
 
     private StringBuilder builder;
@@ -28,7 +29,6 @@ public class FIXTimestampsBenchmark {
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public StringBuilder append() {
         builder.setLength(0);
 

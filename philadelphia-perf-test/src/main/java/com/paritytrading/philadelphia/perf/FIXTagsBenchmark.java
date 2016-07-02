@@ -17,6 +17,7 @@ import org.openjdk.jmh.annotations.TearDown;
 
 @State(Scope.Thread)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
+@BenchmarkMode(Mode.SampleTime)
 public class FIXTagsBenchmark {
 
     private ByteBuffer buffer;
@@ -27,7 +28,6 @@ public class FIXTagsBenchmark {
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public long get() {
         long tag = FIXTags.get(buffer);
 
@@ -37,7 +37,6 @@ public class FIXTagsBenchmark {
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public void put() {
         FIXTags.put(buffer, 123);
 

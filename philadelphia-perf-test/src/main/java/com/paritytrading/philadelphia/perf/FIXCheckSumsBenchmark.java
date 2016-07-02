@@ -16,6 +16,7 @@ import org.openjdk.jmh.annotations.State;
 
 @State(Scope.Thread)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
+@BenchmarkMode(Mode.SampleTime)
 public class FIXCheckSumsBenchmark {
 
     private ByteBuffer buffer;
@@ -30,7 +31,6 @@ public class FIXCheckSumsBenchmark {
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
     public long sum() {
         return FIXCheckSums.sum(buffer, 0, buffer.remaining());
     }
