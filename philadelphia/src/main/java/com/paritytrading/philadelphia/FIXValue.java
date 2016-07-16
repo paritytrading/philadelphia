@@ -34,6 +34,19 @@ public class FIXValue {
     }
 
     /**
+     * Get the byte at the specified index. The index must be between 0 and
+     * the length of the value - 1.
+     *
+     * @param index the index
+     * @return the byte at the specified index
+     * @throws IndexOutOfBoundsException if the index is outside of this
+     *   value container
+     */
+    public byte byteAt(int index) {
+        return bytes[offset + index];
+    }
+
+    /**
      * Get the length of the value.
      *
      * @return the length of the value

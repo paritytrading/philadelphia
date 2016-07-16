@@ -24,6 +24,17 @@ public class FIXValueTest {
         value = new FIXValue(32);
     }
 
+    public void byteAt() {
+        value.setString("FOO");
+
+        byte[] bytes = new byte[value.length()];
+
+        for (int i = 0; i < value.length(); i++)
+            bytes[i] = value.byteAt(i);
+
+        assertArrayEquals(new byte[] { 'F', 'O', 'O' }, bytes);
+    }
+
     @Test
     public void set() {
         FIXValue anotherValue = new FIXValue(32);
