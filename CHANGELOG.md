@@ -2,6 +2,13 @@ Release Notes
 =============
 
 
+0.5.0 (2016-08-23)
+------------------
+
+- Fix links in documentation
+- Add access to byte by index
+
+
 0.4.0 (2016-05-24)
 ------------------
 
