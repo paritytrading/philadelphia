@@ -47,11 +47,11 @@
   </properties>
 
   <modules>
+    <module>philadelphia</module>
     <module>philadelphia-acceptor</module>
     <module>philadelphia-client</module>
     <module>philadelphia-initiator</module>
     <module>philadelphia-perf-test</module>
-    <module>philadelphia</module>
   </modules>
 
   <dependencyManagement>
