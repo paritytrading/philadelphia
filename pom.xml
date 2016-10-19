@@ -51,6 +51,7 @@
     <module>philadelphia-fix42</module>
     <module>philadelphia-fix43</module>
     <module>philadelphia-fix44</module>
+    <module>philadelphia-fix50</module>
     <module>philadelphia-acceptor</module>
     <module>philadelphia-client</module>
     <module>philadelphia-initiator</module>

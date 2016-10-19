@@ -19,7 +19,7 @@ Philadelphia implements the following FIX protocol versions:
 - [**FIX 4.2**](philadelphia-fix42)
 - [**FIX 4.3**](philadelphia-fix43)
 - [**FIX 4.4**](philadelphia-fix44)
-- **FIX 5.0**
+- [**FIX 5.0**](philadelphia-fix50)
 - **FIX 5.0 Service Pack 1**
 - **FIX 5.0 Service Pack 2**
 - **FIXT 1.1**
