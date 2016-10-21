@@ -16,13 +16,13 @@ Features
 
 Philadelphia implements the following FIX protocol versions:
 
-- **FIX 4.2**
-- **FIX 4.3**
-- **FIX 4.4**
-- **FIX 5.0**
-- **FIX 5.0 Service Pack 1**
-- **FIX 5.0 Service Pack 2**
-- **FIXT 1.1**
+- [**FIX 4.2**](philadelphia-fix42)
+- [**FIX 4.3**](philadelphia-fix43)
+- [**FIX 4.4**](philadelphia-fix44)
+- [**FIX 5.0**](philadelphia-fix50)
+- [**FIX 5.0 Service Pack 1**](philadelphia-fix50sp1)
+- [**FIX 5.0 Service Pack 2**](philadelphia-fix50sp2)
+- [**FIXT 1.1**](philadelphia-fixt11)
 
 See the [FIX Trading Community][] for the protocol specifications and
 [Philadelphia Extras][] for additional FIX dialects.
