@@ -73,5 +73,6 @@ For more information on Philadelphia:
 License
 -------
 
-Philadelphia is released under the Apache License, Version 2.0. See `LICENSE`
-for details.
+Copyright 2015 Jussi Virtanen and contributors.
+
+Released under the Apache License, Version 2.0. See `LICENSE.txt` for details.
