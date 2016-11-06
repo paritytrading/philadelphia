@@ -2107,8 +2107,9 @@ public class FIX50SP2Enumerations {
      */
     public static class CxlRejResponseToValues {
 
-        public static final char OrderCancelRequest = '1';
-        public static final char OrderCancel        = '2';
+        public static final char OrderCancelRequest        = '1';
+        public static final char OrderCancel               = '2';
+        public static final char OrderCancelReplaceRequest = '2';
 
         private CxlRejResponseToValues() {
         }
