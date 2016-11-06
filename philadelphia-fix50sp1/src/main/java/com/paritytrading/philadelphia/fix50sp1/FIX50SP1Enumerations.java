@@ -5513,35 +5513,45 @@ public class FIX50SP1Enumerations {
     }
 
     /**
-     * Values for MarketUpdateAction(1395).
+     * Values for ApplReqType(1347).
      */
-    public static class MarketUpdateActionValues {
+    public static class ApplReqTypeValues {
 
-        public static final char Add    = 'A';
-        public static final char Delete = 'D';
-        public static final char Modify = 'M';
+        public static final int Retransmission      = 0;
+        public static final int Subscription        = 1;
+        public static final int RequestLastSeqNum   = 2;
+        public static final int RequestApplications = 3;
+        public static final int Unsubscribe         = 4;
 
-        private MarketUpdateActionValues() {
+        private ApplReqTypeValues() {
         }
 
     }
 
     /**
-     * Values for SessionStatus(1409).
+     * Values for ApplResponseType(1348).
      */
-    public static class SessionStatusValues {
+    public static class ApplResponseTypeValues {
 
-        public static final int SessionActive                             = 0;
-        public static final int SessionPasswordChanged                    = 1;
-        public static final int SessionPasswordDueToExpire                = 2;
-        public static final int NewSessionPasswordDoesNotComplyWithPolicy = 3;
-        public static final int SessionLogoutComplete                     = 4;
-        public static final int InvalidUsernameOrPassword                 = 5;
-        public static final int AccountLocked                             = 6;
-        public static final int LogonsAreNotAllowedAtThisTime             = 7;
-        public static final int PasswordExpired                           = 8;
+        public static final int RequestSuccessfullyProcessed = 0;
+        public static final int ApplicationDoesNotExist      = 1;
+        public static final int MessagesNotAvailable         = 2;
 
-        private SessionStatusValues() {
+        private ApplResponseTypeValues() {
+        }
+
+    }
+
+    /**
+     * Values for ApplResponseError(1354).
+     */
+    public static class ApplResponseErrorValues {
+
+        public static final int ApplicationDoesNotExist          = 0;
+        public static final int MessagesRequestedAreNotAvailable = 1;
+        public static final int UserNotAuthorizedForApplication  = 2;
+
+        private ApplResponseErrorValues() {
         }
 
     }
@@ -5710,45 +5720,35 @@ public class FIX50SP1Enumerations {
     }
 
     /**
-     * Values for ApplReqType(1347).
+     * Values for MarketUpdateAction(1395).
      */
-    public static class ApplReqTypeValues {
+    public static class MarketUpdateActionValues {
 
-        public static final int Retransmission      = 0;
-        public static final int Subscription        = 1;
-        public static final int RequestLastSeqNum   = 2;
-        public static final int RequestApplications = 3;
-        public static final int Unsubscribe         = 4;
+        public static final char Add    = 'A';
+        public static final char Delete = 'D';
+        public static final char Modify = 'M';
 
-        private ApplReqTypeValues() {
+        private MarketUpdateActionValues() {
         }
 
     }
 
     /**
-     * Values for ApplResponseType(1348).
+     * Values for SessionStatus(1409).
      */
-    public static class ApplResponseTypeValues {
+    public static class SessionStatusValues {
 
-        public static final int RequestSuccessfullyProcessed = 0;
-        public static final int ApplicationDoesNotExist      = 1;
-        public static final int MessagesNotAvailable         = 2;
+        public static final int SessionActive                             = 0;
+        public static final int SessionPasswordChanged                    = 1;
+        public static final int SessionPasswordDueToExpire                = 2;
+        public static final int NewSessionPasswordDoesNotComplyWithPolicy = 3;
+        public static final int SessionLogoutComplete                     = 4;
+        public static final int InvalidUsernameOrPassword                 = 5;
+        public static final int AccountLocked                             = 6;
+        public static final int LogonsAreNotAllowedAtThisTime             = 7;
+        public static final int PasswordExpired                           = 8;
 
-        private ApplResponseTypeValues() {
-        }
-
-    }
-
-    /**
-     * Values for ApplResponseError(1354).
-     */
-    public static class ApplResponseErrorValues {
-
-        public static final int ApplicationDoesNotExist          = 0;
-        public static final int MessagesRequestedAreNotAvailable = 1;
-        public static final int UserNotAuthorizedForApplication  = 2;
-
-        private ApplResponseErrorValues() {
+        private SessionStatusValues() {
         }
 
     }
