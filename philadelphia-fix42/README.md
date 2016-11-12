@@ -19,4 +19,4 @@ Add a Maven dependency to Philadelphia FIX 4.2:
 License
 -------
 
-Philadelphia FIX 4.2 is released under the Apache License, Version 2.0.
+Released under the Apache License, Version 2.0.
