@@ -19,4 +19,4 @@ By default, the application runs the entire suite of microbenchmarks. If the
 License
 -------
 
-Philadelphia Performance Test is released under the Apache License, Version 2.0.
+Released under the Apache License, Version 2.0.
