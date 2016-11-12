@@ -20,4 +20,4 @@ Add a Maven dependency to Philadelphia FIX 5.0 SP1:
 License
 -------
 
-Philadelphia FIX 5.0 SP1 is released under the Apache License, Version 2.0.
+Released under the Apache License, Version 2.0.
