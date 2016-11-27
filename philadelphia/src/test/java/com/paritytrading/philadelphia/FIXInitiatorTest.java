@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -20,7 +21,7 @@ import org.junit.rules.Timeout;
 public class FIXInitiatorTest {
 
     @Rule
-    public Timeout timeout = new Timeout(1000);
+    public Timeout timeout = new Timeout(1000, TimeUnit.MILLISECONDS);
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
