@@ -21,7 +21,7 @@ Features
 
 Philadelphia implements the following FIX protocol versions:
 
-- [**FIX 4.2**](philadelphia-fix42)
+- [**FIX 4.2**](libraries/fix42)
 - [**FIX 4.3**](philadelphia-fix43)
 - [**FIX 4.4**](philadelphia-fix44)
 - [**FIX 5.0**](philadelphia-fix50)

@@ -48,7 +48,7 @@
 
   <modules>
     <module>libraries/core</module>
-    <module>philadelphia-fix42</module>
+    <module>libraries/fix42</module>
     <module>philadelphia-fix43</module>
     <module>philadelphia-fix44</module>
     <module>philadelphia-fix50</module>
