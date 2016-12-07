@@ -16,7 +16,7 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>philadelphia</artifactId>
+      <artifactId>philadelphia-core</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>

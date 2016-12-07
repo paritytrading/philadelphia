@@ -57,7 +57,7 @@ Add a Maven dependency to Philadelphia:
 
     <dependency>
       <groupId>com.paritytrading.philadelphia</groupId>
-      <artifactId>philadelphia</artifactId>
+      <artifactId>philadelphia-core</artifactId>
       <version><!-- latest version --></version>
     </dependency>
 

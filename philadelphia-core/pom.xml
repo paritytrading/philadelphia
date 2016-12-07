@@ -9,9 +9,9 @@
     <version>0.5.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>philadelphia</artifactId>
+  <artifactId>philadelphia-core</artifactId>
 
-  <name>Philadelphia</name>
+  <name>Philadelphia Core</name>
 
   <dependencies>
     <dependency>
