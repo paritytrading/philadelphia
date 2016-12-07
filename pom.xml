@@ -52,7 +52,7 @@
     <module>libraries/fix43</module>
     <module>libraries/fix44</module>
     <module>libraries/fix50</module>
-    <module>philadelphia-fix50sp1</module>
+    <module>libraries/fix50sp1</module>
     <module>philadelphia-fix50sp2</module>
     <module>philadelphia-fixt11</module>
     <module>philadelphia-acceptor</module>
