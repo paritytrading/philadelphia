@@ -11,7 +11,7 @@ provide your own services using the FIX protocol.
 Philadelphia is designed to exhibit low and predictable latency. To achieve
 this, it supports non-blocking, zero-copy networking and does not allocate
 any memory on message reception or transmission. It can achieve [7.7 µs
-round-trip time (RTT)](philadelphia-initiator) over the loopback interface.
+round-trip time (RTT)](examples/initiator) over the loopback interface.
 
 Philadelphia requires Java Runtime Environment (JRE) 8 or newer.
 
@@ -43,7 +43,7 @@ Besides the library, Philadelphia contains the following applications:
 - [**Test Acceptor**](examples/acceptor) is an example application
   implementing a simple FIX acceptor
 
-- [**Test Initiator**](philadelphia-initiator) is an example application
+- [**Test Initiator**](examples/initiator) is an example application
   implementing a simple FIX initiator
 
 - [**Performance Test**](philadelphia-perf-test) contains microbenchmarks

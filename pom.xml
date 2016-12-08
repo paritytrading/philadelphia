@@ -57,7 +57,7 @@
     <module>libraries/fixt11</module>
     <module>examples/acceptor</module>
     <module>applications/client</module>
-    <module>philadelphia-initiator</module>
+    <module>examples/initiator</module>
     <module>philadelphia-perf-test</module>
   </modules>
 
