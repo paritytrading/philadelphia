@@ -10,7 +10,7 @@ Usage
 
 Run Philadelphia Terminal Client with Java:
 
-    java -jar <executable> <configuration-file>
+    java -jar philadelphia-client.jar <configuration-file>
 
 When started, the terminal client displays a command prompt:
 
