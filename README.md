@@ -40,7 +40,7 @@ Besides the library, Philadelphia contains the following applications:
 - [**Terminal Client**](philadelphia-client) is a simple console application
   for interacting with a FIX acceptor
 
-- [**Test Acceptor**](philadelphia-acceptor) is an example application
+- [**Test Acceptor**](examples/acceptor) is an example application
   implementing a simple FIX acceptor
 
 - [**Test Initiator**](philadelphia-initiator) is an example application
