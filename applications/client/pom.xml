@@ -7,6 +7,7 @@
     <groupId>com.paritytrading.philadelphia</groupId>
     <artifactId>philadelphia-parent</artifactId>
     <version>0.5.1-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
   </parent>
 
   <artifactId>philadelphia-client</artifactId>
