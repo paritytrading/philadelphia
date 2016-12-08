@@ -10,7 +10,7 @@ Usage
 
 Run Philadelphia Performance Test with Java:
 
-    java -jar <executable>
+    java -jar philadelphia-perf-test.jar
 
 By default, the application runs the entire suite of microbenchmarks. If the
 `-h` option is given, it displays the help instead.
