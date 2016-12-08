@@ -58,7 +58,7 @@
     <module>examples/acceptor</module>
     <module>applications/client</module>
     <module>examples/initiator</module>
-    <module>philadelphia-perf-test</module>
+    <module>tests/perf-test</module>
   </modules>
 
   <dependencyManagement>
