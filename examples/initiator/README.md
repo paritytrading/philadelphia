@@ -10,7 +10,7 @@ Usage
 
 Run Philadelphia Test Initiator with Java:
 
-    java -jar <executable> <host> <port> <orders>
+    java -jar philadelphia-initiator.jar <host> <port> <orders>
 
 The application measures the round-trip time (RTT) between sending an Order
 Single message and receiving an Execution Report message.
