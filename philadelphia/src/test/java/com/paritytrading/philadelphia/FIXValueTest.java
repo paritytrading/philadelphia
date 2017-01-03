@@ -35,6 +35,16 @@ public class FIXValueTest {
         assertArrayEquals(new byte[] { 'F', 'O', 'O' }, bytes);
     }
 
+    public void copyTo() {
+        value.setInt(123);
+
+        byte[] bytes = new byte[6];
+
+        value.copyTo(bytes);
+
+        assertArrayEquals(new byte[] { '1', '2', '3', 0, 0, 0 }, bytes);
+    }
+
     @Test
     public void set() {
         FIXValue anotherValue = new FIXValue(32);

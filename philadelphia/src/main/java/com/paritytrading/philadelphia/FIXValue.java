@@ -56,6 +56,17 @@ public class FIXValue {
     }
 
     /**
+     * Copy the value to a byte array.
+     *
+     * @param bytes a byte array
+     * @throws IndexOutOfBoundsException if the length of the value is greater
+     *     than the length of the byte array
+     */
+    public void copyTo(byte[] bytes) {
+        System.arraycopy(this.bytes, this.offset, bytes, 0, this.length);
+    }
+
+    /**
      * Reset the value.
      */
     public void reset() {
