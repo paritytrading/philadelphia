@@ -53,8 +53,7 @@ public class FIXInitiatorTest {
         ServerSocketChannel acceptorServerChannel = ServerSocketChannel.open();
         acceptorServerChannel.bind(null);
 
-        SocketChannel initiatorChannel = SocketChannel.open();
-        initiatorChannel.connect(acceptorServerChannel.getLocalAddress());
+        SocketChannel initiatorChannel = SocketChannel.open(acceptorServerChannel.getLocalAddress());
         initiatorChannel.configureBlocking(false);
 
         SocketChannel acceptorChannel = acceptorServerChannel.accept();
