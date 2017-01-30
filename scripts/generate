@@ -10,6 +10,10 @@ import xml.etree.ElementTree
 
 INDENT = '    '
 
+ADJUSTED_VALUES = {
+  ('276', 'f '): 'f',
+}
+
 SYMBOLIC_NAME_ALIASES = {
     ('434', '2'): [
         'OrderCancelReplaceRequest',
@@ -22,11 +26,12 @@ def read_enums(infile):
     def enum_with_aliases(elem):
         tag = elem.find('Tag').text
         value = elem.find('Value').text
+        adjusted_value = ADJUSTED_VALUES.get((tag, value), value)
         symbolic_name = elem.find('SymbolicName').text
         sort = int(elem.find('Sort').text) if elem.find('Sort') is not None else None
-        enum = Enum(tag, value, symbolic_name, sort)
+        enum = Enum(tag, adjusted_value, symbolic_name, sort)
         return [enum] + [enum._replace(symbolic_name=symbolic_name_alias)
-                for symbolic_name_alias in SYMBOLIC_NAME_ALIASES.get((tag, value), [])]
+                for symbolic_name_alias in SYMBOLIC_NAME_ALIASES.get((tag, adjusted_value), [])]
     tree = xml.etree.ElementTree.parse(infile)
     enums = [enum_with_aliases(elem) for elem in tree.findall('Enum')]
     return [enum for aliases in enums for enum in aliases]
