@@ -1171,7 +1171,7 @@ public class FIX50Enumerations {
         public static final String RegularETH                 = "c";
         public static final String AutomaticExecution         = "d";
         public static final String AutomaticExecutionETH      = "e";
-        public static final String FastMarketETH              = "f ";
+        public static final String FastMarketETH              = "f";
         public static final String InactiveETH                = "g";
         public static final String Rotation                   = "h";
         public static final String RotationETH                = "i";
