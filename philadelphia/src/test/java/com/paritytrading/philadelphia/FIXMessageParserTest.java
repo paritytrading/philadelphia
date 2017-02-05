@@ -10,19 +10,11 @@ import org.junit.Test;
 
 public class FIXMessageParserTest {
 
-    private FIXMessage message;
-
-    private FIXMessageParser parser;
-
     private FIXMessages messages;
 
     @Before
     public void setUp() {
-        message = new FIXMessage(32, 32);
-
         messages = new FIXMessages();
-
-        parser = new FIXMessageParser(messages, message);
     }
 
     @Test
@@ -101,10 +93,21 @@ public class FIXMessageParserTest {
     }
 
     @Test
+    public void readGarbledCheckSumCheckSumDisabled() throws IOException {
+        ByteBuffer buffer = ByteBuffers.wrap("8=FIX.4.2\u00019=5\u000135=D\u000110=000\u0001");
+
+        assertEquals(true, parse(buffer, false));
+
+        assertEquals(0, buffer.remaining());
+
+        assertEquals(asList("35=D\u0001"), messages.collect());
+    }
+
+    @Test
     public void read() throws IOException {
         ByteBuffer buffer = ByteBuffers.wrap("8=FIX.4.2\u00019=5\u000135=D\u000110=181\u0001");
 
-        assertEquals(true, parser.parse(buffer));
+        assertEquals(true, parse(buffer, true));
 
         assertEquals(0, buffer.remaining());
 
@@ -115,7 +118,7 @@ public class FIXMessageParserTest {
     public void readFixt11() throws IOException {
         ByteBuffer buffer = ByteBuffers.wrap("8=FIXT.1.1\u00019=5\u000135=D\u000110=005\u0001");
 
-        assertEquals(true, parser.parse(buffer));
+        assertEquals(true, parse(buffer, true));
 
         assertEquals(0, buffer.remaining());
 
@@ -129,11 +132,19 @@ public class FIXMessageParserTest {
     private void readGarbledOrPartial(String input, int remaining) throws IOException {
         ByteBuffer buffer = ByteBuffers.wrap(input);
 
-        assertEquals(false, parser.parse(buffer));
+        assertEquals(false, parse(buffer, true));
 
         assertEquals(remaining, buffer.remaining());
 
         assertEquals(asList(), messages.collect());
+    }
+
+    private boolean parse(ByteBuffer buffer, boolean checkSumEnabled) throws IOException {
+        FIXMessage message = new FIXMessage(32, 32);
+
+        FIXMessageParser parser = new FIXMessageParser(messages, message, checkSumEnabled);
+
+        return parser.parse(buffer);
     }
 
 }

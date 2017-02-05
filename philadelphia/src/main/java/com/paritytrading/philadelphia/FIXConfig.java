@@ -17,6 +17,7 @@ public class FIXConfig {
     private int        fieldCapacity;
     private int        rxBufferCapacity;
     private int        txBufferCapacity;
+    private boolean    checkSumEnabled;
 
     /**
      * Create a session configuration.
@@ -31,12 +32,14 @@ public class FIXConfig {
      * @param fieldCapacity the field capacity
      * @param rxBufferCapacity the receive buffer capacity
      * @param txBufferCapacity the transmit buffer capacity
+     * @param checkSumEnabled the incoming CheckSum(10) check status
      * @see Builder
      */
     public FIXConfig(FIXVersion version, String senderCompId,
             String targetCompId, int heartBtInt,
             long incomingMsgSeqNum, long outgoingMsgSeqNum,
-            int maxFieldCount, int fieldCapacity, int rxBufferCapacity, int txBufferCapacity) {
+            int maxFieldCount, int fieldCapacity, int rxBufferCapacity,
+            int txBufferCapacity, boolean checkSumEnabled) {
         this.version           = version;
         this.senderCompId      = senderCompId;
         this.targetCompId      = targetCompId;
@@ -47,6 +50,7 @@ public class FIXConfig {
         this.fieldCapacity     = fieldCapacity;
         this.rxBufferCapacity  = rxBufferCapacity;
         this.txBufferCapacity  = txBufferCapacity;
+        this.checkSumEnabled   = checkSumEnabled;
     }
 
     /**
@@ -141,6 +145,16 @@ public class FIXConfig {
     }
 
     /**
+     * Get the incoming CheckSum(10) check status.
+     *
+     * @return true if the incoming CheckSum(10) check is enabled, otherwise
+     *     false
+     */
+    public boolean isCheckSumEnabled() {
+        return checkSumEnabled;
+    }
+
+    /**
      * <p>A session configuration builder. The builder uses the following
      * default values:</p>
      * <ul>
@@ -154,6 +168,7 @@ public class FIXConfig {
      *   <li>field capacity: 64</li>
      *   <li>receive buffer capacity: 1024</li>
      *   <li>transmit buffer capacity: 1024</li>
+     *   <li>incoming CheckSum(10) check status: enabled</li>
      * </ul>
      */
     public static class Builder {
@@ -168,6 +183,7 @@ public class FIXConfig {
         private int        fieldCapacity;
         private int        rxBufferCapacity;
         private int        txBufferCapacity;
+        private boolean    checkSumEnabled;
 
         /**
          * Create a session configuration builder.
@@ -183,6 +199,7 @@ public class FIXConfig {
             fieldCapacity     = 64;
             rxBufferCapacity  = 1024;
             txBufferCapacity  = 1024;
+            checkSumEnabled   = true;
         }
 
         /**
@@ -306,6 +323,19 @@ public class FIXConfig {
         }
 
         /**
+         * Set the incoming CheckSum(10) check status.
+         *
+         * @param checkSumEnabled if true, the incoming CheckSum(10) check is
+         *     enabled, otherwise it is disabled
+         * @return this instance
+         */
+        public Builder setCheckSumEnabled(boolean checkSumEnabled) {
+            this.checkSumEnabled = checkSumEnabled;
+
+            return this;
+        }
+
+        /**
          * Build the session configuration.
          *
          * @return the session configuration
@@ -313,7 +343,8 @@ public class FIXConfig {
         public FIXConfig build() {
             return new FIXConfig(version, senderCompId, targetCompId,
                     heartBtInt, incomingMsgSeqNum, outgoingMsgSeqNum,
-                    maxFieldCount, fieldCapacity, rxBufferCapacity, txBufferCapacity);
+                    maxFieldCount, fieldCapacity, rxBufferCapacity,
+                    txBufferCapacity, checkSumEnabled);
         }
 
     }

@@ -12,14 +12,19 @@ class FIXMessageParser {
 
     private FIXMessage message;
 
+    private boolean checkSumEnabled;
+
     private FIXField beginString;
     private FIXField bodyLength;
     private FIXField checkSum;
 
-    public FIXMessageParser(FIXMessageListener listener, FIXMessage message) {
+    public FIXMessageParser(FIXMessageListener listener, FIXMessage message,
+            boolean checkSumEnabled) {
         this.listener = listener;
 
         this.message = message;
+
+        this.checkSumEnabled = checkSumEnabled;
 
         this.beginString = new FIXField(BEGIN_STRING_FIELD_CAPACITY);
         this.bodyLength  = new FIXField(BODY_LENGTH_FIELD_CAPACITY);
@@ -70,24 +75,27 @@ class FIXMessageParser {
 
             position = buffer.position();
 
-            buffer.position(position + length);
+            if (checkSumEnabled) {
+                buffer.position(position + length);
 
-            // Garbled message
-            if (!checkSum.get(buffer))
-                continue;
+                // Garbled message
+                if (!checkSum.get(buffer))
+                    continue;
 
-            // Garbled message
-            if (checkSum.getTag() != CheckSum)
-                continue;
+                // Garbled message
+                if (checkSum.getTag() != CheckSum)
+                    continue;
 
-            // Garbled message
-            if (FIXCheckSums.sum(buffer, beginning, position - beginning + length) % 256
-                    != checkSum.getValue().asCheckSum())
-                continue;
+                // Garbled message
+                if (FIXCheckSums.sum(buffer, beginning, position - beginning + length) % 256
+                        != checkSum.getValue().asCheckSum())
+                    continue;
+
+                buffer.position(position);
+            }
 
             int limit = buffer.limit();
 
-            buffer.position(position);
             buffer.limit(position + length);
 
             // Garbled message
