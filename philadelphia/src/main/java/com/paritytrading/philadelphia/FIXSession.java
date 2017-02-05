@@ -89,7 +89,8 @@ public class FIXSession implements Closeable {
         this.targetCompId = config.getTargetCompID();
 
         this.parser = new FIXMessageParser(new MessageHandler(listener),
-                new FIXMessage(config.getMaxFieldCount(), config.getFieldCapacity()));
+                new FIXMessage(config.getMaxFieldCount(), config.getFieldCapacity()),
+                config.isCheckSumEnabled());
 
         this.statusListener = statusListener;
 

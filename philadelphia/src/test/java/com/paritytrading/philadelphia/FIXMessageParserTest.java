@@ -93,10 +93,21 @@ public class FIXMessageParserTest {
     }
 
     @Test
+    public void readGarbledCheckSumCheckSumDisabled() throws IOException {
+        ByteBuffer buffer = ByteBuffers.wrap("8=FIX.4.2\u00019=5\u000135=D\u000110=000\u0001");
+
+        assertEquals(true, parse(buffer, false));
+
+        assertEquals(0, buffer.remaining());
+
+        assertEquals(asList("35=D\u0001"), messages.collect());
+    }
+
+    @Test
     public void read() throws IOException {
         ByteBuffer buffer = ByteBuffers.wrap("8=FIX.4.2\u00019=5\u000135=D\u000110=181\u0001");
 
-        assertEquals(true, parse(buffer));
+        assertEquals(true, parse(buffer, true));
 
         assertEquals(0, buffer.remaining());
 
@@ -107,7 +118,7 @@ public class FIXMessageParserTest {
     public void readFixt11() throws IOException {
         ByteBuffer buffer = ByteBuffers.wrap("8=FIXT.1.1\u00019=5\u000135=D\u000110=005\u0001");
 
-        assertEquals(true, parse(buffer));
+        assertEquals(true, parse(buffer, true));
 
         assertEquals(0, buffer.remaining());
 
@@ -121,17 +132,17 @@ public class FIXMessageParserTest {
     private void readGarbledOrPartial(String input, int remaining) throws IOException {
         ByteBuffer buffer = ByteBuffers.wrap(input);
 
-        assertEquals(false, parse(buffer));
+        assertEquals(false, parse(buffer, true));
 
         assertEquals(remaining, buffer.remaining());
 
         assertEquals(asList(), messages.collect());
     }
 
-    private boolean parse(ByteBuffer buffer) throws IOException {
+    private boolean parse(ByteBuffer buffer, boolean checkSumEnabled) throws IOException {
         FIXMessage message = new FIXMessage(32, 32);
 
-        FIXMessageParser parser = new FIXMessageParser(messages, message);
+        FIXMessageParser parser = new FIXMessageParser(messages, message, checkSumEnabled);
 
         return parser.parse(buffer);
     }
