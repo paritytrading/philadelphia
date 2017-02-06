@@ -9,11 +9,17 @@ Download
 
 Add a Maven dependency to Philadelphia FIXT 1.1:
 
-    <dependency>
-      <groupId>com.paritytrading.philadelphia</groupId>
-      <artifactId>philadelphia-fixt11</artifactId>
-      <version><!-- latest version --></version>
-    </dependency>
+```xml
+<dependency>
+  <groupId>com.paritytrading.philadelphia</groupId>
+  <artifactId>philadelphia-fixt11</artifactId>
+  <version><!-- latest release --></version>
+</dependency>
+```
+
+See the [latest release][] on GitHub.
+
+  [latest release]: https://github.com/paritytrading/philadelphia/releases/latest
 
 
 License
