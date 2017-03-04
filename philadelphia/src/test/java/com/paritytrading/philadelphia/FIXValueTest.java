@@ -380,7 +380,7 @@ public class FIXValueTest {
     }
 
     private void assertPutEquals(String s) {
-        ByteBuffer buffer = ByteBuffer.allocate(s.length());
+        ByteBuffer buffer = ByteBuffer.allocateDirect(s.length());
 
         value.put(buffer);
         buffer.flip();

@@ -18,7 +18,7 @@ public class FIXFieldTest {
     public void setUp() {
         field = new FIXField(32);
 
-        buffer = ByteBuffer.allocate(32);
+        buffer = ByteBuffer.allocateDirect(32);
     }
 
     @Test

@@ -34,7 +34,7 @@ public class FIXMessageBenchmark {
 
         format();
 
-        buffer = ByteBuffer.allocate(1024);
+        buffer = ByteBuffer.allocateDirect(1024);
 
         message.put(buffer);
 

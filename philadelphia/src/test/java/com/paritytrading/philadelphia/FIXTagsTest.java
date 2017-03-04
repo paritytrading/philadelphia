@@ -19,7 +19,7 @@ public class FIXTagsTest {
 
     @Test
     public void put() {
-        ByteBuffer buffer = ByteBuffer.allocate(4);
+        ByteBuffer buffer = ByteBuffer.allocateDirect(4);
 
         FIXTags.put(buffer, 123);
         buffer.flip();

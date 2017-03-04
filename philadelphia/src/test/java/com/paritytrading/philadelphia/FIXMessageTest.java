@@ -31,7 +31,7 @@ public class FIXMessageTest {
         message.addField(OrdType).setChar(OrdTypeValues.Limit);
         message.addField(Price).setFloat(150.25, 2);
 
-        ByteBuffer buffer = ByteBuffer.allocate(256);
+        ByteBuffer buffer = ByteBuffer.allocateDirect(256);
 
         message.put(buffer);
         buffer.flip();

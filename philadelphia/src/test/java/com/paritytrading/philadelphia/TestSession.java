@@ -23,8 +23,8 @@ class TestSession implements Closeable {
 
         this.parser = new TestMessageParser(listener);
 
-        this.rxBuffer = ByteBuffer.allocate(2048);
-        this.txBuffer = ByteBuffer.allocate(2048);
+        this.rxBuffer = ByteBuffer.allocateDirect(2048);
+        this.txBuffer = ByteBuffer.allocateDirect(2048);
     }
 
     public int receive() throws IOException {
