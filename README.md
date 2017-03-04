@@ -8,6 +8,11 @@ You can use Philadelphia to connect to stock exchanges, brokerage firms, and
 other network endpoints that use the FIX protocol. You can also use it to
 provide your own services using the FIX protocol.
 
+Philadelphia is designed to exhibit low and predictable latency. To achieve
+this, it supports non-blocking, zero-copy networking and does not allocate
+any memory on message reception or transmission. It can achieve [7.7 µs
+round-trip time (RTT)](philadelphia-initiator) over the loopback interface.
+
 Philadelphia requires Java Runtime Environment (JRE) 8 or newer.
 
 
