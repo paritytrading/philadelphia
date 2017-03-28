@@ -572,7 +572,7 @@ public class FIXSession implements Closeable {
             }
         }
 
-        private void handleTooLowMsgSeqNum(final FIXMessage message, final long msgSeqNum, final FIXValue msgType) throws IOException {
+        private void handleTooLowMsgSeqNum(FIXMessage message, long msgSeqNum, FIXValue msgType) throws IOException {
             if (msgType.length() != 1 || msgType.asChar() != SequenceReset) {
                 FIXValue possDupFlag = message.findField(PossDupFlag);
 
