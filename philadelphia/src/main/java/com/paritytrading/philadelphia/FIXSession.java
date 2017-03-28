@@ -538,24 +538,13 @@ public class FIXSession implements Closeable {
             }
 
             if (msgSeqNum < rxMsgSeqNum) {
-                if (msgType.length() != 1 || msgType.asChar() != SequenceReset) {
-                    FIXValue possDupFlag = message.findField(PossDupFlag);
-
-                    if (possDupFlag == null || possDupFlag.asChar() != 'Y')
-                        statusListener.tooLowMsgSeqNum(FIXSession.this, msgSeqNum, rxMsgSeqNum);
-                }
-
+                handleTooLowMsgSeqNum(message, msgSeqNum, msgType);
                 return;
             }
 
             rxMsgSeqNum++;
 
-            if (msgType.length() != 1) {
-                downstream.message(message);
-                return;
-            }
-
-            switch (msgType.asChar()) {
+            switch ((char) msgType.byteAt(0)) {
             case Heartbeat:
                 handleHeartbeat();
                 break;
@@ -580,6 +569,15 @@ public class FIXSession implements Closeable {
             default:
                 downstream.message(message);
                 break;
+            }
+        }
+
+        private void handleTooLowMsgSeqNum(final FIXMessage message, final long msgSeqNum, final FIXValue msgType) throws IOException {
+            if (msgType.length() != 1 || msgType.asChar() != SequenceReset) {
+                FIXValue possDupFlag = message.findField(PossDupFlag);
+
+                if (possDupFlag == null || possDupFlag.asChar() != 'Y')
+                    statusListener.tooLowMsgSeqNum(FIXSession.this, msgSeqNum, rxMsgSeqNum);
             }
         }
 
