@@ -524,12 +524,8 @@ public class FIXSession implements Closeable {
             }
 
             if (msgType.length() == 1 && msgType.asChar() == SequenceReset) {
-                FIXValue gapFillFlag = message.findField(GapFillFlag);
-
-                if (gapFillFlag == null || gapFillFlag.asChar() != 'Y') {
-                    handleSequenceReset(message, true);
+                if (handleSequenceReset(message))
                     return;
-                }
             }
 
             if (msgSeqNum > rxMsgSeqNum) {
@@ -538,13 +534,7 @@ public class FIXSession implements Closeable {
             }
 
             if (msgSeqNum < rxMsgSeqNum) {
-                if (msgType.length() != 1 || msgType.asChar() != SequenceReset) {
-                    FIXValue possDupFlag = message.findField(PossDupFlag);
-
-                    if (possDupFlag == null || possDupFlag.asChar() != 'Y')
-                        statusListener.tooLowMsgSeqNum(FIXSession.this, msgSeqNum, rxMsgSeqNum);
-                }
-
+                handleTooLowMsgSeqNum(message, msgType, msgSeqNum);
                 return;
             }
 
@@ -555,7 +545,7 @@ public class FIXSession implements Closeable {
                 return;
             }
 
-            switch (msgType.asChar()) {
+            switch (msgType.byteAt(0)) {
             case Heartbeat:
                 handleHeartbeat();
                 break;
@@ -569,7 +559,7 @@ public class FIXSession implements Closeable {
                 handleReject(message);
                 break;
             case SequenceReset:
-                handleSequenceReset(message, false);
+                handleSequenceReset(message);
                 break;
             case Logout:
                 handleLogout(message);
@@ -580,6 +570,15 @@ public class FIXSession implements Closeable {
             default:
                 downstream.message(message);
                 break;
+            }
+        }
+
+        private void handleTooLowMsgSeqNum(FIXMessage message, FIXValue msgType, long msgSeqNum) throws IOException {
+            if (msgType.length() != 1 || msgType.asChar() != SequenceReset) {
+                FIXValue possDupFlag = message.findField(PossDupFlag);
+
+                if (possDupFlag == null || possDupFlag.asChar() != 'Y')
+                    statusListener.tooLowMsgSeqNum(FIXSession.this, msgSeqNum, rxMsgSeqNum);
             }
         }
 
@@ -623,23 +622,28 @@ public class FIXSession implements Closeable {
             statusListener.reject(FIXSession.this, message);
         }
 
-        private void handleSequenceReset(FIXMessage message, boolean reset) throws IOException {
+        private boolean handleSequenceReset(FIXMessage message) throws IOException {
             FIXValue value = message.findField(NewSeqNo);
             if (value == null) {
                 sendReject(message.getMsgSeqNum(), 1, "NewSeqNo(36) not found");
-                return;
+                return true;
             }
 
             long newSeqNo = value.asInt();
             if (newSeqNo < rxMsgSeqNum) {
                 sendReject(message.getMsgSeqNum(), 5, "NewSeqNo(36) too low");
-                return;
+                return true;
             }
 
             rxMsgSeqNum = newSeqNo;
 
+            FIXValue gapFillFlag = message.findField(GapFillFlag);
+            boolean reset = gapFillFlag == null || gapFillFlag.asChar() != 'Y';
+
             if (reset)
                 statusListener.sequenceReset(FIXSession.this);
+
+            return reset;
         }
 
         private void handleLogout(FIXMessage message) throws IOException {
