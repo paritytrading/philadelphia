@@ -1,5 +1,4 @@
-Philadelphia
-============
+# Philadelphia
 
 Philadelphia is a low latency Financial Information Exchange (FIX) engine for
 the JVM.
@@ -11,23 +10,28 @@ provide your own services using the FIX protocol.
 Philadelphia is designed to exhibit low and predictable latency. To achieve
 this, it supports non-blocking, zero-copy networking and does not allocate
 any memory on message reception or transmission. It can achieve [7.7 µs
-round-trip time (RTT)](philadelphia-initiator) over the loopback interface.
+round-trip time (RTT)](examples/initiator) over the loopback interface.
 
 Philadelphia requires Java Runtime Environment (JRE) 8 or newer.
 
+## Download
 
-Features
---------
+See the [latest release][] on GitHub.
 
-Philadelphia implements the following FIX protocol versions:
+  [latest release]: https://github.com/paritytrading/philadelphia/releases/latest
 
-- [**FIX 4.2**](philadelphia-fix42)
-- [**FIX 4.3**](philadelphia-fix43)
-- [**FIX 4.4**](philadelphia-fix44)
-- [**FIX 5.0**](philadelphia-fix50)
-- [**FIX 5.0 Service Pack 1**](philadelphia-fix50sp1)
-- [**FIX 5.0 Service Pack 2**](philadelphia-fix50sp2)
-- [**FIXT 1.1**](philadelphia-fixt11)
+## Modules
+
+Philadelphia contains the following libraries:
+
+- [**Core**](libraries/core) implements the Financial Information Exchange
+  (FIX) protocol.
+
+- [**FIX 4.2**](libraries/fix42), [**FIX 4.3**](libraries/fix43),
+  [**FIX 4.4**](libraries/fix44), [**FIX 5.0**](libraries/fix50),
+  [**FIX 5.0 SP1**](libraries/fix50sp1),
+  [**FIX 5.0 SP2**](libraries/fix50sp2), and
+  [**FIXT 1.1**](libraries/fixt11) implement the FIX protocol versions.
 
 See the [FIX Trading Community][] for the protocol specifications and
 [Philadelphia Extras][] for additional FIX dialects.
@@ -35,35 +39,23 @@ See the [FIX Trading Community][] for the protocol specifications and
   [FIX Trading Community]: http://www.fixtradingcommunity.org
   [Philadelphia Extras]: https://github.com/paritytrading/philadelphia-extras
 
-Besides the library, Philadelphia contains the following applications:
+Philadelphia contains the following applications:
 
-- [**Terminal Client**](philadelphia-client) is a simple console application
-  for interacting with a FIX acceptor
+- [**Terminal Client**](applications/client) is a simple console application
+  for interacting with a FIX acceptor.
 
-- [**Test Acceptor**](philadelphia-acceptor) is an example application
-  implementing a simple FIX acceptor
+Philadelphia contains the following example applications:
 
-- [**Test Initiator**](philadelphia-initiator) is an example application
-  implementing a simple FIX initiator
+- [**Test Acceptor**](examples/acceptor) implements a simple FIX acceptor.
 
-- [**Performance Test**](philadelphia-perf-test) contains microbenchmarks
-  for the FIX protocol implementation
+- [**Test Initiator**](examples/initiator) implements a simple FIX initiator.
 
+Philadelphia contains the following test applications:
 
-Download
---------
+- [**Performance Test**](tests/perf-test) contains microbenchmarks
+  for the FIX protocol implementation.
 
-Add a Maven dependency to Philadelphia:
-
-    <dependency>
-      <groupId>com.paritytrading.philadelphia</groupId>
-      <artifactId>philadelphia</artifactId>
-      <version><!-- latest version --></version>
-    </dependency>
-
-
-Links
------
+## Links
 
 For more information on Philadelphia:
 
@@ -74,9 +66,7 @@ For more information on Philadelphia:
 - Join [paritytrading/chat](https://gitter.im/paritytrading/chat) on Gitter
   for discussions
 
-
-License
--------
+## License
 
 Copyright 2015 Jussi Virtanen and contributors.
 

@@ -47,18 +47,18 @@
   </properties>
 
   <modules>
-    <module>philadelphia</module>
-    <module>philadelphia-fix42</module>
-    <module>philadelphia-fix43</module>
-    <module>philadelphia-fix44</module>
-    <module>philadelphia-fix50</module>
-    <module>philadelphia-fix50sp1</module>
-    <module>philadelphia-fix50sp2</module>
-    <module>philadelphia-fixt11</module>
-    <module>philadelphia-acceptor</module>
-    <module>philadelphia-client</module>
-    <module>philadelphia-initiator</module>
-    <module>philadelphia-perf-test</module>
+    <module>libraries/core</module>
+    <module>libraries/fix42</module>
+    <module>libraries/fix43</module>
+    <module>libraries/fix44</module>
+    <module>libraries/fix50</module>
+    <module>libraries/fix50sp1</module>
+    <module>libraries/fix50sp2</module>
+    <module>libraries/fixt11</module>
+    <module>examples/acceptor</module>
+    <module>applications/client</module>
+    <module>examples/initiator</module>
+    <module>tests/perf-test</module>
   </modules>
 
   <dependencyManagement>
@@ -141,14 +141,6 @@
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>2.6</version>
-          <configuration>
-            <forceCreation>true</forceCreation> <!-- MSHADE-126 -->
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
           <version>2.5</version>
         </plugin>
@@ -157,7 +149,6 @@
           <artifactId>maven-shade-plugin</artifactId>
           <version>2.3</version>
           <configuration>
-            <createDependencyReducedPom>false</createDependencyReducedPom>
             <minimizeJar>true</minimizeJar>
           </configuration>
           <executions>
