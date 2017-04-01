@@ -14,17 +14,24 @@ round-trip time (RTT)](examples/initiator) over the loopback interface.
 
 Philadelphia requires Java Runtime Environment (JRE) 8 or newer.
 
-## Features
+## Download
 
-Philadelphia implements the following FIX protocol versions:
+See the [latest release][] on GitHub.
 
-- [**FIX 4.2**](libraries/fix42)
-- [**FIX 4.3**](libraries/fix43)
-- [**FIX 4.4**](libraries/fix44)
-- [**FIX 5.0**](libraries/fix50)
-- [**FIX 5.0 SP1**](libraries/fix50sp1)
-- [**FIX 5.0 SP2**](libraries/fix50sp2)
-- [**FIXT 1.1**](libraries/fixt11)
+  [latest release]: https://github.com/paritytrading/philadelphia/releases/latest
+
+## Modules
+
+Philadelphia contains the following libraries:
+
+- [**Core**](libraries/core) implements the Financial Information Exchange
+  (FIX) protocol.
+
+- [**FIX 4.2**](libraries/fix42), [**FIX 4.3**](libraries/fix43),
+  [**FIX 4.4**](libraries/fix44), [**FIX 5.0**](libraries/fix50),
+  [**FIX 5.0 SP1**](libraries/fix50sp1),
+  [**FIX 5.0 SP2**](libraries/fix50sp2), and
+  [**FIXT 1.1**](libraries/fixt11) implement the FIX protocol versions.
 
 See the [FIX Trading Community][] for the protocol specifications and
 [Philadelphia Extras][] for additional FIX dialects.
@@ -32,25 +39,21 @@ See the [FIX Trading Community][] for the protocol specifications and
   [FIX Trading Community]: http://www.fixtradingcommunity.org
   [Philadelphia Extras]: https://github.com/paritytrading/philadelphia-extras
 
-Besides the library, Philadelphia contains the following applications:
+Philadelphia contains the following applications:
 
 - [**Terminal Client**](applications/client) is a simple console application
-  for interacting with a FIX acceptor
+  for interacting with a FIX acceptor.
 
-- [**Test Acceptor**](examples/acceptor) is an example application
-  implementing a simple FIX acceptor
+Philadelphia contains the following example applications:
 
-- [**Test Initiator**](examples/initiator) is an example application
-  implementing a simple FIX initiator
+- [**Test Acceptor**](examples/acceptor) implements a simple FIX acceptor.
+
+- [**Test Initiator**](examples/initiator) implements a simple FIX initiator.
+
+Philadelphia contains the following test applications:
 
 - [**Performance Test**](tests/perf-test) contains microbenchmarks
-  for the FIX protocol implementation
-
-## Download
-
-See the [latest release][] on GitHub.
-
-  [latest release]: https://github.com/paritytrading/philadelphia/releases/latest
+  for the FIX protocol implementation.
 
 ## Links
 
