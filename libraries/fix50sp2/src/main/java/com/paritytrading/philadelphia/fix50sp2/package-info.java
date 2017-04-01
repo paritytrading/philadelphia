@@ -1,4 +1,4 @@
 /**
- * Constants for FIX 5.0 Service Pack 2.
+ * Constants for FIX 5.0 SP2.
  */
 package com.paritytrading.philadelphia.fix50sp2;

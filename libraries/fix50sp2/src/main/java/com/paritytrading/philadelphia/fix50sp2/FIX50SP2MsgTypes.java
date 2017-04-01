@@ -1,7 +1,7 @@
 package com.paritytrading.philadelphia.fix50sp2;
 
 /**
- * Message types for FIX 5.0 Service Pack 2.
+ * Message types for FIX 5.0 SP2.
  */
 public class FIX50SP2MsgTypes {
 

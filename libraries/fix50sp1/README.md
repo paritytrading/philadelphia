@@ -1,8 +1,7 @@
 Philadelphia FIX 5.0 SP1
 =========================
 
-Philadelphia FIX 5.0 SP1 implements the FIX protocol version 5.0 Service
-Pack 1.
+Philadelphia FIX 5.0 SP1 implements the FIX protocol version 5.0 SP1.
 
 
 Download

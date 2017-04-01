@@ -214,7 +214,7 @@ def format_tag(field, name_width, tag_width):
 def version_name(version):
     base = '{} {}.{}'.format(version.protocol, version.major, version.minor)
     if version.sp:
-        return '{} Service Pack {}'.format(base, version.sp)
+        return '{} SP{}'.format(base, version.sp)
     else:
         return base
 

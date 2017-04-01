@@ -1,7 +1,7 @@
 package com.paritytrading.philadelphia.fix50sp1;
 
 /**
- * Enumerations for FIX 5.0 Service Pack 1.
+ * Enumerations for FIX 5.0 SP1.
  */
 public class FIX50SP1Enumerations {
 

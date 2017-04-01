@@ -25,8 +25,8 @@ Philadelphia implements the following FIX protocol versions:
 - [**FIX 4.3**](libraries/fix43)
 - [**FIX 4.4**](libraries/fix44)
 - [**FIX 5.0**](libraries/fix50)
-- [**FIX 5.0 Service Pack 1**](libraries/fix50sp1)
-- [**FIX 5.0 Service Pack 2**](libraries/fix50sp2)
+- [**FIX 5.0 SP1**](libraries/fix50sp1)
+- [**FIX 5.0 SP2**](libraries/fix50sp2)
 - [**FIXT 1.1**](libraries/fixt11)
 
 See the [FIX Trading Community][] for the protocol specifications and

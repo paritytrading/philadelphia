@@ -1,8 +1,7 @@
 Philadelphia FIX 5.0 SP2
 =========================
 
-Philadelphia FIX 5.0 SP2 implements the FIX protocol version 5.0 Service
-Pack 2.
+Philadelphia FIX 5.0 SP2 implements the FIX protocol version 5.0 SP2.
 
 
 Download
