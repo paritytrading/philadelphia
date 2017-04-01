@@ -1,12 +1,9 @@
-Philadelphia Test Initiator
-===========================
+# Philadelphia Test Initiator
 
 Philadelphia Test Initiator is an example application implementing a simple
 FIX initiator.
 
-
-Usage
------
+## Usage
 
 Run Philadelphia Test Initiator with Java:
 
@@ -15,9 +12,7 @@ Run Philadelphia Test Initiator with Java:
 The application measures the round-trip time (RTT) between sending an Order
 Single message and receiving an Execution Report message.
 
-
-Results
--------
+## Results
 
 The following results have been obtained running both Philadelphia Test
 Acceptor and Philadelphia Test Initiator on one Amazon Web Services (AWS)
@@ -36,7 +31,6 @@ Results (n = 50000)
   100.00%:      79.04 µs
 ```
 
-License
--------
+## License
 
 Released under the Apache License, Version 2.0.

@@ -1,12 +1,9 @@
-Philadelphia Terminal Client
-============================
+# Philadelphia Terminal Client
 
 Philadelphia Terminal Client is a simple console application for interacting
 with a FIX acceptor.
 
-
-Usage
------
+## Usage
 
 Run Philadelphia Terminal Client with Java:
 
@@ -31,8 +28,6 @@ To list received messages, use the `messages` command:
 
 Use the `help` command to see a list of all available commands.
 
-
-License
--------
+## License
 
 Released under the Apache License, Version 2.0.

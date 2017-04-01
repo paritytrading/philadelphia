@@ -1,11 +1,8 @@
-Philadelphia FIXT 1.1
-=====================
+# Philadelphia FIXT 1.1
 
 Philadelphia FIXT 1.1 implements the FIX session protocol version 1.1.
 
-
-Download
---------
+## Download
 
 Add a Maven dependency to Philadelphia FIXT 1.1:
 
@@ -21,8 +18,6 @@ See the [latest release][] on GitHub.
 
   [latest release]: https://github.com/paritytrading/philadelphia/releases/latest
 
-
-License
--------
+## License
 
 Released under the Apache License, Version 2.0.

@@ -1,5 +1,4 @@
-Philadelphia
-============
+# Philadelphia
 
 Philadelphia is a low latency Financial Information Exchange (FIX) engine for
 the JVM.
@@ -15,9 +14,7 @@ round-trip time (RTT)](examples/initiator) over the loopback interface.
 
 Philadelphia requires Java Runtime Environment (JRE) 8 or newer.
 
-
-Features
---------
+## Features
 
 Philadelphia implements the following FIX protocol versions:
 
@@ -49,9 +46,7 @@ Besides the library, Philadelphia contains the following applications:
 - [**Performance Test**](tests/perf-test) contains microbenchmarks
   for the FIX protocol implementation
 
-
-Download
---------
+## Download
 
 Add a Maven dependency to Philadelphia:
 
@@ -61,9 +56,7 @@ Add a Maven dependency to Philadelphia:
       <version><!-- latest version --></version>
     </dependency>
 
-
-Links
------
+## Links
 
 For more information on Philadelphia:
 
@@ -74,9 +67,7 @@ For more information on Philadelphia:
 - Join [paritytrading/chat](https://gitter.im/paritytrading/chat) on Gitter
   for discussions
 
-
-License
--------
+## License
 
 Copyright 2015 Jussi Virtanen and contributors.
 

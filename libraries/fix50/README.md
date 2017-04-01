@@ -1,11 +1,8 @@
-Philadelphia FIX 5.0
-====================
+# Philadelphia FIX 5.0
 
 Philadelphia FIX 5.0 implements the FIX protocol version 5.0.
 
-
-Download
---------
+## Download
 
 Add a Maven dependency to Philadelphia FIX 5.0:
 
@@ -21,8 +18,6 @@ See the [latest release][] on GitHub.
 
   [latest release]: https://github.com/paritytrading/philadelphia/releases/latest
 
-
-License
--------
+## License
 
 Released under the Apache License, Version 2.0.

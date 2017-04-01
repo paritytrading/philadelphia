@@ -1,11 +1,8 @@
-Philadelphia Core
-=================
+# Philadelphia Core
 
 Philadelphia Core implements the Financial Information Exchange (FIX) protocol.
 
-
-Download
---------
+## Download
 
 Add a Maven dependency to Philadelphia Core:
 
@@ -21,8 +18,6 @@ See the [latest release][] on GitHub.
 
   [latest release]: https://github.com/paritytrading/philadelphia/releases/latest
 
-
-License
--------
+## License
 
 Released under the Apache License, Version 2.0.
