@@ -48,13 +48,9 @@ Besides the library, Philadelphia contains the following applications:
 
 ## Download
 
-Add a Maven dependency to Philadelphia:
+See the [latest release][] on GitHub.
 
-    <dependency>
-      <groupId>com.paritytrading.philadelphia</groupId>
-      <artifactId>philadelphia-core</artifactId>
-      <version><!-- latest version --></version>
-    </dependency>
+  [latest release]: https://github.com/paritytrading/philadelphia/releases/latest
 
 ## Links
 
