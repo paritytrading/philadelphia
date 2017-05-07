@@ -11,7 +11,7 @@ import java.nio.ReadOnlyBufferException;
  */
 public class FIXMessage {
 
-    private FIXField fields[];
+    private FIXField[] fields;
 
     private int count;
 
