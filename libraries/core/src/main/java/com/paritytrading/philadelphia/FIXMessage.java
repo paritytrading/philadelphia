@@ -33,8 +33,7 @@ public class FIXMessage {
     /**
      * Get the MsgType(35).
      *
-     * @return the MsgType(35) or <code>null</code> if the field is not
-     *   present
+     * @return the MsgType(35) or {@code null} if the field is not present
      */
     public FIXValue getMsgType() {
         return findField(MsgType);
@@ -77,8 +76,8 @@ public class FIXMessage {
      * specified tag.
      *
      * @param tag the tag
-     * @return the value container or <code>null</code> if there are no
-     *   instances of a field with the specified tag
+     * @return the value container or {@code null} if there are no instances
+     *   of a field with the specified tag
      */
     public FIXValue findField(int tag) {
         for (int i = 0; i < count; i++) {
