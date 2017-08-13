@@ -40,7 +40,7 @@
   </scm>
 
   <properties>
-    <eclipse.collections.version>7.0.0</eclipse.collections.version>
+    <eclipse.collections.version>8.0.0</eclipse.collections.version>
     <java.version>1.8</java.version>
     <jmh.version>1.19</jmh.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
