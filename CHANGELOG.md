@@ -1,5 +1,23 @@
 # Release Notes
 
+## 0.6.0 (2017-08-13)
+
+- Extract Philadelphia FIX 4.2 module
+- Extract Philadelphia FIX 4.3 module
+- Extract Philadelphia FIX 4.4 module
+- Extract Philadelphia FIX 5.0 module
+- Extract Philadelphia FIX 5.0 SP1 module
+- Extract Philadelphia FIX 5.0 SP2 module
+- Extract Philadelphia FIXT 1.1 module
+- Add alias for CxlRejResponseTo(434) value
+- Add `FIXValue#copyTo` method
+- Clean up QuoteCondition(276) values
+- Make incoming CheckSum(10) check optional
+- Use direct byte buffer
+- Improve `FIXSession` performance
+- Improve project structure
+- Upgrade to Joda-Time 2.9.9
+
 ## 0.5.0 (2016-08-23)
 
 - Fix links in documentation
