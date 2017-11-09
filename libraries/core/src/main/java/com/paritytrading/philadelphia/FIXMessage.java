@@ -150,4 +150,35 @@ public class FIXMessage {
             fields[i].put(buffer);
     }
 
+    /**
+     * Returns a string representation of this message.
+     *
+     * @return a string representation of this message
+     */
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        toString(builder);
+
+        return builder.toString();
+    }
+
+    /**
+     * Appends a string representation of this message to the specified string
+     * builder.
+     *
+     * @param builder a string builder
+     */
+    public void toString(StringBuilder builder) {
+        for (int i = 0; i < count; i++) {
+            FIXField field = fields[i];
+
+            builder.append(field.getTag());
+            builder.append('=');
+            field.getValue().asString(builder);
+            builder.append('|');
+        }
+    }
+
 }
