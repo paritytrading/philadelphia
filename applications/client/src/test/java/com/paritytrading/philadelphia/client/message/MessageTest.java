@@ -22,7 +22,7 @@ public class MessageTest {
     public void missingMsgType() {
         exception.expect(IllegalArgumentException.class);
 
-        Message message = Message.get("1=foo|2=bar");
+        Message.get("1=foo|2=bar");
     }
 
 }
