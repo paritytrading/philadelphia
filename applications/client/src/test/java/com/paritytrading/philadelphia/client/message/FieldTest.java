@@ -2,14 +2,9 @@ package com.paritytrading.philadelphia.client.message;
 
 import static org.junit.Assert.*;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class FieldTest {
-
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
 
     @Test
     public void valid() {
@@ -23,31 +18,23 @@ public class FieldTest {
         Field.get("12345=foo");
     }
 
-    @Test
+    @Test(expected=IllegalArgumentException.class)
     public void missingTag() {
-        exception.expect(IllegalArgumentException.class);
-
         Field.get("=foo");
     }
 
-    @Test
+    @Test(expected=IllegalArgumentException.class)
     public void tooLongTag() {
-        exception.expect(IllegalArgumentException.class);
-
         Field.get("123456=foo");
     }
 
-    @Test
+    @Test(expected=IllegalArgumentException.class)
     public void invalidTag() {
-        exception.expect(IllegalArgumentException.class);
-
         Field.get("foo=bar");
     }
 
-    @Test
+    @Test(expected=IllegalArgumentException.class)
     public void missingValue() {
-        exception.expect(IllegalArgumentException.class);
-
         Field.get("foo=");
     }
 

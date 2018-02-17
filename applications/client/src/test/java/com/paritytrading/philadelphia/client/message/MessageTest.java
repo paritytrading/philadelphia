@@ -2,14 +2,9 @@ package com.paritytrading.philadelphia.client.message;
 
 import static org.junit.Assert.*;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class MessageTest {
-
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
 
     @Test
     public void valid() {
@@ -18,10 +13,8 @@ public class MessageTest {
         assertEquals("35=1|1=foo|2=bar", message.toString());
     }
 
-    @Test
+    @Test(expected=IllegalArgumentException.class)
     public void missingMsgType() {
-        exception.expect(IllegalArgumentException.class);
-
         Message.get("1=foo|2=bar");
     }
 
