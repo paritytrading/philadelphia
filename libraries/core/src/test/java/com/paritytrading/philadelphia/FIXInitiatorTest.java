@@ -15,16 +15,12 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.rules.Timeout;
 
 public class FIXInitiatorTest {
 
     @Rule
     public Timeout timeout = new Timeout(1000, TimeUnit.MILLISECONDS);
-
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
 
     private static final FIXConfig initiatorConfig = new FIXConfig.Builder()
         .setSenderCompID("initiator")
@@ -333,10 +329,8 @@ public class FIXInitiatorTest {
         assertEquals(asList(new Logout(), new Logout()), initiatorStatus.collect());
     }
 
-    @Test
+    @Test(expected=FIXMessageOverflowException.class)
     public void receiveTooLongMessage() throws IOException {
-        exception.expect(FIXMessageOverflowException.class);
-
         acceptor.send("35=5|34=1|58=" + repeat('A', 1024));
 
         while (true)

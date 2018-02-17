@@ -8,14 +8,9 @@ import java.nio.BufferUnderflowException;
 import org.joda.time.LocalTime;
 import org.joda.time.MutableDateTime;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class FIXValueTest {
-
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
 
     private FIXValue value;
 
@@ -77,11 +72,9 @@ public class FIXValueTest {
         assertPutEquals("Y\u0001");
     }
 
-    @Test
+    @Test(expected=FIXValueFormatException.class)
     public void notChar() {
         value.setString("FOO");
-
-        exception.expect(FIXValueFormatException.class);
 
         value.asChar();
     }
@@ -100,11 +93,9 @@ public class FIXValueTest {
         assertPutEquals("123\u0001");
     }
 
-    @Test
+    @Test(expected=FIXValueFormatException.class)
     public void notInt() {
         value.setString("FOO");
-
-        exception.expect(FIXValueFormatException.class);
 
         value.asInt();
     }
@@ -151,11 +142,9 @@ public class FIXValueTest {
         assertPutEquals("12.50\u0001");
     }
 
-    @Test
+    @Test(expected=FIXValueFormatException.class)
     public void notFloat() {
         value.setString("FOO");
-
-        exception.expect(FIXValueFormatException.class);
 
         value.asFloat();
     }
@@ -331,11 +320,9 @@ public class FIXValueTest {
         assertPutEquals("20150924-09:30:05\u0001");
     }
 
-    @Test
+    @Test(expected=FIXValueFormatException.class)
     public void notTimestamp() {
         value.setString("FOO");
-
-        exception.expect(FIXValueFormatException.class);
 
         value.asTimestamp(new MutableDateTime());
     }
@@ -354,19 +341,15 @@ public class FIXValueTest {
         assertPutEquals("064\u0001");
     }
 
-    @Test
+    @Test(expected=FIXValueFormatException.class)
     public void notCheckSum() {
         value.setString("FOO");
-
-        exception.expect(FIXValueFormatException.class);
 
         value.asCheckSum();
     }
 
-    @Test
+    @Test(expected=FIXValueOverflowException.class)
     public void readOverflow() throws FIXValueOverflowException {
-        exception.expect(FIXValueOverflowException.class);
-
         value.get(ByteBuffers.wrap("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
     }
 
