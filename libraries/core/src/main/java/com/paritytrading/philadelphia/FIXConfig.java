@@ -154,6 +154,29 @@ public class FIXConfig {
         return checkSumEnabled;
     }
 
+
+    /**
+     * Get the string representation of instance.
+     *
+     * @return string representation of instance.
+     */
+    @Override
+    public String toString() {
+        return "FIXConfig{" +
+                "version=" + version +
+                ", senderCompId='" + senderCompId + '\'' +
+                ", targetCompId='" + targetCompId + '\'' +
+                ", heartBtInt=" + heartBtInt +
+                ", incomingMsgSeqNum=" + incomingMsgSeqNum +
+                ", outgoingMsgSeqNum=" + outgoingMsgSeqNum +
+                ", maxFieldCount=" + maxFieldCount +
+                ", fieldCapacity=" + fieldCapacity +
+                ", rxBufferCapacity=" + rxBufferCapacity +
+                ", txBufferCapacity=" + txBufferCapacity +
+                ", checkSumEnabled=" + checkSumEnabled +
+                '}';
+    }
+
     /**
      * <p>A session configuration builder. The builder uses the following
      * default values:</p>
