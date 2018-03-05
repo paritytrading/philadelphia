@@ -13,6 +13,6 @@ public interface FIXMessageListener {
      * @param message a message
      * @throws IOException if an I/O error occurs
      */
-    public void message(FIXMessage message) throws IOException;
+    void message(FIXMessage message) throws IOException;
 
 }
