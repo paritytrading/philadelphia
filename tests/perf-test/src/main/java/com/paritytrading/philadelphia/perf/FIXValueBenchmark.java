@@ -45,6 +45,8 @@ public class FIXValueBenchmark {
 
     private FIXValue timestampValue;
 
+    private FIXValue timestampValueDestination;
+
     @Setup(Level.Iteration)
     public void prepare() {
         string = new StringBuilder(32);
@@ -73,8 +75,10 @@ public class FIXValueBenchmark {
         timeOnlyValue = new FIXValue(32);
         timeOnlyValue.setTimeOnly(timeOnly, true);
 
-        timestampValue = new FIXValue(32);
+        timestampValue = new FIXValue(64);
         timestampValue.setTimestamp(timestamp, true);
+
+        timestampValueDestination = new FIXValue(64);
     }
 
     @Benchmark
@@ -153,6 +157,11 @@ public class FIXValueBenchmark {
     @Benchmark
     public void setTimestamp() {
         timestampValue.setTimestamp(timestamp, true);
+    }
+
+    @Benchmark
+    public void setTimestampByValue() {
+        timestampValueDestination.set(timestampValue);
     }
 
 }
