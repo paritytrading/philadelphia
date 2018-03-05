@@ -57,22 +57,22 @@ public class FIXValueBenchmark {
 
         timestamp = new MutableDateTime(2015, 9, 24, 9, 30, 5, 250);
 
-        charValue = new FIXValue(32);
+        charValue = new FIXValue(64);
         charValue.setChar('Y');
 
-        intValue = new FIXValue(32);
+        intValue = new FIXValue(64);
         intValue.setInt(123);
 
-        floatValue = new FIXValue(32);
+        floatValue = new FIXValue(64);
         floatValue.setFloat(12.30, 2);
 
-        stringValue = new FIXValue(32);
+        stringValue = new FIXValue(64);
         stringValue.setString("FOO");
 
-        dateValue = new FIXValue(32);
+        dateValue = new FIXValue(64);
         dateValue.setDate(date);
 
-        timeOnlyValue = new FIXValue(32);
+        timeOnlyValue = new FIXValue(64);
         timeOnlyValue.setTimeOnly(timeOnly, true);
 
         timestampValue = new FIXValue(64);
