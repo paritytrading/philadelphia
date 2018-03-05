@@ -45,7 +45,7 @@ public class FIXValueBenchmark {
 
     private FIXValue timestampValue;
 
-    private FIXValue timestampValueDestination;
+    private FIXValue copyValue;
 
     @Setup(Level.Iteration)
     public void prepare() {
@@ -78,7 +78,7 @@ public class FIXValueBenchmark {
         timestampValue = new FIXValue(64);
         timestampValue.setTimestamp(timestamp, true);
 
-        timestampValueDestination = new FIXValue(64);
+        copyValue = new FIXValue(64);
     }
 
     @Benchmark
@@ -160,8 +160,8 @@ public class FIXValueBenchmark {
     }
 
     @Benchmark
-    public void setTimestampByValue() {
-        timestampValueDestination.set(timestampValue);
+    public void setToValue() {
+        copyValue.set(timestampValue);
     }
 
 }
