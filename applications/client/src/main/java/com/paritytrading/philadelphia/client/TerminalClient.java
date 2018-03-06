@@ -1,5 +1,7 @@
 package com.paritytrading.philadelphia.client;
 
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Collections.*;
 import static org.jvirtanen.util.Applications.*;
 
 import com.paritytrading.philadelphia.FIXConfig;
@@ -11,11 +13,14 @@ import com.paritytrading.philadelphia.client.message.Messages;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigException;
 import java.io.Closeable;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.nio.channels.ClosedChannelException;
+import java.nio.file.Files;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 import jline.console.ConsoleReader;
@@ -53,42 +58,56 @@ public class TerminalClient implements Closeable {
         return session;
     }
 
-    public void run() throws IOException {
+    public void run(List<String> lines) throws IOException {
         ConsoleReader reader = new ConsoleReader();
 
         reader.addCompleter(new StringsCompleter(Commands.names().castToList()));
 
-        printf("Type 'help' for help.\n");
+        if (lines.isEmpty())
+            printf("Type 'help' for help.\n");
+
+        for (String line : lines) {
+            if (closed)
+                break;
+
+            printf("< %s\n", line);
+
+            execute(line);
+        }
 
         while (!closed) {
             String line = reader.readLine("> ");
             if (line == null)
                 break;
 
-            if (line.trim().startsWith("#"))
-                continue;
-
-            Scanner scanner = scan(line);
-
-            if (!scanner.hasNext())
-                continue;
-
-            Command command = Commands.find(scanner.next());
-            if (command == null) {
-                printf("error: Unknown command\n");
-                continue;
-            }
-
-            try {
-                command.execute(this, scanner);
-            } catch (CommandException e) {
-                printf("Usage: %s\n", command.getUsage());
-            } catch (ClosedChannelException e) {
-                printf("error: Connection closed\n");
-            }
+            execute(line);
         }
 
         close();
+    }
+
+    private void execute(String line) throws IOException {
+        if (line.trim().startsWith("#"))
+            return;
+
+        Scanner scanner = scan(line);
+
+        if (!scanner.hasNext())
+            return;
+
+        Command command = Commands.find(scanner.next());
+        if (command == null) {
+            printf("error: Unknown command\n");
+            return;
+        }
+
+        try {
+            command.execute(this, scanner);
+        } catch (CommandException e) {
+            printf("Usage: %s\n", command.getUsage());
+        } catch (ClosedChannelException e) {
+            printf("error: Connection closed\n");
+        }
     }
 
     @Override
@@ -110,11 +129,18 @@ public class TerminalClient implements Closeable {
     }
 
     public static void main(String[] args) {
-        if (args.length != 1)
-            usage("philadelphia-client <configuration-file>");
+        if (args.length != 1 && args.length != 2)
+            usage("philadelphia-client <configuration-file> [<input-file>]");
 
         try {
-            main(config(args[0]));
+            Config config = config(args[0]);
+
+            List<String> lines = emptyList();
+
+            if (args.length == 2)
+                lines = readAllLines(args[1]);
+
+            main(config, lines);
         } catch (ConfigException | FileNotFoundException e) {
             error(e);
         } catch (IOException e) {
@@ -122,7 +148,7 @@ public class TerminalClient implements Closeable {
         }
     }
 
-    public static void main(Config config) throws IOException {
+    public static void main(Config config, List<String> lines) throws IOException {
         String      version      = config.getString("fix.version");
         String      senderCompId = config.getString("fix.sender-comp-id");
         String      targetCompId = config.getString("fix.target-comp-id");
@@ -140,7 +166,11 @@ public class TerminalClient implements Closeable {
             .setRxBufferCapacity(1024 * 1024)
             .setTxBufferCapacity(1024 * 1024);
 
-        TerminalClient.open(new InetSocketAddress(address, port), builder.build()).run();
+        TerminalClient.open(new InetSocketAddress(address, port), builder.build()).run(lines);
+    }
+
+    private static List<String> readAllLines(String filename) throws IOException {
+        return Files.readAllLines(new File(filename).toPath(), UTF_8);
     }
 
 }
