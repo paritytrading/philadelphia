@@ -1,5 +1,11 @@
 # Release Notes
 
+## 0.6.1 (2018-03-06)
+
+- Add `FIXMessage#toString()` method
+- Add `FIXConfig#toString()` method
+- Use `System.arraycopy()` in `FIXValue#set()` method
+
 ## 0.6.0 (2017-08-13)
 
 - Extract Philadelphia FIX 4.2 module
@@ -10,7 +16,7 @@
 - Extract Philadelphia FIX 5.0 SP2 module
 - Extract Philadelphia FIXT 1.1 module
 - Add alias for CxlRejResponseTo(434) value
-- Add `FIXValue#copyTo` method
+- Add `FIXValue#copyTo()` method
 - Clean up QuoteCondition(276) values
 - Make incoming CheckSum(10) check optional
 - Use direct byte buffer
