@@ -65,6 +65,9 @@ public class TerminalClient implements Closeable {
             if (line == null)
                 break;
 
+            if (line.trim().startsWith("#"))
+                continue;
+
             Scanner scanner = scan(line);
 
             if (!scanner.hasNext())
