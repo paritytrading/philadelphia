@@ -10,7 +10,8 @@ public class Commands {
             new MessagesCommand(),
             new HelpCommand(),
             new ExitCommand(),
-            new SleepCommand()
+            new SleepCommand(),
+            new WaitCommand()
         );
 
     private Commands() {
