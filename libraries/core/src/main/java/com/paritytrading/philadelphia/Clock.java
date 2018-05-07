@@ -1,7 +1,16 @@
 package com.paritytrading.philadelphia;
 
-interface Clock {
+/**
+ * A time source.
+ */
+public interface Clock {
 
+    /**
+     * Get the current time in milliseconds.
+     *
+     * @return the current time in milliseconds
+     * @see System#currentTimeMillis
+     */
     long currentTimeMillis();
 
 }
