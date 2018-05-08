@@ -71,7 +71,17 @@ public class FIXSession implements Closeable {
 
     private StringBuilder currentTimestamp;
 
-    FIXSession(Clock clock, SocketChannel channel, FIXConfig config, FIXMessageListener listener,
+    /**
+     * Create a session. The underlying socket channel can be either blocking or
+     * non-blocking.
+     *
+     * @param clock the clock
+     * @param channel the underlying socket channel
+     * @param config the session configuration
+     * @param listener the inbound message listener
+     * @param statusListener the inbound status event listener
+     */
+    public FIXSession(Clock clock, SocketChannel channel, FIXConfig config, FIXMessageListener listener,
             FIXStatusListener statusListener) {
         this.clock = clock;
 
@@ -138,7 +148,7 @@ public class FIXSession implements Closeable {
      */
     public FIXSession(SocketChannel channel, FIXConfig config, FIXMessageListener listener,
             FIXStatusListener statusListener) {
-        this(SystemClock.INSTANCE, channel, config, listener, statusListener);
+        this(System::currentTimeMillis, channel, config, listener, statusListener);
     }
 
     /**
