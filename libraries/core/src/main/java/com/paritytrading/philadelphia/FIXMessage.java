@@ -89,6 +89,22 @@ public class FIXMessage {
     }
 
     /**
+     * Get the index of the first instance of a field with the specified tag.
+     *
+     * @param tag the tag
+     * @return the index or -1 if there are no instances
+     *   of a field with the specified tag
+     */
+    public int findIndex(int tag) {
+        for (int i = 0; i < count; i++) {
+            if (fields[i].getTag() == tag)
+                return i;
+        }
+
+        return -1;
+    }
+
+    /**
      * Add a field.
      *
      * @param tag the tag
