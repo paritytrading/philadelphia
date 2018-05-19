@@ -198,8 +198,7 @@ ${body}
 
 def format_tags(version, fields):
     name_width = max(len(field.name) for field in fields)
-    tag_width = max(len(field.tag)  for field in fields)
-    body = '\n'.join('{}{}'.format(INDENT, format_tag(field, name_width, tag_width))
+    body = '\n'.join('{}{}'.format(INDENT, format_tag(field, name_width))
         for field in fields)
     return TAGS_TEMPLATE.substitute({
             'package_name': package_name(version),
@@ -208,9 +207,9 @@ def format_tags(version, fields):
             'body': body,
         })
 
-def format_tag(field, name_width, tag_width):
-    return 'public static final int {:<{}} = {:>{}};'.format(field.name,
-        name_width, field.tag, tag_width)
+def format_tag(field, name_width):
+    return 'public static final int {:<{}} = {};'.format(field.name,
+        name_width, field.tag)
 
 def version_name(version):
     base = '{} {}.{}'.format(version.protocol, version.major, version.minor)
