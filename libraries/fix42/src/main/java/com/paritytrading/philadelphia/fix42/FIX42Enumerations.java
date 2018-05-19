@@ -1129,7 +1129,7 @@ public class FIX42Enumerations {
      */
     public static class SecurityTradingStatusValues {
 
-        public static final int OpeningDelay               =  1;
+        public static final int OpeningDelay               = 1;
         public static final int MarketOnCloseImbalanceSell = 10;
         public static final int NoMarketImbalance          = 12;
         public static final int NoMarketOnCloseImbalance   = 13;
@@ -1139,15 +1139,15 @@ public class FIX42Enumerations {
         public static final int ReadyToTrade               = 17;
         public static final int NotAvailableForTrading     = 18;
         public static final int NotTradedOnThisMarket      = 19;
-        public static final int TradingHalt                =  2;
+        public static final int TradingHalt                = 2;
         public static final int UnknownOrInvalid           = 20;
-        public static final int Resume                     =  3;
-        public static final int NoOpen                     =  4;
-        public static final int PriceIndication            =  5;
-        public static final int TradingRangeIndication     =  6;
-        public static final int MarketImbalanceBuy         =  7;
-        public static final int MarketImbalanceSell        =  8;
-        public static final int MarketOnCloseImbalanceBuy  =  9;
+        public static final int Resume                     = 3;
+        public static final int NoOpen                     = 4;
+        public static final int PriceIndication            = 5;
+        public static final int TradingRangeIndication     = 6;
+        public static final int MarketImbalanceBuy         = 7;
+        public static final int MarketImbalanceSell        = 8;
+        public static final int MarketOnCloseImbalanceBuy  = 9;
 
         private SecurityTradingStatusValues() {
         }
@@ -1269,18 +1269,18 @@ public class FIX42Enumerations {
      */
     public static class SessionRejectReasonValues {
 
-        public static final int InvalidTagNumber                =  0;
-        public static final int RequiredTagMissing              =  1;
+        public static final int InvalidTagNumber                = 0;
+        public static final int RequiredTagMissing              = 1;
         public static final int SendingTimeAccuracyProblem      = 10;
         public static final int InvalidMsgType                  = 11;
-        public static final int TagNotDefinedForThisMessageType =  2;
-        public static final int UndefinedTag                    =  3;
-        public static final int TagSpecifiedWithoutAValue       =  4;
-        public static final int ValueIsIncorrect                =  5;
-        public static final int IncorrectDataFormatForValue     =  6;
-        public static final int DecryptionProblem               =  7;
-        public static final int SignatureProblem                =  8;
-        public static final int CompIDProblem                   =  9;
+        public static final int TagNotDefinedForThisMessageType = 2;
+        public static final int UndefinedTag                    = 3;
+        public static final int TagSpecifiedWithoutAValue       = 4;
+        public static final int ValueIsIncorrect                = 5;
+        public static final int IncorrectDataFormatForValue     = 6;
+        public static final int DecryptionProblem               = 7;
+        public static final int SignatureProblem                = 8;
+        public static final int CompIDProblem                   = 9;
 
         private SessionRejectReasonValues() {
         }
