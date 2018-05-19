@@ -459,16 +459,16 @@ public class FIX50SP2Enumerations {
      */
     public static class AllocRejCodeValues {
 
-        public static final int UnknownAccount                 =  0;
-        public static final int IncorrectQuantity              =  1;
-        public static final int IncorrectAveragegPrice         =  2;
-        public static final int UnknownExecutingBrokerMnemonic =  3;
-        public static final int CommissionDifference           =  4;
-        public static final int UnknownOrderID                 =  5;
-        public static final int UnknownListID                  =  6;
-        public static final int OtherSeeText                   =  7;
-        public static final int IncorrectAllocatedQuantity     =  8;
-        public static final int CalculationDifference          =  9;
+        public static final int UnknownAccount                 = 0;
+        public static final int IncorrectQuantity              = 1;
+        public static final int IncorrectAveragegPrice         = 2;
+        public static final int UnknownExecutingBrokerMnemonic = 3;
+        public static final int CommissionDifference           = 4;
+        public static final int UnknownOrderID                 = 5;
+        public static final int UnknownListID                  = 6;
+        public static final int OtherSeeText                   = 7;
+        public static final int IncorrectAllocatedQuantity     = 8;
+        public static final int CalculationDifference          = 9;
         public static final int UnknownOrStaleExecID           = 10;
         public static final int MismatchedData                 = 11;
         public static final int UnknownClOrdID                 = 12;
@@ -517,15 +517,15 @@ public class FIX50SP2Enumerations {
      */
     public static class CxlRejReasonValues {
 
-        public static final int TooLateToCancel                       =  0;
-        public static final int UnknownOrder                          =  1;
-        public static final int BrokerCredit                          =  2;
-        public static final int OrderAlreadyInPendingStatus           =  3;
-        public static final int UnableToProcessOrderMassCancelRequest =  4;
-        public static final int OrigOrdModTime                        =  5;
-        public static final int DuplicateClOrdID                      =  6;
-        public static final int PriceExceedsCurrentPrice              =  7;
-        public static final int PriceExceedsCurrentPriceBand          =  8;
+        public static final int TooLateToCancel                       = 0;
+        public static final int UnknownOrder                          = 1;
+        public static final int BrokerCredit                          = 2;
+        public static final int OrderAlreadyInPendingStatus           = 3;
+        public static final int UnableToProcessOrderMassCancelRequest = 4;
+        public static final int OrigOrdModTime                        = 5;
+        public static final int DuplicateClOrdID                      = 6;
+        public static final int PriceExceedsCurrentPrice              = 7;
+        public static final int PriceExceedsCurrentPriceBand          = 8;
         public static final int InvalidPriceIncrement                 = 18;
         public static final int Other                                 = 99;
 
@@ -539,16 +539,16 @@ public class FIX50SP2Enumerations {
      */
     public static class OrdRejReasonValues {
 
-        public static final int BrokerCredit                          =  0;
-        public static final int UnknownSymbol                         =  1;
-        public static final int ExchangeClosed                        =  2;
-        public static final int OrderExceedsLimit                     =  3;
-        public static final int TooLateToEnter                        =  4;
-        public static final int UnknownOrder                          =  5;
-        public static final int DuplicateOrder                        =  6;
-        public static final int DuplicateOfAVerballyCommunicatedOrder =  7;
-        public static final int StaleOrder                            =  8;
-        public static final int TradeAlongRequired                    =  9;
+        public static final int BrokerCredit                          = 0;
+        public static final int UnknownSymbol                         = 1;
+        public static final int ExchangeClosed                        = 2;
+        public static final int OrderExceedsLimit                     = 3;
+        public static final int TooLateToEnter                        = 4;
+        public static final int UnknownOrder                          = 5;
+        public static final int DuplicateOrder                        = 6;
+        public static final int DuplicateOfAVerballyCommunicatedOrder = 7;
+        public static final int StaleOrder                            = 8;
+        public static final int TradeAlongRequired                    = 9;
         public static final int InvalidInvestorID                     = 10;
         public static final int UnsupportedOrderCharacteristic        = 11;
         public static final int SurveillenceOption                    = 12;
@@ -1486,16 +1486,16 @@ public class FIX50SP2Enumerations {
      */
     public static class QuoteStatusValues {
 
-        public static final int Accepted                      =  0;
-        public static final int CancelForSymbol               =  1;
-        public static final int CanceledForSecurityType       =  2;
-        public static final int CanceledForUnderlying         =  3;
-        public static final int CanceledAll                   =  4;
-        public static final int Rejected                      =  5;
-        public static final int RemovedFromMarket             =  6;
-        public static final int Expired                       =  7;
-        public static final int Query                         =  8;
-        public static final int QuoteNotFound                 =  9;
+        public static final int Accepted                      = 0;
+        public static final int CancelForSymbol               = 1;
+        public static final int CanceledForSecurityType       = 2;
+        public static final int CanceledForUnderlying         = 3;
+        public static final int CanceledAll                   = 4;
+        public static final int Rejected                      = 5;
+        public static final int RemovedFromMarket             = 6;
+        public static final int Expired                       = 7;
+        public static final int Query                         = 8;
+        public static final int QuoteNotFound                 = 9;
         public static final int Pending                       = 10;
         public static final int Pass                          = 11;
         public static final int LockedMarketWarning           = 12;
@@ -1537,15 +1537,15 @@ public class FIX50SP2Enumerations {
      */
     public static class QuoteRejectReasonValues {
 
-        public static final int UnknownSymbol                              =  1;
-        public static final int Exchange                                   =  2;
-        public static final int QuoteRequestExceedsLimit                   =  3;
-        public static final int TooLateToEnter                             =  4;
-        public static final int UnknownQuote                               =  5;
-        public static final int DuplicateQuote                             =  6;
-        public static final int InvalidBid                                 =  7;
-        public static final int InvalidPrice                               =  8;
-        public static final int NotAuthorizedToQuoteSecurity               =  9;
+        public static final int UnknownSymbol                              = 1;
+        public static final int Exchange                                   = 2;
+        public static final int QuoteRequestExceedsLimit                   = 3;
+        public static final int TooLateToEnter                             = 4;
+        public static final int UnknownQuote                               = 5;
+        public static final int DuplicateQuote                             = 6;
+        public static final int InvalidBid                                 = 7;
+        public static final int InvalidPrice                               = 8;
+        public static final int NotAuthorizedToQuoteSecurity               = 9;
         public static final int PriceExceedsCurrentPriceBand               = 10;
         public static final int QuoteLocked                                = 11;
         public static final int InvalidOrUnknownSecurityIssuer             = 12;
@@ -1628,15 +1628,15 @@ public class FIX50SP2Enumerations {
      */
     public static class SecurityTradingStatusValues {
 
-        public static final int OpeningDelay               =  1;
-        public static final int TradingHalt                =  2;
-        public static final int Resume                     =  3;
-        public static final int NoOpen                     =  4;
-        public static final int PriceIndication            =  5;
-        public static final int TradingRangeIndication     =  6;
-        public static final int MarketImbalanceBuy         =  7;
-        public static final int MarketImbalanceSell        =  8;
-        public static final int MarketOnCloseImbalanceBuy  =  9;
+        public static final int OpeningDelay               = 1;
+        public static final int TradingHalt                = 2;
+        public static final int Resume                     = 3;
+        public static final int NoOpen                     = 4;
+        public static final int PriceIndication            = 5;
+        public static final int TradingRangeIndication     = 6;
+        public static final int MarketImbalanceBuy         = 7;
+        public static final int MarketImbalanceSell        = 8;
+        public static final int MarketOnCloseImbalanceBuy  = 9;
         public static final int MarketOnCloseImbalanceSell = 10;
         public static final int NoMarketImbalance          = 12;
         public static final int NoMarketOnCloseImbalance   = 13;
@@ -1758,16 +1758,16 @@ public class FIX50SP2Enumerations {
      */
     public static class SessionRejectReasonValues {
 
-        public static final int InvalidTagNumber                          =  0;
-        public static final int RequiredTagMissing                        =  1;
-        public static final int TagNotDefinedForThisMessageType           =  2;
-        public static final int UndefinedTag                              =  3;
-        public static final int TagSpecifiedWithoutAValue                 =  4;
-        public static final int ValueIsIncorrect                          =  5;
-        public static final int IncorrectDataFormatForValue               =  6;
-        public static final int DecryptionProblem                         =  7;
-        public static final int SignatureProblem                          =  8;
-        public static final int CompIDProblem                             =  9;
+        public static final int InvalidTagNumber                          = 0;
+        public static final int RequiredTagMissing                        = 1;
+        public static final int TagNotDefinedForThisMessageType           = 2;
+        public static final int UndefinedTag                              = 3;
+        public static final int TagSpecifiedWithoutAValue                 = 4;
+        public static final int ValueIsIncorrect                          = 5;
+        public static final int IncorrectDataFormatForValue               = 6;
+        public static final int DecryptionProblem                         = 7;
+        public static final int SignatureProblem                          = 8;
+        public static final int CompIDProblem                             = 9;
         public static final int SendingTimeAccuracyProblem                = 10;
         public static final int InvalidMsgType                            = 11;
         public static final int XMLValidationError                        = 12;
@@ -1802,16 +1802,16 @@ public class FIX50SP2Enumerations {
      */
     public static class ExecRestatementReasonValues {
 
-        public static final int GTCorporateAction        =  0;
-        public static final int GTRenewal                =  1;
-        public static final int VerbalChange             =  2;
-        public static final int RepricingOfOrder         =  3;
-        public static final int BrokerOption             =  4;
-        public static final int PartialDeclineOfOrderQty =  5;
-        public static final int CancelOnTradingHalt      =  6;
-        public static final int CancelOnSystemFailure    =  7;
-        public static final int Market                   =  8;
-        public static final int Canceled                 =  9;
+        public static final int GTCorporateAction        = 0;
+        public static final int GTRenewal                = 1;
+        public static final int VerbalChange             = 2;
+        public static final int RepricingOfOrder         = 3;
+        public static final int BrokerOption             = 4;
+        public static final int PartialDeclineOfOrderQty = 5;
+        public static final int CancelOnTradingHalt      = 6;
+        public static final int CancelOnSystemFailure    = 7;
+        public static final int Market                   = 8;
+        public static final int Canceled                 = 9;
         public static final int WarehouseRecap           = 10;
         public static final int PegRefresh               = 11;
         public static final int Other                    = 99;
@@ -1826,14 +1826,14 @@ public class FIX50SP2Enumerations {
      */
     public static class BusinessRejectReasonValues {
 
-        public static final int Other                               =  0;
-        public static final int UnknownID                           =  1;
-        public static final int UnknownSecurity                     =  2;
-        public static final int UnsupportedMessageType              =  3;
-        public static final int ApplicationNotAvailable             =  4;
-        public static final int ConditionallyRequiredFieldMissing   =  5;
-        public static final int NotAuthorized                       =  6;
-        public static final int DeliverToFirmNotAvailableAtThisTime =  7;
+        public static final int Other                               = 0;
+        public static final int UnknownID                           = 1;
+        public static final int UnknownSecurity                     = 2;
+        public static final int UnsupportedMessageType              = 3;
+        public static final int ApplicationNotAvailable             = 4;
+        public static final int ConditionallyRequiredFieldMissing   = 5;
+        public static final int NotAuthorized                       = 6;
+        public static final int DeliverToFirmNotAvailableAtThisTime = 7;
         public static final int InvalidPriceIncrement               = 18;
 
         private BusinessRejectReasonValues() {
@@ -2000,15 +2000,15 @@ public class FIX50SP2Enumerations {
      */
     public static class PriceTypeValues {
 
-        public static final int Percentage                    =  1;
-        public static final int PerUnit                       =  2;
-        public static final int FixedAmount                   =  3;
-        public static final int Discount                      =  4;
-        public static final int Premium                       =  5;
-        public static final int Spread                        =  6;
-        public static final int TEDPrice                      =  7;
-        public static final int TEDYield                      =  8;
-        public static final int Yield                         =  9;
+        public static final int Percentage                    = 1;
+        public static final int PerUnit                       = 2;
+        public static final int FixedAmount                   = 3;
+        public static final int Discount                      = 4;
+        public static final int Premium                       = 5;
+        public static final int Spread                        = 6;
+        public static final int TEDPrice                      = 7;
+        public static final int TEDYield                      = 8;
+        public static final int Yield                         = 9;
         public static final int FixedCabinetTradePrice        = 10;
         public static final int VariableCabinetTradePrice     = 11;
         public static final int ProductTicksInHalfs           = 13;
@@ -2164,15 +2164,15 @@ public class FIX50SP2Enumerations {
      */
     public static class PartyRoleValues {
 
-        public static final int ExecutingFirm                      =  1;
-        public static final int BrokerOfCredit                     =  2;
-        public static final int ClientID                           =  3;
-        public static final int ClearingFirm                       =  4;
-        public static final int InvestorID                         =  5;
-        public static final int IntroducingFirm                    =  6;
-        public static final int EnteringFirm                       =  7;
-        public static final int Locate                             =  8;
-        public static final int FundManagerClientID                =  9;
+        public static final int ExecutingFirm                      = 1;
+        public static final int BrokerOfCredit                     = 2;
+        public static final int ClientID                           = 3;
+        public static final int ClearingFirm                       = 4;
+        public static final int InvestorID                         = 5;
+        public static final int IntroducingFirm                    = 6;
+        public static final int EnteringFirm                       = 7;
+        public static final int Locate                             = 8;
+        public static final int FundManagerClientID                = 9;
         public static final int SettlementLocation                 = 10;
         public static final int OrderOriginationTrader             = 11;
         public static final int ExecutingTrader                    = 12;
@@ -2259,15 +2259,15 @@ public class FIX50SP2Enumerations {
      */
     public static class ProductValues {
 
-        public static final int AGENCY      =  1;
-        public static final int COMMODITY   =  2;
-        public static final int CORPORATE   =  3;
-        public static final int CURRENCY    =  4;
-        public static final int EQUITY      =  5;
-        public static final int GOVERNMENT  =  6;
-        public static final int INDEX       =  7;
-        public static final int LOAN        =  8;
-        public static final int MONEYMARKET =  9;
+        public static final int AGENCY      = 1;
+        public static final int COMMODITY   = 2;
+        public static final int CORPORATE   = 3;
+        public static final int CURRENCY    = 4;
+        public static final int EQUITY      = 5;
+        public static final int GOVERNMENT  = 6;
+        public static final int INDEX       = 7;
+        public static final int LOAN        = 8;
+        public static final int MONEYMARKET = 9;
         public static final int MORTGAGE    = 10;
         public static final int MUNICIPAL   = 11;
         public static final int OTHER       = 12;
@@ -2297,15 +2297,15 @@ public class FIX50SP2Enumerations {
      */
     public static class DistribPaymentMethodValues {
 
-        public static final int CREST                        =  1;
-        public static final int NSCC                         =  2;
-        public static final int Euroclear                    =  3;
-        public static final int Clearstream                  =  4;
-        public static final int Cheque                       =  5;
-        public static final int TelegraphicTransfer          =  6;
-        public static final int FedWire                      =  7;
-        public static final int DirectCredit                 =  8;
-        public static final int ACHCredit                    =  9;
+        public static final int CREST                        = 1;
+        public static final int NSCC                         = 2;
+        public static final int Euroclear                    = 3;
+        public static final int Clearstream                  = 4;
+        public static final int Cheque                       = 5;
+        public static final int TelegraphicTransfer          = 6;
+        public static final int FedWire                      = 7;
+        public static final int DirectCredit                 = 8;
+        public static final int ACHCredit                    = 9;
         public static final int BPAY                         = 10;
         public static final int HighValueClearingSystemHVACS = 11;
         public static final int ReinvestInFund               = 12;
@@ -2387,15 +2387,15 @@ public class FIX50SP2Enumerations {
      */
     public static class PaymentMethodValues {
 
-        public static final int CREST                   =  1;
-        public static final int NSCC                    =  2;
-        public static final int Euroclear               =  3;
-        public static final int Clearstream             =  4;
-        public static final int Cheque                  =  5;
-        public static final int TelegraphicTransfer     =  6;
-        public static final int FedWire                 =  7;
-        public static final int DebitCard               =  8;
-        public static final int DirectDebit             =  9;
+        public static final int CREST                   = 1;
+        public static final int NSCC                    = 2;
+        public static final int Euroclear               = 3;
+        public static final int Clearstream             = 4;
+        public static final int Cheque                  = 5;
+        public static final int TelegraphicTransfer     = 6;
+        public static final int FedWire                 = 7;
+        public static final int DebitCard               = 8;
+        public static final int DirectDebit             = 9;
         public static final int DirectCredit            = 10;
         public static final int CreditCard              = 11;
         public static final int ACHDebit                = 12;
@@ -2413,36 +2413,36 @@ public class FIX50SP2Enumerations {
      */
     public static class TaxAdvantageTypeValues {
 
-        public static final int None                          =   0;
-        public static final int MaxiISA                       =   1;
-        public static final int TESSA                         =   2;
-        public static final int MiniCashISA                   =   3;
-        public static final int MiniStocksAndSharesISA        =   4;
-        public static final int MiniInsuranceISA              =   5;
-        public static final int CurrentYearPayment            =   6;
-        public static final int PriorYearPayment              =   7;
-        public static final int AssetTransfer                 =   8;
-        public static final int EmployeePriorYear             =   9;
-        public static final int EmployeeCurrentYear           =  10;
-        public static final int EmployerPriorYear             =  11;
-        public static final int EmployerCurrentYear           =  12;
-        public static final int NonFundPrototypeIRA           =  13;
-        public static final int NonFundQualifiedPlan          =  14;
-        public static final int DefinedContributionPlan       =  15;
-        public static final int IRA                           =  16;
-        public static final int IRARollover                   =  17;
-        public static final int KEOGH                         =  18;
-        public static final int ProfitSharingPlan             =  19;
-        public static final int US401K                        =  20;
-        public static final int SelfDirectedIRA               =  21;
-        public static final int US403b                        =  22;
-        public static final int US457                         =  23;
-        public static final int RothIRAPrototype              =  24;
-        public static final int RothIRANonPrototype           =  25;
-        public static final int RothConversionIRAPrototype    =  26;
-        public static final int RothConversionIRANonPrototype =  27;
-        public static final int EducationIRAPrototype         =  28;
-        public static final int EducationIRANonPrototype      =  29;
+        public static final int None                          = 0;
+        public static final int MaxiISA                       = 1;
+        public static final int TESSA                         = 2;
+        public static final int MiniCashISA                   = 3;
+        public static final int MiniStocksAndSharesISA        = 4;
+        public static final int MiniInsuranceISA              = 5;
+        public static final int CurrentYearPayment            = 6;
+        public static final int PriorYearPayment              = 7;
+        public static final int AssetTransfer                 = 8;
+        public static final int EmployeePriorYear             = 9;
+        public static final int EmployeeCurrentYear           = 10;
+        public static final int EmployerPriorYear             = 11;
+        public static final int EmployerCurrentYear           = 12;
+        public static final int NonFundPrototypeIRA           = 13;
+        public static final int NonFundQualifiedPlan          = 14;
+        public static final int DefinedContributionPlan       = 15;
+        public static final int IRA                           = 16;
+        public static final int IRARollover                   = 17;
+        public static final int KEOGH                         = 18;
+        public static final int ProfitSharingPlan             = 19;
+        public static final int US401K                        = 20;
+        public static final int SelfDirectedIRA               = 21;
+        public static final int US403b                        = 22;
+        public static final int US457                         = 23;
+        public static final int RothIRAPrototype              = 24;
+        public static final int RothIRANonPrototype           = 25;
+        public static final int RothConversionIRAPrototype    = 26;
+        public static final int RothConversionIRANonPrototype = 27;
+        public static final int EducationIRAPrototype         = 28;
+        public static final int EducationIRANonPrototype      = 29;
         public static final int Other                         = 999;
 
         private TaxAdvantageTypeValues() {
@@ -2483,15 +2483,15 @@ public class FIX50SP2Enumerations {
      */
     public static class RegistRejReasonCodeValues {
 
-        public static final int InvalidAccountType         =  1;
-        public static final int InvalidTaxExemptType       =  2;
-        public static final int InvalidOwnershipType       =  3;
-        public static final int NoRegDetails               =  4;
-        public static final int InvalidRegSeqNo            =  5;
-        public static final int InvalidRegDetails          =  6;
-        public static final int InvalidMailingDetails      =  7;
-        public static final int InvalidMailingInstructions =  8;
-        public static final int InvalidInvestorID          =  9;
+        public static final int InvalidAccountType         = 1;
+        public static final int InvalidTaxExemptType       = 2;
+        public static final int InvalidOwnershipType       = 3;
+        public static final int NoRegDetails               = 4;
+        public static final int InvalidRegSeqNo            = 5;
+        public static final int InvalidRegDetails          = 6;
+        public static final int InvalidMailingDetails      = 7;
+        public static final int InvalidMailingInstructions = 8;
+        public static final int InvalidInvestorID          = 9;
         public static final int InvalidInvestorIDSource    = 10;
         public static final int InvalidDateOfBirth         = 11;
         public static final int InvalidCountry             = 12;
@@ -2541,15 +2541,15 @@ public class FIX50SP2Enumerations {
      */
     public static class ContAmtTypeValues {
 
-        public static final int CommissionAmount                  =  1;
-        public static final int CommissionPercent                 =  2;
-        public static final int InitialChargeAmount               =  3;
-        public static final int InitialChargePercent              =  4;
-        public static final int DiscountAmount                    =  5;
-        public static final int DiscountPercent                   =  6;
-        public static final int DilutionLevyAmount                =  7;
-        public static final int DilutionLevyPercent               =  8;
-        public static final int ExitChargeAmount                  =  9;
+        public static final int CommissionAmount                  = 1;
+        public static final int CommissionPercent                 = 2;
+        public static final int InitialChargeAmount               = 3;
+        public static final int InitialChargePercent              = 4;
+        public static final int DiscountAmount                    = 5;
+        public static final int DiscountPercent                   = 6;
+        public static final int DilutionLevyAmount                = 7;
+        public static final int DilutionLevyPercent               = 8;
+        public static final int ExitChargeAmount                  = 9;
         public static final int ExitChargePercent                 = 10;
         public static final int FundBasedRenewalCommissionPercent = 11;
         public static final int ProjectedFundValue                = 12;
@@ -2567,15 +2567,15 @@ public class FIX50SP2Enumerations {
      */
     public static class OwnerTypeValues {
 
-        public static final int IndividualInvestor             =  1;
-        public static final int PublicCompany                  =  2;
-        public static final int PrivateCompany                 =  3;
-        public static final int IndividualTrustee              =  4;
-        public static final int CompanyTrustee                 =  5;
-        public static final int PensionPlan                    =  6;
-        public static final int CustodianUnderGiftsToMinorsAct =  7;
-        public static final int Trusts                         =  8;
-        public static final int Fiduciaries                    =  9;
+        public static final int IndividualInvestor             = 1;
+        public static final int PublicCompany                  = 2;
+        public static final int PrivateCompany                 = 3;
+        public static final int IndividualTrustee              = 4;
+        public static final int CompanyTrustee                 = 5;
+        public static final int PensionPlan                    = 6;
+        public static final int CustodianUnderGiftsToMinorsAct = 7;
+        public static final int Trusts                         = 8;
+        public static final int Fiduciaries                    = 9;
         public static final int NetworkingSubAccount           = 10;
         public static final int NonProfitOrganization          = 11;
         public static final int CorporateBody                  = 12;
@@ -2681,16 +2681,16 @@ public class FIX50SP2Enumerations {
      */
     public static class MassCancelRejectReasonValues {
 
-        public static final int MassCancelNotSupported                     =  0;
-        public static final int InvalidOrUnknownSecurity                   =  1;
-        public static final int InvalidOrUnkownUnderlyingSecurity          =  2;
-        public static final int InvalidOrUnknownProduct                    =  3;
-        public static final int InvalidOrUnknownCFICode                    =  4;
-        public static final int InvalidOrUnknownSecurityType               =  5;
-        public static final int InvalidOrUnknownTradingSession             =  6;
-        public static final int InvalidOrUnknownMarket                     =  7;
-        public static final int InvalidOrUnkownMarketSegment               =  8;
-        public static final int InvalidOrUnknownSecurityGroup              =  9;
+        public static final int MassCancelNotSupported                     = 0;
+        public static final int InvalidOrUnknownSecurity                   = 1;
+        public static final int InvalidOrUnkownUnderlyingSecurity          = 2;
+        public static final int InvalidOrUnknownProduct                    = 3;
+        public static final int InvalidOrUnknownCFICode                    = 4;
+        public static final int InvalidOrUnknownSecurityType               = 5;
+        public static final int InvalidOrUnknownTradingSession             = 6;
+        public static final int InvalidOrUnknownMarket                     = 7;
+        public static final int InvalidOrUnkownMarketSegment               = 8;
+        public static final int InvalidOrUnknownSecurityGroup              = 9;
         public static final int InvalidOrUnknownSecurityIssuer             = 10;
         public static final int InvalidOrUnknownIssuerOfUnderlyingSecurity = 11;
         public static final int Other                                      = 99;
@@ -2838,7 +2838,7 @@ public class FIX50SP2Enumerations {
      */
     public static class TradSesStatusRejReasonValues {
 
-        public static final int UnknownOrInvalidTradingSessionID =  1;
+        public static final int UnknownOrInvalidTradingSessionID = 1;
         public static final int Other                            = 99;
 
         private TradSesStatusRejReasonValues() {
@@ -2918,16 +2918,16 @@ public class FIX50SP2Enumerations {
      */
     public static class ClearingInstructionValues {
 
-        public static final int ProcessNormally                   =  0;
-        public static final int ExcludeFromAllNetting             =  1;
-        public static final int BilateralNettingOnly              =  2;
-        public static final int ExClearing                        =  3;
-        public static final int SpecialTrade                      =  4;
-        public static final int MultilateralNetting               =  5;
-        public static final int ClearAgainstCentralCounterparty   =  6;
-        public static final int ExcludeFromCentralCounterparty    =  7;
-        public static final int ManualMode                        =  8;
-        public static final int AutomaticPostingMode              =  9;
+        public static final int ProcessNormally                   = 0;
+        public static final int ExcludeFromAllNetting             = 1;
+        public static final int BilateralNettingOnly              = 2;
+        public static final int ExClearing                        = 3;
+        public static final int SpecialTrade                      = 4;
+        public static final int MultilateralNetting               = 5;
+        public static final int ClearAgainstCentralCounterparty   = 6;
+        public static final int ExcludeFromCentralCounterparty    = 7;
+        public static final int ManualMode                        = 8;
+        public static final int AutomaticPostingMode              = 9;
         public static final int AutomaticGiveUpMode               = 10;
         public static final int QualifiedServiceRepresentativeQSR = 11;
         public static final int CustomerTrade                     = 12;
@@ -2976,15 +2976,15 @@ public class FIX50SP2Enumerations {
      */
     public static class MassStatusReqTypeValues {
 
-        public static final int StatusForOrdersForASecurity            =  1;
-        public static final int StatusForOrdersForAnUnderlyingSecurity =  2;
-        public static final int StatusForOrdersForAProduct             =  3;
-        public static final int StatusForOrdersForACFICode             =  4;
-        public static final int StatusForOrdersForASecurityType        =  5;
-        public static final int StatusForOrdersForATradingSession      =  6;
-        public static final int StatusForAllOrders                     =  7;
-        public static final int StatusForOrdersForAPartyID             =  8;
-        public static final int StatusForSecurityIssuer                =  9;
+        public static final int StatusForOrdersForASecurity            = 1;
+        public static final int StatusForOrdersForAnUnderlyingSecurity = 2;
+        public static final int StatusForOrdersForAProduct             = 3;
+        public static final int StatusForOrdersForACFICode             = 4;
+        public static final int StatusForOrdersForASecurityType        = 5;
+        public static final int StatusForOrdersForATradingSession      = 6;
+        public static final int StatusForAllOrders                     = 7;
+        public static final int StatusForOrdersForAPartyID             = 8;
+        public static final int StatusForSecurityIssuer                = 9;
         public static final int StatusForIssuerOfUnderlyingSecurity    = 10;
 
         private MassStatusReqTypeValues() {
@@ -3056,15 +3056,15 @@ public class FIX50SP2Enumerations {
      */
     public static class AllocTypeValues {
 
-        public static final int Calculated                           =  1;
-        public static final int Preliminary                          =  2;
-        public static final int SellsideCalculatedUsingPreliminary   =  3;
-        public static final int SellsideCalculatedWithoutPreliminary =  4;
-        public static final int ReadyToBook                          =  5;
-        public static final int BuysideReadyToBook                   =  6;
-        public static final int WarehouseInstruction                 =  7;
-        public static final int RequestToIntermediary                =  8;
-        public static final int Accept                               =  9;
+        public static final int Calculated                           = 1;
+        public static final int Preliminary                          = 2;
+        public static final int SellsideCalculatedUsingPreliminary   = 3;
+        public static final int SellsideCalculatedWithoutPreliminary = 4;
+        public static final int ReadyToBook                          = 5;
+        public static final int BuysideReadyToBook                   = 6;
+        public static final int WarehouseInstruction                 = 7;
+        public static final int RequestToIntermediary                = 8;
+        public static final int Accept                               = 9;
         public static final int Reject                               = 10;
         public static final int AcceptPending                        = 11;
         public static final int IncompleteGroup                      = 12;
@@ -3119,15 +3119,15 @@ public class FIX50SP2Enumerations {
      */
     public static class QuoteRequestRejectReasonValues {
 
-        public static final int UnknownSymbol               =  1;
-        public static final int Exchange                    =  2;
-        public static final int QuoteRequestExceedsLimit    =  3;
-        public static final int TooLateToEnter              =  4;
-        public static final int InvalidPrice                =  5;
-        public static final int NotAuthorizedToRequestQuote =  6;
-        public static final int NoMatchForInquiry           =  7;
-        public static final int NoMarketForInstrument       =  8;
-        public static final int NoInventory                 =  9;
+        public static final int UnknownSymbol               = 1;
+        public static final int Exchange                    = 2;
+        public static final int QuoteRequestExceedsLimit    = 3;
+        public static final int TooLateToEnter              = 4;
+        public static final int InvalidPrice                = 5;
+        public static final int NotAuthorizedToRequestQuote = 6;
+        public static final int NoMatchForInquiry           = 7;
+        public static final int NoMarketForInstrument       = 8;
+        public static final int NoInventory                 = 9;
         public static final int Pass                        = 10;
         public static final int InsufficientCredit          = 11;
         public static final int Other                       = 99;
@@ -3142,11 +3142,11 @@ public class FIX50SP2Enumerations {
      */
     public static class AcctIDSourceValues {
 
-        public static final int BIC      =  1;
-        public static final int SIDCode  =  2;
-        public static final int TFM      =  3;
-        public static final int OMGEO    =  4;
-        public static final int DTCCCode =  5;
+        public static final int BIC      = 1;
+        public static final int SIDCode  = 2;
+        public static final int TFM      = 3;
+        public static final int OMGEO    = 4;
+        public static final int DTCCCode = 5;
         public static final int Other    = 99;
 
         private AcctIDSourceValues() {
@@ -3217,15 +3217,15 @@ public class FIX50SP2Enumerations {
      */
     public static class QuotePriceTypeValues {
 
-        public static final int Percent     =  1;
-        public static final int PerShare    =  2;
-        public static final int FixedAmount =  3;
-        public static final int Discount    =  4;
-        public static final int Premium     =  5;
-        public static final int Spread      =  6;
-        public static final int TEDPrice    =  7;
-        public static final int TEDYield    =  8;
-        public static final int YieldSpread =  9;
+        public static final int Percent     = 1;
+        public static final int PerShare    = 2;
+        public static final int FixedAmount = 3;
+        public static final int Discount    = 4;
+        public static final int Premium     = 5;
+        public static final int Spread      = 6;
+        public static final int TEDPrice    = 7;
+        public static final int TEDYield    = 8;
+        public static final int YieldSpread = 9;
         public static final int Yield       = 10;
 
         private QuotePriceTypeValues() {
@@ -3416,8 +3416,8 @@ public class FIX50SP2Enumerations {
      */
     public static class PosMaintResultValues {
 
-        public static final int SuccessfulCompletion =  0;
-        public static final int Rejected             =  1;
+        public static final int SuccessfulCompletion = 0;
+        public static final int Rejected             = 1;
         public static final int Other                = 99;
 
         private PosMaintResultValues() {
@@ -3461,11 +3461,11 @@ public class FIX50SP2Enumerations {
      */
     public static class PosReqResultValues {
 
-        public static final int ValidRequest                      =  0;
-        public static final int InvalidOrUnsupportedRequest       =  1;
-        public static final int NoPositionsFoundThatMatchCriteria =  2;
-        public static final int NotAuthorizedToRequestPositions   =  3;
-        public static final int RequestForPositionNotSupported    =  4;
+        public static final int ValidRequest                      = 0;
+        public static final int InvalidOrUnsupportedRequest       = 1;
+        public static final int NoPositionsFoundThatMatchCriteria = 2;
+        public static final int NotAuthorizedToRequestPositions   = 3;
+        public static final int RequestForPositionNotSupported    = 4;
         public static final int Other                             = 99;
 
         private PosReqResultValues() {
@@ -3531,14 +3531,14 @@ public class FIX50SP2Enumerations {
      */
     public static class TradeRequestResultValues {
 
-        public static final int Successful                    =  0;
-        public static final int InvalidOrUnknownInstrument    =  1;
-        public static final int InvalidTypeOfTradeRequested   =  2;
-        public static final int InvalidParties                =  3;
-        public static final int InvalidTransportTypeRequested =  4;
-        public static final int InvalidDestinationRequested   =  5;
-        public static final int TradeRequestTypeNotSupported  =  8;
-        public static final int NotAuthorized                 =  9;
+        public static final int Successful                    = 0;
+        public static final int InvalidOrUnknownInstrument    = 1;
+        public static final int InvalidTypeOfTradeRequested   = 2;
+        public static final int InvalidParties                = 3;
+        public static final int InvalidTransportTypeRequested = 4;
+        public static final int InvalidDestinationRequested   = 5;
+        public static final int TradeRequestTypeNotSupported  = 8;
+        public static final int NotAuthorized                 = 9;
         public static final int Other                         = 99;
 
         private TradeRequestResultValues() {
@@ -3565,11 +3565,11 @@ public class FIX50SP2Enumerations {
      */
     public static class TradeReportRejectReasonValues {
 
-        public static final int Successful                 =  0;
-        public static final int InvalidPartyOnformation    =  1;
-        public static final int UnknownInstrument          =  2;
-        public static final int UnauthorizedToReportTrades =  3;
-        public static final int InvalidTradeType           =  4;
+        public static final int Successful                 = 0;
+        public static final int InvalidPartyOnformation    = 1;
+        public static final int UnknownInstrument          = 2;
+        public static final int UnauthorizedToReportTrades = 3;
+        public static final int InvalidTradeType           = 4;
         public static final int Other                      = 99;
 
         private TradeReportRejectReasonValues() {
@@ -3628,8 +3628,8 @@ public class FIX50SP2Enumerations {
      */
     public static class ConfirmRejReasonValues {
 
-        public static final int MismatchedAccount             =  1;
-        public static final int MissingSettlementInstructions =  2;
+        public static final int MismatchedAccount             = 1;
+        public static final int MissingSettlementInstructions = 2;
         public static final int Other                         = 99;
 
         private ConfirmRejReasonValues() {
@@ -3700,9 +3700,9 @@ public class FIX50SP2Enumerations {
      */
     public static class SettlInstReqRejCodeValues {
 
-        public static final int UnableToProcessRequest                =  0;
-        public static final int UnknownAccount                        =  1;
-        public static final int NoMatchingSettlementInstructionsFound =  2;
+        public static final int UnableToProcessRequest                = 0;
+        public static final int UnknownAccount                        = 1;
+        public static final int NoMatchingSettlementInstructionsFound = 2;
         public static final int Other                                 = 99;
 
         private SettlInstReqRejCodeValues() {
@@ -3715,12 +3715,12 @@ public class FIX50SP2Enumerations {
      */
     public static class AllocReportTypeValues {
 
-        public static final int PreliminaryRequestToIntermediary     =  2;
-        public static final int SellsideCalculatedUsingPreliminary   =  3;
-        public static final int SellsideCalculatedWithoutPreliminary =  4;
-        public static final int WarehouseRecap                       =  5;
-        public static final int RequestToIntermediary                =  8;
-        public static final int Accept                               =  9;
+        public static final int PreliminaryRequestToIntermediary     = 2;
+        public static final int SellsideCalculatedUsingPreliminary   = 3;
+        public static final int SellsideCalculatedWithoutPreliminary = 4;
+        public static final int WarehouseRecap                       = 5;
+        public static final int RequestToIntermediary                = 8;
+        public static final int Accept                               = 9;
         public static final int Reject                               = 10;
         public static final int AcceptPending                        = 11;
         public static final int Complete                             = 12;
@@ -3736,8 +3736,8 @@ public class FIX50SP2Enumerations {
      */
     public static class AllocCancReplaceReasonValues {
 
-        public static final int OriginalDetailsIncomplete      =  1;
-        public static final int ChangeInUnderlyingOrderDetails =  2;
+        public static final int OriginalDetailsIncomplete      = 1;
+        public static final int ChangeInUnderlyingOrderDetails = 2;
         public static final int Other                          = 99;
 
         private AllocCancReplaceReasonValues() {
@@ -3768,15 +3768,15 @@ public class FIX50SP2Enumerations {
      */
     public static class PartySubIDTypeValues {
 
-        public static final int Firm                             =  1;
-        public static final int Person                           =  2;
-        public static final int System                           =  3;
-        public static final int Application                      =  4;
-        public static final int FullLegalNameOfFirm              =  5;
-        public static final int PostalAddress                    =  6;
-        public static final int PhoneNumber                      =  7;
-        public static final int EmailAddress                     =  8;
-        public static final int ContactName                      =  9;
+        public static final int Firm                             = 1;
+        public static final int Person                           = 2;
+        public static final int System                           = 3;
+        public static final int Application                      = 4;
+        public static final int FullLegalNameOfFirm              = 5;
+        public static final int PostalAddress                    = 6;
+        public static final int PhoneNumber                      = 7;
+        public static final int EmailAddress                     = 8;
+        public static final int ContactName                      = 9;
         public static final int SecuritiesAccountNumber          = 10;
         public static final int RegistrationNumber               = 11;
         public static final int RegisteredAddressForConfirmation = 12;
@@ -3904,16 +3904,16 @@ public class FIX50SP2Enumerations {
      */
     public static class TrdTypeValues {
 
-        public static final int RegularTrade                     =  0;
-        public static final int BlockTrade                       =  1;
-        public static final int EFP                              =  2;
-        public static final int Transfer                         =  3;
-        public static final int LateTrade                        =  4;
-        public static final int TTrade                           =  5;
-        public static final int WeightedAveragePriceTrade        =  6;
-        public static final int BunchedTrade                     =  7;
-        public static final int LateBunchedTrade                 =  8;
-        public static final int PriorReferencePriceTrade         =  9;
+        public static final int RegularTrade                     = 0;
+        public static final int BlockTrade                       = 1;
+        public static final int EFP                              = 2;
+        public static final int Transfer                         = 3;
+        public static final int LateTrade                        = 4;
+        public static final int TTrade                           = 5;
+        public static final int WeightedAveragePriceTrade        = 6;
+        public static final int BunchedTrade                     = 7;
+        public static final int LateBunchedTrade                 = 8;
+        public static final int PriorReferencePriceTrade         = 9;
         public static final int AfterHoursTrade                  = 10;
         public static final int ExchangeForRisk                  = 11;
         public static final int ExchangeForSwap                  = 12;
@@ -3970,16 +3970,16 @@ public class FIX50SP2Enumerations {
      */
     public static class TrdSubTypeValues {
 
-        public static final int CMTA                                      =  0;
-        public static final int InternalTransferOrAdjustment              =  1;
-        public static final int ExternalTransferOrTransferOfAccount       =  2;
-        public static final int RejectForSubmittingSide                   =  3;
-        public static final int AdvisoryForContraSide                     =  4;
-        public static final int OffsetDueToAnAllocation                   =  5;
-        public static final int OnsetDueToAnAllocation                    =  6;
-        public static final int DifferentialSpread                        =  7;
-        public static final int ImpliedSpreadLegExecutedAgainstAnOutright =  8;
-        public static final int TransactionFromExercise                   =  9;
+        public static final int CMTA                                      = 0;
+        public static final int InternalTransferOrAdjustment              = 1;
+        public static final int ExternalTransferOrTransferOfAccount       = 2;
+        public static final int RejectForSubmittingSide                   = 3;
+        public static final int AdvisoryForContraSide                     = 4;
+        public static final int OffsetDueToAnAllocation                   = 5;
+        public static final int OnsetDueToAnAllocation                    = 6;
+        public static final int DifferentialSpread                        = 7;
+        public static final int ImpliedSpreadLegExecutedAgainstAnOutright = 8;
+        public static final int TransactionFromExercise                   = 9;
         public static final int TransactionFromAssignment                 = 10;
         public static final int ACATS                                     = 11;
         public static final int AI                                        = 14;
@@ -4219,16 +4219,16 @@ public class FIX50SP2Enumerations {
      */
     public static class TradeReportTypeValues {
 
-        public static final int Submit                   =  0;
-        public static final int Alleged                  =  1;
-        public static final int Accept                   =  2;
-        public static final int Decline                  =  3;
-        public static final int Addendum                 =  4;
-        public static final int No                       =  5;
-        public static final int TradeReportCancel        =  6;
-        public static final int LockedIn                 =  7;
-        public static final int Defaulted                =  8;
-        public static final int InvalidCMTA              =  9;
+        public static final int Submit                   = 0;
+        public static final int Alleged                  = 1;
+        public static final int Accept                   = 2;
+        public static final int Decline                  = 3;
+        public static final int Addendum                 = 4;
+        public static final int No                       = 5;
+        public static final int TradeReportCancel        = 6;
+        public static final int LockedIn                 = 7;
+        public static final int Defaulted                = 8;
+        public static final int InvalidCMTA              = 9;
         public static final int Pended                   = 10;
         public static final int AllegedNew               = 11;
         public static final int AllegedAddendum          = 12;
@@ -4259,15 +4259,15 @@ public class FIX50SP2Enumerations {
      */
     public static class EventTypeValues {
 
-        public static final int Put                     =  1;
-        public static final int Call                    =  2;
-        public static final int Tender                  =  3;
-        public static final int SinkingFundCall         =  4;
-        public static final int Activation              =  5;
-        public static final int Inactiviation           =  6;
-        public static final int LastEligibleTradeDate   =  7;
-        public static final int SwapStartDate           =  8;
-        public static final int SwapEndDate             =  9;
+        public static final int Put                     = 1;
+        public static final int Call                    = 2;
+        public static final int Tender                  = 3;
+        public static final int SinkingFundCall         = 4;
+        public static final int Activation              = 5;
+        public static final int Inactiviation           = 6;
+        public static final int LastEligibleTradeDate   = 7;
+        public static final int SwapStartDate           = 8;
+        public static final int SwapEndDate             = 9;
         public static final int SwapRollDate            = 10;
         public static final int SwapNextStartDate       = 11;
         public static final int SwapNextRollDate        = 12;
@@ -4290,15 +4290,15 @@ public class FIX50SP2Enumerations {
      */
     public static class InstrAttribTypeValues {
 
-        public static final int Flat                                   =  1;
-        public static final int ZeroCoupon                             =  2;
-        public static final int InterestBearing                        =  3;
-        public static final int NoPeriodicPayments                     =  4;
-        public static final int VariableRate                           =  5;
-        public static final int LessFeeForPut                          =  6;
-        public static final int SteppedCoupon                          =  7;
-        public static final int CouponPeriod                           =  8;
-        public static final int When                                   =  9;
+        public static final int Flat                                   = 1;
+        public static final int ZeroCoupon                             = 2;
+        public static final int InterestBearing                        = 3;
+        public static final int NoPeriodicPayments                     = 4;
+        public static final int VariableRate                           = 5;
+        public static final int LessFeeForPut                          = 6;
+        public static final int SteppedCoupon                          = 7;
+        public static final int CouponPeriod                           = 8;
+        public static final int When                                   = 9;
         public static final int OriginalIssueDiscount                  = 10;
         public static final int Callable                               = 11;
         public static final int EscrowedToMaturity                     = 12;
@@ -4331,8 +4331,8 @@ public class FIX50SP2Enumerations {
      */
     public static class CPProgramValues {
 
-        public static final int Program3a3 =  1;
-        public static final int Program42  =  2;
+        public static final int Program3a3 = 1;
+        public static final int Program42  = 2;
         public static final int Other      = 99;
 
         private CPProgramValues() {
@@ -4428,12 +4428,12 @@ public class FIX50SP2Enumerations {
      */
     public static class CollAsgnRejectReasonValues {
 
-        public static final int UnknownDeal                =  0;
-        public static final int UnknownOrInvalidInstrument =  1;
-        public static final int UnauthorizedTransaction    =  2;
-        public static final int InsufficientCollateral     =  3;
-        public static final int InvalidTypeOfCollateral    =  4;
-        public static final int ExcessiveSubstitution      =  5;
+        public static final int UnknownDeal                = 0;
+        public static final int UnknownOrInvalidInstrument = 1;
+        public static final int UnauthorizedTransaction    = 2;
+        public static final int InsufficientCollateral     = 3;
+        public static final int InvalidTypeOfCollateral    = 4;
+        public static final int ExcessiveSubstitution      = 5;
         public static final int Other                      = 99;
 
         private CollAsgnRejectReasonValues() {
@@ -4612,16 +4612,16 @@ public class FIX50SP2Enumerations {
      */
     public static class CollInquiryResultValues {
 
-        public static final int Successful                            =  0;
-        public static final int InvalidOrUnknownInstrument            =  1;
-        public static final int InvalidOrUnknownCollateralType        =  2;
-        public static final int InvalidParties                        =  3;
-        public static final int InvalidTransportTypeRequested         =  4;
-        public static final int InvalidDestinationRequested           =  5;
-        public static final int NoCollateralFoundForTheTradeSpecified =  6;
-        public static final int NoCollateralFoundForTheOrderSpecified =  7;
-        public static final int CollateralInquiryTypeNotSupported     =  8;
-        public static final int UnauthorizedForCollateralInquiry      =  9;
+        public static final int Successful                            = 0;
+        public static final int InvalidOrUnknownInstrument            = 1;
+        public static final int InvalidOrUnknownCollateralType        = 2;
+        public static final int InvalidParties                        = 3;
+        public static final int InvalidTransportTypeRequested         = 4;
+        public static final int InvalidDestinationRequested           = 5;
+        public static final int NoCollateralFoundForTheTradeSpecified = 6;
+        public static final int NoCollateralFoundForTheOrderSpecified = 7;
+        public static final int CollateralInquiryTypeNotSupported     = 8;
+        public static final int UnauthorizedForCollateralInquiry      = 9;
         public static final int Other                                 = 99;
 
         private CollInquiryResultValues() {
@@ -4634,15 +4634,15 @@ public class FIX50SP2Enumerations {
      */
     public static class StrategyParameterTypeValues {
 
-        public static final int Int                 =  1;
-        public static final int Length              =  2;
-        public static final int NumInGroup          =  3;
-        public static final int SeqNum              =  4;
-        public static final int TagNum              =  5;
-        public static final int Float               =  6;
-        public static final int Qty                 =  7;
-        public static final int Price               =  8;
-        public static final int PriceOffset         =  9;
+        public static final int Int                 = 1;
+        public static final int Length              = 2;
+        public static final int NumInGroup          = 3;
+        public static final int SeqNum              = 4;
+        public static final int TagNum              = 5;
+        public static final int Float               = 6;
+        public static final int Qty                 = 7;
+        public static final int Price               = 8;
+        public static final int PriceOffset         = 9;
         public static final int Amt                 = 10;
         public static final int Percentage          = 11;
         public static final int Char                = 12;
@@ -5379,10 +5379,10 @@ public class FIX50SP2Enumerations {
      */
     public static class QuoteEntryStatusValues {
 
-        public static final int Accepted                 =  0;
-        public static final int Rejected                 =  5;
-        public static final int RemovedFromMarket        =  6;
-        public static final int Expired                  =  7;
+        public static final int Accepted                 = 0;
+        public static final int Rejected                 = 5;
+        public static final int RemovedFromMarket        = 6;
+        public static final int Expired                  = 7;
         public static final int LockedMarketWarning      = 12;
         public static final int CrossMarketWarning       = 13;
         public static final int CanceledDueToLockMarket  = 14;
@@ -5665,15 +5665,15 @@ public class FIX50SP2Enumerations {
      */
     public static class MassActionScopeValues {
 
-        public static final int AllOrdersForASecurity               =  1;
-        public static final int AllOrdersForAnUnderlyingSecurity    =  2;
-        public static final int AllOrdersForAProduct                =  3;
-        public static final int AllOrdersForACFICode                =  4;
-        public static final int AllOrdersForASecurityType           =  5;
-        public static final int AllOrdersForATradingSession         =  6;
-        public static final int AllOrders                           =  7;
-        public static final int AllOrdersForAMarket                 =  8;
-        public static final int AllOrdersForAMarketSegment          =  9;
+        public static final int AllOrdersForASecurity               = 1;
+        public static final int AllOrdersForAnUnderlyingSecurity    = 2;
+        public static final int AllOrdersForAProduct                = 3;
+        public static final int AllOrdersForACFICode                = 4;
+        public static final int AllOrdersForASecurityType           = 5;
+        public static final int AllOrdersForATradingSession         = 6;
+        public static final int AllOrders                           = 7;
+        public static final int AllOrdersForAMarket                 = 8;
+        public static final int AllOrdersForAMarketSegment          = 9;
         public static final int AllOrdersForASecurityGroup          = 10;
         public static final int CancelForSecurityIssuer             = 11;
         public static final int CancelForIssuerOfUnderlyingSecurity = 12;
@@ -5701,16 +5701,16 @@ public class FIX50SP2Enumerations {
      */
     public static class MassActionRejectReasonValues {
 
-        public static final int MassActionNotSupported                     =  0;
-        public static final int InvalidOrUnknownSecurity                   =  1;
-        public static final int InvalidOrUnknownUnderlyingSecurity         =  2;
-        public static final int InvalidOrUnknownProduct                    =  3;
-        public static final int InvalidOrUnknownCFICode                    =  4;
-        public static final int InvalidOrUnknownSecurityType               =  5;
-        public static final int InvalidOrUnknownTradingSession             =  6;
-        public static final int InvalidOrUnknownMarket                     =  7;
-        public static final int InvalidOrUnknownMarketSegment              =  8;
-        public static final int InvalidOrUnknownSecurityGroup              =  9;
+        public static final int MassActionNotSupported                     = 0;
+        public static final int InvalidOrUnknownSecurity                   = 1;
+        public static final int InvalidOrUnknownUnderlyingSecurity         = 2;
+        public static final int InvalidOrUnknownProduct                    = 3;
+        public static final int InvalidOrUnknownCFICode                    = 4;
+        public static final int InvalidOrUnknownSecurityType               = 5;
+        public static final int InvalidOrUnknownTradingSession             = 6;
+        public static final int InvalidOrUnknownMarket                     = 7;
+        public static final int InvalidOrUnknownMarketSegment              = 8;
+        public static final int InvalidOrUnknownSecurityGroup              = 9;
         public static final int InvalidOrUnknownSecurityIssuer             = 10;
         public static final int InvalidOrUnknownIssuerOfUnderlyingSecurity = 11;
         public static final int Other                                      = 99;
@@ -5771,11 +5771,11 @@ public class FIX50SP2Enumerations {
      */
     public static class ListRejectReasonValues {
 
-        public static final int BrokerCredit                   =  0;
-        public static final int ExchangeClosed                 =  2;
-        public static final int TooLateToEnter                 =  4;
-        public static final int UnknownOrder                   =  5;
-        public static final int DuplicateOrder                 =  6;
+        public static final int BrokerCredit                   = 0;
+        public static final int ExchangeClosed                 = 2;
+        public static final int TooLateToEnter                 = 4;
+        public static final int UnknownOrder                   = 5;
+        public static final int DuplicateOrder                 = 6;
         public static final int UnsupportedOrderCharacteristic = 11;
         public static final int Other                          = 99;
 
@@ -5852,12 +5852,12 @@ public class FIX50SP2Enumerations {
      */
     public static class OrderDelayUnitValues {
 
-        public static final int Seconds             =  0;
-        public static final int TenthsOfASecond     =  1;
-        public static final int HundredthsOfASecond =  2;
-        public static final int Milliseconds        =  3;
-        public static final int Microseconds        =  4;
-        public static final int Nanoseconds         =  5;
+        public static final int Seconds             = 0;
+        public static final int TenthsOfASecond     = 1;
+        public static final int HundredthsOfASecond = 2;
+        public static final int Milliseconds        = 3;
+        public static final int Microseconds        = 4;
+        public static final int Nanoseconds         = 5;
         public static final int Minutes             = 10;
         public static final int Hours               = 11;
         public static final int Days                = 12;
@@ -5961,9 +5961,9 @@ public class FIX50SP2Enumerations {
      */
     public static class RateSourceValues {
 
-        public static final int Bloomberg =  0;
-        public static final int Reuters   =  1;
-        public static final int Telerate  =  2;
+        public static final int Bloomberg = 0;
+        public static final int Reuters   = 1;
+        public static final int Telerate  = 2;
         public static final int Other     = 99;
 
         private RateSourceValues() {
@@ -6047,10 +6047,10 @@ public class FIX50SP2Enumerations {
      */
     public static class NewsCategoryValues {
 
-        public static final int CompanyNews         =  0;
-        public static final int MarketplaceNews     =  1;
-        public static final int FinancialMarketNews =  2;
-        public static final int TechnicalNews       =  3;
+        public static final int CompanyNews         = 0;
+        public static final int MarketplaceNews     = 1;
+        public static final int FinancialMarketNews = 2;
+        public static final int TechnicalNews       = 3;
         public static final int OtherNews           = 99;
 
         private NewsCategoryValues() {
@@ -6213,10 +6213,10 @@ public class FIX50SP2Enumerations {
      */
     public static class StreamAsgnRejReasonValues {
 
-        public static final int UnknownClient                =  0;
-        public static final int ExceedsMaximumSize           =  1;
-        public static final int UnknownOrInvalidCurrencyPair =  2;
-        public static final int NoAvailableStream            =  3;
+        public static final int UnknownClient                = 0;
+        public static final int ExceedsMaximumSize           = 1;
+        public static final int UnknownOrInvalidCurrencyPair = 2;
+        public static final int NoAvailableStream            = 3;
         public static final int Other                        = 99;
 
         private StreamAsgnRejReasonValues() {
