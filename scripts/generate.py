@@ -105,14 +105,14 @@ ${body}
     }\
 ''')
 
-def format_char(value, value_width):
+def format_char(value):
     return '\'{}\''.format(value)
 
-def format_string(value, value_width):
+def format_string(value):
     return '"{}"'.format(value)
 
-def format_int(value, value_width):
-    return '{:>{}}'.format(value, value_width)
+def format_int(value):
+    return '{}'.format(value)
 
 FIELD_TYPES = {
     'Char': ('char', format_char),
@@ -133,16 +133,16 @@ def format_enumeration(enumeration):
     if type == 'char' and value_width > 1:
         type, format_type = FIELD_TYPES['String']
     body = '\n'.join('{}{}'.format(2 * INDENT, format_enum(enum, type, symbolic_name_width,
-      format_type, value_width)) for enum in enumeration.enums)
+      format_type)) for enum in enumeration.enums)
     return ENUMERATION_TEMPLATE.substitute({
             'field_name': field_name(enumeration.field),
             'class_name': '{}Values'.format(enumeration.field.name),
             'body': body,
         })
 
-def format_enum(enum, type, symbolic_name_width, format_type, value_width):
+def format_enum(enum, type, symbolic_name_width, format_type):
     return 'public static final {} {:<{}} = {};'.format(type, enum.symbolic_name,
-        symbolic_name_width, format_type(enum.value, value_width))
+        symbolic_name_width, format_type(enum.value))
 
 MSG_TYPES_TEMPLATE = string.Template('''\
 package com.paritytrading.philadelphia.${package_name};
