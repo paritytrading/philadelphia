@@ -28,16 +28,16 @@ public class FIXT11Enumerations {
      */
     public static class SessionRejectReasonValues {
 
-        public static final int InvalidTagNumber                          =  0;
-        public static final int RequiredTagMissing                        =  1;
-        public static final int TagNotDefinedForThisMessageType           =  2;
-        public static final int UndefinedTag                              =  3;
-        public static final int TagSpecifiedWithoutAValue                 =  4;
-        public static final int ValueIsIncorrect                          =  5;
-        public static final int IncorrectDataFormatForValue               =  6;
-        public static final int DecryptionProblem                         =  7;
-        public static final int SignatureProblem                          =  8;
-        public static final int CompidProblem                             =  9;
+        public static final int InvalidTagNumber                          = 0;
+        public static final int RequiredTagMissing                        = 1;
+        public static final int TagNotDefinedForThisMessageType           = 2;
+        public static final int UndefinedTag                              = 3;
+        public static final int TagSpecifiedWithoutAValue                 = 4;
+        public static final int ValueIsIncorrect                          = 5;
+        public static final int IncorrectDataFormatForValue               = 6;
+        public static final int DecryptionProblem                         = 7;
+        public static final int SignatureProblem                          = 8;
+        public static final int CompidProblem                             = 9;
         public static final int SendingtimeAccuracyProblem                = 10;
         public static final int InvalidMsgtype                            = 11;
         public static final int XMLValidationError                        = 12;
