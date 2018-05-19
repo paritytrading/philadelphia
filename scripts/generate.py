@@ -45,7 +45,8 @@ def read_fields(infile):
         type = elem.find('Type').text
         return Field(tag, name, type)
     tree = xml.etree.ElementTree.parse(infile)
-    return [field(elem) for elem in tree.findall('Field')]
+    fields = [field(elem) for elem in tree.findall('Field')]
+    return sorted(fields, key=lambda field: int(field.tag))
 
 Message = collections.namedtuple('Message', ['msg_type', 'name'])
 
