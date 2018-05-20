@@ -2755,16 +2755,16 @@ public class FIX50Enumerations {
         public static final String OnePartyPrivatelyNegotiatedTradeReport = "60";
         public static final String TwoPartyPrivatelyNegotiatedTradeReport = "61";
         public static final String ContinuousAutoMatch                    = "62";
-        public static final String CrossAuction1                          = "63";
-        public static final String CounterOrderSelection1                 = "64";
-        public static final String CallAuction1                           = "65";
+        public static final String CrossAuction2                          = "63";
+        public static final String CounterOrderSelection2                 = "64";
+        public static final String CallAuction2                           = "65";
         public static final String OnePartyTradeReport                    = "1";
         public static final String TwoPartyTradeReport                    = "2";
         public static final String ConfirmedTradeReport                   = "3";
         public static final String AutoMatch                              = "4";
-        public static final String CrossAuction2                          = "5";
-        public static final String CounterOrderSelection2                 = "6";
-        public static final String CallAuction2                           = "7";
+        public static final String CrossAuction                           = "5";
+        public static final String CounterOrderSelection                  = "6";
+        public static final String CallAuction                            = "7";
 
         private MatchTypeValues() {
         }
