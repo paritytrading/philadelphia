@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+set -e
+
+generate() {
+    local command=$1
+    local input_path=$2
+    local output_path="../../$3"
+
+    (cd applications/generate; \
+            python -m philadelphia.generate $command $input_path > $output_path)
+}
+
+generate_version() {
+    local input_dir=$1
+    local input_version=$2
+
+    local output_prefix=${input_version//./}
+    local output_module=${output_prefix,,}
+
+    local input_path="$input_dir/$input_version/Base"
+    local output_dir="libraries/$output_module/src/main/java/com/paritytrading/philadelphia/$output_module"
+
+    generate enumerations "$input_path" "$output_dir/${output_prefix}Enumerations.java"
+    generate msg-types "$input_path" "$output_dir/${output_prefix}MsgTypes.java"
+    generate tags "$input_path" "$output_dir/${output_prefix}Tags.java"
+}
+
+if [[ $# != 1 ]]; then
+    echo "Usage: ${0##*/} <input-directory>" >&2
+    exit 2
+fi
+
+input_dir=$1
+
+generate_version "$input_dir" "FIX.4.2"
+generate_version "$input_dir" "FIX.4.3"
+generate_version "$input_dir" "FIX.4.4"
+generate_version "$input_dir" "FIX.5.0"
+generate_version "$input_dir" "FIX.5.0SP1"
+generate_version "$input_dir" "FIX.5.0SP2"
+generate_version "$input_dir" "FIXT.1.1"
