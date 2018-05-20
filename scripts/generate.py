@@ -14,6 +14,12 @@ ADJUSTED_VALUES = {
   ('276', 'f '): 'f',
 }
 
+SYMBOLIC_NAMES = {
+    ('574', '63'): 'CrossAuction2',
+    ('574', '64'): 'CounterOrderSelection2',
+    ('574', '65'): 'CallAuction2',
+}
+
 SYMBOLIC_NAME_ALIASES = {
     ('434', '2'): [
         'OrderCancelReplaceRequest',
@@ -29,7 +35,7 @@ def read_enums(infile):
         adjusted_value = ADJUSTED_VALUES.get((tag, value), value)
         symbolic_name = elem.find('SymbolicName').text
         sort = int(elem.find('Sort').text) if elem.find('Sort') is not None else None
-        enum = Enum(tag, adjusted_value, symbolic_name, sort)
+        enum = Enum(tag, adjusted_value, SYMBOLIC_NAMES.get((tag, value), symbolic_name), sort)
         return [enum] + [enum._replace(symbolic_name=symbolic_name_alias)
                 for symbolic_name_alias in SYMBOLIC_NAME_ALIASES.get((tag, adjusted_value), [])]
     tree = xml.etree.ElementTree.parse(infile)
@@ -246,7 +252,7 @@ def enumerations(indir):
     version = read_version(enums_path(indir))
     enums = sorted(read_enums(enums_path(indir)), key=lambda enum: int(enum.tag))
     fields = {field.tag: field for field in read_fields(fields_path(indir))}
-    enumerations = [Enumeration(fields[tag], fix_symbolic_names(sort_by_sort_key(list(enums))))
+    enumerations = [Enumeration(fields[tag], sort_by_sort_key(list(enums)))
         for tag, enums
         in itertools.groupby(enums, lambda enum: enum.tag)
         if tag in fields and fields[tag].type != 'Boolean'
@@ -258,18 +264,6 @@ def sort_by_sort_key(enums):
         return sorted(enums, key=lambda enum: enum.sort)
     else:
         return enums
-
-def fix_symbolic_names(enums):
-    counts = collections.Counter(enum.symbolic_name for enum in enums)
-    indexes = collections.Counter()
-    def fix_symbolic_name(enum):
-        if counts[enum.symbolic_name] > 1:
-            indexes[enum.symbolic_name] += 1
-            symbolic_name = enum.symbolic_name + str(indexes[enum.symbolic_name])
-            return enum._replace(symbolic_name=symbolic_name)
-        else:
-            return enum
-    return [fix_symbolic_name(enum) for enum in enums]
 
 def msg_types(indir):
     version = read_version(messages_path(indir))
