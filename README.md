@@ -44,6 +44,9 @@ Philadelphia contains the following applications:
 - [**Terminal Client**](applications/client) is a simple console application
   for interacting with a FIX acceptor.
 
+- [**Code Generator**](applications/generate) is a simple console application
+  for generating Philadelphia profiles for FIX dialects.
+
 Philadelphia contains the following example applications:
 
 - [**Test Acceptor**](examples/acceptor) implements a simple FIX acceptor.

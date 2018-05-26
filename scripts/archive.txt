@@ -4,6 +4,13 @@ README.md
 applications/client/README.md
 applications/client/etc/example.conf
 applications/client/philadelphia-client.jar
+applications/generate/README.md
+applications/generate/philadelphia/__init__.py
+applications/generate/philadelphia/generate.py
+applications/generate/philadelphia/java.py
+applications/generate/philadelphia/model.py
+applications/generate/philadelphia/repository.py
+applications/generate/setup.py
 examples/acceptor/README.md
 examples/acceptor/philadelphia-acceptor.jar
 examples/initiator/README.md
