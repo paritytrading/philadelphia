@@ -1,11 +1,13 @@
+import os.path
 import sys
 
 from . import model
+from . import quickfix
 from . import repository
 
 
 USAGE = '''\
-Usage: philadelphia-generate <command> <input-path>
+Usage: philadelphia-generate <command> [<configuration-file>] <input-path>
 
 Commands:
   enumerations  Generate enumerations
@@ -14,22 +16,37 @@ Commands:
 '''
 
 
-def enumerations(path):
-    dialect = repository.read_dialect(path)
-    fields = repository.read_fields(path)
+def enumerations(config, path):
+    module = read_module(path)
+    dialect = read_dialect(config, module, path)
+    fields = module.read_fields(path)
     print(model.format_enumerations(fields, dialect))
 
 
-def msg_types(path):
-    dialect = repository.read_dialect(path)
-    messages = repository.read_messages(path)
+def msg_types(config, path):
+    module = read_module(path)
+    dialect = read_dialect(config, module, path)
+    messages = module.read_messages(path)
     print(model.format_msg_types(messages, dialect))
 
 
-def tags(path):
-    dialect = repository.read_dialect(path)
-    fields = repository.read_fields(path)
+def tags(config, path):
+    module = read_module(path)
+    dialect = read_dialect(config, module, path)
+    fields = module.read_fields(path)
     print(model.format_tags(fields, dialect))
+
+
+def read_dialect(config, module, path):
+    if config:
+        return model.read_dialect(config)
+    if hasattr(module, 'read_dialect'):
+        return module.read_dialect(path)
+    sys.exit('error: Missing configuration file')
+
+
+def read_module(path):
+    return repository if os.path.isdir(path) else quickfix
 
 
 COMMANDS = {
@@ -40,14 +57,21 @@ COMMANDS = {
 
 
 def main():
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 3 and len(sys.argv) != 4:
         sys.exit(USAGE)
 
     command = COMMANDS.get(sys.argv[1])
     if not command:
         sys.exit('error: {}: Unknown command'.format(sys.argv[1]))
 
-    command(sys.argv[2])
+    if len(sys.argv) == 4:
+        config = sys.argv[2]
+        path = sys.argv[3]
+    else:
+        config = None
+        path = sys.argv[2]
+
+    command(config, path)
 
 
 if __name__ == '__main__':
