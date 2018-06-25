@@ -1,4 +1,5 @@
 import collections
+import configparser
 
 from . import java
 
@@ -13,6 +14,15 @@ Value = collections.namedtuple('Value', ['name', 'value'])
 
 
 Message = collections.namedtuple('Message', ['name', 'msg_type'])
+
+
+def read_dialect(filename):
+    config = configparser.ConfigParser()
+    config.read(filename)
+    package_name = config['dialect']['package-name']
+    class_name_prefix = config['dialect']['class-name-prefix']
+    name = config['dialect']['name']
+    return Dialect(package_name, class_name_prefix, name)
 
 
 def format_enumerations(fields, dialect):

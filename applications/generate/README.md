@@ -10,14 +10,16 @@ Philadelphia Code Generator requires Python 3.5 or newer.
 Philadelphia Code Generator supports the following input sources:
 
 - [FIX Repository][]
+- [QuickFIX][]
 
   [FIX Repository]: https://www.fixtrading.org/standards/fix-repository/
+  [QuickFIX]: http://www.quickfixengine.org/
 
 ## Development
 
 Run Philadelphia Code Generator with Python:
 ```
-python -m philadelphia.generate <command> <input-path>
+python -m philadelphia.generate <command> [<configuration-file>] <input-path>
 ```
 
 ## Installation
@@ -29,7 +31,7 @@ python setup.py install
 
 Run Philadelphia Code Generator:
 ```
-philadelphia-generate <command> <input-path>
+philadelphia-generate <command> [<configuration-file>] <input-path>
 ```
 
 ## License
