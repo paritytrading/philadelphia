@@ -1,5 +1,17 @@
 # Release Notes
 
+## 0.7.0 (2018-06-25)
+
+- Add comment support to Philadelphia Terminal Client
+- Add input file support to Philadelphia Terminal Client
+- Improve `messages` command in Philadelphia Terminal Client
+- Add `sleep` command to Philadelphia Terminal Client
+- Add `wait` command to Philadelphia Terminal Client
+- Make `Clock` interface public
+- Add `FIXMessage#findIndex` method
+- Clean up MatchType(574) handling in Philadelphia FIX 5.0
+- Add Philadelphia Code Generator
+
 ## 0.6.1 (2018-03-06)
 
 - Add `FIXMessage#toString()` method
