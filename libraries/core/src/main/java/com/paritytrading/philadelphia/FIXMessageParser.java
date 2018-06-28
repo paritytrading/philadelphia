@@ -14,9 +14,9 @@ class FIXMessageParser {
 
     private boolean checkSumEnabled;
 
-    private FIXField beginString;
-    private FIXField bodyLength;
-    private FIXField checkSum;
+    private FIXValue beginString;
+    private FIXValue bodyLength;
+    private FIXValue checkSum;
 
     public FIXMessageParser(FIXMessageListener listener, FIXMessage message,
             boolean checkSumEnabled) {
@@ -26,16 +26,26 @@ class FIXMessageParser {
 
         this.checkSumEnabled = checkSumEnabled;
 
-        this.beginString = new FIXField(BEGIN_STRING_FIELD_CAPACITY);
-        this.bodyLength  = new FIXField(BODY_LENGTH_FIELD_CAPACITY);
-        this.checkSum    = new FIXField(CHECK_SUM_FIELD_CAPACITY);
+        this.beginString = new FIXValue(BEGIN_STRING_FIELD_CAPACITY);
+        this.bodyLength  = new FIXValue(BODY_LENGTH_FIELD_CAPACITY);
+        this.checkSum    = new FIXValue(CHECK_SUM_FIELD_CAPACITY);
     }
 
     public boolean parse(ByteBuffer buffer) throws IOException {
+        int tag;
+
         while (true) {
             buffer.mark();
 
             int beginning = buffer.position();
+
+            // Partial message
+            tag = FIXTags.get(buffer);
+            if (tag == 0) {
+                buffer.reset();
+
+                return false;
+            }
 
             // Partial message
             if (!beginString.get(buffer)) {
@@ -45,10 +55,18 @@ class FIXMessageParser {
             }
 
             // Garbled message
-            if (beginString.getTag() != BeginString)
+            if (tag != BeginString)
                 continue;
 
             int position = buffer.position();
+
+            // Partial message
+            tag = FIXTags.get(buffer);
+            if (tag == 0) {
+                buffer.reset();
+
+                return false;
+            }
 
             // Partial message
             if (!bodyLength.get(buffer)) {
@@ -58,13 +76,13 @@ class FIXMessageParser {
             }
 
             // Garbled message
-            if (bodyLength.getTag() != BodyLength) {
+            if (tag != BodyLength) {
                 buffer.position(position);
 
                 continue;
             }
 
-            int length = (int)bodyLength.getValue().asInt();
+            int length = (int)bodyLength.asInt();
 
             // Partial message
             if (buffer.remaining() < length + 7) {
@@ -79,16 +97,21 @@ class FIXMessageParser {
                 buffer.position(position + length);
 
                 // Garbled message
+                tag = FIXTags.get(buffer);
+                if (tag == 0)
+                    continue;
+
+                // Garbled message
                 if (!checkSum.get(buffer))
                     continue;
 
                 // Garbled message
-                if (checkSum.getTag() != CheckSum)
+                if (tag != CheckSum)
                     continue;
 
                 // Garbled message
                 if (FIXCheckSums.sum(buffer, beginning, position - beginning + length) % 256
-                        != checkSum.getValue().asCheckSum())
+                        != checkSum.asCheckSum())
                     continue;
 
                 buffer.position(position);

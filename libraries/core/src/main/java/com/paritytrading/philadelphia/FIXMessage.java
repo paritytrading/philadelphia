@@ -11,7 +11,9 @@ import java.nio.ReadOnlyBufferException;
  */
 public class FIXMessage {
 
-    private FIXField[] fields;
+    private int[] tags;
+
+    private FIXValue[] values;
 
     private int count;
 
@@ -22,10 +24,12 @@ public class FIXMessage {
      * @param fieldCapacity the field capacity
      */
     public FIXMessage(int maxFieldCount, int fieldCapacity) {
-        fields = new FIXField[maxFieldCount];
+        tags = new int[maxFieldCount];
 
-        for (int i = 0; i < fields.length; i++)
-            fields[i] = new FIXField(fieldCapacity);
+        values = new FIXValue[maxFieldCount];
+
+        for (int i = 0; i < values.length; i++)
+            values[i] = new FIXValue(fieldCapacity);
 
         count = 0;
     }
@@ -51,15 +55,27 @@ public class FIXMessage {
     }
 
     /**
-     * Get a field.
+     * Get a tag.
      *
      * @param index the index
-     * @return the field
+     * @return the tag
      * @throws IndexOutOfBoundsException if the index exceeds the maximum
      *   number of fields
      */
-    public FIXField getField(int index) {
-        return fields[index];
+    public int getTag(int index) {
+        return tags[index];
+    }
+
+    /**
+     * Get a value container.
+     *
+     * @param index the index
+     * @return the value container
+     * @throws IndexOutOfBoundsException if the index exceeds the maximum
+     *   number of fields
+     */
+    public FIXValue getValue(int index) {
+        return values[index];
     }
 
     /**
@@ -81,8 +97,8 @@ public class FIXMessage {
      */
     public FIXValue findField(int tag) {
         for (int i = 0; i < count; i++) {
-            if (fields[i].getTag() == tag)
-                return fields[i].getValue();
+            if (tags[i] == tag)
+                return values[i];
         }
 
         return null;
@@ -97,7 +113,7 @@ public class FIXMessage {
      */
     public int findIndex(int tag) {
         for (int i = 0; i < count; i++) {
-            if (fields[i].getTag() == tag)
+            if (tags[i] == tag)
                 return i;
         }
 
@@ -113,11 +129,9 @@ public class FIXMessage {
      *   exceeded
      */
     public FIXValue addField(int tag) {
-        FIXField field = fields[count++];
+        tags[count] = tag;
 
-        field.setTag(tag);
-
-        return field.getValue();
+        return values[count++];
     }
 
     /**
@@ -143,11 +157,19 @@ public class FIXMessage {
         reset();
 
         while (buffer.hasRemaining()) {
-            if (count == fields.length)
+            if (count == tags.length)
                 throw new FIXMessageOverflowException("Too many fields");
 
-            if (!fields[count++].get(buffer))
+            int tag = FIXTags.get(buffer);
+            if (tag == 0)
                 return false;
+
+            tags[count] = tag;
+
+            if (!values[count].get(buffer))
+                return false;
+
+            count++;
         }
 
         return true;
@@ -162,8 +184,11 @@ public class FIXMessage {
      * @throws ReadOnlyBufferException if the buffer is read-only
      */
     public void put(ByteBuffer buffer) {
-        for (int i = 0; i < count; i++)
-            fields[i].put(buffer);
+        for (int i = 0; i < count; i++) {
+            FIXTags.put(buffer, tags[i]);
+
+            values[i].put(buffer);
+        }
     }
 
     /**
@@ -188,11 +213,9 @@ public class FIXMessage {
      */
     public void toString(StringBuilder builder) {
         for (int i = 0; i < count; i++) {
-            FIXField field = fields[i];
-
-            builder.append(field.getTag());
+            builder.append(tags[i]);
             builder.append('=');
-            field.getValue().asString(builder);
+            values[i].asString(builder);
             builder.append('|');
         }
     }
