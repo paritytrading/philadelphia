@@ -108,10 +108,10 @@ public class FIXMessage {
      * Get the index of the first instance of a field with the specified tag.
      *
      * @param tag the tag
-     * @return the index or -1 if there are no instances
-     *   of a field with the specified tag
+     * @return the index or -1 if there are no instances of a field with the
+     *   specified tag
      */
-    public int findIndex(int tag) {
+    public int indexOf(int tag) {
         for (int i = 0; i < count; i++) {
             if (tags[i] == tag)
                 return i;
