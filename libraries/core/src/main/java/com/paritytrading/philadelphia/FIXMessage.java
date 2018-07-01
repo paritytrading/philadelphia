@@ -40,7 +40,7 @@ public class FIXMessage {
      * @return the MsgType(35) or {@code null} if the field is not present
      */
     public FIXValue getMsgType() {
-        return findField(MsgType);
+        return valueOf(MsgType);
     }
 
     /**
@@ -49,7 +49,7 @@ public class FIXMessage {
      * @return the MsgSeqNum(34) or zero if the field is not present
      */
     public long getMsgSeqNum() {
-        FIXValue msgSeqNum = findField(MsgSeqNum);
+        FIXValue msgSeqNum = valueOf(MsgSeqNum);
 
         return msgSeqNum != null ? msgSeqNum.asInt() : 0;
     }
@@ -95,7 +95,7 @@ public class FIXMessage {
      * @return the value container or {@code null} if there are no instances
      *   of a field with the specified tag
      */
-    public FIXValue findField(int tag) {
+    public FIXValue valueOf(int tag) {
         for (int i = 0; i < count; i++) {
             if (tags[i] == tag)
                 return values[i];

@@ -268,13 +268,13 @@ public class FIXSession implements Closeable {
      *   not found
      */
     public void update(FIXMessage message) {
-        FIXValue msgSeqNum = message.findField(MsgSeqNum);
+        FIXValue msgSeqNum = message.valueOf(MsgSeqNum);
         if (msgSeqNum == null)
             throw new IllegalStateException("MsgSeqNum(34) not found");
 
         msgSeqNum.setInt(txMsgSeqNum);
 
-        FIXValue sendingTime = message.findField(SendingTime);
+        FIXValue sendingTime = message.valueOf(SendingTime);
         if (sendingTime == null)
             throw new IllegalStateException("SendingTime(52) not found");
 
@@ -291,13 +291,13 @@ public class FIXSession implements Closeable {
     public void updateCompID(FIXMessage message) {
         FIXValue value;
 
-        value = message.findField(SenderCompID);
+        value = message.valueOf(SenderCompID);
         if (value == null)
             throw new IllegalStateException("SenderCompID(49) not found");
 
         value.setString(senderCompId);
 
-        value = message.findField(TargetCompID);
+        value = message.valueOf(TargetCompID);
         if (value == null)
             throw new IllegalStateException("TargetCompID(56) not found");
 
@@ -585,7 +585,7 @@ public class FIXSession implements Closeable {
 
         private void handleTooLowMsgSeqNum(FIXMessage message, FIXValue msgType, long msgSeqNum) throws IOException {
             if (msgType.length() != 1 || msgType.asChar() != SequenceReset) {
-                FIXValue possDupFlag = message.findField(PossDupFlag);
+                FIXValue possDupFlag = message.valueOf(PossDupFlag);
 
                 if (possDupFlag == null || possDupFlag.asChar() != 'Y')
                     statusListener.tooLowMsgSeqNum(FIXSession.this, msgSeqNum, rxMsgSeqNum);
@@ -597,7 +597,7 @@ public class FIXSession implements Closeable {
         }
 
         private void handleTestRequest(FIXMessage message) throws IOException {
-            FIXValue testReqId = message.findField(TestReqID);
+            FIXValue testReqId = message.valueOf(TestReqID);
             if (testReqId == null) {
                 sendReject(message.getMsgSeqNum(), 1, "TestReqID(112) not found");
 
@@ -612,14 +612,14 @@ public class FIXSession implements Closeable {
         }
 
         private void handleResendRequest(FIXMessage message) throws IOException {
-            FIXValue beginSeqNo = message.findField(BeginSeqNo);
+            FIXValue beginSeqNo = message.valueOf(BeginSeqNo);
             if (beginSeqNo == null) {
                 sendReject(message.getMsgSeqNum(), 1, "BeginSeqNo(7) not found");
 
                 return;
             }
 
-            FIXValue endSeqNo = message.findField(EndSeqNo);
+            FIXValue endSeqNo = message.valueOf(EndSeqNo);
             if (endSeqNo == null) {
                 sendReject(message.getMsgSeqNum(), 1, "EndSeqNo(16) not found");
                 return;
@@ -633,7 +633,7 @@ public class FIXSession implements Closeable {
         }
 
         private boolean handleSequenceReset(FIXMessage message) throws IOException {
-            FIXValue value = message.findField(NewSeqNo);
+            FIXValue value = message.valueOf(NewSeqNo);
             if (value == null) {
                 sendReject(message.getMsgSeqNum(), 1, "NewSeqNo(36) not found");
                 return true;
@@ -647,7 +647,7 @@ public class FIXSession implements Closeable {
 
             rxMsgSeqNum = newSeqNo;
 
-            FIXValue gapFillFlag = message.findField(GapFillFlag);
+            FIXValue gapFillFlag = message.valueOf(GapFillFlag);
             boolean reset = gapFillFlag == null || gapFillFlag.asChar() != 'Y';
 
             if (reset)
@@ -662,7 +662,7 @@ public class FIXSession implements Closeable {
 
         private void handleLogon(FIXMessage message) throws IOException {
             if (senderCompId.isEmpty()) {
-                FIXValue value = message.findField(TargetCompID);
+                FIXValue value = message.valueOf(TargetCompID);
                 if (value == null) {
                     statusListener.close(FIXSession.this, "SenderCompID(49) not found");
                     return;
@@ -672,7 +672,7 @@ public class FIXSession implements Closeable {
             }
 
             if (targetCompId.isEmpty()) {
-                FIXValue value = message.findField(SenderCompID);
+                FIXValue value = message.valueOf(SenderCompID);
                 if (value == null) {
                     statusListener.close(FIXSession.this, "TargetCompID(56) not found");
                     return;
@@ -720,7 +720,7 @@ public class FIXSession implements Closeable {
     private void sendSequenceReset(long msgSeqNum, long newSeqNo) throws IOException {
         prepare(txMessage, SequenceReset);
 
-        txMessage.findField(MsgSeqNum).setInt(msgSeqNum);
+        txMessage.valueOf(MsgSeqNum).setInt(msgSeqNum);
         txMessage.addField(GapFillFlag).setChar('Y');
         txMessage.addField(NewSeqNo).setInt(newSeqNo);
 
