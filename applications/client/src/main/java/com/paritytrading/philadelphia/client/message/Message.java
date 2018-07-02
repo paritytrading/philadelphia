@@ -1,6 +1,5 @@
 package com.paritytrading.philadelphia.client.message;
 
-import com.paritytrading.philadelphia.FIXField;
 import com.paritytrading.philadelphia.FIXMessage;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,9 +52,8 @@ public class Message {
         String msgType = null;
 
         for (int i = 0; i < message.getFieldCount(); i++) {
-            FIXField field = message.getField(i);
-            int      tag   = field.getTag();
-            String   value = field.getValue().asString();
+            int    tag   = message.getTag(i);
+            String value = message.getValue(i).asString();
 
             if (tag == MsgType)
                 msgType = value;

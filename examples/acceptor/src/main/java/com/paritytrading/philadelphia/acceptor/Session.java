@@ -5,7 +5,6 @@ import static com.paritytrading.philadelphia.fix42.FIX42MsgTypes.*;
 import static com.paritytrading.philadelphia.fix42.FIX42Tags.*;
 
 import com.paritytrading.philadelphia.FIXConfig;
-import com.paritytrading.philadelphia.FIXField;
 import com.paritytrading.philadelphia.FIXMessage;
 import com.paritytrading.philadelphia.FIXMessageListener;
 import com.paritytrading.philadelphia.FIXSession;
@@ -109,23 +108,21 @@ class Session implements FIXMessageListener {
         price.reset();
 
         for (int i = 0; i < message.getFieldCount(); i++) {
-            FIXField field = message.getField(i);
-
-            switch (field.getTag()) {
+            switch (message.getTag(i)) {
             case ClOrdID:
-                clOrdId.set(field.getValue());
+                clOrdId.set(message.getValue(i));
                 break;
             case Symbol:
-                symbol.set(field.getValue());
+                symbol.set(message.getValue(i));
                 break;
             case Side:
-                side.set(field.getValue());
+                side.set(message.getValue(i));
                 break;
             case OrderQty:
-                orderQty.set(field.getValue());
+                orderQty.set(message.getValue(i));
                 break;
             case Price:
-                price.set(field.getValue());
+                price.set(message.getValue(i));
                 break;
             }
         }
