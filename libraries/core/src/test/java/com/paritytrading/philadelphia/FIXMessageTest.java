@@ -42,6 +42,16 @@ public class FIXMessageTest {
     }
 
     @Test
+    public void parse() {
+        String input = "11=123|21=1|55=FOO|54=1|60=20150924-09:30:05.250|" +
+                "38=100|40=2|44=150.25|";
+
+        String output = FIXMessage.fromString(input).toString();
+
+        assertEquals(input, output);
+    }
+
+    @Test
     public void print() {
         MutableDateTime timestamp = new MutableDateTime(2015, 9, 24, 9, 30, 5, 250);
 
