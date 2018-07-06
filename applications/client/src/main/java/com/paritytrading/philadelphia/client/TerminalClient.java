@@ -23,8 +23,9 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
-import jline.console.ConsoleReader;
-import jline.console.completer.StringsCompleter;
+import org.jline.reader.LineReader;
+import org.jline.reader.LineReaderBuilder;
+import org.jline.reader.impl.completer.StringsCompleter;
 import org.jvirtanen.config.Configs;
 
 public class TerminalClient implements Closeable {
@@ -59,9 +60,9 @@ public class TerminalClient implements Closeable {
     }
 
     public void run(List<String> lines) throws IOException {
-        ConsoleReader reader = new ConsoleReader();
-
-        reader.addCompleter(new StringsCompleter(Commands.names().castToList()));
+        LineReader reader = LineReaderBuilder.builder()
+            .completer(new StringsCompleter(Commands.names().castToList()))
+            .build();
 
         if (lines.isEmpty())
             printf("Type 'help' for help.\n");
