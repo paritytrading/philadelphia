@@ -436,7 +436,7 @@ public class FIXSession implements Closeable {
         int remaining = txHeaderBuffer.remaining() + txBodyBuffer.remaining();
 
         do {
-            remaining -= channel.write(txBuffers);
+            remaining -= channel.write(txBuffers, 0, txBuffers.length);
         } while (remaining > 0);
 
         txMsgSeqNum++;
