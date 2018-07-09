@@ -88,6 +88,15 @@ public class FIXMessage {
     }
 
     /**
+     * Set the number of fields.
+     *
+     * @param count the number of fields
+     */
+    public void setFieldCount(int count) {
+        this.count = count;
+    }
+
+    /**
      * Get the value container of the first instance of a field with the
      * specified tag.
      *
