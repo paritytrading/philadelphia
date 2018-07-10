@@ -55,14 +55,14 @@ public class FIXMessage {
     }
 
     /**
-     * Get a tag.
+     * Get the tag at a specified index.
      *
      * @param index the index
      * @return the tag
      * @throws IndexOutOfBoundsException if the index exceeds the maximum
      *   number of fields
      */
-    public int getTag(int index) {
+    public int tagAt(int index) {
         return tags[index];
     }
 

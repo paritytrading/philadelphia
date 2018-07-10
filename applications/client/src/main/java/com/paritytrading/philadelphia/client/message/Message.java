@@ -52,7 +52,7 @@ public class Message {
         String msgType = null;
 
         for (int i = 0; i < message.getFieldCount(); i++) {
-            int    tag   = message.getTag(i);
+            int    tag   = message.tagAt(i);
             String value = message.getValue(i).asString();
 
             if (tag == MsgType)

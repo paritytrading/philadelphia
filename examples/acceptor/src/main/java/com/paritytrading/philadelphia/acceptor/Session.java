@@ -108,7 +108,7 @@ class Session implements FIXMessageListener {
         price.reset();
 
         for (int i = 0; i < message.getFieldCount(); i++) {
-            switch (message.getTag(i)) {
+            switch (message.tagAt(i)) {
             case ClOrdID:
                 clOrdId.set(message.getValue(i));
                 break;
