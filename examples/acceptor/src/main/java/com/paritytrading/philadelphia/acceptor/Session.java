@@ -110,19 +110,19 @@ class Session implements FIXMessageListener {
         for (int i = 0; i < message.getFieldCount(); i++) {
             switch (message.tagAt(i)) {
             case ClOrdID:
-                clOrdId.set(message.getValue(i));
+                clOrdId.set(message.valueAt(i));
                 break;
             case Symbol:
-                symbol.set(message.getValue(i));
+                symbol.set(message.valueAt(i));
                 break;
             case Side:
-                side.set(message.getValue(i));
+                side.set(message.valueAt(i));
                 break;
             case OrderQty:
-                orderQty.set(message.getValue(i));
+                orderQty.set(message.valueAt(i));
                 break;
             case Price:
-                price.set(message.getValue(i));
+                price.set(message.valueAt(i));
                 break;
             }
         }

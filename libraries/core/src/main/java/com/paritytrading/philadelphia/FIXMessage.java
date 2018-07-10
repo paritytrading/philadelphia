@@ -67,14 +67,14 @@ public class FIXMessage {
     }
 
     /**
-     * Get a value container.
+     * Get the value container at a specified index.
      *
      * @param index the index
      * @return the value container
      * @throws IndexOutOfBoundsException if the index exceeds the maximum
      *   number of fields
      */
-    public FIXValue getValue(int index) {
+    public FIXValue valueAt(int index) {
         return values[index];
     }
 
