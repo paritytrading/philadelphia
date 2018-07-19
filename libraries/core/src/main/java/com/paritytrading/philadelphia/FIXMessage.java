@@ -5,6 +5,7 @@ import static com.paritytrading.philadelphia.FIXTags.*;
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 import java.nio.ReadOnlyBufferException;
+import java.util.stream.Stream;
 
 /**
  * A message container.
@@ -201,7 +202,39 @@ public class FIXMessage {
     }
 
     /**
+     * Construct a new message container from a string representation.
+     *
+     * <p><strong>Note.</strong> This method allocates memory.</p>
+     *
+     * @param s a string representation
+     * @return a message container
+     */
+    public static FIXMessage fromString(String s) {
+        String[][] fields = Stream.of(s.split("\\|"))
+                .map(field -> field.split("="))
+                .toArray(String[][]::new);
+
+        int maxValueLength = Stream.of(fields)
+                .mapToInt(field -> field[1].length())
+                .max()
+                .orElse(0);
+
+        FIXMessage message = new FIXMessage(fields.length, maxValueLength + 1);
+
+        for (String[] field : fields) {
+            int    tag   = Integer.parseInt(field[0]);
+            String value = field[1];
+
+            message.addField(tag).setString(value);
+        }
+
+        return message;
+    }
+
+    /**
      * Returns a string representation of this message.
+     *
+     * <p><strong>Note.</strong> This method allocates memory.</p>
      *
      * @return a string representation of this message
      */
