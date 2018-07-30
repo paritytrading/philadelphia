@@ -5,15 +5,15 @@
  * primary functions:</p>
  * <ul>
  * <li>data reception
- *   ({@link com.paritytrading.philadelphia.FIXSession#receive})</li>
+ *   ({@link com.paritytrading.philadelphia.FIXConnection#receive})</li>
  * <li>data transmission</li>
- * <li>session keep-alive
- *   ({@link com.paritytrading.philadelphia.FIXSession#keepAlive})</li>
+ * <li>connection keep-alive
+ *   ({@link com.paritytrading.philadelphia.FIXConnection#keepAlive})</li>
  * </ul>
  *
- * <p>Data reception can run on one thread and data transmission and session
- * keep-alive on another without locking. Data transmission and session
- * keep-alive can run on different threads but require locking.</p>
+ * <p>Data reception can run on one thread and data transmission and
+ * connection keep-alive on another without locking. Data transmission and
+ * connection keep-alive can run on different threads but require locking.</p>
  *
  * <p>The underlying socket channels can be either blocking or non-blocking.
  * In both cases, data transmission always blocks.</p>

@@ -37,8 +37,8 @@ public class FIXInitiatorTest {
 
     private FIXStatus initiatorStatus;
 
-    private FIXSession  initiator;
-    private TestSession acceptor;
+    private FIXConnection  initiator;
+    private TestConnection acceptor;
 
     @Before
     public void setUp() throws IOException {
@@ -62,8 +62,8 @@ public class FIXInitiatorTest {
 
         initiatorStatus = new FIXStatus();
 
-        initiator = new FIXSession(clock, initiatorChannel, initiatorConfig, initiatorMessages, initiatorStatus);
-        acceptor  = new TestSession(acceptorChannel, acceptorMessages);
+        initiator = new FIXConnection(clock, initiatorChannel, initiatorConfig, initiatorMessages, initiatorStatus);
+        acceptor  = new TestConnection(acceptorChannel, acceptorMessages);
     }
 
     @Test
@@ -367,16 +367,16 @@ public class FIXInitiatorTest {
         initiatorMessage(logout);
     }
 
-    private void receiveBlocking(FIXSession session) throws IOException {
-        SocketChannel channel = session.getChannel();
+    private void receiveBlocking(FIXConnection connection) throws IOException {
+        SocketChannel channel = connection.getChannel();
 
         if (channel.isBlocking()) {
-            session.receive();
+            connection.receive();
         } else {
             channel.configureBlocking(true);
 
             try {
-                session.receive();
+                connection.receive();
             } finally {
                 channel.configureBlocking(false);
             }

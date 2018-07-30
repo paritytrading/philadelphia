@@ -1,7 +1,7 @@
 package com.paritytrading.philadelphia;
 
 /**
- * A session configuration.
+ * A connection configuration.
  *
  * @see Builder
  */
@@ -20,7 +20,7 @@ public class FIXConfig {
     private boolean    checkSumEnabled;
 
     /**
-     * Create a session configuration.
+     * Create a connection configuration.
      *
      * @param version the protocol version
      * @param senderCompId the SenderCompID(49)
@@ -178,7 +178,7 @@ public class FIXConfig {
     }
 
     /**
-     * <p>A session configuration builder. The builder uses the following
+     * <p>A connection configuration builder. The builder uses the following
      * default values:</p>
      * <ul>
      *   <li>protocol version: FIX 4.2</li>
@@ -209,7 +209,7 @@ public class FIXConfig {
         private boolean    checkSumEnabled;
 
         /**
-         * Create a session configuration builder.
+         * Create a connection configuration builder.
          */
         public Builder() {
             version           = FIXVersion.FIX_4_2;
@@ -359,9 +359,9 @@ public class FIXConfig {
         }
 
         /**
-         * Build the session configuration.
+         * Build the connection configuration.
          *
-         * @return the session configuration
+         * @return the connection configuration
          */
         public FIXConfig build() {
             return new FIXConfig(version, senderCompId, targetCompId,

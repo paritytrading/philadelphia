@@ -12,9 +12,9 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.MutableDateTime;
 
 /**
- * A session.
+ * A connection.
  */
-public class FIXSession implements Closeable {
+public class FIXConnection implements Closeable {
 
     private Clock clock;
 
@@ -40,14 +40,14 @@ public class FIXSession implements Closeable {
     private ByteBuffer[] txBuffers;
 
     /*
-     * This variable is written on data reception and read on session
+     * This variable is written on data reception and read on connection
      * keep-alive. These two functions can run on different threads
      * without locking.
      */
     private volatile long lastRxMillis;
 
     /*
-     * This variable is written on data transmission and read on session
+     * This variable is written on data transmission and read on connection
      * keep-alive. These two functions can run on different threads but
      * require locking.
      */
@@ -72,16 +72,16 @@ public class FIXSession implements Closeable {
     private StringBuilder currentTimestamp;
 
     /**
-     * Create a session. The underlying socket channel can be either blocking or
-     * non-blocking.
+     * Create a connection. The underlying socket channel can be either
+     * blocking or non-blocking.
      *
      * @param clock the clock
      * @param channel the underlying socket channel
-     * @param config the session configuration
+     * @param config the connection configuration
      * @param listener the inbound message listener
      * @param statusListener the inbound status event listener
      */
-    public FIXSession(Clock clock, SocketChannel channel, FIXConfig config, FIXMessageListener listener,
+    public FIXConnection(Clock clock, SocketChannel channel, FIXConfig config, FIXMessageListener listener,
             FIXStatusListener statusListener) {
         this.clock = clock;
 
@@ -138,15 +138,15 @@ public class FIXSession implements Closeable {
     }
 
     /**
-     * Create a session. The underlying socket channel can be either blocking or
-     * non-blocking.
+     * Create a connection. The underlying socket channel can be either
+     * blocking or non-blocking.
      *
      * @param channel the underlying socket channel
-     * @param config the session configuration
+     * @param config the connection configuration
      * @param listener the inbound message listener
      * @param statusListener the inbound status event listener
      */
-    public FIXSession(SocketChannel channel, FIXConfig config, FIXMessageListener listener,
+    public FIXConnection(SocketChannel channel, FIXConfig config, FIXMessageListener listener,
             FIXStatusListener statusListener) {
         this(System::currentTimeMillis, channel, config, listener, statusListener);
     }
@@ -310,7 +310,7 @@ public class FIXSession implements Closeable {
      *
      * <ul>
      *   <li>SendingTime(52)</li>
-     *   <li>the keep-alive mechanism</li>
+     *   <li>the connection keep-alive mechanism</li>
      * </ul>
      */
     public void updateCurrentTimestamp() {
@@ -333,7 +333,7 @@ public class FIXSession implements Closeable {
     }
 
     /**
-     * Keep this session alive.
+     * Keep this connection alive.
      *
      * <p>If the duration indicated by HeartBtInt(108) has passed since
      * sending a message, send a Heartbeat(0) message.</p>
@@ -489,7 +489,7 @@ public class FIXSession implements Closeable {
 
     /**
      * Send a Logon(A) message. Set EncryptMethod(98) to 0 and HeartBtInt(108)
-     * according to the session configuration.
+     * according to the connection configuration.
      *
      * @param resetSeqNum if true set ResetSeqNumFlag(141) to true, otherwise
      *   omit ResetSeqNumFlag(141)
@@ -529,7 +529,7 @@ public class FIXSession implements Closeable {
 
             FIXValue msgType = message.getMsgType();
             if (msgType == null) {
-                statusListener.close(FIXSession.this, "MsgType(35) not found");
+                statusListener.close(FIXConnection.this, "MsgType(35) not found");
                 return;
             }
 
@@ -588,7 +588,7 @@ public class FIXSession implements Closeable {
                 FIXValue possDupFlag = message.valueOf(PossDupFlag);
 
                 if (possDupFlag == null || possDupFlag.asChar() != 'Y')
-                    statusListener.tooLowMsgSeqNum(FIXSession.this, msgSeqNum, rxMsgSeqNum);
+                    statusListener.tooLowMsgSeqNum(FIXConnection.this, msgSeqNum, rxMsgSeqNum);
             }
         }
 
@@ -629,7 +629,7 @@ public class FIXSession implements Closeable {
         }
 
         private void handleReject(FIXMessage message) throws IOException {
-            statusListener.reject(FIXSession.this, message);
+            statusListener.reject(FIXConnection.this, message);
         }
 
         private boolean handleSequenceReset(FIXMessage message) throws IOException {
@@ -651,20 +651,20 @@ public class FIXSession implements Closeable {
             boolean reset = gapFillFlag == null || gapFillFlag.asChar() != 'Y';
 
             if (reset)
-                statusListener.sequenceReset(FIXSession.this);
+                statusListener.sequenceReset(FIXConnection.this);
 
             return reset;
         }
 
         private void handleLogout(FIXMessage message) throws IOException {
-            statusListener.logout(FIXSession.this, message);
+            statusListener.logout(FIXConnection.this, message);
         }
 
         private void handleLogon(FIXMessage message) throws IOException {
             if (senderCompId.isEmpty()) {
                 FIXValue value = message.valueOf(TargetCompID);
                 if (value == null) {
-                    statusListener.close(FIXSession.this, "SenderCompID(49) not found");
+                    statusListener.close(FIXConnection.this, "SenderCompID(49) not found");
                     return;
                 }
 
@@ -674,14 +674,14 @@ public class FIXSession implements Closeable {
             if (targetCompId.isEmpty()) {
                 FIXValue value = message.valueOf(SenderCompID);
                 if (value == null) {
-                    statusListener.close(FIXSession.this, "TargetCompID(56) not found");
+                    statusListener.close(FIXConnection.this, "TargetCompID(56) not found");
                     return;
                 }
 
                 targetCompId = value.asString();
             }
 
-            statusListener.logon(FIXSession.this, message);
+            statusListener.logon(FIXConnection.this, message);
         }
 
     }

@@ -1,9 +1,9 @@
 package com.paritytrading.philadelphia.initiator;
 
 import com.paritytrading.philadelphia.FIXConfig;
+import com.paritytrading.philadelphia.FIXConnection;
 import com.paritytrading.philadelphia.FIXMessage;
 import com.paritytrading.philadelphia.FIXMessageListener;
-import com.paritytrading.philadelphia.FIXSession;
 import com.paritytrading.philadelphia.FIXStatusListener;
 import java.io.IOException;
 import java.net.SocketAddress;
@@ -18,7 +18,7 @@ class Initiator implements FIXMessageListener {
         .setTargetCompID("acceptor")
         .build();
 
-    private FIXSession transport;
+    private FIXConnection connection;
 
     private Histogram histogram;
 
@@ -27,37 +27,37 @@ class Initiator implements FIXMessageListener {
     private boolean received;
 
     private Initiator(SocketChannel channel) {
-        transport = new FIXSession(channel, CONFIG, this, new FIXStatusListener() {
+        connection = new FIXConnection(channel, CONFIG, this, new FIXStatusListener() {
 
             @Override
-            public void close(FIXSession session, String message) throws IOException {
-                session.close();
+            public void close(FIXConnection connection, String message) throws IOException {
+                connection.close();
             }
 
             @Override
-            public void sequenceReset(FIXSession session) {
+            public void sequenceReset(FIXConnection connection) {
             }
 
             @Override
-            public void tooLowMsgSeqNum(FIXSession session, long receivedMsgSeqNum, long expectedMsgSeqNum) {
+            public void tooLowMsgSeqNum(FIXConnection connection, long receivedMsgSeqNum, long expectedMsgSeqNum) {
             }
 
             @Override
-            public void heartbeatTimeout(FIXSession session) throws IOException {
-                session.close();
+            public void heartbeatTimeout(FIXConnection connection) throws IOException {
+                connection.close();
             }
 
             @Override
-            public void reject(FIXSession session, FIXMessage message) throws IOException {
+            public void reject(FIXConnection connection, FIXMessage message) throws IOException {
             }
 
             @Override
-            public void logon(FIXSession session, FIXMessage message) throws IOException {
+            public void logon(FIXConnection connection, FIXMessage message) throws IOException {
             }
 
             @Override
-            public void logout(FIXSession session, FIXMessage message) throws IOException {
-                session.sendLogout();
+            public void logout(FIXConnection connection, FIXMessage message) throws IOException {
+                connection.sendLogout();
             }
 
         });
@@ -86,22 +86,22 @@ class Initiator implements FIXMessageListener {
         return histogram;
     }
 
-    public FIXSession getTransport() {
-        return transport;
+    public FIXConnection getTransport() {
+        return connection;
     }
 
     public void send(FIXMessage message) throws IOException {
         sentAtNanoTime = System.nanoTime();
 
-        transport.update(message);
-        transport.send(message);
+        connection.update(message);
+        connection.send(message);
 
         received = false;
     }
 
     public void receive() throws IOException {
         while (!received) {
-            if (transport.receive() < 0)
+            if (connection.receive() < 0)
                 return;
         }
 

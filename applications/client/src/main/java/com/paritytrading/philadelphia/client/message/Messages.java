@@ -1,8 +1,8 @@
 package com.paritytrading.philadelphia.client.message;
 
+import com.paritytrading.philadelphia.FIXConnection;
 import com.paritytrading.philadelphia.FIXMessage;
 import com.paritytrading.philadelphia.FIXMessageListener;
-import com.paritytrading.philadelphia.FIXSession;
 import com.paritytrading.philadelphia.FIXStatusListener;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.impl.factory.Lists;
@@ -25,33 +25,33 @@ public class Messages implements FIXMessageListener, FIXStatusListener {
     }
 
     @Override
-    public void close(FIXSession session, String message) {
+    public void close(FIXConnection connection, String message) {
     }
 
     @Override
-    public void sequenceReset(FIXSession session) {
+    public void sequenceReset(FIXConnection connection) {
     }
 
     @Override
-    public void tooLowMsgSeqNum(FIXSession session, long receivedMsgSeqNum, long expectedMsgSeqNum) {
+    public void tooLowMsgSeqNum(FIXConnection connection, long receivedMsgSeqNum, long expectedMsgSeqNum) {
     }
 
     @Override
-    public void heartbeatTimeout(FIXSession session) {
+    public void heartbeatTimeout(FIXConnection connection) {
     }
 
     @Override
-    public void reject(FIXSession session, FIXMessage message) {
+    public void reject(FIXConnection connection, FIXMessage message) {
         add(message);
     }
 
     @Override
-    public void logon(FIXSession session, FIXMessage message) {
+    public void logon(FIXConnection connection, FIXMessage message) {
         add(message);
     }
 
     @Override
-    public void logout(FIXSession session, FIXMessage message) {
+    public void logout(FIXConnection connection, FIXMessage message) {
         add(message);
     }
 

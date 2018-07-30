@@ -1,9 +1,9 @@
 package com.paritytrading.philadelphia.client;
 
 import com.paritytrading.philadelphia.FIXConfig;
+import com.paritytrading.philadelphia.FIXConnection;
 import com.paritytrading.philadelphia.FIXMessage;
 import com.paritytrading.philadelphia.FIXMessageListener;
-import com.paritytrading.philadelphia.FIXSession;
 import com.paritytrading.philadelphia.FIXStatusListener;
 import com.paritytrading.philadelphia.client.message.Message;
 import java.io.Closeable;
@@ -19,18 +19,18 @@ public class Session implements Closeable {
 
     private Selector selector;
 
-    private FIXSession transport;
+    private FIXConnection connection;
 
     private volatile boolean closed;
 
     private Object lock;
 
-    private Session(Selector selector, FIXSession transport) {
-        this.txMessage = transport.create();
+    private Session(Selector selector, FIXConnection connection) {
+        this.txMessage = connection.create();
 
         this.selector = selector;
 
-        this.transport = transport;
+        this.connection = connection;
 
         this.closed = false;
 
@@ -51,9 +51,9 @@ public class Session implements Closeable {
 
         channel.register(selector, SelectionKey.OP_READ);
 
-        FIXSession transport = new FIXSession(channel, config, listener, statusListener);
+        FIXConnection connection = new FIXConnection(channel, config, listener, statusListener);
 
-        return new Session(selector, transport);
+        return new Session(selector, connection);
     }
 
     @Override
@@ -61,21 +61,21 @@ public class Session implements Closeable {
         closed = true;
     }
 
-    public FIXSession getTransport() {
-        return transport;
+    public FIXConnection getConnection() {
+        return connection;
     }
 
     public void send(Message message) throws IOException {
         synchronized (lock) {
-            transport.updateCurrentTimestamp();
+            connection.updateCurrentTimestamp();
         }
 
-        transport.prepare(txMessage, message.getMsgType());
+        connection.prepare(txMessage, message.getMsgType());
 
         message.put(txMessage);
 
         synchronized (lock) {
-            transport.send(txMessage);
+            connection.send(txMessage);
         }
     }
 
@@ -90,7 +90,7 @@ public class Session implements Closeable {
                     int numKeys = selector.select(TIMEOUT_MILLIS);
                     if (numKeys > 0) {
                         synchronized (lock) {
-                            if (transport.receive() < 0)
+                            if (connection.receive() < 0)
                                 break;
                         }
 
@@ -98,16 +98,16 @@ public class Session implements Closeable {
                     }
 
                     synchronized (lock) {
-                        transport.updateCurrentTimestamp();
+                        connection.updateCurrentTimestamp();
 
-                        transport.keepAlive();
+                        connection.keepAlive();
                     }
                 }
             } catch (IOException e) {
             }
 
             try {
-                transport.close();
+                connection.close();
             } catch (IOException e) {
             }
 
