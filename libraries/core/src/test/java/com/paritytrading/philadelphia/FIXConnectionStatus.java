@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import org.jvirtanen.value.Value;
 
-class FIXStatus implements FIXStatusListener {
+class FIXConnectionStatus implements FIXConnectionStatusListener {
 
     private List<Event> events;
 
-    public FIXStatus() {
+    public FIXConnectionStatus() {
         this.events = new ArrayList<>();
     }
 

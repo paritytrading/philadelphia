@@ -2,9 +2,9 @@ package com.paritytrading.philadelphia.client;
 
 import com.paritytrading.philadelphia.FIXConfig;
 import com.paritytrading.philadelphia.FIXConnection;
+import com.paritytrading.philadelphia.FIXConnectionStatusListener;
 import com.paritytrading.philadelphia.FIXMessage;
 import com.paritytrading.philadelphia.FIXMessageListener;
-import com.paritytrading.philadelphia.FIXStatusListener;
 import com.paritytrading.philadelphia.client.message.Message;
 import java.io.Closeable;
 import java.io.IOException;
@@ -41,7 +41,7 @@ public class Session implements Closeable {
 
     public static Session open(InetSocketAddress address,
             FIXConfig config, FIXMessageListener listener,
-            FIXStatusListener statusListener) throws IOException {
+            FIXConnectionStatusListener statusListener) throws IOException {
         SocketChannel channel = SocketChannel.open();
 
         channel.connect(address);

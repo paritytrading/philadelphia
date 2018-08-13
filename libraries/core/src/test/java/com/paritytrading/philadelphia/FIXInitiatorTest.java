@@ -1,7 +1,7 @@
 package com.paritytrading.philadelphia;
 
+import static com.paritytrading.philadelphia.FIXConnectionStatus.*;
 import static com.paritytrading.philadelphia.FIXMsgTypes.*;
-import static com.paritytrading.philadelphia.FIXStatus.*;
 import static com.paritytrading.philadelphia.FIXTags.*;
 import static com.paritytrading.philadelphia.Strings.*;
 import static java.util.Arrays.*;
@@ -35,7 +35,7 @@ public class FIXInitiatorTest {
     private FIXMessages  initiatorMessages;
     private TestMessages acceptorMessages;
 
-    private FIXStatus initiatorStatus;
+    private FIXConnectionStatus initiatorStatus;
 
     private FIXConnection  initiator;
     private TestConnection acceptor;
@@ -60,7 +60,7 @@ public class FIXInitiatorTest {
         initiatorMessages = new FIXMessages();
         acceptorMessages  = new TestMessages();
 
-        initiatorStatus = new FIXStatus();
+        initiatorStatus = new FIXConnectionStatus();
 
         initiator = new FIXConnection(clock, initiatorChannel, initiatorConfig, initiatorMessages, initiatorStatus);
         acceptor  = new TestConnection(acceptorChannel, acceptorMessages);

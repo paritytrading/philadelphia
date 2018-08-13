@@ -61,7 +61,7 @@ public class FIXConnection implements Closeable {
 
     private FIXMessageParser parser;
 
-    private FIXStatusListener statusListener;
+    private FIXConnectionStatusListener statusListener;
 
     private FIXMessage txMessage;
 
@@ -82,7 +82,7 @@ public class FIXConnection implements Closeable {
      * @param statusListener the inbound status event listener
      */
     public FIXConnection(Clock clock, SocketChannel channel, FIXConfig config, FIXMessageListener listener,
-            FIXStatusListener statusListener) {
+            FIXConnectionStatusListener statusListener) {
         this.clock = clock;
 
         this.channel = channel;
@@ -147,7 +147,7 @@ public class FIXConnection implements Closeable {
      * @param statusListener the inbound status event listener
      */
     public FIXConnection(SocketChannel channel, FIXConfig config, FIXMessageListener listener,
-            FIXStatusListener statusListener) {
+            FIXConnectionStatusListener statusListener) {
         this(System::currentTimeMillis, channel, config, listener, statusListener);
     }
 

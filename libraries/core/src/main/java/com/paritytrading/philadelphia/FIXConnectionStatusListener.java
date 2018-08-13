@@ -5,7 +5,7 @@ import java.io.IOException;
 /**
  * The interface for inbound status events.
  */
-public interface FIXStatusListener {
+public interface FIXConnectionStatusListener {
 
     /**
      * Receive an indication to close the connection.

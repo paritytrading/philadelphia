@@ -2,9 +2,9 @@ package com.paritytrading.philadelphia.initiator;
 
 import com.paritytrading.philadelphia.FIXConfig;
 import com.paritytrading.philadelphia.FIXConnection;
+import com.paritytrading.philadelphia.FIXConnectionStatusListener;
 import com.paritytrading.philadelphia.FIXMessage;
 import com.paritytrading.philadelphia.FIXMessageListener;
-import com.paritytrading.philadelphia.FIXStatusListener;
 import java.io.IOException;
 import java.net.SocketAddress;
 import java.net.StandardSocketOptions;
@@ -27,7 +27,7 @@ class Initiator implements FIXMessageListener {
     private boolean received;
 
     private Initiator(SocketChannel channel) {
-        connection = new FIXConnection(channel, CONFIG, this, new FIXStatusListener() {
+        connection = new FIXConnection(channel, CONFIG, this, new FIXConnectionStatusListener() {
 
             @Override
             public void close(FIXConnection connection, String message) throws IOException {

@@ -1,13 +1,13 @@
 package com.paritytrading.philadelphia.client.message;
 
 import com.paritytrading.philadelphia.FIXConnection;
+import com.paritytrading.philadelphia.FIXConnectionStatusListener;
 import com.paritytrading.philadelphia.FIXMessage;
 import com.paritytrading.philadelphia.FIXMessageListener;
-import com.paritytrading.philadelphia.FIXStatusListener;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.impl.factory.Lists;
 
-public class Messages implements FIXMessageListener, FIXStatusListener {
+public class Messages implements FIXMessageListener, FIXConnectionStatusListener {
 
     private volatile ImmutableList<Message> messages;
 
