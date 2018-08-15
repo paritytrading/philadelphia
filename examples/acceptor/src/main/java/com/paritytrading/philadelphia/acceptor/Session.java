@@ -5,10 +5,10 @@ import static com.paritytrading.philadelphia.fix42.FIX42MsgTypes.*;
 import static com.paritytrading.philadelphia.fix42.FIX42Tags.*;
 
 import com.paritytrading.philadelphia.FIXConfig;
+import com.paritytrading.philadelphia.FIXConnection;
+import com.paritytrading.philadelphia.FIXConnectionStatusListener;
 import com.paritytrading.philadelphia.FIXMessage;
 import com.paritytrading.philadelphia.FIXMessageListener;
-import com.paritytrading.philadelphia.FIXSession;
-import com.paritytrading.philadelphia.FIXStatusListener;
 import com.paritytrading.philadelphia.FIXValue;
 import java.io.IOException;
 import java.nio.channels.SocketChannel;
@@ -17,7 +17,7 @@ class Session implements FIXMessageListener {
 
     private static final FIXConfig CONFIG = new FIXConfig.Builder().build();
 
-    private FIXSession transport;
+    private FIXConnection connection;
 
     private FIXMessage report;
 
@@ -34,47 +34,47 @@ class Session implements FIXMessageListener {
     private long nextExecId;
 
     public Session(SocketChannel channel) {
-        transport = new FIXSession(channel, CONFIG, this, new FIXStatusListener() {
+        connection = new FIXConnection(channel, CONFIG, this, new FIXConnectionStatusListener() {
 
             @Override
-            public void close(FIXSession session, String message) throws IOException {
-                session.close();
+            public void close(FIXConnection connection, String message) throws IOException {
+                connection.close();
             }
 
             @Override
-            public void sequenceReset(FIXSession session) {
+            public void sequenceReset(FIXConnection connection) {
             }
 
             @Override
-            public void tooLowMsgSeqNum(FIXSession session, long receivedMsgSeqNum, long expectedMsgSeqNum) {
+            public void tooLowMsgSeqNum(FIXConnection connection, long receivedMsgSeqNum, long expectedMsgSeqNum) {
             }
 
             @Override
-            public void heartbeatTimeout(FIXSession session) throws IOException {
-                session.close();
+            public void heartbeatTimeout(FIXConnection connection) throws IOException {
+                connection.close();
             }
 
             @Override
-            public void reject(FIXSession session, FIXMessage message) throws IOException {
+            public void reject(FIXConnection connection, FIXMessage message) throws IOException {
             }
 
             @Override
-            public void logon(FIXSession session, FIXMessage message) throws IOException {
-                session.sendLogon(true);
+            public void logon(FIXConnection connection, FIXMessage message) throws IOException {
+                connection.sendLogon(true);
 
-                session.updateCompID(report);
+                connection.updateCompID(report);
             }
 
             @Override
-            public void logout(FIXSession session, FIXMessage message) throws IOException {
-                session.sendLogout();
+            public void logout(FIXConnection connection, FIXMessage message) throws IOException {
+                connection.sendLogout();
             }
 
         });
 
-        report = transport.create();
+        report = connection.create();
 
-        transport.prepare(report, ExecutionReport);
+        connection.prepare(report, ExecutionReport);
 
         orderId   = report.addField(OrderID);
         clOrdId   = report.addField(ClOrdID);
@@ -128,22 +128,22 @@ class Session implements FIXMessageListener {
         }
 
         if (clOrdId.length() == 0) {
-            transport.sendReject(message.getMsgSeqNum(), 1, "ClOrdID(11) not found");
+            connection.sendReject(message.getMsgSeqNum(), 1, "ClOrdID(11) not found");
             return;
         }
 
         if (symbol.length() == 0) {
-            transport.sendReject(message.getMsgSeqNum(), 1, "Symbol(55) not found");
+            connection.sendReject(message.getMsgSeqNum(), 1, "Symbol(55) not found");
             return;
         }
 
         if (orderQty.length() == 0) {
-            transport.sendReject(message.getMsgSeqNum(), 1, "OrderQty(38) not found");
+            connection.sendReject(message.getMsgSeqNum(), 1, "OrderQty(38) not found");
             return;
         }
 
         if (price.length() == 0) {
-            transport.sendReject(message.getMsgSeqNum(), 1, "Price(44) not found");
+            connection.sendReject(message.getMsgSeqNum(), 1, "Price(44) not found");
             return;
         }
 
@@ -151,12 +151,12 @@ class Session implements FIXMessageListener {
         execId.setInt(nextExecId++);
         leavesQty.set(orderQty);
 
-        transport.update(report);
-        transport.send(report);
+        connection.update(report);
+        connection.send(report);
     }
 
-    public FIXSession getTransport() {
-        return transport;
+    public FIXConnection getConnection() {
+        return connection;
     }
 
 }

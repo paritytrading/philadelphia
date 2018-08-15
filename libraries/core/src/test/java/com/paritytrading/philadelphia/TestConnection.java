@@ -9,7 +9,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.util.List;
 
-class TestSession implements Closeable {
+class TestConnection implements Closeable {
 
     private SocketChannel channel;
 
@@ -18,7 +18,7 @@ class TestSession implements Closeable {
 
     private TestMessageParser parser;
 
-    public TestSession(SocketChannel channel, TestMessageListener listener) {
+    public TestConnection(SocketChannel channel, TestMessageListener listener) {
         this.channel = channel;
 
         this.parser = new TestMessageParser(listener);

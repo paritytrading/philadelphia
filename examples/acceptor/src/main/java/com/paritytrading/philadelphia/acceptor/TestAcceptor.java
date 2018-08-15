@@ -32,18 +32,18 @@ class TestAcceptor {
         int i = 0;
 
         while (true) {
-            if (session.getTransport().receive() < 0)
+            if (session.getConnection().receive() < 0)
                 break;
 
             if (i % 1000 == 0) {
-                session.getTransport().updateCurrentTimestamp();
-                session.getTransport().keepAlive();
+                session.getConnection().updateCurrentTimestamp();
+                session.getConnection().keepAlive();
             }
 
             i++;
         }
 
-        session.getTransport().close();
+        session.getConnection().close();
     }
 
 }

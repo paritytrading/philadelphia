@@ -1,7 +1,7 @@
 package com.paritytrading.philadelphia;
 
+import static com.paritytrading.philadelphia.FIXConnectionStatus.*;
 import static com.paritytrading.philadelphia.FIXMsgTypes.*;
-import static com.paritytrading.philadelphia.FIXStatus.*;
 import static com.paritytrading.philadelphia.FIXTags.*;
 import static com.paritytrading.philadelphia.Strings.*;
 import static java.util.Arrays.*;
@@ -35,10 +35,10 @@ public class FIXInitiatorTest {
     private FIXMessages  initiatorMessages;
     private TestMessages acceptorMessages;
 
-    private FIXStatus initiatorStatus;
+    private FIXConnectionStatus initiatorStatus;
 
-    private FIXSession  initiator;
-    private TestSession acceptor;
+    private FIXConnection  initiator;
+    private TestConnection acceptor;
 
     @Before
     public void setUp() throws IOException {
@@ -60,10 +60,10 @@ public class FIXInitiatorTest {
         initiatorMessages = new FIXMessages();
         acceptorMessages  = new TestMessages();
 
-        initiatorStatus = new FIXStatus();
+        initiatorStatus = new FIXConnectionStatus();
 
-        initiator = new FIXSession(clock, initiatorChannel, initiatorConfig, initiatorMessages, initiatorStatus);
-        acceptor  = new TestSession(acceptorChannel, acceptorMessages);
+        initiator = new FIXConnection(clock, initiatorChannel, initiatorConfig, initiatorMessages, initiatorStatus);
+        acceptor  = new TestConnection(acceptorChannel, acceptorMessages);
     }
 
     @Test
@@ -367,16 +367,16 @@ public class FIXInitiatorTest {
         initiatorMessage(logout);
     }
 
-    private void receiveBlocking(FIXSession session) throws IOException {
-        SocketChannel channel = session.getChannel();
+    private void receiveBlocking(FIXConnection connection) throws IOException {
+        SocketChannel channel = connection.getChannel();
 
         if (channel.isBlocking()) {
-            session.receive();
+            connection.receive();
         } else {
             channel.configureBlocking(true);
 
             try {
-                session.receive();
+                connection.receive();
             } finally {
                 channel.configureBlocking(false);
             }
