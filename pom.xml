@@ -180,6 +180,7 @@
         <configuration>
           <compilerArgs>
             <arg>-Xlint:deprecation</arg>
+            <arg>-Xlint:unchecked</arg>
           </compilerArgs>
           <source>${java.version}</source>
           <target>${java.version}</target>
