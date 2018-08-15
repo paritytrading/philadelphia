@@ -2,7 +2,6 @@ package com.paritytrading.philadelphia.client.command;
 
 import com.paritytrading.philadelphia.client.TerminalClient;
 import com.paritytrading.philadelphia.client.message.Message;
-import com.paritytrading.philadelphia.client.message.Messages;
 import java.util.Scanner;
 import org.eclipse.collections.api.list.ImmutableList;
 
