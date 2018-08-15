@@ -19,6 +19,7 @@ public class FIXValueTest {
         value = new FIXValue(32);
     }
 
+    @Test
     public void byteAt() {
         value.setString("FOO");
 
@@ -30,6 +31,7 @@ public class FIXValueTest {
         assertArrayEquals(new byte[] { 'F', 'O', 'O' }, bytes);
     }
 
+    @Test
     public void copyTo() {
         value.setInt(123);
 
