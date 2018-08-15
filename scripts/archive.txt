@@ -1,6 +1,7 @@
 CHANGELOG.md
 LICENSE.txt
 README.md
+UPGRADE-1.0.0.md
 applications/client/README.md
 applications/client/etc/example.conf
 applications/client/philadelphia-client.jar
