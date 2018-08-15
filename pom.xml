@@ -14,7 +14,7 @@
   <packaging>pom</packaging>
 
   <name>Philadelphia (Parent)</name>
-  <description>FIX engine for the JVM.</description>
+  <description>A low-latency Financial Information Exchange (FIX) engine for the JVM.</description>
   <url>https://github.com/paritytrading/philadelphia</url>
 
   <licenses>

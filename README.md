@@ -1,6 +1,6 @@
 # Philadelphia
 
-Philadelphia is a low latency Financial Information Exchange (FIX) engine for
+Philadelphia is a low-latency Financial Information Exchange (FIX) engine for
 the JVM.
 
 You can use Philadelphia to connect to stock exchanges, brokerage firms, and
