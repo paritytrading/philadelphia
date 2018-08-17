@@ -1,5 +1,20 @@
 # Release Notes
 
+## 1.0.0 (2018-08-17)
+
+- Remove `FIXField` class
+- Add `FIXMessage#tagAt()` method
+- Add `FIXMessage#valueAt()` method
+- Rename `FIXMessage#findIndex()` method to `indexOf()`
+- Rename `FIXMessage#findField()` method to `valueOf()`
+- Optimize TCP socket handling
+- Add `FIXMessage.fromString()` method
+- Rename `FIXSession` class to `FIXConnection`
+- Rename `FIXStatusListener` class to `FIXConnectionStatusListener`
+- Upgrade to Joda-Time 2.10
+
+See the [upgrade instructions](UPGRADE-1.0.0.md) for more details.
+
 ## 0.7.0 (2018-06-25)
 
 - Add comment support to Philadelphia Terminal Client
