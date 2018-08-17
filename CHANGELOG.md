@@ -8,7 +8,7 @@
 - Add `sleep` command to Philadelphia Terminal Client
 - Add `wait` command to Philadelphia Terminal Client
 - Make `Clock` interface public
-- Add `FIXMessage#findIndex` method
+- Add `FIXMessage#findIndex()` method
 - Clean up MatchType(574) handling in Philadelphia FIX 5.0
 - Add Philadelphia Code Generator
 
