@@ -80,7 +80,7 @@ public class FIXValue {
      */
     public void set(FIXValue value) {
         offset = 0;
-        length = value.length();
+        length = value.length;
 
         System.arraycopy(value.bytes, 0, bytes, 0, length + 1);
     }
