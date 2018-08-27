@@ -419,15 +419,15 @@ public class FIXConnection implements Closeable {
         bodyLength.setInt(txBodyBuffer.position());
 
         txHeaderBuffer.clear();
-        FIXTags.put(txHeaderBuffer, BeginString);
+        txHeaderBuffer.put(BEGIN_STRING);
         beginString.put(txHeaderBuffer);
-        FIXTags.put(txHeaderBuffer, BodyLength);
+        txHeaderBuffer.put(BODY_LENGTH);
         bodyLength.put(txHeaderBuffer);
 
         checkSum.setCheckSum(FIXCheckSums.sum(txHeaderBuffer, 0, txHeaderBuffer.position()) +
                 FIXCheckSums.sum(txBodyBuffer, 0, txBodyBuffer.position()));
 
-        FIXTags.put(txBodyBuffer, CheckSum);
+        txBodyBuffer.put(CHECK_SUM);
         checkSum.put(txBodyBuffer);
 
         txHeaderBuffer.flip();
