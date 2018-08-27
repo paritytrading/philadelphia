@@ -22,7 +22,6 @@ public class FIXConnection implements Closeable {
 
     private FIXConfig config;
 
-    private FIXValue beginString;
     private FIXValue bodyLength;
     private FIXValue checkSum;
 
@@ -35,6 +34,9 @@ public class FIXConnection implements Closeable {
     private ByteBuffer rxBuffer;
 
     private ByteBuffer txHeaderBuffer;
+
+    private int bodyLengthOffset;
+
     private ByteBuffer txBodyBuffer;
 
     private ByteBuffer[] txBuffers;
@@ -89,11 +91,8 @@ public class FIXConnection implements Closeable {
 
         this.config = config;
 
-        this.beginString = new FIXValue(BEGIN_STRING_FIELD_CAPACITY);
-        this.bodyLength  = new FIXValue(BODY_LENGTH_FIELD_CAPACITY);
-        this.checkSum    = new FIXValue(CHECK_SUM_FIELD_CAPACITY);
-
-        this.beginString.setString(config.getVersion().getBeginString());
+        this.bodyLength = new FIXValue(BODY_LENGTH_FIELD_CAPACITY);
+        this.checkSum   = new FIXValue(CHECK_SUM_FIELD_CAPACITY);
 
         this.senderCompId = config.getSenderCompID();
         this.targetCompId = config.getTargetCompID();
@@ -110,6 +109,17 @@ public class FIXConnection implements Closeable {
         this.rxBuffer = ByteBuffer.allocateDirect(config.getRxBufferCapacity());
 
         this.txHeaderBuffer = ByteBuffer.allocateDirect(config.getTxBufferCapacity());
+
+        FIXValue beginString = new FIXValue(BEGIN_STRING_FIELD_CAPACITY);
+
+        beginString.setString(config.getVersion().getBeginString());
+
+        this.txHeaderBuffer.put(BEGIN_STRING);
+        beginString.put(this.txHeaderBuffer);
+        this.txHeaderBuffer.put(BODY_LENGTH);
+
+        this.bodyLengthOffset = this.txHeaderBuffer.position();
+
         this.txBodyBuffer = ByteBuffer.allocateDirect(config.getTxBufferCapacity());
 
         this.txBuffers = new ByteBuffer[2];
@@ -418,10 +428,7 @@ public class FIXConnection implements Closeable {
 
         bodyLength.setInt(txBodyBuffer.position());
 
-        txHeaderBuffer.clear();
-        txHeaderBuffer.put(BEGIN_STRING);
-        beginString.put(txHeaderBuffer);
-        txHeaderBuffer.put(BODY_LENGTH);
+        txHeaderBuffer.position(bodyLengthOffset);
         bodyLength.put(txHeaderBuffer);
 
         checkSum.setCheckSum(FIXCheckSums.sum(txHeaderBuffer, 0, txHeaderBuffer.position()) +
