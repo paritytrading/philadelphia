@@ -129,7 +129,7 @@ public class FIXValue {
             if (b < '0' || b > '9')
                 throw new FIXValueFormatException("Not an integer");
 
-            value = 10 * value + bytes[i] - '0';
+            value = 10 * value + b - '0';
         }
 
         return sign * value;
