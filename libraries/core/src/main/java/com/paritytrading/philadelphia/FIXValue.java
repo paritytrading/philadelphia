@@ -243,8 +243,8 @@ public class FIXValue {
      * @param s a string builder
      */
     public void asString(StringBuilder s) {
-        for (int i = offset; i < offset + length; i++)
-            s.append((char)bytes[i]);
+        for (int i = 0; i < length; i++)
+            s.append((char)bytes[offset + i]);
     }
 
     /**
