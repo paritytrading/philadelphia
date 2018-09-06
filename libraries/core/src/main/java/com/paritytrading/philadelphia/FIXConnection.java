@@ -280,13 +280,13 @@ public class FIXConnection implements Closeable {
     public void update(FIXMessage message) {
         FIXValue msgSeqNum = message.valueOf(MsgSeqNum);
         if (msgSeqNum == null)
-            throw new IllegalStateException("MsgSeqNum(34) not found");
+            msgSeqNumNotFound();
 
         msgSeqNum.setInt(txMsgSeqNum);
 
         FIXValue sendingTime = message.valueOf(SendingTime);
         if (sendingTime == null)
-            throw new IllegalStateException("SendingTime(52) not found");
+            sendingTimeNotFound();
 
         sendingTime.setString(currentTimestamp);
     }
@@ -303,13 +303,13 @@ public class FIXConnection implements Closeable {
 
         value = message.valueOf(SenderCompID);
         if (value == null)
-            throw new IllegalStateException("SenderCompID(49) not found");
+            senderCompIDNotFound();
 
         value.setString(senderCompId);
 
         value = message.valueOf(TargetCompID);
         if (value == null)
-            throw new IllegalStateException("TargetCompID(56) not found");
+            targetCompIDNotFound();
 
         value.setString(targetCompId);
     }
@@ -409,7 +409,7 @@ public class FIXConnection implements Closeable {
         rxBuffer.compact();
 
         if (rxBuffer.position() == rxBuffer.capacity())
-            throw new FIXMessageOverflowException("Too long message");
+            tooLongMessage();
 
         lastRxMillis = currentTimeMillis;
 
@@ -732,6 +732,26 @@ public class FIXConnection implements Closeable {
         txMessage.addField(NewSeqNo).setInt(newSeqNo);
 
         send(txMessage);
+    }
+
+    private static void msgSeqNumNotFound() {
+        throw new IllegalStateException("MsgSeqNum(34) not found");
+    }
+
+    private static void sendingTimeNotFound() {
+        throw new IllegalStateException("SendingTime(52) not found");
+    }
+
+    private static void senderCompIDNotFound() {
+        throw new IllegalStateException("SenderCompID(49) not found");
+    }
+
+    private static void targetCompIDNotFound() {
+        throw new IllegalStateException("TargetCompID(56) not found");
+    }
+
+    private static void tooLongMessage() throws FIXMessageOverflowException {
+        throw new FIXMessageOverflowException("Too long message");
     }
 
 }
