@@ -93,7 +93,7 @@ public class FIXValue {
      */
     public char asChar() {
         if (length != 1)
-            throw new FIXValueFormatException("Not a character");
+            notChar();
 
         return (char)bytes[offset];
     }
@@ -127,7 +127,7 @@ public class FIXValue {
             byte b = bytes[i];
 
             if (b < '0' || b > '9')
-                throw new FIXValueFormatException("Not an integer");
+                notInt();
 
             value = 10 * value + b - '0';
         }
@@ -182,7 +182,7 @@ public class FIXValue {
                     continue;
                 }
 
-                throw new FIXValueFormatException("Not a float");
+                notFloat();
             }
 
             value   = 10 * value + b - '0';
@@ -271,7 +271,7 @@ public class FIXValue {
      */
     public void asDate(MutableDateTime d) {
         if (length != 8)
-            throw new FIXValueFormatException("Not a date");
+            notDate();
 
         int year        = getDigits(4, offset + 0);
         int monthOfYear = getDigits(2, offset + 4);
@@ -303,7 +303,7 @@ public class FIXValue {
      */
     public void asTimeOnly(MutableDateTime t) {
         if (length != 8 && length != 12)
-            throw new FIXValueFormatException("Not a time only");
+            notTimeOnly();
 
         t.setHourOfDay(getDigits(2, offset + 0));
         t.setMinuteOfHour(getDigits(2, offset + 3));
@@ -347,7 +347,7 @@ public class FIXValue {
      */
     public void asTimestamp(MutableDateTime t) {
         if (length != 17 && length != 21)
-            throw new FIXValueFormatException("Not a timestamp");
+            notTimestamp();
 
         int year           = getDigits(4, offset + 0);
         int monthOfYear    = getDigits(2, offset + 4);
@@ -438,7 +438,7 @@ public class FIXValue {
                 return true;
 
             if (++length == bytes.length)
-                throw new FIXValueOverflowException("Too long value");
+                tooLongValue();
         }
 
         return false;
@@ -463,7 +463,7 @@ public class FIXValue {
             byte b = bytes[i];
 
             if (b < '0' || b > '9')
-                throw new FIXValueFormatException("Not a digit");
+                notDigit();
 
             value = b - '0' + 10 * value;
         }
@@ -477,6 +477,38 @@ public class FIXValue {
 
             l /= 10;
         }
+    }
+
+    private static void notChar() throws FIXValueFormatException {
+        throw new FIXValueFormatException("Not a character");
+    }
+
+    private static void notDate() throws FIXValueFormatException {
+        throw new FIXValueFormatException("Not a date");
+    }
+
+    private static void notDigit() throws FIXValueFormatException {
+        throw new FIXValueFormatException("Not a digit");
+    }
+
+    private static void notFloat() throws FIXValueFormatException {
+        throw new FIXValueFormatException("Not a float");
+    }
+
+    private static void notInt() throws FIXValueFormatException {
+        throw new FIXValueFormatException("Not an integer");
+    }
+
+    private static void notTimeOnly() throws FIXValueFormatException {
+        throw new FIXValueFormatException("Not a time only");
+    }
+
+    private static void notTimestamp() throws FIXValueFormatException {
+        throw new FIXValueFormatException("Not a timestamp");
+    }
+
+    private static void tooLongValue() throws FIXValueOverflowException {
+        throw new FIXValueOverflowException("Too long value");
     }
 
 }
