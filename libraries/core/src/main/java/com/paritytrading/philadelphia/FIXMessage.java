@@ -168,7 +168,7 @@ public class FIXMessage {
 
         while (buffer.hasRemaining()) {
             if (count == tags.length)
-                throw new FIXMessageOverflowException("Too many fields");
+                tooManyFields();
 
             int tag = FIXTags.get(buffer);
             if (tag == 0)
@@ -260,6 +260,10 @@ public class FIXMessage {
             values[i].asString(builder);
             builder.append('|');
         }
+    }
+
+    private static void tooManyFields() throws FIXMessageOverflowException {
+        throw new FIXMessageOverflowException("Too many fields");
     }
 
 }
