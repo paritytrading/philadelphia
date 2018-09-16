@@ -2,6 +2,7 @@ package com.paritytrading.philadelphia;
 
 import static com.paritytrading.philadelphia.FIX.*;
 import static com.paritytrading.philadelphia.FIXMsgTypes.*;
+import static com.paritytrading.philadelphia.FIXSessionRejectReasons.*;
 import static com.paritytrading.philadelphia.FIXTags.*;
 
 import java.io.Closeable;
@@ -606,7 +607,7 @@ public class FIXConnection implements Closeable {
         private void handleTestRequest(FIXMessage message) throws IOException {
             FIXValue testReqId = message.valueOf(TestReqID);
             if (testReqId == null) {
-                sendReject(message.getMsgSeqNum(), 1, "TestReqID(112) not found");
+                sendReject(message.getMsgSeqNum(), RequiredTagMissing, "TestReqID(112) not found");
 
                 return;
             }
@@ -621,14 +622,14 @@ public class FIXConnection implements Closeable {
         private void handleResendRequest(FIXMessage message) throws IOException {
             FIXValue beginSeqNo = message.valueOf(BeginSeqNo);
             if (beginSeqNo == null) {
-                sendReject(message.getMsgSeqNum(), 1, "BeginSeqNo(7) not found");
+                sendReject(message.getMsgSeqNum(), RequiredTagMissing, "BeginSeqNo(7) not found");
 
                 return;
             }
 
             FIXValue endSeqNo = message.valueOf(EndSeqNo);
             if (endSeqNo == null) {
-                sendReject(message.getMsgSeqNum(), 1, "EndSeqNo(16) not found");
+                sendReject(message.getMsgSeqNum(), RequiredTagMissing, "EndSeqNo(16) not found");
                 return;
             }
 
@@ -642,13 +643,13 @@ public class FIXConnection implements Closeable {
         private boolean handleSequenceReset(FIXMessage message) throws IOException {
             FIXValue value = message.valueOf(NewSeqNo);
             if (value == null) {
-                sendReject(message.getMsgSeqNum(), 1, "NewSeqNo(36) not found");
+                sendReject(message.getMsgSeqNum(), RequiredTagMissing, "NewSeqNo(36) not found");
                 return true;
             }
 
             long newSeqNo = value.asInt();
             if (newSeqNo < rxMsgSeqNum) {
-                sendReject(message.getMsgSeqNum(), 5, "NewSeqNo(36) too low");
+                sendReject(message.getMsgSeqNum(), ValueIsIncorrect, "NewSeqNo(36) too low");
                 return true;
             }
 
