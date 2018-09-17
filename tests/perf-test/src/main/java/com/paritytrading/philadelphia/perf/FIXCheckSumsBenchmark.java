@@ -37,6 +37,10 @@ public class FIXCheckSumsBenchmark {
     }
 
     @Benchmark
+    public void baseline() {
+    }
+
+    @Benchmark
     public long sum() {
         return FIXCheckSums.sum(buffer, 0, buffer.remaining());
     }
