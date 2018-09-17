@@ -64,6 +64,10 @@ public class FIXMessageBenchmark {
     }
 
     @Benchmark
+    public void baseline() {
+    }
+
+    @Benchmark
     public FIXMessage get() throws FIXMessageOverflowException, FIXValueOverflowException {
         message.get(buffer);
 
