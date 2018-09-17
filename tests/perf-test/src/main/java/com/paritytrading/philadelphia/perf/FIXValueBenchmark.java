@@ -82,6 +82,10 @@ public class FIXValueBenchmark {
     }
 
     @Benchmark
+    public void baseline() {
+    }
+
+    @Benchmark
     public char asChar() {
         return charValue.asChar();
     }
