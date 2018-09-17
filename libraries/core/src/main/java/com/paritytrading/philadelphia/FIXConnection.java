@@ -608,7 +608,6 @@ public class FIXConnection implements Closeable {
             FIXValue testReqId = message.valueOf(TestReqID);
             if (testReqId == null) {
                 sendReject(message.getMsgSeqNum(), RequiredTagMissing, "TestReqID(112) not found");
-
                 return;
             }
 
@@ -623,7 +622,6 @@ public class FIXConnection implements Closeable {
             FIXValue beginSeqNo = message.valueOf(BeginSeqNo);
             if (beginSeqNo == null) {
                 sendReject(message.getMsgSeqNum(), RequiredTagMissing, "BeginSeqNo(7) not found");
-
                 return;
             }
 
