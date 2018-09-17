@@ -35,6 +35,10 @@ public class FIXTimestampsBenchmark {
     }
 
     @Benchmark
+    public void baseline() {
+    }
+
+    @Benchmark
     public StringBuilder append() {
         builder.setLength(0);
 
