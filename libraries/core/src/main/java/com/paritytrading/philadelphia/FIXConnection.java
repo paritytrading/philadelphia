@@ -275,21 +275,12 @@ public class FIXConnection implements Closeable {
      * </ul>
      *
      * @param message a message
-     * @throws IllegalStateException if MsgSeqNum(34) or SendingTime(52) is
+     * @throws NullPointerException if MsgSeqNum(34) or SendingTime(52) is
      *   not found
      */
     public void update(FIXMessage message) {
-        FIXValue msgSeqNum = message.valueOf(MsgSeqNum);
-        if (msgSeqNum == null)
-            msgSeqNumNotFound();
-
-        msgSeqNum.setInt(txMsgSeqNum);
-
-        FIXValue sendingTime = message.valueOf(SendingTime);
-        if (sendingTime == null)
-            sendingTimeNotFound();
-
-        sendingTime.setString(currentTimestamp);
+        message.valueOf(MsgSeqNum).setInt(txMsgSeqNum);
+        message.valueOf(SendingTime).setString(currentTimestamp);
     }
 
     /**
@@ -731,14 +722,6 @@ public class FIXConnection implements Closeable {
         txMessage.addField(NewSeqNo).setInt(newSeqNo);
 
         send(txMessage);
-    }
-
-    private static void msgSeqNumNotFound() {
-        throw new IllegalStateException("MsgSeqNum(34) not found");
-    }
-
-    private static void sendingTimeNotFound() {
-        throw new IllegalStateException("SendingTime(52) not found");
     }
 
     private static void senderCompIDNotFound() {
