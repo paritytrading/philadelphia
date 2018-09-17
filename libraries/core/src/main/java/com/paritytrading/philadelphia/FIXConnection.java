@@ -287,23 +287,12 @@ public class FIXConnection implements Closeable {
      * Update SenderCompID(49) and TargetCompID(56).
      *
      * @param message a message
-     * @throws IllegalStateException if SenderCompID(49) or TargetCompID(56)
+     * @throws NullPointerException if SenderCompID(49) or TargetCompID(56)
      *   is not found
      */
     public void updateCompID(FIXMessage message) {
-        FIXValue value;
-
-        value = message.valueOf(SenderCompID);
-        if (value == null)
-            senderCompIDNotFound();
-
-        value.setString(senderCompId);
-
-        value = message.valueOf(TargetCompID);
-        if (value == null)
-            targetCompIDNotFound();
-
-        value.setString(targetCompId);
+        message.valueOf(SenderCompID).setString(senderCompId);
+        message.valueOf(TargetCompID).setString(targetCompId);
     }
 
     /**
@@ -722,14 +711,6 @@ public class FIXConnection implements Closeable {
         txMessage.addField(NewSeqNo).setInt(newSeqNo);
 
         send(txMessage);
-    }
-
-    private static void senderCompIDNotFound() {
-        throw new IllegalStateException("SenderCompID(49) not found");
-    }
-
-    private static void targetCompIDNotFound() {
-        throw new IllegalStateException("TargetCompID(56) not found");
     }
 
     private static void tooLongMessage() throws FIXMessageOverflowException {
