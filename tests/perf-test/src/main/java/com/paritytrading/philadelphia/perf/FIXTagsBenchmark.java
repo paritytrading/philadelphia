@@ -33,6 +33,10 @@ public class FIXTagsBenchmark {
     }
 
     @Benchmark
+    public void baseline() {
+    }
+
+    @Benchmark
     public long get() {
         long tag = FIXTags.get(buffer);
 
