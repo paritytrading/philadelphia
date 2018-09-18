@@ -8,7 +8,7 @@ import org.junit.Test;
 public class FIXTimestampsTest {
 
     @Test
-    public void format() {
+    public void append() {
         MutableDateTime timestamp = new MutableDateTime(2015, 9, 1, 9, 30, 5, 250);
 
         StringBuilder builder = new StringBuilder();
