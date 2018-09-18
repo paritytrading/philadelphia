@@ -33,7 +33,10 @@ public class FIXCheckSumsBenchmark {
             "49=initiator\u000156=acceptor\u000152=20150924-09:30:05.250\u0001" +
             "112=foo\u0001";
 
-        buffer = ByteBuffer.wrap(message.getBytes(US_ASCII));
+        buffer = ByteBuffer.allocateDirect(message.length());
+
+        buffer.put(message.getBytes(US_ASCII));
+        buffer.flip();
     }
 
     @Benchmark
