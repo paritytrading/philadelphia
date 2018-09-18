@@ -29,7 +29,7 @@ public class FIXTimestampsBenchmark {
 
     @Setup(Level.Iteration)
     public void prepare() {
-        builder = new StringBuilder(32);
+        builder = new StringBuilder(21);
 
         timestamp = new MutableDateTime(2015, 9, 24, 9, 30, 5, 250);
     }
