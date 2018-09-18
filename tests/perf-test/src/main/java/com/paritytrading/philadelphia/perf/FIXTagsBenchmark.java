@@ -1,7 +1,5 @@
 package com.paritytrading.philadelphia.perf;
 
-import static java.nio.charset.StandardCharsets.*;
-
 import com.paritytrading.philadelphia.FIXTags;
 import java.nio.ByteBuffer;
 import java.util.concurrent.TimeUnit;
@@ -29,7 +27,12 @@ public class FIXTagsBenchmark {
 
     @Setup(Level.Iteration)
     public void prepare() {
-        buffer = ByteBuffer.wrap("123=".getBytes(US_ASCII));
+        byte[] bytes = new byte[] { '1', '2', '3', '=' };
+
+        buffer = ByteBuffer.allocateDirect(bytes.length);
+
+        buffer.put(bytes);
+        buffer.flip();
     }
 
     @Benchmark
