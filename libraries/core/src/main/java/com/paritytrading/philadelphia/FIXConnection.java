@@ -499,12 +499,8 @@ public class FIXConnection implements Closeable {
 
         private FIXMessageListener downstream;
 
-        private StringBuilder string;
-
         MessageHandler(FIXMessageListener downstream) {
             this.downstream = downstream;
-
-            this.string = new StringBuilder(config.getFieldCapacity());
         }
 
         @Override
@@ -591,11 +587,7 @@ public class FIXConnection implements Closeable {
                 return;
             }
 
-            string.setLength(0);
-
-            testReqId.asString(string);
-
-            sendHeartbeat(string);
+            sendHeartbeat(testReqId);
         }
 
         private void handleResendRequest(FIXMessage message) throws IOException {
@@ -678,10 +670,10 @@ public class FIXConnection implements Closeable {
         send(txMessage);
     }
 
-    private void sendHeartbeat(CharSequence testReqId) throws IOException {
+    private void sendHeartbeat(FIXValue testReqId) throws IOException {
         prepare(txMessage, Heartbeat);
 
-        txMessage.addField(TestReqID).setString(testReqId);
+        txMessage.addField(TestReqID).set(testReqId);
 
         send(txMessage);
     }
