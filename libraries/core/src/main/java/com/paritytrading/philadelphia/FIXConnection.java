@@ -664,7 +664,7 @@ public class FIXConnection implements Closeable {
 
     }
 
-    void sendHeartbeat() throws IOException {
+    private void sendHeartbeat() throws IOException {
         prepare(txMessage, Heartbeat);
 
         send(txMessage);
