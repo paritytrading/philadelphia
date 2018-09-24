@@ -286,9 +286,9 @@ public class FIXValue {
      * @param d a date
      */
     public void setDate(ReadableDateTime d) {
-        setDigits(d.getYear(), 4, 0);
-        setDigits(d.getMonthOfYear(), 2, 4);
-        setDigits(d.getDayOfMonth(), 2, 6);
+        setDigits(d.getYear(), 0, 4);
+        setDigits(d.getMonthOfYear(), 4, 2);
+        setDigits(d.getDayOfMonth(), 6, 2);
         bytes[8] = SOH;
 
         length = 8;
@@ -318,15 +318,15 @@ public class FIXValue {
      * @param millis if true set milliseconds, otherwise do not set milliseconds
      */
     public void setTimeOnly(ReadableDateTime t, boolean millis) {
-        setDigits(t.getHourOfDay(), 2, 0);
+        setDigits(t.getHourOfDay(), 0, 2);
         bytes[2] = ':';
-        setDigits(t.getMinuteOfHour(), 2, 3);
+        setDigits(t.getMinuteOfHour(), 3, 2);
         bytes[5] = ':';
-        setDigits(t.getSecondOfMinute(), 2, 6);
+        setDigits(t.getSecondOfMinute(), 6, 2);
 
         if (millis) {
             bytes[8] = '.';
-            setDigits(t.getMillisOfSecond(), 3, 9);
+            setDigits(t.getMillisOfSecond(), 9, 3);
             bytes[12] = SOH;
 
             length = 12;
@@ -368,19 +368,19 @@ public class FIXValue {
      * @param millis if true set milliseconds, otherwise do not set milliseconds
      */
     public void setTimestamp(ReadableDateTime t, boolean millis) {
-        setDigits(t.getYear(), 4, 0);
-        setDigits(t.getMonthOfYear(), 2, 4);
-        setDigits(t.getDayOfMonth(), 2, 6);
+        setDigits(t.getYear(), 0, 4);
+        setDigits(t.getMonthOfYear(), 4, 2);
+        setDigits(t.getDayOfMonth(), 6, 2);
         bytes[8] = '-';
-        setDigits(t.getHourOfDay(), 2, 9);
+        setDigits(t.getHourOfDay(), 9, 2);
         bytes[11] = ':';
-        setDigits(t.getMinuteOfHour(), 2, 12);
+        setDigits(t.getMinuteOfHour(), 12, 2);
         bytes[14] = ':';
-        setDigits(t.getSecondOfMinute(), 2, 15);
+        setDigits(t.getSecondOfMinute(), 15, 2);
 
         if (millis) {
             bytes[17] = '.';
-            setDigits(t.getMillisOfSecond(), 3, 18);
+            setDigits(t.getMillisOfSecond(), 18, 3);
             bytes[21] = SOH;
 
             length = 21;
@@ -409,7 +409,7 @@ public class FIXValue {
      * @param c a checksum
      */
     public void setCheckSum(long c) {
-        setDigits(c % 256, 3, 0);
+        setDigits(c % 256, 0, 3);
         bytes[3] = SOH;
 
         offset = 0;
@@ -471,7 +471,7 @@ public class FIXValue {
         return value;
     }
 
-    private void setDigits(long l, int digits, int offset) {
+    private void setDigits(long l, int offset, int digits) {
         for (int i = offset + digits - 1; i >= offset; i--) {
             bytes[i] = (byte)('0' + l % 10);
 

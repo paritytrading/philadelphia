@@ -7,6 +7,8 @@ import org.joda.time.ReadableDateTime;
  */
 public class FIXTimestamps {
 
+    private static final ThreadLocal<char[]> BUFFER = ThreadLocal.withInitial(() -> new char[21]);
+
     private FIXTimestamps() {
     }
 
@@ -17,34 +19,29 @@ public class FIXTimestamps {
      * @param s a string builder
      */
     public static void append(ReadableDateTime t, StringBuilder s) {
-        s.append(t.getYear());
-        appendTwoDigits(t.getMonthOfYear(), s);
-        appendTwoDigits(t.getDayOfMonth(), s);
-        s.append('-');
-        appendTwoDigits(t.getHourOfDay(), s);
-        s.append(':');
-        appendTwoDigits(t.getMinuteOfHour(), s);
-        s.append(':');
-        appendTwoDigits(t.getSecondOfMinute(), s);
-        s.append('.');
-        appendThreeDigits(t.getMillisOfSecond(), s);
+        char[] buffer = BUFFER.get();
+
+        setDigits(buffer, t.getYear(), 0, 4);
+        setDigits(buffer, t.getMonthOfYear(), 4, 2);
+        setDigits(buffer, t.getDayOfMonth(), 6, 2);
+        buffer[8] = '-';
+        setDigits(buffer, t.getHourOfDay(), 9, 2);
+        buffer[11] = ':';
+        setDigits(buffer, t.getMinuteOfHour(), 12, 2);
+        buffer[14] = ':';
+        setDigits(buffer, t.getSecondOfMinute(), 15, 2);
+        buffer[17] = '.';
+        setDigits(buffer, t.getMillisOfSecond(), 18, 3);
+
+        s.append(buffer);
     }
 
-    private static void appendThreeDigits(int x, StringBuilder s) {
-        if (x < 100)
-            s.append('0');
+    private static void setDigits(char[] buffer, int i, int offset, int digits) {
+        for (int j = offset + digits - 1; j >= offset; j--) {
+            buffer[j] = (char)('0' + i % 10);
 
-        if (x < 10)
-            s.append('0');
-
-        s.append(x);
-    }
-
-    private static void appendTwoDigits(int x, StringBuilder s) {
-        if (x < 10)
-            s.append('0');
-
-        s.append(x);
+            i /= 10;
+        }
     }
 
 }
