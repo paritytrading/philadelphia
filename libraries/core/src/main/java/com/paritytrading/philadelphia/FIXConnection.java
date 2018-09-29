@@ -333,10 +333,10 @@ public class FIXConnection implements Closeable {
      * reasonable transmission time has passed since receiving a message,
      * send a TestRequest(1) message.</p>
      *
-     * <p>If a TestRequest(1) message has been sent and no Heartbeat(0)
-     * message has been received in the duration indicated by HeartBtInt(108)
-     * amended with a reasonable transmission time, trigger a status event
-     * indicating heartbeat timeout.</p>
+     * <p>If a TestRequest(1) message has been sent and no data has been
+     * received within the duration indicated by HeartBtInt(108) amended with
+     * a reasonable transmission time, trigger a status event indicating
+     * heartbeat timeout.</p>
      *
      * @throws IOException if an I/O error occurs
      */
@@ -393,6 +393,8 @@ public class FIXConnection implements Closeable {
             tooLongMessage();
 
         lastRxMillis = currentTimeMillis;
+
+        testRequestTxMillis = 0;
 
         return bytes;
     }
@@ -541,7 +543,6 @@ public class FIXConnection implements Closeable {
 
             switch (msgType.byteAt(0)) {
             case Heartbeat:
-                handleHeartbeat();
                 break;
             case TestRequest:
                 handleTestRequest(message);
@@ -574,10 +575,6 @@ public class FIXConnection implements Closeable {
                 if (possDupFlag == null || possDupFlag.asChar() != 'Y')
                     statusListener.tooLowMsgSeqNum(FIXConnection.this, msgSeqNum, rxMsgSeqNum);
             }
-        }
-
-        private void handleHeartbeat() {
-            testRequestTxMillis = 0;
         }
 
         private void handleTestRequest(FIXMessage message) throws IOException {
