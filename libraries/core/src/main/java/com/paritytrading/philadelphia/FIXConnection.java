@@ -600,7 +600,7 @@ public class FIXConnection implements Closeable {
                 return;
             }
 
-            sendSequenceReset(beginSeqNo.asInt(), endSeqNo.asInt() + 1);
+            sendSequenceReset(beginSeqNo, endSeqNo.asInt() + 1);
         }
 
         private void handleReject(FIXMessage message) throws IOException {
@@ -692,10 +692,10 @@ public class FIXConnection implements Closeable {
         send(txMessage);
     }
 
-    private void sendSequenceReset(long msgSeqNum, long newSeqNo) throws IOException {
+    private void sendSequenceReset(FIXValue msgSeqNum, long newSeqNo) throws IOException {
         prepare(txMessage, SequenceReset);
 
-        txMessage.valueOf(MsgSeqNum).setInt(msgSeqNum);
+        txMessage.valueOf(MsgSeqNum).set(msgSeqNum);
         txMessage.addField(GapFillFlag).setChar('Y');
         txMessage.addField(NewSeqNo).setInt(newSeqNo);
 
