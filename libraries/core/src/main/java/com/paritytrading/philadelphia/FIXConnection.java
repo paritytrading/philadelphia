@@ -509,7 +509,7 @@ public class FIXConnection implements Closeable {
         public void message(FIXMessage message) throws IOException {
             long msgSeqNum = message.getMsgSeqNum();
             if (msgSeqNum == 0) {
-                sendLogout("MsgSeqNum(34) not found");
+                msgSeqNumNotFound();
                 return;
             }
 
@@ -657,6 +657,10 @@ public class FIXConnection implements Closeable {
             }
 
             statusListener.logon(FIXConnection.this, message);
+        }
+
+        private void msgSeqNumNotFound() throws IOException {
+            sendLogout("MsgSeqNum(34) not found");
         }
 
     }
