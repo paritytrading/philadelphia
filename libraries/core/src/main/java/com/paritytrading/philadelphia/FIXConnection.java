@@ -515,7 +515,7 @@ public class FIXConnection implements Closeable {
 
             FIXValue msgType = message.getMsgType();
             if (msgType == null) {
-                statusListener.close(FIXConnection.this, "MsgType(35) not found");
+                msgTypeNotFound();
                 return;
             }
 
@@ -661,6 +661,10 @@ public class FIXConnection implements Closeable {
 
         private void msgSeqNumNotFound() throws IOException {
             sendLogout("MsgSeqNum(34) not found");
+        }
+
+        private void msgTypeNotFound() throws IOException {
+            statusListener.close(FIXConnection.this, "MsgType(35) not found");
         }
 
     }
