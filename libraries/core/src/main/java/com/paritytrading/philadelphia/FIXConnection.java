@@ -519,7 +519,7 @@ public class FIXConnection implements Closeable {
                 return;
             }
 
-            if (msgType.length() == 1 && msgType.asChar() == SequenceReset) {
+            if (msgType.length() == 1 && msgType.byteAt(0) == SequenceReset) {
                 if (handleSequenceReset(message))
                     return;
             }
