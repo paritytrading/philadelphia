@@ -524,13 +524,8 @@ public class FIXConnection implements Closeable {
                     return;
             }
 
-            if (msgSeqNum > rxMsgSeqNum) {
-                sendResendRequest(rxMsgSeqNum);
-                return;
-            }
-
-            if (msgSeqNum < rxMsgSeqNum) {
-                handleTooLowMsgSeqNum(message, msgType, msgSeqNum);
+            if (msgSeqNum != rxMsgSeqNum) {
+                handleMsgSeqNum(message, msgType, msgSeqNum);
                 return;
             }
 
@@ -566,6 +561,13 @@ public class FIXConnection implements Closeable {
                 downstream.message(message);
                 break;
             }
+        }
+
+        private void handleMsgSeqNum(FIXMessage message, FIXValue msgType, long msgSeqNum) throws IOException {
+            if (msgSeqNum < rxMsgSeqNum)
+                handleTooLowMsgSeqNum(message, msgType, msgSeqNum);
+            else
+                sendResendRequest(rxMsgSeqNum);
         }
 
         private void handleTooLowMsgSeqNum(FIXMessage message, FIXValue msgType, long msgSeqNum) throws IOException {
