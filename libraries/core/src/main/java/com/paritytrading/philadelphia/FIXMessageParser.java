@@ -6,7 +6,10 @@ import static com.paritytrading.philadelphia.FIXTags.*;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-class FIXMessageParser {
+/**
+ * A message parser.
+ */
+public class FIXMessageParser {
 
     private FIXMessageListener listener;
 
@@ -18,6 +21,12 @@ class FIXMessageParser {
     private FIXValue bodyLength;
     private FIXValue checkSum;
 
+    /**
+     * Create a message parser.
+     *
+     * @param config the parser configuration
+     * @param listener the message listener
+     */
     public FIXMessageParser(FIXConfig config, FIXMessageListener listener) {
         this.message = new FIXMessage(config.getMaxFieldCount(), config.getFieldCapacity());
 
@@ -30,6 +39,14 @@ class FIXMessageParser {
         this.checkSum    = new FIXValue(CHECK_SUM_FIELD_CAPACITY);
     }
 
+    /**
+     * Attempt to parse a message from a buffer. If a message is parsed
+     * successfully, invoke the message listener.
+     *
+     * @param buffer a buffer
+     * @return true if a message was parsed successfully, otherwise false
+     * @throws IOException if an I/O error occurs
+     */
     public boolean parse(ByteBuffer buffer) throws IOException {
         int tag;
 
