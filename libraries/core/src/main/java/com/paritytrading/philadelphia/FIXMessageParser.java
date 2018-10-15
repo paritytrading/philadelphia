@@ -18,13 +18,12 @@ class FIXMessageParser {
     private FIXValue bodyLength;
     private FIXValue checkSum;
 
-    public FIXMessageParser(FIXMessageListener listener, FIXMessage message,
-            boolean checkSumEnabled) {
+    public FIXMessageParser(FIXConfig config, FIXMessageListener listener) {
+        this.message = new FIXMessage(config.getMaxFieldCount(), config.getFieldCapacity());
+
+        this.checkSumEnabled = config.isCheckSumEnabled();
+
         this.listener = listener;
-
-        this.message = message;
-
-        this.checkSumEnabled = checkSumEnabled;
 
         this.beginString = new FIXValue(BEGIN_STRING_FIELD_CAPACITY);
         this.bodyLength  = new FIXValue(BODY_LENGTH_FIELD_CAPACITY);

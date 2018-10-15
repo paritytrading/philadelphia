@@ -140,9 +140,13 @@ public class FIXMessageParserTest {
     }
 
     private boolean parse(ByteBuffer buffer, boolean checkSumEnabled) throws IOException {
-        FIXMessage message = new FIXMessage(32, 32);
+        FIXConfig config = new FIXConfig.Builder()
+            .setMaxFieldCount(32)
+            .setFieldCapacity(32)
+            .setCheckSumEnabled(checkSumEnabled)
+            .build();
 
-        FIXMessageParser parser = new FIXMessageParser(messages, message, checkSumEnabled);
+        FIXMessageParser parser = new FIXMessageParser(config, messages);
 
         return parser.parse(buffer);
     }
