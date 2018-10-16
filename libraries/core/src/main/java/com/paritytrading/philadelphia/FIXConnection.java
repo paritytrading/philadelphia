@@ -98,9 +98,7 @@ public class FIXConnection implements Closeable {
         this.senderCompId = config.getSenderCompID();
         this.targetCompId = config.getTargetCompID();
 
-        this.parser = new FIXMessageParser(new MessageHandler(listener),
-                new FIXMessage(config.getMaxFieldCount(), config.getFieldCapacity()),
-                config.isCheckSumEnabled());
+        this.parser = new FIXMessageParser(config, new MessageHandler(listener));
 
         this.statusListener = statusListener;
 
