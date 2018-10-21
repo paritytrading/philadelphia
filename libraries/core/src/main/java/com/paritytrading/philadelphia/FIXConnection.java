@@ -490,7 +490,7 @@ public class FIXConnection implements Closeable {
         txMessage.addField(HeartBtInt).setInt(config.getHeartBtInt());
 
         if (resetSeqNum)
-            txMessage.addField(ResetSeqNumFlag).setChar('Y');
+            txMessage.addField(ResetSeqNumFlag).setBoolean(true);
 
         send(txMessage);
     }
@@ -572,7 +572,7 @@ public class FIXConnection implements Closeable {
             if (msgType.length() != 1 || msgType.asChar() != SequenceReset) {
                 FIXValue possDupFlag = message.valueOf(PossDupFlag);
 
-                if (possDupFlag == null || possDupFlag.asChar() != 'Y')
+                if (possDupFlag == null || !possDupFlag.asBoolean())
                     statusListener.tooLowMsgSeqNum(FIXConnection.this, msgSeqNum, rxMsgSeqNum);
             }
         }
@@ -623,7 +623,7 @@ public class FIXConnection implements Closeable {
             rxMsgSeqNum = newSeqNo;
 
             FIXValue gapFillFlag = message.valueOf(GapFillFlag);
-            boolean reset = gapFillFlag == null || gapFillFlag.asChar() != 'Y';
+            boolean reset = gapFillFlag == null || !gapFillFlag.asBoolean();
 
             if (reset)
                 statusListener.sequenceReset(FIXConnection.this);
@@ -704,7 +704,7 @@ public class FIXConnection implements Closeable {
         prepare(txMessage, SequenceReset);
 
         txMessage.valueOf(MsgSeqNum).set(msgSeqNum);
-        txMessage.addField(GapFillFlag).setChar('Y');
+        txMessage.addField(GapFillFlag).setBoolean(true);
         txMessage.addField(NewSeqNo).setInt(newSeqNo);
 
         send(txMessage);
