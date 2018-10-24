@@ -86,6 +86,32 @@ public class FIXValue {
     }
 
     /**
+     * Get the value as a boolean.
+     *
+     * @return the value as a boolean
+     * @throws FIXValueFormatException if the value is not a boolean
+     */
+    public boolean asBoolean() {
+        if (length != 1)
+            notBoolean();
+
+        return bytes[offset] == YES;
+    }
+
+    /**
+     * Set the value to a boolean.
+     *
+     * @param b a boolean
+     */
+    public void setBoolean(boolean b) {
+        bytes[0] = b ? YES : NO;
+        bytes[1] = SOH;
+
+        offset = 0;
+        length = 1;
+    }
+
+    /**
      * Get the value as a character.
      *
      * @return the value as a character
@@ -477,6 +503,10 @@ public class FIXValue {
 
             l /= 10;
         }
+    }
+
+    private static void notBoolean() throws FIXValueFormatException {
+        throw new FIXValueFormatException("Not a boolean");
     }
 
     private static void notChar() throws FIXValueFormatException {

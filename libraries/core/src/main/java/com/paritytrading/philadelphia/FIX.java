@@ -6,6 +6,10 @@ class FIX {
 
     static final byte SOH = 1;
 
+    static final byte YES = 'Y';
+
+    static final byte NO = 'N';
+
     static final byte[] BEGIN_STRING = new byte[] { '8', '=' };
 
     static final byte[] BODY_LENGTH = new byte[] { '9', '=' };

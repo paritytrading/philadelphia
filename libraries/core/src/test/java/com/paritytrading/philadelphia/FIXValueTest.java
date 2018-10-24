@@ -61,6 +61,27 @@ public class FIXValueTest {
     }
 
     @Test
+    public void asBoolean() throws FIXValueOverflowException {
+        get("Y\u0001");
+
+        assertTrue(value.asBoolean());
+    }
+
+    @Test
+    public void setBoolean() {
+        value.setBoolean(false);
+
+        assertPutEquals("N\u0001");
+    }
+
+    @Test(expected=FIXValueFormatException.class)
+    public void notBoolean() {
+        value.setString("FOO");
+
+        value.asBoolean();
+    }
+
+    @Test
     public void asChar() throws FIXValueOverflowException {
         get("Y\u0001");
 
