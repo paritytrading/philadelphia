@@ -95,7 +95,7 @@ public class FIXValue {
         if (length != 1)
             notBoolean();
 
-        return bytes[offset] == 'Y';
+        return bytes[offset] == YES;
     }
 
     /**
@@ -104,7 +104,7 @@ public class FIXValue {
      * @param b a boolean
      */
     public void setBoolean(boolean b) {
-        bytes[0] = (byte)(b ? 'Y' : 'N');
+        bytes[0] = b ? YES : NO;
         bytes[1] = SOH;
 
         offset = 0;
