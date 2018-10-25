@@ -16,6 +16,8 @@ public class FIXValueBenchmark extends FIXBenchmark {
 
     private MutableDateTime timestamp;
 
+    private FIXValue booleanValue;
+
     private FIXValue charValue;
 
     private FIXValue intValue;
@@ -41,6 +43,9 @@ public class FIXValueBenchmark extends FIXBenchmark {
         timeOnly = new MutableDateTime(2015, 9, 24, 9, 30, 5, 250);
 
         timestamp = new MutableDateTime(2015, 9, 24, 9, 30, 5, 250);
+
+        booleanValue = new FIXValue(64);
+        booleanValue.setBoolean(true);
 
         charValue = new FIXValue(64);
         charValue.setChar('Y');
@@ -68,6 +73,16 @@ public class FIXValueBenchmark extends FIXBenchmark {
 
     @Benchmark
     public void baseline() {
+    }
+
+    @Benchmark
+    public boolean asBoolean() {
+        return booleanValue.asBoolean();
+    }
+
+    @Benchmark
+    public void setBoolean() {
+        booleanValue.setBoolean(true);
     }
 
     @Benchmark
