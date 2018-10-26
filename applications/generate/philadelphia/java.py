@@ -7,7 +7,7 @@ class CompilationUnit(object):
 
     def __init__(self, package, class_):
         self.package = package
-        self.class_= class_
+        self.class_ = class_
 
     def __str__(self):
         return '{}\n\n{}'.format(self.package, self.class_)
