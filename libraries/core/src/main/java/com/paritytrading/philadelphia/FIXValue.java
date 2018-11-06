@@ -144,21 +144,30 @@ public class FIXValue {
      * @throws FIXValueFormatException if the value is not an integer
      */
     public long asInt() {
+        boolean negative = false;
+
+        int i = offset;
+
+        if (bytes[i] == '-') {
+            negative = true;
+
+            i++;
+        }
+
         long value = 0;
 
-        long sign  = bytes[offset] == '-' ? -1 : +1;
-        int  start = sign < 0 ? offset + 1 : offset;
-
-        for (int i = start; i < offset + length; i++) {
+        while (i < offset + length) {
             byte b = bytes[i];
 
             if (b < '0' || b > '9')
                 notInt();
 
             value = 10 * value + b - '0';
+
+            i++;
         }
 
-        return sign * value;
+        return negative ? -value : +value;
     }
 
     /**
