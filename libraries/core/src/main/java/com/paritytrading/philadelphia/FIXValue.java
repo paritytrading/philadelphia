@@ -157,14 +157,12 @@ public class FIXValue {
         long value = 0;
 
         while (i < offset + length) {
-            byte b = bytes[i];
+            byte b = bytes[i++];
 
             if (b < '0' || b > '9')
                 notInt();
 
             value = 10 * value + b - '0';
-
-            i++;
         }
 
         return negative ? -value : +value;
