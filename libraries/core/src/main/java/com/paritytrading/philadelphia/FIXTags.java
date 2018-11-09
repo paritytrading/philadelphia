@@ -52,7 +52,7 @@ public class FIXTags {
             if (b == EQUALS)
                 return tag;
 
-            tag = 10 * tag + (b - '0');
+            tag = 10 * tag + b - '0';
         }
 
         return 0;
