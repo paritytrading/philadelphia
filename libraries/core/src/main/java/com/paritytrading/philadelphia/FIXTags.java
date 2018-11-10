@@ -70,7 +70,7 @@ public class FIXTags {
      */
     public static void put(ByteBuffer buffer, int tag) {
         if (tag < 1 || tag > 99999)
-            throw new IllegalArgumentException("Too large tag");
+            tooLargeTag();
 
         byte b1 = (byte)('0' + tag % 10);
 
@@ -108,6 +108,10 @@ public class FIXTags {
 
         buffer.put(b1);
         buffer.put(EQUALS);
+    }
+
+    private static void tooLargeTag() {
+        throw new IllegalArgumentException("Too large tag");
     }
 
 }
