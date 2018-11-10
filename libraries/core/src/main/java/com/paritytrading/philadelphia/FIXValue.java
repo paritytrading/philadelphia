@@ -498,7 +498,7 @@ public class FIXValue {
             if (b < '0' || b > '9')
                 notDigit();
 
-            value = b - '0' + 10 * value;
+            value = 10 * value + b - '0';
         }
 
         return value;
