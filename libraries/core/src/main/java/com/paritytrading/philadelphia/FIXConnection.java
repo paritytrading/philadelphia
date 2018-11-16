@@ -659,6 +659,33 @@ public class FIXConnection implements Closeable {
             statusListener.logon(FIXConnection.this, message);
         }
 
+        private void sendHeartbeat(FIXValue testReqId) throws IOException {
+            prepare(txMessage, Heartbeat);
+
+            txMessage.addField(TestReqID).set(testReqId);
+
+            send(txMessage);
+        }
+
+        private void sendResendRequest(long beginSeqNo) throws IOException {
+            prepare(txMessage, ResendRequest);
+
+            txMessage.addField(BeginSeqNo).setInt(beginSeqNo);
+            txMessage.addField(EndSeqNo).setInt(0);
+
+            send(txMessage);
+        }
+
+        private void sendSequenceReset(FIXValue msgSeqNum, long newSeqNo) throws IOException {
+            prepare(txMessage, SequenceReset);
+
+            txMessage.valueOf(MsgSeqNum).set(msgSeqNum);
+            txMessage.addField(GapFillFlag).setBoolean(true);
+            txMessage.addField(NewSeqNo).setInt(newSeqNo);
+
+            send(txMessage);
+        }
+
         private void msgSeqNumNotFound() throws IOException {
             sendLogout("MsgSeqNum(34) not found");
         }
@@ -675,37 +702,10 @@ public class FIXConnection implements Closeable {
         send(txMessage);
     }
 
-    private void sendHeartbeat(FIXValue testReqId) throws IOException {
-        prepare(txMessage, Heartbeat);
-
-        txMessage.addField(TestReqID).set(testReqId);
-
-        send(txMessage);
-    }
-
     private void sendTestRequest(CharSequence testReqId) throws IOException {
         prepare(txMessage, TestRequest);
 
         txMessage.addField(TestReqID).setString(testReqId);
-
-        send(txMessage);
-    }
-
-    private void sendResendRequest(long beginSeqNo) throws IOException {
-        prepare(txMessage, ResendRequest);
-
-        txMessage.addField(BeginSeqNo).setInt(beginSeqNo);
-        txMessage.addField(EndSeqNo).setInt(0);
-
-        send(txMessage);
-    }
-
-    private void sendSequenceReset(FIXValue msgSeqNum, long newSeqNo) throws IOException {
-        prepare(txMessage, SequenceReset);
-
-        txMessage.valueOf(MsgSeqNum).set(msgSeqNum);
-        txMessage.addField(GapFillFlag).setBoolean(true);
-        txMessage.addField(NewSeqNo).setInt(newSeqNo);
 
         send(txMessage);
     }
