@@ -25,9 +25,9 @@ public class FIX50SP1Enumerations {
      */
     public static class AdvTransTypeValues {
 
-        public static final String New     = "N";
-        public static final String Cancel  = "C";
-        public static final String Replace = "R";
+        public static final char New     = 'N';
+        public static final char Cancel  = 'C';
+        public static final char Replace = 'R';
 
         private AdvTransTypeValues() {
         }
@@ -137,28 +137,28 @@ public class FIX50SP1Enumerations {
      */
     public static class SecurityIDSourceValues {
 
-        public static final String CUSIP                         = "1";
-        public static final String SEDOL                         = "2";
-        public static final String QUIK                          = "3";
-        public static final String ISINNumber                    = "4";
-        public static final String RICCode                       = "5";
-        public static final String ISOCurrencyCode               = "6";
-        public static final String ISOCountryCode                = "7";
-        public static final String ExchangeSymbol                = "8";
-        public static final String ConsolidatedTapeAssociation   = "9";
-        public static final String BloombergSymbol               = "A";
-        public static final String Wertpapier                    = "B";
-        public static final String Dutch                         = "C";
-        public static final String Valoren                       = "D";
-        public static final String Sicovam                       = "E";
-        public static final String Belgian                       = "F";
-        public static final String Common                        = "G";
-        public static final String ClearingHouse                 = "H";
-        public static final String ISDAFpMLSpecification         = "I";
-        public static final String OptionPriceReportingAuthority = "J";
-        public static final String ISDAFpMLURL                   = "K";
-        public static final String LetterOfCredit                = "L";
-        public static final String MarketplaceAssignedIdentifier = "M";
+        public static final char CUSIP                         = '1';
+        public static final char SEDOL                         = '2';
+        public static final char QUIK                          = '3';
+        public static final char ISINNumber                    = '4';
+        public static final char RICCode                       = '5';
+        public static final char ISOCurrencyCode               = '6';
+        public static final char ISOCountryCode                = '7';
+        public static final char ExchangeSymbol                = '8';
+        public static final char ConsolidatedTapeAssociation   = '9';
+        public static final char BloombergSymbol               = 'A';
+        public static final char Wertpapier                    = 'B';
+        public static final char Dutch                         = 'C';
+        public static final char Valoren                       = 'D';
+        public static final char Sicovam                       = 'E';
+        public static final char Belgian                       = 'F';
+        public static final char Common                        = 'G';
+        public static final char ClearingHouse                 = 'H';
+        public static final char ISDAFpMLSpecification         = 'I';
+        public static final char OptionPriceReportingAuthority = 'J';
+        public static final char ISDAFpMLURL                   = 'K';
+        public static final char LetterOfCredit                = 'L';
+        public static final char MarketplaceAssignedIdentifier = 'M';
 
         private SecurityIDSourceValues() {
         }
@@ -184,10 +184,10 @@ public class FIX50SP1Enumerations {
      */
     public static class IOIQtyValues {
 
-        public static final String Small               = "S";
-        public static final String Medium              = "M";
-        public static final String Large               = "L";
-        public static final String UndisclosedQuantity = "U";
+        public static final char Small               = 'S';
+        public static final char Medium              = 'M';
+        public static final char Large               = 'L';
+        public static final char UndisclosedQuantity = 'U';
 
         private IOIQtyValues() {
         }
@@ -351,18 +351,18 @@ public class FIX50SP1Enumerations {
      */
     public static class SettlTypeValues {
 
-        public static final String Regular              = "0";
-        public static final String Cash                 = "1";
-        public static final String NextDay              = "2";
-        public static final String TPlus2               = "3";
-        public static final String TPlus3               = "4";
-        public static final String TPlus4               = "5";
-        public static final String Future               = "6";
-        public static final String WhenAndIfIssued      = "7";
-        public static final String SellersOption        = "8";
-        public static final String TPlus5               = "9";
-        public static final String BrokenDate           = "B";
-        public static final String FXSpotNextSettlement = "C";
+        public static final char Regular              = '0';
+        public static final char Cash                 = '1';
+        public static final char NextDay              = '2';
+        public static final char TPlus2               = '3';
+        public static final char TPlus3               = '4';
+        public static final char TPlus4               = '5';
+        public static final char Future               = '6';
+        public static final char WhenAndIfIssued      = '7';
+        public static final char SellersOption        = '8';
+        public static final char TPlus5               = '9';
+        public static final char BrokenDate           = 'B';
+        public static final char FXSpotNextSettlement = 'C';
 
         private SettlTypeValues() {
         }
@@ -1197,64 +1197,64 @@ public class FIX50SP1Enumerations {
      */
     public static class QuoteConditionValues {
 
-        public static final String Open                            = "A";
-        public static final String Closed                          = "B";
-        public static final String ExchangeBest                    = "C";
-        public static final String ConsolidatedBest                = "D";
-        public static final String Locked                          = "E";
-        public static final String Crossed                         = "F";
-        public static final String Depth                           = "G";
-        public static final String FastTrading                     = "H";
-        public static final String NonFirm                         = "I";
-        public static final String Manual                          = "L";
-        public static final String OutrightPrice                   = "J";
-        public static final String ImpliedPrice                    = "K";
-        public static final String DepthOnOffer                    = "M";
-        public static final String DepthOnBid                      = "N";
-        public static final String Closing                         = "O";
-        public static final String NewsDissemination               = "P";
-        public static final String TradingRange                    = "Q";
-        public static final String OrderInflux                     = "R";
-        public static final String DueToRelated                    = "S";
-        public static final String NewsPending                     = "T";
-        public static final String AdditionalInfo                  = "U";
-        public static final String AdditionalInfoDueToRelated      = "V";
-        public static final String Resume                          = "W";
-        public static final String ViewOfCommon                    = "X";
-        public static final String VolumeAlert                     = "Y";
-        public static final String OrderImbalance                  = "Z";
-        public static final String EquipmentChangeover             = "a";
-        public static final String NoOpen                          = "b";
-        public static final String RegularETH                      = "c";
-        public static final String AutomaticExecution              = "d";
-        public static final String AutomaticExecutionETH           = "e";
-        public static final String FastMarketETH                   = "f";
-        public static final String InactiveETH                     = "g";
-        public static final String Rotation                        = "h";
-        public static final String RotationETH                     = "i";
-        public static final String Halt                            = "j";
-        public static final String HaltETH                         = "k";
-        public static final String DueToNewsDissemination          = "l";
-        public static final String DueToNewsPending                = "m";
-        public static final String TradingResume                   = "n";
-        public static final String OutOfSequence                   = "o";
-        public static final String BidSpecialist                   = "p";
-        public static final String OfferSpecialist                 = "q";
-        public static final String BidOfferSpecialist              = "r";
-        public static final String EndOfDaySAM                     = "s";
-        public static final String ForbiddenSAM                    = "t";
-        public static final String FrozenSAM                       = "u";
-        public static final String PreOpeningSAM                   = "v";
-        public static final String OpeningSAM                      = "w";
-        public static final String OpenSAM                         = "x";
-        public static final String SurveillanceSAM                 = "y";
-        public static final String SuspendedSAM                    = "z";
-        public static final String ReservedSAM                     = "0";
-        public static final String NoActiveSAM                     = "1";
-        public static final String Restricted                      = "2";
-        public static final String RestOfBookVWAP                  = "3";
-        public static final String BetterPricesInConditionalOrders = "4";
-        public static final String MedianPrice                     = "5";
+        public static final char Open                            = 'A';
+        public static final char Closed                          = 'B';
+        public static final char ExchangeBest                    = 'C';
+        public static final char ConsolidatedBest                = 'D';
+        public static final char Locked                          = 'E';
+        public static final char Crossed                         = 'F';
+        public static final char Depth                           = 'G';
+        public static final char FastTrading                     = 'H';
+        public static final char NonFirm                         = 'I';
+        public static final char Manual                          = 'L';
+        public static final char OutrightPrice                   = 'J';
+        public static final char ImpliedPrice                    = 'K';
+        public static final char DepthOnOffer                    = 'M';
+        public static final char DepthOnBid                      = 'N';
+        public static final char Closing                         = 'O';
+        public static final char NewsDissemination               = 'P';
+        public static final char TradingRange                    = 'Q';
+        public static final char OrderInflux                     = 'R';
+        public static final char DueToRelated                    = 'S';
+        public static final char NewsPending                     = 'T';
+        public static final char AdditionalInfo                  = 'U';
+        public static final char AdditionalInfoDueToRelated      = 'V';
+        public static final char Resume                          = 'W';
+        public static final char ViewOfCommon                    = 'X';
+        public static final char VolumeAlert                     = 'Y';
+        public static final char OrderImbalance                  = 'Z';
+        public static final char EquipmentChangeover             = 'a';
+        public static final char NoOpen                          = 'b';
+        public static final char RegularETH                      = 'c';
+        public static final char AutomaticExecution              = 'd';
+        public static final char AutomaticExecutionETH           = 'e';
+        public static final char FastMarketETH                   = 'f';
+        public static final char InactiveETH                     = 'g';
+        public static final char Rotation                        = 'h';
+        public static final char RotationETH                     = 'i';
+        public static final char Halt                            = 'j';
+        public static final char HaltETH                         = 'k';
+        public static final char DueToNewsDissemination          = 'l';
+        public static final char DueToNewsPending                = 'm';
+        public static final char TradingResume                   = 'n';
+        public static final char OutOfSequence                   = 'o';
+        public static final char BidSpecialist                   = 'p';
+        public static final char OfferSpecialist                 = 'q';
+        public static final char BidOfferSpecialist              = 'r';
+        public static final char EndOfDaySAM                     = 's';
+        public static final char ForbiddenSAM                    = 't';
+        public static final char FrozenSAM                       = 'u';
+        public static final char PreOpeningSAM                   = 'v';
+        public static final char OpeningSAM                      = 'w';
+        public static final char OpenSAM                         = 'x';
+        public static final char SurveillanceSAM                 = 'y';
+        public static final char SuspendedSAM                    = 'z';
+        public static final char ReservedSAM                     = '0';
+        public static final char NoActiveSAM                     = '1';
+        public static final char Restricted                      = '2';
+        public static final char RestOfBookVWAP                  = '3';
+        public static final char BetterPricesInConditionalOrders = '4';
+        public static final char MedianPrice                     = '5';
 
         private QuoteConditionValues() {
         }
@@ -1677,12 +1677,12 @@ public class FIX50SP1Enumerations {
      */
     public static class TradingSessionIDValues {
 
-        public static final String Day        = "1";
-        public static final String HalfDay    = "2";
-        public static final String Morning    = "3";
-        public static final String Afternoon  = "4";
-        public static final String Evening    = "5";
-        public static final String AfterHours = "6";
+        public static final char Day        = '1';
+        public static final char HalfDay    = '2';
+        public static final char Morning    = '3';
+        public static final char Afternoon  = '4';
+        public static final char Evening    = '5';
+        public static final char AfterHours = '6';
 
         private TradingSessionIDValues() {
         }
@@ -3007,13 +3007,13 @@ public class FIX50SP1Enumerations {
      */
     public static class TradingSessionSubIDValues {
 
-        public static final String PreTrading              = "1";
-        public static final String OpeningOrOpeningAuction = "2";
-        public static final String Continuous              = "3";
-        public static final String ClosingOrClosingAuction = "4";
-        public static final String PostTrading             = "5";
-        public static final String IntradayAuction         = "6";
-        public static final String Quiescent               = "7";
+        public static final char PreTrading              = '1';
+        public static final char OpeningOrOpeningAuction = '2';
+        public static final char Continuous              = '3';
+        public static final char ClosingOrClosingAuction = '4';
+        public static final char PostTrading             = '5';
+        public static final char IntradayAuction         = '6';
+        public static final char Quiescent               = '7';
 
         private TradingSessionSubIDValues() {
         }
@@ -3050,20 +3050,20 @@ public class FIX50SP1Enumerations {
      */
     public static class ClearingFeeIndicatorValues {
 
-        public static final String FirstYearDelegate             = "1";
-        public static final String SecondYearDelegate            = "2";
-        public static final String ThirdYearDelegate             = "3";
-        public static final String FourthYearDelegate            = "4";
-        public static final String FifthYearDelegate             = "5";
-        public static final String SixthYearDelegate             = "9";
-        public static final String CBOEMember                    = "B";
-        public static final String NonMemberAndCustomer          = "C";
-        public static final String EquityMemberAndClearingMember = "E";
-        public static final String FullAndAssociateMember        = "F";
-        public static final String Firms106HAnd106J              = "H";
-        public static final String GIM                           = "I";
-        public static final String Lessee106FEmployees           = "L";
-        public static final String AllOtherOwnershipTypes        = "M";
+        public static final char FirstYearDelegate             = '1';
+        public static final char SecondYearDelegate            = '2';
+        public static final char ThirdYearDelegate             = '3';
+        public static final char FourthYearDelegate            = '4';
+        public static final char FifthYearDelegate             = '5';
+        public static final char SixthYearDelegate             = '9';
+        public static final char CBOEMember                    = 'B';
+        public static final char NonMemberAndCustomer          = 'C';
+        public static final char EquityMemberAndClearingMember = 'E';
+        public static final char FullAndAssociateMember        = 'F';
+        public static final char Firms106HAnd106J              = 'H';
+        public static final char GIM                           = 'I';
+        public static final char Lessee106FEmployees           = 'L';
+        public static final char AllOtherOwnershipTypes        = 'M';
 
         private ClearingFeeIndicatorValues() {
         }
@@ -4624,8 +4624,8 @@ public class FIX50SP1Enumerations {
      */
     public static class SecurityStatusValues {
 
-        public static final String Active   = "1";
-        public static final String Inactive = "2";
+        public static final char Active   = '1';
+        public static final char Inactive = '2';
 
         private SecurityStatusValues() {
         }
@@ -5217,15 +5217,15 @@ public class FIX50SP1Enumerations {
      */
     public static class ApplVerIDValues {
 
-        public static final String FIX27    = "0";
-        public static final String FIX30    = "1";
-        public static final String FIX40    = "2";
-        public static final String FIX41    = "3";
-        public static final String FIX42    = "4";
-        public static final String FIX43    = "5";
-        public static final String FIX44    = "6";
-        public static final String FIX50    = "7";
-        public static final String FIX50SP1 = "8";
+        public static final char FIX27    = '0';
+        public static final char FIX30    = '1';
+        public static final char FIX40    = '2';
+        public static final char FIX41    = '3';
+        public static final char FIX42    = '4';
+        public static final char FIX43    = '5';
+        public static final char FIX44    = '6';
+        public static final char FIX50    = '7';
+        public static final char FIX50SP1 = '8';
 
         private ApplVerIDValues() {
         }

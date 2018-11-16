@@ -25,9 +25,9 @@ public class FIX43Enumerations {
      */
     public static class AdvTransTypeValues {
 
-        public static final String New     = "N";
-        public static final String Cancel  = "C";
-        public static final String Replace = "R";
+        public static final char New     = 'N';
+        public static final char Cancel  = 'C';
+        public static final char Replace = 'R';
 
         private AdvTransTypeValues() {
         }
@@ -56,40 +56,40 @@ public class FIX43Enumerations {
      */
     public static class ExecInstValues {
 
-        public static final String TryToStop                  = "Y";
-        public static final String MidPricePeg                = "M";
-        public static final String MarketPeg                  = "P";
-        public static final String CancelOnSystemFailure      = "Q";
-        public static final String PrimaryPeg                 = "R";
-        public static final String Suspend                    = "S";
-        public static final String CustomerDisplayInstruction = "U";
-        public static final String Netting                    = "V";
-        public static final String PegToVWAP                  = "W";
-        public static final String TradeAlong                 = "X";
-        public static final String PercentOfVolume            = "D";
-        public static final String StayOnOfferSide            = "0";
-        public static final String Work                       = "2";
-        public static final String OverTheDay                 = "4";
-        public static final String Held                       = "5";
-        public static final String ParticipateDoNotInitiate   = "6";
-        public static final String StrictScale                = "7";
-        public static final String TryToScale                 = "8";
-        public static final String StayOnBidSide              = "9";
-        public static final String NoCross                    = "A";
-        public static final String OpeningPeg                 = "O";
-        public static final String CallFirst                  = "C";
-        public static final String NonNegotiable              = "N";
-        public static final String DoNotIncrease              = "E";
-        public static final String DoNotReduce                = "F";
-        public static final String AllOrNone                  = "G";
-        public static final String ReinstateOnSystemFailure   = "H";
-        public static final String InstitutionsOnly           = "I";
-        public static final String ReinstateOnTradingHalt     = "J";
-        public static final String CancelOnTradingHalt        = "K";
-        public static final String LastPeg                    = "L";
-        public static final String GoAlong                    = "3";
-        public static final String OKToCross                  = "B";
-        public static final String NotHeld                    = "1";
+        public static final char TryToStop                  = 'Y';
+        public static final char MidPricePeg                = 'M';
+        public static final char MarketPeg                  = 'P';
+        public static final char CancelOnSystemFailure      = 'Q';
+        public static final char PrimaryPeg                 = 'R';
+        public static final char Suspend                    = 'S';
+        public static final char CustomerDisplayInstruction = 'U';
+        public static final char Netting                    = 'V';
+        public static final char PegToVWAP                  = 'W';
+        public static final char TradeAlong                 = 'X';
+        public static final char PercentOfVolume            = 'D';
+        public static final char StayOnOfferSide            = '0';
+        public static final char Work                       = '2';
+        public static final char OverTheDay                 = '4';
+        public static final char Held                       = '5';
+        public static final char ParticipateDoNotInitiate   = '6';
+        public static final char StrictScale                = '7';
+        public static final char TryToScale                 = '8';
+        public static final char StayOnBidSide              = '9';
+        public static final char NoCross                    = 'A';
+        public static final char OpeningPeg                 = 'O';
+        public static final char CallFirst                  = 'C';
+        public static final char NonNegotiable              = 'N';
+        public static final char DoNotIncrease              = 'E';
+        public static final char DoNotReduce                = 'F';
+        public static final char AllOrNone                  = 'G';
+        public static final char ReinstateOnSystemFailure   = 'H';
+        public static final char InstitutionsOnly           = 'I';
+        public static final char ReinstateOnTradingHalt     = 'J';
+        public static final char CancelOnTradingHalt        = 'K';
+        public static final char LastPeg                    = 'L';
+        public static final char GoAlong                    = '3';
+        public static final char OKToCross                  = 'B';
+        public static final char NotHeld                    = '1';
 
         private ExecInstValues() {
         }
@@ -115,22 +115,22 @@ public class FIX43Enumerations {
      */
     public static class SecurityIDSourceValues {
 
-        public static final String Sicovam                     = "E";
-        public static final String SEDOL                       = "2";
-        public static final String CUSIP                       = "1";
-        public static final String QUIK                        = "3";
-        public static final String Belgian                     = "F";
-        public static final String Valoren                     = "D";
-        public static final String Dutch                       = "C";
-        public static final String Wertpapier                  = "B";
-        public static final String BloombergSymbol             = "A";
-        public static final String ConsolidatedTapeAssociation = "9";
-        public static final String ExchangeSymbol              = "8";
-        public static final String ISOCountryCode              = "7";
-        public static final String ISOCurrencyCode             = "6";
-        public static final String RICCode                     = "5";
-        public static final String ISINNumber                  = "4";
-        public static final String Common                      = "G";
+        public static final char Sicovam                     = 'E';
+        public static final char SEDOL                       = '2';
+        public static final char CUSIP                       = '1';
+        public static final char QUIK                        = '3';
+        public static final char Belgian                     = 'F';
+        public static final char Valoren                     = 'D';
+        public static final char Dutch                       = 'C';
+        public static final char Wertpapier                  = 'B';
+        public static final char BloombergSymbol             = 'A';
+        public static final char ConsolidatedTapeAssociation = '9';
+        public static final char ExchangeSymbol              = '8';
+        public static final char ISOCountryCode              = '7';
+        public static final char ISOCurrencyCode             = '6';
+        public static final char RICCode                     = '5';
+        public static final char ISINNumber                  = '4';
+        public static final char Common                      = 'G';
 
         private SecurityIDSourceValues() {
         }
@@ -156,9 +156,9 @@ public class FIX43Enumerations {
      */
     public static class IOIQtyValues {
 
-        public static final String Large  = "L";
-        public static final String Medium = "M";
-        public static final String Small  = "S";
+        public static final char Large  = 'L';
+        public static final char Medium = 'M';
+        public static final char Small  = 'S';
 
         private IOIQtyValues() {
         }
@@ -1046,15 +1046,15 @@ public class FIX43Enumerations {
      */
     public static class QuoteConditionValues {
 
-        public static final String Locked           = "E";
-        public static final String NonFirm          = "I";
-        public static final String FastTrading      = "H";
-        public static final String Crossed          = "F";
-        public static final String ConsolidatedBest = "D";
-        public static final String ExchangeBest     = "C";
-        public static final String Closed           = "B";
-        public static final String Open             = "A";
-        public static final String Depth            = "G";
+        public static final char Locked           = 'E';
+        public static final char NonFirm          = 'I';
+        public static final char FastTrading      = 'H';
+        public static final char Crossed          = 'F';
+        public static final char ConsolidatedBest = 'D';
+        public static final char ExchangeBest     = 'C';
+        public static final char Closed           = 'B';
+        public static final char Open             = 'A';
+        public static final char Depth            = 'G';
 
         private QuoteConditionValues() {
         }
@@ -1066,23 +1066,23 @@ public class FIX43Enumerations {
      */
     public static class TradeConditionValues {
 
-        public static final String NextDayTrade         = "J";
-        public static final String Opened               = "K";
-        public static final String Seller               = "L";
-        public static final String AveragePriceTrade    = "B";
-        public static final String Sold                 = "M";
-        public static final String Rule155Trade         = "H";
-        public static final String StoppedStock         = "N";
-        public static final String ImbalanceMoreBuyers  = "P";
-        public static final String ImbalanceMoreSellers = "Q";
-        public static final String OpeningPrice         = "R";
-        public static final String SoldLast             = "I";
-        public static final String Cash                 = "A";
-        public static final String CashTrade            = "C";
-        public static final String Opening              = "E";
-        public static final String IntradayTradeDetail  = "F";
-        public static final String Rule127Trade         = "G";
-        public static final String NextDay              = "D";
+        public static final char NextDayTrade         = 'J';
+        public static final char Opened               = 'K';
+        public static final char Seller               = 'L';
+        public static final char AveragePriceTrade    = 'B';
+        public static final char Sold                 = 'M';
+        public static final char Rule155Trade         = 'H';
+        public static final char StoppedStock         = 'N';
+        public static final char ImbalanceMoreBuyers  = 'P';
+        public static final char ImbalanceMoreSellers = 'Q';
+        public static final char OpeningPrice         = 'R';
+        public static final char SoldLast             = 'I';
+        public static final char Cash                 = 'A';
+        public static final char CashTrade            = 'C';
+        public static final char Opening              = 'E';
+        public static final char IntradayTradeDetail  = 'F';
+        public static final char Rule127Trade         = 'G';
+        public static final char NextDay              = 'D';
 
         private TradeConditionValues() {
         }
@@ -1145,11 +1145,11 @@ public class FIX43Enumerations {
      */
     public static class OpenCloseSettleFlagValues {
 
-        public static final String SessionOpen                  = "1";
-        public static final String DeliverySettlementEntry      = "2";
-        public static final String ExpectedEntry                = "3";
-        public static final String EntryFromPreviousBusinessDay = "4";
-        public static final String DailyOpen                    = "0";
+        public static final char SessionOpen                  = '1';
+        public static final char DeliverySettlementEntry      = '2';
+        public static final char ExpectedEntry                = '3';
+        public static final char EntryFromPreviousBusinessDay = '4';
+        public static final char DailyOpen                    = '0';
 
         private OpenCloseSettleFlagValues() {
         }
@@ -1161,8 +1161,8 @@ public class FIX43Enumerations {
      */
     public static class FinancialStatusValues {
 
-        public static final String Bankrupt         = "1";
-        public static final String PendingDelisting = "2";
+        public static final char Bankrupt         = '1';
+        public static final char PendingDelisting = '2';
 
         private FinancialStatusValues() {
         }
@@ -1174,11 +1174,11 @@ public class FIX43Enumerations {
      */
     public static class CorporateActionValues {
 
-        public static final String ExDistribution = "B";
-        public static final String ExInterest     = "E";
-        public static final String ExRights       = "C";
-        public static final String ExDividend     = "A";
-        public static final String New            = "D";
+        public static final char ExDistribution = 'B';
+        public static final char ExInterest     = 'E';
+        public static final char ExRights       = 'C';
+        public static final char ExDividend     = 'A';
+        public static final char New            = 'D';
 
         private CorporateActionValues() {
         }
@@ -2171,16 +2171,16 @@ public class FIX43Enumerations {
      */
     public static class OrderRestrictionsValues {
 
-        public static final String ForeignEntity                               = "7";
-        public static final String RisklessArbitrage                           = "A";
-        public static final String ProgramTrade                                = "1";
-        public static final String ExternalMarketParticipant                   = "8";
-        public static final String ActingAsMarketMakerOrSpecialistInUnderlying = "6";
-        public static final String ActingAsMarketMakerOrSpecialistInSecurity   = "5";
-        public static final String NonIndexArbitrage                           = "3";
-        public static final String IndexArbitrage                              = "2";
-        public static final String CompetingMarketMaker                        = "4";
-        public static final String ExternalInterConnectedMarketLinkage         = "9";
+        public static final char ForeignEntity                               = '7';
+        public static final char RisklessArbitrage                           = 'A';
+        public static final char ProgramTrade                                = '1';
+        public static final char ExternalMarketParticipant                   = '8';
+        public static final char ActingAsMarketMakerOrSpecialistInUnderlying = '6';
+        public static final char ActingAsMarketMakerOrSpecialistInSecurity   = '5';
+        public static final char NonIndexArbitrage                           = '3';
+        public static final char IndexArbitrage                              = '2';
+        public static final char CompetingMarketMaker                        = '4';
+        public static final char ExternalInterConnectedMarketLinkage         = '9';
 
         private OrderRestrictionsValues() {
         }
@@ -2275,9 +2275,9 @@ public class FIX43Enumerations {
      */
     public static class ScopeValues {
 
-        public static final String LocalMarket = "1";
-        public static final String National    = "2";
-        public static final String Global      = "3";
+        public static final char LocalMarket = '1';
+        public static final char National    = '2';
+        public static final char Global      = '3';
 
         private ScopeValues() {
         }
@@ -2551,20 +2551,20 @@ public class FIX43Enumerations {
      */
     public static class ClearingFeeIndicatorValues {
 
-        public static final String Firms106HAnd106J              = "H";
-        public static final String FifthYearDelegate             = "5";
-        public static final String FourthYearDelegate            = "4";
-        public static final String ThirdYearDelegate             = "3";
-        public static final String SecondYearDelegate            = "2";
-        public static final String FirstYearDelegate             = "1";
-        public static final String AllOtherOwnershipTypes        = "M";
-        public static final String GIM                           = "I";
-        public static final String SixthYearDelegate             = "9";
-        public static final String FullAndAssociateMember        = "F";
-        public static final String EquityMemberAndClearingMember = "E";
-        public static final String NonMemberAndCustomer          = "C";
-        public static final String CBOEMember                    = "B";
-        public static final String Lessee106FEmployees           = "L";
+        public static final char Firms106HAnd106J              = 'H';
+        public static final char FifthYearDelegate             = '5';
+        public static final char FourthYearDelegate            = '4';
+        public static final char ThirdYearDelegate             = '3';
+        public static final char SecondYearDelegate            = '2';
+        public static final char FirstYearDelegate             = '1';
+        public static final char AllOtherOwnershipTypes        = 'M';
+        public static final char GIM                           = 'I';
+        public static final char SixthYearDelegate             = '9';
+        public static final char FullAndAssociateMember        = 'F';
+        public static final char EquityMemberAndClearingMember = 'E';
+        public static final char NonMemberAndCustomer          = 'C';
+        public static final char CBOEMember                    = 'B';
+        public static final char Lessee106FEmployees           = 'L';
 
         private ClearingFeeIndicatorValues() {
         }
