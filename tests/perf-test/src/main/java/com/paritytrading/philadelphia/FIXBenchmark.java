@@ -1,4 +1,4 @@
-package com.paritytrading.philadelphia.perf;
+package com.paritytrading.philadelphia;
 
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.BenchmarkMode;

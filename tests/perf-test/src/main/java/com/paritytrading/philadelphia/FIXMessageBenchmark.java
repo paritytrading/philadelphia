@@ -1,4 +1,4 @@
-package com.paritytrading.philadelphia.perf;
+package com.paritytrading.philadelphia;
 
 import static com.paritytrading.philadelphia.fix42.FIX42Enumerations.*;
 import static com.paritytrading.philadelphia.fix42.FIX42MsgTypes.*;
