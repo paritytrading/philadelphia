@@ -1,4 +1,4 @@
-package com.paritytrading.philadelphia.perf;
+package com.paritytrading.philadelphia;
 
 import static java.nio.charset.StandardCharsets.*;
 

@@ -1,4 +1,4 @@
-package com.paritytrading.philadelphia.perf;
+package com.paritytrading.philadelphia;
 
 import com.paritytrading.philadelphia.FIXTags;
 import java.nio.ByteBuffer;

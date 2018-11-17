@@ -1,4 +1,4 @@
-package com.paritytrading.philadelphia.perf;
+package com.paritytrading.philadelphia;
 
 import com.paritytrading.philadelphia.FIXValue;
 import org.joda.time.MutableDateTime;
