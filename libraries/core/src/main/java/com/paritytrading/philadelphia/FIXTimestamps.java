@@ -6,7 +6,7 @@ class FIXTimestamps {
 
     private static final ThreadLocal<char[]> BUFFER = ThreadLocal.withInitial(() -> new char[21]);
 
-    public static void append(ReadableDateTime t, StringBuilder s) {
+    static void append(ReadableDateTime t, StringBuilder s) {
         char[] buffer = BUFFER.get();
 
         setDigits(buffer, t.getYear(), 0, 4);
@@ -24,7 +24,7 @@ class FIXTimestamps {
         s.append(buffer);
     }
 
-    private static void setDigits(char[] buffer, int i, int offset, int digits) {
+    static void setDigits(char[] buffer, int i, int offset, int digits) {
         for (int j = offset + digits - 1; j >= offset; j--) {
             buffer[j] = (char)('0' + i % 10);
 
