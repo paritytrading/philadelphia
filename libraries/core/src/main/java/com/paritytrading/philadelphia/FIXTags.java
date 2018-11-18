@@ -28,7 +28,7 @@ class FIXTags {
     static final int ResetSeqNumFlag     = 141;
     static final int SessionRejectReason = 373;
 
-    public static int get(ByteBuffer buffer) {
+    static int get(ByteBuffer buffer) {
         int tag = 0;
 
         while (buffer.hasRemaining()) {
@@ -43,7 +43,7 @@ class FIXTags {
         return 0;
     }
 
-    public static void put(ByteBuffer buffer, int tag) {
+    static void put(ByteBuffer buffer, int tag) {
         if (tag < 1 || tag > 99999)
             tooLargeTag();
 
