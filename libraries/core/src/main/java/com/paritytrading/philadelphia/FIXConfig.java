@@ -7,17 +7,17 @@ package com.paritytrading.philadelphia;
  */
 public class FIXConfig {
 
-    private FIXVersion version;
-    private String     senderCompId;
-    private String     targetCompId;
-    private int        heartBtInt;
-    private long       incomingMsgSeqNum;
-    private long       outgoingMsgSeqNum;
-    private int        maxFieldCount;
-    private int        fieldCapacity;
-    private int        rxBufferCapacity;
-    private int        txBufferCapacity;
-    private boolean    checkSumEnabled;
+    private final FIXVersion version;
+    private final String     senderCompId;
+    private final String     targetCompId;
+    private final int        heartBtInt;
+    private final long       incomingMsgSeqNum;
+    private final long       outgoingMsgSeqNum;
+    private final int        maxFieldCount;
+    private final int        fieldCapacity;
+    private final int        rxBufferCapacity;
+    private final int        txBufferCapacity;
+    private final boolean    checkSumEnabled;
 
     /**
      * Create a connection configuration.
