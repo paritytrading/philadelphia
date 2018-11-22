@@ -17,14 +17,14 @@ import org.joda.time.MutableDateTime;
  */
 public class FIXConnection implements Closeable {
 
-    private Clock clock;
+    private final Clock clock;
 
-    private SocketChannel channel;
+    private final SocketChannel channel;
 
-    private FIXConfig config;
+    private final FIXConfig config;
 
-    private FIXValue bodyLength;
-    private FIXValue checkSum;
+    private final FIXValue bodyLength;
+    private final FIXValue checkSum;
 
     private String senderCompId;
     private String targetCompId;
@@ -32,15 +32,15 @@ public class FIXConnection implements Closeable {
     private long rxMsgSeqNum;
     private long txMsgSeqNum;
 
-    private ByteBuffer rxBuffer;
+    private final ByteBuffer rxBuffer;
 
-    private ByteBuffer txHeaderBuffer;
+    private final ByteBuffer txHeaderBuffer;
 
-    private int bodyLengthOffset;
+    private final int bodyLengthOffset;
 
-    private ByteBuffer txBodyBuffer;
+    private final ByteBuffer txBodyBuffer;
 
-    private ByteBuffer[] txBuffers;
+    private final ByteBuffer[] txBuffers;
 
     /*
      * This variable is written on data reception and read on connection
@@ -62,17 +62,17 @@ public class FIXConnection implements Closeable {
 
     private final long testRequestMillis;
 
-    private FIXMessageParser parser;
+    private final FIXMessageParser parser;
 
-    private FIXConnectionStatusListener statusListener;
+    private final FIXConnectionStatusListener statusListener;
 
-    private FIXMessage txMessage;
+    private final FIXMessage txMessage;
 
     private long currentTimeMillis;
 
-    private MutableDateTime currentTime;
+    private final MutableDateTime currentTime;
 
-    private StringBuilder currentTimestamp;
+    private final StringBuilder currentTimestamp;
 
     /**
      * Create a connection. The underlying socket channel can be either
