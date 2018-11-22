@@ -11,15 +11,15 @@ import java.nio.ByteBuffer;
  */
 public class FIXMessageParser {
 
-    private FIXMessageListener listener;
+    private final FIXMessageListener listener;
 
-    private FIXMessage message;
+    private final FIXMessage message;
 
-    private boolean checkSumEnabled;
+    private final boolean checkSumEnabled;
 
-    private FIXValue beginString;
-    private FIXValue bodyLength;
-    private FIXValue checkSum;
+    private final FIXValue beginString;
+    private final FIXValue bodyLength;
+    private final FIXValue checkSum;
 
     /**
      * Create a message parser.
