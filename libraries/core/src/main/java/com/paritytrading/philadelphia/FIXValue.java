@@ -14,7 +14,7 @@ import org.joda.time.ReadableDateTime;
  */
 public class FIXValue {
 
-    private byte[] bytes;
+    private final byte[] bytes;
 
     private int offset;
     private int length;
