@@ -12,9 +12,9 @@ import java.util.stream.Stream;
  */
 public class FIXMessage {
 
-    private int[] tags;
+    private final int[] tags;
 
-    private FIXValue[] values;
+    private final FIXValue[] values;
 
     private int count;
 
