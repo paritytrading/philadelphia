@@ -2,7 +2,7 @@ package com.paritytrading.philadelphia;
 
 class Longs {
 
-    public static final long[] POWERS_OF_TEN = new long[] {
+    static final long[] POWERS_OF_TEN = new long[] {
         1L,
         10L,
         100L,
