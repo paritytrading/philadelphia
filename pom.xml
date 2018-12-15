@@ -69,7 +69,7 @@
       </dependency>
       <dependency>
         <groupId>org.jline</groupId>
-        <artifactId>jline</artifactId>
+        <artifactId>jline-reader</artifactId>
         <version>3.9.0</version>
       </dependency>
       <dependency>
