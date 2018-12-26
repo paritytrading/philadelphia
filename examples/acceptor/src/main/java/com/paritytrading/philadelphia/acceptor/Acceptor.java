@@ -9,7 +9,7 @@ import java.nio.channels.SocketChannel;
 
 class Acceptor implements Closeable {
 
-    private ServerSocketChannel serverChannel;
+    private final ServerSocketChannel serverChannel;
 
     private Acceptor(ServerSocketChannel serverChannel) {
         this.serverChannel = serverChannel;
