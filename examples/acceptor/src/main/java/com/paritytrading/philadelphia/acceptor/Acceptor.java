@@ -15,7 +15,7 @@ class Acceptor implements Closeable {
         this.serverChannel = serverChannel;
     }
 
-    public static Acceptor open(InetSocketAddress address) throws IOException {
+    static Acceptor open(InetSocketAddress address) throws IOException {
         ServerSocketChannel serverChannel = ServerSocketChannel.open();
 
         serverChannel.bind(address);
@@ -23,7 +23,7 @@ class Acceptor implements Closeable {
         return new Acceptor(serverChannel);
     }
 
-    public Session accept() throws IOException {
+    Session accept() throws IOException {
         SocketChannel channel = serverChannel.accept();
 
         channel.setOption(StandardSocketOptions.TCP_NODELAY, true);
