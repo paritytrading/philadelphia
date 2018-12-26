@@ -18,9 +18,9 @@ class Initiator implements FIXMessageListener {
         .setTargetCompID("acceptor")
         .build();
 
-    private FIXConnection connection;
+    private final FIXConnection connection;
 
-    private Histogram histogram;
+    private final Histogram histogram;
 
     private long sentAtNanoTime;
 
