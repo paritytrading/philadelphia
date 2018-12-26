@@ -65,7 +65,7 @@ class Initiator implements FIXMessageListener {
         histogram = new Histogram(3);
     }
 
-    public static Initiator open(SocketAddress address) throws IOException {
+    static Initiator open(SocketAddress address) throws IOException {
         SocketChannel channel = SocketChannel.open();
 
         channel.setOption(StandardSocketOptions.TCP_NODELAY, true);
@@ -82,15 +82,15 @@ class Initiator implements FIXMessageListener {
         received = true;
     }
 
-    public Histogram getHistogram() {
+    Histogram getHistogram() {
         return histogram;
     }
 
-    public FIXConnection getTransport() {
+    FIXConnection getTransport() {
         return connection;
     }
 
-    public void send(FIXMessage message) throws IOException {
+    void send(FIXMessage message) throws IOException {
         sentAtNanoTime = System.nanoTime();
 
         connection.update(message);
@@ -99,7 +99,7 @@ class Initiator implements FIXMessageListener {
         received = false;
     }
 
-    public void receive() throws IOException {
+    void receive() throws IOException {
         while (!received) {
             if (connection.receive() < 0)
                 return;
