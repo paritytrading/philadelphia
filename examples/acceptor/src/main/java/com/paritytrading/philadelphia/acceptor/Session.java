@@ -33,7 +33,7 @@ class Session implements FIXMessageListener {
     private long nextOrderId;
     private long nextExecId;
 
-    public Session(SocketChannel channel) {
+    Session(SocketChannel channel) {
         connection = new FIXConnection(channel, CONFIG, this, new FIXConnectionStatusListener() {
 
             @Override
@@ -155,7 +155,7 @@ class Session implements FIXMessageListener {
         connection.send(report);
     }
 
-    public FIXConnection getConnection() {
+    FIXConnection getConnection() {
         return connection;
     }
 
