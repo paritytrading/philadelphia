@@ -17,18 +17,18 @@ class Session implements FIXMessageListener {
 
     private static final FIXConfig CONFIG = new FIXConfig.Builder().build();
 
-    private FIXConnection connection;
+    private final FIXConnection connection;
 
-    private FIXMessage report;
+    private final FIXMessage report;
 
-    private FIXValue orderId;
-    private FIXValue clOrdId;
-    private FIXValue execId;
-    private FIXValue symbol;
-    private FIXValue side;
-    private FIXValue orderQty;
-    private FIXValue price;
-    private FIXValue leavesQty;
+    private final FIXValue orderId;
+    private final FIXValue clOrdId;
+    private final FIXValue execId;
+    private final FIXValue symbol;
+    private final FIXValue side;
+    private final FIXValue orderQty;
+    private final FIXValue price;
+    private final FIXValue leavesQty;
 
     private long nextOrderId;
     private long nextExecId;
