@@ -2,6 +2,7 @@ package com.paritytrading.philadelphia.client.command;
 
 import com.paritytrading.philadelphia.client.TerminalClient;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 class HelpCommand implements Command {
 
@@ -38,7 +39,7 @@ class HelpCommand implements Command {
     }
 
     private int calculateMaxCommandNameLength() {
-        return Commands.names().collectInt(String::length).max();
+        return Stream.of(Commands.names()).mapToInt(String::length).max().orElse(0);
     }
 
     @Override
