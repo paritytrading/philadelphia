@@ -2,18 +2,20 @@ package com.paritytrading.philadelphia.client.message;
 
 import com.paritytrading.philadelphia.FIXMessage;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import org.eclipse.collections.api.set.primitive.ImmutableIntSet;
-import org.eclipse.collections.impl.factory.primitive.IntSets;
+import java.util.Set;
 
 public class Message {
 
-    private static final ImmutableIntSet UNPRINTED_TAGS = IntSets.immutable.with(
-        49, // SenderCompID
-        56, // TargetCompID
-        34, // MsgSeqNum
-        52  // SendingTime
-    );
+    private static final Set<Integer> UNPRINTED_TAGS = new HashSet<>();
+
+    static {
+        UNPRINTED_TAGS.add(49); // SenderCompID
+        UNPRINTED_TAGS.add(56); // TargetCompID
+        UNPRINTED_TAGS.add(34); // MsgSeqNum
+        UNPRINTED_TAGS.add(52); // SendingTime
+    }
 
     private static final int MsgType = 35;
 
