@@ -3,11 +3,8 @@ package com.paritytrading.philadelphia.client.command;
 import com.paritytrading.philadelphia.client.TerminalClient;
 import com.paritytrading.philadelphia.client.message.Message;
 import com.paritytrading.philadelphia.client.message.Messages;
-
+import java.util.List;
 import java.util.Scanner;
-
-import org.eclipse.collections.api.list.ImmutableList;
-
 
 class WaitCommand implements Command {
     private static final long WAIT_TIME_MILLIS = 50;
@@ -51,11 +48,11 @@ class WaitCommand implements Command {
     }
 
     private String getLastMsgType(Messages messages) {
-        ImmutableList<Message> collect = messages.collect();
+        List<Message> collect = messages.collect();
 
         if (collect.isEmpty())
             return null;
 
-        return collect.getLast().getMsgType();
+        return collect.get(collect.size() - 1).getMsgType();
     }
 }

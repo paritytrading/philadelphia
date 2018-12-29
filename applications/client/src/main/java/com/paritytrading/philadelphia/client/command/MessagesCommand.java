@@ -2,8 +2,8 @@ package com.paritytrading.philadelphia.client.command;
 
 import com.paritytrading.philadelphia.client.TerminalClient;
 import com.paritytrading.philadelphia.client.message.Message;
+import java.util.List;
 import java.util.Scanner;
-import org.eclipse.collections.api.list.ImmutableList;
 
 class MessagesCommand implements Command {
 
@@ -12,7 +12,7 @@ class MessagesCommand implements Command {
         if (arguments.hasNext()) {
             int index = arguments.nextInt();
 
-            ImmutableList<Message> messages = client.getMessages().collect();
+            List<Message> messages = client.getMessages().collect();
 
             if (index >= 0 && index < +messages.size())
                 client.printf("%s\n", messages.get(index));

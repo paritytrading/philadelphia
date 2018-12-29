@@ -4,19 +4,19 @@ import com.paritytrading.philadelphia.FIXConnection;
 import com.paritytrading.philadelphia.FIXConnectionStatusListener;
 import com.paritytrading.philadelphia.FIXMessage;
 import com.paritytrading.philadelphia.FIXMessageListener;
-import org.eclipse.collections.api.list.ImmutableList;
-import org.eclipse.collections.impl.factory.Lists;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Messages implements FIXMessageListener, FIXConnectionStatusListener {
 
-    private volatile ImmutableList<Message> messages;
+    private List<Message> messages;
 
     public Messages() {
-        messages = Lists.immutable.with();
+        messages = new ArrayList<>();
     }
 
-    public ImmutableList<Message> collect() {
-        return messages;
+    public synchronized List<Message> collect() {
+        return new ArrayList<>(messages);
     }
 
     @Override
@@ -56,7 +56,11 @@ public class Messages implements FIXMessageListener, FIXConnectionStatusListener
     }
 
     private void add(FIXMessage message) {
-        messages = messages.newWith(Message.get(message));
+        add(Message.get(message));
+    }
+
+    private synchronized void add(Message message) {
+        messages.add(message);
     }
 
 }
