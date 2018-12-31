@@ -5,14 +5,14 @@ import java.util.Scanner;
 class SleepCommand implements Command {
 
     @Override
-    public void execute(TerminalClient client, Scanner arguments) throws CommandException {
+    public void execute(TerminalClient client, Scanner arguments) {
         if (!arguments.hasNext())
-            throw new CommandException();
+            throw new IllegalArgumentException();
 
         long millis = arguments.nextLong();
 
         if (arguments.hasNext())
-            throw new CommandException();
+            throw new IllegalArgumentException();
 
         try {
             Thread.sleep(millis);
