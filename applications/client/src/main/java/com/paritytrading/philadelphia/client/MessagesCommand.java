@@ -1,5 +1,7 @@
 package com.paritytrading.philadelphia.client;
 
+import static com.paritytrading.philadelphia.client.TerminalClient.*;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,17 +15,17 @@ class MessagesCommand implements Command {
             List<Message> messages = client.getMessages().collect();
 
             if (index >= 0 && index < +messages.size())
-                client.printf("%s\n", messages.get(index));
+                printf("%s\n", messages.get(index));
 
             if (index >= -messages.size() && index < 0)
-                client.printf("%s\n", messages.get(index + messages.size()));
+                printf("%s\n", messages.get(index + messages.size()));
 
             if (arguments.hasNext())
                 throw new IllegalArgumentException();
         }
         else {
             for (Message message : client.getMessages().collect())
-                client.printf("%s\n", message);
+                printf("%s\n", message);
         }
     }
 
