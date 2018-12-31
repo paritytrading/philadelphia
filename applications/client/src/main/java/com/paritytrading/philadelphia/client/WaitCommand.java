@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 class WaitCommand implements Command {
+
     private static final long WAIT_TIME_MILLIS = 50;
 
     @Override
@@ -41,15 +42,16 @@ class WaitCommand implements Command {
 
     @Override
     public String getUsage() {
-        return "wait <MsgType(35)>";
+        return "wait <msg-type>";
     }
 
-    private String getLastMsgType(Messages messages) {
-        List<Message> collect = messages.collect();
+    private static String getLastMsgType(Messages messages) {
+        List<Message> collection = messages.collect();
 
-        if (collect.isEmpty())
+        if (collection.isEmpty())
             return null;
 
-        return collect.get(collect.size() - 1).getMsgType();
+        return collection.get(collection.size() - 1).getMsgType();
     }
+
 }
