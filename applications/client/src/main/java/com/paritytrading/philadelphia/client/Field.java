@@ -7,8 +7,8 @@ class Field {
 
     private static final Pattern PATTERN = Pattern.compile("(?<tag>\\d{1,5})=(?<value>.+)");
 
-    private int    tag;
-    private String value;
+    private final int    tag;
+    private final String value;
 
     Field(int tag, String value) {
         this.tag   = tag;
