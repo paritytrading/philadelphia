@@ -1,6 +1,5 @@
-package com.paritytrading.philadelphia.client.command;
+package com.paritytrading.philadelphia.client;
 
-import com.paritytrading.philadelphia.client.TerminalClient;
 import com.paritytrading.philadelphia.client.message.Message;
 import java.io.IOException;
 import java.util.Scanner;

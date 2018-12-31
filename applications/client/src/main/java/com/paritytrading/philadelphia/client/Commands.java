@@ -1,4 +1,4 @@
-package com.paritytrading.philadelphia.client.command;
+package com.paritytrading.philadelphia.client;
 
 import java.util.stream.Stream;
 

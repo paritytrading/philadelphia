@@ -1,6 +1,5 @@
-package com.paritytrading.philadelphia.client.command;
+package com.paritytrading.philadelphia.client;
 
-import com.paritytrading.philadelphia.client.TerminalClient;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
