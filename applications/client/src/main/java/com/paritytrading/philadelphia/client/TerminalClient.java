@@ -24,9 +24,9 @@ import org.jline.reader.LineReaderBuilder;
 import org.jline.reader.impl.completer.StringsCompleter;
 import org.jvirtanen.config.Configs;
 
-public class TerminalClient implements Closeable {
+class TerminalClient implements Closeable {
 
-    public static final Locale LOCALE = Locale.US;
+    private static final Locale LOCALE = Locale.US;
 
     private Messages messages;
 
@@ -39,7 +39,7 @@ public class TerminalClient implements Closeable {
         this.session  = session;
     }
 
-    public static TerminalClient open(InetSocketAddress address, FIXConfig config) throws IOException {
+    static TerminalClient open(InetSocketAddress address, FIXConfig config) throws IOException {
         Messages messages = new Messages();
 
         Session session = Session.open(address, config, messages, messages);
@@ -47,15 +47,15 @@ public class TerminalClient implements Closeable {
         return new TerminalClient(messages, session);
     }
 
-    public Messages getMessages() {
+    Messages getMessages() {
         return messages;
     }
 
-    public Session getSession() {
+    Session getSession() {
         return session;
     }
 
-    public void run(List<String> lines) throws IOException {
+    void run(List<String> lines) throws IOException {
         LineReader reader = LineReaderBuilder.builder()
             .completer(new StringsCompleter(Commands.names()))
             .build();
@@ -114,7 +114,7 @@ public class TerminalClient implements Closeable {
         closed = true;
     }
 
-    public void printf(String format, Object... args) {
+    void printf(String format, Object... args) {
         System.out.printf(LOCALE, format, args);
     }
 
@@ -145,7 +145,7 @@ public class TerminalClient implements Closeable {
         }
     }
 
-    public static void main(Config config, List<String> lines) throws IOException {
+    private static void main(Config config, List<String> lines) throws IOException {
         String      version      = config.getString("fix.version");
         String      senderCompId = config.getString("fix.sender-comp-id");
         String      targetCompId = config.getString("fix.target-comp-id");
