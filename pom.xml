@@ -198,7 +198,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
-          <excludePackageNames>com.paritytrading.philadelphia.acceptor:com.paritytrading.philadelphia.client:com.paritytrading.philadelphia.initiator:*.generated</excludePackageNames>
+          <excludePackageNames>com.paritytrading.philadelphia.client:com.paritytrading.philadelphia.initiator:*.generated</excludePackageNames>
           <links>
             <link>http://www.joda.org/joda-time/apidocs/</link>
           </links>
