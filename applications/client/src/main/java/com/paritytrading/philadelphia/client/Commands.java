@@ -2,7 +2,7 @@ package com.paritytrading.philadelphia.client;
 
 import java.util.stream.Stream;
 
-public class Commands {
+class Commands {
 
     private static final Command[] COMMANDS = new Command[] {
         new SendCommand(),
@@ -13,21 +13,18 @@ public class Commands {
         new WaitCommand(),
     };
 
-    private Commands() {
-    }
-
-    public static Command[] all() {
+    static Command[] all() {
         return COMMANDS;
     }
 
-    public static Command find(final String name) {
+    static Command find(final String name) {
         return Stream.of(COMMANDS)
                 .filter(c -> c.getName().equals(name))
                 .findFirst()
                 .orElse(null);
     }
 
-    public static String[] names() {
+    static String[] names() {
         return Stream.of(COMMANDS).map(Command::getName).toArray(String[]::new);
     }
 
