@@ -28,9 +28,9 @@ class TerminalClient implements Closeable {
 
     private static final Locale LOCALE = Locale.US;
 
-    private Messages messages;
+    private final Messages messages;
 
-    private Session session;
+    private final Session session;
 
     private boolean closed;
 
