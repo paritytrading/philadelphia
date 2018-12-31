@@ -19,12 +19,26 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.stream.Stream;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
 import org.jline.reader.impl.completer.StringsCompleter;
 import org.jvirtanen.config.Configs;
 
 class TerminalClient implements Closeable {
+
+    static final Command[] COMMANDS = new Command[] {
+        new SendCommand(),
+        new MessagesCommand(),
+        new HelpCommand(),
+        new ExitCommand(),
+        new SleepCommand(),
+        new WaitCommand(),
+    };
+
+    static final String[] COMMAND_NAMES = Stream.of(COMMANDS)
+            .map(Command::getName)
+            .toArray(String[]::new);
 
     private static final Locale LOCALE = Locale.US;
 
@@ -57,7 +71,7 @@ class TerminalClient implements Closeable {
 
     void run(List<String> lines) throws IOException {
         LineReader reader = LineReaderBuilder.builder()
-            .completer(new StringsCompleter(Commands.names()))
+            .completer(new StringsCompleter(COMMAND_NAMES))
             .build();
 
         if (lines.isEmpty())
@@ -92,7 +106,7 @@ class TerminalClient implements Closeable {
         if (!scanner.hasNext())
             return;
 
-        Command command = Commands.find(scanner.next());
+        Command command = findCommand(scanner.next());
         if (command == null) {
             printf("error: Unknown command\n");
             return;
@@ -112,6 +126,15 @@ class TerminalClient implements Closeable {
         session.close();
 
         closed = true;
+    }
+
+    static Command findCommand(String name) {
+        for (Command command : COMMANDS) {
+            if (name.equals(command.getName()))
+                return command;
+        }
+
+        return null;
     }
 
     void printf(String format, Object... args) {
