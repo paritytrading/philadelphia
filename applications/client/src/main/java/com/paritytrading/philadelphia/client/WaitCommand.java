@@ -1,7 +1,5 @@
 package com.paritytrading.philadelphia.client;
 
-import com.paritytrading.philadelphia.client.message.Message;
-import com.paritytrading.philadelphia.client.message.Messages;
 import java.util.List;
 import java.util.Scanner;
 

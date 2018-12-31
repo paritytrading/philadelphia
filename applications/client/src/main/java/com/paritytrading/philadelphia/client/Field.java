@@ -1,4 +1,4 @@
-package com.paritytrading.philadelphia.client.message;
+package com.paritytrading.philadelphia.client;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
