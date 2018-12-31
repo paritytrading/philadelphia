@@ -12,7 +12,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 
-public class Session implements Closeable {
+class Session implements Closeable {
 
     private FIXMessage txMessage;
 
@@ -38,7 +38,7 @@ public class Session implements Closeable {
         new Thread(new Receiver()).start();
     }
 
-    public static Session open(InetSocketAddress address,
+    static Session open(InetSocketAddress address,
             FIXConfig config, FIXMessageListener listener,
             FIXConnectionStatusListener statusListener) throws IOException {
         SocketChannel channel = SocketChannel.open();
@@ -60,11 +60,11 @@ public class Session implements Closeable {
         closed = true;
     }
 
-    public FIXConnection getConnection() {
+    FIXConnection getConnection() {
         return connection;
     }
 
-    public void send(Message message) throws IOException {
+    void send(Message message) throws IOException {
         synchronized (lock) {
             connection.updateCurrentTimestamp();
         }
