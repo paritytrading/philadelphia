@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Message {
+class Message {
 
     private static final Set<Integer> UNPRINTED_TAGS = new HashSet<>();
 
@@ -28,7 +28,7 @@ public class Message {
         this.fields  = fields;
     }
 
-    public static Message get(String input) {
+    static Message get(String input) {
         List<Field> fields = new ArrayList<>();
 
         String msgType = null;
@@ -48,7 +48,7 @@ public class Message {
         return new Message(msgType, fields);
     }
 
-    public static Message get(FIXMessage message) {
+    static Message get(FIXMessage message) {
         List<Field> fields = new ArrayList<>();
 
         String msgType = null;
@@ -69,15 +69,16 @@ public class Message {
         return new Message(msgType, fields);
     }
 
-    public String getMsgType() {
+    String getMsgType() {
         return msgType;
     }
 
-    public void put(FIXMessage message) {
+    void put(FIXMessage message) {
         for (Field field : fields)
             message.addField(field.getTag()).setString(field.getValue());
     }
 
+    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
