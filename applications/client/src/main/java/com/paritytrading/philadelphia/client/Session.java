@@ -14,15 +14,15 @@ import java.nio.channels.SocketChannel;
 
 class Session implements Closeable {
 
-    private FIXMessage txMessage;
+    private final FIXMessage txMessage;
 
-    private Selector selector;
+    private final Selector selector;
 
-    private FIXConnection connection;
+    private final FIXConnection connection;
 
     private volatile boolean closed;
 
-    private Object lock;
+    private final Object lock;
 
     private Session(Selector selector, FIXConnection connection) {
         this.txMessage = connection.create();
