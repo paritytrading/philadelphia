@@ -7,14 +7,14 @@ class WaitCommand implements Command {
     private static final long WAIT_TIME_MILLIS = 50;
 
     @Override
-    public void execute(TerminalClient client, Scanner arguments) throws CommandException {
+    public void execute(TerminalClient client, Scanner arguments) {
         if (!arguments.hasNext())
-            throw new CommandException();
+            throw new IllegalArgumentException();
 
         String msgType = arguments.next();
 
         if (arguments.hasNext())
-            throw new CommandException();
+            throw new IllegalArgumentException();
 
         while (true) {
             try {

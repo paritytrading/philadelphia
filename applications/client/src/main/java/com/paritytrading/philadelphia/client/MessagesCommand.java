@@ -6,7 +6,7 @@ import java.util.Scanner;
 class MessagesCommand implements Command {
 
     @Override
-    public void execute(TerminalClient client, Scanner arguments) throws CommandException {
+    public void execute(TerminalClient client, Scanner arguments) {
         if (arguments.hasNext()) {
             int index = arguments.nextInt();
 
@@ -19,7 +19,7 @@ class MessagesCommand implements Command {
                 client.printf("%s\n", messages.get(index + messages.size()));
 
             if (arguments.hasNext())
-                throw new CommandException();
+                throw new IllegalArgumentException();
         }
         else {
             for (Message message : client.getMessages().collect())

@@ -6,20 +6,16 @@ import java.util.Scanner;
 class SendCommand implements Command {
 
     @Override
-    public void execute(TerminalClient client, Scanner arguments) throws CommandException, IOException {
+    public void execute(TerminalClient client, Scanner arguments) throws IOException {
         if (!arguments.hasNext())
-            throw new CommandException();
+            throw new IllegalArgumentException();
 
         String message = arguments.next();
 
         if (arguments.hasNext())
-            throw new CommandException();
+            throw new IllegalArgumentException();
 
-        try {
-            client.getSession().send(Message.get(message));
-        } catch (IllegalArgumentException e) {
-            throw new CommandException();
-        }
+        client.getSession().send(Message.get(message));
     }
 
     @Override
