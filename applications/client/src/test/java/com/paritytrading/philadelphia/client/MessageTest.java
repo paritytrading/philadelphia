@@ -1,4 +1,4 @@
-package com.paritytrading.philadelphia.client.message;
+package com.paritytrading.philadelphia.client;
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package com.paritytrading.philadelphia.client.message;
+package com.paritytrading.philadelphia.client;
 
 import com.paritytrading.philadelphia.FIXConnection;
 import com.paritytrading.philadelphia.FIXConnectionStatusListener;

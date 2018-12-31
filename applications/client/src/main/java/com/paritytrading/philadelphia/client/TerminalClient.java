@@ -6,7 +6,6 @@ import static org.jvirtanen.util.Applications.*;
 
 import com.paritytrading.philadelphia.FIXConfig;
 import com.paritytrading.philadelphia.FIXVersion;
-import com.paritytrading.philadelphia.client.message.Messages;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigException;
 import java.io.Closeable;
