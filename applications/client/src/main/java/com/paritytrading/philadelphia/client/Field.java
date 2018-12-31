@@ -10,12 +10,12 @@ class Field {
     private int    tag;
     private String value;
 
-    public Field(int tag, String value) {
+    Field(int tag, String value) {
         this.tag   = tag;
         this.value = value;
     }
 
-    public static Field get(String s) {
+    static Field get(String s) {
         Matcher matcher = PATTERN.matcher(s);
         if (!matcher.matches())
             throw new IllegalArgumentException();
@@ -26,11 +26,11 @@ class Field {
         return new Field(tag, value);
     }
 
-    public int getTag() {
+    int getTag() {
         return tag;
     }
 
-    public String getValue() {
+    String getValue() {
         return value;
     }
 
