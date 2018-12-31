@@ -7,15 +7,15 @@ import com.paritytrading.philadelphia.FIXMessageListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Messages implements FIXMessageListener, FIXConnectionStatusListener {
+class Messages implements FIXMessageListener, FIXConnectionStatusListener {
 
     private List<Message> messages;
 
-    public Messages() {
+    Messages() {
         messages = new ArrayList<>();
     }
 
-    public synchronized List<Message> collect() {
+    synchronized List<Message> collect() {
         return new ArrayList<>(messages);
     }
 
