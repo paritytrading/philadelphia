@@ -19,9 +19,9 @@ class Message {
 
     private static final int MsgType = 35;
 
-    private String msgType;
+    private final String msgType;
 
-    private List<Field> fields;
+    private final List<Field> fields;
 
     private Message(String msgType, List<Field> fields) {
         this.msgType = msgType;
