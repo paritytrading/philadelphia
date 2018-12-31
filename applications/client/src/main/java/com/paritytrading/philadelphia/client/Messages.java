@@ -9,7 +9,7 @@ import java.util.List;
 
 class Messages implements FIXMessageListener, FIXConnectionStatusListener {
 
-    private List<Message> messages;
+    private final List<Message> messages;
 
     Messages() {
         messages = new ArrayList<>();
