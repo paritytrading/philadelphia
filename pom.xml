@@ -46,6 +46,7 @@
 
   <modules>
     <module>applications/client</module>
+    <module>applications/generate</module>
     <module>examples/acceptor</module>
     <module>examples/initiator</module>
     <module>libraries/core</module>
