@@ -45,6 +45,9 @@
   </properties>
 
   <modules>
+    <module>applications/client</module>
+    <module>examples/acceptor</module>
+    <module>examples/initiator</module>
     <module>libraries/core</module>
     <module>libraries/fix42</module>
     <module>libraries/fix43</module>
@@ -53,9 +56,6 @@
     <module>libraries/fix50sp1</module>
     <module>libraries/fix50sp2</module>
     <module>libraries/fixt11</module>
-    <module>examples/acceptor</module>
-    <module>applications/client</module>
-    <module>examples/initiator</module>
     <module>tests/perf-test</module>
   </modules>
 
