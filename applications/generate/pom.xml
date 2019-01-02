@@ -1,0 +1,17 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.paritytrading.philadelphia</groupId>
+    <artifactId>philadelphia-parent</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>philadelphia-generate</artifactId>
+  <packaging>pom</packaging>
+
+  <name>Philadelphia Code Generator</name>
+
+</project>

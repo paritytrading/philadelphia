@@ -13,6 +13,7 @@ applications/generate/philadelphia/java.py
 applications/generate/philadelphia/model.py
 applications/generate/philadelphia/quickfix.py
 applications/generate/philadelphia/repository.py
+applications/generate/pom.xml
 applications/generate/setup.py
 examples/acceptor/README.md
 examples/acceptor/philadelphia-acceptor.jar
