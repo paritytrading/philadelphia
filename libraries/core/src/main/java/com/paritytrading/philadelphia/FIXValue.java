@@ -427,16 +427,6 @@ public class FIXValue {
     }
 
     /**
-     * Get the value as a checksum.
-     *
-     * @return the value as a checksum
-     * @throws FIXValueFormatException if the value is not an integer
-     */
-    public long asCheckSum() {
-        return asInt();
-    }
-
-    /**
      * Set the value to a checksum.
      *
      * @param c a checksum
