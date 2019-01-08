@@ -3,7 +3,6 @@ package com.paritytrading.philadelphia;
 import static com.paritytrading.philadelphia.FIXTags.*;
 
 import java.io.IOException;
-import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 
 class TestMessageParser {

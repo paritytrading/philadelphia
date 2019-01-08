@@ -1,10 +1,8 @@
 package com.paritytrading.philadelphia;
 
-import static com.paritytrading.philadelphia.FIX.*;
 import static org.junit.Assert.*;
 
 import java.nio.ByteBuffer;
-import java.nio.BufferUnderflowException;
 import org.joda.time.LocalTime;
 import org.joda.time.MutableDateTime;
 import org.junit.Before;
