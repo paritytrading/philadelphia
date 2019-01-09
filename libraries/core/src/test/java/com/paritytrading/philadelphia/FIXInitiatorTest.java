@@ -26,8 +26,6 @@ public class FIXInitiatorTest {
         .setFieldCapacity(1024)
         .build();
 
-    private FIXMessage message;
-
     private FixedClock clock;
 
     private FIXMessages  initiatorMessages;
@@ -40,8 +38,6 @@ public class FIXInitiatorTest {
 
     @Before
     public void setUp() throws IOException {
-        message = new FIXMessage(32, 32);
-
         clock = new FixedClock();
 
         ServerSocketChannel acceptorServerChannel = ServerSocketChannel.open();
