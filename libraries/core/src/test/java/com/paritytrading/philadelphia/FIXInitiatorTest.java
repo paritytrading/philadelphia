@@ -1,8 +1,6 @@
 package com.paritytrading.philadelphia;
 
 import static com.paritytrading.philadelphia.FIXConnectionStatus.*;
-import static com.paritytrading.philadelphia.FIXMsgTypes.*;
-import static com.paritytrading.philadelphia.FIXTags.*;
 import static com.paritytrading.philadelphia.Strings.*;
 import static java.util.Arrays.*;
 import static org.junit.Assert.*;
