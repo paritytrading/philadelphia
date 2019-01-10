@@ -20,8 +20,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.stream.Stream;
+import org.jline.reader.EndOfFileException;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
+import org.jline.reader.UserInterruptException;
 import org.jline.reader.impl.completer.StringsCompleter;
 import org.jvirtanen.config.Configs;
 
@@ -161,6 +163,8 @@ class TerminalClient implements Closeable {
                 lines = readAllLines(args[1]);
 
             main(config, lines);
+        } catch (EndOfFileException | UserInterruptException e) {
+            // Ignore.
         } catch (ConfigException | FileNotFoundException e) {
             error(e);
         } catch (IOException e) {

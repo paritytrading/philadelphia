@@ -35,7 +35,10 @@ class Session implements Closeable {
 
         this.lock = new Object();
 
-        new Thread(new Receiver()).start();
+        Thread receiver = new Thread(new Receiver());
+
+        receiver.setDaemon(true);
+        receiver.start();
     }
 
     static Session open(InetSocketAddress address,
