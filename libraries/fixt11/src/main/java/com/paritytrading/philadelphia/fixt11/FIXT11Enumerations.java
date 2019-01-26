@@ -1,5 +1,12 @@
 package com.paritytrading.philadelphia.fixt11;
 
+/*
+ * This file has been automatically generated using Philadelphia Code
+ * Generator. For more information on Philadelphia Code Generator, see:
+ *
+ *   https://github.com/paritytrading/philadelphia
+ */
+
 /**
  * Enumerations for FIXT 1.1.
  */
