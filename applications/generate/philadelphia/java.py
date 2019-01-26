@@ -3,6 +3,16 @@ import string
 import textwrap
 
 
+COMPILATION_UNIT_COMMENT = '''\
+/*
+ * This file has been automatically generated using Philadelphia Code
+ * Generator. For more information on Philadelphia Code Generator, see:
+ *
+ *   https://github.com/paritytrading/philadelphia
+ */\
+'''
+
+
 class CompilationUnit(object):
 
     def __init__(self, package, class_):
@@ -10,7 +20,8 @@ class CompilationUnit(object):
         self.class_ = class_
 
     def __str__(self):
-        return '{}\n\n{}'.format(self.package, self.class_)
+        return '{}\n\n{}\n\n{}'.format(self.package, COMPILATION_UNIT_COMMENT,
+                self.class_)
 
 
 class Package(object):
