@@ -1,5 +1,12 @@
 package com.paritytrading.philadelphia.fix42;
 
+/*
+ * This file has been automatically generated using Philadelphia Code
+ * Generator. For more information on Philadelphia Code Generator, see:
+ *
+ *   https://github.com/paritytrading/philadelphia
+ */
+
 /**
  * Tags for FIX 4.2.
  */
