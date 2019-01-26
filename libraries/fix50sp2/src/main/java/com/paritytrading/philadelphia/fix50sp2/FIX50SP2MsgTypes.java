@@ -1,5 +1,12 @@
 package com.paritytrading.philadelphia.fix50sp2;
 
+/*
+ * This file has been automatically generated using Philadelphia Code
+ * Generator. For more information on Philadelphia Code Generator, see:
+ *
+ *   https://github.com/paritytrading/philadelphia
+ */
+
 /**
  * Message types for FIX 5.0 SP2.
  */
