@@ -79,10 +79,10 @@ public class FIXValue {
      * @param value a value container
      */
     public void set(FIXValue value) {
-        offset = 0;
+        offset = value.offset;
         length = value.length;
 
-        System.arraycopy(value.bytes, 0, bytes, 0, length + 1);
+        System.arraycopy(value.bytes, offset, bytes, offset, length + 1);
     }
 
     /**
