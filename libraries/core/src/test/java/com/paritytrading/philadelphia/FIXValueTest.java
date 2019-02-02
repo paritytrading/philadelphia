@@ -41,7 +41,7 @@ public class FIXValueTest {
     }
 
     @Test
-    public void set() {
+    public void setWithoutOffset() {
         FIXValue anotherValue = new FIXValue(32);
 
         anotherValue.setString("FOO");
@@ -49,6 +49,17 @@ public class FIXValueTest {
         value.set(anotherValue);
 
         assertPutEquals("FOO\u0001");
+    }
+
+    @Test
+    public void setWithOffset() {
+        FIXValue anotherValue = new FIXValue(32);
+
+        anotherValue.setInt(123);
+
+        value.set(anotherValue);
+
+        assertPutEquals("123\u0001");
     }
 
     @Test
