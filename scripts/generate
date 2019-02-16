@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+#
+# This script generates the FIX protocol versions from the FIX Repository. For
+# more information on the FIX Repository, see:
+#
+#   https://www.fixtrading.org/standards/fix-repository/
+#
+# This script uses Philadelphia Code Generator and therefore requires Python
+# 3.5 or newer.
+#
+
 set -e
 
 generate() {
