@@ -126,7 +126,7 @@ public class FIXMessageParser {
                     continue;
 
                 // Garbled message
-                if (FIXCheckSums.sum(buffer, beginning, position - beginning + length) % 256
+                if ((FIXCheckSums.sum(buffer, beginning, position - beginning + length) & 0xff)
                         != checkSum.asCheckSum())
                     continue;
 
