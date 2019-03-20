@@ -442,7 +442,7 @@ public class FIXValue {
      * @param c a checksum
      */
     public void setCheckSum(long c) {
-        setDigits(c % 256, 0, 3);
+        setDigits(c & 0xff, 0, 3);
         bytes[3] = SOH;
 
         offset = 0;
