@@ -69,8 +69,6 @@ For more information on Philadelphia:
 
 ## License
 
-Copyright 2015 Jussi Virtanen and [contributors][].
-
-  [contributors]: https://github.com/paritytrading/philadelphia/graphs/contributors
+Copyright 2015 Philadelphia authors.
 
 Released under the Apache License, Version 2.0. See `LICENSE.txt` for details.
