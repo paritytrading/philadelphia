@@ -29,9 +29,13 @@ public class FIXMessageParserBenchmark extends FIXBenchmark {
             "56=acceptor\u000134=2\u000111=123\u000121=1\u000155=FOO\u000154=1\u000140=2\u0001" +
             "44=150.25\u000110=075\u0001";
 
+    private static final FIXConfig CHECK_SUM_ENABLED  = new FIXConfig.Builder().build();
+    private static final FIXConfig CHECK_SUM_DISABLED = new FIXConfig.Builder().setCheckSumEnabled(false).build();
+
     private ByteBuffer buffer;
 
-    private FIXMessageParser parser;
+    private FIXMessageParser checkSumEnabled;
+    private FIXMessageParser checkSumDisabled;
 
     @Setup(Level.Iteration)
     public void prepare() {
@@ -40,9 +44,8 @@ public class FIXMessageParserBenchmark extends FIXBenchmark {
         buffer.put(MESSAGE.getBytes(US_ASCII));
         buffer.flip();
 
-        FIXConfig config = new FIXConfig.Builder().build();
-
-        parser = new FIXMessageParser(config, listener -> {});
+        checkSumEnabled  = new FIXMessageParser(CHECK_SUM_ENABLED,  listener -> {});
+        checkSumDisabled = new FIXMessageParser(CHECK_SUM_DISABLED, listener -> {});
     }
 
     @Benchmark
@@ -50,8 +53,17 @@ public class FIXMessageParserBenchmark extends FIXBenchmark {
     }
 
     @Benchmark
-    public boolean parse() throws IOException {
-        boolean result = parser.parse(buffer);
+    public boolean checkSumEnabled() throws IOException {
+        boolean result = checkSumEnabled.parse(buffer);
+
+        buffer.flip();
+
+        return result;
+    }
+
+    @Benchmark
+    public boolean checkSumDisabled() throws IOException {
+        boolean result = checkSumDisabled.parse(buffer);
 
         buffer.flip();
 
