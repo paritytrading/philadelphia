@@ -8,7 +8,7 @@ FIX initiator.
 Run Philadelphia Test Initiator with Java:
 
 ```
-java -jar philadelphia-initiator.jar <host> <port> <orders>
+java -jar philadelphia-initiator.jar <host> <port> <orders> <orders-per-second>
 ```
 
 The application measures the round-trip time (RTT) between sending an Order
