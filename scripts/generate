@@ -32,10 +32,10 @@ generate() {
     local input_path=$2
     local output_path=$3
 
-    cat scripts/license.java > $output_path
+    cat scripts/license.java > "$output_path"
 
     (cd applications/generate; \
-            python -m philadelphia.generate $command $input_path >> ../../$output_path)
+            python -m philadelphia.generate "$command" "$input_path" >> "../../$output_path")
 }
 
 generate_version() {
