@@ -21,6 +21,7 @@ import static java.nio.charset.StandardCharsets.*;
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 import java.nio.ReadOnlyBufferException;
+import java.nio.charset.StandardCharsets;
 import org.joda.time.MutableDateTime;
 import org.joda.time.ReadableDateTime;
 
@@ -29,7 +30,7 @@ import org.joda.time.ReadableDateTime;
  */
 public class FIXValue {
 
-    private final byte[] bytes;
+    private final ByteBuffer bytes;
 
     private int offset;
     private int length;
@@ -40,9 +41,9 @@ public class FIXValue {
      * @param capacity the capacity
      */
     public FIXValue(int capacity) {
-        bytes = new byte[capacity];
+        bytes = ByteBuffer.allocateDirect(capacity);
 
-        bytes[0] = SOH;
+        bytes.put(0, SOH);
 
         offset = 0;
         length = 0;
@@ -58,7 +59,7 @@ public class FIXValue {
      *   value container
      */
     public byte byteAt(int index) {
-        return bytes[offset + index];
+        return bytes.get(offset + index);
     }
 
     /**
@@ -78,13 +79,15 @@ public class FIXValue {
      *     than the length of the byte array
      */
     public void copyTo(byte[] bytes) {
-        System.arraycopy(this.bytes, this.offset, bytes, 0, this.length);
+        this.bytes.position(this.offset);
+        this.bytes.get(bytes, 0, this.length);
     }
 
     /**
      * Reset the value.
      */
     public void reset() {
+        bytes.reset();
         length = 0;
     }
 
@@ -97,7 +100,7 @@ public class FIXValue {
         offset = value.offset;
         length = value.length;
 
-        System.arraycopy(value.bytes, offset, bytes, offset, length + 1);
+        bytes.put(value.bytes);
     }
 
     /**
@@ -110,7 +113,7 @@ public class FIXValue {
         if (length != 1)
             notBoolean();
 
-        return bytes[offset] == YES;
+        return bytes.get(offset) == YES;
     }
 
     /**
@@ -119,9 +122,9 @@ public class FIXValue {
      * @param b a boolean
      */
     public void setBoolean(boolean b) {
-        bytes[0] = b ? YES : NO;
-        bytes[1] = SOH;
-
+        bytes.put(0, b ? YES : NO);
+        bytes.put(1, SOH);
+        
         offset = 0;
         length = 1;
     }
@@ -136,7 +139,7 @@ public class FIXValue {
         if (length != 1)
             notChar();
 
-        return (char)bytes[offset];
+        return (char)bytes.get(offset);
     }
 
     /**
@@ -145,8 +148,8 @@ public class FIXValue {
      * @param c a character
      */
     public void setChar(char c) {
-        bytes[0] = (byte)c;
-        bytes[1] = SOH;
+        bytes.put(0, (byte)c);
+        bytes.put(1, SOH);
 
         offset = 0;
         length = 1;
@@ -163,7 +166,7 @@ public class FIXValue {
 
         int i = offset;
 
-        if (bytes[i] == '-') {
+        if (bytes.get(i) == '-') {
             negative = true;
 
             i++;
@@ -172,7 +175,7 @@ public class FIXValue {
         long value = 0;
 
         while (i < offset + length) {
-            byte b = bytes[i++];
+            byte b = bytes.get(i++);
 
             if (b < '0' || b > '9')
                 notInt();
@@ -189,23 +192,23 @@ public class FIXValue {
      * @param i an integer
      */
     public void setInt(long i) {
-        bytes[bytes.length - 1] = SOH;
+        bytes.put(bytes.limit() - 1, SOH);
 
-        long j = Math.abs(i);
+        long j = Math.abs(i); //TODO: maybe another to do this faster
 
-        int k = bytes.length - 2;
+        int k = bytes.limit() - 2;
 
         do {
-            bytes[k--] = (byte)('0' + j % 10);
+            bytes.put(k--, (byte)('0' + j % 10));
 
             j /= 10;
         } while (j > 0);
 
         if (i < 0)
-            bytes[k--] = '-';
+            bytes.put(k--, (byte)('-'));
 
         offset = k + 1;
-        length = bytes.length - 1 - offset;
+        length = bytes.limit() - 1 - offset;
     }
 
     /**
@@ -218,11 +221,11 @@ public class FIXValue {
         long   value  = 0;
         double factor = 0.0;
 
-        long sign  = bytes[offset] == '-' ? -1 : +1;
+        long sign  = bytes.get(offset) == '-' ? -1 : +1;
         int  start = sign < 0 ? offset + 1 : offset;
 
         for (int i = start; i < offset + length; i++) {
-            byte b = bytes[i];
+            byte b = bytes.get(i);
 
             if (b < '0' || b > '9') {
                 if (factor == 0.0 && b == '.') {
@@ -249,30 +252,30 @@ public class FIXValue {
     public void setFloat(double f, int decimals) {
         long i = Math.round(Longs.POWERS_OF_TEN[decimals] * Math.abs(f));
 
-        bytes[bytes.length - 1] = SOH;
+        bytes.put(bytes.limit() - 1, SOH);
 
-        int j = bytes.length - 2;
+        int j = bytes.limit() - 2;
 
         for (int k = 0; k < decimals; k++) {
-            bytes[j--] = (byte)('0' + i % 10);
+            bytes.put(j--, (byte)('0' + i % 10));
 
             i /= 10;
         }
 
         if (decimals > 0)
-            bytes[j--] = '.';
+            bytes.put(j--, (byte)'.');
 
         do {
-            bytes[j--] = (byte)('0' + i % 10);
+            bytes.put(j--, (byte)('0' + i % 10));
 
             i /= 10;
         } while (i > 0);
 
         if (f < 0)
-            bytes[j--] = '-';
+            bytes.put(j--, (byte)'-');
 
         offset = j + 1;
-        length = bytes.length - 1 - offset;
+        length = bytes.limit() - 1 - offset;
     }
 
     /**
@@ -281,7 +284,9 @@ public class FIXValue {
      * @return the value as a string
      */
     public String asString() {
-        return new String(bytes, offset, length, US_ASCII);
+        bytes.position(offset);
+        bytes.limit(offset + length);
+        return StandardCharsets.US_ASCII.decode(bytes.slice()).toString();
     }
 
     /**
@@ -292,7 +297,7 @@ public class FIXValue {
      */
     public void asString(StringBuilder s) {
         for (int i = 0; i < length; i++)
-            s.append((char)bytes[offset + i]);
+            s.append((char)bytes.get(offset + i));
     }
 
     /**
@@ -306,9 +311,9 @@ public class FIXValue {
         length = s.length();
 
         for (int i = 0; i < length; i++)
-            bytes[i] = (byte)s.charAt(i);
+            bytes.put(i, (byte)s.charAt(i));
 
-        bytes[length] = SOH;
+        bytes.put(length, SOH);
     }
 
     /**
@@ -337,7 +342,7 @@ public class FIXValue {
         setDigits(d.getYear(), 0, 4);
         setDigits(d.getMonthOfYear(), 4, 2);
         setDigits(d.getDayOfMonth(), 6, 2);
-        bytes[8] = SOH;
+        bytes.put(8, SOH);
 
         length = 8;
         offset = 0;
@@ -367,19 +372,19 @@ public class FIXValue {
      */
     public void setTimeOnly(ReadableDateTime t, boolean millis) {
         setDigits(t.getHourOfDay(), 0, 2);
-        bytes[2] = ':';
+        bytes.put(2, (byte)':');
         setDigits(t.getMinuteOfHour(), 3, 2);
-        bytes[5] = ':';
+        bytes.put(5, (byte)':');
         setDigits(t.getSecondOfMinute(), 6, 2);
 
         if (millis) {
-            bytes[8] = '.';
+            bytes.put(8, (byte)'.');
             setDigits(t.getMillisOfSecond(), 9, 3);
-            bytes[12] = SOH;
+            bytes.put(12, SOH);
 
             length = 12;
         } else {
-            bytes[8] = SOH;
+            bytes.put(8, SOH);
 
             length = 8;
         }
@@ -419,21 +424,21 @@ public class FIXValue {
         setDigits(t.getYear(), 0, 4);
         setDigits(t.getMonthOfYear(), 4, 2);
         setDigits(t.getDayOfMonth(), 6, 2);
-        bytes[8] = '-';
+        bytes.put(8, (byte)'-');
         setDigits(t.getHourOfDay(), 9, 2);
-        bytes[11] = ':';
+        bytes.put(11, (byte)':');
         setDigits(t.getMinuteOfHour(), 12, 2);
-        bytes[14] = ':';
+        bytes.put(14, (byte)':');
         setDigits(t.getSecondOfMinute(), 15, 2);
 
         if (millis) {
-            bytes[17] = '.';
+            bytes.put(17, (byte)'.');
             setDigits(t.getMillisOfSecond(), 18, 3);
-            bytes[21] = SOH;
+            bytes.put(21, SOH);
 
             length = 21;
         } else {
-            bytes[17] = SOH;
+            bytes.put(17, SOH);
 
             length = 17;
         }
@@ -458,7 +463,7 @@ public class FIXValue {
      */
     public void setCheckSum(long c) {
         setDigits(c & 0xff, 0, 3);
-        bytes[3] = SOH;
+        bytes.put(3, SOH);
 
         offset = 0;
         length = 3;
@@ -476,16 +481,17 @@ public class FIXValue {
     public boolean get(ByteBuffer buffer) throws FIXValueOverflowException {
         offset = 0;
         length = 0;
-
+        bytes.position(0);
         while (buffer.hasRemaining()) {
             byte b = buffer.get();
+            bytes.put(b);
 
-            bytes[length] = b;
-
-            if (b == SOH)
+            if (b == SOH) {
+                bytes.position(0);
                 return true;
+            }
 
-            if (++length == bytes.length)
+            if (++length == bytes.limit())
                 tooLongValue();
         }
 
@@ -501,14 +507,17 @@ public class FIXValue {
      * @throws ReadOnlyBufferException if the buffer is read-only
      */
     public void put(ByteBuffer buffer) {
-        buffer.put(bytes, offset, length + 1);
+        bytes.limit(offset + length + 1);
+        ByteBuffer r = bytes.position(offset).slice();
+        buffer.put(r);
+        bytes.position(0);
     }
 
     private int getDigits(int digits, int offset) {
         int value = 0;
 
         for (int i = offset; i < offset + digits; i++) {
-            byte b = bytes[i];
+            byte b = bytes.get(i);
 
             if (b < '0' || b > '9')
                 notDigit();
@@ -521,7 +530,7 @@ public class FIXValue {
 
     private void setDigits(long l, int offset, int digits) {
         for (int i = offset + digits - 1; i >= offset; i--) {
-            bytes[i] = (byte)('0' + l % 10);
+            bytes.put(i, (byte)('0' + l % 10));
 
             l /= 10;
         }
