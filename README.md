@@ -36,7 +36,7 @@ Philadelphia contains the following libraries:
 See the [FIX Trading Community][] for the protocol specifications and
 [Philadelphia Extras][] for additional FIX dialects.
 
-  [FIX Trading Community]: http://www.fixtradingcommunity.org
+  [FIX Trading Community]: http://www.fixtrading.org
   [Philadelphia Extras]: https://github.com/paritytrading/philadelphia-extras
 
 Philadelphia contains the following applications:
