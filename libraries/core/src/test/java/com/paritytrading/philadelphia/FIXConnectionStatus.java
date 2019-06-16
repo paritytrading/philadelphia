@@ -17,7 +17,6 @@ package com.paritytrading.philadelphia;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.jvirtanen.value.Value;
 
 class FIXConnectionStatus implements FIXConnectionStatusListener {
 
