@@ -19,9 +19,6 @@ import static com.paritytrading.philadelphia.fix42.FIX42Enumerations.*;
 import static com.paritytrading.philadelphia.fix42.FIX42MsgTypes.*;
 import static com.paritytrading.philadelphia.fix42.FIX42Tags.*;
 
-import com.paritytrading.philadelphia.FIXMessage;
-import com.paritytrading.philadelphia.FIXMessageOverflowException;
-import com.paritytrading.philadelphia.FIXValueOverflowException;
 import java.nio.ByteBuffer;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;

@@ -15,7 +15,6 @@
  */
 package com.paritytrading.philadelphia;
 
-import com.paritytrading.philadelphia.FIXTags;
 import java.nio.ByteBuffer;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;

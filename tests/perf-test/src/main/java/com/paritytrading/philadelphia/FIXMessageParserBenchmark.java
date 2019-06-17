@@ -19,12 +19,11 @@ import static com.paritytrading.philadelphia.fix42.FIX42Enumerations.*;
 import static com.paritytrading.philadelphia.fix42.FIX42MsgTypes.*;
 import static com.paritytrading.philadelphia.fix42.FIX42Tags.*;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Setup;
-
-import java.io.IOException;
-import java.nio.ByteBuffer;
 
 public class FIXMessageParserBenchmark extends FIXBenchmark {
 

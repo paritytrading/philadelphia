@@ -15,7 +15,6 @@
  */
 package com.paritytrading.philadelphia;
 
-import com.paritytrading.philadelphia.FIXValue;
 import org.joda.time.MutableDateTime;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;

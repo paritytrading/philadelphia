@@ -17,7 +17,6 @@ package com.paritytrading.philadelphia;
 
 import static java.nio.charset.StandardCharsets.*;
 
-import com.paritytrading.philadelphia.FIXCheckSums;
 import java.nio.ByteBuffer;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
