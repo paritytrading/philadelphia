@@ -51,6 +51,7 @@ class TerminalClient implements Closeable {
         new ExitCommand(),
         new SleepCommand(),
         new WaitCommand(),
+        new ExpectCommand(),
     };
 
     static final String[] COMMAND_NAMES = Stream.of(COMMANDS)

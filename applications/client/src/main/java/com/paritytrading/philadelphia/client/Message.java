@@ -49,7 +49,7 @@ class Message {
         String msgType = null;
 
         for (String part : input.split("\\|")) {
-            Field field = Field.get(part);
+            Field field = part.contains("=") ? Field.get(part) : new Field(Integer.parseInt(part), null);
 
             if (field.getTag() == MsgType)
                 msgType = field.getValue();
@@ -86,6 +86,10 @@ class Message {
 
     String getMsgType() {
         return msgType;
+    }
+
+    List<Field> getFields() {
+        return fields;
     }
 
     void put(FIXMessage message) {
