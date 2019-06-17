@@ -39,6 +39,8 @@ import org.jline.reader.EndOfFileException;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
 import org.jline.reader.UserInterruptException;
+import org.jline.reader.impl.completer.ArgumentCompleter;
+import org.jline.reader.impl.completer.NullCompleter;
 import org.jline.reader.impl.completer.StringsCompleter;
 import org.jvirtanen.config.Configs;
 
@@ -88,7 +90,9 @@ class TerminalClient implements Closeable {
 
     void run(List<String> lines) throws IOException {
         LineReader reader = LineReaderBuilder.builder()
-            .completer(new StringsCompleter(COMMAND_NAMES))
+            .completer(new ArgumentCompleter(
+                        new StringsCompleter(COMMAND_NAMES),
+                        new NullCompleter()))
             .build();
 
         if (lines.isEmpty())
