@@ -18,7 +18,6 @@ package com.paritytrading.philadelphia;
 import static org.junit.Assert.*;
 
 import java.nio.ByteBuffer;
-import org.joda.time.LocalTime;
 import org.joda.time.MutableDateTime;
 import org.junit.Before;
 import org.junit.Test;
@@ -299,22 +298,22 @@ public class FIXValueTest {
     public void asTimeOnlyWithMillis() throws FIXValueOverflowException {
         get("09:30:05.250");
 
-        MutableDateTime t = new MutableDateTime();
+        MutableDateTime t = new MutableDateTime(2015, 9, 24, 22, 45, 10, 750);
 
         value.asTimeOnly(t);
 
-        assertEquals(new LocalTime(9, 30, 5, 250), new LocalTime(t));
+        assertEquals(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), t);
     }
 
     @Test
     public void asTimeOnlyWithoutMillis() throws FIXValueOverflowException {
         get("09:30:05");
 
-        MutableDateTime t = new MutableDateTime();
+        MutableDateTime t = new MutableDateTime(2015, 9, 24, 22, 45, 10, 750);
 
         value.asTimeOnly(t);
 
-        assertEquals(new LocalTime(9, 30, 5, 0), new LocalTime(t));
+        assertEquals(new MutableDateTime(2015, 9, 24, 9, 30, 5, 0), t);
     }
 
     @Test
