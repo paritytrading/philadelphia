@@ -561,9 +561,6 @@ public class FIXConnection implements Closeable {
             case Reject:
                 handleReject(message);
                 break;
-            case SequenceReset:
-                handleSequenceReset(message);
-                break;
             case Logout:
                 handleLogout(message);
                 break;
