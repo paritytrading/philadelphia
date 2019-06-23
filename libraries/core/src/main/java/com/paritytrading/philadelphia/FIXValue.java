@@ -325,7 +325,7 @@ public class FIXValue {
         int monthOfYear = getDigits(2, offset + 4);
         int dayOfMonth  = getDigits(2, offset + 6);
 
-        d.setDateTime(year, monthOfYear, dayOfMonth, 0, 0, 0, 0);
+        d.setDate(year, monthOfYear, dayOfMonth);
     }
 
     /**

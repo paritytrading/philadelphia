@@ -281,11 +281,11 @@ public class FIXValueTest {
     public void asDate() throws FIXValueOverflowException {
         get("20150924");
 
-        MutableDateTime d = new MutableDateTime();
+        MutableDateTime d = new MutableDateTime(1970, 1, 1, 9, 30, 5, 250);
 
         value.asDate(d);
 
-        assertEquals(new MutableDateTime(2015, 9, 24, 0, 0, 0, 0), d);
+        assertEquals(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), d);
     }
 
     @Test
