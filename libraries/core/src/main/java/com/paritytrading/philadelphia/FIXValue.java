@@ -321,11 +321,9 @@ public class FIXValue {
         if (length != 8)
             notDate();
 
-        int year        = getDigits(4, offset + 0);
-        int monthOfYear = getDigits(2, offset + 4);
-        int dayOfMonth  = getDigits(2, offset + 6);
-
-        d.setDate(year, monthOfYear, dayOfMonth);
+        d.setYear(getDigits(4, offset + 0));
+        d.setMonthOfYear(getDigits(2, offset + 4));
+        d.setDayOfMonth(getDigits(2, offset + 6));
     }
 
     /**
