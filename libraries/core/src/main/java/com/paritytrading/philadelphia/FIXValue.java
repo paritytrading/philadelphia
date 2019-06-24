@@ -395,16 +395,13 @@ public class FIXValue {
         if (length != 17 && length != 21)
             notTimestamp();
 
-        int year           = getDigits(4, offset + 0);
-        int monthOfYear    = getDigits(2, offset + 4);
-        int dayOfMonth     = getDigits(2, offset + 6);
-        int hourOfDay      = getDigits(2, offset + 9);
-        int minuteOfHour   = getDigits(2, offset + 12);
-        int secondOfMinute = getDigits(2, offset + 15);
-        int millisOfSecond = length == 21 ? getDigits(3, offset + 18) : 0;
-
-        t.setDateTime(year, monthOfYear, dayOfMonth, hourOfDay, minuteOfHour,
-                secondOfMinute, millisOfSecond);
+        t.setYear(getDigits(4, offset + 0));
+        t.setMonthOfYear(getDigits(2, offset + 4));
+        t.setDayOfMonth(getDigits(2, offset + 6));
+        t.setHourOfDay(getDigits(2, offset + 9));
+        t.setMinuteOfHour(getDigits(2, offset + 12));
+        t.setSecondOfMinute(getDigits(2, offset + 15));
+        t.setMillisOfSecond(length == 21 ? getDigits(3, offset + 18) : 0);
     }
 
     /**
