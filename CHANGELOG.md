@@ -1,5 +1,12 @@
 # Release Notes
 
+## 1.1.1 (2019-06-25)
+
+- Fix message header buffer handling (Jussi Virtanen)
+
+  Before manipulating the message header, invoke `ByteBuffer#clear()` to reset
+  the buffer's limit back to its capacity.
+
 ## 1.1.0 (2019-06-21)
 
 - Improve `FIXValue` class (Jonathan Heusser, Jussi Virtanen)
