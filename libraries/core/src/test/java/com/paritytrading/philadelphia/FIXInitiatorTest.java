@@ -17,6 +17,9 @@ package com.paritytrading.philadelphia;
 
 import static com.paritytrading.philadelphia.FIXConnectionStatus.*;
 import static com.paritytrading.philadelphia.Strings.*;
+import static com.paritytrading.philadelphia.fix42.FIX42Enumerations.*;
+import static com.paritytrading.philadelphia.fix42.FIX42MsgTypes.*;
+import static com.paritytrading.philadelphia.fix42.FIX42Tags.*;
 import static java.util.Arrays.*;
 import static org.junit.Assert.*;
 
@@ -372,6 +375,33 @@ public class FIXInitiatorTest {
             "52=19700101-00:00:00.000|10=220|";
 
         initiatorMessage(logout);
+    }
+
+    @Test
+    public void sendApplicationMessage() throws IOException {
+        initiator.sendLogon(false);
+
+        FIXMessage message = initiator.create();
+
+        initiator.prepare(message, OrderSingle);
+
+        message.addField(ClOrdID).setInt(1);
+        message.addField(HandlInst).setChar(HandlInstValues.AutomatedExecutionNoIntervention);
+        message.addField(Symbol).setString("FOO");
+        message.addField(Side).setChar(SideValues.Buy);
+        message.addField(TransactTime).setString(initiator.getCurrentTimestamp());
+        message.addField(OrderQty).setFloat(100.00, 2);
+        message.addField(OrdType).setChar(OrdTypeValues.Limit);
+        message.addField(Price).setFloat(25.50, 2);
+
+        initiator.send(message);
+
+        List<String> messages = asList("8=FIX.4.2|9=72|35=A|49=initiator|56=acceptor|34=1|" +
+                "52=19700101-00:00:00.000|98=0|108=30|10=004|",
+                "8=FIX.4.2|9=131|35=D|49=initiator|56=acceptor|34=2|52=19700101-00:00:00.000|" +
+                "11=1|21=1|55=FOO|54=1|60=19700101-00:00:00.000|38=100.00|40=2|44=25.50|10=020|");
+
+        initiatorMessages(messages);
     }
 
     private void receiveBlocking(FIXConnection connection) throws IOException {
