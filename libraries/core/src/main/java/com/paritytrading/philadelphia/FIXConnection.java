@@ -424,6 +424,7 @@ public class FIXConnection implements Closeable {
 
         bodyLength.setInt(txBodyBuffer.position());
 
+        txHeaderBuffer.clear();
         txHeaderBuffer.position(bodyLengthOffset);
         bodyLength.put(txHeaderBuffer);
 
