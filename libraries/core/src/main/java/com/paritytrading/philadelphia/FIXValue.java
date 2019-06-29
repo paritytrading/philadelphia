@@ -142,10 +142,10 @@ public class FIXValue {
     /**
      * Set the value to a character.
      *
-     * @param c a character
+     * @param x a character
      */
-    public void setChar(char c) {
-        bytes[0] = (byte)c;
+    public void setChar(char x) {
+        bytes[0] = (byte)x;
         bytes[1] = SOH;
 
         offset = 0;
