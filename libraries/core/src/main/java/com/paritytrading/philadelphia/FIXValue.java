@@ -116,10 +116,10 @@ public class FIXValue {
     /**
      * Set the value to a boolean.
      *
-     * @param b a boolean
+     * @param x a boolean
      */
-    public void setBoolean(boolean b) {
-        bytes[0] = b ? YES : NO;
+    public void setBoolean(boolean x) {
+        bytes[0] = x ? YES : NO;
         bytes[1] = SOH;
 
         offset = 0;
