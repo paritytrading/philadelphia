@@ -186,25 +186,25 @@ public class FIXValue {
     /**
      * Set the value to an integer.
      *
-     * @param i an integer
+     * @param x an integer
      */
-    public void setInt(long i) {
+    public void setInt(long x) {
         bytes[bytes.length - 1] = SOH;
 
-        long j = Math.abs(i);
+        long y = Math.abs(x);
 
-        int k = bytes.length - 2;
+        int i = bytes.length - 2;
 
         do {
-            bytes[k--] = (byte)('0' + j % 10);
+            bytes[i--] = (byte)('0' + y % 10);
 
-            j /= 10;
-        } while (j > 0);
+            y /= 10;
+        } while (y > 0);
 
-        if (i < 0)
-            bytes[k--] = '-';
+        if (x < 0)
+            bytes[i--] = '-';
 
-        offset = k + 1;
+        offset = i + 1;
         length = bytes.length - 1 - offset;
     }
 
