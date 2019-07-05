@@ -49,6 +49,15 @@ public class FIXValue {
         length = 0;
     }
 
+    public FIXValue(ByteBuffer buffer) {
+        bytes = buffer;
+
+        bytes.put(0, SOH);
+
+        offset = 0;
+        length = 0;
+    }
+
     /**
      * Get the byte at the specified index. The index must be between 0 and
      * the length of the value - 1.
