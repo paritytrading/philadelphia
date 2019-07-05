@@ -31,6 +31,8 @@ public class FIXMessage {
 
     private final FIXValue[] values;
 
+    private final byte[] bytes;
+
     private int count;
 
     /**
@@ -44,8 +46,15 @@ public class FIXMessage {
 
         values = new FIXValue[maxFieldCount];
 
-        for (int i = 0; i < values.length; i++)
-            values[i] = new FIXValue(fieldCapacity);
+        bytes = new byte[maxFieldCount * fieldCapacity];
+
+        ByteBuffer buffer = ByteBuffer.wrap(bytes);
+
+        for (int i = 1; i <= values.length; i++) {
+            buffer.position(fieldCapacity * (maxFieldCount - i));
+            buffer.limit(fieldCapacity * (maxFieldCount - i + 1));
+            values[values.length - i] = new FIXValue(buffer.slice());
+        }
 
         count = 0;
     }
