@@ -409,23 +409,23 @@ public class FIXValue {
     /**
      * Set the value to a timestamp.
      *
-     * @param t a timestamp
+     * @param x a timestamp
      * @param millis if true set milliseconds, otherwise do not set milliseconds
      */
-    public void setTimestamp(ReadableDateTime t, boolean millis) {
-        setDigits(t.getYear(), 0, 4);
-        setDigits(t.getMonthOfYear(), 4, 2);
-        setDigits(t.getDayOfMonth(), 6, 2);
+    public void setTimestamp(ReadableDateTime x, boolean millis) {
+        setDigits(x.getYear(), 0, 4);
+        setDigits(x.getMonthOfYear(), 4, 2);
+        setDigits(x.getDayOfMonth(), 6, 2);
         bytes[8] = '-';
-        setDigits(t.getHourOfDay(), 9, 2);
+        setDigits(x.getHourOfDay(), 9, 2);
         bytes[11] = ':';
-        setDigits(t.getMinuteOfHour(), 12, 2);
+        setDigits(x.getMinuteOfHour(), 12, 2);
         bytes[14] = ':';
-        setDigits(t.getSecondOfMinute(), 15, 2);
+        setDigits(x.getSecondOfMinute(), 15, 2);
 
         if (millis) {
             bytes[17] = '.';
-            setDigits(t.getMillisOfSecond(), 18, 3);
+            setDigits(x.getMillisOfSecond(), 18, 3);
             bytes[21] = SOH;
 
             length = 21;
