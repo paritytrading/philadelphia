@@ -245,35 +245,35 @@ public class FIXValue {
     /**
      * Set the value to a float.
      *
-     * @param f a float
+     * @param x a float
      * @param decimals the number of decimals
      */
-    public void setFloat(double f, int decimals) {
-        long i = Math.round(Longs.POWERS_OF_TEN[decimals] * Math.abs(f));
+    public void setFloat(double x, int decimals) {
+        long y = Math.round(Longs.POWERS_OF_TEN[decimals] * Math.abs(x));
 
         bytes[bytes.length - 1] = SOH;
 
-        int j = bytes.length - 2;
+        int i = bytes.length - 2;
 
-        for (int k = 0; k < decimals; k++) {
-            bytes[j--] = (byte)('0' + i % 10);
+        for (int j = 0; j < decimals; j++) {
+            bytes[i--] = (byte)('0' + y % 10);
 
-            i /= 10;
+            y /= 10;
         }
 
         if (decimals > 0)
-            bytes[j--] = '.';
+            bytes[i--] = '.';
 
         do {
-            bytes[j--] = (byte)('0' + i % 10);
+            bytes[i--] = (byte)('0' + y % 10);
 
-            i /= 10;
-        } while (i > 0);
+            y /= 10;
+        } while (y > 0);
 
-        if (f < 0)
-            bytes[j--] = '-';
+        if (x < 0)
+            bytes[i--] = '-';
 
-        offset = j + 1;
+        offset = i + 1;
         length = bytes.length - 1 - offset;
     }
 
