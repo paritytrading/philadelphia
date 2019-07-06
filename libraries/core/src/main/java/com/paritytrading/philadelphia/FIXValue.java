@@ -316,16 +316,16 @@ public class FIXValue {
     /**
      * Get the value as a date.
      *
-     * @param d a date
+     * @param x a date
      * @throws FIXValueFormatException if the value is not a date
      */
-    public void asDate(MutableDateTime d) {
+    public void asDate(MutableDateTime x) {
         if (length != 8)
             notDate();
 
-        d.setYear(getDigits(4, offset + 0));
-        d.setMonthOfYear(getDigits(2, offset + 4));
-        d.setDayOfMonth(getDigits(2, offset + 6));
+        x.setYear(getDigits(4, offset + 0));
+        x.setMonthOfYear(getDigits(2, offset + 4));
+        x.setDayOfMonth(getDigits(2, offset + 6));
     }
 
     /**
