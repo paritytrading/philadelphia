@@ -290,11 +290,11 @@ public class FIXValue {
      * Get the value as a string. The value is appended to the provided
      * string builder.
      *
-     * @param s a string builder
+     * @param x a string builder
      */
-    public void asString(StringBuilder s) {
+    public void asString(StringBuilder x) {
         for (int i = 0; i < length; i++)
-            s.append((char)bytes[offset + i]);
+            x.append((char)bytes[offset + i]);
     }
 
     /**
