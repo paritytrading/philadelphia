@@ -331,12 +331,12 @@ public class FIXValue {
     /**
      * Set the value to a date.
      *
-     * @param d a date
+     * @param x a date
      */
-    public void setDate(ReadableDateTime d) {
-        setDigits(d.getYear(), 0, 4);
-        setDigits(d.getMonthOfYear(), 4, 2);
-        setDigits(d.getDayOfMonth(), 6, 2);
+    public void setDate(ReadableDateTime x) {
+        setDigits(x.getYear(), 0, 4);
+        setDigits(x.getMonthOfYear(), 4, 2);
+        setDigits(x.getDayOfMonth(), 6, 2);
         bytes[8] = SOH;
 
         length = 8;
