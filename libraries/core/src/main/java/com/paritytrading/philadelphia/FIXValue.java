@@ -346,17 +346,17 @@ public class FIXValue {
     /**
      * Get the value as a time only.
      *
-     * @param t a time only
+     * @param x a time only
      * @throws FIXValueFormatException if the value is not a time only
      */
-    public void asTimeOnly(MutableDateTime t) {
+    public void asTimeOnly(MutableDateTime x) {
         if (length != 8 && length != 12)
             notTimeOnly();
 
-        t.setHourOfDay(getDigits(2, offset + 0));
-        t.setMinuteOfHour(getDigits(2, offset + 3));
-        t.setSecondOfMinute(getDigits(2, offset + 6));
-        t.setMillisOfSecond(length == 12 ? getDigits(3, offset + 9) : 0);
+        x.setHourOfDay(getDigits(2, offset + 0));
+        x.setMinuteOfHour(getDigits(2, offset + 3));
+        x.setSecondOfMinute(getDigits(2, offset + 6));
+        x.setMillisOfSecond(length == 12 ? getDigits(3, offset + 9) : 0);
     }
 
     /**
