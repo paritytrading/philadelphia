@@ -390,20 +390,20 @@ public class FIXValue {
     /**
      * Get the value as a timestamp.
      *
-     * @param t a timestamp
+     * @param x a timestamp
      * @throws FIXValueFormatException if the value is not a timestamp
      */
-    public void asTimestamp(MutableDateTime t) {
+    public void asTimestamp(MutableDateTime x) {
         if (length != 17 && length != 21)
             notTimestamp();
 
-        t.setYear(getDigits(4, offset + 0));
-        t.setMonthOfYear(getDigits(2, offset + 4));
-        t.setDayOfMonth(getDigits(2, offset + 6));
-        t.setHourOfDay(getDigits(2, offset + 9));
-        t.setMinuteOfHour(getDigits(2, offset + 12));
-        t.setSecondOfMinute(getDigits(2, offset + 15));
-        t.setMillisOfSecond(length == 21 ? getDigits(3, offset + 18) : 0);
+        x.setYear(getDigits(4, offset + 0));
+        x.setMonthOfYear(getDigits(2, offset + 4));
+        x.setDayOfMonth(getDigits(2, offset + 6));
+        x.setHourOfDay(getDigits(2, offset + 9));
+        x.setMinuteOfHour(getDigits(2, offset + 12));
+        x.setSecondOfMinute(getDigits(2, offset + 15));
+        x.setMillisOfSecond(length == 21 ? getDigits(3, offset + 18) : 0);
     }
 
     /**
