@@ -215,7 +215,8 @@ public class FIXValue {
      * @throws FIXValueFormatException if the value is not a float
      */
     public double asFloat() {
-        long   value  = 0;
+        long x = 0;
+
         double factor = 0.0;
 
         long sign  = bytes[offset] == '-' ? -1 : +1;
@@ -233,11 +234,12 @@ public class FIXValue {
                 notFloat();
             }
 
-            value   = 10 * value + b - '0';
+            x = 10 * x + b - '0';
+
             factor *= 10;
         }
 
-        return sign * (factor > 0.0 ? value / factor : value);
+        return sign * (factor > 0.0 ? x / factor : x);
     }
 
     /**
