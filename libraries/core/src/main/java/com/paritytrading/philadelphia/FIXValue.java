@@ -451,10 +451,10 @@ public class FIXValue {
     /**
      * Set the value to a checksum.
      *
-     * @param c a checksum
+     * @param x a checksum
      */
-    public void setCheckSum(long c) {
-        setDigits(c & 0xff, 0, 3);
+    public void setCheckSum(long x) {
+        setDigits(x & 0xff, 0, 3);
         bytes[3] = SOH;
 
         offset = 0;
