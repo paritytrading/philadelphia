@@ -362,19 +362,19 @@ public class FIXValue {
     /**
      * Set the value to a time only.
      *
-     * @param t a time only
+     * @param x a time only
      * @param millis if true set milliseconds, otherwise do not set milliseconds
      */
-    public void setTimeOnly(ReadableDateTime t, boolean millis) {
-        setDigits(t.getHourOfDay(), 0, 2);
+    public void setTimeOnly(ReadableDateTime x, boolean millis) {
+        setDigits(x.getHourOfDay(), 0, 2);
         bytes[2] = ':';
-        setDigits(t.getMinuteOfHour(), 3, 2);
+        setDigits(x.getMinuteOfHour(), 3, 2);
         bytes[5] = ':';
-        setDigits(t.getSecondOfMinute(), 6, 2);
+        setDigits(x.getSecondOfMinute(), 6, 2);
 
         if (millis) {
             bytes[8] = '.';
-            setDigits(t.getMillisOfSecond(), 9, 3);
+            setDigits(x.getMillisOfSecond(), 9, 3);
             bytes[12] = SOH;
 
             length = 12;
