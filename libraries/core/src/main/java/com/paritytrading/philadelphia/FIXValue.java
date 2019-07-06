@@ -300,15 +300,15 @@ public class FIXValue {
     /**
      * Set the value to a string.
      *
-     * @param s a string
+     * @param x a string
      * @throws IndexOutOfBoundsException if the string is too long
      */
-    public void setString(CharSequence s) {
+    public void setString(CharSequence x) {
         offset = 0;
-        length = s.length();
+        length = x.length();
 
         for (int i = 0; i < length; i++)
-            bytes[i] = (byte)s.charAt(i);
+            bytes[i] = (byte)x.charAt(i);
 
         bytes[length] = SOH;
     }
