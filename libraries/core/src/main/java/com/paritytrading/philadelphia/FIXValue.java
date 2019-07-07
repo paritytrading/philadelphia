@@ -232,8 +232,29 @@ public class FIXValue {
     /**
      * Get the value as a float.
      *
+     * <p><strong>Note.</strong> The value is a string representation of
+     * a decimal number. As converting an arbitrary decimal number into a
+     * floating point number requires arbitrary-precision arithmetic, this
+     * method only works with the subset of decimal numbers that can be
+     * converted into floating point numbers using floating-point
+     * arithmetic.</p>
+     *
+     * <p>If we represent a decimal number in the form
+     *
+     *     &plusmn;<i>s</i>&nbsp;&times;&nbsp;10<sup><i>e</i></sup>,
+     *
+     * where <i>s</i> is an integer significand and <i>e</i> is an integer
+     * exponent, this method works for decimal numbers having
+     *
+     *     0&nbsp;&le;&nbsp;<i>s</i>&nbsp;&le;&nbsp;2<sup>53</sup>&nbsp;-&nbsp;1
+     *
+     * and
+     *
+     *     -22&nbsp;&le;&nbsp;<i>e</i>&nbsp;&le;&nbsp;22.</p>
+     *
      * @return the value as a float
      * @throws FIXValueFormatException if the value is not a float
+     * @see <a href="https://www.exploringbinary.com/fast-path-decimal-to-floating-point-conversion/">Fast Path Decimal to Floating-Point Conversion</a>
      */
     public double asFloat() {
         boolean negative = false;
@@ -285,6 +306,7 @@ public class FIXValue {
      *
      * @param x a float
      * @param decimals the number of decimals
+     * @see #asFloat
      */
     public void setFloat(double x, int decimals) {
         bytes[bytes.length - 1] = SOH;
