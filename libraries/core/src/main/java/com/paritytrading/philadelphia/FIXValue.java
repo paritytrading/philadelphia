@@ -29,6 +29,27 @@ import org.joda.time.ReadableDateTime;
  */
 public class FIXValue {
 
+    private static final double POWERS_OF_TEN[] = {
+        1e0,
+        1e1,
+        1e2,
+        1e3,
+        1e4,
+        1e5,
+        1e6,
+        1e7,
+        1e8,
+        1e9,
+        1e10,
+        1e11,
+        1e12,
+        1e13,
+        1e14,
+        1e15,
+        1e16,
+        1e17,
+    };
+
     private final byte[] bytes;
 
     private int offset;
@@ -249,9 +270,9 @@ public class FIXValue {
      * @param decimals the number of decimals
      */
     public void setFloat(double x, int decimals) {
-        long y = Math.round(Longs.POWERS_OF_TEN[decimals] * Math.abs(x));
-
         bytes[bytes.length - 1] = SOH;
+
+        long y = Math.round(POWERS_OF_TEN[decimals] * Math.abs(x));
 
         int i = bytes.length - 2;
 
