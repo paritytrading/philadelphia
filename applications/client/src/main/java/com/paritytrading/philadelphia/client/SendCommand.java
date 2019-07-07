@@ -22,15 +22,11 @@ class SendCommand implements Command {
 
     @Override
     public void execute(TerminalClient client, Scanner arguments) throws IOException {
-        if (!arguments.hasNext())
+        String message = arguments.findInLine(".*");
+        if (message == null)
             throw new IllegalArgumentException();
 
-        String message = arguments.next();
-
-        if (arguments.hasNext())
-            throw new IllegalArgumentException();
-
-        client.getSession().send(Message.get(message));
+        client.getSession().send(Message.get(message.trim()));
     }
 
     @Override
