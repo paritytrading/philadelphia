@@ -236,31 +236,48 @@ public class FIXValue {
      * @throws FIXValueFormatException if the value is not a float
      */
     public double asFloat() {
-        long x = 0;
+        boolean negative = false;
 
-        double factor = 0.0;
+        int i = offset;
 
-        long sign  = bytes[offset] == '-' ? -1 : +1;
-        int  start = sign < 0 ? offset + 1 : offset;
+        if (bytes[i] == '-') {
+            negative = true;
 
-        for (int i = start; i < offset + length; i++) {
-            byte b = bytes[i];
-
-            if (b < '0' || b > '9') {
-                if (factor == 0.0 && b == '.') {
-                    factor = 1.0;
-                    continue;
-                }
-
-                notFloat();
-            }
-
-            x = 10 * x + b - '0';
-
-            factor *= 10;
+            i++;
         }
 
-        return sign * (factor > 0.0 ? x / factor : x);
+        long significand = 0;
+
+        byte b = 0;
+
+        while (i < offset + length) {
+            b = bytes[i++];
+
+            if (b < '0' || b > '9')
+                break;
+
+            significand = 10 * significand + b - '0';
+        }
+
+        if (b != '.' && i < offset + length)
+            notFloat();
+
+        int exponent = 0;
+
+        while (i < offset + length) {
+            b = bytes[i++];
+
+            if (b < '0' || b > '9')
+                notFloat();
+
+            significand = 10 * significand + b - '0';
+
+            exponent++;
+        }
+
+        double x = significand / POWERS_OF_TEN[exponent];
+
+        return negative ? -x : +x;
     }
 
     /**
