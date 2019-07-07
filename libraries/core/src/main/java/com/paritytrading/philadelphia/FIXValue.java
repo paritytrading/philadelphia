@@ -116,10 +116,10 @@ public class FIXValue {
     /**
      * Set the value to a boolean.
      *
-     * @param b a boolean
+     * @param x a boolean
      */
-    public void setBoolean(boolean b) {
-        bytes[0] = b ? YES : NO;
+    public void setBoolean(boolean x) {
+        bytes[0] = x ? YES : NO;
         bytes[1] = SOH;
 
         offset = 0;
@@ -142,10 +142,10 @@ public class FIXValue {
     /**
      * Set the value to a character.
      *
-     * @param c a character
+     * @param x a character
      */
-    public void setChar(char c) {
-        bytes[0] = (byte)c;
+    public void setChar(char x) {
+        bytes[0] = (byte)x;
         bytes[1] = SOH;
 
         offset = 0;
@@ -169,7 +169,7 @@ public class FIXValue {
             i++;
         }
 
-        long value = 0;
+        long x = 0;
 
         while (i < offset + length) {
             byte b = bytes[i++];
@@ -177,34 +177,34 @@ public class FIXValue {
             if (b < '0' || b > '9')
                 notInt();
 
-            value = 10 * value + b - '0';
+            x = 10 * x + b - '0';
         }
 
-        return negative ? -value : +value;
+        return negative ? -x : +x;
     }
 
     /**
      * Set the value to an integer.
      *
-     * @param i an integer
+     * @param x an integer
      */
-    public void setInt(long i) {
+    public void setInt(long x) {
         bytes[bytes.length - 1] = SOH;
 
-        long j = Math.abs(i);
+        long y = Math.abs(x);
 
-        int k = bytes.length - 2;
+        int i = bytes.length - 2;
 
         do {
-            bytes[k--] = (byte)('0' + j % 10);
+            bytes[i--] = (byte)('0' + y % 10);
 
-            j /= 10;
-        } while (j > 0);
+            y /= 10;
+        } while (y > 0);
 
-        if (i < 0)
-            bytes[k--] = '-';
+        if (x < 0)
+            bytes[i--] = '-';
 
-        offset = k + 1;
+        offset = i + 1;
         length = bytes.length - 1 - offset;
     }
 
@@ -215,7 +215,8 @@ public class FIXValue {
      * @throws FIXValueFormatException if the value is not a float
      */
     public double asFloat() {
-        long   value  = 0;
+        long x = 0;
+
         double factor = 0.0;
 
         long sign  = bytes[offset] == '-' ? -1 : +1;
@@ -233,45 +234,46 @@ public class FIXValue {
                 notFloat();
             }
 
-            value   = 10 * value + b - '0';
+            x = 10 * x + b - '0';
+
             factor *= 10;
         }
 
-        return sign * (factor > 0.0 ? value / factor : value);
+        return sign * (factor > 0.0 ? x / factor : x);
     }
 
     /**
      * Set the value to a float.
      *
-     * @param f a float
+     * @param x a float
      * @param decimals the number of decimals
      */
-    public void setFloat(double f, int decimals) {
-        long i = Math.round(Longs.POWERS_OF_TEN[decimals] * Math.abs(f));
+    public void setFloat(double x, int decimals) {
+        long y = Math.round(Longs.POWERS_OF_TEN[decimals] * Math.abs(x));
 
         bytes[bytes.length - 1] = SOH;
 
-        int j = bytes.length - 2;
+        int i = bytes.length - 2;
 
-        for (int k = 0; k < decimals; k++) {
-            bytes[j--] = (byte)('0' + i % 10);
+        for (int j = 0; j < decimals; j++) {
+            bytes[i--] = (byte)('0' + y % 10);
 
-            i /= 10;
+            y /= 10;
         }
 
         if (decimals > 0)
-            bytes[j--] = '.';
+            bytes[i--] = '.';
 
         do {
-            bytes[j--] = (byte)('0' + i % 10);
+            bytes[i--] = (byte)('0' + y % 10);
 
-            i /= 10;
-        } while (i > 0);
+            y /= 10;
+        } while (y > 0);
 
-        if (f < 0)
-            bytes[j--] = '-';
+        if (x < 0)
+            bytes[i--] = '-';
 
-        offset = j + 1;
+        offset = i + 1;
         length = bytes.length - 1 - offset;
     }
 
@@ -288,25 +290,25 @@ public class FIXValue {
      * Get the value as a string. The value is appended to the provided
      * string builder.
      *
-     * @param s a string builder
+     * @param x a string builder
      */
-    public void asString(StringBuilder s) {
+    public void asString(StringBuilder x) {
         for (int i = 0; i < length; i++)
-            s.append((char)bytes[offset + i]);
+            x.append((char)bytes[offset + i]);
     }
 
     /**
      * Set the value to a string.
      *
-     * @param s a string
+     * @param x a string
      * @throws IndexOutOfBoundsException if the string is too long
      */
-    public void setString(CharSequence s) {
+    public void setString(CharSequence x) {
         offset = 0;
-        length = s.length();
+        length = x.length();
 
         for (int i = 0; i < length; i++)
-            bytes[i] = (byte)s.charAt(i);
+            bytes[i] = (byte)x.charAt(i);
 
         bytes[length] = SOH;
     }
@@ -314,27 +316,27 @@ public class FIXValue {
     /**
      * Get the value as a date.
      *
-     * @param d a date
+     * @param x a date
      * @throws FIXValueFormatException if the value is not a date
      */
-    public void asDate(MutableDateTime d) {
+    public void asDate(MutableDateTime x) {
         if (length != 8)
             notDate();
 
-        d.setYear(getDigits(4, offset + 0));
-        d.setMonthOfYear(getDigits(2, offset + 4));
-        d.setDayOfMonth(getDigits(2, offset + 6));
+        x.setYear(getDigits(4, offset + 0));
+        x.setMonthOfYear(getDigits(2, offset + 4));
+        x.setDayOfMonth(getDigits(2, offset + 6));
     }
 
     /**
      * Set the value to a date.
      *
-     * @param d a date
+     * @param x a date
      */
-    public void setDate(ReadableDateTime d) {
-        setDigits(d.getYear(), 0, 4);
-        setDigits(d.getMonthOfYear(), 4, 2);
-        setDigits(d.getDayOfMonth(), 6, 2);
+    public void setDate(ReadableDateTime x) {
+        setDigits(x.getYear(), 0, 4);
+        setDigits(x.getMonthOfYear(), 4, 2);
+        setDigits(x.getDayOfMonth(), 6, 2);
         bytes[8] = SOH;
 
         length = 8;
@@ -344,35 +346,35 @@ public class FIXValue {
     /**
      * Get the value as a time only.
      *
-     * @param t a time only
+     * @param x a time only
      * @throws FIXValueFormatException if the value is not a time only
      */
-    public void asTimeOnly(MutableDateTime t) {
+    public void asTimeOnly(MutableDateTime x) {
         if (length != 8 && length != 12)
             notTimeOnly();
 
-        t.setHourOfDay(getDigits(2, offset + 0));
-        t.setMinuteOfHour(getDigits(2, offset + 3));
-        t.setSecondOfMinute(getDigits(2, offset + 6));
-        t.setMillisOfSecond(length == 12 ? getDigits(3, offset + 9) : 0);
+        x.setHourOfDay(getDigits(2, offset + 0));
+        x.setMinuteOfHour(getDigits(2, offset + 3));
+        x.setSecondOfMinute(getDigits(2, offset + 6));
+        x.setMillisOfSecond(length == 12 ? getDigits(3, offset + 9) : 0);
     }
 
     /**
      * Set the value to a time only.
      *
-     * @param t a time only
+     * @param x a time only
      * @param millis if true set milliseconds, otherwise do not set milliseconds
      */
-    public void setTimeOnly(ReadableDateTime t, boolean millis) {
-        setDigits(t.getHourOfDay(), 0, 2);
+    public void setTimeOnly(ReadableDateTime x, boolean millis) {
+        setDigits(x.getHourOfDay(), 0, 2);
         bytes[2] = ':';
-        setDigits(t.getMinuteOfHour(), 3, 2);
+        setDigits(x.getMinuteOfHour(), 3, 2);
         bytes[5] = ':';
-        setDigits(t.getSecondOfMinute(), 6, 2);
+        setDigits(x.getSecondOfMinute(), 6, 2);
 
         if (millis) {
             bytes[8] = '.';
-            setDigits(t.getMillisOfSecond(), 9, 3);
+            setDigits(x.getMillisOfSecond(), 9, 3);
             bytes[12] = SOH;
 
             length = 12;
@@ -388,42 +390,42 @@ public class FIXValue {
     /**
      * Get the value as a timestamp.
      *
-     * @param t a timestamp
+     * @param x a timestamp
      * @throws FIXValueFormatException if the value is not a timestamp
      */
-    public void asTimestamp(MutableDateTime t) {
+    public void asTimestamp(MutableDateTime x) {
         if (length != 17 && length != 21)
             notTimestamp();
 
-        t.setYear(getDigits(4, offset + 0));
-        t.setMonthOfYear(getDigits(2, offset + 4));
-        t.setDayOfMonth(getDigits(2, offset + 6));
-        t.setHourOfDay(getDigits(2, offset + 9));
-        t.setMinuteOfHour(getDigits(2, offset + 12));
-        t.setSecondOfMinute(getDigits(2, offset + 15));
-        t.setMillisOfSecond(length == 21 ? getDigits(3, offset + 18) : 0);
+        x.setYear(getDigits(4, offset + 0));
+        x.setMonthOfYear(getDigits(2, offset + 4));
+        x.setDayOfMonth(getDigits(2, offset + 6));
+        x.setHourOfDay(getDigits(2, offset + 9));
+        x.setMinuteOfHour(getDigits(2, offset + 12));
+        x.setSecondOfMinute(getDigits(2, offset + 15));
+        x.setMillisOfSecond(length == 21 ? getDigits(3, offset + 18) : 0);
     }
 
     /**
      * Set the value to a timestamp.
      *
-     * @param t a timestamp
+     * @param x a timestamp
      * @param millis if true set milliseconds, otherwise do not set milliseconds
      */
-    public void setTimestamp(ReadableDateTime t, boolean millis) {
-        setDigits(t.getYear(), 0, 4);
-        setDigits(t.getMonthOfYear(), 4, 2);
-        setDigits(t.getDayOfMonth(), 6, 2);
+    public void setTimestamp(ReadableDateTime x, boolean millis) {
+        setDigits(x.getYear(), 0, 4);
+        setDigits(x.getMonthOfYear(), 4, 2);
+        setDigits(x.getDayOfMonth(), 6, 2);
         bytes[8] = '-';
-        setDigits(t.getHourOfDay(), 9, 2);
+        setDigits(x.getHourOfDay(), 9, 2);
         bytes[11] = ':';
-        setDigits(t.getMinuteOfHour(), 12, 2);
+        setDigits(x.getMinuteOfHour(), 12, 2);
         bytes[14] = ':';
-        setDigits(t.getSecondOfMinute(), 15, 2);
+        setDigits(x.getSecondOfMinute(), 15, 2);
 
         if (millis) {
             bytes[17] = '.';
-            setDigits(t.getMillisOfSecond(), 18, 3);
+            setDigits(x.getMillisOfSecond(), 18, 3);
             bytes[21] = SOH;
 
             length = 21;
@@ -449,10 +451,10 @@ public class FIXValue {
     /**
      * Set the value to a checksum.
      *
-     * @param c a checksum
+     * @param x a checksum
      */
-    public void setCheckSum(long c) {
-        setDigits(c & 0xff, 0, 3);
+    public void setCheckSum(long x) {
+        setDigits(x & 0xff, 0, 3);
         bytes[3] = SOH;
 
         offset = 0;
