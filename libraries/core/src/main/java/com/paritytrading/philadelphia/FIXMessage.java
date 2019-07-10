@@ -16,21 +16,23 @@
 package com.paritytrading.philadelphia;
 
 import static com.paritytrading.philadelphia.FIXTags.*;
+import static com.paritytrading.philadelphia.FIX.*;
 
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 import java.nio.ReadOnlyBufferException;
+import java.nio.charset.StandardCharsets;
 import java.util.stream.Stream;
+import org.joda.time.MutableDateTime;
+import org.joda.time.ReadableDateTime;
 
 /**
  * A message container.
  */
 public class FIXMessage {
 
-    private final int[] tags;
-
     private final FIXValue[] values;
-
+    private final ByteBuffer outgoingBuf;
     private int count;
 
     /**
@@ -40,12 +42,13 @@ public class FIXMessage {
      * @param fieldCapacity the field capacity
      */
     public FIXMessage(int maxFieldCount, int fieldCapacity) {
-        tags = new int[maxFieldCount];
 
         values = new FIXValue[maxFieldCount];
 
         for (int i = 0; i < values.length; i++)
             values[i] = new FIXValue(fieldCapacity);
+
+        outgoingBuf = ByteBuffer.allocateDirect(maxFieldCount * fieldCapacity);
 
         count = 0;
     }
@@ -79,7 +82,7 @@ public class FIXMessage {
      *   number of fields
      */
     public int tagAt(int index) {
-        return tags[index];
+        return values[index].getTag();
     }
 
     /**
@@ -122,7 +125,7 @@ public class FIXMessage {
      */
     public FIXValue valueOf(int tag) {
         for (int i = 0; i < count; i++) {
-            if (tags[i] == tag)
+            if (values[i].getTag() == tag)
                 return values[i];
         }
 
@@ -138,7 +141,7 @@ public class FIXMessage {
      */
     public int indexOf(int tag) {
         for (int i = 0; i < count; i++) {
-            if (tags[i] == tag)
+            if (values[i].getTag() == tag)
                 return i;
         }
 
@@ -154,9 +157,77 @@ public class FIXMessage {
      *   exceeded
      */
     public FIXValue addField(int tag) {
-        tags[count] = tag;
+        return values[count++].setTag(tag);
+    }
 
-        return values[count++];
+    public void addBoolean(int tag, boolean x) {
+        FIXTags.put(outgoingBuf, tag);
+        FIXValue.setBoolean(outgoingBuf, x);
+    }
+
+    public void addChar(int tag, char x) {
+        FIXTags.put(outgoingBuf, tag);
+        FIXValue.setChar(outgoingBuf, x);
+    }
+
+    public void addInt(int tag, long x) {
+        FIXTags.put(outgoingBuf, tag);
+        ByteBuffer buf = outgoingBuf.slice();
+        FIXValue.setInt(buf, x);
+        buf.compact();
+        int pos = outgoingBuf.position();
+        outgoingBuf.position(pos + buf.position());
+    }
+
+    public void addFloat(int tag, double x, int decimals) {
+        FIXTags.put(outgoingBuf, tag);
+        ByteBuffer buf = outgoingBuf.slice();
+        FIXValue.setFloat(buf, x, decimals);
+        buf.compact();
+        int pos = outgoingBuf.position();
+        outgoingBuf.position(pos + buf.position());
+    }
+
+    public void addString(int tag, CharSequence x) {
+        FIXTags.put(outgoingBuf, tag);
+        FIXValue.setString(outgoingBuf, x);
+    }
+
+    public void addDate(int tag, ReadableDateTime x) {
+        FIXTags.put(outgoingBuf, tag);
+        ByteBuffer buf = outgoingBuf.slice();
+        FIXValue.setDate(buf, x);
+        int pos = outgoingBuf.position();
+        outgoingBuf.position(pos + buf.position());       
+    }
+
+    public void addTimeOnly(int tag, ReadableDateTime x, boolean millis) {
+        FIXTags.put(outgoingBuf, tag);
+        ByteBuffer buf = outgoingBuf.slice();
+        FIXValue.setTimeOnly(buf, x, millis);
+        int pos = outgoingBuf.position();
+        outgoingBuf.position(pos + buf.position());  
+    }
+
+    public void addTimestamp(int tag, ReadableDateTime x, boolean millis) {
+        FIXTags.put(outgoingBuf, tag);
+        ByteBuffer buf = outgoingBuf.slice();
+        FIXValue.setTimestamp(buf, x, millis);
+        int pos = outgoingBuf.position();
+        outgoingBuf.position(pos + buf.position());  
+    }
+
+    public void addCheckSum(int tag, long x) {
+        FIXTags.put(outgoingBuf, tag);
+        ByteBuffer buf = outgoingBuf.slice();
+        FIXValue.setCheckSum(buf, x);
+        int pos = outgoingBuf.position();
+        outgoingBuf.position(pos + buf.position());  
+    }
+
+    public void addValue(int tag, FIXValue value) {
+        FIXTags.put(outgoingBuf, tag);
+        value.put(outgoingBuf);
     }
 
     /**
@@ -164,6 +235,7 @@ public class FIXMessage {
      */
     public void reset() {
         count = 0;
+        outgoingBuf.clear();
     }
 
     /**
@@ -182,14 +254,14 @@ public class FIXMessage {
         reset();
 
         while (buffer.hasRemaining()) {
-            if (count == tags.length)
+            if (count == values.length)
                 tooManyFields();
 
             int tag = FIXTags.get(buffer);
             if (tag == 0)
                 return false;
 
-            tags[count] = tag;
+            values[count].setTag(tag);
 
             if (!values[count].get(buffer))
                 return false;
@@ -209,10 +281,15 @@ public class FIXMessage {
      * @throws ReadOnlyBufferException if the buffer is read-only
      */
     public void put(ByteBuffer buffer) {
-        for (int i = 0; i < count; i++) {
-            FIXTags.put(buffer, tags[i]);
-
-            values[i].put(buffer);
+        if (count == 0) {
+            outgoingBuf.flip();
+            buffer.put(outgoingBuf);
+            outgoingBuf.rewind();
+        } else {
+            for (int i = 0; i < count; i++) {
+                FIXTags.put(buffer, values[i].getTag());
+                values[i].put(buffer);
+            }
         }
     }
 
@@ -270,10 +347,20 @@ public class FIXMessage {
      */
     public void toString(StringBuilder builder) {
         for (int i = 0; i < count; i++) {
-            builder.append(tags[i]);
+            builder.append(values[i].getTag());
             builder.append('=');
             values[i].asString(builder);
             builder.append('|');
+        }
+        if (count == 0 && outgoingBuf.position() != 0) {
+            outgoingBuf.flip();
+            while (outgoingBuf.hasRemaining()) {
+                byte b = outgoingBuf.get();
+                if (b == SOH)
+                    builder.append("|");
+                else
+                    builder.append((char)b);
+            }
         }
     }
 

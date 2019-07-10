@@ -46,18 +46,18 @@ public class FIXMessageBenchmark extends FIXBenchmark {
     private void format() {
         message.reset();
 
-        message.addField(MsgType).setChar(OrderSingle);
-        message.addField(SenderCompID).setString("initiator");
-        message.addField(TargetCompID).setString("acceptor");
-        message.addField(MsgSeqNum).setInt(2);
-        message.addField(SendingTime).setString("20150924-09:30:05.250");
-        message.addField(ClOrdID).setString("123");
-        message.addField(HandlInst).setChar(HandlInstValues.AutomatedExecutionNoIntervention);
-        message.addField(Symbol).setString("FOO");
-        message.addField(Side).setChar(SideValues.Buy);
-        message.addField(TransactTime).setString("20150924-09:30:05.250");
-        message.addField(OrdType).setChar(OrdTypeValues.Limit);
-        message.addField(Price).setFloat(150.25, 2);
+        message.addChar(MsgType, OrderSingle);
+        message.addString(SenderCompID, "initiator");
+        message.addString(TargetCompID, "acceptor");
+        message.addInt(MsgSeqNum, 2);
+        message.addString(SendingTime, "20150924-09:30:05.250");
+        message.addString(ClOrdID, "123");
+        message.addChar(HandlInst, HandlInstValues.AutomatedExecutionNoIntervention);
+        message.addString(Symbol, "FOO");
+        message.addChar(Side, SideValues.Buy);
+        message.addString(TransactTime, "20150924-09:30:05.250");
+        message.addChar(OrdType, OrdTypeValues.Limit);
+        message.addFloat(Price, 150.25, 2);
     }
 
     @Benchmark

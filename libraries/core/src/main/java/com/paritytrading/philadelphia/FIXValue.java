@@ -31,6 +31,7 @@ public class FIXValue {
 
     private final byte[] bytes;
 
+    private int tag;
     private int offset;
     private int length;
 
@@ -46,6 +47,16 @@ public class FIXValue {
 
         offset = 0;
         length = 0;
+        tag = 0;
+    }
+
+    public FIXValue setTag(int tag) {
+        this.tag = tag;
+        return this;
+    }
+
+    public int getTag() {
+        return tag;
     }
 
     /**
@@ -127,6 +138,16 @@ public class FIXValue {
     }
 
     /**
+     * Set the value to a boolean.
+     *
+     * @param x a boolean
+     */
+    public static void setBoolean(ByteBuffer bytes, boolean x) {
+        bytes.put(x ? YES : NO);
+        bytes.put(SOH);
+    }
+
+    /**
      * Get the value as a character.
      *
      * @return the value as a character
@@ -150,6 +171,16 @@ public class FIXValue {
 
         offset = 0;
         length = 1;
+    }
+
+    /**
+     * Set the value to a character.
+     *
+     * @param x a character
+     */
+    public static void setChar(ByteBuffer bytes, char x) {
+        bytes.put((byte)x);
+        bytes.put(SOH);
     }
 
     /**
@@ -206,6 +237,30 @@ public class FIXValue {
 
         offset = i + 1;
         length = bytes.length - 1 - offset;
+    }
+
+    /**
+     * Set the value to an integer.
+     *
+     * @param i an integer
+     */
+    public static void setInt(ByteBuffer bytes, long x) {
+        bytes.put(bytes.limit() - 1, SOH);
+
+        long y = Math.abs(x);
+
+        int i = bytes.limit() - 2;
+
+        do {
+            bytes.put(i--, (byte)('0' + y % 10));
+
+            y /= 10;
+        } while (y > 0);
+
+        if (x < 0)
+            bytes.put(i--, (byte)('-'));
+
+        bytes.position(i + 1);
     }
 
     /**
@@ -278,6 +333,40 @@ public class FIXValue {
     }
 
     /**
+     * Set the value to a float.
+     *
+     * @param f a float
+     * @param decimals the number of decimals
+     */
+    public static void setFloat(ByteBuffer bytes, double x, int decimals) {
+        long y = Math.round(Longs.POWERS_OF_TEN[decimals] * Math.abs(x));
+
+        bytes.put(bytes.limit() - 1, SOH);
+
+        int i = bytes.limit() - 2;
+
+        for (int j = 0; j < decimals; j++) {
+            bytes.put(i--, (byte)('0' + y % 10));
+
+            y /= 10;
+        }
+
+        if (decimals > 0)
+            bytes.put(i--, (byte)'.');
+
+        do {
+            bytes.put(i--, (byte)('0' + y % 10));
+
+            y /= 10;
+        } while (y > 0);
+
+        if (x < 0)
+            bytes.put(i--, (byte)'-');
+
+        bytes.position(i + 1);
+    }
+    
+    /**
      * Get the value as a string.
      *
      * @return the value as a string
@@ -313,6 +402,20 @@ public class FIXValue {
         bytes[length] = SOH;
     }
 
+   /**
+     * Set the value to a string.
+     *
+     * @param s a string
+     * @throws IndexOutOfBoundsException if the string is too long
+     */
+    public static void setString(ByteBuffer bytes, CharSequence x) {
+        for (int i = 0; i < x.length(); i++)
+            bytes.put((byte)x.charAt(i));
+
+        bytes.put(SOH);
+    }
+
+
     /**
      * Get the value as a date.
      *
@@ -342,6 +445,22 @@ public class FIXValue {
         length = 8;
         offset = 0;
     }
+
+    /**
+     * Set the value to a date.
+     *
+     * @param d a date
+     */
+    public static void setDate(ByteBuffer bytes, ReadableDateTime x) {
+        setDigits(bytes, x.getYear(), 0, 4);
+        setDigits(bytes, x.getMonthOfYear(), 4, 2);
+        setDigits(bytes, x.getDayOfMonth(), 6, 2);
+
+        bytes.put(8, SOH);
+
+        bytes.position(9);
+    }
+
 
     /**
      * Get the value as a time only.
@@ -385,6 +504,30 @@ public class FIXValue {
         }
 
         offset = 0;
+    }
+
+    /**
+     * Set the value to a time only.
+     *
+     * @param t a time only
+     * @param millis if true set milliseconds, otherwise do not set milliseconds
+     */
+    public static void setTimeOnly(ByteBuffer bytes, ReadableDateTime t, boolean millis) {
+        setDigits(bytes, t.getHourOfDay(), 0, 2);
+        bytes.put(2, (byte)':');
+        setDigits(bytes, t.getMinuteOfHour(), 3, 2);
+        bytes.put(5, (byte)':');
+        setDigits(bytes, t.getSecondOfMinute(), 6, 2);
+
+        if (millis) {
+            bytes.put(8, (byte)'.');
+            setDigits(bytes, t.getMillisOfSecond(), 9, 3);
+            bytes.put(12, SOH);
+            bytes.position(13);
+        } else {
+            bytes.put(8, SOH);
+            bytes.position(9);
+        }
     }
 
     /**
@@ -439,6 +582,37 @@ public class FIXValue {
     }
 
     /**
+     * Set the value to a timestamp.
+     *
+     * @param t a timestamp
+     * @param millis if true set milliseconds, otherwise do not set milliseconds
+     */
+    public static void setTimestamp(ByteBuffer bytes,  ReadableDateTime t, boolean millis) {
+        setDigits(bytes, t.getYear(), 0, 4);
+        setDigits(bytes, t.getMonthOfYear(), 4, 2);
+        setDigits(bytes, t.getDayOfMonth(), 6, 2);
+        bytes.put(8, (byte)'-');
+        setDigits(bytes, t.getHourOfDay(), 9, 2);
+        bytes.put(11, (byte)':');
+        setDigits(bytes, t.getMinuteOfHour(), 12, 2);
+        bytes.put(14, (byte)':');
+        setDigits(bytes, t.getSecondOfMinute(), 15, 2);
+
+        if (millis) {
+            bytes.put(17, (byte)'.');
+            setDigits(bytes, t.getMillisOfSecond(), 18, 3);
+            bytes.put(21, SOH);
+
+            bytes.position(22);
+        } else {
+            bytes.put(17, SOH);
+
+            bytes.position(18);
+        }
+
+    }
+
+    /**
      * Get the value as a checksum.
      *
      * @return the value as a checksum
@@ -459,6 +633,18 @@ public class FIXValue {
 
         offset = 0;
         length = 3;
+    }
+
+    /**
+     * Set the value to a checksum.
+     *
+     * @param c a checksum
+     */
+    public static void setCheckSum(ByteBuffer bytes, long c) {
+        setDigits(bytes, c & 0xff, 0, 3);
+        bytes.put(3, SOH);
+
+        bytes.position(4);
     }
 
     /**
@@ -519,6 +705,14 @@ public class FIXValue {
     private void setDigits(long l, int offset, int digits) {
         for (int i = offset + digits - 1; i >= offset; i--) {
             bytes[i] = (byte)('0' + l % 10);
+
+            l /= 10;
+        }
+    }
+
+    private static void setDigits(ByteBuffer bytes, long l, int offset, int digits) {
+        for (int i = offset + digits - 1; i >= offset; i--) {
+            bytes.put(i, (byte)('0' + l % 10));
 
             l /= 10;
         }

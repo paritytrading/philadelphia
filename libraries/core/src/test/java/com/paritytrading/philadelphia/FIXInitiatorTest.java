@@ -385,14 +385,14 @@ public class FIXInitiatorTest {
 
         initiator.prepare(message, OrderSingle);
 
-        message.addField(ClOrdID).setInt(1);
-        message.addField(HandlInst).setChar(HandlInstValues.AutomatedExecutionNoIntervention);
-        message.addField(Symbol).setString("FOO");
-        message.addField(Side).setChar(SideValues.Buy);
-        message.addField(TransactTime).setString(initiator.getCurrentTimestamp());
-        message.addField(OrderQty).setFloat(100.00, 2);
-        message.addField(OrdType).setChar(OrdTypeValues.Limit);
-        message.addField(Price).setFloat(25.50, 2);
+        message.addInt(ClOrdID, 1);
+        message.addChar(HandlInst, HandlInstValues.AutomatedExecutionNoIntervention);
+        message.addString(Symbol, "FOO");
+        message.addChar(Side, SideValues.Buy);
+        message.addString(TransactTime, initiator.getCurrentTimestamp());
+        message.addFloat(OrderQty, 100.00, 2);
+        message.addChar(OrdType, OrdTypeValues.Limit);
+        message.addFloat(Price, 25.50, 2);
 
         initiator.send(message);
 

@@ -37,14 +37,14 @@ public class FIXMessageTest {
     public void format() {
         MutableDateTime timestamp = new MutableDateTime(2015, 9, 24, 9, 30, 5, 250);
 
-        message.addField(ClOrdID).setString("123");
-        message.addField(HandlInst).setChar(HandlInstValues.AutomatedExecutionNoIntervention);
-        message.addField(Symbol).setString("FOO");
-        message.addField(Side).setChar(SideValues.Buy);
-        message.addField(TransactTime).setTimestamp(timestamp, true);
-        message.addField(OrderQty).setInt(100);
-        message.addField(OrdType).setChar(OrdTypeValues.Limit);
-        message.addField(Price).setFloat(150.25, 2);
+        message.addString(ClOrdID, "123");
+        message.addChar(HandlInst, HandlInstValues.AutomatedExecutionNoIntervention);
+        message.addString(Symbol, "FOO");
+        message.addChar(Side, SideValues.Buy);
+        message.addTimestamp(TransactTime, timestamp, true);
+        message.addInt(OrderQty, 100);
+        message.addChar(OrdType, OrdTypeValues.Limit);
+        message.addFloat(Price, 150.25, 2);
 
         ByteBuffer buffer = ByteBuffer.allocateDirect(256);
 
@@ -70,14 +70,14 @@ public class FIXMessageTest {
     public void print() {
         MutableDateTime timestamp = new MutableDateTime(2015, 9, 24, 9, 30, 5, 250);
 
-        message.addField(ClOrdID).setString("123");
-        message.addField(HandlInst).setChar(HandlInstValues.AutomatedExecutionNoIntervention);
-        message.addField(Symbol).setString("FOO");
-        message.addField(Side).setChar(SideValues.Buy);
-        message.addField(TransactTime).setTimestamp(timestamp, true);
-        message.addField(OrderQty).setInt(100);
-        message.addField(OrdType).setChar(OrdTypeValues.Limit);
-        message.addField(Price).setFloat(150.25, 2);
+        message.addString(ClOrdID, "123");
+        message.addChar(HandlInst, HandlInstValues.AutomatedExecutionNoIntervention);
+        message.addString(Symbol, "FOO");
+        message.addChar(Side, SideValues.Buy);
+        message.addTimestamp(TransactTime, timestamp, true);
+        message.addInt(OrderQty, 100);
+        message.addChar(OrdType, OrdTypeValues.Limit);
+        message.addFloat(Price, 150.25, 2);
 
         assertEquals("11=123|21=1|55=FOO|54=1|60=20150924-09:30:05.250|" +
                 "38=100|40=2|44=150.25|", message.toString());

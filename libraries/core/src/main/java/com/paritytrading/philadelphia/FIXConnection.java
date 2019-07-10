@@ -251,7 +251,7 @@ public class FIXConnection implements Closeable {
     public void prepare(FIXMessage message, char msgType) {
         message.reset();
 
-        message.addField(MsgType).setChar(msgType);
+        message.addChar(MsgType, msgType);
 
         prepare(message);
     }
@@ -266,16 +266,16 @@ public class FIXConnection implements Closeable {
     public void prepare(FIXMessage message, CharSequence msgType) {
         message.reset();
 
-        message.addField(MsgType).setString(msgType);
+        message.addString(MsgType, msgType);
 
         prepare(message);
     }
 
     private void prepare(FIXMessage message) {
-        message.addField(SenderCompID).setString(senderCompId);
-        message.addField(TargetCompID).setString(targetCompId);
-        message.addField(MsgSeqNum).setInt(txMsgSeqNum);
-        message.addField(SendingTime).setString(currentTimestamp);
+        message.addString(SenderCompID, senderCompId);
+        message.addString(TargetCompID, targetCompId);
+        message.addInt(MsgSeqNum, txMsgSeqNum);
+        message.addString(SendingTime, currentTimestamp);
     }
 
     /**
@@ -459,9 +459,9 @@ public class FIXConnection implements Closeable {
     public void sendReject(long refSeqNum, long sessionRejectReason, CharSequence text) throws IOException {
         prepare(txMessage, Reject);
 
-        txMessage.addField(RefSeqNum).setInt(refSeqNum);
-        txMessage.addField(SessionRejectReason).setInt(sessionRejectReason);
-        txMessage.addField(Text).setString(text);
+        txMessage.addInt(RefSeqNum, refSeqNum);
+        txMessage.addInt(SessionRejectReason, sessionRejectReason);
+        txMessage.addString(Text, text);
 
         send(txMessage);
     }
@@ -486,7 +486,7 @@ public class FIXConnection implements Closeable {
     public void sendLogout(CharSequence text) throws IOException {
         prepare(txMessage, Logout);
 
-        txMessage.addField(Text).setString(text);
+        txMessage.addString(Text, text);
 
         send(txMessage);
     }
@@ -502,11 +502,11 @@ public class FIXConnection implements Closeable {
     public void sendLogon(boolean resetSeqNum) throws IOException {
         prepare(txMessage, Logon);
 
-        txMessage.addField(EncryptMethod).setInt(0);
-        txMessage.addField(HeartBtInt).setInt(config.getHeartBtInt());
+        txMessage.addInt(EncryptMethod, 0);
+        txMessage.addInt(HeartBtInt, config.getHeartBtInt());
 
         if (resetSeqNum)
-            txMessage.addField(ResetSeqNumFlag).setBoolean(true);
+            txMessage.addBoolean(ResetSeqNumFlag, true);
 
         send(txMessage);
     }
@@ -675,7 +675,7 @@ public class FIXConnection implements Closeable {
         private void sendHeartbeat(FIXValue testReqId) throws IOException {
             prepare(txMessage, Heartbeat);
 
-            txMessage.addField(TestReqID).set(testReqId);
+            txMessage.addValue(TestReqID, testReqId);
 
             send(txMessage);
         }
@@ -683,18 +683,18 @@ public class FIXConnection implements Closeable {
         private void sendResendRequest(long beginSeqNo) throws IOException {
             prepare(txMessage, ResendRequest);
 
-            txMessage.addField(BeginSeqNo).setInt(beginSeqNo);
-            txMessage.addField(EndSeqNo).setInt(0);
+            txMessage.addInt(BeginSeqNo, beginSeqNo);
+            txMessage.addInt(EndSeqNo, 0);
 
             send(txMessage);
         }
 
         private void sendSequenceReset(FIXValue msgSeqNum, long newSeqNo) throws IOException {
+            txMsgSeqNum = msgSeqNum.asInt();
             prepare(txMessage, SequenceReset);
 
-            txMessage.valueOf(MsgSeqNum).set(msgSeqNum);
-            txMessage.addField(GapFillFlag).setBoolean(true);
-            txMessage.addField(NewSeqNo).setInt(newSeqNo);
+            txMessage.addBoolean(GapFillFlag, true);
+            txMessage.addInt(NewSeqNo, newSeqNo);
 
             send(txMessage);
         }
@@ -718,7 +718,7 @@ public class FIXConnection implements Closeable {
     private void sendTestRequest(CharSequence testReqId) throws IOException {
         prepare(txMessage, TestRequest);
 
-        txMessage.addField(TestReqID).setString(testReqId);
+        txMessage.addString(TestReqID, testReqId);
 
         send(txMessage);
     }

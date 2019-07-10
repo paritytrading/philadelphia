@@ -90,7 +90,7 @@ class Message {
 
     void put(FIXMessage message) {
         for (Field field : fields)
-            message.addField(field.getTag()).setString(field.getValue());
+            message.addString(field.getTag(), field.getValue());
     }
 
     @Override
