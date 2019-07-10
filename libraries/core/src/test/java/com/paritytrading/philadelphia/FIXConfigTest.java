@@ -4,6 +4,7 @@ import org.junit.Test;
 
 public class FIXConfigTest {
 
+    @SuppressWarnings("resource")
     @Test
     public void fixt11() {
         FIXConfig config = new FIXConfig.Builder()
