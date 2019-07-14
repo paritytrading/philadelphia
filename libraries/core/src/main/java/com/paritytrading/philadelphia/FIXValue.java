@@ -29,6 +29,27 @@ import org.joda.time.ReadableDateTime;
  */
 public class FIXValue {
 
+    private static final double POWERS_OF_TEN[] = {
+        1e0,
+        1e1,
+        1e2,
+        1e3,
+        1e4,
+        1e5,
+        1e6,
+        1e7,
+        1e8,
+        1e9,
+        1e10,
+        1e11,
+        1e12,
+        1e13,
+        1e14,
+        1e15,
+        1e16,
+        1e17,
+    };
+
     private final byte[] bytes;
 
     private int offset;
@@ -211,35 +232,73 @@ public class FIXValue {
     /**
      * Get the value as a float.
      *
+     * <p><strong>Note.</strong> The value is a string representation of
+     * a decimal number. As converting an arbitrary decimal number into a
+     * floating point number requires arbitrary-precision arithmetic, this
+     * method only works with the subset of decimal numbers that can be
+     * converted into floating point numbers using floating-point
+     * arithmetic.</p>
+     *
+     * <p>If we represent a decimal number in the form
+     *
+     *     &plusmn;<i>s</i>&nbsp;&times;&nbsp;10<sup><i>e</i></sup>,
+     *
+     * where <i>s</i> is an integer significand and <i>e</i> is an integer
+     * exponent, this method works for decimal numbers having
+     *
+     *     0&nbsp;&le;&nbsp;<i>s</i>&nbsp;&le;&nbsp;2<sup>53</sup>&nbsp;-&nbsp;1
+     *
+     * and
+     *
+     *     -22&nbsp;&le;&nbsp;<i>e</i>&nbsp;&le;&nbsp;22.</p>
+     *
      * @return the value as a float
      * @throws FIXValueFormatException if the value is not a float
+     * @see <a href="https://www.exploringbinary.com/fast-path-decimal-to-floating-point-conversion/">Fast Path Decimal to Floating-Point Conversion</a>
      */
     public double asFloat() {
-        long x = 0;
+        boolean negative = false;
 
-        double factor = 0.0;
+        int i = offset;
 
-        long sign  = bytes[offset] == '-' ? -1 : +1;
-        int  start = sign < 0 ? offset + 1 : offset;
+        if (bytes[i] == '-') {
+            negative = true;
 
-        for (int i = start; i < offset + length; i++) {
-            byte b = bytes[i];
-
-            if (b < '0' || b > '9') {
-                if (factor == 0.0 && b == '.') {
-                    factor = 1.0;
-                    continue;
-                }
-
-                notFloat();
-            }
-
-            x = 10 * x + b - '0';
-
-            factor *= 10;
+            i++;
         }
 
-        return sign * (factor > 0.0 ? x / factor : x);
+        long significand = 0;
+
+        byte b = 0;
+
+        while (i < offset + length) {
+            b = bytes[i++];
+
+            if (b < '0' || b > '9')
+                break;
+
+            significand = 10 * significand + b - '0';
+        }
+
+        if (b != '.' && i < offset + length)
+            notFloat();
+
+        int exponent = 0;
+
+        while (i < offset + length) {
+            b = bytes[i++];
+
+            if (b < '0' || b > '9')
+                notFloat();
+
+            significand = 10 * significand + b - '0';
+
+            exponent++;
+        }
+
+        double x = significand / POWERS_OF_TEN[exponent];
+
+        return negative ? -x : +x;
     }
 
     /**
@@ -247,11 +306,12 @@ public class FIXValue {
      *
      * @param x a float
      * @param decimals the number of decimals
+     * @see #asFloat
      */
     public void setFloat(double x, int decimals) {
-        long y = Math.round(Longs.POWERS_OF_TEN[decimals] * Math.abs(x));
-
         bytes[bytes.length - 1] = SOH;
+
+        long y = Math.round(POWERS_OF_TEN[decimals] * Math.abs(x));
 
         int i = bytes.length - 2;
 
