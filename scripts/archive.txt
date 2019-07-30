@@ -4,6 +4,7 @@ README.md
 UPGRADE-1.0.0.md
 applications/client/README.md
 applications/client/etc/example.conf
+applications/client/etc/example.txt
 applications/client/philadelphia-client.jar
 applications/generate/README.md
 applications/generate/etc/example.ini

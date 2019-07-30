@@ -1,0 +1,53 @@
+#
+# This is an example Philadelphia Terminal Client script. Together with the
+# example configuration file, it can be used to interact with Philadelphia
+# Example Acceptor.
+#
+# Start Philadelphia Example Acceptor as follows:
+#
+#   java -jar philadelphia-acceptor.jar 4000
+#
+# Run this script as follows:
+#
+#   java -jar philadelphia-client.jar example.conf example.txt
+#
+
+#
+# Send: New Order Single
+#
+#   MsgType(35)      = D
+#   ClOrdID(11)      = 1
+#   HandlInst(21)    = 1 (Automated execution, no intervention)
+#   Symbol(55)       = FOO
+#   Side(54)         = 1 (Buy)
+#   TransactTime(60) = 20150901-09:30:05.250
+#   OrderQty(38)     = 100.00
+#   OrdType(40)      = 2 (Limit)
+#   Price(44)        = 25.50
+#
+send 35=D|11=1|21=1|55=FOO|54=1|60=20150901-09:30:05.250|38=100.00|40=2|44=25.50
+
+#
+# Expect: Execution Report
+#
+#   MsgType(35)       = 8
+#   OrderID(37)       = 1
+#   ClOrdID(11)       = 1
+#   ExecID(17)        = 1
+#   ExecTransType(20) = 0 (New)
+#   ExecType(150)     = 0 (New)
+#   OrdStatus(39)     = 0 (New)
+#   Symbol(55)        = FOO
+#   Side(54)          = 1 (Buy)
+#   OrderQty(38)      = 100.00
+#   Price(44)         = 25.50
+#   LeavesQty(151)    = 100.00
+#   CumQty(14)        = 0
+#   AvgPx(6)          = 0.00
+#
+# 35=8|37=1|11=1|17=1|20=0|150=0|39=0|55=FOO|54=1|38=100.00|44=25.50|151=100.00|14=0|6=0.00
+#
+wait 8
+messages -1
+
+exit
