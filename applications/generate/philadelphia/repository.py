@@ -42,8 +42,7 @@ def _name(version):
     name = '{} {}.{}'.format(version.protocol, version.major, version.minor)
     if version.sp:
         return '{} {}'.format(name, version.sp)
-    else:
-        return name
+    return name
 
 
 _Version = collections.namedtuple('_Version', ['protocol', 'major', 'minor', 'sp'])
@@ -97,15 +96,13 @@ def _type(field_type, values):
     type_ = _TYPES.get(field_type)
     if type_ == 'char' and values and max(len(value.value) for value in values) > 1:
         return 'String'
-    else:
-        return type_
+    return type_
 
 
 def _values(tag, field, tag_values):
     if field.type_ == 'Boolean' or field.name == 'MsgType':
         return []
-    else:
-        return tag_values.get(tag, [])
+    return tag_values.get(tag, [])
 
 
 _Field = collections.namedtuple('_Field', ['name', 'type_'])
@@ -153,8 +150,7 @@ def _read_enums(dirname):
 def _sort_enums(enums):
     if all(enum.sort is not None for enum in enums):
         return sorted(enums, key=lambda enum: enum.sort)
-    else:
-        return enums
+    return enums
 
 
 _VALUES = {
