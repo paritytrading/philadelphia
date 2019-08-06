@@ -54,7 +54,7 @@ def _read_version(dirname):
     value = tree.getroot().get('version')
     match = re.match(r'(?P<protocol>.+)\.(?P<major>\d+)\.(?P<minor>\d+)((?P<sp>SP\d+))?', value)
     return _Version(protocol=match.group('protocol'), major=match.group('major'),
-            minor=match.group('minor'), sp=match.group('sp') or '')
+                    minor=match.group('minor'), sp=match.group('sp') or '')
 
 
 def read_messages(dirname):
@@ -144,7 +144,7 @@ def _read_enums(dirname):
     filename = _enums_path(dirname)
     tree = xml.etree.ElementTree.parse(filename)
     return sorted([enum for elem in tree.findall('Enum') for enum in enums(elem)],
-            key=lambda enum: int(enum.tag))
+                  key=lambda enum: int(enum.tag))
 
 
 def _sort_enums(enums):

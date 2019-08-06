@@ -43,7 +43,7 @@ def read_fields(filename):
         return model.Field(tag=number, name=name, type_=type_, values=values)
     root = xml.etree.ElementTree.parse(filename).find('fields')
     return sorted([field(elem) for elem in root.findall('field')],
-            key=lambda field: int(field.tag))
+                  key=lambda field: int(field.tag))
 
 
 _TYPES = {

@@ -53,7 +53,7 @@ def _format_enumeration(field):
     name = '{}Values'.format(field.name)
     javadoc = 'Values for {}({}).'.format(field.name, field.tag)
     fields = [java.ConstantField(type_=field.type_, name=value.name, value=value.value)
-            for value in field.values]
+              for value in field.values]
     return java.InnerClass(name=name, javadoc=javadoc, fields=fields)
 
 
