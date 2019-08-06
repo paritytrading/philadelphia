@@ -28,7 +28,7 @@ COMPILATION_UNIT_COMMENT = '''\
 '''
 
 
-class CompilationUnit(object):
+class CompilationUnit:
 
     def __init__(self, package, class_):
         self.package = package
@@ -39,7 +39,7 @@ class CompilationUnit(object):
                 self.class_)
 
 
-class Package(object):
+class Package:
 
     def __init__(self, name):
         self.name = name
@@ -48,7 +48,7 @@ class Package(object):
         return 'package {};'.format(self.name)
 
 
-class Class(object):
+class Class:
 
     def __init__(self, name, javadoc, classes=None, fields=None):
         self.name = name
@@ -86,7 +86,7 @@ ${body}
 ''')
 
 
-class InnerClass(object):
+class InnerClass:
 
     def __init__(self, name, javadoc, fields):
         self.name = name
