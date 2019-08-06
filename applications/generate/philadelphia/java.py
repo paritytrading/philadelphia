@@ -121,9 +121,9 @@ ${body}
 
 
 _TYPE_FORMATTERS = {
-    'char': lambda value: '\'{}\''.format(value),
-    'int': lambda value: '{}'.format(value),
-    'String': lambda value: '"{}"'.format(value),
+    'char': lambda value: '\'' + value + '\'',
+    'int': str,
+    'String': lambda value: '"' + value + '"',
 }
 
 
