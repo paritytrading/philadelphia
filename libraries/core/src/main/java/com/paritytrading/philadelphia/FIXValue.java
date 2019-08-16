@@ -503,7 +503,9 @@ public class FIXValue {
      *
      * @return the value as a checksum
      * @throws FIXValueFormatException if the value is not an integer
+     * @deprecated Use {@link #asInt()} instead.
      */
+    @Deprecated
     public long asCheckSum() {
         return asInt();
     }
