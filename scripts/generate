@@ -24,6 +24,10 @@
 # This script uses Philadelphia Code Generator and therefore requires Python
 # 3.5 or newer.
 #
+# As this repository already contains the generated FIX protocol versions, you
+# only need to run this script if you change Philadelphia Code Generator or add
+# support for additional FIX protocol versions.
+#
 
 set -e
 
