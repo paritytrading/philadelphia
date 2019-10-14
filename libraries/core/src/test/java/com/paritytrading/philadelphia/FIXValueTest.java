@@ -373,6 +373,7 @@ public class FIXValueTest {
         value.asTimestamp(new MutableDateTime());
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void asCheckSum() throws FIXValueOverflowException {
         get("064\u0001");
@@ -387,6 +388,7 @@ public class FIXValueTest {
         assertPutEquals("064\u0001");
     }
 
+    @SuppressWarnings("deprecation")
     @Test(expected=FIXValueFormatException.class)
     public void notCheckSum() {
         value.setString("FOO");
