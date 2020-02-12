@@ -169,7 +169,6 @@ public class FIXConfig {
         return checkSumEnabled;
     }
 
-
     /**
      * Get the string representation of instance.
      *
