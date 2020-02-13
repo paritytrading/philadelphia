@@ -28,7 +28,7 @@ class TestMessageParser {
 
     private FIXValue value;
 
-    public TestMessageParser(TestMessageListener listener) {
+    TestMessageParser(TestMessageListener listener) {
         this.listener = listener;
 
         this.message = new StringBuilder();
@@ -36,7 +36,7 @@ class TestMessageParser {
         this.value = new FIXValue(32);
     }
 
-    public boolean parse(ByteBuffer buffer) throws IOException {
+    boolean parse(ByteBuffer buffer) throws IOException {
         buffer.mark();
 
         message.setLength(0);
