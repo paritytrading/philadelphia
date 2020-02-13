@@ -17,7 +17,7 @@ package com.paritytrading.philadelphia;
 
 class Strings {
 
-    public static String repeat(char c, int num) {
+    static String repeat(char c, int num) {
         StringBuilder builder = new StringBuilder(num);
 
         for (int i = 0; i < num; i++)
