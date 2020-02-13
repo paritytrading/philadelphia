@@ -33,7 +33,7 @@ class TestConnection implements Closeable {
 
     private TestMessageParser parser;
 
-    public TestConnection(SocketChannel channel, TestMessageListener listener) {
+    TestConnection(SocketChannel channel, TestMessageListener listener) {
         this.channel = channel;
 
         this.parser = new TestMessageParser(listener);
@@ -42,7 +42,7 @@ class TestConnection implements Closeable {
         this.txBuffer = ByteBuffer.allocateDirect(2048);
     }
 
-    public int receive() throws IOException {
+    int receive() throws IOException {
         int bytes = channel.read(rxBuffer);
 
         if (bytes <= 0)
@@ -57,11 +57,11 @@ class TestConnection implements Closeable {
         return bytes;
     }
 
-    public void send(String message) throws IOException {
+    void send(String message) throws IOException {
         send(asList(message));
     }
 
-    public void send(List<String> messages) throws IOException {
+    void send(List<String> messages) throws IOException {
         txBuffer.clear();
 
         for (String message : messages)
