@@ -15,9 +15,7 @@
  */
 package com.paritytrading.philadelphia;
 
-import static com.paritytrading.philadelphia.fix42.FIX42Enumerations.*;
-import static com.paritytrading.philadelphia.fix42.FIX42MsgTypes.*;
-import static com.paritytrading.philadelphia.fix42.FIX42Tags.*;
+import static java.nio.charset.StandardCharsets.*;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -27,41 +25,27 @@ import org.openjdk.jmh.annotations.Setup;
 
 public class FIXMessageParserBenchmark extends FIXBenchmark {
 
+    private static final String MESSAGE = "8=FIX.4.2\u00019=74\u000135=D\u000149=initiator\u0001" +
+            "56=acceptor\u000134=2\u000111=123\u000121=1\u000155=FOO\u000154=1\u000140=2\u0001" +
+            "44=150.25\u000110=075\u0001";
+
+    private static final FIXConfig CHECK_SUM_ENABLED  = new FIXConfig.Builder().build();
+    private static final FIXConfig CHECK_SUM_DISABLED = new FIXConfig.Builder().setCheckSumEnabled(false).build();
+
     private ByteBuffer buffer;
 
-    private FIXMessageParser messageParser;
+    private FIXMessageParser checkSumEnabled;
+    private FIXMessageParser checkSumDisabled;
 
     @Setup(Level.Iteration)
     public void prepare() {
-        FIXMessage message = new FIXMessage(64, 64);
-
-        format(message);
-
         buffer = ByteBuffer.allocateDirect(1024);
 
-        message.put(buffer);
-
+        buffer.put(MESSAGE.getBytes(US_ASCII));
         buffer.flip();
 
-        FIXConfig fixConfig = new FIXConfig.Builder().build();
-
-        messageParser = new FIXMessageParser(fixConfig, listener -> {});
-    }
-
-    private void format(FIXMessage message) {
-        message.addField(BeginString).setString("FIX.4.2");
-        message.addField(BodyLength).setInt(74);
-        message.addField(MsgType).setChar(OrderSingle);
-        message.addField(SenderCompID).setString("initiator");
-        message.addField(TargetCompID).setString("acceptor");
-        message.addField(MsgSeqNum).setInt(2);
-        message.addField(ClOrdID).setString("123");
-        message.addField(HandlInst).setChar(HandlInstValues.AutomatedExecutionNoIntervention);
-        message.addField(Symbol).setString("FOO");
-        message.addField(Side).setChar(SideValues.Buy);
-        message.addField(OrdType).setChar(OrdTypeValues.Limit);
-        message.addField(Price).setFloat(150.25, 2);
-        message.addField(CheckSum).setCheckSum(75);
+        checkSumEnabled  = new FIXMessageParser(CHECK_SUM_ENABLED,  listener -> {});
+        checkSumDisabled = new FIXMessageParser(CHECK_SUM_DISABLED, listener -> {});
     }
 
     @Benchmark
@@ -69,11 +53,21 @@ public class FIXMessageParserBenchmark extends FIXBenchmark {
     }
 
     @Benchmark
-    public boolean parse() throws IOException {
-        boolean success = messageParser.parse(buffer);
+    public boolean checkSumEnabled() throws IOException {
+        boolean result = checkSumEnabled.parse(buffer);
 
         buffer.flip();
 
-        return success;
+        return result;
     }
+
+    @Benchmark
+    public boolean checkSumDisabled() throws IOException {
+        boolean result = checkSumDisabled.parse(buffer);
+
+        buffer.flip();
+
+        return result;
+    }
+
 }

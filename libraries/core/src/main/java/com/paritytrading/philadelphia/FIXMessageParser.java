@@ -124,29 +124,8 @@ public class FIXMessageParser {
 
             position = buffer.position();
 
-            if (checkSumEnabled) {
-                buffer.position(position + length);
-
-                // Garbled message
-                tag = FIXTags.get(buffer);
-                if (tag == 0)
-                    continue;
-
-                // Garbled message
-                if (!checkSum.get(buffer))
-                    continue;
-
-                // Garbled message
-                if (tag != CheckSum)
-                    continue;
-
-                // Garbled message
-                if ((FIXCheckSums.sum(buffer, beginning, position - beginning + length) & 0xff)
-                        != checkSum.asInt())
-                    continue;
-
-                buffer.position(position);
-            }
+            if (checkSumEnabled && !acceptCheckSum(buffer, beginning, position, length))
+                continue;
 
             int limit = buffer.limit();
 
@@ -165,6 +144,32 @@ public class FIXMessageParser {
 
             return true;
         }
+    }
+
+    private boolean acceptCheckSum(ByteBuffer buffer, int beginning, int position, int length) throws IOException {
+        buffer.position(position + length);
+
+        // Garbled message
+        int tag = FIXTags.get(buffer);
+        if (tag == 0)
+            return false;
+
+        // Garbled message
+        if (!checkSum.get(buffer))
+            return false;
+
+        // Garbled message
+        if (tag != CheckSum)
+            return false;
+
+        // Garbled message
+        if ((FIXCheckSums.sum(buffer, beginning, position - beginning + length) & 0xff)
+                != checkSum.asInt())
+            return false;
+
+        buffer.position(position);
+
+        return true;
     }
 
 }
