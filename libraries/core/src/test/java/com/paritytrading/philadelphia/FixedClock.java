@@ -24,7 +24,7 @@ class FixedClock implements Clock {
         return currentTimeMillis;
     }
 
-    public void setCurrentTimeMillis(long currentTimeMillis) {
+    void setCurrentTimeMillis(long currentTimeMillis) {
         this.currentTimeMillis = currentTimeMillis;
     }
 
