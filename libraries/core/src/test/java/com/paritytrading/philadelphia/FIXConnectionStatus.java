@@ -22,11 +22,11 @@ class FIXConnectionStatus implements FIXConnectionStatusListener {
 
     private List<Event> events;
 
-    public FIXConnectionStatus() {
+    FIXConnectionStatus() {
         this.events = new ArrayList<>();
     }
 
-    public List<Event> collect() {
+    List<Event> collect() {
         return events;
     }
 
@@ -65,40 +65,40 @@ class FIXConnectionStatus implements FIXConnectionStatusListener {
         events.add(new Logout());
     }
 
-    public interface Event {
+    interface Event {
     }
 
-    public static class Close extends Value implements Event {
-        public final String message;
+    static class Close extends Value implements Event {
+        final String message;
 
-        public Close(String message) {
+        Close(String message) {
             this.message = message;
         }
     }
 
-    public static class SequenceReset extends Value implements Event {
+    static class SequenceReset extends Value implements Event {
     }
 
-    public static class TooLowMsgSeqNum extends Value implements Event {
-        public final long receivedMsgSeqNum;
-        public final long expectedMsgSeqNum;
+    static class TooLowMsgSeqNum extends Value implements Event {
+        final long receivedMsgSeqNum;
+        final long expectedMsgSeqNum;
 
-        public TooLowMsgSeqNum(long receivedMsgSeqNum, long expectedMsgSeqNum) {
+        TooLowMsgSeqNum(long receivedMsgSeqNum, long expectedMsgSeqNum) {
             this.receivedMsgSeqNum = receivedMsgSeqNum;
             this.expectedMsgSeqNum = expectedMsgSeqNum;
         }
     }
 
-    public static class HeartbeatTimeout extends Value implements Event {
+    static class HeartbeatTimeout extends Value implements Event {
     }
 
-    public static class Reject extends Value implements Event {
+    static class Reject extends Value implements Event {
     }
 
-    public static class Logon extends Value implements Event {
+    static class Logon extends Value implements Event {
     }
 
-    public static class Logout extends Value implements Event {
+    static class Logout extends Value implements Event {
     }
 
 }

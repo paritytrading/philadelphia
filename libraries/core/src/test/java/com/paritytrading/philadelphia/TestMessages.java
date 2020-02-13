@@ -22,11 +22,11 @@ class TestMessages implements TestMessageListener {
 
     private List<String> messages;
 
-    public TestMessages() {
+    TestMessages() {
         this.messages = new ArrayList<>();
     }
 
-    public List<String> collect() {
+    List<String> collect() {
         return messages;
     }
 
