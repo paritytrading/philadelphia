@@ -25,13 +25,13 @@ class FIXMessages implements FIXMessageListener {
 
     private ByteBuffer buffer;
 
-    public FIXMessages() {
+    FIXMessages() {
         this.messages = new ArrayList<>();
 
         this.buffer = ByteBuffer.allocateDirect(1024);
     }
 
-    public List<String> collect() {
+    List<String> collect() {
         return messages;
     }
 
