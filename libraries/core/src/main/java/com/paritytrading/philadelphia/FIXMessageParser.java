@@ -16,7 +16,6 @@
 package com.paritytrading.philadelphia;
 
 import static com.paritytrading.philadelphia.FIX.*;
-import static com.paritytrading.philadelphia.FIXTags.*;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -63,7 +62,7 @@ public class FIXMessageParser {
      * @throws IOException if an I/O error occurs
      */
     public boolean parse(ByteBuffer buffer) throws IOException {
-        int tag;
+        boolean garbled;
 
         while (true) {
             buffer.mark();
@@ -71,12 +70,11 @@ public class FIXMessageParser {
             int beginning = buffer.position();
 
             // Partial message
-            tag = FIXTags.get(buffer);
-            if (tag == 0) {
-                buffer.reset();
-
+            if (buffer.remaining() < 2)
                 return false;
-            }
+
+            // Garbled message
+            garbled = buffer.get() != '8' || buffer.get() != '=';
 
             // Partial message
             if (!beginString.get(buffer)) {
@@ -86,18 +84,20 @@ public class FIXMessageParser {
             }
 
             // Garbled message
-            if (tag != BeginString)
+            if (garbled)
                 continue;
 
             int position = buffer.position();
 
             // Partial message
-            tag = FIXTags.get(buffer);
-            if (tag == 0) {
+            if (buffer.remaining() < 2) {
                 buffer.reset();
 
                 return false;
             }
+
+            // Garbled message
+            garbled = buffer.get() != '9' || buffer.get() != '=';
 
             // Partial message
             if (!bodyLength.get(buffer)) {
@@ -106,8 +106,7 @@ public class FIXMessageParser {
                 return false;
             }
 
-            // Garbled message
-            if (tag != BodyLength) {
+            if (garbled) {
                 buffer.position(position);
 
                 continue;
@@ -132,7 +131,7 @@ public class FIXMessageParser {
             buffer.limit(position + length);
 
             // Garbled message
-            boolean garbled = message.get(buffer) == false;
+            garbled = message.get(buffer) == false;
 
             buffer.limit(limit);
             buffer.position(position + length + 7);
@@ -149,17 +148,14 @@ public class FIXMessageParser {
     private boolean acceptCheckSum(ByteBuffer buffer, int beginning, int position, int length) throws IOException {
         buffer.position(position + length);
 
-        // Garbled message
-        int tag = FIXTags.get(buffer);
-        if (tag == 0)
-            return false;
+        boolean garbled = buffer.get() != '1' || buffer.get() != '0' || buffer.get() != '=';
 
         // Garbled message
         if (!checkSum.get(buffer))
             return false;
 
         // Garbled message
-        if (tag != CheckSum)
+        if (garbled)
             return false;
 
         // Garbled message
