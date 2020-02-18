@@ -25,11 +25,11 @@ class FIX {
 
     static final byte NO = 'N';
 
-    static final byte[] BEGIN_STRING = new byte[] { '8', '=' };
+    static final byte[] BEGIN_STRING = { '8', '=' };
 
-    static final byte[] BODY_LENGTH = new byte[] { '9', '=' };
+    static final byte[] BODY_LENGTH = { '9', '=' };
 
-    static final byte[] CHECK_SUM = new byte[] { '1', '0', '=' };
+    static final byte[] CHECK_SUM = { '1', '0', '=' };
 
     static final int BEGIN_STRING_FIELD_CAPACITY = 16;
 

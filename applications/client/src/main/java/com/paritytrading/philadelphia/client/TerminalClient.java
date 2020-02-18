@@ -46,7 +46,7 @@ import org.jvirtanen.config.Configs;
 
 class TerminalClient implements Closeable {
 
-    static final Command[] COMMANDS = new Command[] {
+    static final Command[] COMMANDS = {
         new SendCommand(),
         new MessagesCommand(),
         new HelpCommand(),
