@@ -26,7 +26,7 @@ public class FIXTagsBenchmark extends FIXBenchmark {
 
     @Setup(Level.Iteration)
     public void prepare() {
-        byte[] bytes = new byte[] { '1', '2', '3', '=' };
+        byte[] bytes = { '1', '2', '3', '=' };
 
         buffer = ByteBuffer.allocateDirect(bytes.length);
 
