@@ -15,6 +15,8 @@
  */
 package com.paritytrading.philadelphia.client;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -32,11 +34,13 @@ class WaitCommand implements Command {
         if (arguments.hasNext())
             throw new IllegalArgumentException();
 
+        int fromIndex = client.getMessages().collect().size();
+
         while (true) {
             try {
                 Thread.sleep(WAIT_TIME_MILLIS);
 
-                if (msgType.equals(getLastMsgType(client.getMessages())))
+                if (getMsgTypes(client.getMessages(), fromIndex).contains(msgType))
                     break;
 
             } catch (InterruptedException e) {
@@ -60,13 +64,12 @@ class WaitCommand implements Command {
         return "wait <msg-type>";
     }
 
-    private static String getLastMsgType(Messages messages) {
-        List<Message> collection = messages.collect();
-
-        if (collection.isEmpty())
-            return null;
-
-        return collection.get(collection.size() - 1).getMsgType();
+    private static List<String> getMsgTypes(Messages messages, int fromIndex) {
+        return messages.collect()
+            .stream()
+            .skip(fromIndex)
+            .map(Message::getMsgType)
+            .collect(toList());
     }
 
 }
