@@ -18,7 +18,6 @@ package com.paritytrading.philadelphia.initiator;
 import static com.paritytrading.philadelphia.fix42.FIX42Enumerations.*;
 import static com.paritytrading.philadelphia.fix42.FIX42MsgTypes.*;
 import static com.paritytrading.philadelphia.fix42.FIX42Tags.*;
-import static org.jvirtanen.util.Applications.*;
 
 import com.paritytrading.philadelphia.FIXMessage;
 import com.paritytrading.philadelphia.FIXValue;
@@ -27,11 +26,9 @@ import java.net.InetSocketAddress;
 
 class TestInitiator {
 
-    private static final String USAGE = "philadelphia-initiator <host> <port> <orders> <orders-per-second>";
-
     public static void main(String[] args) {
         if (args.length != 4)
-            usage(USAGE);
+            usage();
 
         try {
             String host            = args[0];
@@ -41,7 +38,7 @@ class TestInitiator {
 
             main(new InetSocketAddress(host, port), orders, ordersPerSecond);
         } catch (IllegalArgumentException e) {
-            usage(USAGE);
+            usage();
         } catch (IOException e) {
             fatal(e);
         }
@@ -91,4 +88,18 @@ class TestInitiator {
             System.out.printf("\n");
         }
     }
+
+    private static void usage() {
+        System.err.println("Usage: philadelphia-initiator <host> <port> <orders> <orders-per-second>");
+        System.exit(2);
+    }
+
+    private static void fatal(Throwable throwable) {
+        System.err.println("fatal: " + throwable.getMessage());
+        System.err.println();
+        throwable.printStackTrace(System.err);
+        System.err.println();
+        System.exit(1);
+    }
+
 }

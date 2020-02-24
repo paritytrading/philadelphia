@@ -15,23 +15,19 @@
  */
 package com.paritytrading.philadelphia.acceptor;
 
-import static org.jvirtanen.util.Applications.*;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
 class TestAcceptor {
 
-    private static final String USAGE = "philadelphia-acceptor <port>";
-
     public static void main(String[] args) {
         if (args.length != 1)
-            usage(USAGE);
+            usage();
 
         try {
             main(Integer.parseInt(args[0]));
         } catch (NumberFormatException e) {
-            usage(USAGE);
+            usage();
         } catch (IOException e) {
             fatal(e);
         }
@@ -59,6 +55,19 @@ class TestAcceptor {
         }
 
         session.getConnection().close();
+    }
+
+    private static void usage() {
+        System.err.println("Usage: philadelphia-acceptor <port>");
+        System.exit(2);
+    }
+
+    private static void fatal(Throwable throwable) {
+        System.err.println("fatal: " + throwable.getMessage());
+        System.err.println();
+        throwable.printStackTrace(System.err);
+        System.err.println();
+        System.exit(1);
     }
 
 }

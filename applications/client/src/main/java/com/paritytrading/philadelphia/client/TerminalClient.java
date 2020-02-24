@@ -17,12 +17,12 @@ package com.paritytrading.philadelphia.client;
 
 import static java.nio.charset.StandardCharsets.*;
 import static java.util.Collections.*;
-import static org.jvirtanen.util.Applications.*;
 
 import com.paritytrading.philadelphia.FIXConfig;
 import com.paritytrading.philadelphia.FIXVersion;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigException;
+import com.typesafe.config.ConfigFactory;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -171,7 +171,7 @@ class TerminalClient implements Closeable {
 
     public static void main(String[] args) {
         if (args.length != 1 && args.length != 2)
-            usage("philadelphia-client <configuration-file> [<input-file>]");
+            usage();
 
         try {
             Config config = config(args[0]);
@@ -214,6 +214,32 @@ class TerminalClient implements Closeable {
 
     private static List<String> readAllLines(String filename) throws IOException {
         return Files.readAllLines(new File(filename).toPath(), UTF_8);
+    }
+
+    private static Config config(String filename) throws FileNotFoundException {
+        File file = new File(filename);
+        if (!file.exists() || !file.isFile())
+            throw new FileNotFoundException(filename + ": No such file");
+
+        return ConfigFactory.parseFile(file);
+    }
+
+    private static void usage() {
+        System.err.println("Usage: philadelphia-client <configuration-file> [<input-file>]");
+        System.exit(2);
+    }
+
+    private static void error(Throwable throwable) {
+        System.err.println("error: " + throwable.getMessage());
+        System.exit(1);
+    }
+
+    private static void fatal(Throwable throwable) {
+        System.err.println("fatal: " + throwable.getMessage());
+        System.err.println();
+        throwable.printStackTrace(System.err);
+        System.err.println();
+        System.exit(1);
     }
 
 }
