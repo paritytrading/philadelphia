@@ -43,10 +43,6 @@
       <groupId>org.hdrhistogram</groupId>
       <artifactId>HdrHistogram</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.jvirtanen.util</groupId>
-      <artifactId>util-extras</artifactId>
-    </dependency>
   </dependencies>
 
   <build>
