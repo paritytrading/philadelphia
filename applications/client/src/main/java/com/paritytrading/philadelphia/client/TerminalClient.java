@@ -27,7 +27,6 @@ import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.nio.channels.ClosedChannelException;
 import java.nio.file.Files;
@@ -42,7 +41,6 @@ import org.jline.reader.UserInterruptException;
 import org.jline.reader.impl.completer.ArgumentCompleter;
 import org.jline.reader.impl.completer.NullCompleter;
 import org.jline.reader.impl.completer.StringsCompleter;
-import org.jvirtanen.config.Configs;
 
 class TerminalClient implements Closeable {
 
@@ -192,12 +190,12 @@ class TerminalClient implements Closeable {
     }
 
     private static void main(Config config, List<String> lines) throws IOException {
-        String      version      = config.getString("fix.version");
-        String      senderCompId = config.getString("fix.sender-comp-id");
-        String      targetCompId = config.getString("fix.target-comp-id");
-        int         heartBtInt   = config.getInt("fix.heart-bt-int");
-        InetAddress address      = Configs.getInetAddress(config, "fix.address");
-        int         port         = Configs.getPort(config, "fix.port");
+        String version      = config.getString("fix.version");
+        String senderCompId = config.getString("fix.sender-comp-id");
+        String targetCompId = config.getString("fix.target-comp-id");
+        int    heartBtInt   = config.getInt("fix.heart-bt-int");
+        String address      = config.getString("fix.address");
+        int    port         = config.getInt("fix.port");
 
         FIXConfig.Builder builder = new FIXConfig.Builder()
             .setVersion(FIXVersion.valueOf(version))

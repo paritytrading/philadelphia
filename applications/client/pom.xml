@@ -46,10 +46,6 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.jvirtanen.config</groupId>
-      <artifactId>config-extras</artifactId>
-    </dependency>
   </dependencies>
 
   <build>
