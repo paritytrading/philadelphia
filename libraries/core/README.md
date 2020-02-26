@@ -6,7 +6,7 @@ Philadelphia Core implements the Financial Information Exchange (FIX) protocol.
 
 Philadelphia Core depends on the following libraries:
 
-- Joda-Time 2.10.2
+- Joda-Time 2.10.5
 
 ## Download
 
