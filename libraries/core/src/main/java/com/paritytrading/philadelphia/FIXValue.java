@@ -424,10 +424,12 @@ public class FIXValue {
         if (length != 8 && length != 12)
             notTimeOnly();
 
-        x.setHourOfDay(getDigits(2, offset + 0));
-        x.setMinuteOfHour(getDigits(2, offset + 3));
-        x.setSecondOfMinute(getDigits(2, offset + 6));
-        x.setMillisOfSecond(length == 12 ? getDigits(3, offset + 9) : 0);
+        int hourOfDay      = getDigits(2, offset + 0);
+        int minuteOfHour   = getDigits(2, offset + 3);
+        int secondOfMinute = getDigits(2, offset + 6);
+        int millisOfSecond = length == 12 ? getDigits(3, offset + 9) : 0;
+
+        x.setTime(hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);
     }
 
     /**
