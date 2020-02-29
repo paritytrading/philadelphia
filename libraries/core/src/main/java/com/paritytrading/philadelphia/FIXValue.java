@@ -468,13 +468,16 @@ public class FIXValue {
         if (length != 17 && length != 21)
             notTimestamp();
 
-        x.setYear(getDigits(4, offset + 0));
-        x.setMonthOfYear(getDigits(2, offset + 4));
-        x.setDayOfMonth(getDigits(2, offset + 6));
-        x.setHourOfDay(getDigits(2, offset + 9));
-        x.setMinuteOfHour(getDigits(2, offset + 12));
-        x.setSecondOfMinute(getDigits(2, offset + 15));
-        x.setMillisOfSecond(length == 21 ? getDigits(3, offset + 18) : 0);
+        int year           = getDigits(4, offset + 0);
+        int monthOfYear    = getDigits(2, offset + 4);
+        int dayOfMonth     = getDigits(2, offset + 6);
+        int hourOfDay      = getDigits(2, offset + 9);
+        int minuteOfHour   = getDigits(2, offset + 12);
+        int secondOfMinute = getDigits(2, offset + 15);
+        int millisOfSecond = length == 21 ? getDigits(3, offset + 18) : 0;
+
+        x.setDateTime(year, monthOfYear, dayOfMonth, hourOfDay, minuteOfHour,
+                secondOfMinute, millisOfSecond);
     }
 
     /**
