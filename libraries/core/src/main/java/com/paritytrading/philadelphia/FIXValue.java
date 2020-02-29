@@ -376,16 +376,26 @@ public class FIXValue {
     /**
      * Get the value as a date.
      *
+     * <p><strong>Note.</strong> This method sets both date and time fields.
+     * When combining this method and {@link #asTimeOnly(MutableDateTime)},
+     * this method should be invoked first.</p>
+     *
      * @param x a date
      * @throws FIXValueFormatException if the value is not a date
+     * @see #asTimeOnly(MutableDateTime)
      */
     public void asDate(MutableDateTime x) {
         if (length != 8)
             notDate();
 
-        x.setYear(getDigits(4, offset + 0));
-        x.setMonthOfYear(getDigits(2, offset + 4));
-        x.setDayOfMonth(getDigits(2, offset + 6));
+        int year        = getDigits(4, offset + 0);
+        int monthOfYear = getDigits(2, offset + 4);
+        int dayOfMonth  = getDigits(2, offset + 6);
+
+        // Note: 'setDateTime()' takes roughly 55% of the time 'setDate()'
+        // takes. Using individual methods, such as 'setYear()', is faster
+        // than using 'setDate()' but still slower than 'setDateTime()'.
+        x.setDateTime(year, monthOfYear, dayOfMonth, 0, 0, 0, 0);
     }
 
     /**
@@ -408,6 +418,7 @@ public class FIXValue {
      *
      * @param x a time only
      * @throws FIXValueFormatException if the value is not a time only
+     * @see #asDate(MutableDateTime)
      */
     public void asTimeOnly(MutableDateTime x) {
         if (length != 8 && length != 12)

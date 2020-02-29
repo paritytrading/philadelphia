@@ -284,7 +284,7 @@ public class FIXValueTest {
 
         value.asDate(d);
 
-        assertEquals(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), d);
+        assertEquals(new MutableDateTime(2015, 9, 24, 0, 0, 0, 0), d);
     }
 
     @Test
