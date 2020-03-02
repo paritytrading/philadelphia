@@ -1,5 +1,67 @@
 # Release Notes
 
+## 1.2.0 (2020-03-03)
+
+See the [upgrade instructions](UPGRADE-1.2.0.md).
+
+- Improve MsgType(35) handling (Jonathan Heusser, Jussi Virtanen)
+
+  When checking for SequenceReset(4), check the first byte of the MsgType(35)
+  value before checking its length. This avoids one conditional check for most
+  messages.
+
+  Remove a dead branch from the MsgType(35) switch statement following the
+  MsgSeqNum(34) handling.
+
+- Fix `send` command in Philadelphia Terminal Client (Jussi Virtanen)
+
+  Make it possible to send a message containing a field with whitespace
+  characters.
+
+- Improve `FIXValue#asFloat` and `FIXValue#setFloat` (Jussi Virtanen)
+
+- Improve `FIXValueTest` (Jussi Virtanen)
+
+- Improve `FIXConfigTest` (Jan Nielsen)
+
+- Add example script for Philadelphia Terminal Client (Jussi Virtanen)
+
+- Mark `FIXValue#asCheckSum()` as deprecated (Jussi Virtanen)
+
+- Improve Philadelphia Terminal Client documentation (Jussi Virtanen)
+
+- Improve `FIXMessageParserBenchmark` (Jussi Virtanen)
+
+  Add a benchmark for when the incoming CheckSum(10) check is disabled.
+
+- Improve `FIXMessageParser` (Jussi Virtanen)
+
+  Having the incoming CheckSum(10) check in a separate method makes message
+  parsing 9.6% faster in the performance test when the incoming CheckSum(10)
+  check is disabled and 3.7% faster when it is enabled.
+
+  Inlining parsing of BeginString(8), BodyLength(9), and CheckSum(10) tags
+  makes message parsing further 5.9% faster in the performance test when the
+  incoming CheckSum(10) check is disabled and 6.1% faster when it is enabled.
+
+- Fix `wait` command in Philadelphia Terminal Client (Jussi Virtanen)
+
+  The `wait` command looked at received messages at an interval, stopping if
+  the last received message had a matching MsgType(35) value. If two or more
+  messages were received within one interval, the `wait` command might have
+  missed a matching MsgType(35) value and erroneously continued waiting.
+
+- Remove transitive Joda-Time dependency (Jussi Virtanen)
+
+  Replace the transitive Joda-Time 2.10.5 dependency with a Joda-Time 2.x
+  dependency. This makes it possible for applications to manage their Joda-Time
+  2.x and Philadelphia Core dependencies independently.
+
+- Improve `FIXValue#asTimeOnly` (Jussi Virtanen)
+
+  Set the fields all at once rather than one by one. This makes the method 33%
+  faster.
+
 ## 1.1.1 (2019-06-25)
 
 - Fix message header buffer handling (Jussi Virtanen)
