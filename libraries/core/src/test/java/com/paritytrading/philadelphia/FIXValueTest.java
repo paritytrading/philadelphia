@@ -278,7 +278,7 @@ public class FIXValueTest {
 
     @Test
     public void asDate() throws FIXValueOverflowException {
-        get("20150924");
+        get("20150924\u0001");
 
         MutableDateTime d = new MutableDateTime(1970, 1, 1, 9, 30, 5, 250);
 
@@ -296,7 +296,7 @@ public class FIXValueTest {
 
     @Test
     public void asTimeOnlyWithMillis() throws FIXValueOverflowException {
-        get("09:30:05.250");
+        get("09:30:05.250\u0001");
 
         MutableDateTime t = new MutableDateTime(2015, 9, 24, 22, 45, 10, 750);
 
@@ -307,7 +307,7 @@ public class FIXValueTest {
 
     @Test
     public void asTimeOnlyWithoutMillis() throws FIXValueOverflowException {
-        get("09:30:05");
+        get("09:30:05\u0001");
 
         MutableDateTime t = new MutableDateTime(2015, 9, 24, 22, 45, 10, 750);
 
@@ -332,7 +332,7 @@ public class FIXValueTest {
 
     @Test
     public void asTimestampWithMillis() throws FIXValueOverflowException {
-        get("20150924-09:30:05.250");
+        get("20150924-09:30:05.250\u0001");
 
         MutableDateTime t = new MutableDateTime();
 
@@ -343,7 +343,7 @@ public class FIXValueTest {
 
     @Test
     public void asTimestampWithoutMillis() throws FIXValueOverflowException {
-        get("20150924-09:30.05");
+        get("20150924-09:30.05\u0001");
 
         MutableDateTime t = new MutableDateTime();
 
