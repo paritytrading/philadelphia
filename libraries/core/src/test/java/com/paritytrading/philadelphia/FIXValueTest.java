@@ -28,7 +28,9 @@ public class FIXValueTest {
 
     @Before
     public void setUp() {
-        value = new FIXValue(32);
+        byte[] bytes = new byte[64];
+
+        value = new FIXValue(bytes, 16, 48);
     }
 
     @Test

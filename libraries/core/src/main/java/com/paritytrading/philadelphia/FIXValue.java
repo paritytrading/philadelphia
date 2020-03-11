@@ -52,6 +52,9 @@ public class FIXValue {
 
     private final byte[] bytes;
 
+    private final int start;
+    private final int end;
+
     private int offset;
     private int length;
 
@@ -61,12 +64,27 @@ public class FIXValue {
      * @param capacity the capacity
      */
     public FIXValue(int capacity) {
-        bytes = new byte[capacity];
+        this(new byte[capacity], 0, capacity);
+    }
 
-        bytes[0] = SOH;
+    /**
+     * Construct a new value container using the specified backing array.
+     *
+     * @param bytes the backing array
+     * @param start the start index for this value container in the backing
+     *     array
+     * @param end the end index for this value container in the backing array
+     */
+    public FIXValue(byte[] bytes, int start, int end) {
+        this.bytes = bytes;
 
-        offset = 0;
-        length = 0;
+        this.start = start;
+        this.end   = end;
+
+        this.bytes[start] = SOH;
+
+        this.offset = start;
+        this.length = 0;
     }
 
     /**
@@ -115,10 +133,10 @@ public class FIXValue {
      * @param value a value container
      */
     public void set(FIXValue value) {
-        offset = value.offset;
+        offset = start;
         length = value.length;
 
-        System.arraycopy(value.bytes, offset, bytes, offset, length + 1);
+        System.arraycopy(value.bytes, value.offset, bytes, offset, length + 1);
     }
 
     /**
@@ -140,10 +158,10 @@ public class FIXValue {
      * @param x a boolean
      */
     public void setBoolean(boolean x) {
-        bytes[0] = x ? YES : NO;
-        bytes[1] = SOH;
+        bytes[start    ] = x ? YES : NO;
+        bytes[start + 1] = SOH;
 
-        offset = 0;
+        offset = start;
         length = 1;
     }
 
@@ -166,10 +184,10 @@ public class FIXValue {
      * @param x a character
      */
     public void setChar(char x) {
-        bytes[0] = (byte)x;
-        bytes[1] = SOH;
+        bytes[start    ] = (byte)x;
+        bytes[start + 1] = SOH;
 
-        offset = 0;
+        offset = start;
         length = 1;
     }
 
@@ -210,11 +228,11 @@ public class FIXValue {
      * @param x an integer
      */
     public void setInt(long x) {
-        bytes[bytes.length - 1] = SOH;
+        bytes[end - 1] = SOH;
 
         long y = Math.abs(x);
 
-        int i = bytes.length - 2;
+        int i = end - 2;
 
         do {
             bytes[i--] = (byte)('0' + y % 10);
@@ -226,7 +244,7 @@ public class FIXValue {
             bytes[i--] = '-';
 
         offset = i + 1;
-        length = bytes.length - 1 - offset;
+        length = end - 1 - offset;
     }
 
     /**
@@ -309,11 +327,11 @@ public class FIXValue {
      * @see #asFloat
      */
     public void setFloat(double x, int decimals) {
-        bytes[bytes.length - 1] = SOH;
+        bytes[end - 1] = SOH;
 
         long y = Math.round(POWERS_OF_TEN[decimals] * Math.abs(x));
 
-        int i = bytes.length - 2;
+        int i = end - 2;
 
         for (int j = 0; j < decimals; j++) {
             bytes[i--] = (byte)('0' + y % 10);
@@ -334,7 +352,7 @@ public class FIXValue {
             bytes[i--] = '-';
 
         offset = i + 1;
-        length = bytes.length - 1 - offset;
+        length = end - 1 - offset;
     }
 
     /**
@@ -364,13 +382,13 @@ public class FIXValue {
      * @throws IndexOutOfBoundsException if the string is too long
      */
     public void setString(CharSequence x) {
-        offset = 0;
+        offset = start;
         length = x.length();
 
         for (int i = 0; i < length; i++)
-            bytes[i] = (byte)x.charAt(i);
+            bytes[start + i] = (byte)x.charAt(i);
 
-        bytes[length] = SOH;
+        bytes[start + length] = SOH;
     }
 
     /**
@@ -404,13 +422,13 @@ public class FIXValue {
      * @param x a date
      */
     public void setDate(ReadableDateTime x) {
-        setDigits(x.getYear(), 0, 4);
-        setDigits(x.getMonthOfYear(), 4, 2);
-        setDigits(x.getDayOfMonth(), 6, 2);
-        bytes[8] = SOH;
+        setDigits(x.getYear(),        start,     4);
+        setDigits(x.getMonthOfYear(), start + 4, 2);
+        setDigits(x.getDayOfMonth(),  start + 6, 2);
+        bytes[start + 8] = SOH;
 
         length = 8;
-        offset = 0;
+        offset = start;
     }
 
     /**
@@ -439,25 +457,25 @@ public class FIXValue {
      * @param millis if true set milliseconds, otherwise do not set milliseconds
      */
     public void setTimeOnly(ReadableDateTime x, boolean millis) {
-        setDigits(x.getHourOfDay(), 0, 2);
-        bytes[2] = ':';
-        setDigits(x.getMinuteOfHour(), 3, 2);
-        bytes[5] = ':';
-        setDigits(x.getSecondOfMinute(), 6, 2);
+        setDigits(x.getHourOfDay(),      start,     2);
+        bytes[start + 2] = ':';
+        setDigits(x.getMinuteOfHour(),   start + 3, 2);
+        bytes[start + 5] = ':';
+        setDigits(x.getSecondOfMinute(), start + 6, 2);
 
         if (millis) {
-            bytes[8] = '.';
-            setDigits(x.getMillisOfSecond(), 9, 3);
-            bytes[12] = SOH;
+            bytes[start +  8] = '.';
+            setDigits(x.getMillisOfSecond(), start + 9, 3);
+            bytes[start + 12] = SOH;
 
             length = 12;
         } else {
-            bytes[8] = SOH;
+            bytes[start + 8] = SOH;
 
             length = 8;
         }
 
-        offset = 0;
+        offset = start;
     }
 
     /**
@@ -489,29 +507,29 @@ public class FIXValue {
      * @param millis if true set milliseconds, otherwise do not set milliseconds
      */
     public void setTimestamp(ReadableDateTime x, boolean millis) {
-        setDigits(x.getYear(), 0, 4);
-        setDigits(x.getMonthOfYear(), 4, 2);
-        setDigits(x.getDayOfMonth(), 6, 2);
-        bytes[8] = '-';
-        setDigits(x.getHourOfDay(), 9, 2);
-        bytes[11] = ':';
-        setDigits(x.getMinuteOfHour(), 12, 2);
-        bytes[14] = ':';
-        setDigits(x.getSecondOfMinute(), 15, 2);
+        setDigits(x.getYear(),           start,      4);
+        setDigits(x.getMonthOfYear(),    start +  4, 2);
+        setDigits(x.getDayOfMonth(),     start +  6, 2);
+        bytes[start +  8] = '-';
+        setDigits(x.getHourOfDay(),      start +  9, 2);
+        bytes[start + 11] = ':';
+        setDigits(x.getMinuteOfHour(),   start + 12, 2);
+        bytes[start + 14] = ':';
+        setDigits(x.getSecondOfMinute(), start + 15, 2);
 
         if (millis) {
-            bytes[17] = '.';
-            setDigits(x.getMillisOfSecond(), 18, 3);
-            bytes[21] = SOH;
+            bytes[start + 17] = '.';
+            setDigits(x.getMillisOfSecond(), start + 18, 3);
+            bytes[start + 21] = SOH;
 
             length = 21;
         } else {
-            bytes[17] = SOH;
+            bytes[start + 17] = SOH;
 
             length = 17;
         }
 
-        offset = 0;
+        offset = start;
     }
 
     /**
@@ -532,10 +550,10 @@ public class FIXValue {
      * @param x a checksum
      */
     public void setCheckSum(long x) {
-        setDigits((int)(x & 0xff), 0, 3);
-        bytes[3] = SOH;
+        setDigits((int)(x & 0xff), start, 3);
+        bytes[start + 3] = SOH;
 
-        offset = 0;
+        offset = start;
         length = 3;
     }
 
@@ -549,18 +567,21 @@ public class FIXValue {
      *   false
      */
     public boolean get(ByteBuffer buffer) throws FIXValueOverflowException {
-        offset = 0;
-        length = 0;
+        int index = start;
 
         while (buffer.hasRemaining()) {
             byte b = buffer.get();
 
-            bytes[length] = b;
+            bytes[index] = b;
 
-            if (b == SOH)
+            if (b == SOH) {
+                offset = start;
+                length = index - start;
+
                 return true;
+            }
 
-            if (++length == bytes.length)
+            if (++index == end)
                 tooLongValue();
         }
 
