@@ -532,7 +532,7 @@ public class FIXValue {
      * @param x a checksum
      */
     public void setCheckSum(long x) {
-        setDigits(x & 0xff, 0, 3);
+        setDigits((int)(x & 0xff), 0, 3);
         bytes[3] = SOH;
 
         offset = 0;
@@ -594,11 +594,11 @@ public class FIXValue {
         return value;
     }
 
-    private void setDigits(long l, int offset, int digits) {
-        for (int i = offset + digits - 1; i >= offset; i--) {
-            bytes[i] = (byte)('0' + l % 10);
+    private void setDigits(int value, int offset, int digits) {
+        while (digits-- > 0) {
+            bytes[offset + digits] = (byte)('0' + value % 10);
 
-            l /= 10;
+            value /= 10;
         }
     }
 
