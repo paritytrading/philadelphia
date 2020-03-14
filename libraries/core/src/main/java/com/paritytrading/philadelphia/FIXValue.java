@@ -595,8 +595,8 @@ public class FIXValue {
     }
 
     private void setDigits(int value, int offset, int digits) {
-        for (int i = offset + digits - 1; i >= offset; i--) {
-            bytes[i] = (byte)('0' + value % 10);
+        while (digits-- > 0) {
+            bytes[offset + digits] = (byte)('0' + value % 10);
 
             value /= 10;
         }
