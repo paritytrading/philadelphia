@@ -150,7 +150,7 @@ public class FIXConnection implements Closeable {
 
         this.testRequestTxMillis = 0;
 
-        this.txMessage = new FIXMessage(config.getMaxFieldCount(), config.getFieldCapacity());
+        this.txMessage = new FIXMessage(config);
 
         this.currentTimeMillis = clock.currentTimeMillis();
 
@@ -230,7 +230,7 @@ public class FIXConnection implements Closeable {
      * @return a message container
      */
     public FIXMessage create() {
-        return new FIXMessage(config.getMaxFieldCount(), config.getFieldCapacity());
+        return new FIXMessage(config);
     }
 
     /**

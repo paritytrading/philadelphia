@@ -42,7 +42,7 @@ public class FIXMessageParser {
      * @param listener the message listener
      */
     public FIXMessageParser(FIXConfig config, FIXMessageListener listener) {
-        this.message = new FIXMessage(config.getMaxFieldCount(), config.getFieldCapacity());
+        this.message = new FIXMessage(config);
 
         this.checkSumEnabled = config.isCheckSumEnabled();
 
