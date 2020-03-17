@@ -402,6 +402,13 @@ public class FIXValueTest {
     }
 
     @Test
+    public void print() {
+        value.setString("FOO");
+
+        assertEquals("FOO|", value.toString());
+    }
+
+    @Test
     public void readPartial() throws FIXValueOverflowException {
         assertEquals(false, value.get(ByteBuffers.wrap("foo")));
     }
