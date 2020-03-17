@@ -36,6 +36,15 @@ public class FIXMessage {
     /**
      * Construct a new message container.
      *
+     * @param config the message configuration
+     */
+    public FIXMessage(FIXConfig config) {
+        this(config.getMaxFieldCount(), config.getFieldCapacity());
+    }
+
+    /**
+     * Construct a new message container.
+     *
      * @param maxFieldCount the maximum number of fields
      * @param fieldCapacity the field capacity
      */
