@@ -27,6 +27,8 @@ import java.util.stream.Stream;
  */
 public class FIXMessage {
 
+    private static final FIXConfig DEFAULTS = new FIXConfig.Builder().build();
+
     private final int[] tags;
 
     private final FIXValue[] values;
@@ -39,7 +41,7 @@ public class FIXMessage {
      * @param config the message configuration
      */
     public FIXMessage(FIXConfig config) {
-        this(config.getMaxFieldCount(), config.getFieldCapacity());
+        this(config.getMaxFieldCount(), config.getFieldCapacity(), config.getChunkSize());
     }
 
     /**
@@ -49,12 +51,39 @@ public class FIXMessage {
      * @param fieldCapacity the field capacity
      */
     public FIXMessage(int maxFieldCount, int fieldCapacity) {
+        this(maxFieldCount, fieldCapacity, DEFAULTS.getChunkSize());
+    }
+
+    /**
+     * Construct a new message container.
+     *
+     * @param maxFieldCount the maximum number of fields
+     * @param fieldCapacity the field capacity
+     * @param chunkSize the backing store chunk size
+     */
+    public FIXMessage(int maxFieldCount, int fieldCapacity, int chunkSize) {
         tags = new int[maxFieldCount];
 
         values = new FIXValue[maxFieldCount];
 
-        for (int i = 0; i < values.length; i++)
-            values[i] = new FIXValue(fieldCapacity);
+        byte[] bytes = new byte[chunkSize];
+
+        int start = 0;
+
+        for (int i = 0; i < values.length; i++) {
+            int end = start + fieldCapacity;
+
+            if (end > chunkSize) {
+                bytes = new byte[chunkSize];
+
+                start = 0;
+                end   = fieldCapacity;
+            }
+
+            values[i] = new FIXValue(bytes, start, end);
+
+            start = end;
+        }
 
         count = 0;
     }
