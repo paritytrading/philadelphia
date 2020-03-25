@@ -1,5 +1,6 @@
 package com.paritytrading.philadelphia.client;
 
+import static com.paritytrading.philadelphia.client.TerminalClient.IGNORED_TAGS;
 import static com.paritytrading.philadelphia.client.TerminalClient.printf;
 
 import java.util.HashSet;
@@ -10,18 +11,11 @@ import java.util.Set;
 
 class ExpectCommand implements Command {
 
-    private static final Set<Integer> IGNORED_TAGS = new HashSet<>();
-
     private static final Set<String> IGNORED_MESSAGES = new HashSet<>();
 
     private static final long WAIT_TIME_MILLIS = 50;
 
     static {
-        IGNORED_TAGS.add(49); // SenderCompID
-        IGNORED_TAGS.add(56); // TargetCompID
-        IGNORED_TAGS.add(34); // MsgSeqNum
-        IGNORED_TAGS.add(52); // SendingTime
-
         IGNORED_MESSAGES.add("0"); // Heartbeat (0)
         IGNORED_MESSAGES.add("1"); // Test Request (1)
     }
