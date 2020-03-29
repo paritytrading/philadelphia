@@ -50,7 +50,7 @@ public class FieldTest {
 
     @Test(expected=IllegalArgumentException.class)
     public void missingValue() {
-        Field.get("foo=");
+        Field.get("123=");
     }
 
 }
