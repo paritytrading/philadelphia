@@ -22,6 +22,16 @@ Run Philadelphia Code Generator with Python:
 python -m philadelphia.generate <command> [<configuration-file>] <input-path>
 ```
 
+Install development dependencies:
+```
+pip install -r requirements.txt
+```
+
+Run Pylint:
+```
+pylint philadelphia
+```
+
 ## Installation
 
 Install Philadelphia Code Generator:
