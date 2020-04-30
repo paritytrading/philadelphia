@@ -139,6 +139,24 @@ public class FIXMessage {
     }
 
     /**
+     * Get the value container of the first instance of a field with the
+     * specified tag, starting at the specified index.
+     *
+     * @param tag the tag
+     * @param fromIndex the index to start the search from
+     * @return the value container or {@code null} if there are no instances
+     *   of a field with the specified tag
+     */
+    public FIXValue valueOf(int tag, int fromIndex) {
+        for (; fromIndex < count; fromIndex++) {
+            if (tags[fromIndex] == tag)
+                return values[fromIndex];
+        }
+
+        return null;
+    }
+
+    /**
      * Get the index of the first instance of a field with the specified tag.
      *
      * @param tag the tag
@@ -149,6 +167,24 @@ public class FIXMessage {
         for (int i = 0; i < count; i++) {
             if (tags[i] == tag)
                 return i;
+        }
+
+        return -1;
+    }
+
+    /**
+     * Get the index of the first instance of a field with the specified tag,
+     * starting at the specified index.
+     *
+     * @param tag the tag
+     * @param fromIndex the index to start the search from
+     * @return the index or -1 if there are no instances of a field with the
+     *   specified tag
+     */
+    public int indexOf(int tag, int fromIndex) {
+        for (; fromIndex < count; fromIndex++) {
+            if (tags[fromIndex] == tag)
+                return fromIndex;
         }
 
         return -1;
