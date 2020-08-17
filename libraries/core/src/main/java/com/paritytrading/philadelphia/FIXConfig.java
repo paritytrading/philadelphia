@@ -30,7 +30,7 @@ public class FIXConfig {
     private final long       outgoingMsgSeqNum;
     private final int        maxFieldCount;
     private final int        fieldCapacity;
-    private final int        chunkSize;
+    private final int        blockSize;
     private final int        rxBufferCapacity;
     private final int        txBufferCapacity;
     private final boolean    checkSumEnabled;
@@ -46,7 +46,7 @@ public class FIXConfig {
      * @param outgoingMsgSeqNum the outgoing MsgSeqNum(34)
      * @param maxFieldCount the maximum number of fields in a message
      * @param fieldCapacity the field capacity
-     * @param chunkSize the backing store chunk size
+     * @param blockSize the backing store block size
      * @param rxBufferCapacity the receive buffer capacity
      * @param txBufferCapacity the transmit buffer capacity
      * @param checkSumEnabled the incoming CheckSum(10) check status
@@ -55,7 +55,7 @@ public class FIXConfig {
     public FIXConfig(FIXVersion version, String senderCompId,
             String targetCompId, int heartBtInt,
             long incomingMsgSeqNum, long outgoingMsgSeqNum,
-            int maxFieldCount, int fieldCapacity, int chunkSize,
+            int maxFieldCount, int fieldCapacity, int blockSize,
             int rxBufferCapacity, int txBufferCapacity,
             boolean checkSumEnabled) {
         this.version           = version;
@@ -66,7 +66,7 @@ public class FIXConfig {
         this.outgoingMsgSeqNum = outgoingMsgSeqNum;
         this.maxFieldCount     = maxFieldCount;
         this.fieldCapacity     = fieldCapacity;
-        this.chunkSize         = chunkSize;
+        this.blockSize         = blockSize;
         this.rxBufferCapacity  = rxBufferCapacity;
         this.txBufferCapacity  = txBufferCapacity;
         this.checkSumEnabled   = checkSumEnabled;
@@ -145,12 +145,12 @@ public class FIXConfig {
     }
 
     /**
-     * Get the backing store chunk size.
+     * Get the backing store block size.
      *
-     * @return the backing store chunk size
+     * @return the backing store block size
      */
-    public int getChunkSize() {
-        return chunkSize;
+    public int getBlockSize() {
+        return blockSize;
     }
 
     /**
@@ -216,7 +216,7 @@ public class FIXConfig {
      *   <li>outgoing MsgSeqNum(34): 1</li>
      *   <li>maximum number of fields in a message: 64</li>
      *   <li>field capacity: 64</li>
-     *   <li>backing store chunk size: 4096</li>
+     *   <li>backing store block size: 4096</li>
      *   <li>receive buffer capacity: 1024</li>
      *   <li>transmit buffer capacity: 1024</li>
      *   <li>incoming CheckSum(10) check status: enabled</li>
@@ -232,7 +232,7 @@ public class FIXConfig {
         private long       outgoingMsgSeqNum;
         private int        maxFieldCount;
         private int        fieldCapacity;
-        private int        chunkSize;
+        private int        blockSize;
         private int        rxBufferCapacity;
         private int        txBufferCapacity;
         private boolean    checkSumEnabled;
@@ -249,7 +249,7 @@ public class FIXConfig {
             outgoingMsgSeqNum = 1;
             maxFieldCount     = 64;
             fieldCapacity     = 64;
-            chunkSize         = 4096;
+            blockSize         = 4096;
             rxBufferCapacity  = 1024;
             txBufferCapacity  = 1024;
             checkSumEnabled   = true;
@@ -352,13 +352,13 @@ public class FIXConfig {
         }
 
         /**
-         * Set the chunk size.
+         * Set the block size.
          *
-         * @param chunkSize the chunk size
+         * @param blockSize the block size
          * @return this instance
          */
-        public Builder setChunkSize(int chunkSize) {
-            this.chunkSize = chunkSize;
+        public Builder setBlockSize(int blockSize) {
+            this.blockSize = blockSize;
 
             return this;
         }
@@ -408,7 +408,7 @@ public class FIXConfig {
         public FIXConfig build() {
             return new FIXConfig(version, senderCompId, targetCompId,
                     heartBtInt, incomingMsgSeqNum, outgoingMsgSeqNum,
-                    maxFieldCount, fieldCapacity, chunkSize,
+                    maxFieldCount, fieldCapacity, blockSize,
                     rxBufferCapacity, txBufferCapacity,
                     checkSumEnabled);
         }

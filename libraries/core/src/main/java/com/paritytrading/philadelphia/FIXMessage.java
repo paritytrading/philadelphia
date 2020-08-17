@@ -41,7 +41,7 @@ public class FIXMessage {
      * @param config the message configuration
      */
     public FIXMessage(FIXConfig config) {
-        this(config.getMaxFieldCount(), config.getFieldCapacity(), config.getChunkSize());
+        this(config.getMaxFieldCount(), config.getFieldCapacity(), config.getBlockSize());
     }
 
     /**
@@ -51,7 +51,7 @@ public class FIXMessage {
      * @param fieldCapacity the field capacity
      */
     public FIXMessage(int maxFieldCount, int fieldCapacity) {
-        this(maxFieldCount, fieldCapacity, DEFAULTS.getChunkSize());
+        this(maxFieldCount, fieldCapacity, DEFAULTS.getBlockSize());
     }
 
     /**
@@ -59,22 +59,22 @@ public class FIXMessage {
      *
      * @param maxFieldCount the maximum number of fields
      * @param fieldCapacity the field capacity
-     * @param chunkSize the backing store chunk size
+     * @param blockSize the backing store block size
      */
-    public FIXMessage(int maxFieldCount, int fieldCapacity, int chunkSize) {
+    public FIXMessage(int maxFieldCount, int fieldCapacity, int blockSize) {
         tags = new int[maxFieldCount];
 
         values = new FIXValue[maxFieldCount];
 
-        byte[] bytes = new byte[chunkSize];
+        byte[] bytes = new byte[blockSize];
 
         int start = 0;
 
         for (int i = 0; i < values.length; i++) {
             int end = start + fieldCapacity;
 
-            if (end > chunkSize) {
-                bytes = new byte[chunkSize];
+            if (end > blockSize) {
+                bytes = new byte[blockSize];
 
                 start = 0;
                 end   = fieldCapacity;
