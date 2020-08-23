@@ -17,6 +17,7 @@ package com.paritytrading.philadelphia;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import org.joda.time.MutableDateTime;
 import org.junit.Before;
@@ -256,6 +257,18 @@ public class FIXValueTest {
         get("FOO\u0001");
 
         assertEquals("FOO", value.asString());
+    }
+
+    @Test
+    public void asStringToAppendable() throws FIXValueOverflowException,
+           IOException {
+        get("FOO\u0001");
+
+        StringBuilder s = new StringBuilder();
+
+        value.asString((Appendable)s);
+
+        assertEquals("FOO", s.toString());
     }
 
     @Test

@@ -18,6 +18,7 @@ package com.paritytrading.philadelphia;
 import static com.paritytrading.philadelphia.FIX.*;
 import static java.nio.charset.StandardCharsets.*;
 
+import java.io.IOException;
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 import java.nio.ReadOnlyBufferException;
@@ -344,6 +345,18 @@ public class FIXValue {
      */
     public String asString() {
         return new String(bytes, offset, length, US_ASCII);
+    }
+
+    /**
+     * Get the value as a string. The value is appended to the provided
+     * appendable.
+     *
+     * @param x an appendable
+     * @throws IOException if an I/O error occurs
+     */
+    public void asString(Appendable x) throws IOException {
+        for (int i = 0; i < length; i++)
+            x.append((char)bytes[offset + i]);
     }
 
     /**
