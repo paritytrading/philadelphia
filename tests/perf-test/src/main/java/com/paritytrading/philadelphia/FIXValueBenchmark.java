@@ -22,6 +22,8 @@ import org.openjdk.jmh.annotations.Setup;
 
 public class FIXValueBenchmark extends FIXBenchmark {
 
+    private static final byte[] FOO = { 'F', 'O', 'O', };
+
     private StringBuilder string;
 
     private MutableDateTime date;
@@ -87,6 +89,16 @@ public class FIXValueBenchmark extends FIXBenchmark {
 
     @Benchmark
     public void baseline() {
+    }
+
+    @Benchmark
+    public boolean contentEqualsByteArray() {
+        return stringValue.contentEquals(FOO);
+    }
+
+    @Benchmark
+    public boolean contentEqualsCharSequence() {
+        return stringValue.contentEquals("FOO");
     }
 
     @Benchmark

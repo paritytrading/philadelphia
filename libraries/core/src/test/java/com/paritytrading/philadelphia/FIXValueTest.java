@@ -25,6 +25,10 @@ import org.junit.Test;
 
 public class FIXValueTest {
 
+    private static final byte F = 'F';
+
+    private static final byte[] FOO = { 'F', 'O', 'O', };
+
     private FIXValue value;
 
     @Before
@@ -82,6 +86,62 @@ public class FIXValueTest {
         get("FOO\u0001");
 
         assertPutEquals("FOO\u0001");
+    }
+
+    @Test
+    public void contentEqualsByte() {
+        value.setString("F");
+
+        assertTrue(value.contentEquals(F));
+    }
+
+    @Test
+    public void contentDoesNotEqualByte() {
+        value.setString("FOO");
+
+        assertFalse(value.contentEquals(F));
+    }
+
+    @Test
+    public void contentEqualsByteArray() {
+        value.setString("FOO");
+
+        assertTrue(value.contentEquals(FOO));
+    }
+
+    @Test
+    public void contentDoesNotEqualByteArray() {
+        value.setString("F");
+
+        assertFalse(value.contentEquals(FOO));
+    }
+
+    @Test
+    public void contentEqualsChar() {
+        value.setInt(1);
+
+        assertTrue(value.contentEquals('1'));
+    }
+
+    @Test
+    public void contentDoesNotEqualChar() {
+        value.setInt(123);
+
+        assertFalse(value.contentEquals('1'));
+    }
+
+    @Test
+    public void contentEqualsCharSequence() {
+        value.setInt(123);
+
+        assertTrue(value.contentEquals("123"));
+    }
+
+    @Test
+    public void contentDoesNotEqualCharSequence() {
+        value.setInt(1);
+
+        assertFalse(value.contentEquals("123"));
     }
 
     @Test

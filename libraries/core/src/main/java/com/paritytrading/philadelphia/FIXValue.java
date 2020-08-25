@@ -93,6 +93,74 @@ public class FIXValue {
     }
 
     /**
+     * Compare the string representation of this value to the specified
+     * character.
+     *
+     * @param x the character to compare the string representation of this
+     *   value against
+     * @return true if this value represents the same string as the specified
+     *   character, otherwise false
+     */
+    public boolean contentEquals(byte x) {
+        return length == 1 && bytes[offset] == x;
+    }
+
+    /**
+     * Compare the string representation of this value to the specified
+     * character sequence.
+     *
+     * @param x the character sequence to compare the string representation of
+     *   this value against
+     * @return true if this value represents the same string as the specified
+     *   character sequence, otherwise false
+     */
+    public boolean contentEquals(byte[] x) {
+        if (length != x.length)
+            return false;
+
+        for (int i = 0; i < length; i++) {
+            if (bytes[offset + i] != x[i])
+                return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Compare the string representation of this value to the specified
+     * character.
+     *
+     * @param x the character to compare the string representation of this
+     *   value against
+     * @return true if this value represents the same string as the specified
+     *   character, otherwise false
+     */
+    public boolean contentEquals(char x) {
+        return length == 1 && bytes[offset] == x;
+    }
+
+    /**
+     * Compare the string representation of this value to the specified
+     * character sequence.
+     *
+     * @param x the character sequence to compare the string representation of
+     *   this value against
+     * @return true if this value represents the same string as the specified
+     *   character, otherwise false
+     */
+    public boolean contentEquals(CharSequence x) {
+        if (length != x.length())
+            return false;
+
+        for (int i = 0; i < length; i++) {
+            if (bytes[offset + i] != x.charAt(i))
+                return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Copy the value to a byte array.
      *
      * @param bytes a byte array
