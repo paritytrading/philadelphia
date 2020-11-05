@@ -17,6 +17,7 @@ import os.path
 import sys
 
 from . import model
+from . import orchestra
 from . import quickfix
 from . import repository
 
@@ -61,7 +62,16 @@ def read_dialect(config, module, path):
 
 
 def read_module(path):
-    return repository if os.path.isdir(path) else quickfix
+    if os.path.isdir(path):
+        return repository
+    if 'fixr:repository' in read(path):
+        return orchestra
+    return quickfix
+
+
+def read(path):
+    with open(path, 'r') as infile:
+        return infile.read()
 
 
 COMMANDS = {
