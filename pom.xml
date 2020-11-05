@@ -71,6 +71,7 @@
     <module>libraries/fix50</module>
     <module>libraries/fix50sp1</module>
     <module>libraries/fix50sp2</module>
+    <module>libraries/fixlatest</module>
     <module>libraries/fixt11</module>
     <module>tests/perf-test</module>
   </modules>
