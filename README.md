@@ -30,8 +30,8 @@ Philadelphia contains the following libraries:
 - [**FIX 4.2**](libraries/fix42), [**FIX 4.3**](libraries/fix43),
   [**FIX 4.4**](libraries/fix44), [**FIX 5.0**](libraries/fix50),
   [**FIX 5.0 SP1**](libraries/fix50sp1),
-  [**FIX 5.0 SP2**](libraries/fix50sp2), and
-  [**FIXT 1.1**](libraries/fixt11) implement the FIX protocol versions.
+  [**FIX 5.0 SP2**](libraries/fix50sp2), [**FIX Latest**](libraries/fixlatest),
+  and [**FIXT 1.1**](libraries/fixt11) implement the FIX protocol versions.
 
 See the [FIX Trading Community][] for the protocol specifications and
 [Philadelphia Extras][] for additional FIX dialects.
