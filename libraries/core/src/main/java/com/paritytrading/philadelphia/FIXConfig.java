@@ -141,11 +141,21 @@ public class FIXConfig {
     }
 
     /**
+     * Get the buffer capacity.
+     *
+     * @return the buffer capacity
+     */
+    public int getBufferCapacity() {
+        return Math.max(rxBufferCapacity, txBufferCapacity);
+    }
+
+    /**
      * Get the receive buffer capacity.
      *
      * @return the receive buffer capacity
+     * @deprecated Use {@link #getBufferCapacity()} instead.
      */
-
+    @Deprecated
     public int getRxBufferCapacity() {
         return rxBufferCapacity;
     }
@@ -154,7 +164,9 @@ public class FIXConfig {
      * Get the transmit buffer capacity.
      *
      * @return the transmit buffer capacity
+     * @deprecated Use {@link #getBufferCapacity()} instead.
      */
+    @Deprecated
     public int getTxBufferCapacity() {
         return txBufferCapacity;
     }
@@ -336,11 +348,26 @@ public class FIXConfig {
         }
 
         /**
+         * Set the buffer capacity.
+         *
+         * @param bufferCapacity the buffer capacity
+         * @return this instance
+         */
+        public Builder setBufferCapacity(int bufferCapacity) {
+            this.rxBufferCapacity = bufferCapacity;
+            this.txBufferCapacity = bufferCapacity;
+
+            return this;
+        }
+
+        /**
          * Set the receive buffer capacity.
          *
          * @param rxBufferCapacity the receive buffer capacity
          * @return this instance
+         * @deprecated Use {@link #setBufferCapacity(int)} instead.
          */
+        @Deprecated
         public Builder setRxBufferCapacity(int rxBufferCapacity) {
             this.rxBufferCapacity = rxBufferCapacity;
 
@@ -352,7 +379,9 @@ public class FIXConfig {
          *
          * @param txBufferCapacity the transmit buffer capacity
          * @return this instance
+         * @deprecated Use {@link #setBufferCapacity(int)} instead.
          */
+        @Deprecated
         public Builder setTxBufferCapacity(int txBufferCapacity) {
             this.txBufferCapacity = txBufferCapacity;
 

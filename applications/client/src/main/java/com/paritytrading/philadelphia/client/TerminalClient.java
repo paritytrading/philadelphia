@@ -204,8 +204,7 @@ class TerminalClient implements Closeable {
             .setHeartBtInt(heartBtInt)
             .setMaxFieldCount(1024)
             .setFieldCapacity(1024)
-            .setRxBufferCapacity(1024 * 1024)
-            .setTxBufferCapacity(1024 * 1024);
+            .setBufferCapacity(1024 * 1024);
 
         TerminalClient.open(new InetSocketAddress(address, port), builder.build()).run(lines);
     }
