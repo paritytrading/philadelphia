@@ -283,20 +283,37 @@ public class FIXValue {
      * @param x an integer
      */
     public void setInt(long x) {
+        if (x < 0) {
+            setNegativeInt(x);
+            return;
+        }
+
         int i = end;
 
         bytes[--i] = SOH;
 
-        long y = Math.abs(x);
+        do {
+            bytes[--i] = (byte)('0' + x % 10);
+
+            x /= 10;
+        } while (x > 0);
+
+        offset = i;
+        length = end - offset - 1;
+    }
+
+    private void setNegativeInt(long x) {
+        int i = end;
+
+        bytes[--i] = SOH;
 
         do {
-            bytes[--i] = (byte)('0' + y % 10);
+            bytes[--i] = (byte)('0' - x % 10);
 
-            y /= 10;
-        } while (y > 0);
+            x /= 10;
+        } while (x < 0);
 
-        if (x < 0)
-            bytes[--i] = '-';
+        bytes[--i] = '-';
 
         offset = i;
         length = end - offset - 1;
