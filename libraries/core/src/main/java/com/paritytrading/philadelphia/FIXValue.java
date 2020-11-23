@@ -53,6 +53,8 @@ public class FIXValue {
 
     private final byte[] bytes;
 
+    private final int end;
+
     private int offset;
     private int length;
 
@@ -63,6 +65,8 @@ public class FIXValue {
      */
     public FIXValue(int capacity) {
         bytes = new byte[capacity];
+
+        end = capacity;
 
         bytes[0] = SOH;
 
@@ -279,11 +283,11 @@ public class FIXValue {
      * @param x an integer
      */
     public void setInt(long x) {
-        bytes[bytes.length - 1] = SOH;
+        bytes[end - 1] = SOH;
 
         long y = Math.abs(x);
 
-        int i = bytes.length - 2;
+        int i = end - 2;
 
         do {
             bytes[i--] = (byte)('0' + y % 10);
@@ -295,7 +299,7 @@ public class FIXValue {
             bytes[i--] = '-';
 
         offset = i + 1;
-        length = bytes.length - 1 - offset;
+        length = end - 1 - offset;
     }
 
     /**
@@ -378,11 +382,11 @@ public class FIXValue {
      * @see #asFloat
      */
     public void setFloat(double x, int decimals) {
-        bytes[bytes.length - 1] = SOH;
+        bytes[end - 1] = SOH;
 
         long y = Math.round(POWERS_OF_TEN[decimals] * Math.abs(x));
 
-        int i = bytes.length - 2;
+        int i = end - 2;
 
         for (int j = 0; j < decimals; j++) {
             bytes[i--] = (byte)('0' + y % 10);
@@ -403,7 +407,7 @@ public class FIXValue {
             bytes[i--] = '-';
 
         offset = i + 1;
-        length = bytes.length - 1 - offset;
+        length = end - 1 - offset;
     }
 
     /**
@@ -641,7 +645,7 @@ public class FIXValue {
             if (b == SOH)
                 return true;
 
-            if (++length == bytes.length)
+            if (++length == end)
                 tooLongValue();
         }
 
