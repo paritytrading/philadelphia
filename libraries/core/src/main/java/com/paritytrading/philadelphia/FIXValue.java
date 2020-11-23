@@ -283,23 +283,23 @@ public class FIXValue {
      * @param x an integer
      */
     public void setInt(long x) {
-        bytes[end - 1] = SOH;
+        int i = end;
+
+        bytes[--i] = SOH;
 
         long y = Math.abs(x);
 
-        int i = end - 2;
-
         do {
-            bytes[i--] = (byte)('0' + y % 10);
+            bytes[--i] = (byte)('0' + y % 10);
 
             y /= 10;
         } while (y > 0);
 
         if (x < 0)
-            bytes[i--] = '-';
+            bytes[--i] = '-';
 
-        offset = i + 1;
-        length = end - 1 - offset;
+        offset = i;
+        length = end - offset - 1;
     }
 
     /**
