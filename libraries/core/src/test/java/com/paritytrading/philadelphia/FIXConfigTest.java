@@ -15,13 +15,13 @@
  */
 package com.paritytrading.philadelphia;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class FIXConfigTest {
+class FIXConfigTest {
 
     @SuppressWarnings("resource")
     @Test
-    public void fixt11() {
+    void fixt11() {
         FIXConfig config = new FIXConfig.Builder()
                 .setVersion(FIXVersion.FIXT_1_1)
                 .build();

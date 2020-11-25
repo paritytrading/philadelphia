@@ -15,15 +15,15 @@
  */
 package com.paritytrading.philadelphia;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import org.joda.time.MutableDateTime;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class FIXValueTest {
+class FIXValueTest {
 
     private static final byte F = 'F';
 
@@ -31,13 +31,13 @@ public class FIXValueTest {
 
     private FIXValue value;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         value = new FIXValue(32);
     }
 
     @Test
-    public void byteAt() {
+    void byteAt() {
         value.setString("FOO");
 
         byte[] bytes = new byte[value.length()];
@@ -49,7 +49,7 @@ public class FIXValueTest {
     }
 
     @Test
-    public void copyTo() {
+    void copyTo() {
         value.setInt(123);
 
         byte[] bytes = new byte[6];
@@ -60,7 +60,7 @@ public class FIXValueTest {
     }
 
     @Test
-    public void setWithoutOffset() {
+    void setWithoutOffset() {
         FIXValue anotherValue = new FIXValue(32);
 
         anotherValue.setString("FOO");
@@ -71,7 +71,7 @@ public class FIXValueTest {
     }
 
     @Test
-    public void setWithOffset() {
+    void setWithOffset() {
         FIXValue anotherValue = new FIXValue(32);
 
         anotherValue.setInt(123);
@@ -82,245 +82,245 @@ public class FIXValueTest {
     }
 
     @Test
-    public void get() throws FIXValueOverflowException {
+    void get() throws FIXValueOverflowException {
         get("FOO\u0001");
 
         assertPutEquals("FOO\u0001");
     }
 
     @Test
-    public void contentEqualsByte() {
+    void contentEqualsByte() {
         value.setString("F");
 
         assertTrue(value.contentEquals(F));
     }
 
     @Test
-    public void contentDoesNotEqualByte() {
+    void contentDoesNotEqualByte() {
         value.setString("FOO");
 
         assertFalse(value.contentEquals(F));
     }
 
     @Test
-    public void contentEqualsByteArray() {
+    void contentEqualsByteArray() {
         value.setString("FOO");
 
         assertTrue(value.contentEquals(FOO));
     }
 
     @Test
-    public void contentDoesNotEqualByteArray() {
+    void contentDoesNotEqualByteArray() {
         value.setString("F");
 
         assertFalse(value.contentEquals(FOO));
     }
 
     @Test
-    public void contentEqualsChar() {
+    void contentEqualsChar() {
         value.setInt(1);
 
         assertTrue(value.contentEquals('1'));
     }
 
     @Test
-    public void contentDoesNotEqualChar() {
+    void contentDoesNotEqualChar() {
         value.setInt(123);
 
         assertFalse(value.contentEquals('1'));
     }
 
     @Test
-    public void contentEqualsCharSequence() {
+    void contentEqualsCharSequence() {
         value.setInt(123);
 
         assertTrue(value.contentEquals("123"));
     }
 
     @Test
-    public void contentDoesNotEqualCharSequence() {
+    void contentDoesNotEqualCharSequence() {
         value.setInt(1);
 
         assertFalse(value.contentEquals("123"));
     }
 
     @Test
-    public void asBoolean() throws FIXValueOverflowException {
+    void asBoolean() throws FIXValueOverflowException {
         get("Y\u0001");
 
         assertTrue(value.asBoolean());
     }
 
     @Test
-    public void setBoolean() {
+    void setBoolean() {
         value.setBoolean(false);
 
         assertPutEquals("N\u0001");
     }
 
-    @Test(expected=FIXValueFormatException.class)
-    public void notBoolean() {
+    @Test
+    void notBoolean() {
         value.setString("FOO");
 
-        value.asBoolean();
+        assertThrows(FIXValueFormatException.class, () -> value.asBoolean());
     }
 
     @Test
-    public void asChar() throws FIXValueOverflowException {
+    void asChar() throws FIXValueOverflowException {
         get("Y\u0001");
 
         assertEquals('Y', value.asChar());
     }
 
     @Test
-    public void setChar() {
+    void setChar() {
         value.setChar('Y');
 
         assertPutEquals("Y\u0001");
     }
 
-    @Test(expected=FIXValueFormatException.class)
-    public void notChar() {
+    @Test
+    void notChar() {
         value.setString("FOO");
 
-        value.asChar();
+        assertThrows(FIXValueFormatException.class, () -> value.asChar());
     }
 
     @Test
-    public void asInt() throws FIXValueOverflowException {
+    void asInt() throws FIXValueOverflowException {
         get("123\u0001");
 
         assertEquals(123, value.asInt());
     }
 
     @Test
-    public void setInt() {
+    void setInt() {
         value.setInt(123);
 
         assertPutEquals("123\u0001");
     }
 
-    @Test(expected=FIXValueFormatException.class)
-    public void notInt() {
+    @Test
+    void notInt() {
         value.setString("FOO");
 
-        value.asInt();
+        assertThrows(FIXValueFormatException.class, () -> value.asInt());
     }
 
     @Test
-    public void asZeroInt() throws FIXValueOverflowException {
+    void asZeroInt() throws FIXValueOverflowException {
         get("0\u0001");
 
         assertEquals(0, value.asInt());
     }
 
     @Test
-    public void setZeroInt() {
+    void setZeroInt() {
         value.setInt(0);
 
         assertPutEquals("0\u0001");
     }
 
     @Test
-    public void asNegativeInt() throws FIXValueOverflowException {
+    void asNegativeInt() throws FIXValueOverflowException {
         get("-123\u0001");
 
         assertEquals(-123, value.asInt());
     }
 
     @Test
-    public void setNegativeInt() {
+    void setNegativeInt() {
         value.setInt(-123);
 
         assertPutEquals("-123\u0001");
     }
 
     @Test
-    public void asFloat() throws FIXValueOverflowException {
+    void asFloat() throws FIXValueOverflowException {
         get("12.50\u0001");
 
         assertEquals(12.50, value.asFloat(), 0.01);
     }
 
     @Test
-    public void setFloat() {
+    void setFloat() {
         value.setFloat(12.50, 2);
 
         assertPutEquals("12.50\u0001");
     }
 
-    @Test(expected=FIXValueFormatException.class)
-    public void notFloat() {
+    @Test
+    void notFloat() {
         value.setString("FOO");
 
-        value.asFloat();
+        assertThrows(FIXValueFormatException.class, () -> value.asFloat());
     }
 
     @Test
-    public void asZeroFloat() throws FIXValueOverflowException {
+    void asZeroFloat() throws FIXValueOverflowException {
         get("0.00\u0001");
 
         assertEquals(0.00, value.asFloat(), 0.01);
     }
 
     @Test
-    public void setZeroFloat() {
+    void setZeroFloat() {
         value.setFloat(0.00, 2);
 
         assertPutEquals("0.00\u0001");
     }
 
     @Test
-    public void asNegativeFloat() throws FIXValueOverflowException {
+    void asNegativeFloat() throws FIXValueOverflowException {
         get("-12.50\u0001");
 
         assertEquals(-12.50, value.asFloat(), 0.01);
     }
 
     @Test
-    public void setNegativeFloat() {
+    void setNegativeFloat() {
         value.setFloat(-12.50, 2);
 
         assertPutEquals("-12.50\u0001");
     }
 
     @Test
-    public void asFloatWithoutDecimals() throws FIXValueOverflowException {
+    void asFloatWithoutDecimals() throws FIXValueOverflowException {
         get("12\u0001");
 
         assertEquals(12.00, value.asFloat(), 0.01);
     }
 
     @Test
-    public void setFloatWithoutDecimals() {
+    void setFloatWithoutDecimals() {
         value.setFloat(12.00, 0);
 
         assertPutEquals("12\u0001");
     }
 
     @Test
-    public void setFloatWithRoundingDown() {
+    void setFloatWithRoundingDown() {
         value.setFloat(12.50, 2);
 
         assertPutEquals("12.50\u0001");
     }
 
     @Test
-    public void setFloatWithRoundingUp() {
+    void setFloatWithRoundingUp() {
         value.setFloat(12.505, 2);
 
         assertPutEquals("12.51\u0001");
     }
 
     @Test
-    public void asString() throws FIXValueOverflowException {
+    void asString() throws FIXValueOverflowException {
         get("FOO\u0001");
 
         assertEquals("FOO", value.asString());
     }
 
     @Test
-    public void asStringToAppendable() throws FIXValueOverflowException,
+    void asStringToAppendable() throws FIXValueOverflowException,
            IOException {
         get("FOO\u0001");
 
@@ -332,7 +332,7 @@ public class FIXValueTest {
     }
 
     @Test
-    public void asStringToStringBuilder() throws FIXValueOverflowException {
+    void asStringToStringBuilder() throws FIXValueOverflowException {
         get("FOO\u0001");
 
         StringBuilder s = new StringBuilder();
@@ -343,14 +343,14 @@ public class FIXValueTest {
     }
 
     @Test
-    public void setString() {
+    void setString() {
         value.setString("FOO");
 
         assertPutEquals("FOO\u0001");
     }
 
     @Test
-    public void asDate() throws FIXValueOverflowException {
+    void asDate() throws FIXValueOverflowException {
         get("20150924\u0001");
 
         MutableDateTime d = new MutableDateTime(1970, 1, 1, 9, 30, 5, 250);
@@ -361,14 +361,14 @@ public class FIXValueTest {
     }
 
     @Test
-    public void setDate() {
+    void setDate() {
         value.setDate(new MutableDateTime(2015, 9, 24, 0, 0, 0, 0));
 
         assertPutEquals("20150924\u0001");
     }
 
     @Test
-    public void asTimeOnlyWithMillis() throws FIXValueOverflowException {
+    void asTimeOnlyWithMillis() throws FIXValueOverflowException {
         get("09:30:05.250\u0001");
 
         MutableDateTime t = new MutableDateTime(2015, 9, 24, 22, 45, 10, 750);
@@ -379,7 +379,7 @@ public class FIXValueTest {
     }
 
     @Test
-    public void asTimeOnlyWithoutMillis() throws FIXValueOverflowException {
+    void asTimeOnlyWithoutMillis() throws FIXValueOverflowException {
         get("09:30:05\u0001");
 
         MutableDateTime t = new MutableDateTime(2015, 9, 24, 22, 45, 10, 750);
@@ -390,21 +390,21 @@ public class FIXValueTest {
     }
 
     @Test
-    public void setTimeOnlyWithMillis() {
+    void setTimeOnlyWithMillis() {
         value.setTimeOnly(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), true);
 
         assertPutEquals("09:30:05.250\u0001");
     }
 
     @Test
-    public void setTimeOnlyWithoutMillis() {
+    void setTimeOnlyWithoutMillis() {
         value.setTimeOnly(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), false);
 
         assertPutEquals("09:30:05\u0001");
     }
 
     @Test
-    public void asTimestampWithMillis() throws FIXValueOverflowException {
+    void asTimestampWithMillis() throws FIXValueOverflowException {
         get("20150924-09:30:05.250\u0001");
 
         MutableDateTime t = new MutableDateTime();
@@ -415,7 +415,7 @@ public class FIXValueTest {
     }
 
     @Test
-    public void asTimestampWithoutMillis() throws FIXValueOverflowException {
+    void asTimestampWithoutMillis() throws FIXValueOverflowException {
         get("20150924-09:30.05\u0001");
 
         MutableDateTime t = new MutableDateTime();
@@ -426,63 +426,63 @@ public class FIXValueTest {
     }
 
     @Test
-    public void setTimestampWithMillis() {
+    void setTimestampWithMillis() {
         value.setTimestamp(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), true);
 
         assertPutEquals("20150924-09:30:05.250\u0001");
     }
 
     @Test
-    public void setTimestampWithoutMillis() {
+    void setTimestampWithoutMillis() {
         value.setTimestamp(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), false);
 
         assertPutEquals("20150924-09:30:05\u0001");
     }
 
-    @Test(expected=FIXValueFormatException.class)
-    public void notTimestamp() {
+    @Test
+    void notTimestamp() {
         value.setString("FOO");
 
-        value.asTimestamp(new MutableDateTime());
+        assertThrows(FIXValueFormatException.class, () -> value.asTimestamp(new MutableDateTime()));
     }
 
     @SuppressWarnings("deprecation")
     @Test
-    public void asCheckSum() throws FIXValueOverflowException {
+    void asCheckSum() throws FIXValueOverflowException {
         get("064\u0001");
 
         assertEquals(64, value.asCheckSum());
     }
 
     @Test
-    public void setCheckSum() {
+    void setCheckSum() {
         value.setCheckSum(320);
 
         assertPutEquals("064\u0001");
     }
 
     @SuppressWarnings("deprecation")
-    @Test(expected=FIXValueFormatException.class)
-    public void notCheckSum() {
+    @Test
+    void notCheckSum() {
         value.setString("FOO");
 
-        value.asCheckSum();
-    }
-
-    @Test(expected=FIXValueOverflowException.class)
-    public void readOverflow() throws FIXValueOverflowException {
-        value.get(ByteBuffers.wrap("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
+        assertThrows(FIXValueFormatException.class, () -> value.asCheckSum());
     }
 
     @Test
-    public void print() {
+    void readOverflow() throws FIXValueOverflowException {
+        assertThrows(FIXValueOverflowException.class, () -> value.get(ByteBuffers.wrap("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")));
+    }
+
+    @Test
+    void print() {
         value.setString("FOO");
 
         assertEquals("FOO|", value.toString());
     }
 
     @Test
-    public void readPartial() throws FIXValueOverflowException {
+    void readPartial() throws FIXValueOverflowException {
         assertEquals(false, value.get(ByteBuffers.wrap("foo")));
     }
 

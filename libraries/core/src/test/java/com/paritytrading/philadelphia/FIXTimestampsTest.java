@@ -15,15 +15,15 @@
  */
 package com.paritytrading.philadelphia;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.joda.time.MutableDateTime;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class FIXTimestampsTest {
+class FIXTimestampsTest {
 
     @Test
-    public void append() {
+    void append() {
         MutableDateTime timestamp = new MutableDateTime(2015, 9, 1, 9, 30, 5, 250);
 
         StringBuilder builder = new StringBuilder();
