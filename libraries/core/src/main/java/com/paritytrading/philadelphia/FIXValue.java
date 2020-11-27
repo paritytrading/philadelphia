@@ -340,7 +340,7 @@ public class FIXValue {
      *
      * and
      *
-     *     -22&nbsp;&le;&nbsp;<i>e</i>&nbsp;&le;&nbsp;22.</p>
+     *     -17&nbsp;&le;&nbsp;<i>e</i>&nbsp;&le;&nbsp;2.</p>
      *
      * @return the value as a float
      * @throws FIXValueFormatException if the value is not a float

@@ -301,17 +301,143 @@ class FIXValueTest {
     }
 
     @Test
-    void asFloat() {
-        get("12.50\u0001");
+    void asFloatMinValue() {
+        get("-900719925474099100.0");
 
-        assertEquals(12.50, value.asFloat(), 0.01);
+        assertEquals(-900719925474099100.0, value.asFloat(), 0.1);
     }
 
     @Test
-    void setFloat() {
-        value.setFloat(12.50, 2);
+    void asFloatMinusTwelvePointThree() {
+        get("-12.3\u0001");
 
-        assertEquals("12.50\u0001", put());
+        assertEquals(-12.3, value.asFloat(), 0.001);
+    }
+
+    @Test
+    void asFloatMinusPi() {
+        get("-3.141592653589793");
+
+        assertEquals(-Math.PI, value.asFloat(), 1e-16);
+    }
+
+    @Test
+    void asFloatMinusOne() {
+        get("-1\u0001");
+
+        assertEquals(-1.0, value.asFloat(), 0.001);
+    }
+
+    @Test
+    void asFloatMinusOnePointZero() {
+        get("-1.0\u0001");
+
+        assertEquals(-1.0, value.asFloat(), 0.001);
+    }
+
+    @Test
+    void asFloatMinusZeroPointOne() {
+        get("-0.1\u0001");
+
+        assertEquals(-0.1, value.asFloat(), 0.001);
+    }
+
+    @Test
+    void asFloatMinusZeroPointZeroOne() {
+        get("-0.01\u0001");
+
+        assertEquals(-0.01, value.asFloat(), 0.001);
+    }
+
+    @Test
+    void asFloatMinusMinDecimal() {
+        get("-0.00000000000000001");
+
+        assertEquals(-1e-17, value.asFloat(), 1e-18);
+    }
+
+    @Test
+    void asFloatMinusZero() {
+        get("-0\u0001");
+
+        assertEquals(0.0, value.asFloat(), 0.001);
+    }
+
+    @Test
+    void asFloatMinusZeroPointZero() {
+        get("-0.0\u0001");
+
+        assertEquals(0.0, value.asFloat(), 0.001);
+    }
+
+    @Test
+    void asFloatZero() {
+        get("0\u0001");
+
+        assertEquals(0.0, value.asFloat(), 0.001);
+    }
+
+    @Test
+    void asFloatZeroPointZero() {
+        get("0.0\u0001");
+
+        assertEquals(0.0, value.asFloat(), 0.001);
+    }
+
+    @Test
+    void asFloatMinDecimal() {
+        get("0.00000000000000001");
+
+        assertEquals(1e-17, value.asFloat(), 1e-18);
+    }
+
+    @Test
+    void asFloatZeroPointZeroOne() {
+        get("0.01\u0001");
+
+        assertEquals(0.01, value.asFloat(), 0.001);
+    }
+
+    @Test
+    void asFloatZeroPointOne() {
+        get("0.1\u0001");
+
+        assertEquals(0.1, value.asFloat(), 0.001);
+    }
+
+    @Test
+    void asFloatOne() {
+        get("1\u0001");
+
+        assertEquals(1.0, value.asFloat(), 0.001);
+    }
+
+    @Test
+    void asFloatOnePointZero() {
+        get("1.0\u0001");
+
+        assertEquals(1.0, value.asFloat(), 0.001);
+    }
+
+    @Test
+    void asFloatPi() {
+        get("3.141592653589793");
+
+        assertEquals(Math.PI, value.asFloat(), 1e-16);
+    }
+
+    @Test
+    void asFloatTwelvePointThree() {
+        get("12.3\u0001");
+
+        assertEquals(12.3, value.asFloat(), 0.001);
+    }
+
+    @Test
+    void asFloatMaxValue() {
+        get("900719925474099100.0");
+
+        assertEquals(900719925474099100.0, value.asFloat(), 0.1);
     }
 
     @Test
@@ -322,10 +448,10 @@ class FIXValueTest {
     }
 
     @Test
-    void asZeroFloat() {
-        get("0.00\u0001");
+    void setFloat() {
+        value.setFloat(12.50, 2);
 
-        assertEquals(0.00, value.asFloat(), 0.01);
+        assertEquals("12.50\u0001", put());
     }
 
     @Test
@@ -336,24 +462,10 @@ class FIXValueTest {
     }
 
     @Test
-    void asNegativeFloat() {
-        get("-12.50\u0001");
-
-        assertEquals(-12.50, value.asFloat(), 0.01);
-    }
-
-    @Test
     void setNegativeFloat() {
         value.setFloat(-12.50, 2);
 
         assertEquals("-12.50\u0001", put());
-    }
-
-    @Test
-    void asFloatWithoutDecimals() {
-        get("12\u0001");
-
-        assertEquals(12.00, value.asFloat(), 0.01);
     }
 
     @Test
