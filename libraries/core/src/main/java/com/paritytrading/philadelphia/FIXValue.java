@@ -165,14 +165,14 @@ public class FIXValue {
     }
 
     /**
-     * Copy the value to a byte array.
+     * Copy the value to a destination byte array.
      *
-     * @param bytes a byte array
+     * @param dst a destination byte array
      * @throws IndexOutOfBoundsException if the length of the value is greater
-     *     than the length of the byte array
+     *     than the length of the destination byte array
      */
-    public void copyTo(byte[] bytes) {
-        System.arraycopy(this.bytes, this.offset, bytes, 0, this.length);
+    public void copyTo(byte[] dst) {
+        System.arraycopy(bytes, offset, dst, 0, length);
     }
 
     /**

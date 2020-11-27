@@ -107,11 +107,11 @@ class FIXValueTest {
     void copyTo() {
         value.setInt(123);
 
-        byte[] bytes = new byte[6];
+        byte[] dst = new byte[6];
 
-        value.copyTo(bytes);
+        value.copyTo(dst);
 
-        assertArrayEquals(new byte[] { '1', '2', '3', 0, 0, 0 }, bytes);
+        assertArrayEquals(new byte[] { '1', '2', '3', 0, 0, 0 }, dst);
     }
 
     @Test
