@@ -154,8 +154,14 @@ class FIXValueTest {
         assertThrows(FIXValueFormatException.class, () -> value.asBoolean());
     }
 
+    void setBooleanTrue() {
+        value.setBoolean(true);
+
+        assertEquals("Y\u0001", put());
+    }
+
     @Test
-    void setBoolean() {
+    void setBooleanFalse() {
         value.setBoolean(false);
 
         assertEquals("N\u0001", put());
