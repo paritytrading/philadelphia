@@ -134,24 +134,17 @@ class FIXValueTest {
     }
 
     @Test
-    void get() {
-        get("FOO\u0001");
-
-        assertEquals("FOO\u0001", put());
-    }
-
-    @Test
-    void asBoolean() {
+    void asBooleanTrue() {
         get("Y\u0001");
 
         assertTrue(value.asBoolean());
     }
 
     @Test
-    void setBoolean() {
-        value.setBoolean(false);
+    void asBooleanFalse() {
+        get("N\u0001");
 
-        assertEquals("N\u0001", put());
+        assertFalse(value.asBoolean());
     }
 
     @Test
@@ -159,6 +152,13 @@ class FIXValueTest {
         value.setString("FOO");
 
         assertThrows(FIXValueFormatException.class, () -> value.asBoolean());
+    }
+
+    @Test
+    void setBoolean() {
+        value.setBoolean(false);
+
+        assertEquals("N\u0001", put());
     }
 
     @Test
@@ -462,6 +462,13 @@ class FIXValueTest {
         value.setString("FOO");
 
         assertThrows(FIXValueFormatException.class, () -> value.asCheckSum());
+    }
+
+    @Test
+    void get() {
+        get("FOO\u0001");
+
+        assertEquals("FOO\u0001", put());
     }
 
     @Test
