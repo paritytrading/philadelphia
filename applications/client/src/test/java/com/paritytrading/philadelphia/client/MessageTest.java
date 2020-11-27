@@ -15,22 +15,22 @@
  */
 package com.paritytrading.philadelphia.client;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class MessageTest {
+class MessageTest {
 
     @Test
-    public void valid() {
+    void valid() {
         Message message = Message.get("35=1|1=foo|2=bar");
 
         assertEquals("35=1|1=foo|2=bar", message.toString());
     }
 
-    @Test(expected=IllegalArgumentException.class)
-    public void missingMsgType() {
-        Message.get("1=foo|2=bar");
+    @Test
+    void missingMsgType() {
+        assertThrows(IllegalArgumentException.class, () -> Message.get("1=foo|2=bar"));
     }
 
 }

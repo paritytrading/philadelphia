@@ -15,25 +15,25 @@
  */
 package com.paritytrading.philadelphia;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.nio.ByteBuffer;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class FIXTagsTest {
+class FIXTagsTest {
 
     @Test
-    public void get() {
+    void get() {
         assertEquals(123, FIXTags.get(ByteBuffers.wrap("123=")));
     }
 
     @Test
-    public void getPartial() {
+    void getPartial() {
         assertEquals(0, FIXTags.get(ByteBuffers.wrap("123")));
     }
 
     @Test
-    public void put() {
+    void put() {
         ByteBuffer buffer = ByteBuffer.allocateDirect(4);
 
         FIXTags.put(buffer, 123);

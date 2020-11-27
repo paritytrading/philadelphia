@@ -16,99 +16,99 @@
 package com.paritytrading.philadelphia;
 
 import static java.util.Arrays.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class FIXMessageParserTest {
+class FIXMessageParserTest {
 
     private FIXMessages messages;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         messages = new FIXMessages();
     }
 
     @Test
-    public void readPartialBeginStringTag() throws IOException {
+    void readPartialBeginStringTag() throws IOException {
         readPartial("8");
     }
 
     @Test
-    public void readPartialBeginStringValueMissing() throws IOException {
+    void readPartialBeginStringValueMissing() throws IOException {
         readPartial("8=");
     }
 
     @Test
-    public void readPartialBeginStringValue() throws IOException {
+    void readPartialBeginStringValue() throws IOException {
         readPartial("8=FIX");
     }
 
     @Test
-    public void readGarbledBeginString() throws IOException {
+    void readGarbledBeginString() throws IOException {
         readGarbledOrPartial("9=30\u00018=FIX.4.2\u0001", 10);
     }
 
     @Test
-    public void readPartialBodyLengthMissing() throws IOException {
+    void readPartialBodyLengthMissing() throws IOException {
         readPartial("8=FIX.4.2\u0001");
     }
 
     @Test
-    public void readPartialBodyLengthTag() throws IOException {
+    void readPartialBodyLengthTag() throws IOException {
         readPartial("8=FIX.4.2\u00019");
     }
 
     @Test
-    public void readPartialBodyLengthValueMissing() throws IOException {
+    void readPartialBodyLengthValueMissing() throws IOException {
         readPartial("8=FIX.4.2\u00019=");
     }
 
     @Test
-    public void readPartialBodyLengthValue() throws IOException {
+    void readPartialBodyLengthValue() throws IOException {
         readPartial("8=FIX.4.2\u00019=1");
     }
 
     @Test
-    public void readGarbledBodyLength() throws IOException {
+    void readGarbledBodyLength() throws IOException {
         readGarbledOrPartial("8=FIX.4.2\u00018=FIX.4.2\u0001", 10);
     }
 
     @Test
-    public void readPartialBody() throws IOException {
+    void readPartialBody() throws IOException {
         readPartial("8=FIX.4.2\u00019=5\u000135=");
     }
 
     @Test
-    public void readPartialCheckSumMissing() throws IOException {
+    void readPartialCheckSumMissing() throws IOException {
         readPartial("8=FIX.4.2\u00019=5\u000135=D\u0001");
     }
 
     @Test
-    public void readPartialCheckSumTag() throws IOException {
+    void readPartialCheckSumTag() throws IOException {
         readPartial("8=FIX.4.2\u00019=5\u000135=D\u000110");
     }
 
     @Test
-    public void readPartialCheckSumValueMissing() throws IOException {
+    void readPartialCheckSumValueMissing() throws IOException {
         readPartial("8=FIX.4.2\u00019=5\u000135=D\u000110=");
     }
 
     @Test
-    public void readPartialCheckSumValue() throws IOException {
+    void readPartialCheckSumValue() throws IOException {
         readPartial("8=FIX.4.2\u00019=5\u000135=D\u000110=0");
     }
 
     @Test
-    public void readGarbledCheckSum() throws IOException {
+    void readGarbledCheckSum() throws IOException {
         readGarbledOrPartial("8=FIX.4.2\u00019=5\u000135=D\u000110=000\u0001", 0);
     }
 
     @Test
-    public void readGarbledCheckSumCheckSumDisabled() throws IOException {
+    void readGarbledCheckSumCheckSumDisabled() throws IOException {
         ByteBuffer buffer = ByteBuffers.wrap("8=FIX.4.2\u00019=5\u000135=D\u000110=000\u0001");
 
         assertEquals(true, parse(buffer, false));
@@ -119,7 +119,7 @@ public class FIXMessageParserTest {
     }
 
     @Test
-    public void read() throws IOException {
+    void read() throws IOException {
         ByteBuffer buffer = ByteBuffers.wrap("8=FIX.4.2\u00019=5\u000135=D\u000110=181\u0001");
 
         assertEquals(true, parse(buffer, true));
@@ -130,7 +130,7 @@ public class FIXMessageParserTest {
     }
 
     @Test
-    public void readFixt11() throws IOException {
+    void readFixt11() throws IOException {
         ByteBuffer buffer = ByteBuffers.wrap("8=FIXT.1.1\u00019=5\u000135=D\u000110=005\u0001");
 
         assertEquals(true, parse(buffer, true));

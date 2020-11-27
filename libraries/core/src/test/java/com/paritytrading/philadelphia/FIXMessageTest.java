@@ -17,24 +17,24 @@ package com.paritytrading.philadelphia;
 
 import static com.paritytrading.philadelphia.fix42.FIX42Enumerations.*;
 import static com.paritytrading.philadelphia.fix42.FIX42Tags.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.nio.ByteBuffer;
 import org.joda.time.MutableDateTime;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class FIXMessageTest {
+class FIXMessageTest {
 
     private FIXMessage message;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         message = new FIXMessage(32, 32);
     }
 
     @Test
-    public void format() {
+    void format() {
         MutableDateTime timestamp = new MutableDateTime(2015, 9, 24, 9, 30, 5, 250);
 
         message.addField(ClOrdID).setString("123");
@@ -57,7 +57,7 @@ public class FIXMessageTest {
     }
 
     @Test
-    public void parse() {
+    void parse() {
         String input = "11=123|21=1|55=FOO|54=1|60=20150924-09:30:05.250|" +
                 "38=100|40=2|44=150.25|";
 
@@ -67,7 +67,7 @@ public class FIXMessageTest {
     }
 
     @Test
-    public void print() {
+    void print() {
         MutableDateTime timestamp = new MutableDateTime(2015, 9, 24, 9, 30, 5, 250);
 
         message.addField(ClOrdID).setString("123");
