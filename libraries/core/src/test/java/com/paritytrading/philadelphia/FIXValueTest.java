@@ -18,6 +18,7 @@ package com.paritytrading.philadelphia;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.ByteBuffer;
 import org.joda.time.MutableDateTime;
 import org.junit.jupiter.api.BeforeEach;
@@ -82,7 +83,7 @@ class FIXValueTest {
     }
 
     @Test
-    void get() throws FIXValueOverflowException {
+    void get() {
         get("FOO\u0001");
 
         assertPutEquals("FOO\u0001");
@@ -145,7 +146,7 @@ class FIXValueTest {
     }
 
     @Test
-    void asBoolean() throws FIXValueOverflowException {
+    void asBoolean() {
         get("Y\u0001");
 
         assertTrue(value.asBoolean());
@@ -166,7 +167,7 @@ class FIXValueTest {
     }
 
     @Test
-    void asChar() throws FIXValueOverflowException {
+    void asChar() {
         get("Y\u0001");
 
         assertEquals('Y', value.asChar());
@@ -187,7 +188,7 @@ class FIXValueTest {
     }
 
     @Test
-    void asInt() throws FIXValueOverflowException {
+    void asInt() {
         get("123\u0001");
 
         assertEquals(123, value.asInt());
@@ -208,7 +209,7 @@ class FIXValueTest {
     }
 
     @Test
-    void asZeroInt() throws FIXValueOverflowException {
+    void asZeroInt() {
         get("0\u0001");
 
         assertEquals(0, value.asInt());
@@ -222,7 +223,7 @@ class FIXValueTest {
     }
 
     @Test
-    void asNegativeInt() throws FIXValueOverflowException {
+    void asNegativeInt() {
         get("-123\u0001");
 
         assertEquals(-123, value.asInt());
@@ -236,7 +237,7 @@ class FIXValueTest {
     }
 
     @Test
-    void asFloat() throws FIXValueOverflowException {
+    void asFloat() {
         get("12.50\u0001");
 
         assertEquals(12.50, value.asFloat(), 0.01);
@@ -257,7 +258,7 @@ class FIXValueTest {
     }
 
     @Test
-    void asZeroFloat() throws FIXValueOverflowException {
+    void asZeroFloat() {
         get("0.00\u0001");
 
         assertEquals(0.00, value.asFloat(), 0.01);
@@ -271,7 +272,7 @@ class FIXValueTest {
     }
 
     @Test
-    void asNegativeFloat() throws FIXValueOverflowException {
+    void asNegativeFloat() {
         get("-12.50\u0001");
 
         assertEquals(-12.50, value.asFloat(), 0.01);
@@ -285,7 +286,7 @@ class FIXValueTest {
     }
 
     @Test
-    void asFloatWithoutDecimals() throws FIXValueOverflowException {
+    void asFloatWithoutDecimals() {
         get("12\u0001");
 
         assertEquals(12.00, value.asFloat(), 0.01);
@@ -313,15 +314,14 @@ class FIXValueTest {
     }
 
     @Test
-    void asString() throws FIXValueOverflowException {
+    void asString() {
         get("FOO\u0001");
 
         assertEquals("FOO", value.asString());
     }
 
     @Test
-    void asStringToAppendable() throws FIXValueOverflowException,
-           IOException {
+    void asStringToAppendable() throws IOException {
         get("FOO\u0001");
 
         StringBuilder s = new StringBuilder();
@@ -332,7 +332,7 @@ class FIXValueTest {
     }
 
     @Test
-    void asStringToStringBuilder() throws FIXValueOverflowException {
+    void asStringToStringBuilder() {
         get("FOO\u0001");
 
         StringBuilder s = new StringBuilder();
@@ -350,7 +350,7 @@ class FIXValueTest {
     }
 
     @Test
-    void asDate() throws FIXValueOverflowException {
+    void asDate() {
         get("20150924\u0001");
 
         MutableDateTime d = new MutableDateTime(1970, 1, 1, 9, 30, 5, 250);
@@ -368,7 +368,7 @@ class FIXValueTest {
     }
 
     @Test
-    void asTimeOnlyWithMillis() throws FIXValueOverflowException {
+    void asTimeOnlyWithMillis() {
         get("09:30:05.250\u0001");
 
         MutableDateTime t = new MutableDateTime(2015, 9, 24, 22, 45, 10, 750);
@@ -379,7 +379,7 @@ class FIXValueTest {
     }
 
     @Test
-    void asTimeOnlyWithoutMillis() throws FIXValueOverflowException {
+    void asTimeOnlyWithoutMillis() {
         get("09:30:05\u0001");
 
         MutableDateTime t = new MutableDateTime(2015, 9, 24, 22, 45, 10, 750);
@@ -404,7 +404,7 @@ class FIXValueTest {
     }
 
     @Test
-    void asTimestampWithMillis() throws FIXValueOverflowException {
+    void asTimestampWithMillis() {
         get("20150924-09:30:05.250\u0001");
 
         MutableDateTime t = new MutableDateTime();
@@ -415,7 +415,7 @@ class FIXValueTest {
     }
 
     @Test
-    void asTimestampWithoutMillis() throws FIXValueOverflowException {
+    void asTimestampWithoutMillis() {
         get("20150924-09:30.05\u0001");
 
         MutableDateTime t = new MutableDateTime();
@@ -448,7 +448,7 @@ class FIXValueTest {
 
     @SuppressWarnings("deprecation")
     @Test
-    void asCheckSum() throws FIXValueOverflowException {
+    void asCheckSum() {
         get("064\u0001");
 
         assertEquals(64, value.asCheckSum());
@@ -470,7 +470,7 @@ class FIXValueTest {
     }
 
     @Test
-    void readOverflow() throws FIXValueOverflowException {
+    void readOverflow() {
         assertThrows(FIXValueOverflowException.class, () -> value.get(ByteBuffers.wrap("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")));
     }
 
@@ -482,12 +482,16 @@ class FIXValueTest {
     }
 
     @Test
-    void readPartial() throws FIXValueOverflowException {
-        assertEquals(false, value.get(ByteBuffers.wrap("foo")));
+    void readPartial() {
+        assertEquals(false, get("foo"));
     }
 
-    private void get(String s) throws FIXValueOverflowException {
-        value.get(ByteBuffers.wrap(s));
+    private boolean get(String s) {
+        try {
+            return value.get(ByteBuffers.wrap(s));
+        } catch (FIXValueOverflowException e) {
+            throw new UncheckedIOException(e);
+        }
     }
 
     private void assertPutEquals(String s) {
