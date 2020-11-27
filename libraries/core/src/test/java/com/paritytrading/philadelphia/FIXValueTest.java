@@ -39,14 +39,16 @@ class FIXValueTest {
 
     @Test
     void byteAt() {
-        value.setString("FOO");
+        value.setInt(123);
 
-        byte[] bytes = new byte[value.length()];
+        int length = value.length();
 
-        for (int i = 0; i < value.length(); i++)
+        byte[] bytes = new byte[length];
+
+        for (int i = 0; i < length; i++)
             bytes[i] = value.byteAt(i);
 
-        assertArrayEquals(new byte[] { 'F', 'O', 'O' }, bytes);
+        assertArrayEquals(new byte[] { '1', '2', '3' }, bytes);
     }
 
     @Test
