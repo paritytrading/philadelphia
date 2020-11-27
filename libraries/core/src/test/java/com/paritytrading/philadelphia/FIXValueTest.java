@@ -189,17 +189,59 @@ class FIXValueTest {
     }
 
     @Test
-    void asInt() {
+    void asIntMinValue() {
+        get("-9223372036854775808\u0001");
+
+        assertEquals(Long.MIN_VALUE, value.asInt());
+    }
+
+    @Test
+    void asIntMinusOneHundredTwentyThree() {
+        get("-123\u0001");
+
+        assertEquals(-123, value.asInt());
+    }
+
+    @Test
+    void asIntMinusOne() {
+        get("-1\u0001");
+
+        assertEquals(-1, value.asInt());
+    }
+
+    @Test
+    void asIntMinusZero() {
+        get("-0\u0001");
+
+        assertEquals(0, value.asInt());
+    }
+
+    @Test
+    void asIntZero() {
+        get("0\u0001");
+
+        assertEquals(0, value.asInt());
+    }
+
+    @Test
+    void asIntOne() {
+        get("1\u0001");
+
+        assertEquals(1, value.asInt());
+    }
+
+    @Test
+    void asIntOneHundredTwentyThree() {
         get("123\u0001");
 
         assertEquals(123, value.asInt());
     }
 
     @Test
-    void setInt() {
-        value.setInt(123);
+    void asIntMaxValue() {
+        get("9223372036854775807\u0001");
 
-        assertEquals("123\u0001", put());
+        assertEquals(Long.MAX_VALUE, value.asInt());
     }
 
     @Test
@@ -210,10 +252,10 @@ class FIXValueTest {
     }
 
     @Test
-    void asZeroInt() {
-        get("0\u0001");
+    void setInt() {
+        value.setInt(123);
 
-        assertEquals(0, value.asInt());
+        assertEquals("123\u0001", put());
     }
 
     @Test
@@ -221,13 +263,6 @@ class FIXValueTest {
         value.setInt(0);
 
         assertEquals("0\u0001", put());
-    }
-
-    @Test
-    void asNegativeInt() {
-        get("-123\u0001");
-
-        assertEquals(-123, value.asInt());
     }
 
     @Test
