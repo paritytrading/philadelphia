@@ -486,9 +486,9 @@ class FIXValueTest {
         assertEquals(false, get("foo"));
     }
 
-    private boolean get(String s) {
+    private boolean get(String text) {
         try {
-            return value.get(ByteBuffers.wrap(s));
+            return value.get(ByteBuffers.wrap(text));
         } catch (FIXValueOverflowException e) {
             throw new UncheckedIOException(e);
         }
