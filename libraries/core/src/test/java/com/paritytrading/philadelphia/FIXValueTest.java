@@ -26,10 +26,6 @@ import org.junit.jupiter.api.Test;
 
 class FIXValueTest {
 
-    private static final byte F = 'F';
-
-    private static final byte[] FOO = { 'F', 'O', 'O', };
-
     private FIXValue value;
 
     @BeforeEach
@@ -49,6 +45,62 @@ class FIXValueTest {
             bytes[i] = value.byteAt(i);
 
         assertArrayEquals(new byte[] { '1', '2', '3' }, bytes);
+    }
+
+    @Test
+    void contentEqualsByte() {
+        value.setInt(1);
+
+        assertTrue(value.contentEquals((byte)'1'));
+    }
+
+    @Test
+    void contentDoesNotEqualByte() {
+        value.setString("FOO");
+
+        assertFalse(value.contentEquals((byte)'F'));
+    }
+
+    @Test
+    void contentEqualsByteArray() {
+        value.setInt(123);
+
+        assertTrue(value.contentEquals(new byte[] { '1', '2', '3' }));
+    }
+
+    @Test
+    void contentDoesNotEqualByteArray() {
+        value.setString("F");
+
+        assertFalse(value.contentEquals(new byte[] { 'F', 'O', 'O' }));
+    }
+
+    @Test
+    void contentEqualsChar() {
+        value.setInt(1);
+
+        assertTrue(value.contentEquals('1'));
+    }
+
+    @Test
+    void contentDoesNotEqualChar() {
+        value.setString("FOO");
+
+        assertFalse(value.contentEquals('F'));
+    }
+
+    @Test
+    void contentEqualsCharSequence() {
+        value.setInt(123);
+
+        assertTrue(value.contentEquals("123"));
+    }
+
+    @Test
+    void contentDoesNotEqualCharSequence() {
+        value.setString("F");
+
+        assertFalse(value.contentEquals("FOO"));
     }
 
     @Test
@@ -89,62 +141,6 @@ class FIXValueTest {
         get("FOO\u0001");
 
         assertEquals("FOO\u0001", put());
-    }
-
-    @Test
-    void contentEqualsByte() {
-        value.setString("F");
-
-        assertTrue(value.contentEquals(F));
-    }
-
-    @Test
-    void contentDoesNotEqualByte() {
-        value.setString("FOO");
-
-        assertFalse(value.contentEquals(F));
-    }
-
-    @Test
-    void contentEqualsByteArray() {
-        value.setString("FOO");
-
-        assertTrue(value.contentEquals(FOO));
-    }
-
-    @Test
-    void contentDoesNotEqualByteArray() {
-        value.setString("F");
-
-        assertFalse(value.contentEquals(FOO));
-    }
-
-    @Test
-    void contentEqualsChar() {
-        value.setInt(1);
-
-        assertTrue(value.contentEquals('1'));
-    }
-
-    @Test
-    void contentDoesNotEqualChar() {
-        value.setInt(123);
-
-        assertFalse(value.contentEquals('1'));
-    }
-
-    @Test
-    void contentEqualsCharSequence() {
-        value.setInt(123);
-
-        assertTrue(value.contentEquals("123"));
-    }
-
-    @Test
-    void contentDoesNotEqualCharSequence() {
-        value.setInt(1);
-
-        assertFalse(value.contentEquals("123"));
     }
 
     @Test
