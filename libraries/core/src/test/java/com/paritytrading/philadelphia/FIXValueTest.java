@@ -175,17 +175,17 @@ class FIXValueTest {
     }
 
     @Test
-    void setChar() {
-        value.setChar('Y');
-
-        assertEquals("Y\u0001", put());
-    }
-
-    @Test
     void notChar() {
         value.setString("FOO");
 
         assertThrows(FIXValueFormatException.class, () -> value.asChar());
+    }
+
+    @Test
+    void setChar() {
+        value.setChar('Y');
+
+        assertEquals("Y\u0001", put());
     }
 
     @Test
