@@ -115,6 +115,14 @@ class FIXValueTest {
     }
 
     @Test
+    void reset() {
+        value.setString("FOO");
+        value.reset();
+
+        assertEquals(0, value.length());
+    }
+
+    @Test
     void setWithoutOffset() {
         FIXValue anotherValue = new FIXValue(32);
 
