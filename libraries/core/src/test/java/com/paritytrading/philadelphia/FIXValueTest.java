@@ -448,45 +448,171 @@ class FIXValueTest {
     }
 
     @Test
-    void setFloat() {
-        value.setFloat(12.50, 2);
+    void setFloatMinValue() {
+        value.setFloat(-900719925474099100.0, 0);
 
-        assertEquals("12.50\u0001", put());
+        assertEquals("-900719925474099072\u0001", put());
     }
 
     @Test
-    void setZeroFloat() {
-        value.setFloat(0.00, 2);
+    void setFloatMinusTwelvePointThree() {
+        value.setFloat(-12.3, 1);
 
-        assertEquals("0.00\u0001", put());
+        assertEquals("-12.3\u0001", put());
     }
 
     @Test
-    void setNegativeFloat() {
-        value.setFloat(-12.50, 2);
+    void setFloatMinusPi() {
+        value.setFloat(-Math.PI, 15);
 
-        assertEquals("-12.50\u0001", put());
+        assertEquals("-3.141592653589793\u0001", put());
     }
 
     @Test
-    void setFloatWithoutDecimals() {
-        value.setFloat(12.00, 0);
+    void setFloatMinusPiWithFourDecimals() {
+        value.setFloat(-Math.PI, 4);
 
-        assertEquals("12\u0001", put());
+        assertEquals("-3.1416\u0001", put());
     }
 
     @Test
-    void setFloatWithRoundingDown() {
-        value.setFloat(12.50, 2);
+    void setFloatMinusPiWithThreeDecimals() {
+        value.setFloat(-Math.PI, 3);
 
-        assertEquals("12.50\u0001", put());
+        assertEquals("-3.142\u0001", put());
     }
 
     @Test
-    void setFloatWithRoundingUp() {
-        value.setFloat(12.505, 2);
+    void setFloatMinusPiWithTwoDecimals() {
+        value.setFloat(-Math.PI, 2);
 
-        assertEquals("12.51\u0001", put());
+        assertEquals("-3.14\u0001", put());
+    }
+
+    @Test
+    void setFloatMinusOne() {
+        value.setFloat(-1.0, 0);
+
+        assertEquals("-1\u0001", put());
+    }
+
+    @Test
+    void setFloatMinusOnePointZero() {
+        value.setFloat(-1.0, 1);
+
+        assertEquals("-1.0\u0001", put());
+    }
+
+    @Test
+    void setFloatMinusZeroPointOne() {
+        value.setFloat(-0.1, 1);
+
+        assertEquals("-0.1\u0001", put());
+    }
+
+    @Test
+    void setFloatMinusZeroPointZeroOne() {
+        value.setFloat(-0.01, 2);
+
+        assertEquals("-0.01\u0001", put());
+    }
+
+    @Test
+    void setFloatMinusMinDecimal() {
+        value.setFloat(-0.00000000000000001, 17);
+
+        assertEquals("-0.00000000000000001\u0001", put());
+    }
+
+    @Test
+    void setFloatZero() {
+        value.setFloat(0.0, 0);
+
+        assertEquals("0\u0001", put());
+    }
+
+    @Test
+    void setFloatZeroPointZero() {
+        value.setFloat(0.0, 1);
+
+        assertEquals("0.0\u0001", put());
+    }
+
+    @Test
+    void setFloatMinDecimal() {
+        value.setFloat(0.00000000000000001, 17);
+
+        assertEquals("0.00000000000000001\u0001", put());
+    }
+
+    @Test
+    void setFloatZeroPointZeroOne() {
+        value.setFloat(0.01, 2);
+
+        assertEquals("0.01\u0001", put());
+    }
+
+    @Test
+    void setFloatZeroPointOne() {
+        value.setFloat(0.1, 1);
+
+        assertEquals("0.1\u0001", put());
+    }
+
+    @Test
+    void setFloatOne() {
+        value.setFloat(1.0, 0);
+
+        assertEquals("1\u0001", put());
+    }
+
+    @Test
+    void setFloatOnePointZero() {
+        value.setFloat(1.0, 1);
+
+        assertEquals("1.0\u0001", put());
+    }
+
+    @Test
+    void setFloatPiWithTwoDecimals() {
+        value.setFloat(Math.PI, 2);
+
+        assertEquals("3.14\u0001", put());
+    }
+
+    @Test
+    void setFloatPiWithThreeDecimals() {
+        value.setFloat(Math.PI, 3);
+
+        assertEquals("3.142\u0001", put());
+    }
+
+    @Test
+    void setFloatPiWithFourDecimals() {
+        value.setFloat(Math.PI, 4);
+
+        assertEquals("3.1416\u0001", put());
+    }
+
+    @Test
+    void setFloatPi() {
+        value.setFloat(Math.PI, 15);
+
+        assertEquals("3.141592653589793\u0001", put());
+    }
+
+    @Test
+    void setFloatTwelvePointThree() {
+        value.setFloat(12.3, 1);
+
+        assertEquals("12.3\u0001", put());
+    }
+
+    @Test
+    void setFloatMaxValue() {
+        value.setFloat(900719925474099100.0, 0);
+
+        assertEquals("900719925474099072\u0001", put());
     }
 
     @Test
