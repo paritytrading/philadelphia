@@ -68,7 +68,7 @@ class FIXValueTest {
 
         value.set(anotherValue);
 
-        assertPutEquals("FOO\u0001");
+        assertEquals("FOO\u0001", put());
     }
 
     @Test
@@ -79,14 +79,14 @@ class FIXValueTest {
 
         value.set(anotherValue);
 
-        assertPutEquals("123\u0001");
+        assertEquals("123\u0001", put());
     }
 
     @Test
     void get() {
         get("FOO\u0001");
 
-        assertPutEquals("FOO\u0001");
+        assertEquals("FOO\u0001", put());
     }
 
     @Test
@@ -156,7 +156,7 @@ class FIXValueTest {
     void setBoolean() {
         value.setBoolean(false);
 
-        assertPutEquals("N\u0001");
+        assertEquals("N\u0001", put());
     }
 
     @Test
@@ -177,7 +177,7 @@ class FIXValueTest {
     void setChar() {
         value.setChar('Y');
 
-        assertPutEquals("Y\u0001");
+        assertEquals("Y\u0001", put());
     }
 
     @Test
@@ -198,7 +198,7 @@ class FIXValueTest {
     void setInt() {
         value.setInt(123);
 
-        assertPutEquals("123\u0001");
+        assertEquals("123\u0001", put());
     }
 
     @Test
@@ -219,7 +219,7 @@ class FIXValueTest {
     void setZeroInt() {
         value.setInt(0);
 
-        assertPutEquals("0\u0001");
+        assertEquals("0\u0001", put());
     }
 
     @Test
@@ -233,7 +233,7 @@ class FIXValueTest {
     void setNegativeInt() {
         value.setInt(-123);
 
-        assertPutEquals("-123\u0001");
+        assertEquals("-123\u0001", put());
     }
 
     @Test
@@ -247,7 +247,7 @@ class FIXValueTest {
     void setFloat() {
         value.setFloat(12.50, 2);
 
-        assertPutEquals("12.50\u0001");
+        assertEquals("12.50\u0001", put());
     }
 
     @Test
@@ -268,7 +268,7 @@ class FIXValueTest {
     void setZeroFloat() {
         value.setFloat(0.00, 2);
 
-        assertPutEquals("0.00\u0001");
+        assertEquals("0.00\u0001", put());
     }
 
     @Test
@@ -282,7 +282,7 @@ class FIXValueTest {
     void setNegativeFloat() {
         value.setFloat(-12.50, 2);
 
-        assertPutEquals("-12.50\u0001");
+        assertEquals("-12.50\u0001", put());
     }
 
     @Test
@@ -296,21 +296,21 @@ class FIXValueTest {
     void setFloatWithoutDecimals() {
         value.setFloat(12.00, 0);
 
-        assertPutEquals("12\u0001");
+        assertEquals("12\u0001", put());
     }
 
     @Test
     void setFloatWithRoundingDown() {
         value.setFloat(12.50, 2);
 
-        assertPutEquals("12.50\u0001");
+        assertEquals("12.50\u0001", put());
     }
 
     @Test
     void setFloatWithRoundingUp() {
         value.setFloat(12.505, 2);
 
-        assertPutEquals("12.51\u0001");
+        assertEquals("12.51\u0001", put());
     }
 
     @Test
@@ -346,7 +346,7 @@ class FIXValueTest {
     void setString() {
         value.setString("FOO");
 
-        assertPutEquals("FOO\u0001");
+        assertEquals("FOO\u0001", put());
     }
 
     @Test
@@ -364,7 +364,7 @@ class FIXValueTest {
     void setDate() {
         value.setDate(new MutableDateTime(2015, 9, 24, 0, 0, 0, 0));
 
-        assertPutEquals("20150924\u0001");
+        assertEquals("20150924\u0001", put());
     }
 
     @Test
@@ -393,14 +393,14 @@ class FIXValueTest {
     void setTimeOnlyWithMillis() {
         value.setTimeOnly(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), true);
 
-        assertPutEquals("09:30:05.250\u0001");
+        assertEquals("09:30:05.250\u0001", put());
     }
 
     @Test
     void setTimeOnlyWithoutMillis() {
         value.setTimeOnly(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), false);
 
-        assertPutEquals("09:30:05\u0001");
+        assertEquals("09:30:05\u0001", put());
     }
 
     @Test
@@ -429,14 +429,14 @@ class FIXValueTest {
     void setTimestampWithMillis() {
         value.setTimestamp(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), true);
 
-        assertPutEquals("20150924-09:30:05.250\u0001");
+        assertEquals("20150924-09:30:05.250\u0001", put());
     }
 
     @Test
     void setTimestampWithoutMillis() {
         value.setTimestamp(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), false);
 
-        assertPutEquals("20150924-09:30:05\u0001");
+        assertEquals("20150924-09:30:05\u0001", put());
     }
 
     @Test
@@ -458,7 +458,7 @@ class FIXValueTest {
     void setCheckSum() {
         value.setCheckSum(320);
 
-        assertPutEquals("064\u0001");
+        assertEquals("064\u0001", put());
     }
 
     @SuppressWarnings("deprecation")
@@ -494,13 +494,13 @@ class FIXValueTest {
         }
     }
 
-    private void assertPutEquals(String s) {
-        ByteBuffer buffer = ByteBuffer.allocateDirect(s.length());
+    private String put() {
+        ByteBuffer buffer = ByteBuffer.allocateDirect(value.length() + 1);
 
         value.put(buffer);
         buffer.flip();
 
-        assertEquals(s, ByteBuffers.getString(buffer));
+        return ByteBuffers.getString(buffer);
     }
 
 }
