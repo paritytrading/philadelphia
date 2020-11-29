@@ -623,25 +623,27 @@ class FIXValueTest {
     }
 
     @Test
-    void asStringToAppendable() throws IOException {
+    void asStringWithAppendable() throws IOException {
         get("FOO\u0001");
 
-        StringBuilder s = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
 
-        value.asString((Appendable)s);
+        Appendable appendable = builder;
 
-        assertEquals("FOO", s.toString());
+        value.asString(appendable);
+
+        assertEquals("FOO", builder.toString());
     }
 
     @Test
-    void asStringToStringBuilder() {
+    void asStringWithStringBuilder() {
         get("FOO\u0001");
 
-        StringBuilder s = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
 
-        value.asString(s);
+        value.asString(builder);
 
-        assertEquals("FOO", s.toString());
+        assertEquals("FOO", builder.toString());
     }
 
     @Test
