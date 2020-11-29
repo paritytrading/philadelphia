@@ -53,6 +53,8 @@ public class FIXValue {
 
     private final byte[] bytes;
 
+    private final int end;
+
     private int offset;
     private int length;
 
@@ -63,6 +65,8 @@ public class FIXValue {
      */
     public FIXValue(int capacity) {
         bytes = new byte[capacity];
+
+        end = capacity;
 
         bytes[0] = SOH;
 
@@ -279,23 +283,40 @@ public class FIXValue {
      * @param x an integer
      */
     public void setInt(long x) {
-        bytes[bytes.length - 1] = SOH;
+        if (x < 0) {
+            setNegativeInt(x);
+            return;
+        }
 
-        long y = Math.abs(x);
+        int i = end;
 
-        int i = bytes.length - 2;
+        bytes[--i] = SOH;
 
         do {
-            bytes[i--] = (byte)('0' + y % 10);
+            bytes[--i] = (byte)('0' + x % 10);
 
-            y /= 10;
-        } while (y > 0);
+            x /= 10;
+        } while (x > 0);
 
-        if (x < 0)
-            bytes[i--] = '-';
+        offset = i;
+        length = end - offset - 1;
+    }
 
-        offset = i + 1;
-        length = bytes.length - 1 - offset;
+    private void setNegativeInt(long x) {
+        int i = end;
+
+        bytes[--i] = SOH;
+
+        do {
+            bytes[--i] = (byte)('0' - x % 10);
+
+            x /= 10;
+        } while (x < 0);
+
+        bytes[--i] = '-';
+
+        offset = i;
+        length = end - offset - 1;
     }
 
     /**
@@ -378,32 +399,62 @@ public class FIXValue {
      * @see #asFloat
      */
     public void setFloat(double x, int decimals) {
-        bytes[bytes.length - 1] = SOH;
+        if (x < 0.0) {
+            setNegativeFloat(x, decimals);
+            return;
+        }
 
-        long y = Math.round(POWERS_OF_TEN[decimals] * Math.abs(x));
+        int i = end;
 
-        int i = bytes.length - 2;
+        bytes[--i] = SOH;
+
+        long y = Math.round(POWERS_OF_TEN[decimals] * x);
 
         for (int j = 0; j < decimals; j++) {
-            bytes[i--] = (byte)('0' + y % 10);
+            bytes[--i] = (byte)('0' + y % 10);
 
             y /= 10;
         }
 
         if (decimals > 0)
-            bytes[i--] = '.';
+            bytes[--i] = '.';
 
         do {
-            bytes[i--] = (byte)('0' + y % 10);
+            bytes[--i] = (byte)('0' + y % 10);
 
             y /= 10;
         } while (y > 0);
 
-        if (x < 0)
-            bytes[i--] = '-';
+        offset = i;
+        length = end - offset - 1;
+    }
 
-        offset = i + 1;
-        length = bytes.length - 1 - offset;
+    private void setNegativeFloat(double x, int decimals) {
+        int i = end;
+
+        bytes[--i] = SOH;
+
+        long y = Math.round(POWERS_OF_TEN[decimals] * -x);
+
+        for (int j = 0; j < decimals; j++) {
+            bytes[--i] = (byte)('0' + y % 10);
+
+            y /= 10;
+        }
+
+        if (decimals > 0)
+            bytes[--i] = '.';
+
+        do {
+            bytes[--i] = (byte)('0' + y % 10);
+
+            y /= 10;
+        } while (y > 0);
+
+        bytes[--i] = '-';
+
+        offset = i;
+        length = end - offset - 1;
     }
 
     /**
@@ -641,7 +692,7 @@ public class FIXValue {
             if (b == SOH)
                 return true;
 
-            if (++length == bytes.length)
+            if (++length == end)
                 tooLongValue();
         }
 
