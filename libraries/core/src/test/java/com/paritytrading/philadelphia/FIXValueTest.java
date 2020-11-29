@@ -665,6 +665,13 @@ class FIXValueTest {
     }
 
     @Test
+    void notDate() {
+        value.setString("FOO");
+
+        assertThrows(FIXValueFormatException.class, () -> value.asDate(new MutableDateTime()));
+    }
+
+    @Test
     void setDate() {
         value.setDate(new MutableDateTime(2015, 9, 24, 0, 0, 0, 0));
 
