@@ -744,6 +744,13 @@ class FIXValueTest {
     }
 
     @Test
+    void notTimestamp() {
+        value.setString("FOO");
+
+        assertThrows(FIXValueFormatException.class, () -> value.asTimestamp(new MutableDateTime()));
+    }
+
+    @Test
     void setTimestampWithMillis() {
         value.setTimestamp(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), true);
 
@@ -755,13 +762,6 @@ class FIXValueTest {
         value.setTimestamp(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), false);
 
         assertEquals("20150924-09:30:05\u0001", put());
-    }
-
-    @Test
-    void notTimestamp() {
-        value.setString("FOO");
-
-        assertThrows(FIXValueFormatException.class, () -> value.asTimestamp(new MutableDateTime()));
     }
 
     @SuppressWarnings("deprecation")
