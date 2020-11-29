@@ -789,13 +789,18 @@ class FIXValueTest {
 
     @Test
     void get() {
-        get("FOO\u0001");
+        get("FOO\u0001BAR\u0001");
 
         assertEquals("FOO\u0001", put());
     }
 
     @Test
-    void readOverflow() {
+    void getWithPartial() {
+        assertEquals(false, get("FOO"));
+    }
+
+    @Test
+    void getWithOverflow() {
         assertThrows(FIXValueOverflowException.class, () -> value.get(ByteBuffers.wrap("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")));
     }
 
@@ -804,11 +809,6 @@ class FIXValueTest {
         value.setString("FOO");
 
         assertEquals("FOO|", value.toString());
-    }
-
-    @Test
-    void readPartial() {
-        assertEquals(false, get("foo"));
     }
 
     private boolean get(String text) {
