@@ -701,6 +701,13 @@ class FIXValueTest {
     }
 
     @Test
+    void notTimeOnly() {
+        value.setString("FOO");
+
+        assertThrows(FIXValueFormatException.class, () -> value.asTimeOnly(new MutableDateTime()));
+    }
+
+    @Test
     void setTimeOnlyWithMillis() {
         value.setTimeOnly(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), true);
 
