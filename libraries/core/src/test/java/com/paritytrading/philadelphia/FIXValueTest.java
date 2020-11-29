@@ -772,19 +772,19 @@ class FIXValueTest {
         assertEquals(64, value.asCheckSum());
     }
 
-    @Test
-    void setCheckSum() {
-        value.setCheckSum(320);
-
-        assertEquals("064\u0001", put());
-    }
-
     @SuppressWarnings("deprecation")
     @Test
     void notCheckSum() {
         value.setString("FOO");
 
         assertThrows(FIXValueFormatException.class, () -> value.asCheckSum());
+    }
+
+    @Test
+    void setCheckSum() {
+        value.setCheckSum(320);
+
+        assertEquals("064\u0001", put());
     }
 
     @Test
