@@ -31,9 +31,6 @@ public class FIXMessageParser {
 
     private final boolean checkSumEnabled;
 
-    private final FIXValue bodyLength;
-    private final FIXValue checkSum;
-
     /**
      * Create a message parser.
      *
@@ -46,9 +43,6 @@ public class FIXMessageParser {
         this.checkSumEnabled = config.isCheckSumEnabled();
 
         this.listener = listener;
-
-        this.bodyLength = new FIXValue(BODY_LENGTH_FIELD_CAPACITY);
-        this.checkSum   = new FIXValue(CHECK_SUM_FIELD_CAPACITY);
     }
 
     /**
@@ -97,8 +91,10 @@ public class FIXMessageParser {
             // Garbled message
             garbled = buffer.get() != '9' || buffer.get() != '=';
 
+            int bodyLength = getInt(buffer);
+
             // Partial message
-            if (!bodyLength.get(buffer)) {
+            if (bodyLength == -1) {
                 buffer.reset();
 
                 return false;
@@ -110,10 +106,8 @@ public class FIXMessageParser {
                 continue;
             }
 
-            int length = (int)bodyLength.asInt();
-
             // Partial message
-            if (buffer.remaining() < length + 7) {
+            if (buffer.remaining() < bodyLength + 7) {
                 buffer.reset();
 
                 return false;
@@ -121,18 +115,18 @@ public class FIXMessageParser {
 
             position = buffer.position();
 
-            if (checkSumEnabled && !acceptCheckSum(buffer, beginning, position, length))
+            if (checkSumEnabled && !acceptCheckSum(buffer, beginning, position, bodyLength))
                 continue;
 
             int limit = buffer.limit();
 
-            buffer.limit(position + length);
+            buffer.limit(position + bodyLength);
 
             // Garbled message
             garbled = message.get(buffer) == false;
 
             buffer.limit(limit);
-            buffer.position(position + length + 7);
+            buffer.position(position + bodyLength + 7);
 
             if (garbled)
                 continue;
@@ -143,13 +137,15 @@ public class FIXMessageParser {
         }
     }
 
-    private boolean acceptCheckSum(ByteBuffer buffer, int beginning, int position, int length) throws IOException {
-        buffer.position(position + length);
+    private boolean acceptCheckSum(ByteBuffer buffer, int beginning, int position, int bodyLength) throws IOException {
+        buffer.position(position + bodyLength);
 
         boolean garbled = buffer.get() != '1' || buffer.get() != '0' || buffer.get() != '=';
 
+        int checkSum = getInt(buffer);
+
         // Garbled message
-        if (!checkSum.get(buffer))
+        if (checkSum == -1)
             return false;
 
         // Garbled message
@@ -157,13 +153,27 @@ public class FIXMessageParser {
             return false;
 
         // Garbled message
-        if ((FIXCheckSums.sum(buffer, beginning, position - beginning + length) & 0xff)
-                != checkSum.asInt())
+        if ((FIXCheckSums.sum(buffer, beginning, position - beginning + bodyLength) & 0xff) != checkSum)
             return false;
 
         buffer.position(position);
 
         return true;
+    }
+
+    private static int getInt(ByteBuffer buffer) {
+        int value = 0;
+
+        while (buffer.hasRemaining()) {
+            byte b = buffer.get();
+
+            if (b == SOH)
+                return value;
+
+            value = 10 * value + b - '0';
+        }
+
+        return -1;
     }
 
     private static boolean skipValue(ByteBuffer buffer) {
