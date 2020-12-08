@@ -39,7 +39,7 @@ generate() {
     cat scripts/license.java > "$output_path"
 
     (cd applications/generate; \
-            python -m philadelphia.generate "$command" "$input_path" >> "../../$output_path")
+            python -m philadelphia.generate "$command" "../../$input_path" >> "../../$output_path")
 }
 
 generate_version() {
