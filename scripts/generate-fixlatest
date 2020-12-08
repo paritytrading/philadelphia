@@ -22,7 +22,7 @@
 #   https://www.fixtrading.org/standards/fix-orchestra/
 #
 # This script uses Philadelphia Code Generator and therefore requires Python
-# 3.5 or newer.
+# 3.6 or newer.
 #
 # As this repository already contains FIX Latest, you only need to run this
 # script if FIX Latest updates or you change Philadelphia Code Generator.
