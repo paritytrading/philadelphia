@@ -64,8 +64,9 @@ For more information on Philadelphia:
 
 - Follow [@paritytrading](https://twitter.com/paritytrading) on Twitter for
   news and announcements
-- Join [paritytrading/chat](https://gitter.im/paritytrading/chat) on Gitter
-  for discussions
+- Join [the community][GitHub Discussions] on GitHub for discussions
+
+  [GitHub Discussions]: https://github.com/paritytrading/philadelphia/discussions
 
 ## License
 
