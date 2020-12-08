@@ -31,7 +31,6 @@ public class FIXMessageParser {
 
     private final boolean checkSumEnabled;
 
-    private final FIXValue beginString;
     private final FIXValue bodyLength;
     private final FIXValue checkSum;
 
@@ -48,9 +47,8 @@ public class FIXMessageParser {
 
         this.listener = listener;
 
-        this.beginString = new FIXValue(BEGIN_STRING_FIELD_CAPACITY);
-        this.bodyLength  = new FIXValue(BODY_LENGTH_FIELD_CAPACITY);
-        this.checkSum    = new FIXValue(CHECK_SUM_FIELD_CAPACITY);
+        this.bodyLength = new FIXValue(BODY_LENGTH_FIELD_CAPACITY);
+        this.checkSum   = new FIXValue(CHECK_SUM_FIELD_CAPACITY);
     }
 
     /**
@@ -77,7 +75,7 @@ public class FIXMessageParser {
             garbled = buffer.get() != '8' || buffer.get() != '=';
 
             // Partial message
-            if (!beginString.get(buffer)) {
+            if (!skipValue(buffer)) {
                 buffer.reset();
 
                 return false;
@@ -166,6 +164,15 @@ public class FIXMessageParser {
         buffer.position(position);
 
         return true;
+    }
+
+    private static boolean skipValue(ByteBuffer buffer) {
+        while (buffer.hasRemaining()) {
+            if (buffer.get() == SOH)
+                return true;
+        }
+
+        return false;
     }
 
 }
