@@ -13,6 +13,7 @@ applications/generate/philadelphia/__init__.py
 applications/generate/philadelphia/generate.py
 applications/generate/philadelphia/java.py
 applications/generate/philadelphia/model.py
+applications/generate/philadelphia/orchestra.py
 applications/generate/philadelphia/quickfix.py
 applications/generate/philadelphia/repository.py
 applications/generate/pom.xml
@@ -28,6 +29,7 @@ libraries/fix44/README.md
 libraries/fix50/README.md
 libraries/fix50sp1/README.md
 libraries/fix50sp2/README.md
+libraries/fixlatest/README.md
 libraries/fixt11/README.md
 tests/perf-test/README.md
 tests/perf-test/philadelphia-perf-test.jar
