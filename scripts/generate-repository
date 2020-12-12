@@ -16,8 +16,8 @@
 #
 
 #
-# This script generates the FIX protocol versions from the FIX Repository. For
-# more information on the FIX Repository, see:
+# This script generates FIX protocol versions from the FIX Repository. For more
+# information on the FIX Repository, see:
 #
 #   https://www.fixtrading.org/standards/fix-repository/
 #
@@ -36,7 +36,7 @@ generate() {
     local input_path=$2
     local output_path=$3
 
-    cat scripts/license.java > "$output_path"
+    cat scripts/license-repository.java > "$output_path"
 
     (cd applications/generate; \
             python -m philadelphia.generate "$command" "../../$input_path" >> "../../$output_path")
