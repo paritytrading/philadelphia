@@ -317,7 +317,8 @@ public class FIXMessage {
         for (int i = 0; i < count; i++) {
             builder.append(tags[i]);
             builder.append('=');
-            values[i].toString(builder);
+            values[i].asString(builder);
+            builder.append('|');
         }
     }
 
