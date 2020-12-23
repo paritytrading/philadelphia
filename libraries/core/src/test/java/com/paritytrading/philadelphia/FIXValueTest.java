@@ -808,18 +808,7 @@ class FIXValueTest {
     void string() {
         value.setString("FOO");
 
-        assertEquals("FOO|", value.toString());
-    }
-
-    @Test
-    void stringWithStringBuilder() {
-        value.setString("FOO");
-
-        StringBuilder builder = new StringBuilder();
-
-        value.toString(builder);
-
-        assertEquals("FOO|", builder.toString());
+        assertEquals("FOO", value.toString());
     }
 
     private boolean get(String text) {

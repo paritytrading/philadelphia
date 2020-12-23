@@ -720,22 +720,7 @@ public class FIXValue {
      */
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-
-        toString(builder);
-
-        return builder.toString();
-    }
-
-    /**
-     * Appends a string representation of this value to the specified string
-     * builder.
-     *
-     * @param builder a string builder
-     */
-    public void toString(StringBuilder builder) {
-        asString(builder);
-        builder.append('|');
+        return asString();
     }
 
     private int getDigits(int digits, int offset) {
