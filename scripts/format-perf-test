@@ -1,0 +1,90 @@
+#!/usr/bin/env python3
+#
+# Copyright 2021 Philadelphia authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+#
+# This script formats Philadelphia Performance Test results as GitHub Flavored
+# Markdown (GFM) for the regression test in the release process.
+#
+# Run this script as follows:
+#
+#   ./scripts/format-perf-test baseline.json candidate.json
+#
+# Above, 'baseline.json' and 'candidate.json' refer to the machine-readable
+# results from Philadelphia Performance Test for the latest release and the
+# release candidate, respectively.
+#
+# To make Philadelphia Performance Test write machine-readable results to a
+# file, run it as follows:
+#
+#   java -jar philadelphia-perf-test.jar -rf json -rff <output-file>
+#
+
+import collections
+import json
+import os.path
+import sys
+
+
+Result = collections.namedtuple('Result', ['score', 'score_error'])
+
+
+def load(filename):
+    with open(filename, 'r') as infile:
+        return json.load(infile)
+
+
+def parse(data):
+    def name(item):
+        return '`{}`'.format(item['benchmark'].replace('com.paritytrading.philadelphia.', ''))
+    def result(item):
+        return Result(
+                score=item['primaryMetric']['score'],
+                score_error=item['primaryMetric']['scoreError'],
+            )
+    return {name(item): result(item) for item in data}
+
+
+def difference(candidate_result, baseline_result):
+    return candidate_result.score / baseline_result.score
+
+
+def status(candidate_result, baseline_result):
+    if candidate_result.score > baseline_result.score + baseline_result.score_error:
+        return ':exclamation:'
+    else:
+        return ':white_check_mark:'
+
+
+if len(sys.argv) != 3:
+    sys.exit('Usage: {} <baseline-file> <candidate-file>'.format(
+        os.path.basename(sys.argv[0])))
+
+baseline = parse(load(sys.argv[1]))
+candidate = parse(load(sys.argv[2]))
+
+benchmarks = sorted(set(baseline.keys()).intersection(set(candidate.keys())))
+
+max_benchmark_length = max(len(benchmark) for benchmark in benchmarks)
+
+print('{:<{}} | Baseline | Candidate | Status'.format('Benchmark', max_benchmark_length))
+print('{}-|---------:|----------:|:-----------------:'.format('-' * (max_benchmark_length)))
+
+for benchmark in benchmarks:
+    baseline_result = baseline[benchmark]
+    candidate_result = candidate[benchmark]
+    print('{:<{}} |     1.00 | {:>9.2f} | {}'.format(benchmark, max_benchmark_length,
+        difference(baseline_result, candidate_result), status(baseline_result, candidate_result)))
