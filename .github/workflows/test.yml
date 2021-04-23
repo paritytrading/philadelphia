@@ -28,6 +28,8 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Run tests
         run: mvn test
+      - name: Run Checkstyle
+        run: mvn checkstyle:check
   python:
     name: Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
