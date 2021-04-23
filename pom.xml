@@ -91,7 +91,7 @@
       <dependency>
         <groupId>joda-time</groupId>
         <artifactId>joda-time</artifactId>
-        <version>2.10.6</version> <!-- (mentioned in documentation) -->
+        <version>2.10.10</version> <!-- (mentioned in documentation) -->
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
