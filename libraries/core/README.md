@@ -15,7 +15,7 @@ dependency to it. For example:
 <dependency>
   <groupId>joda-time</groupId>
   <artifactId>joda-time</artifactId>
-  <version>2.10.6</version>
+  <version>2.10.10</version>
 </dependency>
 ```
 
