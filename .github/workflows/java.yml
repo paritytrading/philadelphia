@@ -1,0 +1,36 @@
+name: Java
+
+on:
+  push:
+    paths-ignore:
+      - 'applications/generate/**'
+  pull_request:
+    paths-ignore:
+      - 'applications/generate/**'
+
+jobs:
+  java:
+    name: ${{ matrix.java-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java-version:
+          - 8
+          - 11
+    steps:
+      - name: Check out GitHub repository
+        uses: actions/checkout@v2
+      - name: Set up Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java-version }}
+      - name: Cache Maven repository
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Run tests
+        run: mvn test
+      - name: Run Checkstyle
+        run: mvn checkstyle:check
