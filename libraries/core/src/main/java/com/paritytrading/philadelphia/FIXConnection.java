@@ -206,6 +206,10 @@ public class FIXConnection implements Closeable {
         return txMsgSeqNum;
     }
 
+    void setOutgoingMsgSeqNum(long outgoingMsgSeqNum) {
+        txMsgSeqNum = outgoingMsgSeqNum;
+    }
+
     /**
      * Get the SenderCompID(49).
      *
@@ -607,13 +611,16 @@ public class FIXConnection implements Closeable {
                 return;
             }
 
-            FIXValue endSeqNo = message.valueOf(EndSeqNo);
-            if (endSeqNo == null) {
+            FIXValue value = message.valueOf(EndSeqNo);
+            if (value == null) {
                 sendReject(message.getMsgSeqNum(), RequiredTagMissing, "EndSeqNo(16) not found");
                 return;
             }
 
-            sendSequenceReset(beginSeqNo, endSeqNo.asInt() + 1);
+            long endSeqNo = value.asInt();
+            long newSeqNo = endSeqNo == 0 ? txMsgSeqNum : endSeqNo + 1;
+
+            sendSequenceReset(beginSeqNo, newSeqNo);
         }
 
         private void handleReject(FIXMessage message) throws IOException {

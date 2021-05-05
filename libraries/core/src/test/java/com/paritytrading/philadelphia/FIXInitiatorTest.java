@@ -238,10 +238,21 @@ class FIXInitiatorTest {
     }
 
     @Test
-    void receiveResendRequest() throws IOException {
+    void receiveResendRequestWithNonZeroEndSeqNo() throws IOException {
         String request  = "35=2|34=1|7=2|16=4|";
         String response = "8=FIX.4.2|9=71|35=4|49=initiator|56=acceptor|34=2|" +
             "52=19700101-00:00:00.000|123=Y|36=5|10=231|";
+
+        acceptorRequestInitiatorResponse(request, response);
+    }
+
+    @Test
+    void receiveResendRequestWithZeroEndSeqNo() throws IOException {
+        initiator.setOutgoingMsgSeqNum(3);
+
+        String request  = "35=2|34=1|7=2|16=0|";
+        String response = "8=FIX.4.2|9=71|35=4|49=initiator|56=acceptor|34=2|" +
+            "52=19700101-00:00:00.000|123=Y|36=3|10=229|";
 
         acceptorRequestInitiatorResponse(request, response);
     }
