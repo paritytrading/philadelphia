@@ -239,7 +239,7 @@ class FIXInitiatorTest {
 
     @Test
     void receiveResendRequestWithNonZeroEndSeqNo() throws IOException {
-        initiator.setOutgoingMsgSeqNum(2);
+        initiator.setOutgoingMsgSeqNum(5);
 
         String request  = "35=2|34=1|7=2|16=4|";
         String response = "8=FIX.4.2|9=71|35=4|49=initiator|56=acceptor|34=2|" +
@@ -282,6 +282,17 @@ class FIXInitiatorTest {
         String request  = "35=2|34=1|7=2|16=0|";
         String response = "8=FIX.4.2|9=97|35=3|49=initiator|56=acceptor|34=1|" +
             "52=19700101-00:00:00.000|45=1|373=5|58=BeginSeqNo(7) too high|10=252|";
+
+        acceptorRequestInitiatorResponse(request, response);
+    }
+
+    @Test
+    void receiveResendRequestWithTooHighEndSeqNo() throws IOException {
+        initiator.setOutgoingMsgSeqNum(3);
+
+        String request  = "35=2|34=1|7=2|16=5|";
+        String response = "8=FIX.4.2|9=71|35=4|49=initiator|56=acceptor|34=2|" +
+            "52=19700101-00:00:00.000|123=Y|36=3|10=229|";
 
         acceptorRequestInitiatorResponse(request, response);
     }

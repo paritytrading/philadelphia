@@ -628,7 +628,7 @@ public class FIXConnection implements Closeable {
                 return;
             }
 
-            long newSeqNo = endSeqNo == 0 ? txMsgSeqNum : endSeqNo + 1;
+            long newSeqNo = endSeqNo == 0 ? txMsgSeqNum : Math.min(endSeqNo + 1, txMsgSeqNum);
 
             sendSequenceReset(beginSeqNo, newSeqNo);
         }
