@@ -206,6 +206,10 @@ public class FIXConnection implements Closeable {
         return txMsgSeqNum;
     }
 
+    void setOutgoingMsgSeqNum(long outgoingMsgSeqNum) {
+        txMsgSeqNum = outgoingMsgSeqNum;
+    }
+
     /**
      * Get the SenderCompID(49).
      *
@@ -601,19 +605,32 @@ public class FIXConnection implements Closeable {
         }
 
         private void handleResendRequest(FIXMessage message) throws IOException {
-            FIXValue beginSeqNo = message.valueOf(BeginSeqNo);
-            if (beginSeqNo == null) {
+            FIXValue value;
+
+            value = message.valueOf(BeginSeqNo);
+            if (value == null) {
                 sendReject(message.getMsgSeqNum(), RequiredTagMissing, "BeginSeqNo(7) not found");
                 return;
             }
 
-            FIXValue endSeqNo = message.valueOf(EndSeqNo);
-            if (endSeqNo == null) {
+            long beginSeqNo = value.asInt();
+
+            value = message.valueOf(EndSeqNo);
+            if (value == null) {
                 sendReject(message.getMsgSeqNum(), RequiredTagMissing, "EndSeqNo(16) not found");
                 return;
             }
 
-            sendSequenceReset(beginSeqNo, endSeqNo.asInt() + 1);
+            long endSeqNo = value.asInt();
+
+            if (beginSeqNo > txMsgSeqNum) {
+                sendReject(message.getMsgSeqNum(), ValueIsIncorrect, "BeginSeqNo(7) too high");
+                return;
+            }
+
+            long newSeqNo = endSeqNo == 0 ? txMsgSeqNum : Math.min(endSeqNo + 1, txMsgSeqNum);
+
+            sendSequenceReset(beginSeqNo, newSeqNo);
         }
 
         private void handleReject(FIXMessage message) throws IOException {
@@ -689,10 +706,10 @@ public class FIXConnection implements Closeable {
             send(txMessage);
         }
 
-        private void sendSequenceReset(FIXValue msgSeqNum, long newSeqNo) throws IOException {
+        private void sendSequenceReset(long msgSeqNum, long newSeqNo) throws IOException {
             prepare(txMessage, SequenceReset);
 
-            txMessage.valueOf(MsgSeqNum).set(msgSeqNum);
+            txMessage.valueOf(MsgSeqNum).setInt(msgSeqNum);
             txMessage.addField(GapFillFlag).setBoolean(true);
             txMessage.addField(NewSeqNo).setInt(newSeqNo);
 
