@@ -52,8 +52,8 @@ public class FIXTimestamps {
     }
 
     private static void setDigits(char[] buffer, int i, int offset, int digits) {
-        for (int j = offset + digits - 1; j >= offset; j--) {
-            buffer[j] = (char)('0' + i % 10);
+        while (digits-- > 0) {
+            buffer[offset + digits] = (char)('0' + i % 10);
 
             i /= 10;
         }
