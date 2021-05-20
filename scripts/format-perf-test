@@ -58,11 +58,11 @@ def parse(data):
     return {name(item): result(item) for item in data}
 
 
-def difference(candidate_result, baseline_result):
+def difference(baseline_result, candidate_result):
     return candidate_result.score / baseline_result.score
 
 
-def status(candidate_result, baseline_result):
+def status(baseline_result, candidate_result):
     if candidate_result.score > baseline_result.score + baseline_result.score_error:
         return ':exclamation:'
     else:
