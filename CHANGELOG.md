@@ -1,5 +1,78 @@
 # Release Notes
 
+## 1.3.0 (2021-05-21)
+
+- Improve `FIXValueTest` (Jussi Virtanen)
+
+  Make test cases that rely on the side effect of an attempt to read an
+  incomplete value from a buffer partially populating the value container to
+  actually read a complete value.
+
+  Improve test coverage for all `FIXValue` methods.
+
+- Optimize `FIXValue` (Jussi Virtanen)
+
+  Decrease the bytecode size of the `FIXValue#setDigits` method from 44 to 31
+  bytes, which is within HotSpot's default maximum inline size of 35 bytes.
+  This makes the following methods faster:
+
+  - `FIXValue#setCheckSum`
+  - `FIXValue#setDate`
+  - `FIXValue#setTimeOnly`
+  - `FIXValue#setTimestamp`
+
+  Decrease the bytecode size of the `FIXValue#setInt` method from 102 to 79
+  bytes, making it faster.
+
+  Decrease the bytecode size of the `FIXValue#setFloat` method from 177 to 161
+  bytes, making it faster.
+
+- Add `FIXMessage(FIXConfig)` (Jussi Virtanen)
+
+- Add `FIXValue#toString` (Jussi Virtanen)
+
+- Add `FIXMessage#valueOf(int,int)` and `FIXMessage#indexOf(int,int)` (Kasimir
+  Torri)
+
+  Make it possible to get the index or the value container of the first
+  instance of a field with a specific tag, starting from a specific index.
+
+- Optimize `FIXTimestamps` (Jussi Virtanen)
+
+  Decrease the bytecode size of the `FIXTimestamps.setDigits` method from 36 to
+  28 bytes, which is within HotSpot's default maximum inline size of 35 bytes.
+  This makes the `FIXTimestamps.append` method faster.
+
+- Add `FIXValue#asString(Appendable)` (Jussi Virtanen)
+
+- Add `FIXValue#contentEquals` (Jussi Virtanen)
+
+- Add FIX Orchestra support to Philadelphia Code Generator (Jussi Virtanen)
+
+- Add FIX Latest support (Jussi Virtanen)
+
+- Improve `FIXMessageParser` (Jussi Virtanen)
+
+  Optimize parsing of the BeginString(8), BodyLength(9), and CheckSum(10)
+  values, making message parsing faster.
+
+- Fix EndSeqNo(16) handling (Marcus Harte, Jussi Virtanen)
+
+  Handle the value 0 for the EndSeqNo(16) field in a ResendRequest(2) message
+  correctly. This value represents infinity and corresponds to all subsequent
+  messages after the message referred to by the BeginSeqNo(7) field.
+
+- Improve BeginSeqNo(7) handling (Marcus Harte, Jussi Virtanen)
+
+  Respond with a Reject(3) message if the BeginSeqNo(7) value in a
+  ResendRequest(2) message exceeds the current MsgSeqNum(34) value.
+
+- Improve NewSeqNo(36) handling (Marcus Harte, Jussi Virtanen)
+
+  Limit the NewSeqNo(36) value in a subsequent SequenceReset(4) message to
+  the current MsgSeqNum(34) if the EndSeqNo(16) value in the preceding
+  ResendRequest(2) message exceeds it.
+
 ## 1.2.0 (2020-03-03)
 
 See the [upgrade instructions](UPGRADE-1.2.0.md).
