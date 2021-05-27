@@ -16,7 +16,8 @@
 package com.paritytrading.philadelphia;
 
 /**
- * Indicates that the number of fields exceeds the capacity of a message container.
+ * Indicates that the message length exceeds the capacity of the receive buffer
+ * or that the number of fields exceeds the capacity of a message container.
  */
 public class FIXMessageOverflowException extends FIXException {
 
