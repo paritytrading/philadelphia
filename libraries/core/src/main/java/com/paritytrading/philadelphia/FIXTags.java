@@ -17,14 +17,9 @@ package com.paritytrading.philadelphia;
 
 import static com.paritytrading.philadelphia.FIX.*;
 
-import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
-import java.nio.ReadOnlyBufferException;
 
-/**
- * Utilities for working with tags.
- */
-public class FIXTags {
+class FIXTags {
 
     static final int BeginSeqNo          =   7;
     static final int BeginString         =   8;
@@ -48,17 +43,7 @@ public class FIXTags {
     static final int ResetSeqNumFlag     = 141;
     static final int SessionRejectReason = 373;
 
-    private FIXTags() {
-    }
-
-    /**
-     * Read a tag from a buffer.
-     *
-     * @param buffer a buffer
-     * @return the tag if it was successfully read from the buffer, otherwise
-     *     zero
-     */
-    public static int get(ByteBuffer buffer) {
+    static int get(ByteBuffer buffer) {
         int tag = 0;
 
         while (buffer.hasRemaining()) {
@@ -73,17 +58,7 @@ public class FIXTags {
         return 0;
     }
 
-    /**
-     * Write a tag to a buffer.
-     *
-     * @param buffer a buffer
-     * @param tag a tag
-     * @throws IllegalArgumentException if the tag is less than 1 or greater than 99999
-     * @throws BufferOverflowException if there are fewer bytes remaining in
-     *   the buffer than what this tag consists of
-     * @throws ReadOnlyBufferException if the buffer is read-only
-     */
-    public static void put(ByteBuffer buffer, int tag) {
+    static void put(ByteBuffer buffer, int tag) {
         if (tag < 1 || tag > 99999)
             tooLargeTag();
 

@@ -17,23 +17,11 @@ package com.paritytrading.philadelphia;
 
 import org.joda.time.ReadableDateTime;
 
-/**
- * Utilities for working with timestamps.
- */
-public class FIXTimestamps {
+class FIXTimestamps {
 
     private static final ThreadLocal<char[]> BUFFER = ThreadLocal.withInitial(() -> new char[21]);
 
-    private FIXTimestamps() {
-    }
-
-    /**
-     * Append a timestamp to a string builder.
-     *
-     * @param t a timestamp
-     * @param s a string builder
-     */
-    public static void append(ReadableDateTime t, StringBuilder s) {
+    static void append(ReadableDateTime t, StringBuilder s) {
         char[] buffer = BUFFER.get();
 
         setDigits(buffer, t.getYear(), 0, 4);
