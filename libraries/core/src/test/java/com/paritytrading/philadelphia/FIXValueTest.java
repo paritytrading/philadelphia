@@ -764,22 +764,6 @@ class FIXValueTest {
         assertEquals("20150924-09:30:05\u0001", put());
     }
 
-    @SuppressWarnings("deprecation")
-    @Test
-    void asCheckSum() {
-        get("064\u0001");
-
-        assertEquals(64, value.asCheckSum());
-    }
-
-    @SuppressWarnings("deprecation")
-    @Test
-    void notCheckSum() {
-        value.setString("FOO");
-
-        assertThrows(FIXValueFormatException.class, () -> value.asCheckSum());
-    }
-
     @Test
     void setCheckSum() {
         value.setCheckSum(320);
