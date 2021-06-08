@@ -17,7 +17,6 @@ package com.paritytrading.philadelphia;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.ByteBuffer;
 import org.joda.time.MutableDateTime;
@@ -634,19 +633,6 @@ class FIXValueTest {
         get("FOO\u0001");
 
         assertTrue("FOO".contentEquals(value.asString()));
-    }
-
-    @Test
-    void asStringWithAppendable() throws IOException {
-        get("FOO\u0001");
-
-        StringBuilder builder = new StringBuilder();
-
-        Appendable appendable = builder;
-
-        value.asString(appendable);
-
-        assertEquals("FOO", builder.toString());
     }
 
     @Test
