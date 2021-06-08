@@ -143,6 +143,7 @@ public class FIXValueBenchmark extends FIXBenchmark {
 
     @Benchmark
     public StringBuilder asString() {
+        string.setLength(0);
         stringValue.asString(string);
 
         return string;
