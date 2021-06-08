@@ -673,7 +673,7 @@ public class FIXConnection implements Closeable {
                     return;
                 }
 
-                senderCompId = value.asString();
+                senderCompId = value.toString();
             }
 
             if (targetCompId.isEmpty()) {
@@ -683,7 +683,7 @@ public class FIXConnection implements Closeable {
                     return;
                 }
 
-                targetCompId = value.asString();
+                targetCompId = value.toString();
             }
 
             statusListener.logon(FIXConnection.this, message);

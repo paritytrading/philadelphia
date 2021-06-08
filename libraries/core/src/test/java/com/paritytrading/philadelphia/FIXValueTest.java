@@ -633,7 +633,7 @@ class FIXValueTest {
     void asString() {
         get("FOO\u0001");
 
-        assertEquals("FOO", value.asString());
+        assertTrue("FOO".contentEquals(value.asString()));
     }
 
     @Test

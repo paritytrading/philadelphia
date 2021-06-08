@@ -477,8 +477,8 @@ public class FIXValue implements CharSequence {
      *
      * @return the value as a string
      */
-    public String asString() {
-        return new String(bytes, offset, length, US_ASCII);
+    public CharSequence asString() {
+        return this;
     }
 
     /**
@@ -737,7 +737,7 @@ public class FIXValue implements CharSequence {
      */
     @Override
     public String toString() {
-        return asString();
+        return new String(bytes, offset, length, US_ASCII);
     }
 
     private int getDigits(int digits, int offset) {
