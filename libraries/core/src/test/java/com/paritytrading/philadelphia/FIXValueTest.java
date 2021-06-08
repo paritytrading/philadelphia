@@ -636,17 +636,6 @@ class FIXValueTest {
     }
 
     @Test
-    void asStringWithStringBuilder() {
-        get("FOO\u0001");
-
-        StringBuilder builder = new StringBuilder();
-
-        value.asString(builder);
-
-        assertEquals("FOO", builder.toString());
-    }
-
-    @Test
     void setString() {
         value.setString("FOO");
 

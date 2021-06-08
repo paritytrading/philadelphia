@@ -57,7 +57,7 @@ class TestMessageParser {
 
             message.append(tag);
             message.append('=');
-            value.asString(message);
+            message.append(value);
             message.append('|');
 
             if (tag == CheckSum) {

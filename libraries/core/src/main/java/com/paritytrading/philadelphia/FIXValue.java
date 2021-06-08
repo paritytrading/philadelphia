@@ -481,17 +481,6 @@ public class FIXValue implements CharSequence {
     }
 
     /**
-     * Get the value as a string. The value is appended to the provided
-     * string builder.
-     *
-     * @param x a string builder
-     */
-    public void asString(StringBuilder x) {
-        for (int i = 0; i < length; i++)
-            x.append((char)bytes[offset + i]);
-    }
-
-    /**
      * Set the value to a string.
      *
      * @param x a string
