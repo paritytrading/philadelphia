@@ -28,7 +28,7 @@ import org.joda.time.ReadableDateTime;
 /**
  * A value container.
  */
-public class FIXValue {
+public class FIXValue implements CharSequence {
 
     private static final double POWERS_OF_TEN[] = {
         1e0,
@@ -88,10 +88,25 @@ public class FIXValue {
     }
 
     /**
+     * Get the character at the specified index. The index must be between 0
+     * and the length of the value - 1.
+     *
+     * @param index the index
+     * @return the character at the specified index
+     * @throws IndexOutOfBoundsException if the index is outside of this
+     *   value container
+     */
+    @Override
+    public char charAt(int index) {
+        return (char)bytes[offset + index];
+    }
+
+    /**
      * Get the length of the value.
      *
      * @return the length of the value
      */
+    @Override
     public int length() {
         return length;
     }
@@ -697,6 +712,20 @@ public class FIXValue {
      */
     public void put(ByteBuffer buffer) {
         buffer.put(bytes, offset, length + 1);
+    }
+
+    /**
+     * Returns a subsequence of the string representation of this value.
+     *
+     * <p><strong>Note.</strong> This method allocates memory.</p>
+     *
+     * @return a subsequence of the string representation of this value
+     * @throws IndexOutOfBoundsException if either index is outside of this
+     *   value container
+     */
+    @Override
+    public CharSequence subSequence(int start, int end) {
+        return new String(bytes, offset + start, end - start, US_ASCII);
     }
 
     /**

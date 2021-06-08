@@ -48,6 +48,20 @@ class FIXValueTest {
     }
 
     @Test
+    void charAt() {
+        value.setInt(123);
+
+        int length = value.length();
+
+        char[] chars = new char[length];
+
+        for (int i = 0; i < length; i++)
+            chars[i] = value.charAt(i);
+
+        assertArrayEquals(new char[] { '1', '2', '3' }, chars);
+    }
+
+    @Test
     void contentEqualsByte() {
         value.setInt(1);
 
@@ -786,6 +800,13 @@ class FIXValueTest {
     @Test
     void getWithOverflow() {
         assertThrows(FIXValueOverflowException.class, () -> value.get(ByteBuffers.wrap("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")));
+    }
+
+    @Test
+    void subSequence() {
+        value.setInt(123456);
+
+        assertEquals("34", value.subSequence(2, 4));
     }
 
     @Test
