@@ -17,7 +17,6 @@ package com.paritytrading.philadelphia;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.ByteBuffer;
 import org.joda.time.MutableDateTime;
@@ -45,6 +44,20 @@ class FIXValueTest {
             bytes[i] = value.byteAt(i);
 
         assertArrayEquals(new byte[] { '1', '2', '3' }, bytes);
+    }
+
+    @Test
+    void charAt() {
+        value.setInt(123);
+
+        int length = value.length();
+
+        char[] chars = new char[length];
+
+        for (int i = 0; i < length; i++)
+            chars[i] = value.charAt(i);
+
+        assertArrayEquals(new char[] { '1', '2', '3' }, chars);
     }
 
     @Test
@@ -619,31 +632,7 @@ class FIXValueTest {
     void asString() {
         get("FOO\u0001");
 
-        assertEquals("FOO", value.asString());
-    }
-
-    @Test
-    void asStringWithAppendable() throws IOException {
-        get("FOO\u0001");
-
-        StringBuilder builder = new StringBuilder();
-
-        Appendable appendable = builder;
-
-        value.asString(appendable);
-
-        assertEquals("FOO", builder.toString());
-    }
-
-    @Test
-    void asStringWithStringBuilder() {
-        get("FOO\u0001");
-
-        StringBuilder builder = new StringBuilder();
-
-        value.asString(builder);
-
-        assertEquals("FOO", builder.toString());
+        assertTrue("FOO".contentEquals(value.asString()));
     }
 
     @Test
@@ -786,6 +775,13 @@ class FIXValueTest {
     @Test
     void getWithOverflow() {
         assertThrows(FIXValueOverflowException.class, () -> value.get(ByteBuffers.wrap("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")));
+    }
+
+    @Test
+    void subSequence() {
+        value.setInt(123456);
+
+        assertEquals("34", value.subSequence(2, 4));
     }
 
     @Test

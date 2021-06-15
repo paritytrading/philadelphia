@@ -18,7 +18,6 @@ package com.paritytrading.philadelphia;
 import static com.paritytrading.philadelphia.FIX.*;
 import static java.nio.charset.StandardCharsets.*;
 
-import java.io.IOException;
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 import java.nio.ReadOnlyBufferException;
@@ -28,7 +27,7 @@ import org.joda.time.ReadableDateTime;
 /**
  * A value container.
  */
-public class FIXValue {
+public class FIXValue implements CharSequence {
 
     private static final double POWERS_OF_TEN[] = {
         1e0,
@@ -88,10 +87,25 @@ public class FIXValue {
     }
 
     /**
+     * Get the character at the specified index. The index must be between 0
+     * and the length of the value - 1.
+     *
+     * @param index the index
+     * @return the character at the specified index
+     * @throws IndexOutOfBoundsException if the index is outside of this
+     *   value container
+     */
+    @Override
+    public char charAt(int index) {
+        return (char)bytes[offset + index];
+    }
+
+    /**
      * Get the length of the value.
      *
      * @return the length of the value
      */
+    @Override
     public int length() {
         return length;
     }
@@ -462,31 +476,8 @@ public class FIXValue {
      *
      * @return the value as a string
      */
-    public String asString() {
-        return new String(bytes, offset, length, US_ASCII);
-    }
-
-    /**
-     * Get the value as a string. The value is appended to the provided
-     * appendable.
-     *
-     * @param x an appendable
-     * @throws IOException if an I/O error occurs
-     */
-    public void asString(Appendable x) throws IOException {
-        for (int i = 0; i < length; i++)
-            x.append((char)bytes[offset + i]);
-    }
-
-    /**
-     * Get the value as a string. The value is appended to the provided
-     * string builder.
-     *
-     * @param x a string builder
-     */
-    public void asString(StringBuilder x) {
-        for (int i = 0; i < length; i++)
-            x.append((char)bytes[offset + i]);
+    public CharSequence asString() {
+        return this;
     }
 
     /**
@@ -700,6 +691,20 @@ public class FIXValue {
     }
 
     /**
+     * Returns a subsequence of the string representation of this value.
+     *
+     * <p><strong>Note.</strong> This method allocates memory.</p>
+     *
+     * @return a subsequence of the string representation of this value
+     * @throws IndexOutOfBoundsException if either index is outside of this
+     *   value container
+     */
+    @Override
+    public CharSequence subSequence(int start, int end) {
+        return new String(bytes, offset + start, end - start, US_ASCII);
+    }
+
+    /**
      * Returns a string representation of this value.
      *
      * <p><strong>Note.</strong> This method allocates memory.</p>
@@ -708,7 +713,7 @@ public class FIXValue {
      */
     @Override
     public String toString() {
-        return asString();
+        return new String(bytes, offset, length, US_ASCII);
     }
 
     private int getDigits(int digits, int offset) {

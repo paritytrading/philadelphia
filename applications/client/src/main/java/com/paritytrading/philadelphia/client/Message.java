@@ -70,7 +70,7 @@ class Message {
 
         for (int i = 0; i < message.getFieldCount(); i++) {
             int    tag   = message.tagAt(i);
-            String value = message.valueAt(i).asString();
+            String value = message.valueAt(i).toString();
 
             if (tag == MsgType)
                 msgType = value;
