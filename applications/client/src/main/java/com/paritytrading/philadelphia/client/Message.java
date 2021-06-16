@@ -15,22 +15,13 @@
  */
 package com.paritytrading.philadelphia.client;
 
+import static com.paritytrading.philadelphia.client.TerminalClient.IGNORED_TAGS;
+
 import com.paritytrading.philadelphia.FIXMessage;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 class Message {
-
-    private static final Set<Integer> UNPRINTED_TAGS = new HashSet<>();
-
-    static {
-        UNPRINTED_TAGS.add(49); // SenderCompID
-        UNPRINTED_TAGS.add(56); // TargetCompID
-        UNPRINTED_TAGS.add(34); // MsgSeqNum
-        UNPRINTED_TAGS.add(52); // SendingTime
-    }
 
     private static final int MsgType = 35;
 
@@ -49,7 +40,7 @@ class Message {
         String msgType = null;
 
         for (String part : input.split("\\|")) {
-            Field field = Field.get(part);
+            Field field = part.contains("=") ? Field.get(part) : new Field(Integer.parseInt(part), null);
 
             if (field.getTag() == MsgType)
                 msgType = field.getValue();
@@ -88,6 +79,10 @@ class Message {
         return msgType;
     }
 
+    List<Field> getFields() {
+        return fields;
+    }
+
     void put(FIXMessage message) {
         for (Field field : fields)
             message.addField(field.getTag()).setString(field.getValue());
@@ -102,7 +97,7 @@ class Message {
         builder.append(msgType);
 
         for (Field field : fields) {
-            if (UNPRINTED_TAGS.contains(field.getTag()))
+            if (IGNORED_TAGS.contains(field.getTag()))
                 continue;
 
             builder.append('|');

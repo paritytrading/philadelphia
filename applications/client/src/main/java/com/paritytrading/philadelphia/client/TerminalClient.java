@@ -30,9 +30,11 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.ClosedChannelException;
 import java.nio.file.Files;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Stream;
 import org.jline.reader.EndOfFileException;
 import org.jline.reader.LineReader;
@@ -51,11 +53,23 @@ class TerminalClient implements Closeable {
         new ExitCommand(),
         new SleepCommand(),
         new WaitCommand(),
+        new ExpectCommand(),
     };
 
     static final String[] COMMAND_NAMES = Stream.of(COMMANDS)
             .map(Command::getName)
             .toArray(String[]::new);
+
+    static final Set<Integer> IGNORED_TAGS = new HashSet<>();
+
+    static {
+        IGNORED_TAGS.add(49); // SenderCompID
+        IGNORED_TAGS.add(56); // TargetCompID
+        IGNORED_TAGS.add(34); // MsgSeqNum
+        IGNORED_TAGS.add(52); // SendingTime
+    }
+
+
 
     private static final Locale LOCALE = Locale.US;
 
