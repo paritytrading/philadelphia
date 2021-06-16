@@ -89,7 +89,7 @@ public class FIXConnection implements Closeable {
 
     private final MutableDateTime currentTime;
 
-    private final StringBuilder currentTimestamp;
+    private final FIXValue currentTimestamp;
 
     /**
      * Create a connection. The underlying socket channel can be either
@@ -158,9 +158,9 @@ public class FIXConnection implements Closeable {
 
         this.currentTime = new MutableDateTime(this.currentTimeMillis, DateTimeZone.UTC);
 
-        this.currentTimestamp = new StringBuilder(CURRENT_TIMESTAMP_FIELD_CAPACITY);
+        this.currentTimestamp = new FIXValue(CURRENT_TIMESTAMP_FIELD_CAPACITY);
 
-        FIXTimestamps.append(this.currentTime, this.currentTimestamp);
+        this.currentTimestamp.setTimestamp(this.currentTime, true);
     }
 
     /**
@@ -281,7 +281,7 @@ public class FIXConnection implements Closeable {
         message.addField(SenderCompID).setString(senderCompId);
         message.addField(TargetCompID).setString(targetCompId);
         message.addField(MsgSeqNum).setInt(txMsgSeqNum);
-        message.addField(SendingTime).setString(currentTimestamp);
+        message.addField(SendingTime).set(currentTimestamp);
     }
 
     /**
@@ -299,7 +299,7 @@ public class FIXConnection implements Closeable {
      */
     public void update(FIXMessage message) {
         message.valueOf(MsgSeqNum).setInt(txMsgSeqNum);
-        message.valueOf(SendingTime).setString(currentTimestamp);
+        message.valueOf(SendingTime).set(currentTimestamp);
     }
 
     /**
@@ -328,9 +328,7 @@ public class FIXConnection implements Closeable {
 
         currentTime.setMillis(currentTimeMillis);
 
-        currentTimestamp.setLength(0);
-
-        FIXTimestamps.append(currentTime, currentTimestamp);
+        currentTimestamp.setTimestamp(currentTime, true);
     }
 
     /**
@@ -734,10 +732,10 @@ public class FIXConnection implements Closeable {
         send(txMessage);
     }
 
-    private void sendTestRequest(CharSequence testReqId) throws IOException {
+    private void sendTestRequest(FIXValue testReqId) throws IOException {
         prepare(txMessage, TestRequest);
 
-        txMessage.addField(TestReqID).setString(testReqId);
+        txMessage.addField(TestReqID).set(testReqId);
 
         send(txMessage);
     }
