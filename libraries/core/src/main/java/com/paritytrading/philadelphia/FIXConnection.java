@@ -32,6 +32,8 @@ import org.joda.time.MutableDateTime;
  */
 public class FIXConnection implements Closeable {
 
+    private static final int CURRENT_TIMESTAMP_FIELD_CAPACITY = 24;
+
     private final Clock clock;
 
     private final SocketChannel channel;
@@ -156,7 +158,7 @@ public class FIXConnection implements Closeable {
 
         this.currentTime = new MutableDateTime(this.currentTimeMillis, DateTimeZone.UTC);
 
-        this.currentTimestamp = new StringBuilder(config.getFieldCapacity());
+        this.currentTimestamp = new StringBuilder(CURRENT_TIMESTAMP_FIELD_CAPACITY);
 
         FIXTimestamps.append(this.currentTime, this.currentTimestamp);
     }
