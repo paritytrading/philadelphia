@@ -2811,7 +2811,7 @@ public class FIXLatestTags {
     public static final int NBBOQty                                                               = 2833;
     public static final int NBBOSource                                                            = 2834;
     public static final int OrderOriginationFirmID                                                = 2835;
-    public static final int OrderTime                                                             = 2836;
+    public static final int RelatedOrderTime                                                      = 2836;
     public static final int SingleQuoteIndicator                                                  = 2837;
     public static final int CurrentWorkingPrice                                                   = 2838;
     public static final int TrdRegTimestampManualIndicator                                        = 2839;
@@ -2850,6 +2850,16 @@ public class FIXLatestTags {
     public static final int ContraRoutingArrangmentIndicator                                      = 2884;
     public static final int UnderlyingAccruedInterestAmt                                          = 2885;
     public static final int UnderlyingNumDaysInterest                                             = 2886;
+    public static final int RelatedOrderID                                                        = 2887;
+    public static final int RelatedOrderIDSource                                                  = 2888;
+    public static final int RelatedOrderQty                                                       = 2889;
+    public static final int OrderRelationship                                                     = 2890;
+    public static final int UPICode                                                               = 2891;
+    public static final int DerivativeUPICode                                                     = 2892;
+    public static final int LegUPICode                                                            = 2893;
+    public static final int UnderlyingUPICode                                                     = 2894;
+    public static final int InstrumentScopeUPICode                                                = 2895;
+    public static final int TertiaryTrdType                                                       = 2896;
     public static final int NoAdditionalTermBondRefs                                              = 40000;
     public static final int AdditionalTermBondSecurityID                                          = 40001;
     public static final int AdditionalTermBondSecurityIDSource                                    = 40002;

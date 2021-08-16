@@ -1108,8 +1108,8 @@ public class FIXLatestEnumerations {
         public static final String VarianceSwap                             = "VARSWAP";
         public static final String PortfolioSwaps                           = "PRTFLIOSWAP";
         public static final String FuturesOnASwap                           = "FUTSWAP";
-        public static final String ForwardsOnASwap                          = "FWDSWAP ";
-        public static final String ForwardFreightAgreement                  = "FWDFRTAGMT ";
+        public static final String ForwardsOnASwap                          = "FWDSWAP";
+        public static final String ForwardFreightAgreement                  = "FWDFRTAGMT";
         public static final String SpreadBetting                            = "SPREADBET";
         public static final String ExchangeTradedCommodity                  = "ETC";
 
@@ -1487,7 +1487,7 @@ public class FIXLatestEnumerations {
         public static final char SettlementPrice                            = '6';
         public static final char TradingSessionHighPrice                    = '7';
         public static final char TradingSessionLowPrice                     = '8';
-        public static final char TradingSessionVWAPPrice                    = '9';
+        public static final char VWAP                                       = '9';
         public static final char Imbalance                                  = 'A';
         public static final char TradeVolume                                = 'B';
         public static final char OpenInterest                               = 'C';
@@ -1518,6 +1518,10 @@ public class FIXLatestEnumerations {
         public static final char MarketOffer                                = 'c';
         public static final char ShortSaleMinPrice                          = 'd';
         public static final char PreviousClosingPrice                       = 'e';
+        public static final char ThresholdLimitPriceBanding                 = 'g';
+        public static final char DailyFinancingValue                        = 'h';
+        public static final char AccruedFinancingValue                      = 'i';
+        public static final char TWAP                                       = 't';
 
         private MDEntryTypeValues() {
         }
@@ -2592,6 +2596,8 @@ public class FIXLatestEnumerations {
         public static final char NationalIDNaturalPerson            = 'Q';
         public static final char IndiaPermanentAccountNumber        = 'R';
         public static final char FDID                               = 'S';
+        public static final char SPSAID                             = 'T';
+        public static final char MasterSPSAID                       = 'U';
 
         private PartyIDSourceValues() {
         }
@@ -2935,7 +2941,7 @@ public class FIXLatestEnumerations {
         public static final int SWIFT                   = 17;
         public static final int CHAPS                   = 18;
         public static final int SIC                     = 19;
-        public static final int euroSIC                 = 20;
+        public static final int EuroSIC                 = 20;
 
         private PaymentMethodValues() {
         }
@@ -3743,6 +3749,7 @@ public class FIXLatestEnumerations {
         public static final int TFM      = 3;
         public static final int OMGEO    = 4;
         public static final int DTCCCode = 5;
+        public static final int SPSAID   = 6;
         public static final int Other    = 99;
 
         private AcctIDSourceValues() {
@@ -4726,6 +4733,7 @@ public class FIXLatestEnumerations {
      * <p>The following fields also use these values:</p>
      * <ul>
      *   <li>SecondaryTrdType(855)</li>
+     *   <li>TertiaryTrdType(2896)</li>
      * </ul>
      */
     public static class TrdTypeValues {
@@ -4862,6 +4870,8 @@ public class FIXLatestEnumerations {
         public static final int Balancing                                 = 50;
         public static final int BasisTradeIndexClose                      = 51;
         public static final int TradeAtCashOpen                           = 52;
+        public static final int TrdSubmitVenueClrSettl                    = 53;
+        public static final int BilateralCompression                      = 54;
 
         private TrdSubTypeValues() {
         }
@@ -5680,6 +5690,7 @@ public class FIXLatestEnumerations {
      * <p>The following fields also use these values:</p>
      * <ul>
      *   <li>TradSesUpdateAction(1327)</li>
+     *   <li>MarketUpdateAction(1395)</li>
      * </ul>
      */
     public static class SecurityUpdateActionValues {
@@ -5796,7 +5807,7 @@ public class FIXLatestEnumerations {
         public static final String Allowances                            = "Alw";
         public static final String CubicMeters                           = "CBM";
         public static final String Barrels                               = "Bbl";
-        public static final String gigajoules                            = "GJ";
+        public static final String Gigajoules                            = "GJ";
         public static final String BoardFeet                             = "BDFT";
         public static final String HeatRate                              = "kHR";
         public static final String Bushels                               = "Bu";
@@ -5808,7 +5819,7 @@ public class FIXLatestEnumerations {
         public static final String CertifiedEmissionsReduction           = "CER";
         public static final String MegawattHours                         = "MWh";
         public static final String CriticalPrecipDay                     = "CPD";
-        public static final String therms                                = "thm";
+        public static final String Therms                                = "thm";
         public static final String ClimateReserveTonnes                  = "CRT";
         public static final String TonsOfCarbonDioxide                   = "tnCO2";
         public static final String Hundredweight                         = "cwt";
@@ -5823,13 +5834,13 @@ public class FIXLatestEnumerations {
         public static final String HeatingDegreeDay                      = "HDD";
         public static final String IndexPoint                            = "IPNT";
         public static final String Kilograms                             = "kg";
-        public static final String kiloliters                            = "kL";
+        public static final String Kiloliters                            = "kL";
         public static final String KilowattYear                          = "kW-a";
         public static final String KilowattDay                           = "kW-d";
         public static final String KilowattHour                          = "kW-h";
         public static final String KilowattMonth                         = "kW-M";
-        public static final String KilowattMinute                        = "kW-min ";
-        public static final String liters                                = "L";
+        public static final String KilowattMinute                        = "kW-min";
+        public static final String Liters                                = "L";
         public static final String Pounds                                = "lbs";
         public static final String MegawattYear                          = "MW-a";
         public static final String MegawattDay                           = "MW-d";
@@ -5973,6 +5984,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for CustOrderHandlingInst(1031).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>DeskOrderHandlingInst(1035)</li>
+     * </ul>
      */
     public static class CustOrderHandlingInstValues {
 
@@ -6095,6 +6111,7 @@ public class FIXLatestEnumerations {
         public static final String Swaps                = "SW";
         public static final String TradingDeskSystem    = "T";
         public static final String Treasury             = "TR";
+        public static final String FloorBroker          = "FB";
 
         private DeskTypeValues() {
         }
@@ -6109,41 +6126,6 @@ public class FIXLatestEnumerations {
         public static final int FINRAOATS = 1;
 
         private DeskTypeSourceValues() {
-        }
-
-    }
-
-    /**
-     * Values for DeskOrderHandlingInst(1035).
-     */
-    public static class DeskOrderHandlingInstValues {
-
-        public static final String AddOnOrder                     = "ADD";
-        public static final String AllOrNone                      = "AON";
-        public static final String CashNotHeld                    = "CNH";
-        public static final String DirectedOrder                  = "DIR";
-        public static final String ExchangeForPhysicalTransaction = "E.W";
-        public static final String FillOrKill                     = "FOK";
-        public static final String ImbalanceOnly                  = "IO";
-        public static final String ImmediateOrCancel              = "IOC";
-        public static final String LimitOnOpen                    = "LOO";
-        public static final String LimitOnClose                   = "LOC";
-        public static final String MarketAtOpen                   = "MAO";
-        public static final String MarketAtClose                  = "MAC";
-        public static final String MarketOnOpen                   = "MOO";
-        public static final String MarketOnClose                  = "MOC";
-        public static final String MinimumQuantity                = "MQT";
-        public static final String NotHeld                        = "NH";
-        public static final String OverTheDay                     = "OVD";
-        public static final String Pegged                         = "PEG";
-        public static final String ReserveSizeOrder               = "RSV";
-        public static final String StopStockTransaction           = "S.W";
-        public static final String Scale                          = "SCL";
-        public static final String TimeOrder                      = "TMO";
-        public static final String TrailingStop                   = "TS";
-        public static final String Work                           = "WRK";
-
-        private DeskOrderHandlingInstValues() {
         }
 
     }
@@ -6267,17 +6249,17 @@ public class FIXLatestEnumerations {
      */
     public static class RefOrderIDSourceValues {
 
-        public static final String SecondaryOrderID        = "0";
-        public static final String OrderID                 = "1";
-        public static final String MDEntryID               = "2";
-        public static final String QuoteEntryID            = "3";
-        public static final String OriginalOrderID         = "4";
-        public static final String QuoteID                 = "5";
-        public static final String QuoteReqID              = "6";
-        public static final String PreviousOrderIdentifier = "7";
-        public static final String PreviousQuoteIdentifier = "8";
-        public static final String ParentOrderIdentifier   = "9";
-        public static final String ManualOrderIdentifier   = "10";
+        public static final char SecondaryOrderID        = '0';
+        public static final char OrderID                 = '1';
+        public static final char MDEntryID               = '2';
+        public static final char QuoteEntryID            = '3';
+        public static final char OriginalOrderID         = '4';
+        public static final char QuoteID                 = '5';
+        public static final char QuoteReqID              = '6';
+        public static final char PreviousOrderIdentifier = '7';
+        public static final char PreviousQuoteIdentifier = '8';
+        public static final char ParentOrderIdentifier   = '9';
+        public static final char ManualOrderIdentifier   = 'A';
 
         private RefOrderIDSourceValues() {
         }
@@ -6507,16 +6489,17 @@ public class FIXLatestEnumerations {
      */
     public static class ApplVerIDValues {
 
-        public static final String FIX27    = "0";
-        public static final String FIX30    = "1";
-        public static final String FIX40    = "2";
-        public static final String FIX41    = "3";
-        public static final String FIX42    = "4";
-        public static final String FIX43    = "5";
-        public static final String FIX44    = "6";
-        public static final String FIX50    = "7";
-        public static final String FIX50SP1 = "8";
-        public static final String FIX50SP2 = "9";
+        public static final String FIX27     = "0";
+        public static final String FIX30     = "1";
+        public static final String FIX40     = "2";
+        public static final String FIX41     = "3";
+        public static final String FIX42     = "4";
+        public static final String FIX43     = "5";
+        public static final String FIX44     = "6";
+        public static final String FIX50     = "7";
+        public static final String FIX50SP1  = "8";
+        public static final String FIX50SP2  = "9";
+        public static final String FIXLatest = "10";
 
         private ApplVerIDValues() {
         }
@@ -7092,20 +7075,6 @@ public class FIXLatestEnumerations {
         public static final int Published           = 3;
 
         private TradePublishIndicatorValues() {
-        }
-
-    }
-
-    /**
-     * Values for MarketUpdateAction(1395).
-     */
-    public static class MarketUpdateActionValues {
-
-        public static final char Add    = 'A';
-        public static final char Delete = 'D';
-        public static final char Modify = 'M';
-
-        private MarketUpdateActionValues() {
         }
 
     }
@@ -8474,21 +8443,6 @@ public class FIXLatestEnumerations {
     }
 
     /**
-     * Values for RiskLimitRequestStatus(1762).
-     */
-    public static class RiskLimitRequestStatusValues {
-
-        public static final int Accepted            = 0;
-        public static final int AcceptedWithChanges = 1;
-        public static final int Rejected            = 2;
-        public static final int AcceptancePending   = 3;
-
-        private RiskLimitRequestStatusValues() {
-        }
-
-    }
-
-    /**
      * Values for RiskLimitStatus(1763).
      */
     public static class RiskLimitStatusValues {
@@ -8576,7 +8530,7 @@ public class FIXLatestEnumerations {
         public static final int UTCTimeOnly         = 20;
         public static final int LocalMktDate        = 21;
         public static final int UTCDateOnly         = 22;
-        public static final int data                = 23;
+        public static final int Data                = 23;
         public static final int MultipleStringValue = 24;
         public static final int Country             = 25;
         public static final int Language            = 26;
@@ -9119,6 +9073,7 @@ public class FIXLatestEnumerations {
      *
      * <p>The following fields also use these values:</p>
      * <ul>
+     *   <li>RiskLimitRequestStatus(1762)</li>
      *   <li>EntitlementRequestStatus(1882)</li>
      * </ul>
      */
@@ -9235,6 +9190,7 @@ public class FIXLatestEnumerations {
      * <p>The following fields also use these values:</p>
      * <ul>
      *   <li>AllocRegulatoryTradeIDEvent(1911)</li>
+     *   <li>SideRegulatoryTradeIDEvent(1974)</li>
      * </ul>
      */
     public static class RegulatoryTradeIDEventValues {
@@ -9258,6 +9214,7 @@ public class FIXLatestEnumerations {
      * <p>The following fields also use these values:</p>
      * <ul>
      *   <li>AllocRegulatoryTradeIDType(1912)</li>
+     *   <li>SideRegulatoryTradeIDType(1975)</li>
      * </ul>
      */
     public static class RegulatoryTradeIDTypeValues {
@@ -9676,7 +9633,7 @@ public class FIXLatestEnumerations {
     public static class CouponDayCountValues {
 
         public static final int OneOne                 = 0;
-        public static final int ThrityThreeSixtyUS     = 1;
+        public static final int ThirtyThreeSixtyUS     = 1;
         public static final int ThirtyThreeSixtySIA    = 2;
         public static final int ThirtyThreeSixtyM      = 3;
         public static final int ThirtyEThreeSixty      = 4;
@@ -9772,38 +9729,6 @@ public class FIXLatestEnumerations {
         public static final int WesternEuropeanInsurance     = 10;
 
         private ReferenceEntityTypeValues() {
-        }
-
-    }
-
-    /**
-     * Values for SideRegulatoryTradeIDEvent(1974).
-     */
-    public static class SideRegulatoryTradeIDEventValues {
-
-        public static final int InitialBlockTrade = 0;
-        public static final int Allocation        = 1;
-        public static final int Clearing          = 2;
-        public static final int Compression       = 3;
-        public static final int Novation          = 4;
-        public static final int Termination       = 5;
-
-        private SideRegulatoryTradeIDEventValues() {
-        }
-
-    }
-
-    /**
-     * Values for SideRegulatoryTradeIDType(1975).
-     */
-    public static class SideRegulatoryTradeIDTypeValues {
-
-        public static final int Current  = 0;
-        public static final int Previous = 1;
-        public static final int Block    = 2;
-        public static final int Related  = 3;
-
-        private SideRegulatoryTradeIDTypeValues() {
         }
 
     }
@@ -11184,6 +11109,7 @@ public class FIXLatestEnumerations {
         public static final int ExceptionDueToReportByPaper                      = 13;
         public static final int ExceptionDueToTradeExecutedWithNonReportingParty = 14;
         public static final int ExceptionDueToIntraFirmOrder                     = 15;
+        public static final int ReportedOutsideReportingHours                    = 16;
 
         private TrdRegPublicationReasonValues() {
         }
@@ -11815,6 +11741,36 @@ public class FIXLatestEnumerations {
         public static final int RoutingArrangementInPlace  = 1;
 
         private RoutingArrangmentIndicatorValues() {
+        }
+
+    }
+
+    /**
+     * Values for RelatedOrderIDSource(2888).
+     */
+    public static class RelatedOrderIDSourceValues {
+
+        public static final int NonFIXSource                   = 0;
+        public static final int SystemOrderIdentifier          = 1;
+        public static final int ClientOrderIdentifier          = 2;
+        public static final int SecondaryOrderIdentifier       = 3;
+        public static final int SecondaryClientOrderIdentifier = 4;
+
+        private RelatedOrderIDSourceValues() {
+        }
+
+    }
+
+    /**
+     * Values for OrderRelationship(2890).
+     */
+    public static class OrderRelationshipValues {
+
+        public static final int NotSpecified     = 0;
+        public static final int OrderAggregation = 1;
+        public static final int OrderSplit       = 2;
+
+        private OrderRelationshipValues() {
         }
 
     }
