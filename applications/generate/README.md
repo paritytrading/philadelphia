@@ -29,9 +29,9 @@ Install development dependencies:
 pip install -r requirements.txt
 ```
 
-Run Pylint:
+Run type check:
 ```
-pylint philadelphia
+mypy philadelphia
 ```
 
 ## Installation

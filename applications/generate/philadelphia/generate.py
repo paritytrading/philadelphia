@@ -15,11 +15,13 @@
 #
 import os.path
 import sys
+import typing
 
 from . import model
 from . import orchestra
 from . import quickfix
 from . import repository
+from . import source
 
 
 USAGE = '''\
@@ -32,44 +34,47 @@ Commands:
 '''
 
 
-def enumerations(config, path):
-    module = read_module(path)
-    dialect = read_dialect(config, module, path)
-    fields = module.read_fields(path)
+def enumerations(config: str, path: str) -> None:
+    reader = find_reader(path)
+    dialect = read_dialect(config, reader, path)
+    fields = reader.read_fields(path)
     print(model.format_enumerations(fields, dialect))
 
 
-def msg_types(config, path):
-    module = read_module(path)
-    dialect = read_dialect(config, module, path)
-    messages = module.read_messages(path)
+def msg_types(config: str, path: str) -> None:
+    reader = find_reader(path)
+    dialect = read_dialect(config, reader, path)
+    messages = reader.read_messages(path)
     print(model.format_msg_types(messages, dialect))
 
 
-def tags(config, path):
-    module = read_module(path)
-    dialect = read_dialect(config, module, path)
-    fields = module.read_fields(path)
+def tags(config: str, path: str) -> None:
+    reader = find_reader(path)
+    dialect = read_dialect(config, reader, path)
+    fields = reader.read_fields(path)
     print(model.format_tags(fields, dialect))
 
 
-def read_dialect(config, module, path):
+def read_dialect(config: str, reader: source.Reader, path: str) -> model.Dialect:
     if config:
         return model.read_dialect(config)
-    if hasattr(module, 'read_dialect'):
-        return module.read_dialect(path)
+    if reader.read_dialect:
+        dialect = reader.read_dialect(path)
+        if not dialect:
+            sys.exit('error: Unable to read dialect')
+        return dialect
     sys.exit('error: Missing configuration file')
 
 
-def read_module(path):
+def find_reader(path: str) -> source.Reader:
     if os.path.isdir(path):
-        return repository
+        return repository.READER
     if 'fixr:repository' in read(path):
-        return orchestra
-    return quickfix
+        return orchestra.READER
+    return quickfix.READER
 
 
-def read(path):
+def read(path: str) -> str:
     with open(path, 'r') as infile:
         return infile.read()
 

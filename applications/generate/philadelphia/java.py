@@ -13,87 +13,47 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import collections
 import string
 import textwrap
+import typing
 
 
-COMPILATION_UNIT_COMMENT = '''\
-/*
- * This file has been automatically generated using Philadelphia Code
- * Generator. For more information on Philadelphia Code Generator, see:
- *
- *   https://github.com/paritytrading/philadelphia
- */\
-'''
+_TYPE_FORMATTERS: typing.Dict[str, typing.Callable[[str], str]] = {
+    'char': lambda value: '\'' + value + '\'',
+    'int': str,
+    'String': lambda value: '"' + value + '"',
+}
 
 
-class CompilationUnit:
-
-    def __init__(self, package, class_):
-        self.package = package
-        self.class_ = class_
-
-    def __str__(self):
-        return '{}\n\n{}\n\n{}'.format(self.package, COMPILATION_UNIT_COMMENT,
-                                       self.class_)
+class ConstantField(typing.NamedTuple):
+    type_: str
+    name: str
+    value: str
 
 
-class Package:
-
-    def __init__(self, name):
-        self.name = name
-
-    def __str__(self):
-        return 'package {};'.format(self.name)
+def _format_constant_fields(fields: typing.List[ConstantField]) -> str:
+    type_width = max(len(field.type_) for field in fields)
+    name_width = max(len(field.name) for field in fields)
+    return '\n'.join(_format_constant_field(field, type_width, name_width)
+                     for field in fields)
 
 
-class Class:
-
-    def __init__(self, name, javadoc, classes=None, fields=None):
-        self.name = name
-        self.javadoc = javadoc
-        self.classes = classes if classes else []
-        self.fields = fields if fields else []
-
-    def __str__(self):
-        body = self._format_classes() or self._format_fields()
-        return _CLASS_TEMPLATE.substitute(
-            name=self.name,
-            javadoc=self.javadoc,
-            body=_indent(body),
-        )
-
-    def _format_classes(self):
-        return '\n\n'.join(str(class_) for class_ in self.classes)
-
-    def _format_fields(self):
-        return _format_constant_fields(self.fields)
-
-
-_CLASS_TEMPLATE = string.Template('''\
-/**
- * ${javadoc}
- */
-public class ${name} {
-
-${body}
-
-    private ${name}() {
-    }
-
-}\
-''')
+def _format_constant_field(field: ConstantField, type_width: int,
+        name_width: int) -> str:
+    return 'public static final {:<{}} {:<{}} = {};'.format(
+        field.type_, type_width, field.name, name_width,
+        _TYPE_FORMATTERS[field.type_](field.value))
 
 
 class InnerClass:
 
-    def __init__(self, name, javadoc, fields):
+    def __init__(self, name: str, javadoc: str,
+            fields: typing.List[ConstantField]) -> None:
         self.name = name
         self.javadoc = javadoc
         self.fields = fields
 
-    def __str__(self):
+    def __str__(self) -> str:
         body = _format_constant_fields(self.fields)
         return _INNER_CLASS_TEMPLATE.substitute(
             name=self.name,
@@ -101,7 +61,7 @@ class InnerClass:
             body=_indent(body),
         )
 
-    def _format_fields(self):
+    def _format_fields(self) -> str:
         return _format_constant_fields(self.fields)
 
 
@@ -120,28 +80,75 @@ ${body}
 ''')
 
 
-_TYPE_FORMATTERS = {
-    'char': lambda value: '\'' + value + '\'',
-    'int': str,
-    'String': lambda value: '"' + value + '"',
-}
+class Class:
+
+    def __init__(self, name: str, javadoc: str,
+            classes: typing.Optional[typing.List[InnerClass]] = None,
+            fields: typing.Optional[typing.List[ConstantField]] = None) -> None:
+        self.name = name
+        self.javadoc = javadoc
+        self.classes = classes if classes else []
+        self.fields = fields if fields else []
+
+    def __str__(self) -> str:
+        body = self._format_classes() or self._format_fields()
+        return _CLASS_TEMPLATE.substitute(
+            name=self.name,
+            javadoc=self.javadoc,
+            body=_indent(body),
+        )
+
+    def _format_classes(self) -> str:
+        return '\n\n'.join(str(class_) for class_ in self.classes)
+
+    def _format_fields(self) -> str:
+        return _format_constant_fields(self.fields)
 
 
-ConstantField = collections.namedtuple('ConstantField', ['type_', 'name', 'value'])
+_CLASS_TEMPLATE = string.Template('''\
+/**
+ * ${javadoc}
+ */
+public class ${name} {
+
+${body}
+
+    private ${name}() {
+    }
+
+}\
+''')
 
 
-def _format_constant_fields(fields):
-    type_width = max(len(field.type_) for field in fields)
-    name_width = max(len(field.name) for field in fields)
-    return '\n'.join(_format_constant_field(field, type_width, name_width)
-                     for field in fields)
+class Package:
+
+    def __init__(self, name: str) -> None:
+        self.name = name
+
+    def __str__(self):
+        return 'package {};'.format(self.name)
 
 
-def _format_constant_field(field, type_width, name_width):
-    return 'public static final {:<{}} {:<{}} = {};'.format(
-        field.type_, type_width, field.name, name_width,
-        _TYPE_FORMATTERS[field.type_](field.value))
+class CompilationUnit:
+
+    def __init__(self, package: Package, class_: Class) -> None:
+        self.package = package
+        self.class_ = class_
+
+    def __str__(self):
+        return '{}\n\n{}\n\n{}'.format(self.package, COMPILATION_UNIT_COMMENT,
+                                       self.class_)
 
 
-def _indent(text):
+COMPILATION_UNIT_COMMENT = '''\
+/*
+ * This file has been automatically generated using Philadelphia Code
+ * Generator. For more information on Philadelphia Code Generator, see:
+ *
+ *   https://github.com/paritytrading/philadelphia
+ */\
+'''
+
+
+def _indent(text: str) -> str:
     return textwrap.indent(text, '    ')

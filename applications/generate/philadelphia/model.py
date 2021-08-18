@@ -13,25 +13,36 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import collections
 import configparser
+import typing
 
 from . import java
 
 
-Dialect = collections.namedtuple('Dialect', ['package_name', 'class_name_prefix', 'name'])
+class Dialect(typing.NamedTuple):
+    package_name: str
+    class_name_prefix: str
+    name: str
 
 
-Field = collections.namedtuple('Field', ['tag', 'name', 'type_', 'values'])
+class Value(typing.NamedTuple):
+    name: str
+    value: str
 
 
-Value = collections.namedtuple('Value', ['name', 'value'])
+class Field(typing.NamedTuple):
+    tag: str
+    name: str
+    type_: str
+    values: typing.List[Value]
 
 
-Message = collections.namedtuple('Message', ['name', 'msg_type'])
+class Message(typing.NamedTuple):
+    name: str
+    msg_type: str
 
 
-def read_dialect(filename):
+def read_dialect(filename: str) -> Dialect:
     config = configparser.ConfigParser()
     config.read(filename)
     package_name = config['dialect']['package-name']
@@ -40,7 +51,7 @@ def read_dialect(filename):
     return Dialect(package_name, class_name_prefix, name)
 
 
-def format_enumerations(fields, dialect):
+def format_enumerations(fields, dialect) -> java.CompilationUnit:
     name = '{}Enumerations'.format(dialect.class_name_prefix)
     javadoc = 'Enumerations for {}.'.format(dialect.name)
     classes = [_format_enumeration(field) for field in fields if field.values]
@@ -49,7 +60,7 @@ def format_enumerations(fields, dialect):
     return java.CompilationUnit(package, class_)
 
 
-def _format_enumeration(field):
+def _format_enumeration(field) -> java.InnerClass:
     name = '{}Values'.format(field.name)
     javadoc = 'Values for {}({}).'.format(field.name, field.tag)
     fields = [java.ConstantField(type_=field.type_, name=value.name, value=value.value)
@@ -57,30 +68,31 @@ def _format_enumeration(field):
     return java.InnerClass(name=name, javadoc=javadoc, fields=fields)
 
 
-def format_msg_types(messages, dialect):
+def format_msg_types(messages, dialect) -> java.CompilationUnit:
     name = '{}MsgTypes'.format(dialect.class_name_prefix)
     javadoc = 'Message types for {}.'.format(dialect.name)
     fields = [_format_msg_type(message) for message in messages]
     return _format_constant_fields(name, javadoc, fields, dialect)
 
 
-def _format_msg_type(message):
+def _format_msg_type(message: Message) -> java.ConstantField:
     type_ = 'String' if len(message.msg_type) > 1 else 'char'
     return java.ConstantField(type_=type_, name=message.name, value=message.msg_type)
 
 
-def format_tags(fields, dialect):
+def format_tags(fields: typing.List[Field], dialect: Dialect) -> java.CompilationUnit:
     name = '{}Tags'.format(dialect.class_name_prefix)
     javadoc = 'Tags for {}.'.format(dialect.name)
-    fields = [_format_tag(field) for field in fields]
-    return _format_constant_fields(name, javadoc, fields, dialect)
+    constant_fields = [_format_tag(field) for field in fields]
+    return _format_constant_fields(name, javadoc, constant_fields, dialect)
 
 
-def _format_tag(field):
+def _format_tag(field: Field) -> java.ConstantField:
     return java.ConstantField(type_='int', name=field.name, value=field.tag)
 
 
-def _format_constant_fields(name, javadoc, fields, dialect):
+def _format_constant_fields(name: str, javadoc: str,
+        fields: typing.List[java.ConstantField], dialect: Dialect) -> java.CompilationUnit:
     package = java.Package(name=dialect.package_name)
     class_ = java.Class(name=name, javadoc=javadoc, fields=fields)
     return java.CompilationUnit(package, class_)
