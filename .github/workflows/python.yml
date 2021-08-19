@@ -29,6 +29,6 @@ jobs:
       - name: Install development dependencies
         run: pip install -r requirements.txt
         working-directory: ./applications/generate
-      - name: Run Pylint
-        run: pylint philadelphia
+      - name: Run type check
+        run: mypy philadelphia
         working-directory: ./applications/generate

@@ -10,12 +10,14 @@ applications/client/philadelphia-client.jar
 applications/generate/README.md
 applications/generate/etc/example.ini
 applications/generate/philadelphia/__init__.py
+applications/generate/philadelphia/etree.py
 applications/generate/philadelphia/generate.py
 applications/generate/philadelphia/java.py
 applications/generate/philadelphia/model.py
 applications/generate/philadelphia/orchestra.py
 applications/generate/philadelphia/quickfix.py
 applications/generate/philadelphia/repository.py
+applications/generate/philadelphia/source.py
 applications/generate/pom.xml
 applications/generate/setup.py
 examples/acceptor/README.md

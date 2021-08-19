@@ -13,37 +13,46 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import xml.etree.ElementTree
+import typing
 
+from . import etree
 from . import model
+from . import source
 
 
-def read_messages(filename):
-    def message(elem):
-        name = elem.get('name')
-        msgtype = elem.get('msgtype')
+def read_messages(filename: str) -> typing.List[model.Message]:
+    def message(elem: etree.Element) -> model.Message:
+        name = etree.get(elem, 'name')
+        msgtype = etree.get(elem, 'msgtype')
         return model.Message(name=name, msg_type=msgtype)
-    root = xml.etree.ElementTree.parse(filename).find('messages')
+    root = etree.parse(filename).find('messages')
+    if not root:
+        return []
     return [message(elem) for elem in root.findall('message')]
 
 
-def read_fields(filename):
-    def value(elem):
-        enum = elem.get('enum')
-        description = elem.get('description')
+def read_fields(filename: str) -> typing.List[model.Field]:
+    def value(elem: etree.Element) -> model.Value:
+        enum = etree.get(elem, 'enum')
+        description = etree.get(elem, 'description')
         return model.Value(name=description, value=enum)
-    def field(root):
-        number = root.get('number')
-        name = root.get('name')
+    def field(root: etree.Element) -> model.Field:
+        number = etree.get(root, 'number')
+        name = etree.get(root, 'name')
         type_ = _type(root)
         if name == 'MsgType' or not type_:
             values = []
         else:
             values = [value(elem) for elem in root.findall('value')]
         return model.Field(tag=number, name=name, type_=type_, values=values)
-    root = xml.etree.ElementTree.parse(filename).find('fields')
+    root = etree.parse(filename).find('fields')
+    if not root:
+        return []
     return sorted([field(elem) for elem in root.findall('field')],
                   key=lambda field: int(field.tag))
+
+
+READER = source.Reader(None, read_fields, read_messages)
 
 
 _TYPES = {
@@ -56,6 +65,6 @@ _TYPES = {
 }
 
 
-def _type(elem):
-    type_ = elem.get('type')
-    return _TYPES.get(type_)
+def _type(elem: etree.Element) -> str:
+    type_ = etree.get(elem, 'type')
+    return _TYPES.get(type_, 'String')

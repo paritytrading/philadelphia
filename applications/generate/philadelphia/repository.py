@@ -13,16 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import collections
 import itertools
 import os
 import re
-import xml.etree.ElementTree
+import typing
 
+from . import etree
 from . import model
+from . import source
 
 
-def read_dialect(dirname):
+def read_dialect(dirname: str) -> model.Dialect:
     version = _read_version(dirname)
     class_name_prefix = _class_name_prefix(version)
     package_name = _package_name(class_name_prefix)
@@ -30,40 +31,46 @@ def read_dialect(dirname):
     return model.Dialect(package_name, class_name_prefix, name)
 
 
-def _class_name_prefix(version):
+class _Version(typing.NamedTuple):
+    protocol: str
+    major: str
+    minor: str
+    sp: str
+
+
+def _class_name_prefix(version: _Version) -> str:
     return ''.join([version.protocol, version.major, version.minor, version.sp])
 
 
-def _package_name(class_name_prefix):
+def _package_name(class_name_prefix: str) -> str:
     return 'com.paritytrading.philadelphia.{}'.format(class_name_prefix.lower())
 
 
-def _name(version):
+def _name(version: _Version) -> str:
     name = '{} {}.{}'.format(version.protocol, version.major, version.minor)
     if version.sp:
         return '{} {}'.format(name, version.sp)
     return name
 
 
-_Version = collections.namedtuple('_Version', ['protocol', 'major', 'minor', 'sp'])
-
-
-def _read_version(dirname):
+def _read_version(dirname: str) -> _Version:
     filename = _messages_path(dirname)
-    tree = xml.etree.ElementTree.parse(filename)
-    value = tree.getroot().get('version')
+    tree = etree.parse(filename)
+    value = etree.get(tree.getroot(), 'version')
     match = re.match(r'(?P<protocol>.+)\.(?P<major>\d+)\.(?P<minor>\d+)((?P<sp>SP\d+))?', value)
-    return _Version(protocol=match.group('protocol'), major=match.group('major'),
-                    minor=match.group('minor'), sp=match.group('sp') or '')
+    if not match:
+        raise RuntimeError('Unable to read version')
+    return _Version(protocol=_group(match, 'protocol'), major=_group(match, 'major'),
+                    minor=_group(match, 'minor'), sp=match.group('sp') or '')
 
 
 def read_messages(dirname):
-    def message(elem):
-        name = elem.find('Name').text
-        msg_type = elem.find('MsgType').text
+    def message(elem: etree.Element) -> model.Message:
+        name = _text(elem.find('Name'))
+        msg_type = _text(elem.find('MsgType'))
         return model.Message(name, msg_type)
     filename = _messages_path(dirname)
-    tree = xml.etree.ElementTree.parse(filename)
+    tree = etree.parse(filename)
     return [message(elem) for elem in tree.findall('Message')]
 
 
@@ -79,77 +86,84 @@ def read_fields(dirname):
     return sorted(fields, key=lambda field: int(field.tag))
 
 
+READER = source.Reader(read_dialect, read_fields, read_messages)
+
+
 _TYPES = {
     'Char': 'char',
-    'char': 'char',
     'Int': 'int',
-    'int': 'int',
     'MultipleCharValue': 'char',
     'MultipleStringValue': 'String',
     'MultipleValueString': 'String',
     'NumInGroup': 'int',
-    'String': 'String',
 }
 
 
-def _type(field_type, values):
-    type_ = _TYPES.get(field_type)
+def _type(field_type: str, values: typing.List[model.Value]) -> str:
+    type_ = _TYPES.get(field_type, field_type)
     if type_ == 'char' and values and max(len(value.value) for value in values) > 1:
         return 'String'
     return type_
 
 
-def _values(tag, field, tag_values):
+class _Field(typing.NamedTuple):
+    name: str
+    type_: str
+
+
+def _values(tag: str, field: _Field,
+        tag_values: typing.Dict[str, typing.List[model.Value]]) -> typing.List[model.Value]:
     if field.type_ == 'Boolean' or field.name == 'MsgType':
         return []
     return tag_values.get(tag, [])
 
 
-_Field = collections.namedtuple('_Field', ['name', 'type_'])
-
-
-def _read_tag_fields(dirname):
-    def tag(elem):
-        return elem.find('Tag').text
-    def field(elem):
-        name = elem.find('Name').text
-        type_ = elem.find('Type').text
+def _read_tag_fields(dirname: str) -> typing.Dict[str, _Field]:
+    def tag(elem: etree.Element) -> str:
+        return _text(elem.find('Tag'))
+    def field(elem: etree.Element) -> _Field:
+        name = _text(elem.find('Name'))
+        type_ = _text(elem.find('Type'))
         return _Field(name, type_)
     filename = _fields_path(dirname)
-    tree = xml.etree.ElementTree.parse(filename)
+    tree = etree.parse(filename)
     return {tag(elem): field(elem) for elem in tree.findall('Field')}
 
 
-def _read_tag_values(dirname):
-    def value(enum):
+class _Enum(typing.NamedTuple):
+    tag: str
+    value: str
+    symbolic_name: str
+    sort: typing.Optional[int]
+
+
+def _read_tag_values(dirname: str) -> typing.Dict[str, typing.List[model.Value]]:
+    def value(enum: _Enum) -> model.Value:
         return model.Value(name=enum.symbolic_name, value=enum.value)
-    def values(enums):
+    def values(enums: typing.List[_Enum]):
         return [value(enum) for enum in _sort_enums(enums)]
     enums = _read_enums(dirname)
     return {tag: values(list(enums)) for tag, enums in
             itertools.groupby(enums, lambda enum: enum.tag)}
 
 
-_Enum = collections.namedtuple('_Enum', ['tag', 'value', 'symbolic_name', 'sort'])
-
-
-def _read_enums(dirname):
-    def enums(elem):
-        tag = elem.find('Tag').text
+def _read_enums(dirname: str) -> typing.List[_Enum]:
+    def enums(elem: etree.Element) -> typing.List[_Enum]:
+        tag = _text(elem.find('Tag'))
         value = _value(elem, tag)
         symbolic_names = _symbolic_names(elem, tag, value)
         sort = _sort(elem)
         return [_Enum(tag, value, symbolic_name, sort)
                 for symbolic_name in symbolic_names]
     filename = _enums_path(dirname)
-    tree = xml.etree.ElementTree.parse(filename)
+    tree = etree.parse(filename)
     return sorted([enum for elem in tree.findall('Enum') for enum in enums(elem)],
                   key=lambda enum: int(enum.tag))
 
 
-def _sort_enums(enums):
+def _sort_enums(enums: typing.List[_Enum]) -> typing.List[_Enum]:
     if all(enum.sort is not None for enum in enums):
-        return sorted(enums, key=lambda enum: enum.sort)
+        return sorted(enums, key=lambda enum: enum.sort or 0)
     return enums
 
 
@@ -158,8 +172,8 @@ _VALUES = {
 }
 
 
-def _value(elem, tag):
-    value = elem.find('Value').text
+def _value(elem: etree.Element, tag: str) -> str:
+    value = _text(elem.find('Value'))
     return _VALUES.get((tag, value), value)
 
 
@@ -177,25 +191,40 @@ _SYMBOLIC_NAME_ALIASES = {
 }
 
 
-def _symbolic_names(elem, tag, value):
-    symbolic_name = elem.find('SymbolicName').text
+def _symbolic_names(elem: etree.Element, tag: str, value: str) -> typing.List[str]:
+    symbolic_name = _text(elem.find('SymbolicName'))
     primary = _SYMBOLIC_NAMES.get((tag, value), symbolic_name)
     aliases = _SYMBOLIC_NAME_ALIASES.get((tag, value), [])
     return [primary] + aliases
 
 
-def _sort(elem):
-    value = elem.find('Sort')
-    return int(value.text) if value is not None else None
+def _sort(root: etree.Element) -> typing.Optional[int]:
+    elem = root.find('Sort')
+    if elem is None or elem.text is None:
+        return None
+    return int(elem.text)
 
 
-def _enums_path(dirname):
+def _enums_path(dirname: str) -> str:
     return os.path.join(dirname, 'Enums.xml')
 
 
-def _fields_path(dirname):
+def _fields_path(dirname: str) -> str:
     return os.path.join(dirname, 'Fields.xml')
 
 
-def _messages_path(dirname):
+def _messages_path(dirname: str) -> str:
     return os.path.join(dirname, 'Messages.xml')
+
+
+def _group(match: typing.Match, name: str) -> str:
+    value = match.group(name)
+    if not value:
+        raise KeyError('Missing group: {}'.format(name))
+    return value
+
+
+def _text(elem: typing.Optional[etree.Element]) -> str:
+    if elem is None:
+        raise RuntimeError('Missing element')
+    return elem.text or ''
