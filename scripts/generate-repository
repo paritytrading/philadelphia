@@ -33,13 +33,14 @@ set -e
 
 generate() {
     local command=$1
-    local input_path=$2
-    local output_path=$3
+    local config_path=$2
+    local input_path=$3
+    local output_path=$4
 
     cat scripts/license-repository.java > "$output_path"
 
     (cd applications/generate; \
-            python -m philadelphia.generate "$command" "../../$input_path" >> "../../$output_path")
+            python -m philadelphia.generate "$command" "../../$config_path" "../../$input_path" >> "../../$output_path")
 }
 
 generate_version() {
@@ -49,12 +50,13 @@ generate_version() {
     local output_prefix=${input_version//./}
     local output_module=${output_prefix,,}
 
+    local config_path="scripts/config-$output_module.ini"
     local input_path="$input_dir/$input_version/Base"
     local output_dir="libraries/$output_module/src/main/java/com/paritytrading/philadelphia/$output_module"
 
-    generate enumerations "$input_path" "$output_dir/${output_prefix}Enumerations.java"
-    generate msg-types "$input_path" "$output_dir/${output_prefix}MsgTypes.java"
-    generate tags "$input_path" "$output_dir/${output_prefix}Tags.java"
+    generate enumerations "$config_path" "$input_path" "$output_dir/${output_prefix}Enumerations.java"
+    generate msg-types "$config_path" "$input_path" "$output_dir/${output_prefix}MsgTypes.java"
+    generate tags "$config_path" "$input_path" "$output_dir/${output_prefix}Tags.java"
 }
 
 if [[ $# != 1 ]]; then

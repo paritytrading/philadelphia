@@ -52,7 +52,7 @@ def read_fields(filename: str) -> typing.List[model.Field]:
                   key=lambda field: int(field.tag))
 
 
-READER = source.Reader(None, read_fields, read_messages)
+READER = source.Reader(read_fields, read_messages)
 
 
 _TYPES = {

@@ -21,7 +21,7 @@ Philadelphia Code Generator supports the following input sources:
 
 Run Philadelphia Code Generator with Python:
 ```
-python -m philadelphia.generate <command> [<configuration-file>] <input-path>
+python -m philadelphia.generate <command> <configuration-file> <input-path>
 ```
 
 Install development dependencies:
@@ -43,7 +43,7 @@ python setup.py install
 
 Run Philadelphia Code Generator:
 ```
-philadelphia-generate <command> [<configuration-file>] <input-path>
+philadelphia-generate <command> <configuration-file> <input-path>
 ```
 
 ## License

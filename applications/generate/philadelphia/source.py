@@ -19,6 +19,5 @@ from . import model
 
 
 class Reader(typing.NamedTuple):
-    read_dialect: typing.Optional[typing.Callable[[str], model.Dialect]]
     read_fields: typing.Callable[[str], typing.List[model.Field]]
     read_messages: typing.Callable[[str], typing.List[model.Message]]
