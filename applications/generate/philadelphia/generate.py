@@ -25,7 +25,7 @@ from . import source
 
 
 USAGE = '''\
-Usage: philadelphia-generate <command> [<configuration-file>] <input-path>
+Usage: philadelphia-generate <command> <configuration-file> <input-path>
 
 Commands:
   enumerations  Generate enumerations
@@ -34,36 +34,19 @@ Commands:
 '''
 
 
-def enumerations(config: str, path: str) -> None:
-    reader = find_reader(path)
-    dialect = read_dialect(config, reader, path)
+def enumerations(dialect: model.Dialect, reader: source.Reader, path: str) -> None:
     fields = reader.read_fields(path)
     print(model.format_enumerations(fields, dialect))
 
 
-def msg_types(config: str, path: str) -> None:
-    reader = find_reader(path)
-    dialect = read_dialect(config, reader, path)
+def msg_types(dialect: model.Dialect, reader: source.Reader, path: str) -> None:
     messages = reader.read_messages(path)
     print(model.format_msg_types(messages, dialect))
 
 
-def tags(config: str, path: str) -> None:
-    reader = find_reader(path)
-    dialect = read_dialect(config, reader, path)
+def tags(dialect: model.Dialect, reader: source.Reader, path: str) -> None:
     fields = reader.read_fields(path)
     print(model.format_tags(fields, dialect))
-
-
-def read_dialect(config: str, reader: source.Reader, path: str) -> model.Dialect:
-    if config:
-        return model.read_dialect(config)
-    if reader.read_dialect:
-        dialect = reader.read_dialect(path)
-        if not dialect:
-            sys.exit('error: Unable to read dialect')
-        return dialect
-    sys.exit('error: Missing configuration file')
 
 
 def find_reader(path: str) -> source.Reader:
@@ -87,21 +70,20 @@ COMMANDS = {
 
 
 def main():
-    if len(sys.argv) != 3 and len(sys.argv) != 4:
+    if len(sys.argv) != 4:
         sys.exit(USAGE)
 
     command = COMMANDS.get(sys.argv[1])
     if not command:
         sys.exit('error: {}: Unknown command'.format(sys.argv[1]))
 
-    if len(sys.argv) == 4:
-        config = sys.argv[2]
-        path = sys.argv[3]
-    else:
-        config = None
-        path = sys.argv[2]
+    config = sys.argv[2]
+    path = sys.argv[3]
 
-    command(config, path)
+    dialect = model.read_dialect(config)
+    reader = find_reader(path)
+
+    command(dialect, reader, path)
 
 
 if __name__ == '__main__':

@@ -15,53 +15,11 @@
 #
 import itertools
 import os
-import re
 import typing
 
 from . import etree
 from . import model
 from . import source
-
-
-def read_dialect(dirname: str) -> model.Dialect:
-    version = _read_version(dirname)
-    class_name_prefix = _class_name_prefix(version)
-    package_name = _package_name(class_name_prefix)
-    name = _name(version)
-    return model.Dialect(package_name, class_name_prefix, name)
-
-
-class _Version(typing.NamedTuple):
-    protocol: str
-    major: str
-    minor: str
-    sp: str
-
-
-def _class_name_prefix(version: _Version) -> str:
-    return ''.join([version.protocol, version.major, version.minor, version.sp])
-
-
-def _package_name(class_name_prefix: str) -> str:
-    return 'com.paritytrading.philadelphia.{}'.format(class_name_prefix.lower())
-
-
-def _name(version: _Version) -> str:
-    name = '{} {}.{}'.format(version.protocol, version.major, version.minor)
-    if version.sp:
-        return '{} {}'.format(name, version.sp)
-    return name
-
-
-def _read_version(dirname: str) -> _Version:
-    filename = _messages_path(dirname)
-    tree = etree.parse(filename)
-    value = etree.get(tree.getroot(), 'version')
-    match = re.match(r'(?P<protocol>.+)\.(?P<major>\d+)\.(?P<minor>\d+)((?P<sp>SP\d+))?', value)
-    if not match:
-        raise RuntimeError('Unable to read version')
-    return _Version(protocol=_group(match, 'protocol'), major=_group(match, 'major'),
-                    minor=_group(match, 'minor'), sp=match.group('sp') or '')
 
 
 def read_messages(dirname):
@@ -86,7 +44,7 @@ def read_fields(dirname):
     return sorted(fields, key=lambda field: int(field.tag))
 
 
-READER = source.Reader(read_dialect, read_fields, read_messages)
+READER = source.Reader(read_fields, read_messages)
 
 
 _TYPES = {
@@ -215,13 +173,6 @@ def _fields_path(dirname: str) -> str:
 
 def _messages_path(dirname: str) -> str:
     return os.path.join(dirname, 'Messages.xml')
-
-
-def _group(match: typing.Match, name: str) -> str:
-    value = match.group(name)
-    if not value:
-        raise KeyError('Missing group: {}'.format(name))
-    return value
 
 
 def _text(elem: typing.Optional[etree.Element]) -> str:
