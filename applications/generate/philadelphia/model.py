@@ -51,7 +51,7 @@ def read_dialect(filename: str) -> Dialect:
     return Dialect(package_name, class_name_prefix, name)
 
 
-def format_enumerations(fields, dialect) -> java.CompilationUnit:
+def format_enumerations(fields: typing.List[Field], dialect: Dialect) -> java.CompilationUnit:
     name = '{}Enumerations'.format(dialect.class_name_prefix)
     javadoc = 'Enumerations for {}.'.format(dialect.name)
     classes = [_format_enumeration(field) for field in fields if field.values]
@@ -60,7 +60,7 @@ def format_enumerations(fields, dialect) -> java.CompilationUnit:
     return java.CompilationUnit(package, class_)
 
 
-def _format_enumeration(field) -> java.InnerClass:
+def _format_enumeration(field: Field) -> java.InnerClass:
     name = '{}Values'.format(field.name)
     javadoc = 'Values for {}({}).'.format(field.name, field.tag)
     fields = [java.ConstantField(type_=field.type_, name=value.name, value=value.value)
@@ -68,7 +68,7 @@ def _format_enumeration(field) -> java.InnerClass:
     return java.InnerClass(name=name, javadoc=javadoc, fields=fields)
 
 
-def format_msg_types(messages, dialect) -> java.CompilationUnit:
+def format_msg_types(messages: typing.List[Message], dialect: Dialect) -> java.CompilationUnit:
     name = '{}MsgTypes'.format(dialect.class_name_prefix)
     javadoc = 'Message types for {}.'.format(dialect.name)
     fields = [_format_msg_type(message) for message in messages]
