@@ -25,30 +25,19 @@ def read_messages(filename: str) -> typing.List[model.Message]:
         name = etree.get(elem, 'name')
         msgtype = etree.get(elem, 'msgtype')
         return model.Message(name=name, msg_type=msgtype)
-    root = etree.parse(filename).find('messages')
-    if not root:
-        return []
-    return [message(elem) for elem in root.findall('message')]
+    tree = etree.parse(filename)
+    return [message(elem) for elem in tree.findall('./messages/message')]
 
 
 def read_fields(filename: str) -> typing.List[model.Field]:
-    def value(elem: etree.Element) -> model.Value:
-        enum = etree.get(elem, 'enum')
-        description = etree.get(elem, 'description')
-        return model.Value(name=description, value=enum)
-    def field(root: etree.Element) -> model.Field:
-        number = etree.get(root, 'number')
-        name = etree.get(root, 'name')
-        type_ = _type(root)
-        if name == 'MsgType' or not type_:
-            values = []
-        else:
-            values = [value(elem) for elem in root.findall('value')]
+    def field(elem: etree.Element) -> model.Field:
+        number = etree.get(elem, 'number')
+        name = etree.get(elem, 'name')
+        type_ = _read_type(elem)
+        values = _read_values(elem) if _has_values(name) else []
         return model.Field(tag=number, name=name, type_=type_, values=values)
-    root = etree.parse(filename).find('fields')
-    if not root:
-        return []
-    return sorted([field(elem) for elem in root.findall('field')],
+    tree = etree.parse(filename)
+    return sorted([field(elem) for elem in tree.findall('./fields/field')],
                   key=lambda field: int(field.tag))
 
 
@@ -65,6 +54,18 @@ _TYPES = {
 }
 
 
-def _type(elem: etree.Element) -> str:
+def _read_type(elem: etree.Element) -> str:
     type_ = etree.get(elem, 'type')
     return _TYPES.get(type_, 'String')
+
+
+def _has_values(name: str) -> bool:
+    return name != 'MsgType'
+
+
+def _read_values(root: etree.Element) -> typing.List[model.Value]:
+    def value(elem: etree.Element) -> model.Value:
+        enum = etree.get(elem, 'enum')
+        description = etree.get(elem, 'description')
+        return model.Value(name=description, value=enum)
+    return [value(elem) for elem in root.findall('value')]

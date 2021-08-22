@@ -22,29 +22,51 @@ from . import model
 from . import source
 
 
-def read_messages(dirname):
+def read_messages(dirname: str) -> typing.List[model.Message]:
     def message(elem: etree.Element) -> model.Message:
-        name = _text(elem.find('Name'))
-        msg_type = _text(elem.find('MsgType'))
+        name = _find(elem, 'Name')
+        msg_type = _find(elem, 'MsgType')
         return model.Message(name, msg_type)
     filename = _messages_path(dirname)
     tree = etree.parse(filename)
     return [message(elem) for elem in tree.findall('Message')]
 
 
-def read_fields(dirname):
-    tag_fields = _read_tag_fields(dirname)
-    tag_values = _read_tag_values(dirname)
-    def field_with_values(tag, field):
-        name = field.name
-        values = _values(tag, field, tag_values)
-        type_ = _type(field.type_, values)
-        return model.Field(tag, name, type_, values)
-    fields = [field_with_values(tag, field) for tag, field in tag_fields.items()]
-    return sorted(fields, key=lambda field: int(field.tag))
+def read_fields(dirname: str) -> typing.List[model.Field]:
+    fields = _read_fields(dirname)
+    enums = _read_enums(dirname)
+    enums_by_tag = {tag: list(enums) for tag, enums in itertools.groupby(enums, lambda enum: enum.tag)}
+    return sorted([_make_field(field, enums_by_tag.get(field.tag, [])) for field in fields], key=lambda field: int(field.tag))
 
 
 READER = source.Reader(read_fields, read_messages)
+
+
+class _Enum(typing.NamedTuple):
+    tag: str
+    value: str
+    symbolic_name: str
+    sort: typing.Optional[int]
+
+
+class _Field(typing.NamedTuple):
+    tag: str
+    name: str
+    type_: str
+
+
+def _make_field(field: _Field, enums: typing.List[_Enum]) -> model.Field:
+    tag = field.tag
+    name = field.name
+    values = _make_values(enums) if _has_values(field) else []
+    type_ = _make_type(field.type_, values)
+    return model.Field(tag, name, type_, values)
+
+
+def _make_values(enums: typing.List[_Enum]) -> typing.List[model.Value]:
+    def value(enum: _Enum) -> model.Value:
+        return model.Value(name=enum.symbolic_name, value=enum.value)
+    return [value(enum) for enum in _sorted_enums(enums)]
 
 
 _TYPES = {
@@ -57,60 +79,34 @@ _TYPES = {
 }
 
 
-def _type(field_type: str, values: typing.List[model.Value]) -> str:
+def _make_type(field_type: str, values: typing.List[model.Value]) -> str:
     type_ = _TYPES.get(field_type, field_type)
     if type_ == 'char' and values and max(len(value.value) for value in values) > 1:
         return 'String'
     return type_
 
 
-class _Field(typing.NamedTuple):
-    name: str
-    type_: str
+def _has_values(field: _Field) -> bool:
+    return not field.type_ == 'Boolean' and not field.name == 'MsgType'
 
 
-def _values(tag: str, field: _Field,
-        tag_values: typing.Dict[str, typing.List[model.Value]]) -> typing.List[model.Value]:
-    if field.type_ == 'Boolean' or field.name == 'MsgType':
-        return []
-    return tag_values.get(tag, [])
-
-
-def _read_tag_fields(dirname: str) -> typing.Dict[str, _Field]:
-    def tag(elem: etree.Element) -> str:
-        return _text(elem.find('Tag'))
+def _read_fields(dirname: str) -> typing.List[_Field]:
     def field(elem: etree.Element) -> _Field:
-        name = _text(elem.find('Name'))
-        type_ = _text(elem.find('Type'))
-        return _Field(name, type_)
+        tag = _find(elem, 'Tag')
+        name = _find(elem, 'Name')
+        type_ = _find(elem, 'Type')
+        return _Field(tag, name, type_)
     filename = _fields_path(dirname)
     tree = etree.parse(filename)
-    return {tag(elem): field(elem) for elem in tree.findall('Field')}
-
-
-class _Enum(typing.NamedTuple):
-    tag: str
-    value: str
-    symbolic_name: str
-    sort: typing.Optional[int]
-
-
-def _read_tag_values(dirname: str) -> typing.Dict[str, typing.List[model.Value]]:
-    def value(enum: _Enum) -> model.Value:
-        return model.Value(name=enum.symbolic_name, value=enum.value)
-    def values(enums: typing.List[_Enum]):
-        return [value(enum) for enum in _sort_enums(enums)]
-    enums = _read_enums(dirname)
-    return {tag: values(list(enums)) for tag, enums in
-            itertools.groupby(enums, lambda enum: enum.tag)}
+    return [field(elem) for elem in tree.findall('Field')]
 
 
 def _read_enums(dirname: str) -> typing.List[_Enum]:
     def enums(elem: etree.Element) -> typing.List[_Enum]:
-        tag = _text(elem.find('Tag'))
-        value = _value(elem, tag)
-        symbolic_names = _symbolic_names(elem, tag, value)
-        sort = _sort(elem)
+        tag = _find(elem, 'Tag')
+        value = _read_value(elem, tag)
+        symbolic_names = _read_symbolic_names(elem, tag, value)
+        sort = _read_sort(elem)
         return [_Enum(tag, value, symbolic_name, sort)
                 for symbolic_name in symbolic_names]
     filename = _enums_path(dirname)
@@ -119,7 +115,7 @@ def _read_enums(dirname: str) -> typing.List[_Enum]:
                   key=lambda enum: int(enum.tag))
 
 
-def _sort_enums(enums: typing.List[_Enum]) -> typing.List[_Enum]:
+def _sorted_enums(enums: typing.List[_Enum]) -> typing.List[_Enum]:
     if all(enum.sort is not None for enum in enums):
         return sorted(enums, key=lambda enum: enum.sort or 0)
     return enums
@@ -130,9 +126,16 @@ _VALUES = {
 }
 
 
-def _value(elem: etree.Element, tag: str) -> str:
-    value = _text(elem.find('Value'))
+def _read_value(elem: etree.Element, tag: str) -> str:
+    value = _find(elem, 'Value')
     return _VALUES.get((tag, value), value)
+
+
+def _read_sort(root: etree.Element) -> typing.Optional[int]:
+    elem = root.find('Sort')
+    if elem is None or elem.text is None:
+        return None
+    return int(elem.text)
 
 
 _SYMBOLIC_NAMES = {
@@ -149,18 +152,11 @@ _SYMBOLIC_NAME_ALIASES = {
 }
 
 
-def _symbolic_names(elem: etree.Element, tag: str, value: str) -> typing.List[str]:
-    symbolic_name = _text(elem.find('SymbolicName'))
+def _read_symbolic_names(elem: etree.Element, tag: str, value: str) -> typing.List[str]:
+    symbolic_name = _find(elem, 'SymbolicName')
     primary = _SYMBOLIC_NAMES.get((tag, value), symbolic_name)
     aliases = _SYMBOLIC_NAME_ALIASES.get((tag, value), [])
     return [primary] + aliases
-
-
-def _sort(root: etree.Element) -> typing.Optional[int]:
-    elem = root.find('Sort')
-    if elem is None or elem.text is None:
-        return None
-    return int(elem.text)
 
 
 def _enums_path(dirname: str) -> str:
@@ -175,7 +171,6 @@ def _messages_path(dirname: str) -> str:
     return os.path.join(dirname, 'Messages.xml')
 
 
-def _text(elem: typing.Optional[etree.Element]) -> str:
-    if elem is None:
-        raise RuntimeError('Missing element')
-    return elem.text or ''
+def _find(root: etree.Element, match: str) -> str:
+    elem = root.find(match)
+    return elem.text if elem is not None and elem.text else ''
