@@ -37,13 +37,20 @@ def read_messages(filename: str) -> typing.List[model.Message]:
 def read_fields(filename: str) -> typing.List[model.Field]:
     tree = etree.parse(filename)
     fields = _read_fields(tree)
-    code_sets = _read_code_sets(tree)
-    code_sets_by_id = {code_set.id_: code_set for code_set in code_sets}
-    return sorted([_make_field(field, code_sets_by_id.get(field.id_)) for field in fields],
+    return sorted([_make_field(field) for field in fields],
                   key=lambda field: int(field.tag))
 
 
-READER = source.Reader(read_fields, read_messages)
+def read_enumerations(filename: str) -> typing.List[model.Enumeration]:
+    tree = etree.parse(filename)
+    fields = _read_fields(tree)
+    fields_by_id = {field.id_: field for field in fields}
+    code_sets = _read_code_sets(tree)
+    return sorted([_make_enumeration(fields_by_id[code_set.id_], code_set) for code_set in code_sets if _has_values(code_set)],
+                  key=lambda enumeration: int(enumeration.field.tag))
+
+
+READER = source.Reader(read_enumerations, read_fields, read_messages)
 
 
 class _Code(typing.NamedTuple):
@@ -89,10 +96,13 @@ def _read_fields(tree: etree.ElementTree) -> typing.List[_Field]:
     return [field(elem) for elem in tree.findall('.//fixr:field', _NS)]
 
 
-def _make_field(field: _Field, code_set: typing.Optional[_CodeSet]) -> model.Field:
-    type_ = _make_type(field, code_set)
-    values = _make_values(code_set) if code_set and _has_values(code_set) else []
-    return model.Field(tag=field.id_, name=field.name, type_=type_, values=values)
+def _make_field(field: _Field) -> model.Field:
+    return model.Field(tag=field.id_, name=field.name)
+
+
+def _make_enumeration(field: _Field, code_set: _CodeSet) -> model.Enumeration:
+    return model.Enumeration(field=_make_field(field), type_=_make_type(field, code_set),
+            values=_make_values(code_set))
 
 
 _TYPES = {

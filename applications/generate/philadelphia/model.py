@@ -25,14 +25,18 @@ class Dialect(typing.NamedTuple):
     name: str
 
 
+class Field(typing.NamedTuple):
+    tag: str
+    name: str
+
+
 class Value(typing.NamedTuple):
     name: str
     value: str
 
 
-class Field(typing.NamedTuple):
-    tag: str
-    name: str
+class Enumeration(typing.NamedTuple):
+    field: Field
     type_: str
     values: typing.List[Value]
 
@@ -51,20 +55,21 @@ def read_dialect(filename: str) -> Dialect:
     return Dialect(package_name, class_name_prefix, name)
 
 
-def format_enumerations(fields: typing.List[Field], dialect: Dialect) -> java.CompilationUnit:
+def format_enumerations(enumerations: typing.List[Enumeration], dialect: Dialect) -> java.CompilationUnit:
     name = '{}Enumerations'.format(dialect.class_name_prefix)
     javadoc = 'Enumerations for {}.'.format(dialect.name)
-    classes = [_format_enumeration(field) for field in fields if field.values]
+    classes = [_format_enumeration(enumeration) for enumeration in enumerations]
     class_ = java.Class(name=name, javadoc=javadoc, classes=classes)
     package = java.Package(name=dialect.package_name)
     return java.CompilationUnit(package, class_)
 
 
-def _format_enumeration(field: Field) -> java.InnerClass:
+def _format_enumeration(enumeration: Enumeration) -> java.InnerClass:
+    field = enumeration.field
     name = '{}Values'.format(field.name)
     javadoc = 'Values for {}({}).'.format(field.name, field.tag)
-    fields = [java.ConstantField(type_=field.type_, name=value.name, value=value.value)
-              for value in field.values]
+    fields = [java.ConstantField(type_=enumeration.type_, name=value.name, value=value.value)
+              for value in enumeration.values]
     return java.InnerClass(name=name, javadoc=javadoc, fields=fields)
 
 

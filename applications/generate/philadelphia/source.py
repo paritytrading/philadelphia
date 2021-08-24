@@ -19,5 +19,6 @@ from . import model
 
 
 class Reader(typing.NamedTuple):
+    read_enumerations: typing.Callable[[str], typing.List[model.Enumeration]]
     read_fields: typing.Callable[[str], typing.List[model.Field]]
     read_messages: typing.Callable[[str], typing.List[model.Message]]

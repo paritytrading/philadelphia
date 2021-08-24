@@ -34,12 +34,20 @@ def read_messages(dirname: str) -> typing.List[model.Message]:
 
 def read_fields(dirname: str) -> typing.List[model.Field]:
     fields = _read_fields(dirname)
+    return sorted([_make_field(field) for field in fields], key=lambda field: int(field.tag))
+
+
+def read_enumerations(dirname: str) -> typing.List[model.Enumeration]:
+    fields = _read_fields(dirname)
+    fields_by_tag = {field.tag: field for field in fields}
     enums = _read_enums(dirname)
     enums_by_tag = {tag: list(enums) for tag, enums in itertools.groupby(enums, lambda enum: enum.tag)}
-    return sorted([_make_field(field, enums_by_tag.get(field.tag, [])) for field in fields], key=lambda field: int(field.tag))
+    tags = set(fields_by_tag.keys()).intersection(enums_by_tag.keys())
+    return sorted([_make_enumeration(fields_by_tag[tag], enums_by_tag[tag]) for tag in tags if _has_values(fields_by_tag[tag])],
+                  key=lambda enumeration: int(enumeration.field.tag))
 
 
-READER = source.Reader(read_fields, read_messages)
+READER = source.Reader(read_enumerations, read_fields, read_messages)
 
 
 class _Enum(typing.NamedTuple):
@@ -55,12 +63,14 @@ class _Field(typing.NamedTuple):
     type_: str
 
 
-def _make_field(field: _Field, enums: typing.List[_Enum]) -> model.Field:
-    tag = field.tag
-    name = field.name
-    values = _make_values(enums) if _has_values(field) else []
+def _make_field(field: _Field) -> model.Field:
+    return model.Field(tag=field.tag, name=field.name)
+
+
+def _make_enumeration(field: _Field, enums: typing.List[_Enum]) -> model.Enumeration:
+    values = _make_values(enums)
     type_ = _make_type(field.type_, values)
-    return model.Field(tag, name, type_, values)
+    return model.Enumeration(field=_make_field(field), type_=type_, values=values)
 
 
 def _make_values(enums: typing.List[_Enum]) -> typing.List[model.Value]:
