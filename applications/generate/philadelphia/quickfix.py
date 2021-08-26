@@ -40,10 +40,10 @@ def read_enumerations(filename: str) -> typing.List[model.Enumeration]:
         field = _read_field(elem)
         type_ = _read_type(elem)
         values = _read_values(elem) if _has_values(field.name) else []
-        return model.Enumeration(field=field, type_=type_, values=values)
+        return model.Enumeration(primary_field=field, secondary_fields=[], type_=type_, values=values)
     tree = etree.parse(filename)
     return sorted([enumeration(elem) for elem in tree.findall('./fields/field')],
-                  key=lambda enumeration: int(enumeration.field.tag))
+                  key=lambda enumeration: int(enumeration.primary_field.tag))
 
 
 READER = source.Reader(read_enumerations, read_fields, read_messages)
