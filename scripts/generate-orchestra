@@ -56,7 +56,7 @@ fi
 config_file=$1
 input_file=$2
 
-class_name_prefix=$(grep class-name-prefix $config_file)
+class_name_prefix=$(grep class-name-prefix "$config_file")
 
 output_prefix=${class_name_prefix#class-name-prefix=}
 output_module=${output_prefix,,}
