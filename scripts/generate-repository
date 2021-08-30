@@ -37,10 +37,14 @@ generate() {
     local input_path=$3
     local output_path=$4
 
+    if [[ $input_path != /* ]]; then
+        input_path="../../$input_path"
+    fi
+
     cat scripts/license-repository.java > "$output_path"
 
     (cd applications/generate; \
-            python -m philadelphia.generate "$command" "../../$config_path" "../../$input_path" >> "../../$output_path")
+            python -m philadelphia.generate "$command" "../../$config_path" "$input_path" >> "../../$output_path")
 }
 
 generate_version() {

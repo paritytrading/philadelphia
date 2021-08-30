@@ -39,8 +39,12 @@ generate() {
 
     cat scripts/license-orchestra.java > "$output_path"
 
+    if [[ $input_path != /* ]]; then
+        input_path="../../$input_path"
+    fi
+
     (cd applications/generate; \
-            python -m philadelphia.generate "$command" "../../$config_file" "../../$input_path" \
+            python -m philadelphia.generate "$command" "../../$config_file" "$input_path" \
                     >> "../../$output_path")
 }
 
