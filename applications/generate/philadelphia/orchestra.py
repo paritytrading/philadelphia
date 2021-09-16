@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import itertools
 import typing
 
 from . import etree
@@ -37,13 +38,20 @@ def read_messages(filename: str) -> typing.List[model.Message]:
 def read_fields(filename: str) -> typing.List[model.Field]:
     tree = etree.parse(filename)
     fields = _read_fields(tree)
-    code_sets = _read_code_sets(tree)
-    code_sets_by_id = {code_set.id_: code_set for code_set in code_sets}
-    return sorted([_make_field(field, code_sets_by_id.get(field.id_)) for field in fields],
+    return sorted([_make_field(field) for field in fields],
                   key=lambda field: int(field.tag))
 
 
-READER = source.Reader(read_fields, read_messages)
+def read_enumerations(filename: str) -> typing.List[model.Enumeration]:
+    tree = etree.parse(filename)
+    fields = _read_fields(tree)
+    fields_by_type = _group_fields_by_type(fields)
+    code_sets = _read_code_sets(tree)
+    return sorted([_make_enumeration(code_set, fields_by_type[code_set.name]) for code_set in code_sets if _has_values(code_set)],
+                  key=lambda enumeration: int(enumeration.primary_field.tag))
+
+
+READER = source.Reader(read_enumerations, read_fields, read_messages)
 
 
 class _Code(typing.NamedTuple):
@@ -89,10 +97,18 @@ def _read_fields(tree: etree.ElementTree) -> typing.List[_Field]:
     return [field(elem) for elem in tree.findall('.//fixr:field', _NS)]
 
 
-def _make_field(field: _Field, code_set: typing.Optional[_CodeSet]) -> model.Field:
-    type_ = _make_type(field, code_set)
-    values = _make_values(code_set) if code_set and _has_values(code_set) else []
-    return model.Field(tag=field.id_, name=field.name, type_=type_, values=values)
+def _make_field(field: _Field) -> model.Field:
+    return model.Field(tag=field.id_, name=field.name)
+
+
+def _make_enumeration(code_set: _CodeSet, fields: typing.List[_Field]) -> model.Enumeration:
+    primary_fields = [field for field in fields if code_set.id_ == field.id_]
+    primary_field = primary_fields[0]
+    secondary_fields = sorted([field for field in fields if code_set.id_ != field.id_],
+            key=lambda field: int(field.id_))
+    return model.Enumeration(primary_field=_make_field(primary_field),
+            secondary_fields=[_make_field(secondary_field) for secondary_field in secondary_fields],
+                type_=_make_type(primary_field, code_set), values=_make_values(code_set))
 
 
 _TYPES = {
@@ -131,6 +147,11 @@ def _make_values(code_set: _CodeSet) -> typing.List[model.Value]:
         value = _VALUE_REPLACEMENTS.get((id_, code.value), code.value)
         return model.Value(name=name, value=value)
     return [value(code_set.id_, code) for code in code_set.codes]
+
+
+def _group_fields_by_type(fields: typing.List[_Field]) -> typing.Dict[str, typing.List[_Field]]:
+    sorted_by_type = sorted(fields, key=lambda field: field.type_)
+    return {type_: list(grouped_by_type) for type_, grouped_by_type in itertools.groupby(sorted_by_type, lambda field: field.type_)}
 
 
 _NO_VALUES = [

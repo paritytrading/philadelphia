@@ -35,8 +35,8 @@ Commands:
 
 
 def enumerations(dialect: model.Dialect, reader: source.Reader, path: str) -> None:
-    fields = reader.read_fields(path)
-    print(model.format_enumerations(fields, dialect))
+    enumerations = reader.read_enumerations(path)
+    print(model.format_enumerations(enumerations, dialect))
 
 
 def msg_types(dialect: model.Dialect, reader: source.Reader, path: str) -> None:

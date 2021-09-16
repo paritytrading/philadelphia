@@ -30,18 +30,23 @@ def read_messages(filename: str) -> typing.List[model.Message]:
 
 
 def read_fields(filename: str) -> typing.List[model.Field]:
-    def field(elem: etree.Element) -> model.Field:
-        number = etree.get(elem, 'number')
-        name = etree.get(elem, 'name')
-        type_ = _read_type(elem)
-        values = _read_values(elem) if _has_values(name) else []
-        return model.Field(tag=number, name=name, type_=type_, values=values)
     tree = etree.parse(filename)
-    return sorted([field(elem) for elem in tree.findall('./fields/field')],
+    return sorted([_read_field(elem) for elem in tree.findall('./fields/field')],
                   key=lambda field: int(field.tag))
 
 
-READER = source.Reader(read_fields, read_messages)
+def read_enumerations(filename: str) -> typing.List[model.Enumeration]:
+    def enumeration(elem: etree.Element) -> model.Enumeration:
+        field = _read_field(elem)
+        type_ = _read_type(elem)
+        values = _read_values(elem) if _has_values(field.name) else []
+        return model.Enumeration(primary_field=field, secondary_fields=[], type_=type_, values=values)
+    tree = etree.parse(filename)
+    return sorted([enumeration(elem) for elem in tree.findall('./fields/field')],
+                  key=lambda enumeration: int(enumeration.primary_field.tag))
+
+
+READER = source.Reader(read_enumerations, read_fields, read_messages)
 
 
 _TYPES = {
@@ -52,6 +57,12 @@ _TYPES = {
     'NUMINGROUP': 'int',
     'STRING': 'String',
 }
+
+
+def _read_field(elem: etree.Element) -> model.Field:
+    number = etree.get(elem, 'number')
+    name = etree.get(elem, 'name')
+    return model.Field(tag=number, name=name)
 
 
 def _read_type(elem: etree.Element) -> str:

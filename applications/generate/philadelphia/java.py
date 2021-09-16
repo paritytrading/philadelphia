@@ -57,7 +57,7 @@ class InnerClass:
         body = _format_constant_fields(self.fields)
         return _INNER_CLASS_TEMPLATE.substitute(
             name=self.name,
-            javadoc=self.javadoc,
+            javadoc=_format_javadoc(self.javadoc),
             body=_indent(body),
         )
 
@@ -66,9 +66,7 @@ class InnerClass:
 
 
 _INNER_CLASS_TEMPLATE = string.Template('''\
-/**
- * ${javadoc}
- */
+${javadoc}
 public static class ${name} {
 
 ${body}
@@ -94,7 +92,7 @@ class Class:
         body = self._format_classes() or self._format_fields()
         return _CLASS_TEMPLATE.substitute(
             name=self.name,
-            javadoc=self.javadoc,
+            javadoc=_format_javadoc(self.javadoc),
             body=_indent(body),
         )
 
@@ -106,9 +104,7 @@ class Class:
 
 
 _CLASS_TEMPLATE = string.Template('''\
-/**
- * ${javadoc}
- */
+${javadoc}
 public class ${name} {
 
 ${body}
@@ -148,6 +144,19 @@ COMPILATION_UNIT_COMMENT = '''\
  *   https://github.com/paritytrading/philadelphia
  */\
 '''
+
+
+_JAVADOC_HEADER = '/**\n'
+
+_JAVADOC_PREFIX = ' *'
+
+_JAVADOC_FOOTER = ' */'
+
+
+def _format_javadoc(javadoc: str) -> str:
+    lines = javadoc.splitlines()
+    body = ''.join('{}{}{}\n'.format(_JAVADOC_PREFIX, ' ' if line else '', line) for line in lines)
+    return '{}{}{}'.format(_JAVADOC_HEADER, body, _JAVADOC_FOOTER)
 
 
 def _indent(text: str) -> str:

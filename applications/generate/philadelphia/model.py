@@ -25,14 +25,19 @@ class Dialect(typing.NamedTuple):
     name: str
 
 
+class Field(typing.NamedTuple):
+    tag: str
+    name: str
+
+
 class Value(typing.NamedTuple):
     name: str
     value: str
 
 
-class Field(typing.NamedTuple):
-    tag: str
-    name: str
+class Enumeration(typing.NamedTuple):
+    primary_field: Field
+    secondary_fields: typing.List[Field]
     type_: str
     values: typing.List[Value]
 
@@ -51,21 +56,39 @@ def read_dialect(filename: str) -> Dialect:
     return Dialect(package_name, class_name_prefix, name)
 
 
-def format_enumerations(fields: typing.List[Field], dialect: Dialect) -> java.CompilationUnit:
+def format_enumerations(enumerations: typing.List[Enumeration], dialect: Dialect) -> java.CompilationUnit:
     name = '{}Enumerations'.format(dialect.class_name_prefix)
     javadoc = 'Enumerations for {}.'.format(dialect.name)
-    classes = [_format_enumeration(field) for field in fields if field.values]
+    classes = [_format_enumeration(enumeration) for enumeration in enumerations]
     class_ = java.Class(name=name, javadoc=javadoc, classes=classes)
     package = java.Package(name=dialect.package_name)
     return java.CompilationUnit(package, class_)
 
 
-def _format_enumeration(field: Field) -> java.InnerClass:
-    name = '{}Values'.format(field.name)
-    javadoc = 'Values for {}({}).'.format(field.name, field.tag)
-    fields = [java.ConstantField(type_=field.type_, name=value.name, value=value.value)
-              for value in field.values]
+def _format_enumeration(enumeration: Enumeration) -> java.InnerClass:
+    primary_field = enumeration.primary_field
+    name = '{}Values'.format(primary_field.name)
+    primary_field_javadoc = _format_primary_field_javadoc(enumeration)
+    secondary_fields_javadoc = _format_secondary_fields_javadoc(enumeration) or ''
+    javadoc = '{}{}'.format(primary_field_javadoc, secondary_fields_javadoc)
+    fields = [java.ConstantField(type_=enumeration.type_, name=value.name, value=value.value)
+              for value in enumeration.values]
     return java.InnerClass(name=name, javadoc=javadoc, fields=fields)
+
+
+def _format_primary_field_javadoc(enumeration: Enumeration) -> str:
+    field = enumeration.primary_field
+    return 'Values for {}({}).'.format(field.name, field.tag)
+
+
+def _format_secondary_fields_javadoc(enumeration: Enumeration) -> typing.Optional[str]:
+    fields = enumeration.secondary_fields
+    if not fields:
+        return None
+    header = '\n\n<p>The following fields also use these values:</p>\n<ul>\n'
+    items = ''.join('  <li>{}({})</li>\n'.format(field.name, field.tag) for field in fields)
+    footer = '</ul>\n'
+    return '{}{}{}'.format(header, items, footer)
 
 
 def format_msg_types(messages: typing.List[Message], dialect: Dialect) -> java.CompilationUnit:

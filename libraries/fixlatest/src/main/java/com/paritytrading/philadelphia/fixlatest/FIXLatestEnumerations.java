@@ -58,6 +58,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for CommType(13).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>CommissionBasis(2642)</li>
+     *   <li>AllocCommissionBasis(2656)</li>
+     *   <li>LegReturnRateCommissionBasis(42536)</li>
+     *   <li>ReturnRateCommissionBasis(42737)</li>
+     *   <li>UnderlyingReturnRateCommissionBasis(43036)</li>
+     * </ul>
      */
     public static class CommTypeValues {
 
@@ -77,6 +86,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ExecInst(18).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>ExecInstValue(1308)</li>
+     *   <li>LegExecInst(1384)</li>
+     * </ul>
      */
     public static class ExecInstValues {
 
@@ -164,6 +179,41 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for SecurityIDSource(22).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingSecurityIDSource(305)</li>
+     *   <li>SecurityAltIDSource(456)</li>
+     *   <li>UnderlyingSecurityAltIDSource(459)</li>
+     *   <li>LegSecurityIDSource(603)</li>
+     *   <li>LegSecurityAltIDSource(606)</li>
+     *   <li>BenchmarkSecurityIDSource(761)</li>
+     *   <li>PegSecurityIDSource(1096)</li>
+     *   <li>TriggerSecurityIDSource(1105)</li>
+     *   <li>DerivativeSecurityIDSource(1217)</li>
+     *   <li>DerivativeSecurityAltIDSource(1220)</li>
+     *   <li>InstrumentScopeSecurityIDSource(1539)</li>
+     *   <li>RelatedSecurityIDSource(1651)</li>
+     *   <li>ConvertibleBondEquityIDSource(1952)</li>
+     *   <li>UnderlyingObligationIDSource(1995)</li>
+     *   <li>UnderlyingEquityIDSource(1997)</li>
+     *   <li>LegConvertibleBondEquityIDSource(2167)</li>
+     *   <li>RelatedToSecurityIDSource(2414)</li>
+     *   <li>UnderlyingFutureIDSource(2621)</li>
+     *   <li>FloatingRateIndexIDSource(2732)</li>
+     *   <li>AdditionalTermBondSecurityIDSource(40002)</li>
+     *   <li>MarketDisruptionFallbackUnderlierSecurityIDSource(41099)</li>
+     *   <li>StreamCommoditySecurityIDSource(41254)</li>
+     *   <li>LegAdditionalTermBondSecurityIDSource(41318)</li>
+     *   <li>LegMarketDisruptionFallbackUnderlierSecurityIDSource(41474)</li>
+     *   <li>LegStreamCommoditySecurityIDSource(41651)</li>
+     *   <li>UnderlyingAdditionalTermBondSecurityIDSource(41701)</li>
+     *   <li>UnderlyingMarketDisruptionFallbackUnderlierSecurityIDSource(41871)</li>
+     *   <li>UnderlyingStreamCommoditySecurityIDSource(41967)</li>
+     *   <li>LegPaymentStreamRateIndexIDSource(43089)</li>
+     *   <li>PaymentStreamRateIndexIDSource(43091)</li>
+     *   <li>UnderlyingPaymentStreamRateIndexIDSource(43093)</li>
+     * </ul>
      */
     public static class SecurityIDSourceValues {
 
@@ -221,6 +271,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for IOIQty(27).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegIOIQty(682)</li>
+     * </ul>
      */
     public static class IOIQtyValues {
 
@@ -329,6 +384,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for Side(54).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegSide(624)</li>
+     *   <li>AggressorSide(2446)</li>
+     * </ul>
      */
     public static class SideValues {
 
@@ -395,6 +456,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for SettlType(63).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegSettlType(587)</li>
+     *   <li>InstrumentScopeSettlType(1557)</li>
+     * </ul>
      */
     public static class SettlTypeValues {
 
@@ -418,6 +485,13 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for SymbolSfx(65).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingSymbolSfx(312)</li>
+     *   <li>LegSymbolSfx(601)</li>
+     *   <li>DerivativeSymbolSfx(1215)</li>
+     * </ul>
      */
     public static class SymbolSfxValues {
 
@@ -449,6 +523,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PositionEffect(77).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPositionEffect(564)</li>
+     * </ul>
      */
     public static class PositionEffectValues {
 
@@ -510,6 +589,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for AllocRejCode(88).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>IndividualAllocRejCode(776)</li>
+     * </ul>
      */
     public static class AllocRejCodeValues {
 
@@ -646,6 +730,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for IOIQualifier(104).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>QuoteQualifier(695)</li>
+     * </ul>
      */
     public static class IOIQualifierValues {
 
@@ -791,6 +880,14 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for SettlCurrFxRateCalc(156).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>SettlPriceFxRateCalc(2366)</li>
+     *   <li>LegReturnRateFXRateCalc(42533)</li>
+     *   <li>ReturnRateFXRateCalc(42734)</li>
+     *   <li>UnderlyingReturnRateFXRateCalc(43033)</li>
+     * </ul>
      */
     public static class SettlCurrFxRateCalcValues {
 
@@ -850,6 +947,14 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for SecurityType(167).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingSecurityType(310)</li>
+     *   <li>LegSecurityType(609)</li>
+     *   <li>DerivativeSecurityType(1249)</li>
+     *   <li>InstrumentScopeSecurityType(1547)</li>
+     * </ul>
      */
     public static class SecurityTypeValues {
 
@@ -1059,6 +1164,14 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PutOrCall(201).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingPutOrCall(315)</li>
+     *   <li>DerivativePutOrCall(1323)</li>
+     *   <li>LegPutOrCall(1358)</li>
+     *   <li>InstrumentScopePutOrCall(1553)</li>
+     * </ul>
      */
     public static class PutOrCallValues {
 
@@ -1074,6 +1187,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for CoveredOrUncovered(203).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegCoveredOrUncovered(565)</li>
+     * </ul>
      */
     public static class CoveredOrUncoveredValues {
 
@@ -1119,6 +1237,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for BenchmarkCurveName(221).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegBenchmarkCurveName(677)</li>
+     * </ul>
      */
     public static class BenchmarkCurveNameValues {
 
@@ -1164,6 +1287,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for StipulationType(233).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegStipulationType(688)</li>
+     *   <li>UnderlyingStipType(888)</li>
+     * </ul>
      */
     public static class StipulationTypeValues {
 
@@ -1757,6 +1886,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for QuoteRejectReason(300).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>QuoteEntryRejectReason(368)</li>
+     * </ul>
      */
     public static class QuoteRejectReasonValues {
 
@@ -1857,6 +1991,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for SecurityTradingStatus(326).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>SecurityMassTradingStatus(1679)</li>
+     *   <li>MDSecurityTradingStatus(1682)</li>
+     * </ul>
      */
     public static class SecurityTradingStatusValues {
 
@@ -1894,6 +2034,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for HaltReason(327).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>MassHaltReason(1681)</li>
+     *   <li>MDHaltReason(1684)</li>
+     * </ul>
      */
     public static class HaltReasonValues {
 
@@ -2240,6 +2386,16 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PriceType(423).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>BenchmarkPriceType(663)</li>
+     *   <li>LegBenchmarkPriceType(680)</li>
+     *   <li>LegPriceType(686)</li>
+     *   <li>YieldRedemptionPriceType(698)</li>
+     *   <li>PosAmtPriceType(2877)</li>
+     *   <li>PaymentPriceType(40919)</li>
+     * </ul>
      */
     public static class PriceTypeValues {
 
@@ -2381,6 +2537,30 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PartyIDSource(447).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>NestedPartyIDSource(525)</li>
+     *   <li>Nested2PartyIDSource(758)</li>
+     *   <li>SettlPartyIDSource(783)</li>
+     *   <li>Nested3PartyIDSource(950)</li>
+     *   <li>InstrumentPartyIDSource(1050)</li>
+     *   <li>UnderlyingInstrumentPartyIDSource(1060)</li>
+     *   <li>RootPartyIDSource(1118)</li>
+     *   <li>DerivativeInstrumentPartyIDSource(1294)</li>
+     *   <li>Nested4PartyIDSource(1416)</li>
+     *   <li>TargetPartyIDSource(1463)</li>
+     *   <li>PartyDetailAltIDSource(1518)</li>
+     *   <li>RelatedPartyDetailIDSource(1564)</li>
+     *   <li>RelatedPartyDetailAltIDSource(1571)</li>
+     *   <li>RequestingPartyIDSource(1659)</li>
+     *   <li>PartyDetailIDSource(1692)</li>
+     *   <li>LegInstrumentPartyIDSource(2256)</li>
+     *   <li>ProvisionPartyIDSource(40176)</li>
+     *   <li>PaymentSettlPartyIDSource(40235)</li>
+     *   <li>LegProvisionPartyIDSource(40535)</li>
+     *   <li>UnderlyingProvisionPartyIDSource(42175)</li>
+     * </ul>
      */
     public static class PartyIDSourceValues {
 
@@ -2420,6 +2600,31 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PartyRole(452).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>NestedPartyRole(538)</li>
+     *   <li>Nested2PartyRole(759)</li>
+     *   <li>SettlPartyRole(784)</li>
+     *   <li>Nested3PartyRole(951)</li>
+     *   <li>InstrumentPartyRole(1051)</li>
+     *   <li>UnderlyingInstrumentPartyRole(1061)</li>
+     *   <li>RootPartyRole(1119)</li>
+     *   <li>DerivativeInstrumentPartyRole(1295)</li>
+     *   <li>TrdRepPartyRole(1388)</li>
+     *   <li>Nested4PartyRole(1417)</li>
+     *   <li>TargetPartyRole(1464)</li>
+     *   <li>RequestedPartyRole(1509)</li>
+     *   <li>RelatedPartyDetailRole(1565)</li>
+     *   <li>RequestingPartyRole(1660)</li>
+     *   <li>PartyDetailRole(1693)</li>
+     *   <li>LegInstrumentPartyRole(2257)</li>
+     *   <li>LimitRole(2396)</li>
+     *   <li>ProvisionPartyRole(40177)</li>
+     *   <li>PaymentSettlPartyRole(40236)</li>
+     *   <li>LegProvisionPartyRole(40536)</li>
+     *   <li>UnderlyingProvisionPartyRole(42176)</li>
+     * </ul>
      */
     public static class PartyRoleValues {
 
@@ -2556,6 +2761,14 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for Product(460).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingProduct(462)</li>
+     *   <li>LegProduct(607)</li>
+     *   <li>DerivativeProduct(1246)</li>
+     *   <li>InstrumentScopeProduct(1543)</li>
+     * </ul>
      */
     public static class ProductValues {
 
@@ -2580,6 +2793,22 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for RoundingDirection(468).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>InstrumentRoundingDirection(2144)</li>
+     *   <li>LegInstrumentRoundingDirection(2214)</li>
+     *   <li>UnderlyingInstrumentRoundingDirection(2298)</li>
+     *   <li>LegPaymentStreamFinalRateRoundingDirection(40346)</li>
+     *   <li>UnderlyingPaymentStreamFinalRateRoundingDirection(40635)</li>
+     *   <li>PaymentStreamFinalRateRoundingDirection(40804)</li>
+     *   <li>DividendFinalRateRoundingDirection(42232)</li>
+     *   <li>LegDividendFinalRateRoundingDirection(42326)</li>
+     *   <li>LegPaymentStreamCompoundingFinalRateRoundingDirection(42441)</li>
+     *   <li>PaymentStreamCompoundingFinalRateRoundingDirection(42642)</li>
+     *   <li>UnderlyingDividendFinalRateRoundingDirection(42815)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingFinalRateRoundingDirection(42937)</li>
+     * </ul>
      */
     public static class RoundingDirectionValues {
 
@@ -3243,6 +3472,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ClearingInstruction(577).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>TradeClearingInstruction(1925)</li>
+     * </ul>
      */
     public static class ClearingInstructionValues {
 
@@ -3496,6 +3730,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for AcctIDSource(660).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>AllocAcctIDSource(661)</li>
+     * </ul>
      */
     public static class AcctIDSourceValues {
 
@@ -3691,6 +3930,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PosAmtType(707).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPosAmtType(1588)</li>
+     *   <li>TradeAllocAmtType(1845)</li>
+     * </ul>
      */
     public static class PosAmtTypeValues {
 
@@ -3764,6 +4009,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PosMaintAction(712).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>PosReportAction(2364)</li>
+     * </ul>
      */
     public static class PosMaintActionValues {
 
@@ -3906,6 +4156,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for SettlPriceType(731).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingSettlPriceType(733)</li>
+     * </ul>
      */
     public static class SettlPriceTypeValues {
 
@@ -4013,6 +4268,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for TrdRegTimestampType(770).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>SideTrdRegTimestampType(1013)</li>
+     * </ul>
      */
     public static class TrdRegTimestampTypeValues {
 
@@ -4146,6 +4406,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for TerminationType(788).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegTerminationType(2514)</li>
+     * </ul>
      */
     public static class TerminationTypeValues {
 
@@ -4235,6 +4500,30 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PartySubIDType(803).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>SettlPartySubIDType(786)</li>
+     *   <li>NestedPartySubIDType(805)</li>
+     *   <li>Nested2PartySubIDType(807)</li>
+     *   <li>Nested3PartySubIDType(954)</li>
+     *   <li>InstrumentPartySubIDType(1054)</li>
+     *   <li>UnderlyingInstrumentPartySubIDType(1064)</li>
+     *   <li>RootPartySubIDType(1122)</li>
+     *   <li>DerivativeInstrumentPartySubIDType(1298)</li>
+     *   <li>Nested4PartySubIDType(1411)</li>
+     *   <li>PartyDetailAltSubIDType(1521)</li>
+     *   <li>RelatedPartyDetailSubIDType(1568)</li>
+     *   <li>RelatedPartyDetailAltSubIDType(1574)</li>
+     *   <li>RequestingPartySubIDType(1663)</li>
+     *   <li>PartyDetailSubIDType(1696)</li>
+     *   <li>LegInstrumentPartySubIDType(2260)</li>
+     *   <li>TargetPartySubIDType(2435)</li>
+     *   <li>ProvisionPartySubIDType(40180)</li>
+     *   <li>PaymentSettlPartySubIDType(40240)</li>
+     *   <li>LegProvisionPartySubIDType(40539)</li>
+     *   <li>UnderlyingProvisionPartySubIDType(42179)</li>
+     * </ul>
      */
     public static class PartySubIDTypeValues {
 
@@ -4380,6 +4669,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for AvgPxIndicator(819).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>AllocAvgPxIndicator(2769)</li>
+     * </ul>
      */
     public static class AvgPxIndicatorValues {
 
@@ -4428,6 +4722,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for TrdType(828).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>SecondaryTrdType(855)</li>
+     * </ul>
      */
     public static class TrdTypeValues {
 
@@ -4505,6 +4804,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for TrdSubType(829).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>SideTrdSubTyp(1008)</li>
+     * </ul>
      */
     public static class TrdSubTypeValues {
 
@@ -4721,6 +5025,13 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for LastLiquidityInd(851).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>FillLiquidityInd(1443)</li>
+     *   <li>SideLiquidityInd(1444)</li>
+     *   <li>OrderEventLiquidityIndicator(1801)</li>
+     * </ul>
      */
     public static class LastLiquidityIndValues {
 
@@ -4759,6 +5070,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for QtyType(854).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegQtyType(1591)</li>
+     * </ul>
      */
     public static class QtyTypeValues {
 
@@ -4816,6 +5132,13 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for EventType(865).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>DerivativeEventType(1287)</li>
+     *   <li>UnderlyingEventType(1982)</li>
+     *   <li>LegEventType(2060)</li>
+     * </ul>
      */
     public static class EventTypeValues {
 
@@ -4855,6 +5178,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for InstrAttribType(871).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>NestedInstrAttribType(1210)</li>
+     *   <li>DerivativeInstrAttribType(1313)</li>
+     * </ul>
      */
     public static class InstrAttribTypeValues {
 
@@ -4908,6 +5237,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for CPProgram(875).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingCPProgram(877)</li>
+     *   <li>LegCPProgram(2207)</li>
+     * </ul>
      */
     public static class CPProgramValues {
 
@@ -5051,6 +5386,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for DeliveryType(919).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegDeliveryType(2504)</li>
+     * </ul>
      */
     public static class DeliveryTypeValues {
 
@@ -5197,6 +5537,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for CollInquiryStatus(945).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>MarginReqmtInqStatus(1640)</li>
+     * </ul>
      */
     public static class CollInquiryStatusValues {
 
@@ -5275,6 +5620,13 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for SecurityStatus(965).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>DerivativeSecurityStatus(1256)</li>
+     *   <li>UnderlyingSecurityStatus(2011)</li>
+     *   <li>LegSecurityStatus(2148)</li>
+     * </ul>
      */
     public static class SecurityStatusValues {
 
@@ -5324,6 +5676,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for SecurityUpdateAction(980).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>TradSesUpdateAction(1327)</li>
+     * </ul>
      */
     public static class SecurityUpdateActionValues {
 
@@ -5367,6 +5724,71 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for UnitOfMeasure(996).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingUnitOfMeasure(998)</li>
+     *   <li>LegUnitOfMeasure(999)</li>
+     *   <li>PriceUnitOfMeasure(1191)</li>
+     *   <li>CommUnitOfMeasure(1238)</li>
+     *   <li>DerivativeUnitOfMeasure(1269)</li>
+     *   <li>DerivativePriceUnitOfMeasure(1315)</li>
+     *   <li>LegPriceUnitOfMeasure(1421)</li>
+     *   <li>UnderlyingPriceUnitOfMeasure(1424)</li>
+     *   <li>StrikeUnitOfMeasure(1698)</li>
+     *   <li>PosQtyUnitOfMeasure(1836)</li>
+     *   <li>SettlPriceUnitOfMeasure(1886)</li>
+     *   <li>LegStrikeUnitOfMeasure(2183)</li>
+     *   <li>UnderlyingStrikeUnitOfMeasure(2290)</li>
+     *   <li>CommissionUnitOfMeasure(2644)</li>
+     *   <li>AllocCommissionUnitOfMeasure(2658)</li>
+     *   <li>DeliveryScheduleNotionalUnitOfMeasure(41041)</li>
+     *   <li>DeliveryScheduleToleranceUnitOfMeasure(41045)</li>
+     *   <li>DeliveryStreamToleranceUnitOfMeasure(41073)</li>
+     *   <li>PaymentUnitOfMeasure(41155)</li>
+     *   <li>PaymentScheduleRateUnitOfMeasure(41167)</li>
+     *   <li>PaymentScheduleSettlPeriodPriceUnitOfMeasure(41172)</li>
+     *   <li>PaymentScheduleStepUnitOfMeasure(41173)</li>
+     *   <li>PaymentStreamFixedAmountUnitOfMeasure(41187)</li>
+     *   <li>PaymentStreamRateIndexUnitOfMeasure(41198)</li>
+     *   <li>PaymentStreamReferenceLevelUnitOfMeasure(41201)</li>
+     *   <li>PaymentStreamRateSpreadUnitOfMeasure(41204)</li>
+     *   <li>StreamCommodityUnitOfMeasure(41258)</li>
+     *   <li>StreamCommoditySettlPeriodNotionalUnitOfMeasure(41294)</li>
+     *   <li>StreamCommoditySettlPeriodPriceUnitOfMeasure(41298)</li>
+     *   <li>StreamNotionalUnitOfMeasure(41309)</li>
+     *   <li>StreamTotalNotionalUnitOfMeasure(41311)</li>
+     *   <li>LegDeliveryScheduleNotionalUnitOfMeasure(41412)</li>
+     *   <li>LegDeliveryScheduleToleranceUnitOfMeasure(41416)</li>
+     *   <li>LegDeliveryStreamToleranceUnitOfMeasure(41444)</li>
+     *   <li>LegPaymentScheduleRateUnitOfMeasure(41536)</li>
+     *   <li>LegPaymentScheduleSettlPeriodPriceUnitOfMeasure(41541)</li>
+     *   <li>LegPaymentScheduleStepUnitOfMeasure(41542)</li>
+     *   <li>LegPaymentStreamFixedAmountUnitOfMeasure(41556)</li>
+     *   <li>LegPaymentStreamRateIndexUnitOfMeasure(41567)</li>
+     *   <li>LegPaymentStreamReferenceLevelUnitOfMeasure(41570)</li>
+     *   <li>LegPaymentStreamRateSpreadUnitOfMeasure(41573)</li>
+     *   <li>LegStreamCommodityUnitOfMeasure(41655)</li>
+     *   <li>LegStreamCommoditySettlPeriodNotionalUnitOfMeasure(41691)</li>
+     *   <li>LegStreamCommoditySettlPeriodPriceUnitOfMeasure(41695)</li>
+     *   <li>LegStreamNotionalUnitOfMeasure(41706)</li>
+     *   <li>LegStreamTotalNotionalUnitOfMeasure(41708)</li>
+     *   <li>UnderlyingDeliveryScheduleNotionalUnitOfMeasure(41760)</li>
+     *   <li>UnderlyingDeliveryScheduleToleranceUnitOfMeasure(41764)</li>
+     *   <li>UnderlyingDeliveryStreamToleranceUnitOfMeasure(41792)</li>
+     *   <li>UnderlyingPaymentScheduleRateUnitOfMeasure(41884)</li>
+     *   <li>UnderlyingPaymentScheduleSettlPeriodPriceUnitOfMeasure(41889)</li>
+     *   <li>UnderlyingPaymentScheduleStepUnitOfMeasure(41890)</li>
+     *   <li>UnderlyingPaymentStreamFixedAmountUnitOfMeasure(41904)</li>
+     *   <li>UnderlyingPaymentStreamRateIndexUnitOfMeasure(41915)</li>
+     *   <li>UnderlyingPaymentStreamReferenceLevelUnitOfMeasure(41918)</li>
+     *   <li>UnderlyingPaymentStreamRateSpreadUnitOfMeasure(41921)</li>
+     *   <li>UnderlyingStreamCommodityUnitOfMeasure(41971)</li>
+     *   <li>UnderlyingStreamCommoditySettlPeriodNotionalUnitOfMeasure(42007)</li>
+     *   <li>UnderlyingStreamCommoditySettlPeriodPriceUnitOfMeasure(42011)</li>
+     *   <li>UnderlyingStreamNotionalUnitOfMeasure(42022)</li>
+     *   <li>UnderlyingStreamTotalNotionalUnitOfMeasure(42024)</li>
+     * </ul>
      */
     public static class UnitOfMeasureValues {
 
@@ -5458,6 +5880,18 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for TimeUnit(997).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingTimeUnit(1000)</li>
+     *   <li>LegTimeUnit(1001)</li>
+     *   <li>DerivativeTimeUnit(1271)</li>
+     *   <li>RiskLimitVelocityUnit(2337)</li>
+     *   <li>MDStatisticIntervalTypeUnit(2465)</li>
+     *   <li>StreamNotionalFrequencyUnit(41307)</li>
+     *   <li>LegStreamNotionalFrequencyUnit(41704)</li>
+     *   <li>UnderlyingStreamNotionalFrequencyUnit(42020)</li>
+     * </ul>
      */
     public static class TimeUnitValues {
 
@@ -5743,6 +6177,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for UnderlyingFXRateCalc(1046).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>MarginAmtFXRateCalc(2089)</li>
+     *   <li>CollateralFXRateCalc(2091)</li>
+     *   <li>PayCollectFXRateCalc(2095)</li>
+     *   <li>PositionFXRateCalc(2098)</li>
+     *   <li>SideCollateralFXRateCalc(2697)</li>
+     * </ul>
      */
     public static class UnderlyingFXRateCalcValues {
 
@@ -5785,6 +6228,13 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for InstrmtAssignmentMethod(1049).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>DerivativeInstrmtAssignmentMethod(1255)</li>
+     *   <li>UnderlyingAssignmentMethod(2010)</li>
+     *   <li>LegInstrmtAssignmentMethod(2147)</li>
+     * </ul>
      */
     public static class InstrmtAssignmentMethodValues {
 
@@ -6023,6 +6473,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for TradeHandlingInstr(1123).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>OrigTradeHandlingInstr(1124)</li>
+     * </ul>
      */
     public static class TradeHandlingInstrValues {
 
@@ -6043,6 +6498,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ApplVerID(1128).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>RefApplVerID(1130)</li>
+     *   <li>DefaultApplVerID(1137)</li>
+     * </ul>
      */
     public static class ApplVerIDValues {
 
@@ -6174,6 +6635,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for SecurityTradingEvent(1174).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>SecurityMassTradingEvent(1680)</li>
+     * </ul>
      */
     public static class SecurityTradingEventValues {
 
@@ -6223,6 +6689,13 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for SettlMethod(1193).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingSettlMethod(1039)</li>
+     *   <li>DerivativeSettlMethod(1317)</li>
+     *   <li>LegSettlMethod(2192)</li>
+     * </ul>
      */
     public static class SettlMethodValues {
 
@@ -6237,6 +6710,17 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ExerciseStyle(1194).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>DerivativeExerciseStyle(1299)</li>
+     *   <li>StrikeExerciseStyle(1304)</li>
+     *   <li>UnderlyingExerciseStyle(1419)</li>
+     *   <li>LegExerciseStyle(1420)</li>
+     *   <li>ProvisionOptionExerciseStyle(40101)</li>
+     *   <li>LegProvisionOptionExerciseStyle(40459)</li>
+     *   <li>UnderlyingProvisionOptionExerciseStyle(42159)</li>
+     * </ul>
      */
     public static class ExerciseStyleValues {
 
@@ -6252,6 +6736,13 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PriceQuoteMethod(1196).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>DerivativePriceQuoteMethod(1318)</li>
+     *   <li>UnderlyingPriceQuoteMethod(2030)</li>
+     *   <li>LegPriceQuoteMethod(2195)</li>
+     * </ul>
      */
     public static class PriceQuoteMethodValues {
 
@@ -6267,6 +6758,13 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ValuationMethod(1197).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>DerivativeValuationMethod(1319)</li>
+     *   <li>UnderlyingValuationMethod(2031)</li>
+     *   <li>LegValuationMethod(2196)</li>
+     * </ul>
      */
     public static class ValuationMethodValues {
 
@@ -6283,6 +6781,13 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ListMethod(1198).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>DerivativeListMethod(1320)</li>
+     *   <li>UnderlyingListMethod(2032)</li>
+     *   <li>LegListMethod(2199)</li>
+     * </ul>
      */
     public static class ListMethodValues {
 
@@ -6342,6 +6847,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PriceLimitType(1306).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>SecondaryPriceLimitType(1305)</li>
+     * </ul>
      */
     public static class PriceLimitTypeValues {
 
@@ -6639,6 +7149,18 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for OrderDelayUnit(1429).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>ThrottleTimeUnit(1615)</li>
+     *   <li>ExposureDurationUnit(1916)</li>
+     *   <li>MDStatisticFrequencyUnit(2461)</li>
+     *   <li>MDStatisticDelayUnit(2463)</li>
+     *   <li>MDStatisticIntervalUnit(2467)</li>
+     *   <li>MDStatisticValueUnit(2480)</li>
+     *   <li>MarketDepthTimeIntervalUnit(2564)</li>
+     *   <li>MDRecoveryTimeIntervalUnit(2566)</li>
+     * </ul>
      */
     public static class OrderDelayUnitValues {
 
@@ -6662,6 +7184,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for VenueType(1430).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>SideVenueType(1899)</li>
+     * </ul>
      */
     public static class VenueTypeValues {
 
@@ -6728,6 +7255,13 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ContractMultiplierUnit(1435).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegContractMultiplierUnit(1436)</li>
+     *   <li>UnderlyingContractMultiplierUnit(1437)</li>
+     *   <li>DerivativeContractMultiplierUnit(1438)</li>
+     * </ul>
      */
     public static class ContractMultiplierUnitValues {
 
@@ -6742,6 +7276,13 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for FlowScheduleType(1439).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegFlowScheduleType(1440)</li>
+     *   <li>UnderlyingFlowScheduleType(1441)</li>
+     *   <li>DerivativeFlowScheduleType(1442)</li>
+     * </ul>
      */
     public static class FlowScheduleTypeValues {
 
@@ -6764,6 +7305,25 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for RateSource(1446).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStreamNonDeliverableSettlRateSource(40087)</li>
+     *   <li>LegSettlRateFallbackRateSource(40366)</li>
+     *   <li>PaymentStreamNonDeliverableSettlRateSource(40371)</li>
+     *   <li>SettlRateFallbackRateSource(40373)</li>
+     *   <li>LegPaymentScheduleRateSource(40415)</li>
+     *   <li>UnderlyingPaymentStreamNonDeliverableSettlRateSource(40661)</li>
+     *   <li>UnderlyingPaymentScheduleRateSource(40705)</li>
+     *   <li>PaymentScheduleRateSource(40869)</li>
+     *   <li>UnderlyingSettlRateFallbackRateSource(40904)</li>
+     *   <li>ComplexEventRateSource(41014)</li>
+     *   <li>LegComplexEventRateSource(41383)</li>
+     *   <li>UnderlyingComplexEventRateSource(41733)</li>
+     *   <li>LegReturnRateInformationSource(42561)</li>
+     *   <li>ReturnRateInformationSource(42762)</li>
+     *   <li>UnderlyingReturnRateInformationSource(43061)</li>
+     * </ul>
      */
     public static class RateSourceValues {
 
@@ -6780,6 +7340,16 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for RateSourceType(1447).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentScheduleRateSourceType(40416)</li>
+     *   <li>UnderlyingPaymentScheduleRateSourceType(40706)</li>
+     *   <li>PaymentScheduleRateSourceType(40870)</li>
+     *   <li>ComplexEventRateSourceType(41015)</li>
+     *   <li>LegComplexEventRateSourceType(41384)</li>
+     *   <li>UnderlyingComplexEventRateSourceType(41734)</li>
+     * </ul>
      */
     public static class RateSourceTypeValues {
 
@@ -6793,6 +7363,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for RestructuringType(1449).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingRestructuringType(1453)</li>
+     *   <li>LegRestructuringType(2149)</li>
+     * </ul>
      */
     public static class RestructuringTypeValues {
 
@@ -6808,6 +7384,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for Seniority(1450).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingSeniority(1454)</li>
+     *   <li>LegSeniority(2150)</li>
+     *   <li>AdditionalTermBondSeniority(40010)</li>
+     *   <li>LegAdditionalTermBondSeniority(41326)</li>
+     *   <li>UnderlyingAdditionalTermBondSeniority(42027)</li>
+     * </ul>
      */
     public static class SeniorityValues {
 
@@ -6885,6 +7470,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for StrikePriceDeterminationMethod(1478).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingStrikePriceDeterminationMethod(2023)</li>
+     *   <li>LegStrikePriceDeterminationMethod(2186)</li>
+     * </ul>
      */
     public static class StrikePriceDeterminationMethodValues {
 
@@ -6900,6 +7491,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for StrikePriceBoundaryMethod(1479).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingStrikePriceBoundaryMethod(2024)</li>
+     *   <li>LegStrikePriceBoundaryMethod(2187)</li>
+     * </ul>
      */
     public static class StrikePriceBoundaryMethodValues {
 
@@ -6916,6 +7513,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for UnderlyingPriceDeterminationMethod(1481).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegUnderlyingPriceDeterminationMethod(2189)</li>
+     * </ul>
      */
     public static class UnderlyingPriceDeterminationMethodValues {
 
@@ -6931,6 +7533,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for OptPayoutType(1482).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingOptPayoutType(2028)</li>
+     *   <li>LegOptPayoutType(2193)</li>
+     * </ul>
      */
     public static class OptPayoutTypeValues {
 
@@ -6951,6 +7559,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ComplexEventType(1484).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingComplexEventType(2046)</li>
+     *   <li>LegComplexEventType(2219)</li>
+     * </ul>
      */
     public static class ComplexEventTypeValues {
 
@@ -6985,6 +7599,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ComplexEventPriceBoundaryMethod(1487).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingComplexEventPriceBoundaryMethod(2049)</li>
+     *   <li>LegComplexEventPriceBoundaryMethod(2229)</li>
+     * </ul>
      */
     public static class ComplexEventPriceBoundaryMethodValues {
 
@@ -7001,6 +7621,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ComplexEventPriceTimeType(1489).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingComplexEventPriceTimeType(2051)</li>
+     *   <li>LegComplexEventPriceTimeType(2231)</li>
+     * </ul>
      */
     public static class ComplexEventPriceTimeTypeValues {
 
@@ -7020,6 +7646,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ComplexEventCondition(1490).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingComplexEventCondition(2052)</li>
+     *   <li>LegComplexEventCondition(2232)</li>
+     * </ul>
      */
     public static class ComplexEventConditionValues {
 
@@ -7199,6 +7831,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for SwapSubClass(1575).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegSwapSubClass(2156)</li>
+     *   <li>UnderlyingSwapSubClass(2289)</li>
+     * </ul>
      */
     public static class SwapSubClassValues {
 
@@ -7234,6 +7872,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PosAmtReason(1585).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPosAmtReason(1590)</li>
+     *   <li>TradeAllocAmtReason(1850)</li>
+     * </ul>
      */
     public static class PosAmtReasonValues {
 
@@ -7532,6 +8176,29 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PartyDetailRoleQualifier(1674).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>RelatedPartyDetailRoleQualifier(1675)</li>
+     *   <li>TargetPartyRoleQualifier(1818)</li>
+     *   <li>RequestingPartyRoleQualifier(2338)</li>
+     *   <li>PartyRoleQualifier(2376)</li>
+     *   <li>DerivativeInstrumentPartyRoleQualifier(2377)</li>
+     *   <li>InstrumentPartyRoleQualifier(2378)</li>
+     *   <li>LegInstrumentPartyRoleQualifier(2379)</li>
+     *   <li>LegProvisionPartyRoleQualifier(2380)</li>
+     *   <li>Nested2PartyRoleQualifier(2381)</li>
+     *   <li>Nested3PartyRoleQualifier(2382)</li>
+     *   <li>Nested4PartyRoleQualifier(2383)</li>
+     *   <li>NestedPartyRoleQualifier(2384)</li>
+     *   <li>ProvisionPartyRoleQualifier(2385)</li>
+     *   <li>RequestedPartyRoleQualifier(2386)</li>
+     *   <li>RootPartyRoleQualifier(2388)</li>
+     *   <li>SettlPartyRoleQualifier(2389)</li>
+     *   <li>UnderlyingInstrumentPartyRoleQualifier(2391)</li>
+     *   <li>PaymentSettlPartyRoleQualifier(40237)</li>
+     *   <li>UnderlyingProvisionPartyRoleQualifier(40918)</li>
+     * </ul>
      */
     public static class PartyDetailRoleQualifierValues {
 
@@ -7599,6 +8266,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ShortSaleRestriction(1687).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingShortSaleRestriction(2043)</li>
+     *   <li>LegShortSaleRestriction(2209)</li>
+     * </ul>
      */
     public static class ShortSaleRestrictionValues {
 
@@ -7614,6 +8287,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ShortSaleExemptionReason(1688).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegShortSaleExemptionReason(1689)</li>
+     *   <li>SideShortSaleExemptionReason(1690)</li>
+     * </ul>
      */
     public static class ShortSaleExemptionReasonValues {
 
@@ -7635,6 +8314,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for OrderOrigination(1724).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>ContraOrderOrigination(2882)</li>
+     * </ul>
      */
     public static class OrderOriginationValues {
 
@@ -7680,6 +8364,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ObligationType(1739).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegObligationType(2155)</li>
+     * </ul>
      */
     public static class ObligationTypeValues {
 
@@ -7753,6 +8442,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for RiskLimitRequestResult(1761).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>RiskLimitResult(1764)</li>
+     * </ul>
      */
     public static class RiskLimitRequestResultValues {
 
@@ -7810,6 +8504,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for RiskLimitAction(1767).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>RiskWarningLevelAction(1769)</li>
+     * </ul>
      */
     public static class RiskLimitActionValues {
 
@@ -8086,6 +8785,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ClearingAccountType(1816).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegClearingAccountType(1817)</li>
+     * </ul>
      */
     public static class ClearingAccountTypeValues {
 
@@ -8143,6 +8847,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for EventTimeUnit(1827).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegEventTimeUnit(2063)</li>
+     * </ul>
      */
     public static class EventTimeUnitValues {
 
@@ -8385,6 +9094,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PartyDetailRequestResult(1877).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>PartyDetailDefinitionResult(1880)</li>
+     * </ul>
      */
     public static class PartyDetailRequestResultValues {
 
@@ -8402,6 +9116,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PartyDetailRequestStatus(1878).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>EntitlementRequestStatus(1882)</li>
+     * </ul>
      */
     public static class PartyDetailRequestStatusValues {
 
@@ -8431,6 +9150,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for EntitlementRequestResult(1881).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>EntitlementResult(1884)</li>
+     * </ul>
      */
     public static class EntitlementRequestResultValues {
 
@@ -8507,6 +9231,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for RegulatoryTradeIDEvent(1904).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>AllocRegulatoryTradeIDEvent(1911)</li>
+     * </ul>
      */
     public static class RegulatoryTradeIDEventValues {
 
@@ -8525,6 +9254,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for RegulatoryTradeIDType(1906).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>AllocRegulatoryTradeIDType(1912)</li>
+     * </ul>
      */
     public static class RegulatoryTradeIDTypeValues {
 
@@ -8733,6 +9467,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for AssetClass(1938).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>SecondaryAssetClass(1977)</li>
+     *   <li>UnderlyingAssetClass(2013)</li>
+     *   <li>LegAssetClass(2067)</li>
+     *   <li>LegSecondaryAssetClass(2077)</li>
+     *   <li>UnderlyingSecondaryAssetClass(2081)</li>
+     * </ul>
      */
     public static class AssetClassValues {
 
@@ -8755,6 +9498,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for AssetSubClass(1939).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>SecondaryAssetSubClass(1978)</li>
+     *   <li>UnderlyingAssetSubClass(2014)</li>
+     *   <li>LegAssetSubClass(2068)</li>
+     *   <li>LegSecondaryAssetSubClass(2078)</li>
+     *   <li>UnderlyingSecondaryAssetSubClass(2082)</li>
+     * </ul>
      */
     public static class AssetSubClassValues {
 
@@ -8814,6 +9566,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for SwapClass(1941).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingSwapClass(2016)</li>
+     *   <li>LegSwapClass(2070)</li>
+     * </ul>
      */
     public static class SwapClassValues {
 
@@ -8829,6 +9587,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for CouponType(1946).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingCouponType(1989)</li>
+     *   <li>LegCouponType(2161)</li>
+     *   <li>AdditionalTermBondCouponType(40011)</li>
+     *   <li>LegAdditionalTermBondCouponType(41327)</li>
+     *   <li>UnderlyingAdditionalTermBondCouponType(42028)</li>
+     * </ul>
      */
     public static class CouponTypeValues {
 
@@ -8844,6 +9611,33 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for CouponFrequencyUnit(1949).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingCouponFrequencyUnit(1992)</li>
+     *   <li>LegCouponFrequencyUnit(2164)</li>
+     *   <li>AdditionalTermBondCouponFrequencyUnit(40017)</li>
+     *   <li>StreamCalculationFrequencyUnit(40083)</li>
+     *   <li>ProvisionOptionExerciseFrequencyUnit(40128)</li>
+     *   <li>LegStreamCalculationFrequencyUnit(40275)</li>
+     *   <li>LegPaymentStreamResetFrequencyUnit(40307)</li>
+     *   <li>LegPaymentScheduleStepFrequencyUnit(40391)</li>
+     *   <li>LegProvisionOptionExerciseFrequencyUnit(40481)</li>
+     *   <li>UnderlyingStreamCalculationFrequencyUnit(40566)</li>
+     *   <li>UnderlyingPaymentStreamResetFrequencyUnit(40596)</li>
+     *   <li>UnderlyingPaymentScheduleStepFrequencyUnit(40681)</li>
+     *   <li>PaymentStreamResetFrequencyUnit(40765)</li>
+     *   <li>PaymentScheduleStepFrequencyUnit(40845)</li>
+     *   <li>LegAdditionalTermBondCouponFrequencyUnit(41333)</li>
+     *   <li>UnderlyingAdditionalTermBondCouponFrequencyUnit(42034)</li>
+     *   <li>UnderlyingProvisionOptionExerciseFrequencyUnit(42119)</li>
+     *   <li>LegPaymentStreamCompoundingFrequencyUnit(42415)</li>
+     *   <li>LegReturnRateValuationFrequencyUnit(42527)</li>
+     *   <li>PaymentStreamCompoundingFrequencyUnit(42616)</li>
+     *   <li>ReturnRateValuationFrequencyUnit(42728)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingFrequencyUnit(42911)</li>
+     *   <li>UnderlyingReturnRateValuationFrequencyUnit(43027)</li>
+     * </ul>
      */
     public static class CouponFrequencyUnitValues {
 
@@ -8863,6 +9657,21 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for CouponDayCount(1950).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingCouponDayCount(1993)</li>
+     *   <li>LegCouponDayCount(2165)</li>
+     *   <li>AdditionalTermBondDayCount(40018)</li>
+     *   <li>LegPaymentStreamDayCount(40283)</li>
+     *   <li>LegPaymentStreamDiscountRateDayCount(40287)</li>
+     *   <li>UnderlyingPaymentStreamDayCount(40572)</li>
+     *   <li>UnderlyingPaymentStreamDiscountRateDayCount(40576)</li>
+     *   <li>PaymentStreamDayCount(40742)</li>
+     *   <li>PaymentStreamDiscountRateDayCount(40746)</li>
+     *   <li>LegAdditionalTermBondDayCount(41334)</li>
+     *   <li>UnderlyingAdditionalTermBondDayCount(42035)</li>
+     * </ul>
      */
     public static class CouponDayCountValues {
 
@@ -8898,6 +9707,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for LienSeniority(1954).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingLienSeniority(1998)</li>
+     *   <li>LegLienSeniority(2169)</li>
+     * </ul>
      */
     public static class LienSeniorityValues {
 
@@ -8913,6 +9728,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for LoanFacility(1955).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingLoanFacility(1999)</li>
+     *   <li>LegLoanFacility(2170)</li>
+     * </ul>
      */
     public static class LoanFacilityValues {
 
@@ -8930,6 +9751,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ReferenceEntityType(1956).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingReferenceEntityType(2000)</li>
+     *   <li>LegReferenceEntityType(2171)</li>
+     * </ul>
      */
     public static class ReferenceEntityTypeValues {
 
@@ -9039,6 +9866,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ComplexOptPayoutTime(2121).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegComplexOptPayoutTime(2225)</li>
+     *   <li>UnderlyingComplexOptPayoutTime(2265)</li>
+     * </ul>
      */
     public static class ComplexOptPayoutTimeValues {
 
@@ -9057,6 +9890,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ComplexEventQuoteBasis(2126).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegComplexEventQuoteBasis(2235)</li>
+     *   <li>UnderlyingComplexEventQuoteBasis(2270)</li>
+     * </ul>
      */
     public static class ComplexEventQuoteBasisValues {
 
@@ -9070,6 +9909,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ComplexEventCreditEventNotifyingParty(2134).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegComplexEventCreditEventNotifyingParty(2243)</li>
+     *   <li>UnderlyingComplexEventCreditEventNotifyingParty(2278)</li>
+     * </ul>
      */
     public static class ComplexEventCreditEventNotifyingPartyValues {
 
@@ -9084,6 +9929,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for StrategyType(2141).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegStrategyType(2211)</li>
+     *   <li>UnderlyingStrategyType(2295)</li>
+     * </ul>
      */
     public static class StrategyTypeValues {
 
@@ -9101,6 +9952,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for SettlDisruptionProvision(2143).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegSettlDisruptionProvision(2213)</li>
+     *   <li>UnderlyingSettlDisruptionProvision(2297)</li>
+     * </ul>
      */
     public static class SettlDisruptionProvisionValues {
 
@@ -9114,6 +9971,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for AssetGroup(2210).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegAssetGroup(2348)</li>
+     *   <li>UnderlyingAssetGroup(2491)</li>
+     * </ul>
      */
     public static class AssetGroupValues {
 
@@ -9271,6 +10134,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for RefRiskLimitCheckIDType(2335).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>AllocRefRiskLimitCheckIDType(2393)</li>
+     * </ul>
      */
     public static class RefRiskLimitCheckIDTypeValues {
 
@@ -9300,6 +10168,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for RiskLimitCheckStatus(2343).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>SideRiskLimitCheckStatus(2344)</li>
+     *   <li>AllocRiskLimitCheckStatus(2483)</li>
+     * </ul>
      */
     public static class RiskLimitCheckStatusValues {
 
@@ -9393,6 +10267,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for RegulatoryTradeIDScope(2397).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>SideRegulatoryTradeIDScope(2398)</li>
+     *   <li>AllocRegulatoryTradeIDScope(2399)</li>
+     * </ul>
      */
     public static class RegulatoryTradeIDScopeValues {
 
@@ -9921,6 +10801,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for TradeReportingIndicator(2524).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>SideTradeReportingIndicator(2671)</li>
+     * </ul>
      */
     public static class TradeReportingIndicatorValues {
 
@@ -10125,6 +11010,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ComplexEventPVFinalPriceElectionFallback(2599).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegComplexEventPVFinalPriceElectionFallback(2610)</li>
+     *   <li>UnderlyingComplexEventPVFinalPriceElectionFallback(2613)</li>
+     *   <li>LegReturnRateFinalPriceFallback(42559)</li>
+     *   <li>ReturnRateFinalPriceFallback(42760)</li>
+     *   <li>UnderlyingReturnRateFinalPriceFallback(43059)</li>
+     * </ul>
      */
     public static class ComplexEventPVFinalPriceElectionFallbackValues {
 
@@ -10138,6 +11032,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for StrikeIndexQuote(2601).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegStrikeIndexQuote(2605)</li>
+     *   <li>UnderlyingStrikeIndexQuote(2623)</li>
+     *   <li>LegMakeWholeBenchmarkQuote(42397)</li>
+     *   <li>MakeWholeBenchmarkQuote(42596)</li>
+     *   <li>UnderlyingMakeWholeBenchmarkQuote(42893)</li>
+     * </ul>
      */
     public static class StrikeIndexQuoteValues {
 
@@ -10152,6 +11055,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ExtraordinaryEventAdjustmentMethod(2602).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegExtraordinaryEventAdjustmentMethod(2606)</li>
+     *   <li>UnderlyingExtraordinaryEventAdjustmentMethod(2624)</li>
+     * </ul>
      */
     public static class ExtraordinaryEventAdjustmentMethodValues {
 
@@ -10179,6 +11088,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for CollateralAmountType(2632).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>SideCollateralAmountType(2694)</li>
+     * </ul>
      */
     public static class CollateralAmountTypeValues {
 
@@ -10196,6 +11110,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for CommissionAmountType(2641).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>AllocCommissionAmountType(2655)</li>
+     * </ul>
      */
     public static class CommissionAmountTypeValues {
 
@@ -10325,6 +11244,13 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for InTheMoneyCondition(2681).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegInTheMoneyCondition(2682)</li>
+     *   <li>UnderlyingInTheMoneyCondition(2683)</li>
+     *   <li>DerivativeInTheMoneyCondition(2684)</li>
+     * </ul>
      */
     public static class InTheMoneyConditionValues {
 
@@ -10426,6 +11352,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for CommissionAmountSubType(2725).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>AllocCommissionAmountSubType(2726)</li>
+     * </ul>
      */
     public static class CommissionAmountSubTypeValues {
 
@@ -10473,6 +11404,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ReturnTrigger(2753).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegReturnTrigger(2755)</li>
+     *   <li>UnderlyingReturnTrigger(2757)</li>
+     * </ul>
      */
     public static class ReturnTriggerValues {
 
@@ -10556,6 +11493,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for MatchExceptionElementType(2774).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>MatchingDataPointType(2784)</li>
+     * </ul>
      */
     public static class MatchExceptionElementTypeValues {
 
@@ -10795,6 +11737,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for CollateralReinvestmentType(2844).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>SideCollateralReinvestmentType(2867)</li>
+     * </ul>
      */
     public static class CollateralReinvestmentTypeValues {
 
@@ -10856,6 +11803,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for RoutingArrangmentIndicator(2883).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>ContraRoutingArrangmentIndicator(2884)</li>
+     * </ul>
      */
     public static class RoutingArrangmentIndicatorValues {
 
@@ -10869,6 +11821,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for CashSettlQuoteMethod(40027).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegCashSettlQuoteMethod(41351)</li>
+     *   <li>UnderlyingCashSettlQuoteMethod(42048)</li>
+     *   <li>LegReturnRateQuoteMethod(42544)</li>
+     *   <li>ReturnRateQuoteMethod(42745)</li>
+     *   <li>UnderlyingReturnRateQuoteMethod(43044)</li>
+     * </ul>
      */
     public static class CashSettlQuoteMethodValues {
 
@@ -10883,6 +11844,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for CashSettlValuationMethod(40038).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegCashSettlValuationMethod(41361)</li>
+     *   <li>UnderlyingCashSettlValuationMethod(42058)</li>
+     * </ul>
      */
     public static class CashSettlValuationMethodValues {
 
@@ -10902,6 +11869,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for StreamType(40050).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegStreamType(40242)</li>
+     *   <li>UnderlyingStreamType(40541)</li>
+     * </ul>
      */
     public static class StreamTypeValues {
 
@@ -10915,6 +11888,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ProvisionType(40091).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegProvisionType(40449)</li>
+     *   <li>UnderlyingProvisionType(42150)</li>
+     * </ul>
      */
     public static class ProvisionTypeValues {
 
@@ -10934,6 +11913,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ProvisionDateTenorUnit(40097).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegProvisionDateTenorUnit(40455)</li>
+     *   <li>UnderlyingProvisionDateTenorUnit(42155)</li>
+     * </ul>
      */
     public static class ProvisionDateTenorUnitValues {
 
@@ -10949,6 +11934,18 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ProvisionCalculationAgent(40098).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>ComplexEventCalculationAgent(2129)</li>
+     *   <li>LegComplexEventCalculationAgent(2238)</li>
+     *   <li>UnderlyingComplexEventCalculationAgent(2273)</li>
+     *   <li>SettlRatePostponementCalculationAgent(40089)</li>
+     *   <li>LegProvisionCalculationAgent(40456)</li>
+     *   <li>UnderlyingSettlRatePostponementCalculationAgent(40663)</li>
+     *   <li>LegSettlRatePostponementCalculationAgent(40906)</li>
+     *   <li>UnderlyingProvisionCalculationAgent(42156)</li>
+     * </ul>
      */
     public static class ProvisionCalculationAgentValues {
 
@@ -10964,6 +11961,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ProvisionOptionSinglePartyBuyerSide(40099).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>ProvisionOptionSinglePartySellerSide(40100)</li>
+     *   <li>LegProvisionOptionSinglePartyBuyerSide(40457)</li>
+     *   <li>LegProvisionOptionSinglePartySellerSide(40458)</li>
+     *   <li>UnderlyingProvisionOptionSinglePartyBuyerSide(42157)</li>
+     *   <li>UnderlyingProvisionOptionSinglePartySellerSide(42158)</li>
+     * </ul>
      */
     public static class ProvisionOptionSinglePartyBuyerSideValues {
 
@@ -10977,6 +11983,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ProvisionCashSettlMethod(40108).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegProvisionCashSettlMethod(40466)</li>
+     *   <li>UnderlyingProvisionCashSettlMethod(42166)</li>
+     * </ul>
      */
     public static class ProvisionCashSettlMethodValues {
 
@@ -10995,6 +12007,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ProvisionCashSettlQuoteType(40111).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegProvisionCashSettlQuoteType(40469)</li>
+     *   <li>UnderlyingProvisionCashSettlQuoteType(42169)</li>
+     * </ul>
      */
     public static class ProvisionCashSettlQuoteTypeValues {
 
@@ -11010,6 +12028,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ProvisionOptionExerciseEarliestDateOffsetUnit(40126).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegProvisionOptionExerciseEarliestDateOffsetUnit(40479)</li>
+     *   <li>OptionExerciseEarliestDateOffsetUnit(41121)</li>
+     *   <li>LegOptionExerciseEarliestDateOffsetUnit(41496)</li>
+     *   <li>UnderlyingOptionExerciseEarliestDateOffsetUnit(41825)</li>
+     *   <li>UnderlyingProvisionOptionExerciseEarliestDateOffsetUnit(42117)</li>
+     * </ul>
      */
     public static class ProvisionOptionExerciseEarliestDateOffsetUnitValues {
 
@@ -11025,6 +12052,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ProvisionOptionExerciseFixedDateType(40144).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegProvisionOptionExerciseFixedDateType(40497)</li>
+     *   <li>UnderlyingProvisionOptionExerciseFixedDateType(42114)</li>
+     * </ul>
      */
     public static class ProvisionOptionExerciseFixedDateTypeValues {
 
@@ -11038,6 +12071,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ProvisionCashSettlPaymentDateType(40173).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegProvisionCashSettlPaymentDateType(40475)</li>
+     *   <li>UnderlyingProvisionCashSettlPaymentDateType(42101)</li>
+     * </ul>
      */
     public static class ProvisionCashSettlPaymentDateTypeValues {
 
@@ -11051,6 +12090,30 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ProtectionTermEventUnit(40196).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>ComplexEventCreditEventUnit(41002)</li>
+     *   <li>ComplexEventScheduleFrequencyUnit(41035)</li>
+     *   <li>OptionExerciseFrequencyUnit(41123)</li>
+     *   <li>OptionExerciseExpirationFrequencyUnit(41147)</li>
+     *   <li>StreamCalculationCorrectionUnit(41248)</li>
+     *   <li>StreamCommoditySettlPeriodFrequencyUnit(41296)</li>
+     *   <li>LegComplexEventCreditEventUnit(41371)</li>
+     *   <li>LegComplexEventScheduleFrequencyUnit(41404)</li>
+     *   <li>LegOptionExerciseFrequencyUnit(41498)</li>
+     *   <li>LegOptionExerciseExpirationFrequencyUnit(41522)</li>
+     *   <li>LegProtectionTermEventUnit(41630)</li>
+     *   <li>LegStreamCalculationCorrectionUnit(41645)</li>
+     *   <li>LegStreamCommoditySettlPeriodFrequencyUnit(41693)</li>
+     *   <li>UnderlyingComplexEventCreditEventUnit(41721)</li>
+     *   <li>UnderlyingComplexEventScheduleFrequencyUnit(41754)</li>
+     *   <li>UnderlyingOptionExerciseFrequencyUnit(41827)</li>
+     *   <li>UnderlyingOptionExerciseExpirationFrequencyUnit(41851)</li>
+     *   <li>UnderlyingStreamCalculationCorrectionUnit(41961)</li>
+     *   <li>UnderlyingStreamCommoditySettlPeriodFrequencyUnit(42009)</li>
+     *   <li>UnderlyingProtectionTermEventUnit(42082)</li>
+     * </ul>
      */
     public static class ProtectionTermEventUnitValues {
 
@@ -11083,6 +12146,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ProtectionTermEventQualifier(40200).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>ComplexEventCreditEventQualifier(41006)</li>
+     *   <li>LegComplexEventCreditEventQualifier(41375)</li>
+     *   <li>LegProtectionTermEventQualifier(41634)</li>
+     *   <li>UnderlyingComplexEventCreditEventQualifier(41725)</li>
+     *   <li>UnderlyingProtectionTermEventQualifier(42086)</li>
+     * </ul>
      */
     public static class ProtectionTermEventQualifierValues {
 
@@ -11124,6 +12196,32 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentPaySide(40214).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>ComplexOptPayoutPaySide(2117)</li>
+     *   <li>ComplexOptPayoutReceiveSide(2118)</li>
+     *   <li>LegComplexOptPayoutPaySide(2220)</li>
+     *   <li>LegComplexOptPayoutReceiveSide(2221)</li>
+     *   <li>UnderlyingComplexOptPayoutPaySide(2261)</li>
+     *   <li>UnderlyingComplexOptPayoutReceiveSide(2262)</li>
+     *   <li>StreamPaySide(40052)</li>
+     *   <li>StreamReceiveSide(40053)</li>
+     *   <li>PaymentReceiveSide(40215)</li>
+     *   <li>LegStreamPaySide(40244)</li>
+     *   <li>LegStreamReceiveSide(40245)</li>
+     *   <li>LegPaymentSchedulePaySide(40379)</li>
+     *   <li>LegPaymentScheduleReceiveSide(40380)</li>
+     *   <li>UnderlyingStreamPaySide(40543)</li>
+     *   <li>UnderlyingStreamReceiveSide(40544)</li>
+     *   <li>UnderlyingPaymentSchedulePaySide(40669)</li>
+     *   <li>UnderlyingPaymentScheduleReceiveSide(40670)</li>
+     *   <li>PaymentSchedulePaySide(40833)</li>
+     *   <li>PaymentScheduleReceiveSide(40834)</li>
+     *   <li>LegSettlMethodElectingPartySide(42391)</li>
+     *   <li>SettlMethodElectingPartySide(42590)</li>
+     *   <li>UnderlyingSettlMethodElectingPartySide(42887)</li>
+     * </ul>
      */
     public static class PaymentPaySideValues {
 
@@ -11151,6 +12249,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamType(40738).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStreamType(40279)</li>
+     *   <li>UnderlyingPaymentStreamType(40568)</li>
+     * </ul>
      */
     public static class PaymentStreamTypeValues {
 
@@ -11172,6 +12276,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamDiscountType(40744).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStreamDiscountType(40285)</li>
+     *   <li>UnderlyingPaymentStreamDiscountType(40574)</li>
+     * </ul>
      */
     public static class PaymentStreamDiscountTypeValues {
 
@@ -11185,6 +12295,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamCompoundingMethod(40747).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStreamCompoundingMethod(40288)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingMethod(40577)</li>
+     *   <li>DividendCompoundingMethod(42254)</li>
+     *   <li>LegDividendCompoundingMethod(42346)</li>
+     *   <li>UnderlyingDividendCompoundingMethod(42835)</li>
+     * </ul>
      */
     public static class PaymentStreamCompoundingMethodValues {
 
@@ -11200,6 +12319,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamPaymentFrequencyUnit(40754).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStreamPaymentFrequencyUnit(40295)</li>
+     *   <li>UnderlyingPaymentStreamPaymentFrequencyUnit(40584)</li>
+     * </ul>
      */
     public static class PaymentStreamPaymentFrequencyUnitValues {
 
@@ -11216,6 +12341,112 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamPaymentDateOffsetUnit(40760).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingStreamEffectiveDateOffsetUnit(40062)</li>
+     *   <li>StreamTerminationDateOffsetUnit(40070)</li>
+     *   <li>ProvisionCashSettlValueDateOffsetUnit(40120)</li>
+     *   <li>ProvisionOptionExerciseStartDateOffsetUnit(40132)</li>
+     *   <li>ProvisionOptionExpirationDateOffsetUnit(40150)</li>
+     *   <li>ProvisionOptionRelevantUnderlyingDateOffsetUnit(40160)</li>
+     *   <li>ProvisionCashSettlPaymentDateOffsetUnit(40167)</li>
+     *   <li>LegStreamEffectiveDateOffsetUnit(40254)</li>
+     *   <li>LegStreamTerminationDateOffsetUnit(40262)</li>
+     *   <li>LegPaymentStreamPaymentDateOffsetUnit(40301)</li>
+     *   <li>LegPaymentStreamInitialFixingDateOffsetUnit(40313)</li>
+     *   <li>LegPaymentStreamFixingDateOffsetUnit(40320)</li>
+     *   <li>LegPaymentStreamRateCutoffDateOffsetUnit(40324)</li>
+     *   <li>LegPaymentStreamNonDeliverableFixingDatesOffsetUnit(40364)</li>
+     *   <li>LegPaymentScheduleFixingDateOffsetUnit(40402)</li>
+     *   <li>LegPaymentScheduleInterimExchangeDatesOffsetUnit(40411)</li>
+     *   <li>LegProvisionOptionExerciseStartDateOffsetUnit(40485)</li>
+     *   <li>LegProvisionOptionExpirationDateOffsetUnit(40503)</li>
+     *   <li>LegProvisionOptionRelevantUnderlyingDateOffsetUnit(40513)</li>
+     *   <li>LegProvisionCashSettlPaymentDateOffsetUnit(40520)</li>
+     *   <li>LegProvisionCashSettlValueDateOffsetUnit(40530)</li>
+     *   <li>UnderlyingStreamTerminationDateOffsetUnit(40553)</li>
+     *   <li>UnderlyingPaymentStreamPaymentDateOffsetUnit(40590)</li>
+     *   <li>UnderlyingPaymentStreamInitialFixingDateOffsetUnit(40602)</li>
+     *   <li>UnderlyingPaymentStreamFixingDateOffsetUnit(40609)</li>
+     *   <li>UnderlyingPaymentStreamRateCutoffDateOffsetUnit(40613)</li>
+     *   <li>UnderlyingPaymentStreamNonDeliverableFixingDatesOffsetUnit(40653)</li>
+     *   <li>UnderlyingPaymentScheduleFixingDateOffsetUnit(40692)</li>
+     *   <li>UnderlyingPaymentScheduleInterimExchangeDatesOffsetUnit(40701)</li>
+     *   <li>PaymentStreamInitialFixingDateOffsetUnit(40771)</li>
+     *   <li>PaymentStreamFixingDateOffsetUnit(40778)</li>
+     *   <li>PaymentStreamRateCutoffDateOffsetUnit(40782)</li>
+     *   <li>PaymentStreamNonDeliverableFixingDatesOffsetUnit(40822)</li>
+     *   <li>PaymentScheduleFixingDateOffsetUnit(40856)</li>
+     *   <li>PaymentScheduleInterimExchangeDatesOffsetUnit(40865)</li>
+     *   <li>StreamEffectiveDateOffsetUnit(40912)</li>
+     *   <li>ComplexEventDateOffsetUnit(41023)</li>
+     *   <li>OptionExerciseStartDateOffsetUnit(41127)</li>
+     *   <li>OptionExerciseExpirationDateOffsetUnit(41145)</li>
+     *   <li>PaymentDateOffsetUnit(41158)</li>
+     *   <li>PaymentScheduleFixingFirstObservationDateOffsetUnit(41179)</li>
+     *   <li>PaymentStreamFirstObservationDateOffsetUnit(41212)</li>
+     *   <li>LegComplexEventDateOffsetUnit(41392)</li>
+     *   <li>LegOptionExerciseStartDateOffsetUnit(41502)</li>
+     *   <li>LegOptionExerciseExpirationDateOffsetUnit(41520)</li>
+     *   <li>LegPaymentScheduleFixingFirstObservationDateOffsetUnit(41548)</li>
+     *   <li>LegPaymentStreamFirstObservationDateOffsetUnit(41581)</li>
+     *   <li>UnderlyingComplexEventDateOffsetUnit(41742)</li>
+     *   <li>UnderlyingOptionExerciseStartDateOffsetUnit(41831)</li>
+     *   <li>UnderlyingOptionExerciseExpirationDateOffsetUnit(41849)</li>
+     *   <li>UnderlyingPaymentScheduleFixingFirstObservationDateOffsetUnit(41896)</li>
+     *   <li>UnderlyingPaymentStreamFirstObservationDateOffsetUnit(41929)</li>
+     *   <li>UnderlyingProvisionCashSettlPaymentDateOffsetUnit(42095)</li>
+     *   <li>UnderlyingProvisionCashSettlValueDateOffsetUnit(42109)</li>
+     *   <li>UnderlyingProvisionOptionExerciseStartDateOffsetUnit(42123)</li>
+     *   <li>UnderlyingProvisionOptionExpirationDateOffsetUnit(42137)</li>
+     *   <li>UnderlyingProvisionOptionRelevantUnderlyingDateOffsetUnit(42146)</li>
+     *   <li>CashSettlDateOffsetUnit(42211)</li>
+     *   <li>DividendAccrualPaymentDateOffsetUnit(42240)</li>
+     *   <li>DividendFXTriggerDateOffsetUnit(42267)</li>
+     *   <li>DividendPeriodValuationDateOffsetUnit(42284)</li>
+     *   <li>DividendPeriodPaymentDateOffsetUnit(42290)</li>
+     *   <li>LegCashSettlDateOffsetUnit(42303)</li>
+     *   <li>LegDividendAccrualPaymentDateOffsetUnit(42332)</li>
+     *   <li>LegDividendFXTriggerDateOffsetUnit(42359)</li>
+     *   <li>LegDividendPeriodValuationDateOffsetUnit(42376)</li>
+     *   <li>LegDividendPeriodPaymentDateOffsetUnit(42382)</li>
+     *   <li>LegPaymentStreamCompoundingDatesOffsetUnit(42411)</li>
+     *   <li>LegPaymentStreamCompoundingEndDateOffsetUnit(42424)</li>
+     *   <li>LegPaymentStreamCompoundingStartDateOffsetUnit(42448)</li>
+     *   <li>LegPaymentStreamFinalPricePaymentDateOffsetUnit(42456)</li>
+     *   <li>LegPaymentStubEndDateOffsetUnit(42492)</li>
+     *   <li>LegPaymentStubStartDateOffsetUnit(42501)</li>
+     *   <li>LegReturnRateValuationDateOffsetUnit(42512)</li>
+     *   <li>LegReturnRateValuationStartDateOffsetUnit(42517)</li>
+     *   <li>LegReturnRateValuationEndDateOffsetUnit(42523)</li>
+     *   <li>LegSettlMethodElectionDateOffsetUnit(42578)</li>
+     *   <li>PaymentStreamCompoundingDatesOffsetUnit(42612)</li>
+     *   <li>PaymentStreamCompoundingEndDateOffsetUnit(42625)</li>
+     *   <li>PaymentStreamCompoundingStartDateOffsetUnit(42649)</li>
+     *   <li>PaymentStreamFinalPricePaymentDateOffsetUnit(42657)</li>
+     *   <li>PaymentStubEndDateOffsetUnit(42693)</li>
+     *   <li>PaymentStubStartDateOffsetUnit(42702)</li>
+     *   <li>ReturnRateValuationDateOffsetUnit(42713)</li>
+     *   <li>ReturnRateValuationStartDateOffsetUnit(42718)</li>
+     *   <li>ReturnRateValuationEndDateOffsetUnit(42724)</li>
+     *   <li>SettlMethodElectionDateOffsetUnit(42781)</li>
+     *   <li>UnderlyingCashSettlDateOffsetUnit(42794)</li>
+     *   <li>UnderlyingDividendAccrualPaymentDateOffsetUnit(42821)</li>
+     *   <li>UnderlyingDividendFXTriggerDateOffsetUnit(42848)</li>
+     *   <li>UnderlyingDividendPeriodValuationDateOffsetUnit(42872)</li>
+     *   <li>UnderlyingDividendPeriodPaymentDateOffsetUnit(42878)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingDatesOffsetUnit(42907)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingEndDateOffsetUnit(42920)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingStartDateOffsetUnit(42944)</li>
+     *   <li>UnderlyingPaymentStreamFinalPricePaymentDateOffsetUnit(42952)</li>
+     *   <li>UnderlyingPaymentStubEndDateOffsetUnit(42988)</li>
+     *   <li>UnderlyingPaymentStubStartDateOffsetUnit(42997)</li>
+     *   <li>UnderlyingReturnRateValuationDateOffsetUnit(43012)</li>
+     *   <li>UnderlyingReturnRateValuationStartDateOffsetUnit(43017)</li>
+     *   <li>UnderlyingReturnRateValuationEndDateOffsetUnit(43023)</li>
+     *   <li>UnderlyingSettlMethodElectionDateOffsetUnit(43080)</li>
+     * </ul>
      */
     public static class PaymentStreamPaymentDateOffsetUnitValues {
 
@@ -11231,6 +12462,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamResetWeeklyRollConvention(40766).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStreamResetWeeklyRollConvention(40308)</li>
+     *   <li>UnderlyingPaymentStreamResetWeeklyRollConvention(40597)</li>
+     * </ul>
      */
     public static class PaymentStreamResetWeeklyRollConventionValues {
 
@@ -11249,6 +12486,24 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamRateIndexSource(40790).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>ProvisionCashSettlQuoteSource(40112)</li>
+     *   <li>LegPaymentStreamRateIndexSource(40332)</li>
+     *   <li>LegPaymentStreamInflationIndexSource(40354)</li>
+     *   <li>LegPaymentStubIndexSource(40425)</li>
+     *   <li>LegPaymentStubIndex2Source(40439)</li>
+     *   <li>LegProvisionCashSettlQuoteSource(40470)</li>
+     *   <li>UnderlyingPaymentStreamRateIndexSource(40621)</li>
+     *   <li>UnderlyingPaymentStreamInflationIndexSource(40643)</li>
+     *   <li>UnderlyingPaymentStubIndexSource(40715)</li>
+     *   <li>UnderlyingPaymentStubIndex2Source(40729)</li>
+     *   <li>PaymentStreamInflationIndexSource(40812)</li>
+     *   <li>PaymentStubIndexSource(40879)</li>
+     *   <li>PaymentStubIndex2Source(40893)</li>
+     *   <li>UnderlyingProvisionCashSettlQuoteSource(42102)</li>
+     * </ul>
      */
     public static class PaymentStreamRateIndexSourceValues {
 
@@ -11264,6 +12519,32 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamRateIndexCurveUnit(40791).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingIndexCurveUnit(2723)</li>
+     *   <li>FloatingRateIndexCurveUnit(2730)</li>
+     *   <li>LegPaymentStreamRateIndexCurveUnit(40333)</li>
+     *   <li>LegPaymentStubIndexCurveUnit(40427)</li>
+     *   <li>LegPaymentStubIndex2CurveUnit(40441)</li>
+     *   <li>UnderlyingPaymentStreamRateIndexCurveUnit(40622)</li>
+     *   <li>UnderlyingPaymentStubIndexCurveUnit(40717)</li>
+     *   <li>UnderlyingPaymentStubIndex2CurveUnit(40731)</li>
+     *   <li>PaymentStubIndexCurveUnit(40881)</li>
+     *   <li>PaymentStubIndex2CurveUnit(40895)</li>
+     *   <li>PaymentStreamRateIndex2CurveUnit(41195)</li>
+     *   <li>LegPaymentStreamRateIndex2CurveUnit(41563)</li>
+     *   <li>UnderlyingPaymentStreamRateIndex2CurveUnit(41911)</li>
+     *   <li>DividendFloatingRateIndexCurveUnit(42220)</li>
+     *   <li>LegDividendFloatingRateIndexCurveUnit(42314)</li>
+     *   <li>LegPaymentStreamCompoundingRateIndexCurveUnit(42429)</li>
+     *   <li>PaymentStreamCompoundingRateIndexCurveUnit(42630)</li>
+     *   <li>UnderlyingDividendFloatingRateIndexCurveUnit(42803)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingRateIndexCurveUnit(42925)</li>
+     *   <li>PaymentFloatingRateIndexCurveUnit(43100)</li>
+     *   <li>PaymentFrequencyUnit(43103)</li>
+     *   <li>PaymentRateResetFrequencyUnit(43105)</li>
+     * </ul>
      */
     public static class PaymentStreamRateIndexCurveUnitValues {
 
@@ -11279,6 +12560,27 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamRateSpreadPositionType(40795).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStreamRateSpreadPositionType(40337)</li>
+     *   <li>LegPaymentScheduleRateSpreadPositionType(40386)</li>
+     *   <li>LegPaymentStubIndexRateSpreadPositionType(40430)</li>
+     *   <li>LegPaymentStubIndex2RateSpreadPositionType(40444)</li>
+     *   <li>UnderlyingPaymentStreamRateSpreadPositionType(40626)</li>
+     *   <li>UnderlyingPaymentScheduleRateSpreadPositionType(40676)</li>
+     *   <li>UnderlyingPaymentStubIndexRateSpreadPositionType(40720)</li>
+     *   <li>UnderlyingPaymentStubIndex2RateSpreadPositionType(40734)</li>
+     *   <li>PaymentScheduleRateSpreadPositionType(40840)</li>
+     *   <li>PaymentStubIndexRateSpreadPositionType(40884)</li>
+     *   <li>PaymentStubIndex2RateSpreadPositionType(40898)</li>
+     *   <li>DividendFloatingRateSpreadPositionType(42223)</li>
+     *   <li>LegDividendFloatingRateSpreadPositionType(42317)</li>
+     *   <li>LegPaymentStreamCompoundingRateSpreadPositionType(42432)</li>
+     *   <li>PaymentStreamCompoundingRateSpreadPositionType(42633)</li>
+     *   <li>UnderlyingDividendFloatingRateSpreadPositionType(42806)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingRateSpreadPositionType(42928)</li>
+     * </ul>
      */
     public static class PaymentStreamRateSpreadPositionTypeValues {
 
@@ -11292,6 +12594,27 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamRateTreatment(40796).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStreamRateTreatment(40338)</li>
+     *   <li>LegPaymentScheduleRateTreatment(40387)</li>
+     *   <li>LegPaymentStubIndexRateTreatment(40431)</li>
+     *   <li>LegPaymentStubIndex2RateTreatment(40445)</li>
+     *   <li>UnderlyingPaymentStreamRateTreatment(40627)</li>
+     *   <li>UnderlyingPaymentScheduleRateTreatment(40677)</li>
+     *   <li>UnderlyingPaymentStubIndexRateTreatment(40721)</li>
+     *   <li>UnderlyingPaymentStubIndex2RateTreatment(40735)</li>
+     *   <li>PaymentScheduleRateTreatment(40841)</li>
+     *   <li>PaymentStubIndexRateTreatment(40885)</li>
+     *   <li>PaymentStubIndex2RateTreatment(40899)</li>
+     *   <li>DividendFloatingRateTreatment(42224)</li>
+     *   <li>LegDividendFloatingRateTreatment(42318)</li>
+     *   <li>LegPaymentStreamCompoundingRateTreatment(42433)</li>
+     *   <li>PaymentStreamCompoundingRateTreatment(42634)</li>
+     *   <li>UnderlyingDividendFloatingRateTreatment(42807)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingRateTreatment(42929)</li>
+     * </ul>
      */
     public static class PaymentStreamRateTreatmentValues {
 
@@ -11305,6 +12628,36 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamCapRateBuySide(40798).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStreamCapRateBuySide(40340)</li>
+     *   <li>LegPaymentStreamCapRateSellSide(40341)</li>
+     *   <li>LegPaymentStubIndexCapRateBuySide(40433)</li>
+     *   <li>LegPaymentStubIndexCapRateSellSide(40434)</li>
+     *   <li>UnderlyingPaymentStreamCapRateBuySide(40629)</li>
+     *   <li>UnderlyingPaymentStreamCapRateSellSide(40630)</li>
+     *   <li>UnderlyingPaymentStubIndexCapRateBuySide(40723)</li>
+     *   <li>UnderlyingPaymentStubIndexCapRateSellSide(40724)</li>
+     *   <li>PaymentStreamCapRateSellSide(40799)</li>
+     *   <li>PaymentStubIndexCapRateBuySide(40887)</li>
+     *   <li>PaymentStubIndexCapRateSellSide(40888)</li>
+     *   <li>DividendCapRateBuySide(42226)</li>
+     *   <li>DividendCapRateSellSide(42227)</li>
+     *   <li>ExtraordinaryDividendPartySide(42249)</li>
+     *   <li>LegDividendCapRateBuySide(42320)</li>
+     *   <li>LegDividendCapRateSellSide(42321)</li>
+     *   <li>LegExtraordinaryDividendPartySide(42341)</li>
+     *   <li>LegPaymentStreamCompoundingCapRateBuySide(42435)</li>
+     *   <li>LegPaymentStreamCompoundingCapRateSellSide(42436)</li>
+     *   <li>PaymentStreamCompoundingCapRateBuySide(42636)</li>
+     *   <li>PaymentStreamCompoundingCapRateSellSide(42637)</li>
+     *   <li>UnderlyingDividendCapRateBuySide(42809)</li>
+     *   <li>UnderlyingDividendCapRateSellSide(42810)</li>
+     *   <li>UnderlyingExtraordinaryDividendPartySide(42830)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingCapRateBuySide(42931)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingCapRateSellSide(42932)</li>
+     * </ul>
      */
     public static class PaymentStreamCapRateBuySideValues {
 
@@ -11318,6 +12671,33 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamFloorRateBuySide(40801).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStreamFloorRateBuySide(40343)</li>
+     *   <li>LegPaymentStreamFloorRateSellSide(40344)</li>
+     *   <li>LegPaymentStubIndexFloorRateBuySide(40436)</li>
+     *   <li>LegPaymentStubIndexFloorRateSellSide(40437)</li>
+     *   <li>UnderlyingPaymentStreamFloorRateBuySide(40632)</li>
+     *   <li>UnderlyingPaymentStreamFloorRateSellSide(40633)</li>
+     *   <li>UnderlyingPaymentStubIndexFloorRateBuySide(40726)</li>
+     *   <li>UnderlyingPaymentStubIndexFloorRateSellSide(40727)</li>
+     *   <li>PaymentStreamFloorRateSellSide(40802)</li>
+     *   <li>PaymentStubIndexFloorRateBuySide(40890)</li>
+     *   <li>PaymentStubIndexFloorRateSellSide(40891)</li>
+     *   <li>DividendFloorRateBuySide(42229)</li>
+     *   <li>DividendFloorRateSellSide(42230)</li>
+     *   <li>LegDividendFloorRateBuySide(42323)</li>
+     *   <li>LegDividendFloorRateSellSide(42324)</li>
+     *   <li>LegPaymentStreamCompoundingFloorRateBuySide(42438)</li>
+     *   <li>LegPaymentStreamCompoundingFloorRateSellSide(42439)</li>
+     *   <li>PaymentStreamCompoundingFloorRateBuySide(42639)</li>
+     *   <li>PaymentStreamCompoundingFloorRateSellSide(42640)</li>
+     *   <li>UnderlyingDividendFloorRateBuySide(42812)</li>
+     *   <li>UnderlyingDividendFloorRateSellSide(42813)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingFloorRateBuySide(42934)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingFloorRateSellSide(42935)</li>
+     * </ul>
      */
     public static class PaymentStreamFloorRateBuySideValues {
 
@@ -11331,6 +12711,18 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamAveragingMethod(40806).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStreamAveragingMethod(40348)</li>
+     *   <li>UnderlyingPaymentStreamAveragingMethod(40637)</li>
+     *   <li>DividendAveragingMethod(42234)</li>
+     *   <li>LegDividendAveragingMethod(42328)</li>
+     *   <li>LegPaymentStreamCompoundingAveragingMethod(42443)</li>
+     *   <li>PaymentStreamCompoundingAveragingMethod(42644)</li>
+     *   <li>UnderlyingDividendAveragingMethod(42817)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingAveragingMethod(42939)</li>
+     * </ul>
      */
     public static class PaymentStreamAveragingMethodValues {
 
@@ -11344,6 +12736,18 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamNegativeRateTreatment(40807).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStreamNegativeRateTreatment(40349)</li>
+     *   <li>UnderlyingPaymentStreamNegativeRateTreatment(40638)</li>
+     *   <li>DividendNegativeRateTreatment(42235)</li>
+     *   <li>LegDividendNegativeRateTreatment(42329)</li>
+     *   <li>LegPaymentStreamCompoundingNegativeRateTreatment(42444)</li>
+     *   <li>PaymentStreamCompoundingNegativeRateTreatment(42645)</li>
+     *   <li>UnderlyingDividendNegativeRateTreatment(42818)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingNegativeRateTreatment(42940)</li>
+     * </ul>
      */
     public static class PaymentStreamNegativeRateTreatmentValues {
 
@@ -11357,6 +12761,18 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamInflationLagUnit(40809).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStreamInflationLagUnit(40351)</li>
+     *   <li>UnderlyingPaymentStreamInflationLagUnit(40640)</li>
+     *   <li>PaymentScheduleFixingLagUnit(41177)</li>
+     *   <li>PaymentStreamCalculationLagUnit(41210)</li>
+     *   <li>LegPaymentScheduleFixingLagUnit(41546)</li>
+     *   <li>LegPaymentStreamCalculationLagUnit(41579)</li>
+     *   <li>UnderlyingPaymentScheduleFixingLagUnit(41894)</li>
+     *   <li>UnderlyingPaymentStreamCalculationLagUnit(41927)</li>
+     * </ul>
      */
     public static class PaymentStreamInflationLagUnitValues {
 
@@ -11372,6 +12788,14 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamInflationLagDayType(40810).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStreamInflationLagDayType(40352)</li>
+     *   <li>UnderlyingPaymentStreamInflationLagDayType(40641)</li>
+     *   <li>LegProtectionTermEventDayType(41631)</li>
+     *   <li>UnderlyingProtectionTermEventDayType(42083)</li>
+     * </ul>
      */
     public static class PaymentStreamInflationLagDayTypeValues {
 
@@ -11389,6 +12813,18 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamInflationInterpolationMethod(40811).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStreamInflationInterpolationMethod(40353)</li>
+     *   <li>UnderlyingPaymentStreamInflationInterpolationMethod(40642)</li>
+     *   <li>LegMakeWholeInterpolationMethod(42398)</li>
+     *   <li>LegPaymentStreamInterpolationMethod(42402)</li>
+     *   <li>MakeWholeInterpolationMethod(42597)</li>
+     *   <li>PaymentStreamInterpolationMethod(42603)</li>
+     *   <li>UnderlyingMakeWholeInterpolationMethod(42894)</li>
+     *   <li>UnderlyingPaymentStreamInterpolationMethod(42898)</li>
+     * </ul>
      */
     public static class PaymentStreamInflationInterpolationMethodValues {
 
@@ -11402,6 +12838,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamFRADiscounting(40816).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStreamFRADiscounting(40358)</li>
+     *   <li>UnderlyingPaymentStreamFRADiscounting(40647)</li>
+     * </ul>
      */
     public static class PaymentStreamFRADiscountingValues {
 
@@ -11416,6 +12858,21 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for NonDeliverableFixingDateType(40827).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegNonDeliverableFixingDateType(40369)</li>
+     *   <li>UnderlyingNonDeliverableFixingDateType(40658)</li>
+     *   <li>LegPaymentStreamCompoundingDateType(42407)</li>
+     *   <li>LegPaymentStreamFixingDateType(42461)</li>
+     *   <li>LegReturnRateValuationDateType(42573)</li>
+     *   <li>PaymentStreamCompoundingDateType(42608)</li>
+     *   <li>PaymentStreamFixingDateType(42662)</li>
+     *   <li>ReturnRateValuationDateType(42774)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingDateType(42903)</li>
+     *   <li>UnderlyingPaymentStreamFixingDateType(42957)</li>
+     *   <li>UnderlyingReturnRateValuationDateType(43073)</li>
+     * </ul>
      */
     public static class NonDeliverableFixingDateTypeValues {
 
@@ -11429,6 +12886,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentScheduleType(40829).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentScheduleType(40375)</li>
+     *   <li>UnderlyingPaymentScheduleType(40665)</li>
+     * </ul>
      */
     public static class PaymentScheduleTypeValues {
 
@@ -11464,6 +12927,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentScheduleStepRelativeTo(40849).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentScheduleStepRelativeTo(40395)</li>
+     *   <li>UnderlyingPaymentScheduleStepRelativeTo(40685)</li>
+     * </ul>
      */
     public static class PaymentScheduleStepRelativeToValues {
 
@@ -11477,6 +12946,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStubType(40873).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentScheduleStubType(40376)</li>
+     *   <li>LegPaymentStubType(40419)</li>
+     *   <li>UnderlyingPaymentScheduleStubType(40666)</li>
+     *   <li>UnderlyingPaymentStubType(40709)</li>
+     *   <li>PaymentScheduleStubType(40830)</li>
+     * </ul>
      */
     public static class PaymentStubTypeValues {
 
@@ -11492,6 +12970,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStubLength(40874).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStubLength(40420)</li>
+     *   <li>UnderlyingPaymentStubLength(40710)</li>
+     * </ul>
      */
     public static class PaymentStubLengthValues {
 
@@ -11505,6 +12989,103 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamPaymentDateOffsetDayType(40920).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingStreamEffectiveDateOffsetDayType(40063)</li>
+     *   <li>StreamTerminationDateOffsetDayType(40071)</li>
+     *   <li>ProvisionCashSettlValueDateOffsetDayType(40121)</li>
+     *   <li>ProvisionOptionExerciseStartDateOffsetDayType(40133)</li>
+     *   <li>ProvisionOptionExpirationDateOffsetDayType(40151)</li>
+     *   <li>ProvisionOptionRelevantUnderlyingDateOffsetDayType(40161)</li>
+     *   <li>ProvisionCashSettlPaymentDateOffsetDayType(40168)</li>
+     *   <li>LegStreamEffectiveDateOffsetDayType(40255)</li>
+     *   <li>LegStreamTerminationDateOffsetDayType(40263)</li>
+     *   <li>LegPaymentStreamPaymentDateOffsetDayType(40302)</li>
+     *   <li>LegPaymentStreamInitialFixingDateOffsetDayType(40314)</li>
+     *   <li>LegPaymentStreamFixingDateOffsetDayType(40321)</li>
+     *   <li>LegPaymentStreamRateCutoffDateOffsetDayType(40325)</li>
+     *   <li>LegPaymentStreamNonDeliverableFixingDatesOffsetDayType(40365)</li>
+     *   <li>LegPaymentScheduleFixingDateOffsetDayType(40403)</li>
+     *   <li>LegPaymentScheduleInterimExchangeDatesOffsetDayType(40412)</li>
+     *   <li>LegProvisionOptionExerciseStartDateOffsetDayType(40486)</li>
+     *   <li>LegProvisionOptionExpirationDateOffsetDayType(40504)</li>
+     *   <li>LegProvisionOptionRelevantUnderlyingDateOffsetDayType(40514)</li>
+     *   <li>LegProvisionCashSettlPaymentDateOffsetDayType(40521)</li>
+     *   <li>LegProvisionCashSettlValueDateOffsetDayType(40531)</li>
+     *   <li>UnderlyingStreamTerminationDateOffsetDayType(40554)</li>
+     *   <li>UnderlyingPaymentStreamPaymentDateOffsetDayType(40591)</li>
+     *   <li>UnderlyingPaymentStreamInitialFixingDateOffsetDayType(40603)</li>
+     *   <li>UnderlyingPaymentStreamFixingDateOffsetDayType(40610)</li>
+     *   <li>UnderlyingPaymentStreamRateCutoffDateOffsetDayType(40614)</li>
+     *   <li>UnderlyingPaymentStreamNonDeliverableFixingDatesOffsetDayType(40654)</li>
+     *   <li>UnderlyingPaymentScheduleFixingDateOffsetDayType(40693)</li>
+     *   <li>UnderlyingPaymentScheduleInterimExchangeDatesOffsetDayType(40702)</li>
+     *   <li>PaymentStreamInitialFixingDateOffsetDayType(40772)</li>
+     *   <li>PaymentStreamFixingDateOffsetDayType(40779)</li>
+     *   <li>PaymentStreamRateCutoffDateOffsetDayType(40783)</li>
+     *   <li>PaymentStreamNonDeliverableFixingDatesOffsetDayType(40823)</li>
+     *   <li>PaymentScheduleFixingDateOffsetDayType(40857)</li>
+     *   <li>PaymentScheduleInterimExchangeDatesOffsetDayType(40866)</li>
+     *   <li>StreamEffectiveDateOffsetDayType(40913)</li>
+     *   <li>OptionExerciseStartDateOffsetDayType(41128)</li>
+     *   <li>OptionExerciseExpirationDateOffsetDayType(41149)</li>
+     *   <li>LegOptionExerciseStartDateOffsetDayType(41503)</li>
+     *   <li>UnderlyingOptionExerciseStartDateOffsetDayType(41832)</li>
+     *   <li>UnderlyingProvisionCashSettlPaymentDateOffsetDayType(42096)</li>
+     *   <li>UnderlyingProvisionCashSettlValueDateOffsetDayType(42110)</li>
+     *   <li>UnderlyingProvisionOptionExerciseStartDateOffsetDayType(42124)</li>
+     *   <li>UnderlyingProvisionOptionExpirationDateOffsetDayType(42138)</li>
+     *   <li>UnderlyingProvisionOptionRelevantUnderlyingDateOffsetDayType(42147)</li>
+     *   <li>CashSettlDateOffsetDayType(42212)</li>
+     *   <li>DividendAccrualPaymentDateOffsetDayType(42241)</li>
+     *   <li>DividendFXTriggerDateOffsetDayType(42268)</li>
+     *   <li>DividendPeriodValuationDateOffsetDayType(42285)</li>
+     *   <li>DividendPeriodPaymentDateOffsetDayType(42291)</li>
+     *   <li>LegCashSettlDateOffsetDayType(42304)</li>
+     *   <li>LegDividendAccrualPaymentDateOffsetDayType(42333)</li>
+     *   <li>LegDividendFXTriggerDateOffsetDayType(42360)</li>
+     *   <li>LegDividendPeriodValuationDateOffsetDayType(42377)</li>
+     *   <li>LegDividendPeriodPaymentDateOffsetDayType(42383)</li>
+     *   <li>LegPaymentStreamCompoundingDatesOffsetDayType(42412)</li>
+     *   <li>LegPaymentStreamCompoundingEndDateOffsetDayType(42425)</li>
+     *   <li>LegPaymentStreamCompoundingStartDateOffsetDayType(42449)</li>
+     *   <li>LegPaymentStreamFinalPricePaymentDateOffsetDayType(42457)</li>
+     *   <li>LegPaymentStreamFirstObservationDateOffsetDayType(42464)</li>
+     *   <li>LegPaymentStubEndDateOffsetDayType(42493)</li>
+     *   <li>LegPaymentStubStartDateOffsetDayType(42502)</li>
+     *   <li>LegReturnRateValuationDateOffsetDayType(42513)</li>
+     *   <li>LegReturnRateValuationStartDateOffsetDayType(42518)</li>
+     *   <li>LegReturnRateValuationEndDateOffsetDayType(42524)</li>
+     *   <li>LegSettlMethodElectionDateOffsetDayType(42579)</li>
+     *   <li>PaymentStreamCompoundingDatesOffsetDayType(42613)</li>
+     *   <li>PaymentStreamCompoundingEndDateOffsetDayType(42626)</li>
+     *   <li>PaymentStreamCompoundingStartDateOffsetDayType(42650)</li>
+     *   <li>PaymentStreamFinalPricePaymentDateOffsetDayType(42658)</li>
+     *   <li>PaymentStreamFirstObservationDateOffsetDayType(42665)</li>
+     *   <li>PaymentStubEndDateOffsetDayType(42694)</li>
+     *   <li>PaymentStubStartDateOffsetDayType(42703)</li>
+     *   <li>ReturnRateValuationDateOffsetDayType(42714)</li>
+     *   <li>ReturnRateValuationStartDateOffsetDayType(42719)</li>
+     *   <li>ReturnRateValuationEndDateOffsetDayType(42725)</li>
+     *   <li>SettlMethodElectionDateOffsetDayType(42782)</li>
+     *   <li>UnderlyingCashSettlDateOffsetDayType(42795)</li>
+     *   <li>UnderlyingDividendAccrualPaymentDateOffsetDayType(42822)</li>
+     *   <li>UnderlyingDividendFXTriggerDateOffsetDayType(42849)</li>
+     *   <li>UnderlyingDividendPeriodValuationDateOffsetDayType(42873)</li>
+     *   <li>UnderlyingDividendPeriodPaymentDateOffsetDayType(42879)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingDatesOffsetDayType(42908)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingEndDateOffsetDayType(42921)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingStartDateOffsetDayType(42945)</li>
+     *   <li>UnderlyingPaymentStreamFinalPricePaymentDateOffsetDayType(42953)</li>
+     *   <li>UnderlyingPaymentStreamFirstObservationDateOffsetDayType(42960)</li>
+     *   <li>UnderlyingPaymentStubEndDateOffsetDayType(42989)</li>
+     *   <li>UnderlyingPaymentStubStartDateOffsetDayType(42998)</li>
+     *   <li>UnderlyingReturnRateValuationDateOffsetDayType(43013)</li>
+     *   <li>UnderlyingReturnRateValuationStartDateOffsetDayType(43018)</li>
+     *   <li>UnderlyingReturnRateValuationEndDateOffsetDayType(43024)</li>
+     *   <li>UnderlyingSettlMethodElectionDateOffsetDayType(43081)</li>
+     * </ul>
      */
     public static class PaymentStreamPaymentDateOffsetDayTypeValues {
 
@@ -11522,6 +13103,110 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for BusinessDayConvention(40921).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>BusinessDayType(2581)</li>
+     *   <li>UnderlyingStreamEffectiveDateBusinessDayConvention(40058)</li>
+     *   <li>StreamTerminationDateBusinessDayConvention(40066)</li>
+     *   <li>StreamCalculationPeriodBusinessDayConvention(40073)</li>
+     *   <li>StreamFirstPeriodStartDateBusinessDayConvention(40076)</li>
+     *   <li>ProvisionDateBusinessDayConvention(40093)</li>
+     *   <li>ProvisionCashSettlValueDateBusinessDayConvention(40116)</li>
+     *   <li>ProvisionOptionExerciseBusinessDayConvention(40123)</li>
+     *   <li>ProvisionOptionExpirationDateBusinessDayConvention(40146)</li>
+     *   <li>ProvisionOptionRelevantUnderlyingDateBusinessDayConvention(40156)</li>
+     *   <li>ProvisionCashSettlPaymentDateBusinessDayConvention(40163)</li>
+     *   <li>PaymentBusinessDayConvention(40220)</li>
+     *   <li>LegStreamEffectiveDateBusinessDayConvention(40250)</li>
+     *   <li>LegStreamTerminationDateBusinessDayConvention(40258)</li>
+     *   <li>LegStreamCalculationPeriodBusinessDayConvention(40265)</li>
+     *   <li>LegStreamFirstPeriodStartDateBusinessDayConvention(40268)</li>
+     *   <li>LegPaymentStreamPaymentDateBusinessDayConvention(40292)</li>
+     *   <li>LegPaymentStreamResetDateBusinessDayConvention(40304)</li>
+     *   <li>LegPaymentStreamInitialFixingDateBusinessDayConvention(40310)</li>
+     *   <li>LegPaymentStreamFixingDateBusinessDayConvention(40317)</li>
+     *   <li>LegPaymentStreamNonDeliverableFixingDatesBusinessDayConvention(40360)</li>
+     *   <li>LegPaymentScheduleFixingDateBusinessDayConvention(40399)</li>
+     *   <li>LegPaymentScheduleInterimExchangeDatesBusinessDayConvention(40408)</li>
+     *   <li>LegProvisionDateBusinessDayConvention(40451)</li>
+     *   <li>LegProvisionOptionExerciseBusinessDayConvention(40476)</li>
+     *   <li>LegProvisionOptionExpirationDateBusinessDayConvention(40499)</li>
+     *   <li>LegProvisionOptionRelevantUnderlyingDateBusinessDayConvention(40509)</li>
+     *   <li>LegProvisionCashSettlPaymentDateBusinessDayConvention(40516)</li>
+     *   <li>LegProvisionCashSettlValueDateBusinessDayConvention(40526)</li>
+     *   <li>UnderlyingStreamTerminationDateBusinessDayConvention(40549)</li>
+     *   <li>UnderlyingStreamCalculationPeriodBusinessDayConvention(40556)</li>
+     *   <li>UnderlyingStreamFirstPeriodStartDateBusinessDayConvention(40559)</li>
+     *   <li>UnderlyingPaymentStreamPaymentDateBusinessDayConvention(40581)</li>
+     *   <li>UnderlyingPaymentStreamResetDateBusinessDayConvention(40593)</li>
+     *   <li>UnderlyingPaymentStreamInitialFixingDateBusinessDayConvention(40599)</li>
+     *   <li>UnderlyingPaymentStreamFixingDateBusinessDayConvention(40606)</li>
+     *   <li>UnderlyingPaymentStreamNonDeliverableFixingDatesBusinessDayConvention(40649)</li>
+     *   <li>UnderlyingPaymentScheduleFixingDateBusinessDayCnvtn(40689)</li>
+     *   <li>UnderlyingPaymentScheduleInterimExchangeDatesBusinessDayConvention(40698)</li>
+     *   <li>PaymentStreamPaymentDateBusinessDayConvention(40751)</li>
+     *   <li>PaymentStreamResetDateBusinessDayConvention(40762)</li>
+     *   <li>PaymentStreamInitialFixingDateBusinessDayConvention(40768)</li>
+     *   <li>PaymentStreamFixingDateBusinessDayConvention(40775)</li>
+     *   <li>PaymentStreamNonDeliverableFixingDatesBusinessDayConvention(40818)</li>
+     *   <li>PaymentScheduleFixingDateBusinessDayConvention(40853)</li>
+     *   <li>PaymentScheduleInterimExchangeDatesBusinessDayConvention(40862)</li>
+     *   <li>StreamEffectiveDateBusinessDayConvention(40908)</li>
+     *   <li>LegBusinessDayConvention(40925)</li>
+     *   <li>UnderlyingBusinessDayConvention(40964)</li>
+     *   <li>ComplexEventDateBusinessDayConvention(41025)</li>
+     *   <li>OptionExerciseBusinessDayConvention(41118)</li>
+     *   <li>OptionExerciseExpirationDateBusinessDayConvention(41142)</li>
+     *   <li>PaymentStreamPricingBusinessDayConvention(41217)</li>
+     *   <li>PricingDateBusinessDayConvention(41233)</li>
+     *   <li>StreamCommoditySettlDateBusinessDayConvention(41269)</li>
+     *   <li>LegComplexEventDateBusinessDayConvention(41394)</li>
+     *   <li>LegOptionExerciseBusinessDayConvention(41493)</li>
+     *   <li>LegOptionExerciseExpirationDateBusinessDayConvention(41517)</li>
+     *   <li>LegPaymentStreamPricingBusinessDayConvention(41586)</li>
+     *   <li>LegPricingDateBusinessDayConvention(41610)</li>
+     *   <li>LegStreamCommoditySettlDateBusinessDayConvention(41666)</li>
+     *   <li>UnderlyingComplexEventDateBusinessDayConvention(41744)</li>
+     *   <li>UnderlyingOptionExerciseBusinessDayConvention(41822)</li>
+     *   <li>UnderlyingOptionExerciseExpirationDateBusinessDayConvention(41846)</li>
+     *   <li>UnderlyingPaymentStreamPricingBusinessDayConvention(41934)</li>
+     *   <li>UnderlyingPricingDateBusinessDayConvention(41950)</li>
+     *   <li>UnderlyingStreamCommoditySettlDateBusinessDayConvention(41982)</li>
+     *   <li>UnderlyingProvisionCashSettlPaymentDateBusinessDayConvention(42092)</li>
+     *   <li>UnderlyingProvisionCashSettlValueDateBusinessDayConvention(42106)</li>
+     *   <li>UnderlyingProvisionOptionExerciseBusinessDayConvention(42115)</li>
+     *   <li>UnderlyingProvisionOptionExpirationDateBusinessDayConvention(42134)</li>
+     *   <li>UnderlyingProvisionOptionRelevantUnderlyingDateBusinessDayConvention(42143)</li>
+     *   <li>UnderlyingProvisionDateBusinessDayConvention(42152)</li>
+     *   <li>CashSettlDateBusinessDayConvention(42208)</li>
+     *   <li>DividendAccrualPaymeentDateBusinessDayConvention(42243)</li>
+     *   <li>DividendFXTriggerDateBusinessDayConvention(42270)</li>
+     *   <li>DividendPeriodBusinessDayConvention(42280)</li>
+     *   <li>LegCashSettlDateBusinessDayConvention(42300)</li>
+     *   <li>LegDividendAccrualPaymentDateBusinessDayConvention(42335)</li>
+     *   <li>LegDividendFXTriggerDateBusinessDayConvention(42362)</li>
+     *   <li>LegDividendPeriodBusinessDayConvention(42372)</li>
+     *   <li>LegPaymentStreamCompoundingDatesBusinessDayConvention(42408)</li>
+     *   <li>LegPaymentStubEndDateBusinessDayConvention(42489)</li>
+     *   <li>LegPaymentStubStartDateBusinessDayConvention(42498)</li>
+     *   <li>LegReturnRateValuationDateBusinessDayConvention(42529)</li>
+     *   <li>LegSettlMethodElectionDateBusinessDayConvention(42575)</li>
+     *   <li>PaymentStreamCompoundingDatesBusinessDayConvention(42609)</li>
+     *   <li>PaymentStubEndDateBusinessDayConvention(42690)</li>
+     *   <li>PaymentStubStartDateBusinessDayConvention(42699)</li>
+     *   <li>ReturnRateValuationDateBusinessDayConvention(42730)</li>
+     *   <li>SettlMethodElectionDateBusinessDayConvention(42778)</li>
+     *   <li>UnderlyingCashSettlDateBusinessDayConvention(42791)</li>
+     *   <li>UnderlyingDividendAccrualPaymentDateBusinessDayConvention(42824)</li>
+     *   <li>UnderlyingDividendFXTriggerDateBusinessDayConvention(42851)</li>
+     *   <li>UnderlyingDividendPeriodBusinessDayConvention(42868)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingDatesBusinessDayConvention(42904)</li>
+     *   <li>UnderlyingPaymentStubEndDateBusinessDayConvention(42985)</li>
+     *   <li>UnderlyingPaymentStubStartDateBusinessDayConvention(42994)</li>
+     *   <li>UnderlyingReturnRateValuationDateBusinessDayConvention(43029)</li>
+     *   <li>UnderlyingSettlMethodElectionDateBusinessDayConvention(43077)</li>
+     * </ul>
      */
     public static class BusinessDayConventionValues {
 
@@ -11541,6 +13226,30 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for DateRollConvention(40922).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>StreamCalculationRollConvention(40084)</li>
+     *   <li>LegStreamCalculationRollConvention(40276)</li>
+     *   <li>LegPaymentStreamPaymentRollConvention(40296)</li>
+     *   <li>UnderlyingStreamCalculationRollConvention(40567)</li>
+     *   <li>UnderlyingPaymentStreamPaymentRollConvention(40585)</li>
+     *   <li>PaymentStreamPaymentRollConvention(40755)</li>
+     *   <li>LegDateRollConvention(40926)</li>
+     *   <li>UnderlyingDateRollConvention(40965)</li>
+     *   <li>ComplexEventScheduleRollConvention(41036)</li>
+     *   <li>OptionExerciseExpirationRollConvention(41148)</li>
+     *   <li>LegComplexEventScheduleRollConvention(41405)</li>
+     *   <li>LegOptionExerciseExpirationRollConvention(41523)</li>
+     *   <li>UnderlyingComplexEventScheduleRollConvention(41755)</li>
+     *   <li>UnderlyingOptionExerciseExpirationRollConvention(41852)</li>
+     *   <li>LegPaymentStreamCompoundingRollConvention(42416)</li>
+     *   <li>LegReturnRateValuationFrequencyRollConvention(42528)</li>
+     *   <li>PaymentStreamCompoundingRollConvention(42617)</li>
+     *   <li>ReturnRateValuationFrequencyRollConvention(42729)</li>
+     *   <li>UnderlyingPaymentStreamCompoundingRollConvention(42912)</li>
+     *   <li>UnderlyingReturnRateValuationFrequencyRollConvention(43028)</li>
+     * </ul>
      */
     public static class DateRollConventionValues {
 
@@ -11620,6 +13329,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ComplexEventPeriodType(41011).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegComplexEventPeriodType(41380)</li>
+     *   <li>UnderlyingComplexEventPeriodType(41730)</li>
+     * </ul>
      */
     public static class ComplexEventPeriodTypeValues {
 
@@ -11637,6 +13352,26 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ComplexEventDateOffsetDayType(41024).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>ComplexEventCreditEventDayType(41003)</li>
+     *   <li>OptionExerciseEarliestDateOffsetDayType(41119)</li>
+     *   <li>PaymentStreamPricingDayType(41213)</li>
+     *   <li>StreamCommoditySettlDayType(41274)</li>
+     *   <li>LegComplexEventCreditEventDayType(41372)</li>
+     *   <li>LegComplexEventDateOffsetDayType(41393)</li>
+     *   <li>LegOptionExerciseEarliestDateOffsetDayType(41494)</li>
+     *   <li>LegOptionExerciseExpirationDateOffsetDayType(41524)</li>
+     *   <li>LegPaymentStreamPricingDayType(41582)</li>
+     *   <li>LegStreamCommoditySettlDayType(41671)</li>
+     *   <li>UnderlyingComplexEventCreditEventDayType(41722)</li>
+     *   <li>UnderlyingComplexEventDateOffsetDayType(41743)</li>
+     *   <li>UnderlyingOptionExerciseEarliestDateOffsetDayType(41823)</li>
+     *   <li>UnderlyingOptionExerciseExpirationDateOffsetDayType(41853)</li>
+     *   <li>UnderlyingPaymentStreamPricingDayType(41930)</li>
+     *   <li>UnderlyingStreamCommoditySettlDayType(41987)</li>
+     * </ul>
      */
     public static class ComplexEventDateOffsetDayTypeValues {
 
@@ -11654,6 +13389,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for DeliveryScheduleType(41038).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegDeliveryScheduleType(41409)</li>
+     *   <li>UnderlyingDeliveryScheduleType(41757)</li>
+     * </ul>
      */
     public static class DeliveryScheduleTypeValues {
 
@@ -11668,6 +13409,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for DeliveryScheduleToleranceType(41046).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>DeliveryStreamToleranceType(41074)</li>
+     *   <li>LegDeliveryScheduleToleranceType(41417)</li>
+     *   <li>LegDeliveryStreamToleranceType(41445)</li>
+     *   <li>UnderlyingDeliveryScheduleToleranceType(41765)</li>
+     *   <li>UnderlyingDeliveryStreamToleranceType(41793)</li>
+     * </ul>
      */
     public static class DeliveryScheduleToleranceTypeValues {
 
@@ -11681,6 +13431,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for DeliveryScheduleSettlFlowType(41049).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>StreamCommoditySettlFlowType(41292)</li>
+     *   <li>LegDeliveryScheduleSettlFlowType(41420)</li>
+     *   <li>LegStreamCommoditySettlFlowType(41689)</li>
+     *   <li>UnderlyingDeliveryScheduleSettlFlowType(41768)</li>
+     *   <li>UnderlyingStreamCommoditySettlFlowType(42005)</li>
+     * </ul>
      */
     public static class DeliveryScheduleSettlFlowTypeValues {
 
@@ -11698,6 +13457,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for DeliveryScheduleSettlHolidaysProcessingInstruction(41050).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>StreamCommoditySettlHolidaysProcessingInstruction(41300)</li>
+     *   <li>LegDeliveryScheduleSettlHolidaysProcessingInstruction(41421)</li>
+     *   <li>LegStreamCommoditySettlHolidaysProcessingInstruction(41697)</li>
+     *   <li>UnderlyingDeliveryScheduleSettlHolidaysProcessingInstruction(41769)</li>
+     *   <li>UnderlyingStreamCommoditySettlHolidaysProcessingInstruction(42013)</li>
+     * </ul>
      */
     public static class DeliveryScheduleSettlHolidaysProcessingInstructionValues {
 
@@ -11711,6 +13479,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for DeliveryScheduleSettlDay(41052).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>StreamCommoditySettlDay(41284)</li>
+     *   <li>LegDeliveryScheduleSettlDay(41423)</li>
+     *   <li>LegStreamCommoditySettlDay(41681)</li>
+     *   <li>UnderlyingDeliveryScheduleSettlDay(41771)</li>
+     *   <li>UnderlyingStreamCommoditySettlDay(41997)</li>
+     * </ul>
      */
     public static class DeliveryScheduleSettlDayValues {
 
@@ -11732,6 +13509,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for DeliveryScheduleSettlTimeType(41057).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegDeliveryScheduleSettlTimeType(41428)</li>
+     *   <li>StreamCommoditySettlTimeType(41588)</li>
+     *   <li>UnderlyingDeliveryScheduleSettlTimeType(41776)</li>
+     *   <li>LegStreamCommoditySettlTimeType(41935)</li>
+     *   <li>UnderlyingStreamCommoditySettlTimeType(41936)</li>
+     * </ul>
      */
     public static class DeliveryScheduleSettlTimeTypeValues {
 
@@ -11745,6 +13531,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for DeliveryStreamType(41058).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegDeliveryStreamType(41429)</li>
+     *   <li>UnderlyingDeliveryStreamType(41777)</li>
+     * </ul>
      */
     public static class DeliveryStreamTypeValues {
 
@@ -11759,6 +13551,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for DeliveryStreamDeliveryRestriction(41063).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegDeliveryStreamDeliveryRestriction(41434)</li>
+     *   <li>UnderlyingDeliveryStreamDeliveryRestriction(41782)</li>
+     * </ul>
      */
     public static class DeliveryStreamDeliveryRestrictionValues {
 
@@ -11775,6 +13573,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for DeliveryStreamTitleTransferCondition(41069).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegDeliveryStreamTitleTransferCondition(41440)</li>
+     *   <li>UnderlyingDeliveryStreamTitleTransferCondition(41788)</li>
+     * </ul>
      */
     public static class DeliveryStreamTitleTransferConditionValues {
 
@@ -11788,6 +13592,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for DeliveryStreamToleranceOptionSide(41075).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegDeliveryStreamToleranceOptionSide(41446)</li>
+     *   <li>UnderlyingDeliveryStreamToleranceOptionSide(41794)</li>
+     * </ul>
      */
     public static class DeliveryStreamToleranceOptionSideValues {
 
@@ -11801,6 +13611,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for DeliveryStreamElectingPartySide(41080).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>DeliveryStreamDeliveryContingentPartySide(41065)</li>
+     *   <li>LegDeliveryStreamDeliveryContingentPartySide(41436)</li>
+     *   <li>LegDeliveryStreamElectingPartySide(41451)</li>
+     *   <li>UnderlyingDeliveryStreamDeliveryContingentPartySide(41784)</li>
+     *   <li>UnderlyingDeliveryStreamElectingPartySide(41799)</li>
+     * </ul>
      */
     public static class DeliveryStreamElectingPartySideValues {
 
@@ -11814,6 +13633,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for MarketDisruptionProvision(41087).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegMarketDisruptionProvision(41462)</li>
+     *   <li>UnderlyingMarketDisruptionProvision(41859)</li>
+     * </ul>
      */
     public static class MarketDisruptionProvisionValues {
 
@@ -11829,6 +13654,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for MarketDisruptionFallbackProvision(41088).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegMarketDisruptionFallbackProvision(41463)</li>
+     *   <li>UnderlyingMarketDisruptionFallbackProvision(41860)</li>
+     * </ul>
      */
     public static class MarketDisruptionFallbackProvisionValues {
 
@@ -11842,6 +13673,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for MarketDisruptionFallbackUnderlierType(41097).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegMarketDisruptionFallbackUnderlierType(41472)</li>
+     *   <li>UnderlyingMarketDisruptionFallbackUnderlierType(41869)</li>
+     * </ul>
      */
     public static class MarketDisruptionFallbackUnderlierTypeValues {
 
@@ -11865,6 +13702,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ExerciseConfirmationMethod(41111).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegExerciseConfirmationMethod(41486)</li>
+     *   <li>UnderlyingExerciseConfirmationMethod(41815)</li>
+     * </ul>
      */
     public static class ExerciseConfirmationMethodValues {
 
@@ -11880,6 +13723,24 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for OptionExerciseDateType(41139).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>OptionExerciseExpirationDateType(41154)</li>
+     *   <li>PaymentStreamPaymentDateType(41222)</li>
+     *   <li>PaymentStreamPricingDateType(41226)</li>
+     *   <li>StreamCalculationPeriodDateType(41243)</li>
+     *   <li>LegOptionExerciseDateType(41514)</li>
+     *   <li>LegOptionExerciseExpirationDateType(41529)</li>
+     *   <li>LegPaymentStreamPaymentDateType(41591)</li>
+     *   <li>LegPaymentStreamPricingDateType(41595)</li>
+     *   <li>LegStreamCalculationPeriodDateType(41640)</li>
+     *   <li>UnderlyingOptionExerciseDateType(41843)</li>
+     *   <li>UnderlyingOptionExerciseExpirationDateType(41858)</li>
+     *   <li>UnderlyingPaymentStreamPaymentDateType(41939)</li>
+     *   <li>UnderlyingPaymentStreamPricingDateType(41943)</li>
+     *   <li>UnderlyingStreamCalculationPeriodDateType(41956)</li>
+     * </ul>
      */
     public static class OptionExerciseDateTypeValues {
 
@@ -11925,6 +13786,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamSettlLevel(41199).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStreamSettlLevel(41568)</li>
+     *   <li>UnderlyingPaymentStreamSettlLevel(41916)</li>
+     * </ul>
      */
     public static class PaymentStreamSettlLevelValues {
 
@@ -11940,6 +13807,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamRateSpreadType(41206).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>PaymentScheduleRateSpreadType(41169)</li>
+     *   <li>LegPaymentScheduleRateSpreadType(41538)</li>
+     *   <li>LegPaymentStreamRateSpreadType(41575)</li>
+     *   <li>UnderlyingPaymentScheduleRateSpreadType(41886)</li>
+     *   <li>UnderlyingPaymentStreamRateSpreadType(41923)</li>
+     * </ul>
      */
     public static class PaymentStreamRateSpreadTypeValues {
 
@@ -11953,6 +13829,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamPricingDayDistribution(41214).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>PaymentScheduleFixingDayDistribution(41174)</li>
+     *   <li>LegPaymentScheduleFixingDayDistribution(41543)</li>
+     *   <li>LegPaymentStreamPricingDayDistribution(41583)</li>
+     *   <li>UnderlyingPaymentScheduleFixingDayDistribution(41891)</li>
+     *   <li>UnderlyingPaymentStreamPricingDayDistribution(41931)</li>
+     * </ul>
      */
     public static class PaymentStreamPricingDayDistributionValues {
 
@@ -11968,6 +13853,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamPricingDayOfWeek(41228).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>PaymentScheduleFixingDayOfWeek(41162)</li>
+     *   <li>LegPaymentScheduleFixingDayOfWeek(41531)</li>
+     *   <li>LegPaymentStreamPricingDayOfWeek(41597)</li>
+     *   <li>UnderlyingPaymentScheduleFixingDayOfWeek(41879)</li>
+     *   <li>UnderlyingPaymentStreamPricingDayOfWeek(41945)</li>
+     * </ul>
      */
     public static class PaymentStreamPricingDayOfWeekValues {
 
@@ -11987,6 +13881,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for StreamCommodityNearbySettlDayUnit(41267).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegStreamCommodityNearbySettlDayUnit(41664)</li>
+     *   <li>UnderlyingStreamCommodityNearbySettlDayUnit(41980)</li>
+     * </ul>
      */
     public static class StreamCommodityNearbySettlDayUnitValues {
 
@@ -12000,6 +13900,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for StreamCommoditySettlDateRollUnit(41273).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegStreamCommoditySettlDateRollUnit(41670)</li>
+     *   <li>UnderlyingStreamCommoditySettlDateRollUnit(41986)</li>
+     * </ul>
      */
     public static class StreamCommoditySettlDateRollUnitValues {
 
@@ -12012,6 +13918,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for StreamCommodityDataSourceIDType(41282).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegStreamCommodityDataSourceIDType(41679)</li>
+     *   <li>UnderlyingStreamCommodityDataSourceIDType(41995)</li>
+     * </ul>
      */
     public static class StreamCommodityDataSourceIDTypeValues {
 
@@ -12027,6 +13939,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for StreamNotionalCommodityFrequency(41308).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>DeliveryScheduleNotionalCommodityFrequency(41042)</li>
+     *   <li>LegDeliveryScheduleNotionalCommodityFrequency(41413)</li>
+     *   <li>LegStreamNotionalCommodityFrequency(41705)</li>
+     *   <li>UnderlyingDeliveryScheduleNotionalCommodityFrequency(41761)</li>
+     *   <li>UnderlyingStreamNotionalCommodityFrequency(42021)</li>
+     * </ul>
      */
     public static class StreamNotionalCommodityFrequencyValues {
 
@@ -12045,6 +13966,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for DeliveryStreamDeliveryPointSource(42192).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegDeliveryStreamDeliveryPointSource(42194)</li>
+     *   <li>UnderlyingDeliveryStreamDeliveryPointSource(42196)</li>
+     * </ul>
      */
     public static class DeliveryStreamDeliveryPointSourceValues {
 
@@ -12058,6 +13985,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for CashSettlPriceDefault(42217).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegCashSettlPriceDefault(42309)</li>
+     *   <li>UnderlyingCashSettlPriceDefault(42798)</li>
+     * </ul>
      */
     public static class CashSettlPriceDefaultValues {
 
@@ -12071,6 +14004,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for DividendEntitlementEvent(42246).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegDividendEntitlementEvent(42338)</li>
+     *   <li>UnderlyingDividendEntitlementEvent(42827)</li>
+     * </ul>
      */
     public static class DividendEntitlementEventValues {
 
@@ -12084,6 +14023,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for DividendAmountType(42247).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>ExtraordinaryDividendAmountType(42250)</li>
+     *   <li>LegDividendAmountType(42339)</li>
+     *   <li>LegExtraordinaryDividendAmountType(42342)</li>
+     *   <li>UnderlyingDividendAmountType(42828)</li>
+     *   <li>UnderlyingExtraordinaryDividendAmountType(42831)</li>
+     * </ul>
      */
     public static class DividendAmountTypeValues {
 
@@ -12099,6 +14047,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for NonCashDividendTreatment(42258).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegNonCashDividendTreatment(42350)</li>
+     *   <li>UnderlyingNonCashDividendTreatment(42839)</li>
+     * </ul>
      */
     public static class NonCashDividendTreatmentValues {
 
@@ -12112,6 +14066,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for DividendComposition(42259).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegDividendComposition(42351)</li>
+     *   <li>UnderlyingDividendComposition(42840)</li>
+     * </ul>
      */
     public static class DividendCompositionValues {
 
@@ -12125,6 +14085,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamInterpolationPeriod(42604).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStreamInterpolationPeriod(42403)</li>
+     *   <li>UnderlyingPaymentStreamInterpolationPeriod(42899)</li>
+     * </ul>
      */
     public static class PaymentStreamInterpolationPeriodValues {
 
@@ -12140,6 +14106,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamLinkStrikePriceType(42674).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStreamLinkStrikePriceType(42473)</li>
+     *   <li>UnderlyingPaymentStreamLinkStrikePriceType(42969)</li>
+     * </ul>
      */
     public static class PaymentStreamLinkStrikePriceTypeValues {
 
@@ -12153,6 +14125,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PaymentStreamRealizedVarianceMethod(42679).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegPaymentStreamRealizedVarianceMethod(42478)</li>
+     *   <li>UnderlyingPaymentStreamRealizedVarianceMethod(42974)</li>
+     * </ul>
      */
     public static class PaymentStreamRealizedVarianceMethodValues {
 
@@ -12167,6 +14145,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ProvisionBreakFeeElection(42707).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegProvisionBreakFeeElection(42506)</li>
+     *   <li>UnderlyingProvisionBreakFeeElection(43002)</li>
+     * </ul>
      */
     public static class ProvisionBreakFeeElectionValues {
 
@@ -12183,6 +14167,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ReturnRateDateMode(42710).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegReturnRateDateMode(42509)</li>
+     *   <li>UnderlyingReturnRateDateMode(43009)</li>
+     * </ul>
      */
     public static class ReturnRateDateModeValues {
 
@@ -12196,6 +14186,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ReturnRatePriceSequence(42736).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegReturnRatePriceSequence(42535)</li>
+     *   <li>UnderlyingReturnRatePriceSequence(43035)</li>
+     * </ul>
      */
     public static class ReturnRatePriceSequenceValues {
 
@@ -12210,6 +14206,15 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ReturnRateQuoteTimeType(42748).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegReturnRateQuoteTimeType(42547)</li>
+     *   <li>LegReturnRateValuationTimeType(42555)</li>
+     *   <li>ReturnRateValuationTimeType(42756)</li>
+     *   <li>UnderlyingReturnRateQuoteTimeType(43047)</li>
+     *   <li>UnderlyingReturnRateValuationTimeType(43055)</li>
+     * </ul>
      */
     public static class ReturnRateQuoteTimeTypeValues {
 
@@ -12229,6 +14234,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ReturnRateValuationPriceOption(42759).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegReturnRateValuationPriceOption(42558)</li>
+     *   <li>UnderlyingReturnRateValuationPriceOption(43058)</li>
+     * </ul>
      */
     public static class ReturnRateValuationPriceOptionValues {
 
@@ -12243,6 +14254,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ReturnRatePriceBasis(42766).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegReturnRatePriceBasis(42565)</li>
+     *   <li>UnderlyingReturnRatePriceBasis(43065)</li>
+     * </ul>
      */
     public static class ReturnRatePriceBasisValues {
 
@@ -12258,6 +14275,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ReturnRatePriceType(42769).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegReturnRatePriceType(42568)</li>
+     *   <li>UnderlyingReturnRatePriceType(43068)</li>
+     * </ul>
      */
     public static class ReturnRatePriceTypeValues {
 
@@ -12271,6 +14294,12 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for StreamNotionalAdjustments(42787).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegStreamNotionalAdjustments(42586)</li>
+     *   <li>UnderlyingStreamNotionalAdjustments(43086)</li>
+     * </ul>
      */
     public static class StreamNotionalAdjustmentsValues {
 
