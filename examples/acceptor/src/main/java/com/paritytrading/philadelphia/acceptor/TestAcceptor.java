@@ -47,7 +47,7 @@ class TestAcceptor {
                 break;
 
             if (i % 1000 == 0) {
-                session.getConnection().updateCurrentTimestamp();
+                session.getConnection().updateCurrentTimestamp(System.currentTimeMillis());
                 session.getConnection().keepAlive();
             }
 

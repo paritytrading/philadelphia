@@ -34,8 +34,6 @@ public class FIXConnection implements Closeable {
 
     private static final int CURRENT_TIMESTAMP_FIELD_CAPACITY = 24;
 
-    private final Clock clock;
-
     private final SocketChannel channel;
 
     private final FIXConfig config;
@@ -95,16 +93,13 @@ public class FIXConnection implements Closeable {
      * Create a connection. The underlying socket channel can be either
      * blocking or non-blocking.
      *
-     * @param clock the clock
      * @param channel the underlying socket channel
      * @param config the connection configuration
      * @param listener the inbound message listener
      * @param statusListener the inbound status event listener
      */
-    public FIXConnection(Clock clock, SocketChannel channel, FIXConfig config, FIXMessageListener listener,
+    public FIXConnection(SocketChannel channel, FIXConfig config, FIXMessageListener listener,
             FIXConnectionStatusListener statusListener) {
-        this.clock = clock;
-
         this.channel = channel;
 
         this.config = config;
@@ -143,8 +138,8 @@ public class FIXConnection implements Closeable {
         this.txBuffers[0] = txHeaderBuffer;
         this.txBuffers[1] = txBodyBuffer;
 
-        this.lastRxMillis = clock.currentTimeMillis();
-        this.lastTxMillis = clock.currentTimeMillis();
+        this.lastRxMillis = 0;
+        this.lastTxMillis = 0;
 
         this.heartbeatMillis = config.getHeartBtInt() * 1000;
 
@@ -154,27 +149,13 @@ public class FIXConnection implements Closeable {
 
         this.txMessage = new FIXMessage(config);
 
-        this.currentTimeMillis = clock.currentTimeMillis();
+        this.currentTimeMillis = 0;
 
         this.currentTime = new MutableDateTime(this.currentTimeMillis, DateTimeZone.UTC);
 
         this.currentTimestamp = new FIXValue(CURRENT_TIMESTAMP_FIELD_CAPACITY);
 
         this.currentTimestamp.setTimestamp(this.currentTime, true);
-    }
-
-    /**
-     * Create a connection. The underlying socket channel can be either
-     * blocking or non-blocking.
-     *
-     * @param channel the underlying socket channel
-     * @param config the connection configuration
-     * @param listener the inbound message listener
-     * @param statusListener the inbound status event listener
-     */
-    public FIXConnection(SocketChannel channel, FIXConfig config, FIXMessageListener listener,
-            FIXConnectionStatusListener statusListener) {
-        this(System::currentTimeMillis, channel, config, listener, statusListener);
     }
 
     /**
@@ -322,9 +303,11 @@ public class FIXConnection implements Closeable {
      *   <li>SendingTime(52)</li>
      *   <li>the connection keep-alive mechanism</li>
      * </ul>
+     *
+     * @param currentTimeMillis the current time in milliseconds
      */
-    public void updateCurrentTimestamp() {
-        currentTimeMillis = clock.currentTimeMillis();
+    public void updateCurrentTimestamp(long currentTimeMillis) {
+        this.currentTimeMillis = currentTimeMillis;
 
         currentTime.setMillis(currentTimeMillis);
 
