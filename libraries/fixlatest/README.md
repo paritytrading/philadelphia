@@ -1,7 +1,7 @@
 # Philadelphia FIX Latest
 
 Philadelphia FIX Latest implements the FIX protocol version Latest, currently
-based on FIX 5.0 SP2 EP258.
+based on FIX 5.0 SP2 EP269.
 
 ## Download
 
