@@ -73,13 +73,13 @@ class FIXInitiatorTest {
 
     @Test
     void heartbeat() throws IOException {
-        initiator.updateCurrentTimestamp(10_000);
+        initiator.setCurrentTimeMillis(10_000);
         initiator.keepAlive();
 
         acceptor.send("35=0|34=1|");
         receiveBlocking(initiator);
 
-        initiator.updateCurrentTimestamp(35_000);
+        initiator.setCurrentTimeMillis(35_000);
         initiator.keepAlive();
 
         String message = "8=FIX.4.2|9=60|35=0|49=initiator|56=acceptor|34=1|" +
@@ -90,13 +90,13 @@ class FIXInitiatorTest {
 
     @Test
     void testRequest() throws IOException {
-        initiator.updateCurrentTimestamp(32_500);
+        initiator.setCurrentTimeMillis(32_500);
         initiator.keepAlive();
 
         String heartbeat = "8=FIX.4.2|9=60|35=0|49=initiator|56=acceptor|34=1|" +
             "52=19700101-00:00:32.500|10=225|";
 
-        initiator.updateCurrentTimestamp(35_000);
+        initiator.setCurrentTimeMillis(35_000);
         initiator.keepAlive();
 
         String testRequest = "8=FIX.4.2|9=86|35=1|49=initiator|56=acceptor|34=2|" +
@@ -107,7 +107,7 @@ class FIXInitiatorTest {
 
     @Test
     void testResponse() throws IOException {
-        initiator.updateCurrentTimestamp(35_000);
+        initiator.setCurrentTimeMillis(35_000);
         initiator.keepAlive();
 
         assertEquals(asList(), initiatorStatus.collect());
@@ -116,17 +116,17 @@ class FIXInitiatorTest {
 
         receiveBlocking(initiator);
 
-        initiator.updateCurrentTimestamp(60_000);
+        initiator.setCurrentTimeMillis(60_000);
         initiator.keepAlive();
 
         assertEquals(asList(), initiatorStatus.collect());
 
-        initiator.updateCurrentTimestamp(70_000);
+        initiator.setCurrentTimeMillis(70_000);
         initiator.keepAlive();
 
         assertEquals(asList(), initiatorStatus.collect());
 
-        initiator.updateCurrentTimestamp(75_000);
+        initiator.setCurrentTimeMillis(75_000);
         initiator.keepAlive();
 
         assertEquals(asList(), initiatorStatus.collect());
@@ -134,22 +134,22 @@ class FIXInitiatorTest {
 
     @Test
     void heartbeatTimeout() throws IOException {
-        initiator.updateCurrentTimestamp(35_000);
+        initiator.setCurrentTimeMillis(35_000);
         initiator.keepAlive();
 
         assertEquals(asList(), initiatorStatus.collect());
 
-        initiator.updateCurrentTimestamp(40_000);
+        initiator.setCurrentTimeMillis(40_000);
         initiator.keepAlive();
 
         assertEquals(asList(), initiatorStatus.collect());
 
-        initiator.updateCurrentTimestamp(70_000);
+        initiator.setCurrentTimeMillis(70_000);
         initiator.keepAlive();
 
         assertEquals(asList(new HeartbeatTimeout()), initiatorStatus.collect());
 
-        initiator.updateCurrentTimestamp(75_000);
+        initiator.setCurrentTimeMillis(75_000);
         initiator.keepAlive();
 
         assertEquals(asList(new HeartbeatTimeout()), initiatorStatus.collect());

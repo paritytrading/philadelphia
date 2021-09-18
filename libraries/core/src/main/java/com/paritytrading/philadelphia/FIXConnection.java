@@ -296,8 +296,8 @@ public class FIXConnection implements Closeable {
     }
 
     /**
-     * <p>Update the current timestamp. The current timestamp is used for the
-     * following purposes:</p>
+     * <p>Set the current time in milliseconds. It is used for the following
+     * purposes:</p>
      *
      * <ul>
      *   <li>SendingTime(52)</li>
@@ -306,12 +306,22 @@ public class FIXConnection implements Closeable {
      *
      * @param currentTimeMillis the current time in milliseconds
      */
-    public void updateCurrentTimestamp(long currentTimeMillis) {
+    public void setCurrentTimeMillis(long currentTimeMillis) {
         this.currentTimeMillis = currentTimeMillis;
 
         currentTime.setMillis(currentTimeMillis);
 
         currentTimestamp.setTimestamp(currentTime, true);
+    }
+
+    /**
+     * Get the current time in milliseconds.
+     *
+     * @return the current time milliseconds
+     * @see #setCurrentTimeMillis
+     */
+    public long getCurrentTimeMillis() {
+        return currentTimeMillis;
     }
 
     /**
