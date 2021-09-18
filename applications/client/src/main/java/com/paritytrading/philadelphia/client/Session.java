@@ -84,7 +84,7 @@ class Session implements Closeable {
 
     void send(Message message) throws IOException {
         synchronized (lock) {
-            connection.updateCurrentTimestamp();
+            connection.setCurrentTimeMillis(System.currentTimeMillis());
         }
 
         connection.prepare(txMessage, message.getMsgType());
@@ -115,7 +115,7 @@ class Session implements Closeable {
                     }
 
                     synchronized (lock) {
-                        connection.updateCurrentTimestamp();
+                        connection.setCurrentTimeMillis(System.currentTimeMillis());
 
                         connection.keepAlive();
                     }
