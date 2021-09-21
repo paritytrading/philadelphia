@@ -284,15 +284,30 @@ public class FIXConnection implements Closeable {
     }
 
     /**
-     * Update SenderCompID(49) and TargetCompID(56).
+     * <p>Prepare a message again. When preparing a message again, the
+     * following mandatory fields are updated:</p>
+     *
+     * <ul>
+     *   <li>SenderCompID(49)</li>
+     *   <li>TargetCompID(56)</li>
+     *   <li>MsgSeqNum(34)</li>
+     *   <li>SendingTime(52)</li>
+     * </ul>
+     *
+     * <p>An example of an application that might want to use this method is
+     * an acceptor that uses message templates. Upon receiving the Logon(A)
+     * message, the application can use this method on each message template
+     * to update the SenderCompID(49) and TargetCompID(56) fields.</p>
      *
      * @param message a message
-     * @throws NullPointerException if SenderCompID(49) or TargetCompID(56)
-     *   is not found
+     * @throws NullPointerException if SenderCompID(49), TargetCompID(56),
+     *   MsgSeqNum(34), or SendingTime(52) is not found
      */
-    public void updateCompID(FIXMessage message) {
+    public void reprepare(FIXMessage message) {
         message.valueOf(SenderCompID).setString(senderCompId);
         message.valueOf(TargetCompID).setString(targetCompId);
+        message.valueOf(MsgSeqNum).setInt(txMsgSeqNum);
+        message.valueOf(SendingTime).set(currentTimestamp);
     }
 
     /**
