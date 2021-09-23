@@ -284,18 +284,6 @@ public class FIXConnection implements Closeable {
     }
 
     /**
-     * Update SenderCompID(49) and TargetCompID(56).
-     *
-     * @param message a message
-     * @throws NullPointerException if SenderCompID(49) or TargetCompID(56)
-     *   is not found
-     */
-    public void updateCompID(FIXMessage message) {
-        message.valueOf(SenderCompID).setString(senderCompId);
-        message.valueOf(TargetCompID).setString(targetCompId);
-    }
-
-    /**
      * <p>Set the current time in milliseconds. It is used for the following
      * purposes:</p>
      *
