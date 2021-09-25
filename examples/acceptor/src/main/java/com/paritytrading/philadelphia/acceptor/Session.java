@@ -77,7 +77,8 @@ class Session implements FIXMessageListener {
             public void logon(FIXConnection connection, FIXMessage message) throws IOException {
                 connection.sendLogon(true);
 
-                connection.updateCompID(report);
+                report.valueOf(SenderCompID).setString(connection.getSenderCompID());
+                report.valueOf(TargetCompID).setString(connection.getTargetCompID());
             }
 
             @Override
