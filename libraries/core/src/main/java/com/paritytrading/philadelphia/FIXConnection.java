@@ -512,7 +512,7 @@ public class FIXConnection implements Closeable {
                 return;
             }
 
-            FIXValue msgType = message.getMsgType();
+            FIXValue msgType = message.valueOf(MsgType);
             if (msgType == null) {
                 msgTypeNotFound();
                 return;
