@@ -512,7 +512,7 @@ public class FIXConnection implements Closeable {
                 return;
             }
 
-            FIXValue msgType = message.getMsgType();
+            FIXValue msgType = message.valueOf(MsgType);
             if (msgType == null) {
                 msgTypeNotFound();
                 return;
@@ -567,7 +567,7 @@ public class FIXConnection implements Closeable {
         }
 
         private void handleTooLowMsgSeqNum(FIXMessage message, FIXValue msgType, long msgSeqNum) throws IOException {
-            if (msgType.length() != 1 || msgType.asChar() != SequenceReset) {
+            if (!msgType.contentEquals(SequenceReset)) {
                 FIXValue possDupFlag = message.valueOf(PossDupFlag);
 
                 if (possDupFlag == null || !possDupFlag.asBoolean())
