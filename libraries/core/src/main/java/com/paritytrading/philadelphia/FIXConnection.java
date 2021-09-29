@@ -570,7 +570,7 @@ public class FIXConnection implements Closeable {
             if (!msgType.contentEquals(SequenceReset)) {
                 FIXValue possDupFlag = message.valueOf(PossDupFlag);
 
-                if (possDupFlag == null || !possDupFlag.asBoolean())
+                if (possDupFlag == null || possDupFlag.asBoolean() == false)
                     statusListener.tooLowMsgSeqNum(FIXConnection.this, msgSeqNum, rxMsgSeqNum);
             }
         }
@@ -634,7 +634,7 @@ public class FIXConnection implements Closeable {
             rxMsgSeqNum = newSeqNo;
 
             FIXValue gapFillFlag = message.valueOf(GapFillFlag);
-            boolean reset = gapFillFlag == null || !gapFillFlag.asBoolean();
+            boolean reset = gapFillFlag == null || gapFillFlag.asBoolean() == false;
 
             if (reset)
                 statusListener.sequenceReset(FIXConnection.this);
