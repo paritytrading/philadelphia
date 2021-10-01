@@ -221,6 +221,15 @@ public class FIXConnection implements Closeable {
     }
 
     /**
+     * Set the TargetCompID(56).
+     *
+     * @param targetCompId the TargetCompID(56).
+     */
+    public void setTargetCompID(String targetCompId) {
+        this.targetCompId = targetCompId;
+    }
+
+    /**
      * Create a message container.
      *
      * @return a message container
@@ -673,7 +682,7 @@ public class FIXConnection implements Closeable {
                     return;
                 }
 
-                targetCompId = value.toString();
+                setTargetCompID(value.toString());
             }
 
             statusListener.logon(FIXConnection.this, message);
