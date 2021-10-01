@@ -82,7 +82,7 @@ public class FIXValueBenchmark extends FIXBenchmark {
         timeOnlyValue.setTimeOnlyMillis(timeOnly);
 
         timestampValue = new FIXValue(64);
-        timestampValue.setTimestamp(timestamp, true);
+        timestampValue.setTimestampMillis(timestamp);
 
         copyValue = new FIXValue(64);
     }
@@ -187,7 +187,7 @@ public class FIXValueBenchmark extends FIXBenchmark {
 
     @Benchmark
     public void setTimestamp() {
-        timestampValue.setTimestamp(timestamp, true);
+        timestampValue.setTimestampMillis(timestamp);
     }
 
     @Benchmark

@@ -155,7 +155,7 @@ public class FIXConnection implements Closeable {
 
         this.currentTimestamp = new FIXValue(CURRENT_TIMESTAMP_FIELD_CAPACITY);
 
-        this.currentTimestamp.setTimestamp(this.currentTime, true);
+        this.currentTimestamp.setTimestampMillis(this.currentTime);
     }
 
     /**
@@ -317,7 +317,7 @@ public class FIXConnection implements Closeable {
 
         currentTime.setMillis(currentTimeMillis);
 
-        currentTimestamp.setTimestamp(currentTime, true);
+        currentTimestamp.setTimestampMillis(currentTime);
     }
 
     /**

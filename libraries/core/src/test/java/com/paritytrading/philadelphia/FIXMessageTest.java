@@ -41,7 +41,7 @@ class FIXMessageTest {
         message.addField(HandlInst).setChar(HandlInstValues.AutomatedExecutionNoIntervention);
         message.addField(Symbol).setString("FOO");
         message.addField(Side).setChar(SideValues.Buy);
-        message.addField(TransactTime).setTimestamp(timestamp, true);
+        message.addField(TransactTime).setTimestampMillis(timestamp);
         message.addField(OrderQty).setInt(100);
         message.addField(OrdType).setChar(OrdTypeValues.Limit);
         message.addField(Price).setFloat(150.25, 2);
@@ -74,7 +74,7 @@ class FIXMessageTest {
         message.addField(HandlInst).setChar(HandlInstValues.AutomatedExecutionNoIntervention);
         message.addField(Symbol).setString("FOO");
         message.addField(Side).setChar(SideValues.Buy);
-        message.addField(TransactTime).setTimestamp(timestamp, true);
+        message.addField(TransactTime).setTimestampMillis(timestamp);
         message.addField(OrderQty).setInt(100);
         message.addField(OrdType).setChar(OrdTypeValues.Limit);
         message.addField(Price).setFloat(150.25, 2);

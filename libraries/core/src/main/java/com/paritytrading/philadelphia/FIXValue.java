@@ -614,12 +614,11 @@ public class FIXValue implements CharSequence {
     }
 
     /**
-     * Set the value to a timestamp.
+     * Set the value to a timestamp with the granularity of milliseconds.
      *
      * @param x a timestamp
-     * @param millis if true set milliseconds, otherwise do not set milliseconds
      */
-    public void setTimestamp(ReadableDateTime x, boolean millis) {
+    public void setTimestampMillis(ReadableDateTime x) {
         setDigits(x.getYear(), 0, 4);
         setDigits(x.getMonthOfYear(), 4, 2);
         setDigits(x.getDayOfMonth(), 6, 2);
@@ -629,20 +628,33 @@ public class FIXValue implements CharSequence {
         setDigits(x.getMinuteOfHour(), 12, 2);
         bytes[14] = ':';
         setDigits(x.getSecondOfMinute(), 15, 2);
-
-        if (millis) {
-            bytes[17] = '.';
-            setDigits(x.getMillisOfSecond(), 18, 3);
-            bytes[21] = SOH;
-
-            length = 21;
-        } else {
-            bytes[17] = SOH;
-
-            length = 17;
-        }
+        bytes[17] = '.';
+        setDigits(x.getMillisOfSecond(), 18, 3);
+        bytes[21] = SOH;
 
         offset = 0;
+        length = 21;
+    }
+
+    /**
+     * Set the value to a timestamp with the granularity of seconds.
+     *
+     * @param x a timestamp
+     */
+    public void setTimestampSecs(ReadableDateTime x) {
+        setDigits(x.getYear(), 0, 4);
+        setDigits(x.getMonthOfYear(), 4, 2);
+        setDigits(x.getDayOfMonth(), 6, 2);
+        bytes[8] = '-';
+        setDigits(x.getHourOfDay(), 9, 2);
+        bytes[11] = ':';
+        setDigits(x.getMinuteOfHour(), 12, 2);
+        bytes[14] = ':';
+        setDigits(x.getSecondOfMinute(), 15, 2);
+        bytes[17] = SOH;
+
+        offset = 0;
+        length = 17;
     }
 
     /**
