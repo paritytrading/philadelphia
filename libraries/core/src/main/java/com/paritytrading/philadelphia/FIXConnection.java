@@ -203,12 +203,30 @@ public class FIXConnection implements Closeable {
     }
 
     /**
+     * Set the SenderCompID(49).
+     *
+     * @param senderCompId the SenderCompID(49)
+     */
+    public void setSenderCompID(String senderCompId) {
+        this.senderCompId = senderCompId;
+    }
+
+    /**
      * Get the TargetCompID(56).
      *
      * @return the TargetCompID(56)
      */
     public String getTargetCompID() {
         return targetCompId;
+    }
+
+    /**
+     * Set the TargetCompID(56).
+     *
+     * @param targetCompId the TargetCompID(56).
+     */
+    public void setTargetCompID(String targetCompId) {
+        this.targetCompId = targetCompId;
     }
 
     /**
@@ -654,7 +672,7 @@ public class FIXConnection implements Closeable {
                     return;
                 }
 
-                senderCompId = value.toString();
+                setSenderCompID(value.toString());
             }
 
             if (targetCompId.isEmpty()) {
@@ -664,7 +682,7 @@ public class FIXConnection implements Closeable {
                     return;
                 }
 
-                targetCompId = value.toString();
+                setTargetCompID(value.toString());
             }
 
             statusListener.logon(FIXConnection.this, message);
