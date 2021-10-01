@@ -79,7 +79,7 @@ public class FIXValueBenchmark extends FIXBenchmark {
         dateValue.setDate(date);
 
         timeOnlyValue = new FIXValue(64);
-        timeOnlyValue.setTimeOnly(timeOnly, true);
+        timeOnlyValue.setTimeOnlyMillis(timeOnly);
 
         timestampValue = new FIXValue(64);
         timestampValue.setTimestamp(timestamp, true);
@@ -175,7 +175,7 @@ public class FIXValueBenchmark extends FIXBenchmark {
 
     @Benchmark
     public void setTimeOnly() {
-        timeOnlyValue.setTimeOnly(timeOnly, true);
+        timeOnlyValue.setTimeOnlySecs(timeOnly);
     }
 
     @Benchmark
