@@ -697,15 +697,15 @@ class FIXValueTest {
     }
 
     @Test
-    void setTimeOnlyWithMillis() {
-        value.setTimeOnly(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), true);
+    void setTimeOnlyMillis() {
+        value.setTimeOnlyMillis(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250));
 
         assertEquals("09:30:05.250\u0001", put());
     }
 
     @Test
-    void setTimeOnlyWithoutMillis() {
-        value.setTimeOnly(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), false);
+    void setTimeOnlySecs() {
+        value.setTimeOnlySecs(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250));
 
         assertEquals("09:30:05\u0001", put());
     }
@@ -740,15 +740,15 @@ class FIXValueTest {
     }
 
     @Test
-    void setTimestampWithMillis() {
-        value.setTimestamp(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), true);
+    void setTimestampMillis() {
+        value.setTimestampMillis(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250));
 
         assertEquals("20150924-09:30:05.250\u0001", put());
     }
 
     @Test
-    void setTimestampWithoutMillis() {
-        value.setTimestamp(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), false);
+    void setTimestampSecs() {
+        value.setTimestampSecs(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250));
 
         assertEquals("20150924-09:30:05\u0001", put());
     }
