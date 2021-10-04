@@ -121,12 +121,8 @@ public class FIXConnection implements Closeable {
 
         this.txHeaderBuffer = ByteBuffer.allocateDirect(config.getTxBufferCapacity());
 
-        FIXValue beginString = new FIXValue(BEGIN_STRING_FIELD_CAPACITY);
-
-        beginString.setString(config.getVersion().getBeginString());
-
         this.txHeaderBuffer.put(BEGIN_STRING);
-        beginString.put(this.txHeaderBuffer);
+        this.txHeaderBuffer.put(config.getVersion().getBeginString());
         this.txHeaderBuffer.put(BODY_LENGTH);
 
         this.bodyLengthOffset = this.txHeaderBuffer.position();
