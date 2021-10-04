@@ -30,12 +30,7 @@ public enum FIXVersion {
         this.beginString = beginString;
     }
 
-    /**
-     * Get the BeginString(8).
-     *
-     * @return the BeginString(8)
-     */
-    public String getBeginString() {
+    String getBeginString() {
         return beginString;
     }
 
