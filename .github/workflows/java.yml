@@ -3,9 +3,11 @@ name: Java
 on:
   push:
     paths-ignore:
+      - '.github/workflows/python.yml'
       - 'applications/generate/**'
   pull_request:
     paths-ignore:
+      - '.github/workflows/python.yml'
       - 'applications/generate/**'
 
 jobs:
