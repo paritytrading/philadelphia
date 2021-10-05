@@ -172,7 +172,12 @@ public class FIXConnection implements Closeable {
         return rxMsgSeqNum;
     }
 
-    void setIncomingMsgSeqNum(long incomingMsgSeqNum) {
+    /**
+     * Set the next incoming MsgSeqNum(34).
+     *
+     * @param incomingMsgSeqNum the next incoming MsgSeqNum(34)
+     */
+    public void setIncomingMsgSeqNum(long incomingMsgSeqNum) {
         rxMsgSeqNum = incomingMsgSeqNum;
     }
 
@@ -185,7 +190,12 @@ public class FIXConnection implements Closeable {
         return txMsgSeqNum;
     }
 
-    void setOutgoingMsgSeqNum(long outgoingMsgSeqNum) {
+    /**
+     * Set the next outgoing MsgSeqNum(34).
+     *
+     * @param outgoingMsgSeqNum the next outgoing MsgSeqNum(34)
+     */
+    public void setOutgoingMsgSeqNum(long outgoingMsgSeqNum) {
         txMsgSeqNum = outgoingMsgSeqNum;
     }
 
