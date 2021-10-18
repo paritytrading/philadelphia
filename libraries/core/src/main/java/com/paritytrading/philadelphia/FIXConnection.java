@@ -34,6 +34,8 @@ public class FIXConnection implements Closeable {
 
     private static final int CURRENT_TIMESTAMP_FIELD_CAPACITY = 24;
 
+    private static final FIXValue FALSE = FIXValue.fromBoolean(false);
+
     private final SocketChannel channel;
 
     private final FIXConfig config;
@@ -592,9 +594,9 @@ public class FIXConnection implements Closeable {
 
         private void handleTooLowMsgSeqNum(FIXMessage message, FIXValue msgType, long msgSeqNum) throws IOException {
             if (!msgType.contentEquals(SequenceReset)) {
-                FIXValue possDupFlag = message.valueOf(PossDupFlag);
+                FIXValue possDupFlag = message.valueOf(PossDupFlag, FALSE);
 
-                if (possDupFlag == null || possDupFlag.asBoolean() == false)
+                if (possDupFlag.asBoolean() == false)
                     statusListener.tooLowMsgSeqNum(FIXConnection.this, msgSeqNum, rxMsgSeqNum);
             }
         }
@@ -657,8 +659,8 @@ public class FIXConnection implements Closeable {
 
             rxMsgSeqNum = newSeqNo;
 
-            FIXValue gapFillFlag = message.valueOf(GapFillFlag);
-            boolean reset = gapFillFlag == null || gapFillFlag.asBoolean() == false;
+            FIXValue gapFillFlag = message.valueOf(GapFillFlag, FALSE);
+            boolean reset = gapFillFlag.asBoolean() == false;
 
             if (reset)
                 statusListener.sequenceReset(FIXConnection.this);
