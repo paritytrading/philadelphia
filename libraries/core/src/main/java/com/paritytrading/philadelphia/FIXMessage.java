@@ -140,6 +140,24 @@ public class FIXMessage {
 
     /**
      * Get the value container of the first instance of a field with the
+     * specified tag or the default value container.
+     *
+     * @param tag the tag
+     * @param defaultValue the default value container
+     * @return the value container or the default value container if there are
+     *   no instances of a field with the specified tag
+     */
+    public FIXValue valueOf(int tag, FIXValue defaultValue) {
+        for (int i = 0; i < count; i++) {
+            if (tags[i] == tag)
+                return values[i];
+        }
+
+        return defaultValue;
+    }
+
+    /**
+     * Get the value container of the first instance of a field with the
      * specified tag, starting at the specified index.
      *
      * @param tag the tag
@@ -154,6 +172,26 @@ public class FIXMessage {
         }
 
         return null;
+    }
+
+    /**
+     * Get the value container of the first instance of a field with the
+     * specified tag, starting at the specified index, or the default value
+     * container.
+     *
+     * @param tag the tag
+     * @param fromIndex the index to start the search from
+     * @param defaultValue the default value container
+     * @return the value container or the default value container if there are
+     *   no instances of a field with the specified tag
+     */
+    public FIXValue valueOf(int tag, int fromIndex, FIXValue defaultValue) {
+        for (int i = 0; i < count; i++) {
+            if (tags[i] == tag)
+                return values[i];
+        }
+
+        return defaultValue;
     }
 
     /**
