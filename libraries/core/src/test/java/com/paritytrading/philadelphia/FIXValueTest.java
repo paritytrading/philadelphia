@@ -664,6 +664,34 @@ class FIXValueTest {
     }
 
     @Test
+    void fromFloatMinValue() {
+        FIXValue constant = FIXValue.fromFloat(-900719925474099100.0, 0);
+
+        assertEquals(-900719925474099100.0, constant.asFloat());
+    }
+
+    @Test
+    void fromFloatMinusMinDecimal() {
+        FIXValue constant = FIXValue.fromFloat(-0.00000000000000001, 17);
+
+        assertEquals(-0.00000000000000001, constant.asFloat());
+    }
+
+    @Test
+    void fromFloatMinDecimal() {
+        FIXValue constant = FIXValue.fromFloat(0.00000000000000001, 17);
+
+        assertEquals(0.00000000000000001, constant.asFloat());
+    }
+
+    @Test
+    void fromFloatMaxValue() {
+        FIXValue constant = FIXValue.fromFloat(900719925474099100.0, 0);
+
+        assertEquals(900719925474099100.0, constant.asFloat());
+    }
+
+    @Test
     void asString() {
         get("FOO\u0001");
 

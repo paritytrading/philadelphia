@@ -514,6 +514,21 @@ public class FIXValue implements CharSequence {
     }
 
     /**
+     * Construct a value container from a float.
+     *
+     * @param x a float
+     * @param decimals the number of decimals
+     * @return a value container
+     */
+    public static FIXValue fromFloat(double x, int decimals) {
+        FIXValue value = new FIXValue(22);
+
+        value.setFloat(x, decimals);
+
+        return value;
+    }
+
+    /**
      * Get the value as a string.
      *
      * @return the value as a string
