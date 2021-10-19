@@ -788,6 +788,21 @@ public class FIXValue implements CharSequence {
     }
 
     /**
+     * Construct a value container from a timestamp with the granularity of
+     * seconds.
+     *
+     * @param x a timestamp
+     * @return a value container
+     */
+    public static FIXValue fromTimestampSecs(ReadableDateTime x) {
+        FIXValue value = new FIXValue(18);
+
+        value.setTimestampSecs(x);
+
+        return value;
+    }
+
+    /**
      * Set the value to a checksum.
      *
      * @param x a checksum
