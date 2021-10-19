@@ -850,6 +850,17 @@ class FIXValueTest {
     }
 
     @Test
+    void fromTimestampMillis() {
+        FIXValue constant = FIXValue.fromTimestampMillis(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250));
+
+        MutableDateTime t = new MutableDateTime();
+
+        constant.asTimestamp(t);
+
+        assertEquals(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), t);
+    }
+
+    @Test
     void setTimestampSecs() {
         value.setTimestampSecs(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250));
 

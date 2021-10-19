@@ -752,6 +752,21 @@ public class FIXValue implements CharSequence {
     }
 
     /**
+     * Construct a value container from a timestamp with the granularity of
+     * milliseconds.
+     *
+     * @param x a timestamp
+     * @return a value container
+     */
+    public static FIXValue fromTimestampMillis(ReadableDateTime x) {
+        FIXValue value = new FIXValue(22);
+
+        value.setTimestampMillis(x);
+
+        return value;
+    }
+
+    /**
      * Set the value to a timestamp with the granularity of seconds.
      *
      * @param x a timestamp
