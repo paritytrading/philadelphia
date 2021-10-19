@@ -181,6 +181,20 @@ class FIXValueTest {
     }
 
     @Test
+    void fromBooleanTrue() {
+        FIXValue constant = FIXValue.fromBoolean(true);
+
+        assertTrue(constant.asBoolean());
+    }
+
+    @Test
+    void fromBooleanFalse() {
+        FIXValue constant = FIXValue.fromBoolean(false);
+
+        assertFalse(constant.asBoolean());
+    }
+
+    @Test
     void asChar() {
         get("Y\u0001");
 

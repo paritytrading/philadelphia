@@ -235,6 +235,20 @@ public class FIXValue implements CharSequence {
     }
 
     /**
+     * Construct a value container from a boolean.
+     *
+     * @param x a boolean
+     * @return a value container
+     */
+    public static FIXValue fromBoolean(boolean x) {
+        FIXValue value = new FIXValue(2);
+
+        value.setBoolean(x);
+
+        return value;
+    }
+
+    /**
      * Get the value as a character.
      *
      * @return the value as a character
