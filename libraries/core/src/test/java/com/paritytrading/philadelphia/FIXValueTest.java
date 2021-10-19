@@ -706,6 +706,13 @@ class FIXValueTest {
     }
 
     @Test
+    void fromString() {
+        FIXValue constant = FIXValue.fromString("FOO");
+
+        assertTrue("FOO".contentEquals(constant.asString()));
+    }
+
+    @Test
     void asDate() {
         get("20150924\u0001");
 

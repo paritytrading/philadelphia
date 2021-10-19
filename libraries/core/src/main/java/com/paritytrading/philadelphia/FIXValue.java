@@ -554,6 +554,20 @@ public class FIXValue implements CharSequence {
     }
 
     /**
+     * Construct a value container from a string.
+     *
+     * @param x a string
+     * @return a value container
+     */
+    public static FIXValue fromString(CharSequence x) {
+        FIXValue value = new FIXValue(x.length() + 1);
+
+        value.setString(x);
+
+        return value;
+    }
+
+    /**
      * Get the value as a date.
      *
      * <p><strong>Note.</strong> This method sets both date and time fields.
