@@ -216,6 +216,13 @@ class FIXValueTest {
     }
 
     @Test
+    void fromChar() {
+        FIXValue constant = FIXValue.fromChar('Y');
+
+        assertEquals('Y', constant.asChar());
+    }
+
+    @Test
     void asIntMinValue() {
         get("-9223372036854775808\u0001");
 
