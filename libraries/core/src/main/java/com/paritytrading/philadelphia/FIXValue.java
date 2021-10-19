@@ -660,6 +660,21 @@ public class FIXValue implements CharSequence {
     }
 
     /**
+     * Construct a value container from a time only with the granularity of
+     * milliseconds.
+     *
+     * @param x a time only
+     * @return a value container
+     */
+    public static FIXValue fromTimeOnlyMillis(ReadableDateTime x) {
+        FIXValue value = new FIXValue(13);
+
+        value.setTimeOnlyMillis(x);
+
+        return value;
+    }
+
+    /**
      * Set the value to a time only with the granularity of seconds.
      *
      * @param x a time only

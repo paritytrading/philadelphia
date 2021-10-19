@@ -785,6 +785,17 @@ class FIXValueTest {
     }
 
     @Test
+    void fromTimeOnlyMillis() {
+        FIXValue constant = FIXValue.fromTimeOnlyMillis(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250));
+
+        MutableDateTime t = new MutableDateTime(2015, 9, 24, 22, 45, 10, 750);
+
+        constant.asTimeOnly(t);
+
+        assertEquals(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), t);
+    }
+
+    @Test
     void setTimeOnlySecs() {
         value.setTimeOnlySecs(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250));
 
