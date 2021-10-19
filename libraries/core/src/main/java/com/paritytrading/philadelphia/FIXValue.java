@@ -608,6 +608,20 @@ public class FIXValue implements CharSequence {
     }
 
     /**
+     * Construct a value container from a date.
+     *
+     * @param x a date
+     * @return a value container
+     */
+    public static FIXValue fromDate(ReadableDateTime x) {
+        FIXValue value = new FIXValue(9);
+
+        value.setDate(x);
+
+        return value;
+    }
+
+    /**
      * Get the value as a time only.
      *
      * @param x a time only
