@@ -362,6 +362,20 @@ public class FIXValue implements CharSequence {
     }
 
     /**
+     * Construct a value container from an integer.
+     *
+     * @param x an integer
+     * @return a value container
+     */
+    public static FIXValue fromInt(long x) {
+        FIXValue value = new FIXValue(21);
+
+        value.setInt(x);
+
+        return value;
+    }
+
+    /**
      * Get the value as a float.
      *
      * <p><strong>Note.</strong> The value is a string representation of

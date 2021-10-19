@@ -335,6 +335,20 @@ class FIXValueTest {
     }
 
     @Test
+    void fromIntMinValue() {
+        FIXValue constant = FIXValue.fromInt(Long.MIN_VALUE);
+
+        assertEquals(Long.MIN_VALUE, constant.asInt());
+    }
+
+    @Test
+    void fromIntMaxValue() {
+        FIXValue constant = FIXValue.fromInt(Long.MAX_VALUE);
+
+        assertEquals(Long.MAX_VALUE, constant.asInt());
+    }
+
+    @Test
     void asFloatMinValue() {
         get("-900719925474099100.0");
 
