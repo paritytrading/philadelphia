@@ -692,6 +692,21 @@ public class FIXValue implements CharSequence {
     }
 
     /**
+     * Construct a value container from a time only with the granularity of
+     * seconds.
+     *
+     * @param x a time only
+     * @return a value container
+     */
+    public static FIXValue fromTimeOnlySecs(ReadableDateTime x) {
+        FIXValue value = new FIXValue(9);
+
+        value.setTimeOnlySecs(x);
+
+        return value;
+    }
+
+    /**
      * Get the value as a timestamp.
      *
      * @param x a timestamp
