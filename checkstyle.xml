@@ -28,6 +28,12 @@
     <property name="eachLine" value="true" />
   </module>
 
+  <!-- No trailing whitespace. -->
+  <module name="RegexpSingleline">
+    <property name="format" value="\s+$" />
+    <property name="message" value="Line must not contain trailing whitespace" />
+  </module>
+
   <module name="TreeWalker">
 
     <!-- No unused imports. -->

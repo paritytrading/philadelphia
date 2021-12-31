@@ -70,7 +70,7 @@ public interface FIXConnectionStatusListener {
     /**
      * Receive a Logon(A) message.
      *
-     * @param connection the connection 
+     * @param connection the connection
      * @param message the Logon(A) message
      * @throws IOException if an I/O error occurs
      */
@@ -79,7 +79,7 @@ public interface FIXConnectionStatusListener {
     /**
      * Receive a Logout(5) message.
      *
-     * @param connection the connection 
+     * @param connection the connection
      * @param message the Logout(5) message
      * @throws IOException if an I/O error occurs
      */
