@@ -34,3 +34,6 @@ jobs:
       - name: Run type check
         run: mypy philadelphia
         working-directory: ./applications/generate
+      - name: Install application
+        run: python setup.py install
+        working-directory: ./applications/generate
