@@ -39,10 +39,10 @@ def read_enumerations(filename: str) -> typing.List[model.Enumeration]:
     def enumeration(elem: etree.Element) -> model.Enumeration:
         field = _read_field(elem)
         type_ = _read_type(elem)
-        values = _read_values(elem) if _has_values(field.name) else []
+        values = _read_values(elem)
         return model.Enumeration(primary_field=field, secondary_fields=[], type_=type_, values=values)
     tree = etree.parse(filename)
-    return sorted([enumeration(elem) for elem in tree.findall('./fields/field')],
+    return sorted([enumeration(elem) for elem in tree.findall('./fields/field') if _has_values(elem)],
                   key=lambda enumeration: int(enumeration.primary_field.tag))
 
 
@@ -70,8 +70,8 @@ def _read_type(elem: etree.Element) -> str:
     return _TYPES.get(type_, 'String')
 
 
-def _has_values(name: str) -> bool:
-    return name != 'MsgType'
+def _has_values(elem: etree.Element) -> bool:
+    return etree.get(elem, 'name') != 'MsgType' and elem.find('value') is not None
 
 
 def _read_values(root: etree.Element) -> typing.List[model.Value]:
