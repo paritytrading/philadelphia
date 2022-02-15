@@ -38,8 +38,8 @@ def read_fields(filename: str) -> typing.List[model.Field]:
 def read_enumerations(filename: str) -> typing.List[model.Enumeration]:
     def enumeration(elem: etree.Element) -> model.Enumeration:
         field = _read_field(elem)
-        type_ = _read_type(elem)
         values = _read_values(elem)
+        type_ = _read_type(elem, values)
         return model.Enumeration(primary_field=field, secondary_fields=[], type_=type_, values=values)
     tree = etree.parse(filename)
     return sorted([enumeration(elem) for elem in tree.findall('./fields/field') if _has_values(elem)],
@@ -65,9 +65,11 @@ def _read_field(elem: etree.Element) -> model.Field:
     return model.Field(tag=number, name=name)
 
 
-def _read_type(elem: etree.Element) -> str:
-    type_ = etree.get(elem, 'type')
-    return _TYPES.get(type_, 'String')
+def _read_type(elem: etree.Element, values: typing.List[model.Value]) -> str:
+    type_ = _TYPES.get(etree.get(elem, 'type'), 'String')
+    if type_ == 'char' and values and max(len(value.value) for value in values) > 1:
+        return 'String'
+    return type_
 
 
 def _has_values(elem: etree.Element) -> bool:
