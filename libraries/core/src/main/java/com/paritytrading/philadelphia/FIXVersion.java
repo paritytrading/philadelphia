@@ -21,9 +21,25 @@ import static com.paritytrading.philadelphia.FIX.*;
  * The protocol version.
  */
 public enum FIXVersion {
+
+    /**
+     * FIX 4.2.
+     */
     FIX_4_2(new byte[] { 'F', 'I', 'X', '.', '4', '.', '2', SOH }),
+
+    /**
+     * FIX 4.3.
+     */
     FIX_4_3(new byte[] { 'F', 'I', 'X', '.', '4', '.', '3', SOH }),
+
+    /**
+     * FIX 4.4.
+     */
     FIX_4_4(new byte[] { 'F', 'I', 'X', '.', '4', '.', '4', SOH }),
+
+    /**
+     * FIXT 1.1.
+     */
     FIXT_1_1(new byte[] { 'F', 'I', 'X', 'T', '.', '1', '.', '1', SOH });
 
     private final byte[] beginString;
