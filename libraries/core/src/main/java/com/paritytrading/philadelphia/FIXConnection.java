@@ -548,6 +548,12 @@ public class FIXConnection implements Closeable {
             }
 
             if (msgSeqNum != rxMsgSeqNum) {
+                // Sometimes a logout request can be paired with the 'MsgSeqNum too low' error
+                // which doesn't allow to proceed with a Resend sequence
+                if (msgType.byteAt(0) == Logout) {
+                    handleLogout(message);
+                    return;
+                }
                 handleMsgSeqNum(message, msgType, msgSeqNum);
                 return;
             }
