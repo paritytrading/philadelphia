@@ -210,7 +210,19 @@ class FIXInitiatorTest {
     }
 
     @Test
-    void receiveResendRequestWithNonZeroEndSeqNo() throws IOException {
+    void receiveResendRequestWithEndSeqNoSmallerThanLastMsgSeqNum() throws IOException {
+        initiator.setOutgoingMsgSeqNum(5);
+
+        String request  = "35=2|34=1|7=2|16=3|";
+        String response = "8=FIX.4.2|9=71|35=4|49=initiator|56=acceptor|34=2|" +
+            "52=19700101-00:00:00.000|123=Y|36=4|10=230|";
+
+        acceptorRequestInitiatorResponse(request, response);
+        assertEquals(5, initiator.getOutgoingMsgSeqNum());
+    }
+
+    @Test
+    void receiveResendRequestWithEndSeqNoEqualToLastMsgSeqNum() throws IOException {
         initiator.setOutgoingMsgSeqNum(5);
 
         String request  = "35=2|34=1|7=2|16=4|";
@@ -218,6 +230,19 @@ class FIXInitiatorTest {
             "52=19700101-00:00:00.000|123=Y|36=5|10=231|";
 
         acceptorRequestInitiatorResponse(request, response);
+        assertEquals(5, initiator.getOutgoingMsgSeqNum());
+    }
+
+    @Test
+    void receiveResendRequestWithEndSeqNoLargerThanLastMsgSeqNum() throws IOException {
+        initiator.setOutgoingMsgSeqNum(5);
+
+        String request  = "35=2|34=1|7=2|16=6|";
+        String response = "8=FIX.4.2|9=71|35=4|49=initiator|56=acceptor|34=2|" +
+            "52=19700101-00:00:00.000|123=Y|36=5|10=231|";
+
+        acceptorRequestInitiatorResponse(request, response);
+        assertEquals(5, initiator.getOutgoingMsgSeqNum());
     }
 
     @Test
@@ -229,6 +254,7 @@ class FIXInitiatorTest {
             "52=19700101-00:00:00.000|123=Y|36=3|10=229|";
 
         acceptorRequestInitiatorResponse(request, response);
+        assertEquals(3, initiator.getOutgoingMsgSeqNum());
     }
 
     @Test
