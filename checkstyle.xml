@@ -36,6 +36,21 @@
 
   <module name="TreeWalker">
 
+    <module name="ImportOrder">
+
+      <!-- Static imports at the top. -->
+      <property name="option" value="top" />
+
+      <!-- Type imports in alphabetical order. -->
+      <property name="ordered" value="true" />
+
+      <!-- An empty line between static imports and type imports. -->
+      <property name="separatedStaticGroups" value="true" />
+
+      <!-- Static imports in alphabetical order. -->
+      <property name="sortStaticImportsAlphabetically" value="true" />
+    </module>
+
     <!-- No unused imports. -->
     <module name="UnusedImports" />
   </module>
