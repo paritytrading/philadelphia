@@ -20,7 +20,6 @@ import static com.paritytrading.philadelphia.fix42.FIX42Tags.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.nio.ByteBuffer;
-import org.joda.time.MutableDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +34,7 @@ class FIXMessageTest {
 
     @Test
     void format() {
-        MutableDateTime timestamp = new MutableDateTime(2015, 9, 24, 9, 30, 5, 250);
+        FIXTimestamp timestamp = new FIXTimestamp(2015, 9, 24, 9, 30, 5, 250);
 
         message.addField(ClOrdID).setString("123");
         message.addField(HandlInst).setChar(HandlInstValues.AutomatedExecutionNoIntervention);
@@ -68,7 +67,7 @@ class FIXMessageTest {
 
     @Test
     void print() {
-        MutableDateTime timestamp = new MutableDateTime(2015, 9, 24, 9, 30, 5, 250);
+        FIXTimestamp timestamp = new FIXTimestamp(2015, 9, 24, 9, 30, 5, 250);
 
         message.addField(ClOrdID).setString("123");
         message.addField(HandlInst).setChar(HandlInstValues.AutomatedExecutionNoIntervention);

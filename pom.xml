@@ -89,11 +89,6 @@
         <version>3.19.0</version>
       </dependency>
       <dependency>
-        <groupId>joda-time</groupId>
-        <artifactId>joda-time</artifactId>
-        <version>2.10.10</version> <!-- (mentioned in documentation) -->
-      </dependency>
-      <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
         <version>3.12.0</version>
@@ -216,9 +211,6 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
           <excludePackageNames>com.paritytrading.philadelphia.acceptor:com.paritytrading.philadelphia.client:com.paritytrading.philadelphia.initiator:*.generated</excludePackageNames>
-          <links>
-            <link>http://www.joda.org/joda-time/apidocs/</link>
-          </links>
           <sourceFileExcludes>**\/*Benchmark.java</sourceFileExcludes>
         </configuration>
       </plugin>

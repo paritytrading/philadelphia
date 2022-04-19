@@ -24,8 +24,6 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
-import org.joda.time.DateTimeZone;
-import org.joda.time.MutableDateTime;
 
 /**
  * A connection.
@@ -85,7 +83,7 @@ public class FIXConnection implements Closeable {
 
     private long currentTimeMillis;
 
-    private final MutableDateTime currentTime;
+    private final FIXTimestamp currentTime;
 
     private final FIXValue currentTimestamp;
 
@@ -147,7 +145,7 @@ public class FIXConnection implements Closeable {
 
         this.currentTimeMillis = 0;
 
-        this.currentTime = new MutableDateTime(this.currentTimeMillis, DateTimeZone.UTC);
+        this.currentTime = new FIXTimestamp();
 
         this.currentTimestamp = new FIXValue(CURRENT_TIMESTAMP_FIELD_CAPACITY);
 
@@ -321,7 +319,7 @@ public class FIXConnection implements Closeable {
     public void setCurrentTimeMillis(long currentTimeMillis) {
         this.currentTimeMillis = currentTimeMillis;
 
-        currentTime.setMillis(currentTimeMillis);
+        currentTime.setEpochMilli(currentTimeMillis);
 
         currentTimestamp.setTimestampMillis(currentTime);
     }
