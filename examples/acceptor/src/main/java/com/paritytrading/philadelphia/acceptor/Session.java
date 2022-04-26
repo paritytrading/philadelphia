@@ -32,7 +32,7 @@ class Session implements FIXMessageListener {
 
     private static final FIXConfig CONFIG = new FIXConfig.Builder().build();
 
-    private final FIXConnection<?> connection;
+    private final FIXConnection connection;
 
     private final FIXMessage report;
 
@@ -49,32 +49,32 @@ class Session implements FIXMessageListener {
     private long nextExecId;
 
     Session(SocketChannel channel) {
-        connection = new FIXConnection<>(channel, CONFIG, this, new FIXConnectionStatusListener() {
+        connection = new FIXConnection(channel, CONFIG, this, new FIXConnectionStatusListener() {
 
             @Override
-            public void close(FIXConnection<?> connection, String message) throws IOException {
+            public void close(FIXConnection connection, String message) throws IOException {
                 connection.close();
             }
 
             @Override
-            public void sequenceReset(FIXConnection<?> connection) {
+            public void sequenceReset(FIXConnection connection) {
             }
 
             @Override
-            public void tooLowMsgSeqNum(FIXConnection<?> connection, long receivedMsgSeqNum, long expectedMsgSeqNum) {
+            public void tooLowMsgSeqNum(FIXConnection connection, long receivedMsgSeqNum, long expectedMsgSeqNum) {
             }
 
             @Override
-            public void heartbeatTimeout(FIXConnection<?> connection) throws IOException {
+            public void heartbeatTimeout(FIXConnection connection) throws IOException {
                 connection.close();
             }
 
             @Override
-            public void reject(FIXConnection<?> connection, FIXMessage message) throws IOException {
+            public void reject(FIXConnection connection, FIXMessage message) throws IOException {
             }
 
             @Override
-            public void logon(FIXConnection<?> connection, FIXMessage message) throws IOException {
+            public void logon(FIXConnection connection, FIXMessage message) throws IOException {
                 connection.sendLogon(true);
 
                 report.valueOf(SenderCompID).setString(connection.getSenderCompID());
@@ -82,7 +82,7 @@ class Session implements FIXMessageListener {
             }
 
             @Override
-            public void logout(FIXConnection<?> connection, FIXMessage message) throws IOException {
+            public void logout(FIXConnection connection, FIXMessage message) throws IOException {
                 connection.sendLogout();
             }
 
@@ -171,7 +171,7 @@ class Session implements FIXMessageListener {
         connection.send(report);
     }
 
-    FIXConnection<?> getConnection() {
+    FIXConnection getConnection() {
         return connection;
     }
 

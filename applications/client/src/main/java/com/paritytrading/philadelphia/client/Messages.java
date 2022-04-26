@@ -40,33 +40,33 @@ class Messages implements FIXMessageListener, FIXConnectionStatusListener {
     }
 
     @Override
-    public void close(FIXConnection<?> connection, String message) {
+    public void close(FIXConnection connection, String message) {
     }
 
     @Override
-    public void sequenceReset(FIXConnection<?> connection) {
+    public void sequenceReset(FIXConnection connection) {
     }
 
     @Override
-    public void tooLowMsgSeqNum(FIXConnection<?> connection, long receivedMsgSeqNum, long expectedMsgSeqNum) {
+    public void tooLowMsgSeqNum(FIXConnection connection, long receivedMsgSeqNum, long expectedMsgSeqNum) {
     }
 
     @Override
-    public void heartbeatTimeout(FIXConnection<?> connection) {
+    public void heartbeatTimeout(FIXConnection connection) {
     }
 
     @Override
-    public void reject(FIXConnection<?> connection, FIXMessage message) {
+    public void reject(FIXConnection connection, FIXMessage message) {
         add(message);
     }
 
     @Override
-    public void logon(FIXConnection<?> connection, FIXMessage message) {
+    public void logon(FIXConnection connection, FIXMessage message) {
         add(message);
     }
 
     @Override
-    public void logout(FIXConnection<?> connection, FIXMessage message) {
+    public void logout(FIXConnection connection, FIXMessage message) {
         add(message);
     }
 

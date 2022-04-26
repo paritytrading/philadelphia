@@ -48,7 +48,7 @@ class FIXInitiatorTest {
 
     private FIXConnectionStatus initiatorStatus;
 
-    private FIXConnection<?>  initiator;
+    private FIXConnection  initiator;
     private TestConnection acceptor;
 
     @BeforeEach
@@ -69,7 +69,7 @@ class FIXInitiatorTest {
 
         initiatorStatus = new FIXConnectionStatus();
 
-        initiator = new FIXConnection<>(initiatorChannel, initiatorConfig, initiatorMessages, initiatorStatus);
+        initiator = new FIXConnection(initiatorChannel, initiatorConfig, initiatorMessages, initiatorStatus);
         acceptor  = new TestConnection(acceptorChannel, acceptorMessages);
     }
 
@@ -410,7 +410,7 @@ class FIXInitiatorTest {
         initiatorMessages(messages);
     }
 
-    private void receiveBlocking(FIXConnection<?> connection) throws IOException {
+    private void receiveBlocking(FIXConnection connection) throws IOException {
         Channel channel = connection.getChannel();
         if (!(channel instanceof SelectableChannel)) {
             throw new UnsupportedOperationException("This operation requires the usage of a SelectableChannel");
