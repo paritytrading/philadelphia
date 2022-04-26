@@ -31,37 +31,37 @@ class FIXConnectionStatus implements FIXConnectionStatusListener {
     }
 
     @Override
-    public void close(FIXConnection connection, String message) {
+    public void close(FIXConnection<?> connection, String message) {
         events.add(new Close(message));
     }
 
     @Override
-    public void sequenceReset(FIXConnection connection) {
+    public void sequenceReset(FIXConnection<?> connection) {
         events.add(new SequenceReset());
     }
 
     @Override
-    public void tooLowMsgSeqNum(FIXConnection connection, long receivedMsgSeqNum, long expectedMsgSeqNum) {
+    public void tooLowMsgSeqNum(FIXConnection<?> connection, long receivedMsgSeqNum, long expectedMsgSeqNum) {
         events.add(new TooLowMsgSeqNum(receivedMsgSeqNum, expectedMsgSeqNum));
     }
 
     @Override
-    public void heartbeatTimeout(FIXConnection connection) {
+    public void heartbeatTimeout(FIXConnection<?> connection) {
         events.add(new HeartbeatTimeout());
     }
 
     @Override
-    public void reject(FIXConnection connection, FIXMessage message) {
+    public void reject(FIXConnection<?> connection, FIXMessage message) {
         events.add(new Reject());
     }
 
     @Override
-    public void logon(FIXConnection connection, FIXMessage message) {
+    public void logon(FIXConnection<?> connection, FIXMessage message) {
         events.add(new Logon());
     }
 
     @Override
-    public void logout(FIXConnection connection, FIXMessage message) {
+    public void logout(FIXConnection<?> connection, FIXMessage message) {
         events.add(new Logout());
     }
 

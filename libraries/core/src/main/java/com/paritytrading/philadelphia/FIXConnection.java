@@ -23,6 +23,8 @@ import static com.paritytrading.philadelphia.FIXTags.*;
 import java.io.Closeable;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.channels.GatheringByteChannel;
+import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.SocketChannel;
 import org.joda.time.DateTimeZone;
 import org.joda.time.MutableDateTime;
@@ -30,11 +32,11 @@ import org.joda.time.MutableDateTime;
 /**
  * A connection.
  */
-public class FIXConnection implements Closeable {
+public class FIXConnection<T extends ReadableByteChannel & GatheringByteChannel> implements Closeable {
 
     private static final int CURRENT_TIMESTAMP_FIELD_CAPACITY = 24;
 
-    private final SocketChannel channel;
+    private final T channel;
 
     private final FIXConfig config;
 
@@ -98,7 +100,7 @@ public class FIXConnection implements Closeable {
      * @param listener the inbound message listener
      * @param statusListener the inbound status event listener
      */
-    public FIXConnection(SocketChannel channel, FIXConfig config, FIXMessageListener listener,
+    public FIXConnection(T channel, FIXConfig config, FIXMessageListener listener,
             FIXConnectionStatusListener statusListener) {
         this.channel = channel;
 
@@ -159,7 +161,7 @@ public class FIXConnection implements Closeable {
      *
      * @return the underlying socket channel
      */
-    public SocketChannel getChannel() {
+    public T getChannel() {
         return channel;
     }
 

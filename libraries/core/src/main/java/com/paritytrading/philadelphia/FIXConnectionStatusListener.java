@@ -29,7 +29,7 @@ public interface FIXConnectionStatusListener {
      * @param message a detail message
      * @throws IOException if an I/O error occurs
      */
-    void close(FIXConnection connection, String message) throws IOException;
+    void close(FIXConnection<?> connection, String message) throws IOException;
 
     /**
      * Receive an indication of a sequence reset.
@@ -37,7 +37,7 @@ public interface FIXConnectionStatusListener {
      * @param connection the connection
      * @throws IOException if an I/O error occurs
      */
-    void sequenceReset(FIXConnection connection) throws IOException;
+    void sequenceReset(FIXConnection<?> connection) throws IOException;
 
     /**
      * Receive an indication of a message with too low MsgSeqNum(34) and
@@ -48,7 +48,7 @@ public interface FIXConnectionStatusListener {
      * @param expectedMsgSeqNum the expected MsgSeqNum(34)
      * @throws IOException if an I/O error occurs
      */
-    void tooLowMsgSeqNum(FIXConnection connection, long receivedMsgSeqNum, long expectedMsgSeqNum) throws IOException;
+    void tooLowMsgSeqNum(FIXConnection<?> connection, long receivedMsgSeqNum, long expectedMsgSeqNum) throws IOException;
 
     /**
      * Receive an indication of a heartbeat timeout.
@@ -56,7 +56,7 @@ public interface FIXConnectionStatusListener {
      * @param connection the connection
      * @throws IOException if an I/O error occurs
      */
-    void heartbeatTimeout(FIXConnection connection) throws IOException;
+    void heartbeatTimeout(FIXConnection<?> connection) throws IOException;
 
     /**
      * Receive a Reject(3) message.
@@ -65,7 +65,7 @@ public interface FIXConnectionStatusListener {
      * @param message the Reject(3) message
      * @throws IOException if an I/O error occurs
      */
-    void reject(FIXConnection connection, FIXMessage message) throws IOException;
+    void reject(FIXConnection<?> connection, FIXMessage message) throws IOException;
 
     /**
      * Receive a Logon(A) message.
@@ -74,7 +74,7 @@ public interface FIXConnectionStatusListener {
      * @param message the Logon(A) message
      * @throws IOException if an I/O error occurs
      */
-    void logon(FIXConnection connection, FIXMessage message) throws IOException;
+    void logon(FIXConnection<?> connection, FIXMessage message) throws IOException;
 
     /**
      * Receive a Logout(5) message.
@@ -83,6 +83,6 @@ public interface FIXConnectionStatusListener {
      * @param message the Logout(5) message
      * @throws IOException if an I/O error occurs
      */
-    void logout(FIXConnection connection, FIXMessage message) throws IOException;
+    void logout(FIXConnection<?> connection, FIXMessage message) throws IOException;
 
 }

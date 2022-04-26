@@ -25,7 +25,7 @@ class FIXConfigTest {
         FIXConfig config = new FIXConfig.Builder()
                 .setVersion(FIXVersion.FIXT_1_1)
                 .build();
-        new FIXConnection(null, config, null, null);
+        new FIXConnection<>(null, config, null, null);
     }
 
 }
