@@ -22,6 +22,8 @@ import java.net.StandardSocketOptions;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
+import com.paritytrading.philadelphia.FIXChannel;
+
 class Acceptor implements Closeable {
 
     private final ServerSocketChannel serverChannel;
@@ -44,7 +46,7 @@ class Acceptor implements Closeable {
         channel.setOption(StandardSocketOptions.TCP_NODELAY, true);
         channel.configureBlocking(false);
 
-        return new Session(channel);
+        return new Session(FIXChannel.ofSocketChannel(channel));
     }
 
     @Override

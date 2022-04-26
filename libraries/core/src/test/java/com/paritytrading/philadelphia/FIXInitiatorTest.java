@@ -24,6 +24,8 @@ import static java.util.Arrays.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
+import java.nio.channels.Channel;
+import java.nio.channels.SelectableChannel;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.List;
@@ -409,17 +411,21 @@ class FIXInitiatorTest {
     }
 
     private void receiveBlocking(FIXConnection connection) throws IOException {
-        SocketChannel channel = connection.getChannel();
+        Channel channel = connection.getChannel();
+        if (!(channel instanceof SelectableChannel)) {
+            throw new UnsupportedOperationException("This operation requires the usage of a SelectableChannel");
+        }
 
-        if (channel.isBlocking()) {
+        SelectableChannel selectableChannel = (SelectableChannel) channel;
+        if (selectableChannel.isBlocking()) {
             connection.receive();
         } else {
-            channel.configureBlocking(true);
+            selectableChannel.configureBlocking(true);
 
             try {
                 connection.receive();
             } finally {
-                channel.configureBlocking(false);
+                selectableChannel.configureBlocking(false);
             }
         }
     }

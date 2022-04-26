@@ -15,6 +15,8 @@
  */
 package com.paritytrading.philadelphia;
 
+import java.nio.channels.SocketChannel;
+
 import org.junit.jupiter.api.Test;
 
 class FIXConfigTest {
@@ -25,7 +27,7 @@ class FIXConfigTest {
         FIXConfig config = new FIXConfig.Builder()
                 .setVersion(FIXVersion.FIXT_1_1)
                 .build();
-        new FIXConnection(null, config, null, null);
+        new FIXConnection((SocketChannel) null, config, null, null);
     }
 
 }

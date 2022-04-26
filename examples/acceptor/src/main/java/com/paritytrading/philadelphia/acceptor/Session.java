@@ -19,6 +19,7 @@ import static com.paritytrading.philadelphia.fix42.FIX42Enumerations.*;
 import static com.paritytrading.philadelphia.fix42.FIX42MsgTypes.*;
 import static com.paritytrading.philadelphia.fix42.FIX42Tags.*;
 
+import com.paritytrading.philadelphia.FIXChannel;
 import com.paritytrading.philadelphia.FIXConfig;
 import com.paritytrading.philadelphia.FIXConnection;
 import com.paritytrading.philadelphia.FIXConnectionStatusListener;
@@ -48,7 +49,7 @@ class Session implements FIXMessageListener {
     private long nextOrderId;
     private long nextExecId;
 
-    Session(SocketChannel channel) {
+    Session(FIXChannel channel) {
         connection = new FIXConnection(channel, CONFIG, this, new FIXConnectionStatusListener() {
 
             @Override

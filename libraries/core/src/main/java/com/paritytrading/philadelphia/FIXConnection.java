@@ -24,6 +24,7 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
+
 import org.joda.time.DateTimeZone;
 import org.joda.time.MutableDateTime;
 
@@ -34,7 +35,7 @@ public class FIXConnection implements Closeable {
 
     private static final int CURRENT_TIMESTAMP_FIELD_CAPACITY = 24;
 
-    private final SocketChannel channel;
+    private final FIXChannel channel;
 
     private final FIXConfig config;
 
@@ -89,16 +90,20 @@ public class FIXConnection implements Closeable {
 
     private final FIXValue currentTimestamp;
 
+    public FIXConnection(SocketChannel channel, FIXConfig config, FIXMessageListener listener,
+                         FIXConnectionStatusListener statusListener) {
+        this(FIXChannel.ofSocketChannel(channel), config, listener, statusListener);
+    }
     /**
      * Create a connection. The underlying socket channel can be either
      * blocking or non-blocking.
      *
-     * @param channel the underlying socket channel
+     * @param channel the underlying socket channel wrapped in a {@link FIXChannel}.
      * @param config the connection configuration
      * @param listener the inbound message listener
      * @param statusListener the inbound status event listener
      */
-    public FIXConnection(SocketChannel channel, FIXConfig config, FIXMessageListener listener,
+    public FIXConnection(FIXChannel channel, FIXConfig config, FIXMessageListener listener,
             FIXConnectionStatusListener statusListener) {
         this.channel = channel;
 
@@ -159,7 +164,7 @@ public class FIXConnection implements Closeable {
      *
      * @return the underlying socket channel
      */
-    public SocketChannel getChannel() {
+    public FIXChannel getChannel() {
         return channel;
     }
 
