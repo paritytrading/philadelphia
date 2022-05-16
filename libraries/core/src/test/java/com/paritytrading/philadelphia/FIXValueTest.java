@@ -19,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.UncheckedIOException;
 import java.nio.ByteBuffer;
-import org.joda.time.MutableDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -646,23 +645,23 @@ class FIXValueTest {
     void asDate() {
         get("20150924\u0001");
 
-        MutableDateTime d = new MutableDateTime(1970, 1, 1, 9, 30, 5, 250);
+        FIXTimestamp d = new FIXTimestamp(1970, 1, 1, 9, 30, 5, 250);
 
         value.asDate(d);
 
-        assertEquals(new MutableDateTime(2015, 9, 24, 0, 0, 0, 0), d);
+        assertEquals(new FIXTimestamp(2015, 9, 24, 9, 30, 5, 250), d);
     }
 
     @Test
     void notDate() {
         value.setString("FOO");
 
-        assertThrows(FIXValueFormatException.class, () -> value.asDate(new MutableDateTime()));
+        assertThrows(FIXValueFormatException.class, () -> value.asDate(new FIXTimestamp()));
     }
 
     @Test
     void setDate() {
-        value.setDate(new MutableDateTime(2015, 9, 24, 0, 0, 0, 0));
+        value.setDate(new FIXTimestamp(2015, 9, 24, 0, 0, 0, 0));
 
         assertEquals("20150924\u0001", put());
     }
@@ -671,41 +670,41 @@ class FIXValueTest {
     void asTimeOnlyWithMillis() {
         get("09:30:05.250\u0001");
 
-        MutableDateTime t = new MutableDateTime(2015, 9, 24, 22, 45, 10, 750);
+        FIXTimestamp t = new FIXTimestamp(2015, 9, 24, 22, 45, 10, 750);
 
         value.asTimeOnly(t);
 
-        assertEquals(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), t);
+        assertEquals(new FIXTimestamp(2015, 9, 24, 9, 30, 5, 250), t);
     }
 
     @Test
     void asTimeOnlyWithoutMillis() {
         get("09:30:05\u0001");
 
-        MutableDateTime t = new MutableDateTime(2015, 9, 24, 22, 45, 10, 750);
+        FIXTimestamp t = new FIXTimestamp(2015, 9, 24, 22, 45, 10, 750);
 
         value.asTimeOnly(t);
 
-        assertEquals(new MutableDateTime(2015, 9, 24, 9, 30, 5, 0), t);
+        assertEquals(new FIXTimestamp(2015, 9, 24, 9, 30, 5, 0), t);
     }
 
     @Test
     void notTimeOnly() {
         value.setString("FOO");
 
-        assertThrows(FIXValueFormatException.class, () -> value.asTimeOnly(new MutableDateTime()));
+        assertThrows(FIXValueFormatException.class, () -> value.asTimeOnly(new FIXTimestamp()));
     }
 
     @Test
     void setTimeOnlyMillis() {
-        value.setTimeOnlyMillis(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250));
+        value.setTimeOnlyMillis(new FIXTimestamp(2015, 9, 24, 9, 30, 5, 250));
 
         assertEquals("09:30:05.250\u0001", put());
     }
 
     @Test
     void setTimeOnlySecs() {
-        value.setTimeOnlySecs(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250));
+        value.setTimeOnlySecs(new FIXTimestamp(2015, 9, 24, 9, 30, 5, 250));
 
         assertEquals("09:30:05\u0001", put());
     }
@@ -714,41 +713,41 @@ class FIXValueTest {
     void asTimestampWithMillis() {
         get("20150924-09:30:05.250\u0001");
 
-        MutableDateTime t = new MutableDateTime();
+        FIXTimestamp t = new FIXTimestamp();
 
         value.asTimestamp(t);
 
-        assertEquals(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250), t);
+        assertEquals(new FIXTimestamp(2015, 9, 24, 9, 30, 5, 250), t);
     }
 
     @Test
     void asTimestampWithoutMillis() {
         get("20150924-09:30.05\u0001");
 
-        MutableDateTime t = new MutableDateTime();
+        FIXTimestamp t = new FIXTimestamp();
 
         value.asTimestamp(t);
 
-        assertEquals(new MutableDateTime(2015, 9, 24, 9, 30, 5, 0), t);
+        assertEquals(new FIXTimestamp(2015, 9, 24, 9, 30, 5, 0), t);
     }
 
     @Test
     void notTimestamp() {
         value.setString("FOO");
 
-        assertThrows(FIXValueFormatException.class, () -> value.asTimestamp(new MutableDateTime()));
+        assertThrows(FIXValueFormatException.class, () -> value.asTimestamp(new FIXTimestamp()));
     }
 
     @Test
     void setTimestampMillis() {
-        value.setTimestampMillis(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250));
+        value.setTimestampMillis(new FIXTimestamp(2015, 9, 24, 9, 30, 5, 250));
 
         assertEquals("20150924-09:30:05.250\u0001", put());
     }
 
     @Test
     void setTimestampSecs() {
-        value.setTimestampSecs(new MutableDateTime(2015, 9, 24, 9, 30, 5, 250));
+        value.setTimestampSecs(new FIXTimestamp(2015, 9, 24, 9, 30, 5, 250));
 
         assertEquals("20150924-09:30:05\u0001", put());
     }

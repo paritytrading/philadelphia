@@ -15,7 +15,6 @@
  */
 package com.paritytrading.philadelphia;
 
-import org.joda.time.MutableDateTime;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Setup;
@@ -26,11 +25,17 @@ public class FIXValueBenchmark extends FIXBenchmark {
 
     private StringBuilder string;
 
-    private MutableDateTime date;
+    private FIXTimestamp date;
 
-    private MutableDateTime timeOnly;
+    private FIXTimestamp timeOnly;
 
-    private MutableDateTime timestamp;
+    private FIXTimestamp timestamp;
+
+    private long dateMillis;
+
+    private long timeOnlyMillis;
+
+    private long timestampMillis;
 
     private FIXValue booleanValue;
 
@@ -54,11 +59,15 @@ public class FIXValueBenchmark extends FIXBenchmark {
     public void prepare() {
         string = new StringBuilder(32);
 
-        date = new MutableDateTime(2015, 9, 24, 0, 0, 0, 0);
+        date = new FIXTimestamp(2015, 9, 24, 0, 0, 0, 0);
 
-        timeOnly = new MutableDateTime(2015, 9, 24, 9, 30, 5, 250);
+        timeOnly = new FIXTimestamp(2015, 9, 24, 9, 30, 5, 250);
 
-        timestamp = new MutableDateTime(2015, 9, 24, 9, 30, 5, 250);
+        timestamp = new FIXTimestamp(2015, 9, 24, 9, 30, 5, 250);
+
+        dateMillis = date.getEpochMilli();
+        timeOnlyMillis = timeOnly.getEpochMilli();
+        timestampMillis = timestamp.getEpochMilli();
 
         booleanValue = new FIXValue(64);
         booleanValue.setBoolean(true);
@@ -155,38 +164,44 @@ public class FIXValueBenchmark extends FIXBenchmark {
     }
 
     @Benchmark
-    public MutableDateTime asDate() {
+    public long asDate() {
         dateValue.asDate(date);
 
-        return date;
+        return date.getEpochMilli();
     }
 
     @Benchmark
     public void setDate() {
+        date.setEpochMilli(dateMillis);
+
         dateValue.setDate(date);
     }
 
     @Benchmark
-    public MutableDateTime asTimeOnly() {
+    public long asTimeOnly() {
         timeOnlyValue.asTimeOnly(timeOnly);
 
-        return timeOnly;
+        return timeOnly.getEpochMilli();
     }
 
     @Benchmark
     public void setTimeOnly() {
+        timeOnly.setEpochMilli(timeOnlyMillis);
+
         timeOnlyValue.setTimeOnlySecs(timeOnly);
     }
 
     @Benchmark
-    public MutableDateTime asTimestamp() {
+    public long asTimestamp() {
         timestampValue.asTimestamp(timestamp);
 
-        return timestamp;
+        return timestamp.getEpochMilli();
     }
 
     @Benchmark
     public void setTimestamp() {
+        timestamp.setEpochMilli(timestampMillis);
+
         timestampValue.setTimestampMillis(timestamp);
     }
 

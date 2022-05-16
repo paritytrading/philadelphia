@@ -21,8 +21,6 @@ import static java.nio.charset.StandardCharsets.*;
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 import java.nio.ReadOnlyBufferException;
-import org.joda.time.MutableDateTime;
-import org.joda.time.ReadableDateTime;
 
 /**
  * A value container.
@@ -499,26 +497,16 @@ public class FIXValue implements CharSequence {
     /**
      * Get the value as a date.
      *
-     * <p><strong>Note.</strong> This method sets both date and time fields.
-     * When combining this method and {@link #asTimeOnly(MutableDateTime)},
-     * this method should be invoked first.</p>
-     *
      * @param x a date
      * @throws FIXValueFormatException if the value is not a date
-     * @see #asTimeOnly(MutableDateTime)
      */
-    public void asDate(MutableDateTime x) {
+    public void asDate(FIXTimestamp x) {
         if (length != 8)
             notDate();
 
-        int year        = getDigits(4, offset + 0);
-        int monthOfYear = getDigits(2, offset + 4);
-        int dayOfMonth  = getDigits(2, offset + 6);
-
-        // Note: 'setDateTime()' takes roughly 55% of the time 'setDate()'
-        // takes. Using individual methods, such as 'setYear()', is faster
-        // than using 'setDate()' but still slower than 'setDateTime()'.
-        x.setDateTime(year, monthOfYear, dayOfMonth, 0, 0, 0, 0);
+        x.setYear(getDigits(4, offset + 0));
+        x.setMonth(getDigits(2, offset + 4));
+        x.setDay(getDigits(2, offset + 6));
     }
 
     /**
@@ -526,10 +514,10 @@ public class FIXValue implements CharSequence {
      *
      * @param x a date
      */
-    public void setDate(ReadableDateTime x) {
+    public void setDate(FIXTimestamp x) {
         setDigits(x.getYear(), 0, 4);
-        setDigits(x.getMonthOfYear(), 4, 2);
-        setDigits(x.getDayOfMonth(), 6, 2);
+        setDigits(x.getMonth(), 4, 2);
+        setDigits(x.getDay(), 6, 2);
         bytes[8] = SOH;
 
         length = 8;
@@ -541,18 +529,15 @@ public class FIXValue implements CharSequence {
      *
      * @param x a time only
      * @throws FIXValueFormatException if the value is not a time only
-     * @see #asDate(MutableDateTime)
      */
-    public void asTimeOnly(MutableDateTime x) {
+    public void asTimeOnly(FIXTimestamp x) {
         if (length != 8 && length != 12)
             notTimeOnly();
 
-        int hourOfDay      = getDigits(2, offset + 0);
-        int minuteOfHour   = getDigits(2, offset + 3);
-        int secondOfMinute = getDigits(2, offset + 6);
-        int millisOfSecond = length == 12 ? getDigits(3, offset + 9) : 0;
-
-        x.setTime(hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);
+        x.setHour(getDigits(2, offset + 0));
+        x.setMinute(getDigits(2, offset + 3));
+        x.setSecond(getDigits(2, offset + 6));
+        x.setMilli(length == 12 ? getDigits(3, offset + 9) : 0);
     }
 
     /**
@@ -560,14 +545,14 @@ public class FIXValue implements CharSequence {
      *
      * @param x a time only
      */
-    public void setTimeOnlyMillis(ReadableDateTime x) {
-        setDigits(x.getHourOfDay(), 0, 2);
+    public void setTimeOnlyMillis(FIXTimestamp x) {
+        setDigits(x.getHour(), 0, 2);
         bytes[2] = ':';
-        setDigits(x.getMinuteOfHour(), 3, 2);
+        setDigits(x.getMinute(), 3, 2);
         bytes[5] = ':';
-        setDigits(x.getSecondOfMinute(), 6, 2);
+        setDigits(x.getSecond(), 6, 2);
         bytes[8] = '.';
-        setDigits(x.getMillisOfSecond(), 9, 3);
+        setDigits(x.getMilli(), 9, 3);
         bytes[12] = SOH;
 
         offset = 0;
@@ -579,12 +564,12 @@ public class FIXValue implements CharSequence {
      *
      * @param x a time only
      */
-    public void setTimeOnlySecs(ReadableDateTime x) {
-        setDigits(x.getHourOfDay(), 0, 2);
+    public void setTimeOnlySecs(FIXTimestamp x) {
+        setDigits(x.getHour(), 0, 2);
         bytes[2] = ':';
-        setDigits(x.getMinuteOfHour(), 3, 2);
+        setDigits(x.getMinute(), 3, 2);
         bytes[5] = ':';
-        setDigits(x.getSecondOfMinute(), 6, 2);
+        setDigits(x.getSecond(), 6, 2);
         bytes[8] = SOH;
 
         offset = 0;
@@ -597,20 +582,17 @@ public class FIXValue implements CharSequence {
      * @param x a timestamp
      * @throws FIXValueFormatException if the value is not a timestamp
      */
-    public void asTimestamp(MutableDateTime x) {
+    public void asTimestamp(FIXTimestamp x) {
         if (length != 17 && length != 21)
             notTimestamp();
 
-        int year           = getDigits(4, offset + 0);
-        int monthOfYear    = getDigits(2, offset + 4);
-        int dayOfMonth     = getDigits(2, offset + 6);
-        int hourOfDay      = getDigits(2, offset + 9);
-        int minuteOfHour   = getDigits(2, offset + 12);
-        int secondOfMinute = getDigits(2, offset + 15);
-        int millisOfSecond = length == 21 ? getDigits(3, offset + 18) : 0;
-
-        x.setDateTime(year, monthOfYear, dayOfMonth, hourOfDay, minuteOfHour,
-                secondOfMinute, millisOfSecond);
+        x.setYear(getDigits(4, offset + 0));
+        x.setMonth(getDigits(2, offset + 4));
+        x.setDay(getDigits(2, offset + 6));
+        x.setHour(getDigits(2, offset + 9));
+        x.setMinute(getDigits(2, offset + 12));
+        x.setSecond(getDigits(2, offset + 15));
+        x.setMilli(length == 21 ? getDigits(3, offset + 18) : 0);
     }
 
     /**
@@ -618,18 +600,18 @@ public class FIXValue implements CharSequence {
      *
      * @param x a timestamp
      */
-    public void setTimestampMillis(ReadableDateTime x) {
+    public void setTimestampMillis(FIXTimestamp x) {
         setDigits(x.getYear(), 0, 4);
-        setDigits(x.getMonthOfYear(), 4, 2);
-        setDigits(x.getDayOfMonth(), 6, 2);
+        setDigits(x.getMonth(), 4, 2);
+        setDigits(x.getDay(), 6, 2);
         bytes[8] = '-';
-        setDigits(x.getHourOfDay(), 9, 2);
+        setDigits(x.getHour(), 9, 2);
         bytes[11] = ':';
-        setDigits(x.getMinuteOfHour(), 12, 2);
+        setDigits(x.getMinute(), 12, 2);
         bytes[14] = ':';
-        setDigits(x.getSecondOfMinute(), 15, 2);
+        setDigits(x.getSecond(), 15, 2);
         bytes[17] = '.';
-        setDigits(x.getMillisOfSecond(), 18, 3);
+        setDigits(x.getMilli(), 18, 3);
         bytes[21] = SOH;
 
         offset = 0;
@@ -641,16 +623,16 @@ public class FIXValue implements CharSequence {
      *
      * @param x a timestamp
      */
-    public void setTimestampSecs(ReadableDateTime x) {
+    public void setTimestampSecs(FIXTimestamp x) {
         setDigits(x.getYear(), 0, 4);
-        setDigits(x.getMonthOfYear(), 4, 2);
-        setDigits(x.getDayOfMonth(), 6, 2);
+        setDigits(x.getMonth(), 4, 2);
+        setDigits(x.getDay(), 6, 2);
         bytes[8] = '-';
-        setDigits(x.getHourOfDay(), 9, 2);
+        setDigits(x.getHour(), 9, 2);
         bytes[11] = ':';
-        setDigits(x.getMinuteOfHour(), 12, 2);
+        setDigits(x.getMinute(), 12, 2);
         bytes[14] = ':';
-        setDigits(x.getSecondOfMinute(), 15, 2);
+        setDigits(x.getSecond(), 15, 2);
         bytes[17] = SOH;
 
         offset = 0;
