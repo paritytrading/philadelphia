@@ -1,14 +1,8 @@
 name: Python
 
 on:
-  push:
-    paths:
-      - '.github/workflows/python.yml'
-      - 'applications/generate/**'
-  pull_request:
-    paths:
-      - '.github/workflows/python.yml'
-      - 'applications/generate/**'
+  - push
+  - pull_request
 
 jobs:
   python:
