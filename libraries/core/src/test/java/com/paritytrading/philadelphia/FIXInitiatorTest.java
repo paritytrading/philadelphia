@@ -77,7 +77,8 @@ class FIXInitiatorTest {
         initiator.keepAlive();
 
         acceptor.send("35=0|34=1|");
-        receiveBlocking(initiator);
+        while (initiator.getIncomingMsgSeqNum() != 2)
+            initiator.receive();
 
         initiator.setCurrentTimeMillis(35_000);
         initiator.keepAlive();
@@ -114,7 +115,8 @@ class FIXInitiatorTest {
 
         acceptor.send("35=0|34=1|");
 
-        receiveBlocking(initiator);
+        while (initiator.getIncomingMsgSeqNum() != 2)
+            initiator.receive();
 
         initiator.setCurrentTimeMillis(60_000);
         initiator.keepAlive();
@@ -406,22 +408,6 @@ class FIXInitiatorTest {
                 "11=1|21=1|55=FOO|54=1|60=19700101-00:00:00.000|38=100.00|40=2|44=25.50|10=020|");
 
         initiatorMessages(messages);
-    }
-
-    private void receiveBlocking(FIXConnection connection) throws IOException {
-        SocketChannel channel = connection.getChannel();
-
-        if (channel.isBlocking()) {
-            connection.receive();
-        } else {
-            channel.configureBlocking(true);
-
-            try {
-                connection.receive();
-            } finally {
-                channel.configureBlocking(false);
-            }
-        }
     }
 
     private void initiatorMessage(String message) throws IOException {
