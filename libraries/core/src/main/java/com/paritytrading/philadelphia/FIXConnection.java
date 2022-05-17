@@ -716,6 +716,8 @@ public class FIXConnection implements Closeable {
             txMessage.addField(GapFillFlag).setBoolean(true);
             txMessage.addField(NewSeqNo).setInt(newSeqNo);
 
+            txMsgSeqNum--;
+
             send(txMessage);
         }
 
