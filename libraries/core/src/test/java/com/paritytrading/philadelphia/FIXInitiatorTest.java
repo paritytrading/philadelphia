@@ -383,6 +383,25 @@ class FIXInitiatorTest {
     }
 
     @Test
+    void receiveLogoutWithTooLowMsgSeqNum() throws IOException {
+        initiator.setIncomingMsgSeqNum(2);
+
+        String message = "35=5|34=1|";
+        Event  status  = new Logout();
+
+        acceptorMessageInitiatorStatus(message, status);
+    }
+
+    @Test
+    void receiveLogoutWithTooHighMsgSeqNum() throws IOException {
+        String request  = "35=5|34=2|";
+        String response = "8=FIX.4.2|9=69|35=2|49=initiator|56=acceptor|34=1|" +
+            "52=19700101-00:00:00.000|7=1|16=0|10=093|";
+
+        acceptorRequestInitiatorResponse(request, response);
+    }
+
+    @Test
     void receiveFullBuffer() throws IOException {
         acceptor.send(asList("35=5|34=1|58=" + repeat('A', 512) + "|",
                 "35=5|34=2|58=" + repeat('A', 512) + "|"));
