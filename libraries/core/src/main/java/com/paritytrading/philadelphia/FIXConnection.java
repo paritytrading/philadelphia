@@ -589,7 +589,9 @@ public class FIXConnection implements Closeable {
         }
 
         private void handleTooLowMsgSeqNum(FIXMessage message, FIXValue msgType, long msgSeqNum) throws IOException {
-            if (!msgType.contentEquals(SequenceReset)) {
+            if (msgType.contentEquals(Logout)) {
+                handleLogout(message);
+            } else if (!msgType.contentEquals(SequenceReset)) {
                 FIXValue possDupFlag = message.valueOf(PossDupFlag);
 
                 if (possDupFlag == null || possDupFlag.asBoolean() == false)
