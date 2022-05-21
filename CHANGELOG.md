@@ -1,5 +1,19 @@
 # Release Notes
 
+## 1.3.1 (2022-05-21)
+
+- Fix MsgSeqNum(34) handling on SequenceReset(4) (Vadim Platonov, Jussi
+  Virtanen)
+
+  Do not increment the outgoing MsgSeqNum(34) value when sending a
+  SequenceReset(4) message.
+
+- Improve Logout(5) handling (Vadim Platonov, Jussi Virtanen)
+
+  Handle a Logout(5) message with too low MsgSeqNum(34) value, but still send
+  a ResendRequest(2) message when receiving a Logout(5) message with too high
+  MsgSeqNum(34) value.
+
 ## 1.3.0 (2021-05-21)
 
 - Improve `FIXValueTest` (Jussi Virtanen)
