@@ -84,11 +84,6 @@
         <version>1.4.1</version>
       </dependency>
       <dependency>
-        <groupId>org.jline</groupId>
-        <artifactId>jline-reader</artifactId>
-        <version>3.19.0</version>
-      </dependency>
-      <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
         <version>3.12.0</version>
@@ -98,6 +93,11 @@
         <groupId>org.hdrhistogram</groupId>
         <artifactId>HdrHistogram</artifactId>
         <version>2.1.12</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jline</groupId>
+        <artifactId>jline-reader</artifactId>
+        <version>3.19.0</version>
       </dependency>
       <dependency>
         <groupId>org.junit.jupiter</groupId>
