@@ -23,16 +23,17 @@ import static com.paritytrading.philadelphia.FIXTags.*;
 import java.io.Closeable;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.channels.SocketChannel;
+import java.nio.channels.GatheringByteChannel;
+import java.nio.channels.ReadableByteChannel;
 
 /**
  * A connection.
  */
-public class FIXConnection implements Closeable {
+public class FIXConnection<CHANNEL extends ReadableByteChannel & GatheringByteChannel> implements Closeable {
 
     private static final int CURRENT_TIMESTAMP_FIELD_CAPACITY = 24;
 
-    private final SocketChannel channel;
+    private final CHANNEL channel;
 
     private final FIXConfig config;
 
@@ -77,7 +78,7 @@ public class FIXConnection implements Closeable {
 
     private final FIXMessageParser parser;
 
-    private final FIXConnectionStatusListener statusListener;
+    private final FIXConnectionStatusListener<CHANNEL> statusListener;
 
     private final FIXMessage txMessage;
 
@@ -96,8 +97,8 @@ public class FIXConnection implements Closeable {
      * @param listener the inbound message listener
      * @param statusListener the inbound status event listener
      */
-    public FIXConnection(SocketChannel channel, FIXConfig config, FIXMessageListener listener,
-            FIXConnectionStatusListener statusListener) {
+    public FIXConnection(CHANNEL channel, FIXConfig config, FIXMessageListener listener,
+            FIXConnectionStatusListener<CHANNEL> statusListener) {
         this.channel = channel;
 
         this.config = config;
@@ -157,7 +158,7 @@ public class FIXConnection implements Closeable {
      *
      * @return the underlying socket channel
      */
-    public SocketChannel getChannel() {
+    public CHANNEL getChannel() {
         return channel;
     }
 

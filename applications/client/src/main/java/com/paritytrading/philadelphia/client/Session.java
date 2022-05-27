@@ -33,13 +33,13 @@ class Session implements Closeable {
 
     private final Selector selector;
 
-    private final FIXConnection connection;
+    private final FIXConnection<SocketChannel> connection;
 
     private volatile boolean closed;
 
     private final Object lock;
 
-    private Session(Selector selector, FIXConnection connection) {
+    private Session(Selector selector, FIXConnection<SocketChannel> connection) {
         this.txMessage = connection.create();
 
         this.selector = selector;
@@ -58,7 +58,7 @@ class Session implements Closeable {
 
     static Session open(InetSocketAddress address,
             FIXConfig config, FIXMessageListener listener,
-            FIXConnectionStatusListener statusListener) throws IOException {
+            FIXConnectionStatusListener<SocketChannel> statusListener) throws IOException {
         SocketChannel channel = SocketChannel.open();
 
         channel.connect(address);
@@ -68,7 +68,7 @@ class Session implements Closeable {
 
         channel.register(selector, SelectionKey.OP_READ);
 
-        FIXConnection connection = new FIXConnection(channel, config, listener, statusListener);
+        FIXConnection<SocketChannel> connection = new FIXConnection<>(channel, config, listener, statusListener);
 
         return new Session(selector, connection);
     }
@@ -78,7 +78,7 @@ class Session implements Closeable {
         closed = true;
     }
 
-    FIXConnection getConnection() {
+    FIXConnection<SocketChannel> getConnection() {
         return connection;
     }
 

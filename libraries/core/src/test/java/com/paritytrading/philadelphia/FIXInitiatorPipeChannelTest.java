@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Philadelphia authors
+ * Copyright 2022 Philadelphia authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,18 @@
  */
 package com.paritytrading.philadelphia;
 
-import org.junit.jupiter.api.Test;
+import java.io.IOException;
+import java.nio.channels.Pipe;
 
-class FIXConfigTest {
+class FIXInitiatorPipeChannelTest extends FIXInitiatorTest<PipeChannel> {
+    @Override
+    protected Channels createChannels() throws IOException {
+        Pipe up = Pipe.open();
+        Pipe down = Pipe.open();
 
-    @SuppressWarnings("resource")
-    @Test
-    void fixt11() {
-        FIXConfig config = new FIXConfig.Builder()
-                .setVersion(FIXVersion.FIXT_1_1)
-                .build();
-        new FIXConnection<>(null, config, null, null);
+        Channels channels = new Channels();
+        channels.initiator = new PipeChannel(up.sink(), down.source());
+        channels.acceptor = new PipeChannel(down.sink(), up.source());
+        return channels;
     }
-
 }
