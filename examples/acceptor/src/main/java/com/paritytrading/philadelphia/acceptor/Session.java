@@ -144,22 +144,26 @@ class Session implements FIXMessageListener {
         }
 
         if (clOrdId.length() == 0) {
-            connection.sendReject(message.getMsgSeqNum(), 1, "ClOrdID(11) not found");
+            connection.sendReject(message.getMsgSeqNum(),
+                    SessionRejectReasonValues.RequiredTagMissing, "ClOrdID(11) not found");
             return;
         }
 
         if (symbol.length() == 0) {
-            connection.sendReject(message.getMsgSeqNum(), 1, "Symbol(55) not found");
+            connection.sendReject(message.getMsgSeqNum(),
+                    SessionRejectReasonValues.RequiredTagMissing, "Symbol(55) not found");
             return;
         }
 
         if (orderQty.length() == 0) {
-            connection.sendReject(message.getMsgSeqNum(), 1, "OrderQty(38) not found");
+            connection.sendReject(message.getMsgSeqNum(),
+                    SessionRejectReasonValues.RequiredTagMissing, "OrderQty(38) not found");
             return;
         }
 
         if (price.length() == 0) {
-            connection.sendReject(message.getMsgSeqNum(), 1, "Price(44) not found");
+            connection.sendReject(message.getMsgSeqNum(),
+                    SessionRejectReasonValues.RequiredTagMissing, "Price(44) not found");
             return;
         }
 
