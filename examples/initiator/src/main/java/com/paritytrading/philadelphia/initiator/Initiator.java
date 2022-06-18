@@ -37,7 +37,7 @@ class Initiator implements FIXMessageListener, Closeable {
         .setTargetCompID("acceptor")
         .build();
 
-    private final FIXConnection connection;
+    private final FIXConnection<SocketChannel> connection;
 
     private final Histogram histogram;
 
@@ -46,36 +46,36 @@ class Initiator implements FIXMessageListener, Closeable {
     private int receiveCount;
 
     private Initiator(SocketChannel channel) {
-        connection = new FIXConnection(channel, CONFIG, this, new FIXConnectionStatusListener() {
+        connection = new FIXConnection<>(channel, CONFIG, this, new FIXConnectionStatusListener<SocketChannel>() {
 
             @Override
-            public void close(FIXConnection connection, String message) throws IOException {
+            public void close(FIXConnection<SocketChannel> connection, String message) throws IOException {
                 connection.close();
             }
 
             @Override
-            public void sequenceReset(FIXConnection connection) {
+            public void sequenceReset(FIXConnection<SocketChannel> connection) {
             }
 
             @Override
-            public void tooLowMsgSeqNum(FIXConnection connection, long receivedMsgSeqNum, long expectedMsgSeqNum) {
+            public void tooLowMsgSeqNum(FIXConnection<SocketChannel> connection, long receivedMsgSeqNum, long expectedMsgSeqNum) {
             }
 
             @Override
-            public void heartbeatTimeout(FIXConnection connection) throws IOException {
+            public void heartbeatTimeout(FIXConnection<SocketChannel> connection) throws IOException {
                 connection.close();
             }
 
             @Override
-            public void reject(FIXConnection connection, FIXMessage message) throws IOException {
+            public void reject(FIXConnection<SocketChannel> connection, FIXMessage message) throws IOException {
             }
 
             @Override
-            public void logon(FIXConnection connection, FIXMessage message) throws IOException {
+            public void logon(FIXConnection<SocketChannel> connection, FIXMessage message) throws IOException {
             }
 
             @Override
-            public void logout(FIXConnection connection, FIXMessage message) throws IOException {
+            public void logout(FIXConnection<SocketChannel> connection, FIXMessage message) throws IOException {
                 connection.sendLogout();
             }
 
@@ -111,7 +111,7 @@ class Initiator implements FIXMessageListener, Closeable {
         return histogram;
     }
 
-    FIXConnection getTransport() {
+    FIXConnection<SocketChannel> getTransport() {
         return connection;
     }
 

@@ -21,19 +21,19 @@ import static java.util.Arrays.*;
 import java.io.Closeable;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.channels.SocketChannel;
+import java.nio.channels.ByteChannel;
 import java.util.List;
 
 class TestConnection implements Closeable {
 
-    private SocketChannel channel;
+    private ByteChannel channel;
 
     private ByteBuffer rxBuffer;
     private ByteBuffer txBuffer;
 
     private TestMessageParser parser;
 
-    TestConnection(SocketChannel channel, TestMessageListener listener) {
+    TestConnection(ByteChannel channel, TestMessageListener listener) {
         this.channel = channel;
 
         this.parser = new TestMessageParser(listener);
