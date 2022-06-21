@@ -24,8 +24,8 @@ import static java.util.Arrays.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
-import java.nio.channels.ByteChannel;
 import java.nio.channels.GatheringByteChannel;
+import java.nio.channels.ReadableByteChannel;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
 @Timeout(value=1, unit=TimeUnit.SECONDS)
-abstract class FIXInitiatorTest<INITIATOR_CHANNEL extends ByteChannel & GatheringByteChannel> {
+abstract class FIXInitiatorTest {
 
     private static final FIXConfig initiatorConfig = new FIXConfig.Builder()
         .setSenderCompID("initiator")
@@ -44,14 +44,16 @@ abstract class FIXInitiatorTest<INITIATOR_CHANNEL extends ByteChannel & Gatherin
     private FIXMessages  initiatorMessages;
     private TestMessages acceptorMessages;
 
-    private FIXConnectionStatus<INITIATOR_CHANNEL> initiatorStatus;
+    private FIXConnectionStatus initiatorStatus;
 
-    private FIXConnection<INITIATOR_CHANNEL> initiator;
+    private FIXConnection initiator;
     private TestConnection acceptor;
 
-    final class Channels {
-        public INITIATOR_CHANNEL initiator;
-        public ByteChannel acceptor;
+    static final class Channels {
+        public ReadableByteChannel initiatorRx;
+        public GatheringByteChannel initiatorTx;
+        public ReadableByteChannel acceptorRx;
+        public GatheringByteChannel acceptorTx;
     }
 
     abstract Channels createChannels() throws IOException;
@@ -61,11 +63,14 @@ abstract class FIXInitiatorTest<INITIATOR_CHANNEL extends ByteChannel & Gatherin
         initiatorMessages = new FIXMessages();
         acceptorMessages  = new TestMessages();
 
-        initiatorStatus = new FIXConnectionStatus<>();
+        initiatorStatus = new FIXConnectionStatus();
 
         Channels channels = createChannels();
-        initiator = new FIXConnection<>(channels.initiator, initiatorConfig, initiatorMessages, initiatorStatus);
-        acceptor  = new TestConnection(channels.acceptor, acceptorMessages);
+        initiator = new FIXConnection(
+                channels.initiatorRx, channels.initiatorTx,
+                initiatorConfig, initiatorMessages, initiatorStatus
+        );
+        acceptor  = new TestConnection(channels.acceptorRx, channels.acceptorTx, acceptorMessages);
     }
 
     @Test

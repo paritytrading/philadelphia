@@ -19,11 +19,10 @@ import com.paritytrading.philadelphia.FIXConnection;
 import com.paritytrading.philadelphia.FIXConnectionStatusListener;
 import com.paritytrading.philadelphia.FIXMessage;
 import com.paritytrading.philadelphia.FIXMessageListener;
-import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.List;
 
-class Messages implements FIXMessageListener, FIXConnectionStatusListener<SocketChannel> {
+class Messages implements FIXMessageListener, FIXConnectionStatusListener {
 
     private final List<Message> messages;
 
@@ -41,33 +40,33 @@ class Messages implements FIXMessageListener, FIXConnectionStatusListener<Socket
     }
 
     @Override
-    public void close(FIXConnection<SocketChannel> connection, String message) {
+    public void close(FIXConnection connection, String message) {
     }
 
     @Override
-    public void sequenceReset(FIXConnection<SocketChannel> connection) {
+    public void sequenceReset(FIXConnection connection) {
     }
 
     @Override
-    public void tooLowMsgSeqNum(FIXConnection<SocketChannel> connection, long receivedMsgSeqNum, long expectedMsgSeqNum) {
+    public void tooLowMsgSeqNum(FIXConnection connection, long receivedMsgSeqNum, long expectedMsgSeqNum) {
     }
 
     @Override
-    public void heartbeatTimeout(FIXConnection<SocketChannel> connection) {
+    public void heartbeatTimeout(FIXConnection connection) {
     }
 
     @Override
-    public void reject(FIXConnection<SocketChannel> connection, FIXMessage message) {
+    public void reject(FIXConnection connection, FIXMessage message) {
         add(message);
     }
 
     @Override
-    public void logon(FIXConnection<SocketChannel> connection, FIXMessage message) {
+    public void logon(FIXConnection connection, FIXMessage message) {
         add(message);
     }
 
     @Override
-    public void logout(FIXConnection<SocketChannel> connection, FIXMessage message) {
+    public void logout(FIXConnection connection, FIXMessage message) {
         add(message);
     }
 

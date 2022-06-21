@@ -21,21 +21,23 @@ import static java.util.Arrays.*;
 import java.io.Closeable;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.channels.ByteChannel;
+import java.nio.channels.GatheringByteChannel;
+import java.nio.channels.ReadableByteChannel;
 import java.util.List;
 
 class TestConnection implements Closeable {
 
-    private ByteChannel channel;
+    private ReadableByteChannel rxChannel;
+    private GatheringByteChannel txChannel;
 
     private ByteBuffer rxBuffer;
     private ByteBuffer txBuffer;
 
     private TestMessageParser parser;
 
-    TestConnection(ByteChannel channel, TestMessageListener listener) {
-        this.channel = channel;
-
+    TestConnection(ReadableByteChannel rxChannel, GatheringByteChannel txChannel, TestMessages listener) {
+        this.rxChannel = rxChannel;
+        this.txChannel = txChannel;
         this.parser = new TestMessageParser(listener);
 
         this.rxBuffer = ByteBuffer.allocateDirect(2048);
@@ -43,7 +45,7 @@ class TestConnection implements Closeable {
     }
 
     int receive() throws IOException {
-        int bytes = channel.read(rxBuffer);
+        int bytes = rxChannel.read(rxBuffer);
 
         if (bytes <= 0)
             return bytes;
@@ -70,12 +72,13 @@ class TestConnection implements Closeable {
         txBuffer.flip();
 
         while (txBuffer.hasRemaining())
-            channel.write(txBuffer);
+            txChannel.write(txBuffer);
     }
 
     @Override
     public void close() throws IOException {
-        channel.close();
+        try (Closeable closingRx = rxChannel; Closeable closingTx = txChannel) {
+        }
     }
 
     private String format(String message) {

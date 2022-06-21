@@ -29,11 +29,12 @@ import java.nio.channels.ReadableByteChannel;
 /**
  * A connection.
  */
-public class FIXConnection<CHANNEL extends ReadableByteChannel & GatheringByteChannel> implements Closeable {
+public class FIXConnection implements Closeable {
 
     private static final int CURRENT_TIMESTAMP_FIELD_CAPACITY = 24;
 
-    private final CHANNEL channel;
+    private final ReadableByteChannel rxChannel;
+    private final GatheringByteChannel txChannel;
 
     private final FIXConfig config;
 
@@ -78,7 +79,7 @@ public class FIXConnection<CHANNEL extends ReadableByteChannel & GatheringByteCh
 
     private final FIXMessageParser parser;
 
-    private final FIXConnectionStatusListener<CHANNEL> statusListener;
+    private final FIXConnectionStatusListener statusListener;
 
     private final FIXMessage txMessage;
 
@@ -89,17 +90,34 @@ public class FIXConnection<CHANNEL extends ReadableByteChannel & GatheringByteCh
     private final FIXValue currentTimestamp;
 
     /**
+     * Create a connection using a single read/write channel.
+     * The underlying socket channel can be either blocking or non-blocking.
+     *
+     * @param channel the underlying channel
+     * @param config the connection configuration
+     * @param listener the inbound message listener
+     * @param statusListener the inbound status event listener
+     * @param <CHANNEL> generic type for the read/write channel
+     */
+    public <CHANNEL extends ReadableByteChannel & GatheringByteChannel>
+    FIXConnection(CHANNEL channel, FIXConfig config, FIXMessageListener listener, FIXConnectionStatusListener statusListener) {
+            this(channel, channel, config, listener, statusListener);
+    }
+
+    /**
      * Create a connection. The underlying socket channel can be either
      * blocking or non-blocking.
      *
-     * @param channel the underlying socket channel
+     * @param rxChannel the channel to use for reading
+     * @param txChannel the channel to use for writing (can be the same instance as {@code rxChannel})
      * @param config the connection configuration
      * @param listener the inbound message listener
      * @param statusListener the inbound status event listener
      */
-    public FIXConnection(CHANNEL channel, FIXConfig config, FIXMessageListener listener,
-            FIXConnectionStatusListener<CHANNEL> statusListener) {
-        this.channel = channel;
+    public FIXConnection(ReadableByteChannel rxChannel, GatheringByteChannel txChannel,
+                         FIXConfig config, FIXMessageListener listener, FIXConnectionStatusListener statusListener) {
+        this.rxChannel = rxChannel;
+        this.txChannel = txChannel;
 
         this.config = config;
 
@@ -151,15 +169,6 @@ public class FIXConnection<CHANNEL extends ReadableByteChannel & GatheringByteCh
         this.currentTimestamp = new FIXValue(CURRENT_TIMESTAMP_FIELD_CAPACITY);
 
         this.currentTimestamp.setTimestampMillis(this.currentTime);
-    }
-
-    /**
-     * Get the underlying socket channel.
-     *
-     * @return the underlying socket channel
-     */
-    public CHANNEL getChannel() {
-        return channel;
     }
 
     /**
@@ -387,7 +396,8 @@ public class FIXConnection<CHANNEL extends ReadableByteChannel & GatheringByteCh
      */
     @Override
     public void close() throws IOException {
-        channel.close();
+        try (Closeable closingRx = rxChannel; Closeable closingTx = txChannel) {
+        }
     }
 
     /**
@@ -399,7 +409,7 @@ public class FIXConnection<CHANNEL extends ReadableByteChannel & GatheringByteCh
      * @throws IOException if an I/O error occurs
      */
     public int receive() throws IOException {
-        int bytes = channel.read(rxBuffer);
+        int bytes = rxChannel.read(rxBuffer);
 
         if (bytes <= 0)
             return bytes;
@@ -448,7 +458,7 @@ public class FIXConnection<CHANNEL extends ReadableByteChannel & GatheringByteCh
         int remaining = txHeaderBuffer.remaining() + txBodyBuffer.remaining();
 
         do {
-            remaining -= channel.write(txBuffers, 0, txBuffers.length);
+            remaining -= txChannel.write(txBuffers, 0, txBuffers.length);
         } while (remaining > 0);
 
         txMsgSeqNum++;
