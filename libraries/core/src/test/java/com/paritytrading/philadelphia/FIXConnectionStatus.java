@@ -15,12 +15,10 @@
  */
 package com.paritytrading.philadelphia;
 
-import java.nio.channels.GatheringByteChannel;
-import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
 import java.util.List;
 
-class FIXConnectionStatus<CHANNEL extends ReadableByteChannel & GatheringByteChannel> implements FIXConnectionStatusListener<CHANNEL> {
+class FIXConnectionStatus implements FIXConnectionStatusListener {
 
     private List<Event> events;
 
@@ -33,37 +31,37 @@ class FIXConnectionStatus<CHANNEL extends ReadableByteChannel & GatheringByteCha
     }
 
     @Override
-    public void close(FIXConnection<CHANNEL> connection, String message) {
+    public void close(FIXConnection connection, String message) {
         events.add(new Close(message));
     }
 
     @Override
-    public void sequenceReset(FIXConnection<CHANNEL> connection) {
+    public void sequenceReset(FIXConnection connection) {
         events.add(new SequenceReset());
     }
 
     @Override
-    public void tooLowMsgSeqNum(FIXConnection<CHANNEL> connection, long receivedMsgSeqNum, long expectedMsgSeqNum) {
+    public void tooLowMsgSeqNum(FIXConnection connection, long receivedMsgSeqNum, long expectedMsgSeqNum) {
         events.add(new TooLowMsgSeqNum(receivedMsgSeqNum, expectedMsgSeqNum));
     }
 
     @Override
-    public void heartbeatTimeout(FIXConnection<CHANNEL> connection) {
+    public void heartbeatTimeout(FIXConnection connection) {
         events.add(new HeartbeatTimeout());
     }
 
     @Override
-    public void reject(FIXConnection<CHANNEL> connection, FIXMessage message) {
+    public void reject(FIXConnection connection, FIXMessage message) {
         events.add(new Reject());
     }
 
     @Override
-    public void logon(FIXConnection<CHANNEL> connection, FIXMessage message) {
+    public void logon(FIXConnection connection, FIXMessage message) {
         events.add(new Logon());
     }
 
     @Override
-    public void logout(FIXConnection<CHANNEL> connection, FIXMessage message) {
+    public void logout(FIXConnection connection, FIXMessage message) {
         events.add(new Logout());
     }
 

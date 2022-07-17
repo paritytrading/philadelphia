@@ -18,15 +18,17 @@ package com.paritytrading.philadelphia;
 import java.io.IOException;
 import java.nio.channels.Pipe;
 
-class FIXInitiatorPipeChannelTest extends FIXInitiatorTest<PipeChannel> {
+class FIXInitiatorPipeChannelTest extends FIXInitiatorTest {
     @Override
     protected Channels createChannels() throws IOException {
         Pipe up = Pipe.open();
         Pipe down = Pipe.open();
 
         Channels channels = new Channels();
-        channels.initiator = new PipeChannel(up.sink(), down.source());
-        channels.acceptor = new PipeChannel(down.sink(), up.source());
+        channels.initiatorRx = down.source();
+        channels.initiatorTx = up.sink();
+        channels.acceptorRx = up.source();
+        channels.acceptorTx = down.sink();
         return channels;
     }
 }
