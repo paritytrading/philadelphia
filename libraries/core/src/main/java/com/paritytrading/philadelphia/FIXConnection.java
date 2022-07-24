@@ -104,7 +104,7 @@ public class FIXConnection implements Closeable {
      */
     public <CHANNEL extends ReadableByteChannel & GatheringByteChannel>
     FIXConnection(CHANNEL channel, FIXConfig config, FIXMessageListener listener, FIXConnectionStatusListener statusListener) {
-            this(channel, channel, config, listener, statusListener);
+        this(channel, channel, config, listener, statusListener);
     }
 
     /**
@@ -113,7 +113,7 @@ public class FIXConnection implements Closeable {
      *
      * @param inboundChannel the underlying channel for reading
      * @param outboundChannel the underlying channel for writing (can be the
-     *     same instance as {@code inboundChannel})
+     *   same instance as {@code inboundChannel})
      * @param config the connection configuration
      * @param listener the inbound message listener
      * @param statusListener the inbound status event listener
