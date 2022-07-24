@@ -462,7 +462,7 @@ public class FIXConnection implements Closeable {
         int remaining = txHeaderBuffer.remaining() + txBodyBuffer.remaining();
 
         do {
-            remaining -= txChannel.write(txBuffers, 0, txBuffers.length);
+            remaining -= txChannel.write(txBuffers, 0, 2);
         } while (remaining > 0);
 
         txMsgSeqNum++;
