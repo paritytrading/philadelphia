@@ -28,16 +28,4 @@
 
   <name>Philadelphia FIX 4.2</name>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <configuration>
-          <doclint>all,-missing</doclint>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-
 </project>
