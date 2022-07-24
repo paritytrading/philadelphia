@@ -31,7 +31,7 @@
  * connection keep-alive on another without locking. Data transmission and
  * connection keep-alive can run on different threads but require locking.</p>
  *
- * <p>The underlying socket channels can be either blocking or non-blocking.
- * In both cases, data transmission always blocks.</p>
+ * <p>The underlying channels can be either blocking or non-blocking. In both
+ * cases, data transmission always blocks.</p>
  */
 package com.paritytrading.philadelphia;

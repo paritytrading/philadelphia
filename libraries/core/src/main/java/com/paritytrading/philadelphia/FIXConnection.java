@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.GatheringByteChannel;
 import java.nio.channels.ReadableByteChannel;
+import java.nio.channels.SocketChannel;
 
 /**
  * A connection.
@@ -90,14 +91,16 @@ public class FIXConnection implements Closeable {
     private final FIXValue currentTimestamp;
 
     /**
-     * Create a connection using a single read/write channel.
-     * The underlying socket channel can be either blocking or non-blocking.
+     * Create a connection. The underlying channel can be either blocking or
+     * non-blocking.
      *
      * @param channel the underlying channel
      * @param config the connection configuration
      * @param listener the inbound message listener
      * @param statusListener the inbound status event listener
-     * @param <CHANNEL> generic type for the read/write channel
+     * @param <CHANNEL> the underlying channel type, which must implement
+     *   {@link ReadableByteChannel} and {@link GatheringByteChannel}
+     * @see SocketChannel
      */
     public <CHANNEL extends ReadableByteChannel & GatheringByteChannel>
     FIXConnection(CHANNEL channel, FIXConfig config, FIXMessageListener listener, FIXConnectionStatusListener statusListener) {
@@ -105,19 +108,20 @@ public class FIXConnection implements Closeable {
     }
 
     /**
-     * Create a connection. The underlying socket channel can be either
-     * blocking or non-blocking.
+     * Create a connection. The underlying channels can be either blocking or
+     * non-blocking.
      *
-     * @param rxChannel the channel to use for reading
-     * @param txChannel the channel to use for writing (can be the same instance as {@code rxChannel})
+     * @param inboundChannel the underlying channel for reading
+     * @param outboundChannel the underlying channel for writing (can be the
+     *     same instance as {@code inboundChannel})
      * @param config the connection configuration
      * @param listener the inbound message listener
      * @param statusListener the inbound status event listener
      */
-    public FIXConnection(ReadableByteChannel rxChannel, GatheringByteChannel txChannel,
+    public FIXConnection(ReadableByteChannel inboundChannel, GatheringByteChannel outboundChannel,
                          FIXConfig config, FIXMessageListener listener, FIXConnectionStatusListener statusListener) {
-        this.rxChannel = rxChannel;
-        this.txChannel = txChannel;
+        this.rxChannel = inboundChannel;
+        this.txChannel = outboundChannel;
 
         this.config = config;
 
@@ -390,7 +394,7 @@ public class FIXConnection implements Closeable {
     }
 
     /**
-     * Close the underlying socket channel.
+     * Close the underlying channels.
      *
      * @throws IOException if an I/O error occurs
      */
@@ -401,8 +405,8 @@ public class FIXConnection implements Closeable {
     }
 
     /**
-     * Receive data from the underlying socket channel. For each message
-     * received, invoke the message listener if applicable.
+     * Receive data from the underlying channel. For each message received,
+     * invoke the message listener if applicable.
      *
      * @return the number of bytes read, possibly zero, or -1 if the channel
      *   has reached end-of-stream
