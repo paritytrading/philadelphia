@@ -32,6 +32,8 @@ import java.nio.channels.SocketChannel;
  */
 public class FIXConnection implements Closeable {
 
+    private static final int ADMIN_MESSAGE_MAX_FIELD_COUNT = 8;
+
     private static final int CURRENT_TIMESTAMP_FIELD_CAPACITY = 24;
 
     private final ReadableByteChannel rxChannel;
@@ -82,7 +84,7 @@ public class FIXConnection implements Closeable {
 
     private final FIXConnectionStatusListener statusListener;
 
-    private final FIXMessage txMessage;
+    private final FIXMessage adminMessage;
 
     private long currentTimeMillis;
 
@@ -164,7 +166,7 @@ public class FIXConnection implements Closeable {
 
         this.testRequestTxMillis = 0;
 
-        this.txMessage = new FIXMessage(config);
+        this.adminMessage = new FIXMessage(ADMIN_MESSAGE_MAX_FIELD_COUNT, config.getFieldCapacity());
 
         this.currentTimeMillis = 0;
 
@@ -479,13 +481,13 @@ public class FIXConnection implements Closeable {
      * @throws IOException if an I/O error occurs
      */
     public void sendReject(long refSeqNum, long sessionRejectReason, CharSequence text) throws IOException {
-        prepare(txMessage, Reject);
+        prepare(adminMessage, Reject);
 
-        txMessage.addField(RefSeqNum).setInt(refSeqNum);
-        txMessage.addField(SessionRejectReason).setInt(sessionRejectReason);
-        txMessage.addField(Text).setString(text);
+        adminMessage.addField(RefSeqNum).setInt(refSeqNum);
+        adminMessage.addField(SessionRejectReason).setInt(sessionRejectReason);
+        adminMessage.addField(Text).setString(text);
 
-        send(txMessage);
+        send(adminMessage);
     }
 
     /**
@@ -494,9 +496,9 @@ public class FIXConnection implements Closeable {
      * @throws IOException if an I/O error occurs
      */
     public void sendLogout() throws IOException {
-        prepare(txMessage, Logout);
+        prepare(adminMessage, Logout);
 
-        send(txMessage);
+        send(adminMessage);
     }
 
     /**
@@ -506,11 +508,11 @@ public class FIXConnection implements Closeable {
      * @throws IOException if an I/O error occurs
      */
     public void sendLogout(CharSequence text) throws IOException {
-        prepare(txMessage, Logout);
+        prepare(adminMessage, Logout);
 
-        txMessage.addField(Text).setString(text);
+        adminMessage.addField(Text).setString(text);
 
-        send(txMessage);
+        send(adminMessage);
     }
 
     /**
@@ -522,15 +524,15 @@ public class FIXConnection implements Closeable {
      * @throws IOException if an I/O error occurs
      */
     public void sendLogon(boolean resetSeqNum) throws IOException {
-        prepare(txMessage, Logon);
+        prepare(adminMessage, Logon);
 
-        txMessage.addField(EncryptMethod).setInt(0);
-        txMessage.addField(HeartBtInt).setInt(config.getHeartBtInt());
+        adminMessage.addField(EncryptMethod).setInt(0);
+        adminMessage.addField(HeartBtInt).setInt(config.getHeartBtInt());
 
         if (resetSeqNum)
-            txMessage.addField(ResetSeqNumFlag).setBoolean(true);
+            adminMessage.addField(ResetSeqNumFlag).setBoolean(true);
 
-        send(txMessage);
+        send(adminMessage);
     }
 
     private class MessageHandler implements FIXMessageListener {
@@ -710,32 +712,32 @@ public class FIXConnection implements Closeable {
         }
 
         private void sendHeartbeat(FIXValue testReqId) throws IOException {
-            prepare(txMessage, Heartbeat);
+            prepare(adminMessage, Heartbeat);
 
-            txMessage.addField(TestReqID).set(testReqId);
+            adminMessage.addField(TestReqID).set(testReqId);
 
-            send(txMessage);
+            send(adminMessage);
         }
 
         private void sendResendRequest(long beginSeqNo) throws IOException {
-            prepare(txMessage, ResendRequest);
+            prepare(adminMessage, ResendRequest);
 
-            txMessage.addField(BeginSeqNo).setInt(beginSeqNo);
-            txMessage.addField(EndSeqNo).setInt(0);
+            adminMessage.addField(BeginSeqNo).setInt(beginSeqNo);
+            adminMessage.addField(EndSeqNo).setInt(0);
 
-            send(txMessage);
+            send(adminMessage);
         }
 
         private void sendSequenceReset(long msgSeqNum, long newSeqNo) throws IOException {
-            prepare(txMessage, SequenceReset);
+            prepare(adminMessage, SequenceReset);
 
-            txMessage.valueOf(MsgSeqNum).setInt(msgSeqNum);
-            txMessage.addField(GapFillFlag).setBoolean(true);
-            txMessage.addField(NewSeqNo).setInt(newSeqNo);
+            adminMessage.valueOf(MsgSeqNum).setInt(msgSeqNum);
+            adminMessage.addField(GapFillFlag).setBoolean(true);
+            adminMessage.addField(NewSeqNo).setInt(newSeqNo);
 
             txMsgSeqNum--;
 
-            send(txMessage);
+            send(adminMessage);
         }
 
         private void msgSeqNumNotFound() throws IOException {
@@ -749,17 +751,17 @@ public class FIXConnection implements Closeable {
     }
 
     private void sendHeartbeat() throws IOException {
-        prepare(txMessage, Heartbeat);
+        prepare(adminMessage, Heartbeat);
 
-        send(txMessage);
+        send(adminMessage);
     }
 
     private void sendTestRequest(FIXValue testReqId) throws IOException {
-        prepare(txMessage, TestRequest);
+        prepare(adminMessage, TestRequest);
 
-        txMessage.addField(TestReqID).set(testReqId);
+        adminMessage.addField(TestReqID).set(testReqId);
 
-        send(txMessage);
+        send(adminMessage);
     }
 
     private static void tooLongMessage() throws FIXMessageOverflowException {
