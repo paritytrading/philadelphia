@@ -4,6 +4,9 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
+    ignore:
+      - dependency-name: 'com.puppycrawl.tools:checkstyle'
+        update-types: ['version-update:semver-major']
   - package-ecosystem: 'pip'
     directory: '/applications/generate'
     schedule:
