@@ -3,11 +3,11 @@ updates:
   - package-ecosystem: 'maven'
     directory: '/'
     schedule:
-      interval: 'weekly'
+      interval: 'daily'
     ignore:
       - dependency-name: 'com.puppycrawl.tools:checkstyle'
         update-types: ['version-update:semver-major']
   - package-ecosystem: 'pip'
     directory: '/applications/generate'
     schedule:
-      interval: 'monthly'
+      interval: 'daily'
