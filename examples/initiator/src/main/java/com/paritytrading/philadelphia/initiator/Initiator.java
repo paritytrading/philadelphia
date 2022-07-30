@@ -62,11 +62,6 @@ class Initiator implements FIXMessageListener, Closeable {
             }
 
             @Override
-            public void heartbeatTimeout(FIXConnection connection) throws IOException {
-                connection.close();
-            }
-
-            @Override
             public void reject(FIXConnection connection, FIXMessage message) throws IOException {
             }
 

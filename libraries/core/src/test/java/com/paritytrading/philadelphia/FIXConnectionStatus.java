@@ -46,11 +46,6 @@ class FIXConnectionStatus implements FIXConnectionStatusListener {
     }
 
     @Override
-    public void heartbeatTimeout(FIXConnection connection) {
-        events.add(new HeartbeatTimeout());
-    }
-
-    @Override
     public void reject(FIXConnection connection, FIXMessage message) {
         events.add(new Reject());
     }
@@ -87,9 +82,6 @@ class FIXConnectionStatus implements FIXConnectionStatusListener {
             this.receivedMsgSeqNum = receivedMsgSeqNum;
             this.expectedMsgSeqNum = expectedMsgSeqNum;
         }
-    }
-
-    static class HeartbeatTimeout extends Value implements Event {
     }
 
     static class Reject extends Value implements Event {

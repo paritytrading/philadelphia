@@ -15,6 +15,7 @@
  */
 package com.paritytrading.philadelphia.acceptor;
 
+import com.paritytrading.philadelphia.FIXKeepAliveStatus;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
@@ -48,7 +49,8 @@ class TestAcceptor {
 
             if (i % 1000 == 0) {
                 session.getConnection().setCurrentTimeMillis(System.currentTimeMillis());
-                session.getConnection().keepAlive();
+                if (session.getConnection().keepAlive() != FIXKeepAliveStatus.OK)
+                    break;
             }
 
             i++;

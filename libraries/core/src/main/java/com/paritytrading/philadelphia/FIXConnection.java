@@ -371,12 +371,13 @@ public class FIXConnection implements Closeable {
      *
      * <p>If a TestRequest(1) message has been sent and no data has been
      * received within the duration indicated by HeartBtInt(108) amended with
-     * a reasonable transmission time, trigger a status event indicating
-     * heartbeat timeout.</p>
+     * a reasonable transmission time, return a value indicating heartbeat
+     * timeout.</p>
      *
+     * @return the keep-alive status of this connection
      * @throws IOException if an I/O error occurs
      */
-    public void keepAlive() throws IOException {
+    public FIXKeepAliveStatus keepAlive() throws IOException {
         if (currentTimeMillis - lastTxMillis > heartbeatMillis)
             sendHeartbeat();
 
@@ -388,11 +389,13 @@ public class FIXConnection implements Closeable {
             }
         } else {
             if (currentTimeMillis - testRequestTxMillis > testRequestMillis) {
-                statusListener.heartbeatTimeout(this);
-
                 testRequestTxMillis = 0;
+
+                return FIXKeepAliveStatus.HEARTBEAT_TIMEOUT;
             }
         }
+
+        return FIXKeepAliveStatus.OK;
     }
 
     /**
