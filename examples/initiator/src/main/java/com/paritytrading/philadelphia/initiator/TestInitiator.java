@@ -23,8 +23,11 @@ import com.paritytrading.philadelphia.FIXMessage;
 import com.paritytrading.philadelphia.FIXValue;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.Locale;
 
 class TestInitiator {
+
+    private static final Locale LOCALE = Locale.US;
 
     public static void main(String[] args) {
         if (args.length != 4)
@@ -65,28 +68,32 @@ class TestInitiator {
             message.addField(OrdType).setChar(OrdTypeValues.Limit);
             message.addField(Price).setFloat(25.50, 2);
 
-            System.out.println("Warming up...");
+            printf("Warming up...\n");
 
             initiator.sendAndReceive(message, clOrdId, orders);
 
             initiator.reset();
 
-            System.out.println("Benchmarking...");
+            printf("Benchmarking...\n");
 
             initiator.sendAndReceive(message, clOrdId, orders);
 
             initiator.getTransport().close();
 
-            System.out.printf("Results (n = %d)\n", orders);
-            System.out.printf("\n");
-            System.out.printf("   50.00%%: %10.2f µs\n", initiator.getHistogram().getValueAtPercentile( 50.00) / 1000.0);
-            System.out.printf("   90.00%%: %10.2f µs\n", initiator.getHistogram().getValueAtPercentile( 90.00) / 1000.0);
-            System.out.printf("   99.00%%: %10.2f µs\n", initiator.getHistogram().getValueAtPercentile( 99.00) / 1000.0);
-            System.out.printf("   99.90%%: %10.2f µs\n", initiator.getHistogram().getValueAtPercentile( 99.90) / 1000.0);
-            System.out.printf("   99.99%%: %10.2f µs\n", initiator.getHistogram().getValueAtPercentile( 99.99) / 1000.0);
-            System.out.printf("  100.00%%: %10.2f µs\n", initiator.getHistogram().getValueAtPercentile(100.00) / 1000.0);
-            System.out.printf("\n");
+            printf("Results (n = %d)\n", orders);
+            printf("\n");
+            printf("   50.00%%: %10.2f µs\n", initiator.getHistogram().getValueAtPercentile( 50.00) / 1000.0);
+            printf("   90.00%%: %10.2f µs\n", initiator.getHistogram().getValueAtPercentile( 90.00) / 1000.0);
+            printf("   99.00%%: %10.2f µs\n", initiator.getHistogram().getValueAtPercentile( 99.00) / 1000.0);
+            printf("   99.90%%: %10.2f µs\n", initiator.getHistogram().getValueAtPercentile( 99.90) / 1000.0);
+            printf("   99.99%%: %10.2f µs\n", initiator.getHistogram().getValueAtPercentile( 99.99) / 1000.0);
+            printf("  100.00%%: %10.2f µs\n", initiator.getHistogram().getValueAtPercentile(100.00) / 1000.0);
+            printf("\n");
         }
+    }
+
+    private static void printf(String format, Object... args) {
+        System.out.printf(LOCALE, format, args);
     }
 
     private static void usage() {
