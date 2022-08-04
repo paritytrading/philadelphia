@@ -44,8 +44,8 @@ public class FIXMessageParserBenchmark extends FIXBenchmark {
         buffer.put(MESSAGE.getBytes(US_ASCII));
         buffer.flip();
 
-        checkSumEnabled  = new FIXMessageParser(CHECK_SUM_ENABLED,  listener -> {});
-        checkSumDisabled = new FIXMessageParser(CHECK_SUM_DISABLED, listener -> {});
+        checkSumEnabled  = new FIXMessageParser(CHECK_SUM_ENABLED,  null, (connection, message) -> {});
+        checkSumDisabled = new FIXMessageParser(CHECK_SUM_DISABLED, null, (connection, message) -> {});
     }
 
     @Benchmark

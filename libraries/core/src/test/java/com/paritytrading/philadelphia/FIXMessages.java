@@ -36,7 +36,7 @@ class FIXMessages implements FIXMessageListener {
     }
 
     @Override
-    public void message(FIXMessage message) {
+    public void message(FIXConnection connection, FIXMessage message) {
         buffer.clear();
         message.put(buffer);
         buffer.flip();

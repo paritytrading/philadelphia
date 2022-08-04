@@ -161,7 +161,7 @@ class FIXMessageParserTest {
             .setCheckSumEnabled(checkSumEnabled)
             .build();
 
-        FIXMessageParser parser = new FIXMessageParser(config, messages);
+        FIXMessageParser parser = new FIXMessageParser(config, null, messages);
 
         return parser.parse(buffer);
     }

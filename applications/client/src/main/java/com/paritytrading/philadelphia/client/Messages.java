@@ -35,7 +35,7 @@ class Messages implements FIXMessageListener, FIXConnectionStatusListener {
     }
 
     @Override
-    public void message(FIXMessage message) {
+    public void message(FIXConnection connection, FIXMessage message) {
         add(message);
     }
 

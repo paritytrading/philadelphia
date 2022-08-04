@@ -133,7 +133,7 @@ public class FIXConnection implements Closeable {
         this.senderCompId = config.getSenderCompID();
         this.targetCompId = config.getTargetCompID();
 
-        this.parser = new FIXMessageParser(config, new MessageHandler(listener));
+        this.parser = new FIXMessageParser(config, this, new MessageHandler(listener));
 
         this.statusListener = statusListener;
 
@@ -544,7 +544,7 @@ public class FIXConnection implements Closeable {
         }
 
         @Override
-        public void message(FIXMessage message) throws IOException {
+        public void message(FIXConnection connection, FIXMessage message) throws IOException {
             long msgSeqNum = message.getMsgSeqNum();
             if (msgSeqNum == 0) {
                 msgSeqNumNotFound();
@@ -570,7 +570,7 @@ public class FIXConnection implements Closeable {
             rxMsgSeqNum++;
 
             if (msgType.length() != 1) {
-                downstream.message(message);
+                downstream.message(connection, message);
                 return;
             }
 
@@ -593,7 +593,7 @@ public class FIXConnection implements Closeable {
                 handleLogon(message);
                 break;
             default:
-                downstream.message(message);
+                downstream.message(connection, message);
                 break;
             }
         }

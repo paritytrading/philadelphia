@@ -25,9 +25,10 @@ public interface FIXMessageListener {
     /**
      * Receive a message.
      *
+     * @param connection the connection
      * @param message a message
      * @throws IOException if an I/O error occurs
      */
-    void message(FIXMessage message) throws IOException;
+    void message(FIXConnection connection, FIXMessage message) throws IOException;
 
 }

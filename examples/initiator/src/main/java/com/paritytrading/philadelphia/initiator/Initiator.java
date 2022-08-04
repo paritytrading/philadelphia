@@ -95,7 +95,7 @@ class Initiator implements FIXMessageListener, Closeable {
     }
 
     @Override
-    public void message(FIXMessage message) {
+    public void message(FIXConnection connection, FIXMessage message) {
         FIXValue clOrdId = message.valueOf(ClOrdID);
         histogram.recordValue(System.nanoTime() - clOrdId.asInt());
 

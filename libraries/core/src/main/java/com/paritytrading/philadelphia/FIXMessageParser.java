@@ -25,6 +25,8 @@ import java.nio.ByteBuffer;
  */
 public class FIXMessageParser {
 
+    private final FIXConnection connection;
+
     private final FIXMessageListener listener;
 
     private final FIXMessage message;
@@ -35,12 +37,15 @@ public class FIXMessageParser {
      * Create a message parser.
      *
      * @param config the parser configuration
+     * @param connection the connection
      * @param listener the message listener
      */
-    public FIXMessageParser(FIXConfig config, FIXMessageListener listener) {
+    public FIXMessageParser(FIXConfig config, FIXConnection connection, FIXMessageListener listener) {
         this.message = new FIXMessage(config);
 
         this.checkSumEnabled = config.isCheckSumEnabled();
+
+        this.connection = connection;
 
         this.listener = listener;
     }
@@ -131,7 +136,7 @@ public class FIXMessageParser {
             if (garbled)
                 continue;
 
-            listener.message(message);
+            listener.message(connection, message);
 
             return true;
         }

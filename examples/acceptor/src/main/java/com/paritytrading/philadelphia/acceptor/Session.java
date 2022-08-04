@@ -111,7 +111,7 @@ class Session implements FIXMessageListener {
     }
 
     @Override
-    public void message(FIXMessage message) throws IOException {
+    public void message(FIXConnection connection, FIXMessage message) throws IOException {
         FIXValue msgType = message.getMsgType();
 
         if (msgType.length() != 1 || msgType.asChar() != OrderSingle)
