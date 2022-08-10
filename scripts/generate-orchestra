@@ -37,7 +37,7 @@ generate() {
     local input_path=$3
     local output_path=$4
 
-    cat scripts/license-orchestra.java > "$output_path"
+    ./scripts/generate-license > "$output_path"
 
     if [[ $input_path != /* ]]; then
         input_path="../../$input_path"
