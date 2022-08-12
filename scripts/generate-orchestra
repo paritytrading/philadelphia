@@ -25,8 +25,8 @@
 # 3.7 or newer.
 #
 # As this repository already contains the generated FIX protocol versions, you
-# only need to run this script if FIX Latest updates or you change Philadelphia
-# Code Generator.
+# only need to run this script if FIX Latest or FIXT 1.1 updates or you change
+# Philadelphia Code Generator.
 #
 
 set -e
@@ -37,7 +37,7 @@ generate() {
     local input_path=$3
     local output_path=$4
 
-    cat scripts/license-orchestra.java > "$output_path"
+    ./scripts/generate-license > "$output_path"
 
     if [[ $input_path != /* ]]; then
         input_path="../../$input_path"
@@ -48,21 +48,26 @@ generate() {
                     >> "../../$output_path")
 }
 
-if [[ $# != 2 ]]; then
-    echo "Usage: ${0##*/} <configuration-file> <input-file>" >&2
+generate_version() {
+    local input_file=$1
+    local output_prefix=$2
+
+    local output_module=${output_prefix,,}
+
+    local config_file="scripts/config-$output_module.ini"
+    local output_dir="libraries/$output_module/src/main/java/com/paritytrading/philadelphia/$output_module"
+
+    generate enumerations "$config_file" "$input_file" "$output_dir/${output_prefix}Enumerations.java"
+    generate msg-types "$config_file" "$input_file" "$output_dir/${output_prefix}MsgTypes.java"
+    generate tags "$config_file" "$input_file" "$output_dir/${output_prefix}Tags.java"
+}
+
+if [[ $# != 1 ]]; then
+    echo "Usage: ${0##*/} <input-directory>" >&2
     exit 2
 fi
 
-config_file=$1
-input_file=$2
+input_dir=$1
 
-class_name_prefix=$(grep class-name-prefix "$config_file")
-
-output_prefix=${class_name_prefix#class-name-prefix=}
-output_module=${output_prefix,,}
-
-output_dir="libraries/$output_module/src/main/java/com/paritytrading/philadelphia/$output_module"
-
-generate enumerations "$config_file" "$input_file" "$output_dir/${output_prefix}Enumerations.java"
-generate msg-types "$config_file" "$input_file" "$output_dir/${output_prefix}MsgTypes.java"
-generate tags "$config_file" "$input_file" "$output_dir/${output_prefix}Tags.java"
+generate_version "$input_dir/OrchestraFIXLatest.xml" "FIXLatest"
+generate_version "$input_dir/FIXTSession.xml" "FIXT11"

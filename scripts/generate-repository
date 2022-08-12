@@ -41,7 +41,7 @@ generate() {
         input_path="../../$input_path"
     fi
 
-    cat scripts/license-repository.java > "$output_path"
+    ./scripts/generate-license > "$output_path"
 
     (cd applications/generate; \
             python -m philadelphia.generate "$command" "../../$config_path" "$input_path" >> "../../$output_path")
