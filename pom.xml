@@ -168,7 +168,6 @@
           <version>3.3.0</version>
           <configuration>
             <createDependencyReducedPom>false</createDependencyReducedPom>
-            <minimizeJar>true</minimizeJar>
           </configuration>
           <executions>
             <execution>
