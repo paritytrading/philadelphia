@@ -54,7 +54,7 @@ generate_version() {
     local output_prefix=${input_version//./}
     local output_module=${output_prefix,,}
 
-    local config_path="scripts/config-$output_module.ini"
+    local config_path="scripts/$output_module.ini"
     local input_path="$input_dir/$input_version/Base"
     local output_dir="libraries/$output_module/src/main/java/com/paritytrading/philadelphia/$output_module"
 

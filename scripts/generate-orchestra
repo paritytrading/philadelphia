@@ -54,7 +54,7 @@ generate_version() {
 
     local output_module=${output_prefix,,}
 
-    local config_file="scripts/config-$output_module.ini"
+    local config_file="scripts/$output_module.ini"
     local output_dir="libraries/$output_module/src/main/java/com/paritytrading/philadelphia/$output_module"
 
     generate enumerations "$config_file" "$input_file" "$output_dir/${output_prefix}Enumerations.java"
