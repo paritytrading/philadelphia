@@ -22,6 +22,61 @@ package com.paritytrading.philadelphia;
  */
 public class FIXConfig {
 
+    /**
+     * The default protocol version.
+     */
+    public static final FIXVersion DEFAULT_VERSION = FIXVersion.FIX_4_2;
+
+    /**
+     * The default SenderCompID(49).
+     */
+    public static final String DEFAULT_SENDER_COMP_ID = "";
+
+    /**
+     * The default TargetCompID(56).
+     */
+    public static final String DEFAULT_TARGET_COMP_ID = "";
+
+    /**
+     * The default HeartBtInt(108).
+     */
+    public static final int DEFAULT_HEART_BT_INT = 30;
+
+    /**
+     * The default incoming MsgSeqNum(34).
+     */
+    public static final int DEFAULT_INCOMING_MSG_SEQ_NUM = 1;
+
+    /**
+     * The default outgoing MsgSeqNum(34).
+     */
+    public static final int DEFAULT_OUTGOING_MSG_SEQ_NUM = 1;
+
+    /**
+     * The default maximum number of fields.
+     */
+    public static final int DEFAULT_MAX_FIELD_COUNT = 64;
+
+    /**
+     * The default field capacity.
+     */
+    public static final int DEFAULT_FIELD_CAPACITY = 64;
+
+    /**
+     * The default receive buffer capacity.
+     */
+    public static final int DEFAULT_RX_BUFFER_CAPACITY = 1024;
+
+    /**
+     * The default transmit buffer capacity.
+     */
+    public static final int DEFAULT_TX_BUFFER_CAPACITY = 1024;
+
+    /**
+     * The default incoming CheckSum(10) check status.
+     */
+    public static final boolean DEFAULT_CHECK_SUM_ENABLED = true;
+
     private final FIXVersion version;
     private final String     senderCompId;
     private final String     targetCompId;
@@ -192,21 +247,7 @@ public class FIXConfig {
     }
 
     /**
-     * <p>A connection configuration builder. The builder uses the following
-     * default values:</p>
-     * <ul>
-     *   <li>protocol version: FIX 4.2</li>
-     *   <li>SenderCompID(49): empty</li>
-     *   <li>TargetCompID(56): empty</li>
-     *   <li>HeartBtInt(108): 30</li>
-     *   <li>incoming MsgSeqNum(34): 1</li>
-     *   <li>outgoing MsgSeqNum(34): 1</li>
-     *   <li>maximum number of fields in a message: 64</li>
-     *   <li>field capacity: 64</li>
-     *   <li>receive buffer capacity: 1024</li>
-     *   <li>transmit buffer capacity: 1024</li>
-     *   <li>incoming CheckSum(10) check status: enabled</li>
-     * </ul>
+     * A connection configuration builder.
      */
     public static class Builder {
 
@@ -226,17 +267,17 @@ public class FIXConfig {
          * Create a connection configuration builder.
          */
         public Builder() {
-            version           = FIXVersion.FIX_4_2;
-            senderCompId      = "";
-            targetCompId      = "";
-            heartBtInt        = 30;
-            incomingMsgSeqNum = 1;
-            outgoingMsgSeqNum = 1;
-            maxFieldCount     = 64;
-            fieldCapacity     = 64;
-            rxBufferCapacity  = 1024;
-            txBufferCapacity  = 1024;
-            checkSumEnabled   = true;
+            version           = DEFAULT_VERSION;
+            senderCompId      = DEFAULT_SENDER_COMP_ID;
+            targetCompId      = DEFAULT_TARGET_COMP_ID;
+            heartBtInt        = DEFAULT_HEART_BT_INT;
+            incomingMsgSeqNum = DEFAULT_INCOMING_MSG_SEQ_NUM;
+            outgoingMsgSeqNum = DEFAULT_OUTGOING_MSG_SEQ_NUM;
+            maxFieldCount     = DEFAULT_MAX_FIELD_COUNT;
+            fieldCapacity     = DEFAULT_FIELD_CAPACITY;
+            rxBufferCapacity  = DEFAULT_RX_BUFFER_CAPACITY;
+            txBufferCapacity  = DEFAULT_TX_BUFFER_CAPACITY;
+            checkSumEnabled   = DEFAULT_CHECK_SUM_ENABLED;
         }
 
         /**
