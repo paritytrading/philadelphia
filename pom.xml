@@ -65,6 +65,7 @@
     <module>examples/acceptor</module>
     <module>examples/initiator</module>
     <module>libraries/core</module>
+    <module>libraries/fix40</module>
     <module>libraries/fix42</module>
     <module>libraries/fix43</module>
     <module>libraries/fix44</module>

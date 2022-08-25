@@ -23,6 +23,11 @@ import static com.paritytrading.philadelphia.FIX.*;
 public enum FIXVersion {
 
     /**
+     * FIX 4.0.
+     */
+    FIX_4_0(new byte[] { 'F', 'I', 'X', '.', '4', '.', '0', SOH }),
+
+    /**
      * FIX 4.2.
      */
     FIX_4_2(new byte[] { 'F', 'I', 'X', '.', '4', '.', '2', SOH }),

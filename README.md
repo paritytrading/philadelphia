@@ -25,9 +25,9 @@ Philadelphia contains the following libraries:
 
 - [**Core**](libraries/core) implements the FIX protocol.
 
-- [**FIX 4.2**](libraries/fix42), [**FIX 4.3**](libraries/fix43),
-  [**FIX 4.4**](libraries/fix44), [**FIX 5.0**](libraries/fix50),
-  [**FIX 5.0 SP1**](libraries/fix50sp1),
+- [**FIX4.0**](libraries/fix40), [**FIX 4.2**](libraries/fix42),
+  [**FIX 4.3**](libraries/fix43), [**FIX 4.4**](libraries/fix44),
+  [**FIX 5.0**](libraries/fix50), [**FIX 5.0 SP1**](libraries/fix50sp1),
   [**FIX 5.0 SP2**](libraries/fix50sp2), [**FIX Latest**](libraries/fixlatest),
   and [**FIXT 1.1**](libraries/fixt11) implement profiles for the corresponding
   FIX protocol versions.
