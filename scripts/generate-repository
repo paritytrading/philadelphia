@@ -71,6 +71,7 @@ fi
 input_dir=$1
 
 generate_version "$input_dir" "FIX.4.0"
+generate_version "$input_dir" "FIX.4.1"
 generate_version "$input_dir" "FIX.4.2"
 generate_version "$input_dir" "FIX.4.3"
 generate_version "$input_dir" "FIX.4.4"
