@@ -1,6 +1,6 @@
 # Code generation
 
-Philadelphia uses code generation for the FIX protocol versions from FIX 4.2
+Philadelphia uses code generation for the FIX protocol versions from FIX 4.0
 to FIX Latest.
 
 As Philadelphia already contains the output of the code generation process,
@@ -13,6 +13,8 @@ Code generation requires Bash and Python 3.7 or newer.
 
 The following FIX protocol versions use [FIX Repository][] as their source:
 
+  - FIX 4.0
+  - FIX 4.1
   - FIX 4.2
   - FIX 4.3
   - FIX 4.4
