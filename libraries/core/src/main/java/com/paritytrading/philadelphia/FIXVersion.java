@@ -16,6 +16,7 @@
 package com.paritytrading.philadelphia;
 
 import static com.paritytrading.philadelphia.FIX.*;
+import static java.nio.charset.StandardCharsets.*;
 
 /**
  * The protocol version.
@@ -25,37 +26,37 @@ public enum FIXVersion {
     /**
      * FIX 4.0.
      */
-    FIX_4_0(new byte[] { 'F', 'I', 'X', '.', '4', '.', '0', SOH }),
+    FIX_4_0("FIX.4.0"),
 
     /**
      * FIX 4.1.
      */
-    FIX_4_1(new byte[] { 'F', 'I', 'X', '.', '4', '.', '1', SOH }),
+    FIX_4_1("FIX.4.1"),
 
     /**
      * FIX 4.2.
      */
-    FIX_4_2(new byte[] { 'F', 'I', 'X', '.', '4', '.', '2', SOH }),
+    FIX_4_2("FIX.4.2"),
 
     /**
      * FIX 4.3.
      */
-    FIX_4_3(new byte[] { 'F', 'I', 'X', '.', '4', '.', '3', SOH }),
+    FIX_4_3("FIX.4.3"),
 
     /**
      * FIX 4.4.
      */
-    FIX_4_4(new byte[] { 'F', 'I', 'X', '.', '4', '.', '4', SOH }),
+    FIX_4_4("FIX.4.4"),
 
     /**
      * FIXT 1.1.
      */
-    FIXT_1_1(new byte[] { 'F', 'I', 'X', 'T', '.', '1', '.', '1', SOH });
+    FIXT_1_1("FIXT.1.1");
 
     private final byte[] beginString;
 
-    private FIXVersion(byte[] beginString) {
-        this.beginString = beginString;
+    private FIXVersion(String beginString) {
+        this.beginString = beginString.getBytes(US_ASCII);
     }
 
     byte[] getBeginString() {
