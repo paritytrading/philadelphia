@@ -28,6 +28,11 @@ public enum FIXVersion {
     FIX_4_0(new byte[] { 'F', 'I', 'X', '.', '4', '.', '0', SOH }),
 
     /**
+     * FIX 4.1.
+     */
+    FIX_4_1(new byte[] { 'F', 'I', 'X', '.', '4', '.', '1', SOH }),
+
+    /**
      * FIX 4.2.
      */
     FIX_4_2(new byte[] { 'F', 'I', 'X', '.', '4', '.', '2', SOH }),
