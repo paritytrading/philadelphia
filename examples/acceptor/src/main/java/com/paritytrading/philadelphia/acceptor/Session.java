@@ -30,7 +30,7 @@ import java.nio.channels.SocketChannel;
 
 class Session implements FIXMessageListener {
 
-    private static final FIXConfig CONFIG = new FIXConfig.Builder().build();
+    private static final FIXConfig CONFIG = FIXConfig.newBuilder().build();
 
     private final FIXConnection connection;
 

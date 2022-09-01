@@ -22,7 +22,7 @@ class FIXConfigTest {
     @SuppressWarnings("resource")
     @Test
     void fixt11() {
-        FIXConfig config = new FIXConfig.Builder()
+        FIXConfig config = FIXConfig.newBuilder()
                 .setVersion(FIXVersion.FIXT_1_1)
                 .build();
         new FIXConnection(null, config, null, null);

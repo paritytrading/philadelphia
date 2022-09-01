@@ -35,7 +35,7 @@ import org.junit.jupiter.api.Timeout;
 @Timeout(value=1, unit=TimeUnit.SECONDS)
 abstract class FIXInitiatorTest {
 
-    private static final FIXConfig initiatorConfig = new FIXConfig.Builder()
+    private static final FIXConfig initiatorConfig = FIXConfig.newBuilder()
         .setSenderCompID("initiator")
         .setTargetCompID("acceptor")
         .setFieldCapacity(1024)

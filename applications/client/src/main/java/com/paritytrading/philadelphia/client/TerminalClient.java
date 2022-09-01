@@ -197,7 +197,7 @@ class TerminalClient implements Closeable {
         String address      = config.getString("fix.address");
         int    port         = config.getInt("fix.port");
 
-        FIXConfig.Builder builder = new FIXConfig.Builder()
+        FIXConfig.Builder builder = FIXConfig.newBuilder()
             .setVersion(FIXVersion.valueOf(version))
             .setSenderCompID(senderCompId)
             .setTargetCompID(targetCompId)

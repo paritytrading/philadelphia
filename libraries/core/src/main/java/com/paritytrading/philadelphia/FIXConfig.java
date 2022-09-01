@@ -18,7 +18,7 @@ package com.paritytrading.philadelphia;
 /**
  * A connection configuration.
  *
- * @see Builder
+ * @see #newBuilder
  */
 public class FIXConfig {
 
@@ -103,7 +103,7 @@ public class FIXConfig {
      * @param rxBufferCapacity the receive buffer capacity
      * @param txBufferCapacity the transmit buffer capacity
      * @param checkSumEnabled the incoming CheckSum(10) check status
-     * @see Builder
+     * @see #newBuilder
      */
     public FIXConfig(FIXVersion version, String senderCompId,
             String targetCompId, int heartBtInt,
@@ -247,6 +247,15 @@ public class FIXConfig {
     }
 
     /**
+     * Create a connection configuration builder.
+     *
+     * @return a connection configuration builder
+     */
+    public static Builder newBuilder() {
+        return new Builder();
+    }
+
+    /**
      * A connection configuration builder.
      */
     public static class Builder {
@@ -263,10 +272,7 @@ public class FIXConfig {
         private int        txBufferCapacity;
         private boolean    checkSumEnabled;
 
-        /**
-         * Create a connection configuration builder.
-         */
-        public Builder() {
+        private Builder() {
             version           = DEFAULT_VERSION;
             senderCompId      = DEFAULT_SENDER_COMP_ID;
             targetCompId      = DEFAULT_TARGET_COMP_ID;
