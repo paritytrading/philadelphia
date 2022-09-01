@@ -77,6 +77,11 @@ public class FIXConfig {
      */
     public static final boolean DEFAULT_CHECK_SUM_ENABLED = true;
 
+    /**
+     * The default connection configuration.
+     */
+    public static final FIXConfig DEFAULTS = newBuilder().build();
+
     private final FIXVersion version;
     private final String     senderCompId;
     private final String     targetCompId;

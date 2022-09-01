@@ -30,8 +30,6 @@ import java.nio.channels.SocketChannel;
 
 class Session implements FIXMessageListener {
 
-    private static final FIXConfig CONFIG = FIXConfig.newBuilder().build();
-
     private final FIXConnection connection;
 
     private final FIXMessage report;
@@ -49,7 +47,7 @@ class Session implements FIXMessageListener {
     private long nextExecId;
 
     Session(SocketChannel channel) {
-        connection = new FIXConnection(channel, CONFIG, this, new FIXConnectionStatusListener() {
+        connection = new FIXConnection(channel, FIXConfig.DEFAULTS, this, new FIXConnectionStatusListener() {
 
             @Override
             public void close(FIXConnection connection, String message) throws IOException {

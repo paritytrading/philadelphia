@@ -29,7 +29,7 @@ public class FIXMessageParserBenchmark extends FIXBenchmark {
             "56=acceptor\u000134=2\u000111=123\u000121=1\u000155=FOO\u000154=1\u000140=2\u0001" +
             "44=150.25\u000110=075\u0001";
 
-    private static final FIXConfig CHECK_SUM_ENABLED  = FIXConfig.newBuilder().build();
+    private static final FIXConfig CHECK_SUM_ENABLED  = FIXConfig.DEFAULTS;
     private static final FIXConfig CHECK_SUM_DISABLED = FIXConfig.newBuilder().setCheckSumEnabled(false).build();
 
     private ByteBuffer buffer;
