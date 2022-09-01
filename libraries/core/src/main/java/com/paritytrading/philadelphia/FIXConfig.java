@@ -236,19 +236,21 @@ public class FIXConfig {
      */
     @Override
     public String toString() {
-        return "FIXConfig{" +
-                "version=" + version +
-                ", senderCompId='" + senderCompId + '\'' +
-                ", targetCompId='" + targetCompId + '\'' +
-                ", heartBtInt=" + heartBtInt +
-                ", incomingMsgSeqNum=" + incomingMsgSeqNum +
-                ", outgoingMsgSeqNum=" + outgoingMsgSeqNum +
-                ", maxFieldCount=" + maxFieldCount +
-                ", fieldCapacity=" + fieldCapacity +
-                ", rxBufferCapacity=" + rxBufferCapacity +
-                ", txBufferCapacity=" + txBufferCapacity +
-                ", checkSumEnabled=" + checkSumEnabled +
-                '}';
+        return new StringBuilder()
+            .append("FIXConfig(")
+            .append("version=").append(version).append(",")
+            .append("senderCompId=\"").append(senderCompId).append("\",")
+            .append("targetCompId=\"").append(targetCompId).append("\",")
+            .append("heartBtInt=").append(heartBtInt).append(",")
+            .append("incomingMsgSeqNum=").append(incomingMsgSeqNum).append(",")
+            .append("outgoingMsgSeqNum=").append(outgoingMsgSeqNum).append(",")
+            .append("maxFieldCount=").append(maxFieldCount).append(",")
+            .append("fieldCapacity=").append(fieldCapacity).append(",")
+            .append("rxBufferCapacity=").append(rxBufferCapacity).append(",")
+            .append("txBufferCapacity=").append(txBufferCapacity).append(",")
+            .append("checkSumEnabled=").append(checkSumEnabled)
+            .append(")")
+            .toString();
     }
 
     /**
