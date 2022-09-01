@@ -213,7 +213,7 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
           <doclint>all,-missing</doclint>
-          <excludePackageNames>com.paritytrading.philadelphia.acceptor:com.paritytrading.philadelphia.client:com.paritytrading.philadelphia.initiator:*.generated</excludePackageNames>
+          <excludePackageNames>com.paritytrading.philadelphia.acceptor:com.paritytrading.philadelphia.client:com.paritytrading.philadelphia.initiator:*.jmh_generated</excludePackageNames>
           <sourceFileExcludes>**\/*Benchmark.java</sourceFileExcludes>
         </configuration>
       </plugin>
