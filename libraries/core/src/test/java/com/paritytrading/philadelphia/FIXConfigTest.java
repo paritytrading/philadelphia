@@ -34,7 +34,7 @@ class FIXConfigTest {
     void string() {
         assertEquals("" +
                 "FIXConfig(" +
-                "version=FIX_4_2," +
+                "beginString=\"FIX.4.2\"," +
                 "senderCompId=\"\"," +
                 "targetCompId=\"\"," +
                 "heartBtInt=30," +
