@@ -15,6 +15,8 @@
  */
 package com.paritytrading.philadelphia;
 
+import static java.nio.charset.StandardCharsets.*;
+
 /**
  * A connection configuration.
  *
@@ -23,9 +25,9 @@ package com.paritytrading.philadelphia;
 public class FIXConfig {
 
     /**
-     * The default protocol version.
+     * The default BeginString(8).
      */
-    public static final FIXVersion DEFAULT_VERSION = FIXVersion.FIX_4_2;
+    public static final byte[] DEFAULT_BEGIN_STRING = FIXVersion.FIX_4_2.getBeginString();
 
     /**
      * The default SenderCompID(49).
@@ -82,22 +84,22 @@ public class FIXConfig {
      */
     public static final FIXConfig DEFAULTS = newBuilder().build();
 
-    private final FIXVersion version;
-    private final String     senderCompId;
-    private final String     targetCompId;
-    private final int        heartBtInt;
-    private final long       incomingMsgSeqNum;
-    private final long       outgoingMsgSeqNum;
-    private final int        maxFieldCount;
-    private final int        fieldCapacity;
-    private final int        rxBufferCapacity;
-    private final int        txBufferCapacity;
-    private final boolean    checkSumEnabled;
+    private final byte[]  beginString;
+    private final String  senderCompId;
+    private final String  targetCompId;
+    private final int     heartBtInt;
+    private final long    incomingMsgSeqNum;
+    private final long    outgoingMsgSeqNum;
+    private final int     maxFieldCount;
+    private final int     fieldCapacity;
+    private final int     rxBufferCapacity;
+    private final int     txBufferCapacity;
+    private final boolean checkSumEnabled;
 
     /**
      * Create a connection configuration.
      *
-     * @param version the protocol version
+     * @param beginString the BeginString(8)
      * @param senderCompId the SenderCompID(49)
      * @param targetCompId the TargetCompID(56)
      * @param heartBtInt the HeartBtInt(108)
@@ -110,12 +112,12 @@ public class FIXConfig {
      * @param checkSumEnabled the incoming CheckSum(10) check status
      * @see #newBuilder
      */
-    public FIXConfig(FIXVersion version, String senderCompId,
+    public FIXConfig(byte[] beginString, String senderCompId,
             String targetCompId, int heartBtInt,
             long incomingMsgSeqNum, long outgoingMsgSeqNum,
             int maxFieldCount, int fieldCapacity, int rxBufferCapacity,
             int txBufferCapacity, boolean checkSumEnabled) {
-        this.version           = version;
+        this.beginString       = beginString;
         this.senderCompId      = senderCompId;
         this.targetCompId      = targetCompId;
         this.heartBtInt        = heartBtInt;
@@ -129,12 +131,12 @@ public class FIXConfig {
     }
 
     /**
-     * Get the protocol version.
+     * Get the BeginString(8).
      *
-     * @return the protocol version
+     * @return the BeginString(8)
      */
-    public FIXVersion getVersion() {
-        return version;
+    public byte[] getBeginString() {
+        return beginString;
     }
 
     /**
@@ -238,7 +240,7 @@ public class FIXConfig {
     public String toString() {
         return new StringBuilder()
             .append("FIXConfig(")
-            .append("version=").append(version).append(",")
+            .append("beginString=\"").append(new String(beginString, US_ASCII)).append("\",")
             .append("senderCompId=\"").append(senderCompId).append("\",")
             .append("targetCompId=\"").append(targetCompId).append("\",")
             .append("heartBtInt=").append(heartBtInt).append(",")
@@ -267,20 +269,20 @@ public class FIXConfig {
      */
     public static class Builder {
 
-        private FIXVersion version;
-        private String     senderCompId;
-        private String     targetCompId;
-        private int        heartBtInt;
-        private long       incomingMsgSeqNum;
-        private long       outgoingMsgSeqNum;
-        private int        maxFieldCount;
-        private int        fieldCapacity;
-        private int        rxBufferCapacity;
-        private int        txBufferCapacity;
-        private boolean    checkSumEnabled;
+        private byte[]  beginString;
+        private String  senderCompId;
+        private String  targetCompId;
+        private int     heartBtInt;
+        private long    incomingMsgSeqNum;
+        private long    outgoingMsgSeqNum;
+        private int     maxFieldCount;
+        private int     fieldCapacity;
+        private int     rxBufferCapacity;
+        private int     txBufferCapacity;
+        private boolean checkSumEnabled;
 
         private Builder() {
-            version           = DEFAULT_VERSION;
+            beginString       = DEFAULT_BEGIN_STRING;
             senderCompId      = DEFAULT_SENDER_COMP_ID;
             targetCompId      = DEFAULT_TARGET_COMP_ID;
             heartBtInt        = DEFAULT_HEART_BT_INT;
@@ -294,15 +296,37 @@ public class FIXConfig {
         }
 
         /**
+         * Set the BeginString(8).
+         *
+         * @param beginString the BeginString(8)
+         * @return this instance
+         * @see #setVersion
+         */
+        public Builder setBeginString(byte[] beginString) {
+            this.beginString = beginString;
+
+            return this;
+        }
+
+        /**
+         * Set the BeginString(8).
+         *
+         * @param beginString the BeginString(8)
+         * @return this instance
+         * @see #setVersion
+         */
+        public Builder setBeginString(String beginString) {
+            return setBeginString(beginString.getBytes(US_ASCII));
+        }
+
+        /**
          * Set the protocol version.
          *
          * @param version the protocol version
          * @return this instance
          */
         public Builder setVersion(FIXVersion version) {
-            this.version = version;
-
-            return this;
+            return setBeginString(version.getBeginString());
         }
 
         /**
@@ -432,7 +456,7 @@ public class FIXConfig {
          * @return the connection configuration
          */
         public FIXConfig build() {
-            return new FIXConfig(version, senderCompId, targetCompId,
+            return new FIXConfig(beginString, senderCompId, targetCompId,
                     heartBtInt, incomingMsgSeqNum, outgoingMsgSeqNum,
                     maxFieldCount, fieldCapacity, rxBufferCapacity,
                     txBufferCapacity, checkSumEnabled);
