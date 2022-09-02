@@ -15,6 +15,8 @@
  */
 package com.paritytrading.philadelphia;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 
 class FIXConfigTest {
@@ -22,10 +24,28 @@ class FIXConfigTest {
     @SuppressWarnings("resource")
     @Test
     void fixt11() {
-        FIXConfig config = new FIXConfig.Builder()
+        FIXConfig config = FIXConfig.newBuilder()
                 .setVersion(FIXVersion.FIXT_1_1)
                 .build();
         new FIXConnection(null, config, null, null);
+    }
+
+    @Test
+    void string() {
+        assertEquals("" +
+                "FIXConfig(" +
+                "version=FIX_4_2," +
+                "senderCompId=\"\"," +
+                "targetCompId=\"\"," +
+                "heartBtInt=30," +
+                "incomingMsgSeqNum=1," +
+                "outgoingMsgSeqNum=1," +
+                "maxFieldCount=64," +
+                "fieldCapacity=64," +
+                "rxBufferCapacity=1024," +
+                "txBufferCapacity=1024," +
+                "checkSumEnabled=true" +
+                ")", FIXConfig.DEFAULTS.toString());
     }
 
 }

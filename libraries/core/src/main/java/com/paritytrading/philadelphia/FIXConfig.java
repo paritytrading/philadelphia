@@ -18,9 +18,69 @@ package com.paritytrading.philadelphia;
 /**
  * A connection configuration.
  *
- * @see Builder
+ * @see #newBuilder
  */
 public class FIXConfig {
+
+    /**
+     * The default protocol version.
+     */
+    public static final FIXVersion DEFAULT_VERSION = FIXVersion.FIX_4_2;
+
+    /**
+     * The default SenderCompID(49).
+     */
+    public static final String DEFAULT_SENDER_COMP_ID = "";
+
+    /**
+     * The default TargetCompID(56).
+     */
+    public static final String DEFAULT_TARGET_COMP_ID = "";
+
+    /**
+     * The default HeartBtInt(108).
+     */
+    public static final int DEFAULT_HEART_BT_INT = 30;
+
+    /**
+     * The default incoming MsgSeqNum(34).
+     */
+    public static final int DEFAULT_INCOMING_MSG_SEQ_NUM = 1;
+
+    /**
+     * The default outgoing MsgSeqNum(34).
+     */
+    public static final int DEFAULT_OUTGOING_MSG_SEQ_NUM = 1;
+
+    /**
+     * The default maximum number of fields.
+     */
+    public static final int DEFAULT_MAX_FIELD_COUNT = 64;
+
+    /**
+     * The default field capacity.
+     */
+    public static final int DEFAULT_FIELD_CAPACITY = 64;
+
+    /**
+     * The default receive buffer capacity.
+     */
+    public static final int DEFAULT_RX_BUFFER_CAPACITY = 1024;
+
+    /**
+     * The default transmit buffer capacity.
+     */
+    public static final int DEFAULT_TX_BUFFER_CAPACITY = 1024;
+
+    /**
+     * The default incoming CheckSum(10) check status.
+     */
+    public static final boolean DEFAULT_CHECK_SUM_ENABLED = true;
+
+    /**
+     * The default connection configuration.
+     */
+    public static final FIXConfig DEFAULTS = newBuilder().build();
 
     private final FIXVersion version;
     private final String     senderCompId;
@@ -48,7 +108,7 @@ public class FIXConfig {
      * @param rxBufferCapacity the receive buffer capacity
      * @param txBufferCapacity the transmit buffer capacity
      * @param checkSumEnabled the incoming CheckSum(10) check status
-     * @see Builder
+     * @see #newBuilder
      */
     public FIXConfig(FIXVersion version, String senderCompId,
             String targetCompId, int heartBtInt,
@@ -176,37 +236,34 @@ public class FIXConfig {
      */
     @Override
     public String toString() {
-        return "FIXConfig{" +
-                "version=" + version +
-                ", senderCompId='" + senderCompId + '\'' +
-                ", targetCompId='" + targetCompId + '\'' +
-                ", heartBtInt=" + heartBtInt +
-                ", incomingMsgSeqNum=" + incomingMsgSeqNum +
-                ", outgoingMsgSeqNum=" + outgoingMsgSeqNum +
-                ", maxFieldCount=" + maxFieldCount +
-                ", fieldCapacity=" + fieldCapacity +
-                ", rxBufferCapacity=" + rxBufferCapacity +
-                ", txBufferCapacity=" + txBufferCapacity +
-                ", checkSumEnabled=" + checkSumEnabled +
-                '}';
+        return new StringBuilder()
+            .append("FIXConfig(")
+            .append("version=").append(version).append(",")
+            .append("senderCompId=\"").append(senderCompId).append("\",")
+            .append("targetCompId=\"").append(targetCompId).append("\",")
+            .append("heartBtInt=").append(heartBtInt).append(",")
+            .append("incomingMsgSeqNum=").append(incomingMsgSeqNum).append(",")
+            .append("outgoingMsgSeqNum=").append(outgoingMsgSeqNum).append(",")
+            .append("maxFieldCount=").append(maxFieldCount).append(",")
+            .append("fieldCapacity=").append(fieldCapacity).append(",")
+            .append("rxBufferCapacity=").append(rxBufferCapacity).append(",")
+            .append("txBufferCapacity=").append(txBufferCapacity).append(",")
+            .append("checkSumEnabled=").append(checkSumEnabled)
+            .append(")")
+            .toString();
     }
 
     /**
-     * <p>A connection configuration builder. The builder uses the following
-     * default values:</p>
-     * <ul>
-     *   <li>protocol version: FIX 4.2</li>
-     *   <li>SenderCompID(49): empty</li>
-     *   <li>TargetCompID(56): empty</li>
-     *   <li>HeartBtInt(108): 30</li>
-     *   <li>incoming MsgSeqNum(34): 1</li>
-     *   <li>outgoing MsgSeqNum(34): 1</li>
-     *   <li>maximum number of fields in a message: 64</li>
-     *   <li>field capacity: 64</li>
-     *   <li>receive buffer capacity: 1024</li>
-     *   <li>transmit buffer capacity: 1024</li>
-     *   <li>incoming CheckSum(10) check status: enabled</li>
-     * </ul>
+     * Create a connection configuration builder.
+     *
+     * @return a connection configuration builder
+     */
+    public static Builder newBuilder() {
+        return new Builder();
+    }
+
+    /**
+     * A connection configuration builder.
      */
     public static class Builder {
 
@@ -222,21 +279,18 @@ public class FIXConfig {
         private int        txBufferCapacity;
         private boolean    checkSumEnabled;
 
-        /**
-         * Create a connection configuration builder.
-         */
-        public Builder() {
-            version           = FIXVersion.FIX_4_2;
-            senderCompId      = "";
-            targetCompId      = "";
-            heartBtInt        = 30;
-            incomingMsgSeqNum = 1;
-            outgoingMsgSeqNum = 1;
-            maxFieldCount     = 64;
-            fieldCapacity     = 64;
-            rxBufferCapacity  = 1024;
-            txBufferCapacity  = 1024;
-            checkSumEnabled   = true;
+        private Builder() {
+            version           = DEFAULT_VERSION;
+            senderCompId      = DEFAULT_SENDER_COMP_ID;
+            targetCompId      = DEFAULT_TARGET_COMP_ID;
+            heartBtInt        = DEFAULT_HEART_BT_INT;
+            incomingMsgSeqNum = DEFAULT_INCOMING_MSG_SEQ_NUM;
+            outgoingMsgSeqNum = DEFAULT_OUTGOING_MSG_SEQ_NUM;
+            maxFieldCount     = DEFAULT_MAX_FIELD_COUNT;
+            fieldCapacity     = DEFAULT_FIELD_CAPACITY;
+            rxBufferCapacity  = DEFAULT_RX_BUFFER_CAPACITY;
+            txBufferCapacity  = DEFAULT_TX_BUFFER_CAPACITY;
+            checkSumEnabled   = DEFAULT_CHECK_SUM_ENABLED;
         }
 
         /**

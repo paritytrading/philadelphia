@@ -32,7 +32,7 @@ import org.HdrHistogram.Histogram;
 
 class Initiator implements FIXMessageListener, Closeable {
 
-    private static final FIXConfig CONFIG = new FIXConfig.Builder()
+    private static final FIXConfig CONFIG = FIXConfig.newBuilder()
         .setSenderCompID("initiator")
         .setTargetCompID("acceptor")
         .build();
