@@ -46,7 +46,7 @@ The following configuration parameters are required:
 ```
 fix {
 
-  # The FIX protocol version: FIX_4_2, FIX_4_3, FIX_4_4, or FIXT_1_1.
+  # The FIX protocol version: FIX_4_0, FIX_4_1, FIX_4_2, FIX_4_3, FIX_4_4, or FIXT_1_1.
   version = FIX_4_2
 
   # SenderCompID(49) for the terminal client.
