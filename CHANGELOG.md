@@ -4,6 +4,23 @@
 
 See the [upgrade instructions](UPGRADE-2.0.0.md).
 
+- Add `FIXTimestamp` (Jussi Virtanen)
+
+  Replace uses of Joda-Time's `MutableDateTime` class and `ReadableDateTime`
+  interface with a `FIXTimestamp` class. While its design is inspired by the
+  `java.time` package and the `LocalDateTime` class in particular, it is
+  mutable unlike `LocalDateTime`.
+
+  With `FIXTimestamp`, the date and time operations on `FIXValue` become at
+  best over three times as fast as they were with `MutableDateTime`. These
+  benchmarks include the conversion from date and time fields into a timestamp
+  in millisecods or vice versa. However, as `FIXTimestamp` internally stores
+  the instant it represents in date and time fields rather than as a timestamp
+  in milliseconds, these conversions only take place when explicitly invoking
+  the `FIXTimestamp#getEpochMilli` and `FIXTimestamp#setEpochMilli` methods.
+
+  This change removes the Joda-Time 2.x dependency.
+
 ## 1.3.1 (2022-05-21)
 
 - Fix MsgSeqNum(34) handling on SequenceReset(4) (Vadim Platonov, Jussi
