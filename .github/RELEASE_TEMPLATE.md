@@ -9,6 +9,8 @@ The following artifacts are available in the Central Repository:
 Group ID                         | Artifact ID              | Version
 ---------------------------------|--------------------------|--------
 `com.paritytrading.philadelphia` | `philadelphia-core`      | `...`
+`com.paritytrading.philadelphia` | `philadelphia-fix40`     | `...`
+`com.paritytrading.philadelphia` | `philadelphia-fix41`     | `...`
 `com.paritytrading.philadelphia` | `philadelphia-fix42`     | `...`
 `com.paritytrading.philadelphia` | `philadelphia-fix43`     | `...`
 `com.paritytrading.philadelphia` | `philadelphia-fix44`     | `...`
