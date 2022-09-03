@@ -1,5 +1,9 @@
 # Release Notes
 
+## 2.0.0 (????-??-??)
+
+See the [upgrade instructions](UPGRADE-2.0.0.md).
+
 ## 1.3.1 (2022-05-21)
 
 - Fix MsgSeqNum(34) handling on SequenceReset(4) (Vadim Platonov, Jussi
