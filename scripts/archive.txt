@@ -25,6 +25,8 @@ examples/acceptor/philadelphia-acceptor.jar
 examples/initiator/README.md
 examples/initiator/philadelphia-initiator.jar
 libraries/core/README.md
+libraries/fix40/README.md
+libraries/fix41/README.md
 libraries/fix42/README.md
 libraries/fix43/README.md
 libraries/fix44/README.md
