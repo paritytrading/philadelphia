@@ -68,7 +68,7 @@ class Session implements Closeable {
 
         channel.register(selector, SelectionKey.OP_READ);
 
-        FIXConnection connection = new FIXConnection(channel, config, listener, statusListener);
+        FIXConnection connection = new FIXConnection(channel, config, listener, statusListener, System.currentTimeMillis());
 
         return new Session(selector, connection);
     }

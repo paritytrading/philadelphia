@@ -84,7 +84,7 @@ class Session implements FIXMessageListener {
                 connection.sendLogout();
             }
 
-        });
+        }, System.currentTimeMillis());
 
         report = connection.create();
 

@@ -27,7 +27,7 @@ class FIXConfigTest {
         FIXConfig config = FIXConfig.newBuilder()
                 .setVersion(FIXVersion.FIXT_1_1)
                 .build();
-        new FIXConnection(null, config, null, null);
+        new FIXConnection(null, config, null, null, 0);
     }
 
     @Test
