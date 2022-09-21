@@ -57,6 +57,20 @@ public class FIXLatestEnumerations {
     }
 
     /**
+     * Values for BeginString(8).
+     */
+    public static class BeginStringValues {
+
+        public static final String FIX42  = "FIX.4.2";
+        public static final String FIX44  = "FIX.4.4";
+        public static final String FIXT11 = "FIXT.1.1";
+
+        private BeginStringValues() {
+        }
+
+    }
+
+    /**
      * Values for CommType(13).
      *
      * <p>The following fields also use these values:</p>
@@ -193,6 +207,7 @@ public class FIXLatestEnumerations {
      *   <li>DerivativeSecurityIDSource(1217)</li>
      *   <li>DerivativeSecurityAltIDSource(1220)</li>
      *   <li>InstrumentScopeSecurityIDSource(1539)</li>
+     *   <li>InstrumentScopeSecurityAltIDSource(1542)</li>
      *   <li>RelatedSecurityIDSource(1651)</li>
      *   <li>ConvertibleBondEquityIDSource(1952)</li>
      *   <li>UnderlyingObligationIDSource(1995)</li>
@@ -213,6 +228,9 @@ public class FIXLatestEnumerations {
      *   <li>LegPaymentStreamRateIndexIDSource(43089)</li>
      *   <li>PaymentStreamRateIndexIDSource(43091)</li>
      *   <li>UnderlyingPaymentStreamRateIndexIDSource(43093)</li>
+     *   <li>PaymentStreamRateIndex2IDSource(43115)</li>
+     *   <li>LegPaymentStreamRateIndex2IDSource(43119)</li>
+     *   <li>UnderlyingPaymentStreamRateIndex2IDSource(43123)</li>
      * </ul>
      */
     public static class SecurityIDSourceValues {
@@ -599,7 +617,7 @@ public class FIXLatestEnumerations {
 
         public static final int UnknownAccount                         = 0;
         public static final int IncorrectQuantity                      = 1;
-        public static final int IncorrectAveragegPrice                 = 2;
+        public static final int IncorrectAveragePrice                  = 2;
         public static final int UnknownExecutingBrokerMnemonic         = 3;
         public static final int CommissionDifference                   = 4;
         public static final int UnknownOrderID                         = 5;
@@ -611,7 +629,7 @@ public class FIXLatestEnumerations {
         public static final int MismatchedData                         = 11;
         public static final int UnknownClOrdID                         = 12;
         public static final int WarehouseRequestRejected               = 13;
-        public static final int DuplicateOrMissingIndividualAllocId    = 14;
+        public static final int DuplicateOrMissingIndividualAllocID    = 14;
         public static final int TradeNotRecognized                     = 15;
         public static final int DuplicateTrade                         = 16;
         public static final int IncorrectOrMissingInstrument           = 17;
@@ -712,7 +730,7 @@ public class FIXLatestEnumerations {
         public static final int InvalidPriceIncrement                 = 18;
         public static final int ReferencePriceNotAvailable            = 19;
         public static final int NotionalValueExceedsThreshold         = 20;
-        public static final int AlgorithRiskThresholdBreached         = 21;
+        public static final int AlgorithmRiskThresholdBreached        = 21;
         public static final int ShortSellNotPermitted                 = 22;
         public static final int ShortSellSecurityPreBorrowRestriction = 23;
         public static final int ShortSellAccountPreBorrowRestriction  = 24;
@@ -954,6 +972,7 @@ public class FIXLatestEnumerations {
      *   <li>LegSecurityType(609)</li>
      *   <li>DerivativeSecurityType(1249)</li>
      *   <li>InstrumentScopeSecurityType(1547)</li>
+     *   <li>RelatedSecurityType(1652)</li>
      * </ul>
      */
     public static class SecurityTypeValues {
@@ -1026,6 +1045,7 @@ public class FIXLatestEnumerations {
         public static final String RevenueAnticipationNote                  = "RAN";
         public static final String Wildcard                                 = "?";
         public static final String USCorporateFloatingRateNotes             = "FRN";
+        public static final String FXBankNote                               = "FXBN";
         public static final String OptionsOnCombo                           = "OOC";
         public static final String Floor                                    = "FLR";
         public static final String CollateralBasket                         = "COLLBSKT";
@@ -1036,6 +1056,7 @@ public class FIXLatestEnumerations {
         public static final String RevenueBonds                             = "REV";
         public static final String Cash                                     = "CASH";
         public static final String IndexedLinked                            = "XLINKD";
+        public static final String ForeignCurrencyDiscountNote              = "FXDN";
         public static final String FRA                                      = "FRA";
         public static final String StructuredFinanceProduct                 = "SFP";
         public static final String InterestStripFromAnyBondOrNote           = "TINT";
@@ -1061,27 +1082,33 @@ public class FIXLatestEnumerations {
         public static final String EuroCertificateOfDeposit                 = "EUCD";
         public static final String MiscellaneousPassThrough                 = "MPT";
         public static final String SpecialTax                               = "SPCLT";
+        public static final String OffshoreIssuedChineseYuanCorporateBond   = "DIMSUMCORP";
         public static final String InterestRateSwap                         = "IRS";
         public static final String TotalReturnSwap                          = "TRS";
         public static final String PrincipalStripFromANonCallableBondOrNote = "TPRN";
         public static final String Matured                                  = "MATURED";
         public static final String EuroCommercialPaper                      = "EUCP";
-        public static final String Pfandbriefe                              = "PFAND";
+        public static final String Pfandbrief                               = "PFAND";
         public static final String TaxAnticipationNote                      = "TAN";
         public static final String SecuritizedDerivative                    = "SECDERIV";
+        public static final String PreferredCorporateBond                   = "PRCORP";
         public static final String LoanLease                                = "LOANLEASE";
         public static final String USTreasuryNote                           = "TNOTE";
         public static final String Amended                                  = "AMENDED";
         public static final String LiquidityNote                            = "LQN";
         public static final String ToBeAnnounced                            = "TBA";
         public static final String TaxAllocation                            = "TAXA";
+        public static final String ExchangeTradedFund                       = "ETF";
+        public static final String OffshoreIssuedChineseYuanSovereignBond   = "DIMSUMSOV";
         public static final String Retired                                  = "RETIRED";
         public static final String MediumTermNotes                          = "MTN";
         public static final String TaxExemptCommercialPaper                 = "TECP";
         public static final String OptionsOnFutures                         = "OOF";
+        public static final String SovereignBond                            = "SOV";
         public static final String Overnight                                = "ONITE";
         public static final String TaxableMunicipalCP                       = "TMCP";
         public static final String OptionsOnPhysical                        = "OOP";
+        public static final String USTreasuryFloatingRateNote               = "TFRN";
         public static final String PromissoryNote                           = "PN";
         public static final String ShortTermLoanNote                        = "STN";
         public static final String TaxRevenueAnticipationNote               = "TRAN";
@@ -1093,25 +1120,44 @@ public class FIXLatestEnumerations {
         public static final String Warrant                                  = "WAR";
         public static final String SwapOption                               = "SWAPTION";
         public static final String TimeDeposit                              = "TD";
+        public static final String MunicipalInterestBearingCommercialPaper  = "MCPIB";
         public static final String Transmission                             = "XMISSION";
+        public static final String TaxableMunicipalBond                     = "TMB";
         public static final String Index                                    = "INDEX";
         public static final String TermLiquidityNote                        = "TLQN";
+        public static final String VariableRateDemandObligation             = "VRDO";
         public static final String BondBasket                               = "BDBSKT";
         public static final String ExtendedCommNote                         = "XCN";
         public static final String ContractForDifference                    = "CFD";
         public static final String YankeeCertificateOfDeposit               = "YCD";
         public static final String CorrelationSwap                          = "CRLTNSWAP";
+        public static final String BankAcceptedBill                         = "BAB";
         public static final String DiviendSwap                              = "DVDNDSWAP";
+        public static final String ShortTermBankNote                        = "BNST";
         public static final String EquityBasket                             = "EQBSKT";
+        public static final String CallableCommercialPaper                  = "CLCP";
         public static final String EquityForward                            = "EQFWD";
+        public static final String CommercialNote                           = "CN";
         public static final String ReturnSwap                               = "RTRNSWAP";
+        public static final String InterestBearingCommercialPaper           = "CPIB";
         public static final String VarianceSwap                             = "VARSWAP";
+        public static final String EuroMediumTermNote                       = "EUMTN";
         public static final String PortfolioSwaps                           = "PRTFLIOSWAP";
+        public static final String EuroNegotiableCommercialPaper            = "EUNCP";
         public static final String FuturesOnASwap                           = "FUTSWAP";
+        public static final String EuroStructuredLiquidityNote              = "EUSTLQN";
         public static final String ForwardsOnASwap                          = "FWDSWAP";
+        public static final String EuroTimeDeposit                          = "EUTD";
         public static final String ForwardFreightAgreement                  = "FWDFRTAGMT";
+        public static final String JumboCertificateOfDeposit                = "JCD";
         public static final String SpreadBetting                            = "SPREADBET";
+        public static final String MoneyMarketFund                          = "MMF";
         public static final String ExchangeTradedCommodity                  = "ETC";
+        public static final String MasterNote                               = "MN";
+        public static final String NegotiableCertificateOfDeposit           = "NCD";
+        public static final String NegotiableCommercialPaper                = "NCP";
+        public static final String RetailCertificateOfDeposit               = "RCD";
+        public static final String TermDepositReceipt                       = "TDR";
 
         private SecurityTypeValues() {
         }
@@ -1279,6 +1325,28 @@ public class FIXLatestEnumerations {
         public static final String TELBOR               = "TELBOR";
         public static final String TIBOR                = "TIBOR";
         public static final String WIBOR                = "WIBOR";
+        public static final String AONIA                = "AONIA";
+        public static final String AONIAR               = "AONIA-R";
+        public static final String BKBM                 = "BKBM";
+        public static final String CD19D                = "CD91D";
+        public static final String CORRA                = "CORRA";
+        public static final String DIRRTN               = "DIRR-TN";
+        public static final String EIBOR                = "EIBOR";
+        public static final String FixingRepoRate       = "FixingRepoRate";
+        public static final String HIBOR                = "HIBOR";
+        public static final String IBR                  = "IBR";
+        public static final String KLIBOR               = "KLIBOR";
+        public static final String MIBOR                = "MIBOR";
+        public static final String NZONIA               = "NZONIA";
+        public static final String PHIREF               = "PHIREF";
+        public static final String REIBOR               = "REIBOR";
+        public static final String SAIBOR               = "SAIBOR";
+        public static final String SARON                = "SARON";
+        public static final String SORA                 = "SORA";
+        public static final String TLREF                = "TLREF";
+        public static final String TIIE                 = "TIIE";
+        public static final String THBFIX               = "THBFIX";
+        public static final String TONAR                = "TONAR";
 
         private BenchmarkCurveNameValues() {
         }
@@ -1684,7 +1752,7 @@ public class FIXLatestEnumerations {
         public static final String Cancel                              = "0";
         public static final String StoppedSoldLast                     = "AL";
         public static final String StoppedOutOfSequence                = "AM";
-        public static final String OfficalClosingPrice                 = "AN";
+        public static final String OfficialClosingPriceDup             = "AN";
         public static final String CrossedOld                          = "AO";
         public static final String FastMarket                          = "AP";
         public static final String AutomaticExecution                  = "AQ";
@@ -2160,8 +2228,8 @@ public class FIXLatestEnumerations {
         public static final int TagSpecifiedOutOfRequiredOrder            = 14;
         public static final int RepeatingGroupFieldsOutOfOrder            = 15;
         public static final int IncorrectNumInGroupCountForRepeatingGroup = 16;
-        public static final int Non                                       = 17;
-        public static final int Invalid                                   = 18;
+        public static final int NonDataValueIncludesFieldDelimiter        = 17;
+        public static final int InvalidUnsupportedApplVer                 = 18;
         public static final int Other                                     = 99;
 
         private SessionRejectReasonValues() {
@@ -2844,6 +2912,7 @@ public class FIXLatestEnumerations {
         public static final int BPAY                         = 10;
         public static final int HighValueClearingSystemHVACS = 11;
         public static final int ReinvestInFund               = 12;
+        public static final int Other                        = 999;
 
         private DistribPaymentMethodValues() {
         }
@@ -2942,6 +3011,7 @@ public class FIXLatestEnumerations {
         public static final int CHAPS                   = 18;
         public static final int SIC                     = 19;
         public static final int EuroSIC                 = 20;
+        public static final int Other                   = 999;
 
         private PaymentMethodValues() {
         }
@@ -3236,7 +3306,7 @@ public class FIXLatestEnumerations {
 
         public static final int MassCancelNotSupported                     = 0;
         public static final int InvalidOrUnknownSecurity                   = 1;
-        public static final int InvalidOrUnkownUnderlyingSecurity          = 2;
+        public static final int InvalidOrUnknownUnderlyingSecurity         = 2;
         public static final int InvalidOrUnknownProduct                    = 3;
         public static final int InvalidOrUnknownCFICode                    = 4;
         public static final int InvalidOrUnknownSecurityType               = 5;
@@ -3740,6 +3810,7 @@ public class FIXLatestEnumerations {
      * <p>The following fields also use these values:</p>
      * <ul>
      *   <li>AllocAcctIDSource(661)</li>
+     *   <li>LegAllocAcctIDSource(674)</li>
      * </ul>
      */
     public static class AcctIDSourceValues {
@@ -4815,7 +4886,7 @@ public class FIXLatestEnumerations {
      *
      * <p>The following fields also use these values:</p>
      * <ul>
-     *   <li>SideTrdSubTyp(1008)</li>
+     *   <li>SideTrdSubType(1008)</li>
      * </ul>
      */
     public static class TrdSubTypeValues {
@@ -6137,7 +6208,7 @@ public class FIXLatestEnumerations {
 
         public static final char Received = '0';
         public static final char Accepted = '1';
-        public static final char Don      = '2';
+        public static final char DontKnow = '2';
 
         private ExecAckStatusValues() {
         }
@@ -8443,20 +8514,6 @@ public class FIXLatestEnumerations {
     }
 
     /**
-     * Values for RiskLimitStatus(1763).
-     */
-    public static class RiskLimitStatusValues {
-
-        public static final int Accepted            = 0;
-        public static final int AcceptedWithChanges = 1;
-        public static final int Rejected            = 2;
-
-        private RiskLimitStatusValues() {
-        }
-
-    }
-
-    /**
      * Values for RiskLimitAction(1767).
      *
      * <p>The following fields also use these values:</p>
@@ -9091,6 +9148,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for PartyDetailDefinitionStatus(1879).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>RiskLimitStatus(1763)</li>
+     * </ul>
      */
     public static class PartyDetailDefinitionStatusValues {
 
@@ -10764,6 +10826,9 @@ public class FIXLatestEnumerations {
         public static final int GSpread              = 7;
         public static final int CDSBasis             = 8;
         public static final int CDSInterpolatedBasis = 9;
+        public static final int DV01                 = 10;
+        public static final int PV01                 = 11;
+        public static final int CS01                 = 12;
 
         private RelativeValueTypeValues() {
         }
@@ -10917,7 +10982,7 @@ public class FIXLatestEnumerations {
         public static final int LiquidityProvisionActivityOrder  = 2;
         public static final int RiskReductionOrder               = 3;
         public static final int AlgorithmicOrder                 = 4;
-        public static final int SystemicInternaliserOrder        = 5;
+        public static final int SystematicInternaliserOrder      = 5;
         public static final int AllExecutionsSubmittedToAPA      = 6;
         public static final int OrderExecutionInstructedByClient = 7;
         public static final int LargeInScale                     = 8;
@@ -11360,10 +11425,10 @@ public class FIXLatestEnumerations {
      */
     public static class AveragePriceTypeValues {
 
-        public static final int TimeWeightedAveragePrice     = 0;
-        public static final int VolumeWeightedAveragePrice   = 1;
-        public static final int PercentOfVolumeAvveragePrice = 2;
-        public static final int LimitOrderAveragePrice       = 3;
+        public static final int TimeWeightedAveragePrice    = 0;
+        public static final int VolumeWeightedAveragePrice  = 1;
+        public static final int PercentOfVolumeAveragePrice = 2;
+        public static final int LimitOrderAveragePrice      = 3;
 
         private AveragePriceTypeValues() {
         }
@@ -12085,6 +12150,11 @@ public class FIXLatestEnumerations {
 
     /**
      * Values for ProtectionTermEventDayType(40197).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>UnderlyingProtectionTermEventDayType(42083)</li>
+     * </ul>
      */
     public static class ProtectionTermEventDayTypeValues {
 
@@ -12459,6 +12529,9 @@ public class FIXLatestEnumerations {
      *   <li>PaymentStubIndexSource(40879)</li>
      *   <li>PaymentStubIndex2Source(40893)</li>
      *   <li>UnderlyingProvisionCashSettlQuoteSource(42102)</li>
+     *   <li>PaymentStreamRateIndex2Source(43113)</li>
+     *   <li>LegPaymentStreamRateIndex2Source(43117)</li>
+     *   <li>UnderlyingPaymentStreamRateIndex2Source(43121)</li>
      * </ul>
      */
     public static class PaymentStreamRateIndexSourceValues {
@@ -12750,7 +12823,6 @@ public class FIXLatestEnumerations {
      *   <li>LegPaymentStreamInflationLagDayType(40352)</li>
      *   <li>UnderlyingPaymentStreamInflationLagDayType(40641)</li>
      *   <li>LegProtectionTermEventDayType(41631)</li>
-     *   <li>UnderlyingProtectionTermEventDayType(42083)</li>
      * </ul>
      */
     public static class PaymentStreamInflationLagDayTypeValues {
@@ -13098,9 +13170,9 @@ public class FIXLatestEnumerations {
      *   <li>UnderlyingPaymentStreamResetDateBusinessDayConvention(40593)</li>
      *   <li>UnderlyingPaymentStreamInitialFixingDateBusinessDayConvention(40599)</li>
      *   <li>UnderlyingPaymentStreamFixingDateBusinessDayConvention(40606)</li>
-     *   <li>UnderlyingPaymentStreamNonDeliverableFixingDatesBusinessDayConvention(40649)</li>
+     *   <li>UnderlyingPaymentStreamNonDeliverableFixingDatesBizDayConvention(40649)</li>
      *   <li>UnderlyingPaymentScheduleFixingDateBusinessDayCnvtn(40689)</li>
-     *   <li>UnderlyingPaymentScheduleInterimExchangeDatesBusinessDayConvention(40698)</li>
+     *   <li>UnderlyingPaymentScheduleInterimExchangeDatesBizDayConvention(40698)</li>
      *   <li>PaymentStreamPaymentDateBusinessDayConvention(40751)</li>
      *   <li>PaymentStreamResetDateBusinessDayConvention(40762)</li>
      *   <li>PaymentStreamInitialFixingDateBusinessDayConvention(40768)</li>
@@ -13133,7 +13205,7 @@ public class FIXLatestEnumerations {
      *   <li>UnderlyingProvisionCashSettlValueDateBusinessDayConvention(42106)</li>
      *   <li>UnderlyingProvisionOptionExerciseBusinessDayConvention(42115)</li>
      *   <li>UnderlyingProvisionOptionExpirationDateBusinessDayConvention(42134)</li>
-     *   <li>UnderlyingProvisionOptionRelevantUnderlyingDateBusinessDayConvention(42143)</li>
+     *   <li>UnderlyingProvisionOptionRelevantUnderlyingDateBizDayConvention(42143)</li>
      *   <li>UnderlyingProvisionDateBusinessDayConvention(42152)</li>
      *   <li>CashSettlDateBusinessDayConvention(42208)</li>
      *   <li>DividendAccrualPaymeentDateBusinessDayConvention(42243)</li>
