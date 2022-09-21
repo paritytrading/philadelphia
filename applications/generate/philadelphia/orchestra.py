@@ -136,16 +136,10 @@ _NAME_REPLACEMENTS = {
 }
 
 
-_VALUE_REPLACEMENTS = {
-    ('276', 'f '): 'f',
-}
-
-
 def _make_values(code_set: _CodeSet) -> typing.List[model.Value]:
     def value(id_: str, code: _Code) -> model.Value:
         name = _NAME_REPLACEMENTS.get((id_, code.value), code.name)
-        value = _VALUE_REPLACEMENTS.get((id_, code.value), code.value)
-        return model.Value(name=name, value=value)
+        return model.Value(name=name, value=code.value)
     return [value(code_set.id_, code) for code in code_set.codes]
 
 
