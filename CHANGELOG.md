@@ -4,6 +4,21 @@
 
 See the [upgrade instructions](UPGRADE-2.0.0.md).
 
+- Improve `FIXValue` (Jussi Virtanen)
+
+  Make the `FIXValue` class implement the `CharSequence` interface. Change the
+  return type of the `FIXValue#asString()` method from `String` to
+  `CharSequence` to avoid memory allocation, and remove the
+  `FIXValue#asString(Appendable)` and `FIXValue#asString(StringBuilder)`
+  methods as superfluous.
+
+  Split the `FIXValue#setTimeOnly` method into `FIXValue#setTimeOnlyMillis`
+  and `FIXTimeOnly#setTimeOnlySecs`, and split the
+  `FIXValue#setTimestamp` method into `FIXValue#setTimestampMillis` and
+  `FIXValue#setTimestampSecs`.
+
+  Remove the `FIXValue#asCheckSum` method.
+
 - Add `FIXTimestamp` (Jussi Virtanen)
 
   Replace uses of Joda-Time's `MutableDateTime` class and `ReadableDateTime`
