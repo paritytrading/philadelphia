@@ -27,7 +27,7 @@ public class FIXConfig {
     /**
      * The default BeginString(8).
      */
-    public static final byte[] DEFAULT_BEGIN_STRING = FIXVersion.FIX_4_2.getBeginString();
+    public static final byte[] DEFAULT_BEGIN_STRING = FIXVersion.FIX_4_2.getBeginString().getBytes(US_ASCII);
 
     /**
      * The default SenderCompID(49).
