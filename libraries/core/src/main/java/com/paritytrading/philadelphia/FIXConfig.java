@@ -281,7 +281,10 @@ public class FIXConfig {
         private int     txBufferCapacity;
         private boolean checkSumEnabled;
 
-        private Builder() {
+        /**
+         * Create a connection configuration builder.
+         */
+        public Builder() {
             beginString       = DEFAULT_BEGIN_STRING;
             senderCompId      = DEFAULT_SENDER_COMP_ID;
             targetCompId      = DEFAULT_TARGET_COMP_ID;
