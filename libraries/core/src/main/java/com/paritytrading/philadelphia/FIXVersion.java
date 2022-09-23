@@ -15,9 +15,6 @@
  */
 package com.paritytrading.philadelphia;
 
-import static com.paritytrading.philadelphia.FIX.*;
-import static java.nio.charset.StandardCharsets.*;
-
 /**
  * The protocol version.
  */
@@ -53,13 +50,18 @@ public enum FIXVersion {
      */
     FIXT_1_1("FIXT.1.1");
 
-    private final byte[] beginString;
+    private final String beginString;
 
     private FIXVersion(String beginString) {
-        this.beginString = beginString.getBytes(US_ASCII);
+        this.beginString = beginString;
     }
 
-    byte[] getBeginString() {
+    /**
+     * Get the BeginString(8).
+     *
+     * @return the BeginString(8)
+     */
+    public String getBeginString() {
         return beginString;
     }
 
