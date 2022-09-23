@@ -4,6 +4,20 @@
 
 See the [upgrade instructions](UPGRADE-2.0.0.md).
 
+- Make `FIXCheckSums` package-private (Jussi Virtanen)
+
+  Despite being public, `FIXCheckSums` is essentially an internal utility
+  class. Make it package-private to reflect this and gain more flexibility
+  for the future.
+
+- Make `FIXTags` package-private (Jussi Virtanen)
+
+  See above.
+
+- Remove `FIXTimestamps` (Jussi Virtanen)
+
+  See above.
+
 - Improve `FIXValue` (Jussi Virtanen)
 
   Make the `FIXValue` class implement the `CharSequence` interface. Change the
@@ -35,6 +49,29 @@ See the [upgrade instructions](UPGRADE-2.0.0.md).
   the `FIXTimestamp#getEpochMilli` and `FIXTimestamp#setEpochMilli` methods.
 
   This change removes the Joda-Time 2.x dependency.
+
+- Update FIX 4.3 support (Jussi Virtanen)
+
+  Regenerate the FIX 4.3 support from the latest FIX Repository version.
+
+- Update FIXT 1.1 support (Jussi Virtanen)
+
+  Regenerate the FIXT 1.1 support from the latest FIX Ochestra version.
+
+- Add FIX 4.0 support (Jussi Virtanen)
+
+- Add FIX 4.1 support (Jussi Virtanen)
+
+- Improve `FIXConfig` (Jussi Virtanen)
+
+  Define constants for default values. Add a static `FIXConfig.newBuilder`
+  method to simplify `FIXConfig.Builder` construction. Add a
+  `FIXConfig.DEFAULTS` constant to simplify default configuration usage.
+
+- Update FIX Latest support (Jussi Virtanen)
+
+  Regenerate the FIX Latest support from the latest FIX Orchestra version,
+  including Extension Packs up to EP272.
 
 ## 1.3.1 (2022-05-21)
 
