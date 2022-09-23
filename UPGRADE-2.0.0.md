@@ -120,3 +120,12 @@ value.getTimestamp(timestamp);
 // Get the millisecond field from the instance.
 int milli = timestamp.getMilli();
 ```
+
+## Miscellanea
+
+Philadelphia 2.0.0 no longer provides the following classes: `FIXCheckSums`,
+`FIXTags`, and `FIXTimestamps`. Applications that rely on their functionality
+now need to provide it themselves.
+
+Philadelphia 2.0.0 replaces the `FIXConfig#getVersion()` method with a
+`FIXConfig#getBeginString()` method.
