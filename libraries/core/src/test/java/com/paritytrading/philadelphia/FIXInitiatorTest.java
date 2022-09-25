@@ -68,7 +68,7 @@ abstract class FIXInitiatorTest {
         Channels channels = createChannels();
         initiator = new FIXConnection(
                 channels.initiatorRx, channels.initiatorTx,
-                initiatorConfig, initiatorMessages, initiatorStatus
+                initiatorConfig, initiatorMessages, initiatorStatus, 0
         );
         acceptor  = new TestConnection(channels.acceptorRx, channels.acceptorTx, acceptorMessages);
     }

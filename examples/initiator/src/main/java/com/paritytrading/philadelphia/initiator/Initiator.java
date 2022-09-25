@@ -79,7 +79,7 @@ class Initiator implements FIXMessageListener, Closeable {
                 connection.sendLogout();
             }
 
-        });
+        }, System.currentTimeMillis());
 
         histogram = new Histogram(3);
     }

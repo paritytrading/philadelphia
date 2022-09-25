@@ -100,13 +100,14 @@ public class FIXConnection implements Closeable {
      * @param config the connection configuration
      * @param listener the inbound message listener
      * @param statusListener the inbound status event listener
+     * @param currentTimeMillis the current time in milliseconds
      * @param <CHANNEL> the underlying channel type, which must implement
      *   {@link ReadableByteChannel} and {@link GatheringByteChannel}
      * @see SocketChannel
      */
     public <CHANNEL extends ReadableByteChannel & GatheringByteChannel>
-    FIXConnection(CHANNEL channel, FIXConfig config, FIXMessageListener listener, FIXConnectionStatusListener statusListener) {
-        this(channel, channel, config, listener, statusListener);
+    FIXConnection(CHANNEL channel, FIXConfig config, FIXMessageListener listener, FIXConnectionStatusListener statusListener, long currentTimeMillis) {
+        this(channel, channel, config, listener, statusListener, currentTimeMillis);
     }
 
     /**
@@ -119,9 +120,10 @@ public class FIXConnection implements Closeable {
      * @param config the connection configuration
      * @param listener the inbound message listener
      * @param statusListener the inbound status event listener
+     * @param currentTimeMillis the current time in milliseconds
      */
     public FIXConnection(ReadableByteChannel inboundChannel, GatheringByteChannel outboundChannel,
-                         FIXConfig config, FIXMessageListener listener, FIXConnectionStatusListener statusListener) {
+                         FIXConfig config, FIXMessageListener listener, FIXConnectionStatusListener statusListener, long currentTimeMillis) {
         this.rxChannel = inboundChannel;
         this.txChannel = outboundChannel;
 
@@ -158,8 +160,8 @@ public class FIXConnection implements Closeable {
         this.txBuffers[0] = txHeaderBuffer;
         this.txBuffers[1] = txBodyBuffer;
 
-        this.lastRxMillis = 0;
-        this.lastTxMillis = 0;
+        this.lastRxMillis = currentTimeMillis;
+        this.lastTxMillis = currentTimeMillis;
 
         this.heartbeatMillis = config.getHeartBtInt() * 1000;
 
@@ -169,9 +171,10 @@ public class FIXConnection implements Closeable {
 
         this.adminMessage = new FIXMessage(ADMIN_MESSAGE_MAX_FIELD_COUNT, config.getFieldCapacity());
 
-        this.currentTimeMillis = 0;
+        this.currentTimeMillis = currentTimeMillis;
 
         this.currentTime = new FIXTimestamp();
+        this.currentTime.setEpochMilli(currentTimeMillis);
 
         this.currentTimestamp = new FIXValue(CURRENT_TIMESTAMP_FIELD_CAPACITY);
 
