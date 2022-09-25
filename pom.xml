@@ -156,6 +156,7 @@
           <version>3.4.1</version>
           <configuration>
             <failOnWarnings>true</failOnWarnings>
+            <quiet>true</quiet>
             <source>${java.version}</source>
           </configuration>
         </plugin>
