@@ -149,14 +149,11 @@ abstract class FIXInitiatorTest {
         assertEquals(asList(), initiatorStatus.collect());
 
         initiator.setCurrentTimeMillis(70_000);
-        initiator.keepAlive();
 
-        assertEquals(asList(new HeartbeatTimeout()), initiatorStatus.collect());
+        assertThrows(FIXHeartbeatTimeoutException.class, () -> initiator.keepAlive());
 
         initiator.setCurrentTimeMillis(75_000);
         initiator.keepAlive();
-
-        assertEquals(asList(new HeartbeatTimeout()), initiatorStatus.collect());
     }
 
     @Test
