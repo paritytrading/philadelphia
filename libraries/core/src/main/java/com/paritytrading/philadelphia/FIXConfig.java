@@ -207,7 +207,6 @@ public class FIXConfig {
      *
      * @return the receive buffer capacity
      */
-
     public int getRxBufferCapacity() {
         return rxBufferCapacity;
     }
