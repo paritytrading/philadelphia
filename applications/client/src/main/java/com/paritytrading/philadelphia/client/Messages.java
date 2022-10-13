@@ -52,10 +52,6 @@ class Messages implements FIXMessageListener, FIXConnectionStatusListener {
     }
 
     @Override
-    public void heartbeatTimeout(FIXConnection connection) {
-    }
-
-    @Override
     public void reject(FIXConnection connection, FIXMessage message) {
         add(message);
     }

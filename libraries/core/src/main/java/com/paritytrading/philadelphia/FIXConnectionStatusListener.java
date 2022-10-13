@@ -51,14 +51,6 @@ public interface FIXConnectionStatusListener {
     void tooLowMsgSeqNum(FIXConnection connection, long receivedMsgSeqNum, long expectedMsgSeqNum) throws IOException;
 
     /**
-     * Receive an indication of a heartbeat timeout.
-     *
-     * @param connection the connection
-     * @throws IOException if an I/O error occurs
-     */
-    void heartbeatTimeout(FIXConnection connection) throws IOException;
-
-    /**
      * Receive a Reject(3) message.
      *
      * @param connection the connection
