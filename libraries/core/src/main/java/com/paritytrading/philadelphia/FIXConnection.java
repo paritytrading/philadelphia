@@ -103,8 +103,33 @@ public class FIXConnection implements Closeable {
      * @see SocketChannel
      */
     public <CHANNEL extends ReadableByteChannel & GatheringByteChannel>
-    FIXConnection(CHANNEL channel, FIXConfig config, FIXMessageListener listener, FIXConnectionStatusListener statusListener, long currentTimeMillis) {
+    FIXConnection(CHANNEL channel, FIXConfig config, FIXMessageListener listener,
+            FIXConnectionStatusListener statusListener, long currentTimeMillis) {
         this(channel, channel, config, listener, statusListener, currentTimeMillis);
+    }
+
+    /**
+     * Create a connection. The underlying channel can be either blocking or
+     * non-blocking.
+     *
+     * <p><strong>Note.</strong> When using this constructor, the inbound
+     * message listener will be invoked for all incoming messages, including
+     * all administrative messages. The application is responsible for handling
+     * these appropriately. At the very least, it must increment the incoming
+     * MsgSeqNum(34) value.</p>
+     *
+     * @param channel the underlying channel
+     * @param config the connection configuration
+     * @param listener the inbound message listener
+     * @param currentTimeMillis the current time in milliseconds
+     * @param <CHANNEL> the underlying channel type, which must implement
+     *   {@link ReadableByteChannel} and {@link GatheringByteChannel}
+     * @see SocketChannel
+     * @see #incrementIncomingMsgSeqNum
+     */
+    public <CHANNEL extends ReadableByteChannel & GatheringByteChannel>
+    FIXConnection(CHANNEL channel, FIXConfig config, FIXMessageListener listener, long currentTimeMillis) {
+        this(channel, channel, config, listener, null, currentTimeMillis);
     }
 
     /**
@@ -120,7 +145,8 @@ public class FIXConnection implements Closeable {
      * @param currentTimeMillis the current time in milliseconds
      */
     public FIXConnection(ReadableByteChannel inboundChannel, GatheringByteChannel outboundChannel,
-                         FIXConfig config, FIXMessageListener listener, FIXConnectionStatusListener statusListener, long currentTimeMillis) {
+            FIXConfig config, FIXMessageListener listener, FIXConnectionStatusListener statusListener,
+            long currentTimeMillis) {
         this.rxChannel = inboundChannel;
         this.txChannel = outboundChannel;
 
@@ -132,7 +158,10 @@ public class FIXConnection implements Closeable {
         this.senderCompId = config.getSenderCompID();
         this.targetCompId = config.getTargetCompID();
 
-        this.parser = new FIXMessageParser(config, new FIXConnectionStatusHandler(config, this, listener, statusListener));
+        if (statusListener != null)
+            listener = new FIXConnectionStatusHandler(config, this, listener, statusListener);
+
+        this.parser = new FIXMessageParser(config, listener);
 
         this.statusListener = statusListener;
 
@@ -176,6 +205,29 @@ public class FIXConnection implements Closeable {
         this.currentTimestamp = new FIXValue(CURRENT_TIMESTAMP_FIELD_CAPACITY);
 
         this.currentTimestamp.setTimestampMillis(this.currentTime);
+    }
+
+    /**
+     * Create a connection. The underlying channels can be either blocking or
+     * non-blocking.
+     *
+     * <p><strong>Note.</strong> When using this constructor, the inbound
+     * message listener will be invoked for all incoming messages, including
+     * all administrative messages. The application is responsible for handling
+     * these appropriately. At the very least, it must increment the incoming
+     * MsgSeqNum(34) value.</p>
+     *
+     * @param inboundChannel the underlying channel for reading
+     * @param outboundChannel the underlying channel for writing (can be the
+     *   same instance as {@code inboundChannel})
+     * @param config the connection configuration
+     * @param listener the inbound message listener
+     * @param currentTimeMillis the current time in milliseconds
+     * @see #incrementIncomingMsgSeqNum
+     */
+    public FIXConnection(ReadableByteChannel inboundChannel, GatheringByteChannel outboundChannel,
+            FIXConfig config, FIXMessageListener listener, long currentTimeMillis) {
+        this(inboundChannel, outboundChannel, config, listener, null, currentTimeMillis);
     }
 
     /**
