@@ -35,4 +35,6 @@ class FIX {
 
     static final int CHECK_SUM_FIELD_CAPACITY = 8;
 
+    static final int ADMIN_MESSAGE_MAX_FIELD_COUNT = 8;
+
 }

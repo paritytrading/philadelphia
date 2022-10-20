@@ -17,7 +17,6 @@ package com.paritytrading.philadelphia;
 
 import static com.paritytrading.philadelphia.FIX.*;
 import static com.paritytrading.philadelphia.FIXMsgTypes.*;
-import static com.paritytrading.philadelphia.FIXSessionRejectReasons.*;
 import static com.paritytrading.philadelphia.FIXTags.*;
 
 import java.io.Closeable;
@@ -31,8 +30,6 @@ import java.nio.channels.SocketChannel;
  * A connection.
  */
 public class FIXConnection implements Closeable {
-
-    private static final int ADMIN_MESSAGE_MAX_FIELD_COUNT = 8;
 
     private static final int CURRENT_TIMESTAMP_FIELD_CAPACITY = 24;
 
@@ -106,8 +103,33 @@ public class FIXConnection implements Closeable {
      * @see SocketChannel
      */
     public <CHANNEL extends ReadableByteChannel & GatheringByteChannel>
-    FIXConnection(CHANNEL channel, FIXConfig config, FIXMessageListener listener, FIXConnectionStatusListener statusListener, long currentTimeMillis) {
+    FIXConnection(CHANNEL channel, FIXConfig config, FIXMessageListener listener,
+            FIXConnectionStatusListener statusListener, long currentTimeMillis) {
         this(channel, channel, config, listener, statusListener, currentTimeMillis);
+    }
+
+    /**
+     * Create a connection. The underlying channel can be either blocking or
+     * non-blocking.
+     *
+     * <p><strong>Note.</strong> When using this constructor, the inbound
+     * message listener will be invoked for all incoming messages, including
+     * all administrative messages. The application is responsible for handling
+     * these appropriately. At the very least, it must increment the incoming
+     * MsgSeqNum(34) value.</p>
+     *
+     * @param channel the underlying channel
+     * @param config the connection configuration
+     * @param listener the inbound message listener
+     * @param currentTimeMillis the current time in milliseconds
+     * @param <CHANNEL> the underlying channel type, which must implement
+     *   {@link ReadableByteChannel} and {@link GatheringByteChannel}
+     * @see SocketChannel
+     * @see #incrementIncomingMsgSeqNum
+     */
+    public <CHANNEL extends ReadableByteChannel & GatheringByteChannel>
+    FIXConnection(CHANNEL channel, FIXConfig config, FIXMessageListener listener, long currentTimeMillis) {
+        this(channel, channel, config, listener, null, currentTimeMillis);
     }
 
     /**
@@ -123,7 +145,8 @@ public class FIXConnection implements Closeable {
      * @param currentTimeMillis the current time in milliseconds
      */
     public FIXConnection(ReadableByteChannel inboundChannel, GatheringByteChannel outboundChannel,
-                         FIXConfig config, FIXMessageListener listener, FIXConnectionStatusListener statusListener, long currentTimeMillis) {
+            FIXConfig config, FIXMessageListener listener, FIXConnectionStatusListener statusListener,
+            long currentTimeMillis) {
         this.rxChannel = inboundChannel;
         this.txChannel = outboundChannel;
 
@@ -135,7 +158,10 @@ public class FIXConnection implements Closeable {
         this.senderCompId = config.getSenderCompID();
         this.targetCompId = config.getTargetCompID();
 
-        this.parser = new FIXMessageParser(config, new MessageHandler(listener));
+        if (statusListener != null)
+            listener = new FIXConnectionStatusHandler(config, this, listener, statusListener);
+
+        this.parser = new FIXMessageParser(config, listener);
 
         this.statusListener = statusListener;
 
@@ -182,6 +208,29 @@ public class FIXConnection implements Closeable {
     }
 
     /**
+     * Create a connection. The underlying channels can be either blocking or
+     * non-blocking.
+     *
+     * <p><strong>Note.</strong> When using this constructor, the inbound
+     * message listener will be invoked for all incoming messages, including
+     * all administrative messages. The application is responsible for handling
+     * these appropriately. At the very least, it must increment the incoming
+     * MsgSeqNum(34) value.</p>
+     *
+     * @param inboundChannel the underlying channel for reading
+     * @param outboundChannel the underlying channel for writing (can be the
+     *   same instance as {@code inboundChannel})
+     * @param config the connection configuration
+     * @param listener the inbound message listener
+     * @param currentTimeMillis the current time in milliseconds
+     * @see #incrementIncomingMsgSeqNum
+     */
+    public FIXConnection(ReadableByteChannel inboundChannel, GatheringByteChannel outboundChannel,
+            FIXConfig config, FIXMessageListener listener, long currentTimeMillis) {
+        this(inboundChannel, outboundChannel, config, listener, null, currentTimeMillis);
+    }
+
+    /**
      * Get the next incoming MsgSeqNum(34).
      *
      * @return the next incoming MsgSeqNum(34)
@@ -197,6 +246,13 @@ public class FIXConnection implements Closeable {
      */
     public void setIncomingMsgSeqNum(long incomingMsgSeqNum) {
         rxMsgSeqNum = incomingMsgSeqNum;
+    }
+
+    /**
+     * Increment the incoming MsgSeqNum(34).
+     */
+    public void incrementIncomingMsgSeqNum() {
+        rxMsgSeqNum++;
     }
 
     /**
@@ -540,221 +596,6 @@ public class FIXConnection implements Closeable {
             adminMessage.addField(ResetSeqNumFlag).setBoolean(true);
 
         send(adminMessage);
-    }
-
-    private class MessageHandler implements FIXMessageListener {
-
-        private FIXMessageListener downstream;
-
-        MessageHandler(FIXMessageListener downstream) {
-            this.downstream = downstream;
-        }
-
-        @Override
-        public void message(FIXMessage message) throws IOException {
-            long msgSeqNum = message.getMsgSeqNum();
-            if (msgSeqNum == 0) {
-                msgSeqNumNotFound();
-                return;
-            }
-
-            FIXValue msgType = message.valueOf(MsgType);
-            if (msgType == null) {
-                msgTypeNotFound();
-                return;
-            }
-
-            if (msgType.byteAt(0) == SequenceReset && msgType.length() == 1) {
-                if (handleSequenceReset(message))
-                    return;
-            }
-
-            if (msgSeqNum != rxMsgSeqNum) {
-                handleMsgSeqNum(message, msgType, msgSeqNum);
-                return;
-            }
-
-            rxMsgSeqNum++;
-
-            if (msgType.length() != 1) {
-                downstream.message(message);
-                return;
-            }
-
-            switch (msgType.byteAt(0)) {
-            case Heartbeat:
-                break;
-            case TestRequest:
-                handleTestRequest(message);
-                break;
-            case ResendRequest:
-                handleResendRequest(message);
-                break;
-            case Reject:
-                handleReject(message);
-                break;
-            case Logout:
-                handleLogout(message);
-                break;
-            case Logon:
-                handleLogon(message);
-                break;
-            default:
-                downstream.message(message);
-                break;
-            }
-        }
-
-        private void handleMsgSeqNum(FIXMessage message, FIXValue msgType, long msgSeqNum) throws IOException {
-            if (msgSeqNum < rxMsgSeqNum)
-                handleTooLowMsgSeqNum(message, msgType, msgSeqNum);
-            else
-                sendResendRequest(rxMsgSeqNum);
-        }
-
-        private void handleTooLowMsgSeqNum(FIXMessage message, FIXValue msgType, long msgSeqNum) throws IOException {
-            if (msgType.contentEquals(Logout)) {
-                handleLogout(message);
-            } else if (!msgType.contentEquals(SequenceReset)) {
-                FIXValue possDupFlag = message.valueOf(PossDupFlag);
-
-                if (possDupFlag == null || possDupFlag.asBoolean() == false)
-                    statusListener.tooLowMsgSeqNum(FIXConnection.this, msgSeqNum, rxMsgSeqNum);
-            }
-        }
-
-        private void handleTestRequest(FIXMessage message) throws IOException {
-            FIXValue testReqId = message.valueOf(TestReqID);
-            if (testReqId == null) {
-                sendReject(message.getMsgSeqNum(), RequiredTagMissing, "TestReqID(112) not found");
-                return;
-            }
-
-            sendHeartbeat(testReqId);
-        }
-
-        private void handleResendRequest(FIXMessage message) throws IOException {
-            FIXValue value;
-
-            value = message.valueOf(BeginSeqNo);
-            if (value == null) {
-                sendReject(message.getMsgSeqNum(), RequiredTagMissing, "BeginSeqNo(7) not found");
-                return;
-            }
-
-            long beginSeqNo = value.asInt();
-
-            value = message.valueOf(EndSeqNo);
-            if (value == null) {
-                sendReject(message.getMsgSeqNum(), RequiredTagMissing, "EndSeqNo(16) not found");
-                return;
-            }
-
-            long endSeqNo = value.asInt();
-
-            if (beginSeqNo > txMsgSeqNum) {
-                sendReject(message.getMsgSeqNum(), ValueIsIncorrect, "BeginSeqNo(7) too high");
-                return;
-            }
-
-            long newSeqNo = endSeqNo == 0 ? txMsgSeqNum : Math.min(endSeqNo + 1, txMsgSeqNum);
-
-            sendSequenceReset(beginSeqNo, newSeqNo);
-        }
-
-        private void handleReject(FIXMessage message) throws IOException {
-            statusListener.reject(FIXConnection.this, message);
-        }
-
-        private boolean handleSequenceReset(FIXMessage message) throws IOException {
-            FIXValue value = message.valueOf(NewSeqNo);
-            if (value == null) {
-                sendReject(message.getMsgSeqNum(), RequiredTagMissing, "NewSeqNo(36) not found");
-                return true;
-            }
-
-            long newSeqNo = value.asInt();
-            if (newSeqNo < rxMsgSeqNum) {
-                sendReject(message.getMsgSeqNum(), ValueIsIncorrect, "NewSeqNo(36) too low");
-                return true;
-            }
-
-            rxMsgSeqNum = newSeqNo;
-
-            FIXValue gapFillFlag = message.valueOf(GapFillFlag);
-            boolean reset = gapFillFlag == null || gapFillFlag.asBoolean() == false;
-
-            if (reset)
-                statusListener.sequenceReset(FIXConnection.this);
-
-            return reset;
-        }
-
-        private void handleLogout(FIXMessage message) throws IOException {
-            statusListener.logout(FIXConnection.this, message);
-        }
-
-        private void handleLogon(FIXMessage message) throws IOException {
-            if (senderCompId.isEmpty()) {
-                FIXValue value = message.valueOf(TargetCompID);
-                if (value == null) {
-                    statusListener.close(FIXConnection.this, "SenderCompID(49) not found");
-                    return;
-                }
-
-                setSenderCompID(value.toString());
-            }
-
-            if (targetCompId.isEmpty()) {
-                FIXValue value = message.valueOf(SenderCompID);
-                if (value == null) {
-                    statusListener.close(FIXConnection.this, "TargetCompID(56) not found");
-                    return;
-                }
-
-                setTargetCompID(value.toString());
-            }
-
-            statusListener.logon(FIXConnection.this, message);
-        }
-
-        private void sendHeartbeat(FIXValue testReqId) throws IOException {
-            prepare(adminMessage, Heartbeat);
-
-            adminMessage.addField(TestReqID).set(testReqId);
-
-            send(adminMessage);
-        }
-
-        private void sendResendRequest(long beginSeqNo) throws IOException {
-            prepare(adminMessage, ResendRequest);
-
-            adminMessage.addField(BeginSeqNo).setInt(beginSeqNo);
-            adminMessage.addField(EndSeqNo).setInt(0);
-
-            send(adminMessage);
-        }
-
-        private void sendSequenceReset(long msgSeqNum, long newSeqNo) throws IOException {
-            prepare(adminMessage, SequenceReset);
-
-            adminMessage.valueOf(MsgSeqNum).setInt(msgSeqNum);
-            adminMessage.addField(GapFillFlag).setBoolean(true);
-            adminMessage.addField(NewSeqNo).setInt(newSeqNo);
-
-            txMsgSeqNum--;
-
-            send(adminMessage);
-        }
-
-        private void msgSeqNumNotFound() throws IOException {
-            sendLogout("MsgSeqNum(34) not found");
-        }
-
-        private void msgTypeNotFound() throws IOException {
-            statusListener.close(FIXConnection.this, "MsgType(35) not found");
-        }
-
     }
 
     private void sendHeartbeat() throws IOException {
