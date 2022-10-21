@@ -38,8 +38,8 @@ class FIXConfigTest {
                 "senderCompId=\"\"," +
                 "targetCompId=\"\"," +
                 "heartBtInt=30," +
-                "incomingMsgSeqNum=1," +
-                "outgoingMsgSeqNum=1," +
+                "inMsgSeqNum=1," +
+                "outMsgSeqNum=1," +
                 "maxFieldCount=64," +
                 "fieldCapacity=64," +
                 "rxBufferCapacity=1024," +

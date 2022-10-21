@@ -47,12 +47,12 @@ public class FIXConfig {
     /**
      * The default incoming MsgSeqNum(34).
      */
-    public static final int DEFAULT_INCOMING_MSG_SEQ_NUM = 1;
+    public static final int DEFAULT_IN_MSG_SEQ_NUM = 1;
 
     /**
      * The default outgoing MsgSeqNum(34).
      */
-    public static final int DEFAULT_OUTGOING_MSG_SEQ_NUM = 1;
+    public static final int DEFAULT_OUT_MSG_SEQ_NUM = 1;
 
     /**
      * The default maximum number of fields.
@@ -88,8 +88,8 @@ public class FIXConfig {
     private final String  senderCompId;
     private final String  targetCompId;
     private final int     heartBtInt;
-    private final long    incomingMsgSeqNum;
-    private final long    outgoingMsgSeqNum;
+    private final long    inMsgSeqNum;
+    private final long    outMsgSeqNum;
     private final int     maxFieldCount;
     private final int     fieldCapacity;
     private final int     rxBufferCapacity;
@@ -103,8 +103,8 @@ public class FIXConfig {
      * @param senderCompId the SenderCompID(49)
      * @param targetCompId the TargetCompID(56)
      * @param heartBtInt the HeartBtInt(108)
-     * @param incomingMsgSeqNum the incoming MsgSeqNum(34)
-     * @param outgoingMsgSeqNum the outgoing MsgSeqNum(34)
+     * @param inMsgSeqNum the incoming MsgSeqNum(34)
+     * @param outMsgSeqNum the outgoing MsgSeqNum(34)
      * @param maxFieldCount the maximum number of fields in a message
      * @param fieldCapacity the field capacity
      * @param rxBufferCapacity the receive buffer capacity
@@ -113,21 +113,21 @@ public class FIXConfig {
      * @see #newBuilder
      */
     public FIXConfig(byte[] beginString, String senderCompId,
-            String targetCompId, int heartBtInt,
-            long incomingMsgSeqNum, long outgoingMsgSeqNum,
-            int maxFieldCount, int fieldCapacity, int rxBufferCapacity,
-            int txBufferCapacity, boolean checkSumEnabled) {
-        this.beginString       = beginString;
-        this.senderCompId      = senderCompId;
-        this.targetCompId      = targetCompId;
-        this.heartBtInt        = heartBtInt;
-        this.incomingMsgSeqNum = incomingMsgSeqNum;
-        this.outgoingMsgSeqNum = outgoingMsgSeqNum;
-        this.maxFieldCount     = maxFieldCount;
-        this.fieldCapacity     = fieldCapacity;
-        this.rxBufferCapacity  = rxBufferCapacity;
-        this.txBufferCapacity  = txBufferCapacity;
-        this.checkSumEnabled   = checkSumEnabled;
+            String targetCompId, int heartBtInt, long inMsgSeqNum,
+            long outMsgSeqNum, int maxFieldCount, int fieldCapacity,
+            int rxBufferCapacity, int txBufferCapacity,
+            boolean checkSumEnabled) {
+        this.beginString      = beginString;
+        this.senderCompId     = senderCompId;
+        this.targetCompId     = targetCompId;
+        this.heartBtInt       = heartBtInt;
+        this.inMsgSeqNum      = inMsgSeqNum;
+        this.outMsgSeqNum     = outMsgSeqNum;
+        this.maxFieldCount    = maxFieldCount;
+        this.fieldCapacity    = fieldCapacity;
+        this.rxBufferCapacity = rxBufferCapacity;
+        this.txBufferCapacity = txBufferCapacity;
+        this.checkSumEnabled  = checkSumEnabled;
     }
 
     /**
@@ -171,8 +171,8 @@ public class FIXConfig {
      *
      * @return the incoming MsgSeqNum(34)
      */
-    public long getIncomingMsgSeqNum() {
-        return incomingMsgSeqNum;
+    public long getInMsgSeqNum() {
+        return inMsgSeqNum;
     }
 
     /**
@@ -180,8 +180,8 @@ public class FIXConfig {
      *
      * @return the outgoing MsgSeqNum(34)
      */
-    public long getOutgoingMsgSeqNum() {
-        return outgoingMsgSeqNum;
+    public long getOutMsgSeqNum() {
+        return outMsgSeqNum;
     }
 
     /**
@@ -243,8 +243,8 @@ public class FIXConfig {
             .append("senderCompId=\"").append(senderCompId).append("\",")
             .append("targetCompId=\"").append(targetCompId).append("\",")
             .append("heartBtInt=").append(heartBtInt).append(",")
-            .append("incomingMsgSeqNum=").append(incomingMsgSeqNum).append(",")
-            .append("outgoingMsgSeqNum=").append(outgoingMsgSeqNum).append(",")
+            .append("inMsgSeqNum=").append(inMsgSeqNum).append(",")
+            .append("outMsgSeqNum=").append(outMsgSeqNum).append(",")
             .append("maxFieldCount=").append(maxFieldCount).append(",")
             .append("fieldCapacity=").append(fieldCapacity).append(",")
             .append("rxBufferCapacity=").append(rxBufferCapacity).append(",")
@@ -272,8 +272,8 @@ public class FIXConfig {
         private String  senderCompId;
         private String  targetCompId;
         private int     heartBtInt;
-        private long    incomingMsgSeqNum;
-        private long    outgoingMsgSeqNum;
+        private long    inMsgSeqNum;
+        private long    outMsgSeqNum;
         private int     maxFieldCount;
         private int     fieldCapacity;
         private int     rxBufferCapacity;
@@ -284,17 +284,17 @@ public class FIXConfig {
          * Create a connection configuration builder.
          */
         public Builder() {
-            beginString       = DEFAULT_BEGIN_STRING;
-            senderCompId      = DEFAULT_SENDER_COMP_ID;
-            targetCompId      = DEFAULT_TARGET_COMP_ID;
-            heartBtInt        = DEFAULT_HEART_BT_INT;
-            incomingMsgSeqNum = DEFAULT_INCOMING_MSG_SEQ_NUM;
-            outgoingMsgSeqNum = DEFAULT_OUTGOING_MSG_SEQ_NUM;
-            maxFieldCount     = DEFAULT_MAX_FIELD_COUNT;
-            fieldCapacity     = DEFAULT_FIELD_CAPACITY;
-            rxBufferCapacity  = DEFAULT_RX_BUFFER_CAPACITY;
-            txBufferCapacity  = DEFAULT_TX_BUFFER_CAPACITY;
-            checkSumEnabled   = DEFAULT_CHECK_SUM_ENABLED;
+            beginString      = DEFAULT_BEGIN_STRING;
+            senderCompId     = DEFAULT_SENDER_COMP_ID;
+            targetCompId     = DEFAULT_TARGET_COMP_ID;
+            heartBtInt       = DEFAULT_HEART_BT_INT;
+            inMsgSeqNum      = DEFAULT_IN_MSG_SEQ_NUM;
+            outMsgSeqNum     = DEFAULT_OUT_MSG_SEQ_NUM;
+            maxFieldCount    = DEFAULT_MAX_FIELD_COUNT;
+            fieldCapacity    = DEFAULT_FIELD_CAPACITY;
+            rxBufferCapacity = DEFAULT_RX_BUFFER_CAPACITY;
+            txBufferCapacity = DEFAULT_TX_BUFFER_CAPACITY;
+            checkSumEnabled  = DEFAULT_CHECK_SUM_ENABLED;
         }
 
         /**
@@ -370,11 +370,11 @@ public class FIXConfig {
         /**
          * Set the incoming MsgSeqNum(34).
          *
-         * @param incomingMsgSeqNum the incoming MsgSeqNum(34)
+         * @param inMsgSeqNum the incoming MsgSeqNum(34)
          * @return this instance
          */
-        public Builder setIncomingMsgSeqNum(long incomingMsgSeqNum) {
-            this.incomingMsgSeqNum = incomingMsgSeqNum;
+        public Builder setInMsgSeqNum(long inMsgSeqNum) {
+            this.inMsgSeqNum = inMsgSeqNum;
 
             return this;
         }
@@ -382,11 +382,11 @@ public class FIXConfig {
         /**
          * Set the outgoing MsgSeqNum(34).
          *
-         * @param outgoingMsgSeqNum the outgoing MsgSeqNum(34)
+         * @param outMsgSeqNum the outgoing MsgSeqNum(34)
          * @return this instance
          */
-        public Builder setOutgoingMsgSeqNum(long outgoingMsgSeqNum) {
-            this.outgoingMsgSeqNum = outgoingMsgSeqNum;
+        public Builder setOutMsgSeqNum(long outMsgSeqNum) {
+            this.outMsgSeqNum = outMsgSeqNum;
 
             return this;
         }
@@ -459,9 +459,9 @@ public class FIXConfig {
          */
         public FIXConfig build() {
             return new FIXConfig(beginString, senderCompId, targetCompId,
-                    heartBtInt, incomingMsgSeqNum, outgoingMsgSeqNum,
-                    maxFieldCount, fieldCapacity, rxBufferCapacity,
-                    txBufferCapacity, checkSumEnabled);
+                    heartBtInt, inMsgSeqNum, outMsgSeqNum, maxFieldCount,
+                    fieldCapacity, rxBufferCapacity, txBufferCapacity,
+                    checkSumEnabled);
         }
 
     }

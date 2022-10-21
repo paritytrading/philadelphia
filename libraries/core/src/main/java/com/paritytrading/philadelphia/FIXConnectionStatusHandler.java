@@ -61,12 +61,12 @@ class FIXConnectionStatusHandler implements FIXMessageListener {
                 return;
         }
 
-        if (msgSeqNum != connection.getIncomingMsgSeqNum()) {
+        if (msgSeqNum != connection.getInMsgSeqNum()) {
             handleMsgSeqNum(message, msgType, msgSeqNum);
             return;
         }
 
-        connection.incrementIncomingMsgSeqNum();
+        connection.incrementInMsgSeqNum();
 
         if (msgType.length() != 1) {
             listener.message(message);
@@ -98,7 +98,7 @@ class FIXConnectionStatusHandler implements FIXMessageListener {
     }
 
     private void handleMsgSeqNum(FIXMessage message, FIXValue msgType, long msgSeqNum) throws IOException {
-        long rxMsgSeqNum = connection.getIncomingMsgSeqNum();
+        long rxMsgSeqNum = connection.getInMsgSeqNum();
 
         if (msgSeqNum < rxMsgSeqNum)
             handleTooLowMsgSeqNum(message, msgType, msgSeqNum);
@@ -107,7 +107,7 @@ class FIXConnectionStatusHandler implements FIXMessageListener {
     }
 
     private void handleTooLowMsgSeqNum(FIXMessage message, FIXValue msgType, long msgSeqNum) throws IOException {
-        long rxMsgSeqNum = connection.getIncomingMsgSeqNum();
+        long rxMsgSeqNum = connection.getInMsgSeqNum();
 
         if (msgType.contentEquals(Logout)) {
             handleLogout(message);
@@ -147,7 +147,7 @@ class FIXConnectionStatusHandler implements FIXMessageListener {
         }
 
         long endSeqNo = value.asInt();
-        long txMsgSeqNum = connection.getOutgoingMsgSeqNum();
+        long txMsgSeqNum = connection.getOutMsgSeqNum();
 
         if (beginSeqNo > txMsgSeqNum) {
             connection.sendReject(message.getMsgSeqNum(), ValueIsIncorrect, "BeginSeqNo(7) too high");
@@ -164,7 +164,7 @@ class FIXConnectionStatusHandler implements FIXMessageListener {
     }
 
     private boolean handleSequenceReset(FIXMessage message) throws IOException {
-        long rxMsgSeqNum = connection.getIncomingMsgSeqNum();
+        long rxMsgSeqNum = connection.getInMsgSeqNum();
 
         FIXValue value = message.valueOf(NewSeqNo);
         if (value == null) {
@@ -178,7 +178,7 @@ class FIXConnectionStatusHandler implements FIXMessageListener {
             return true;
         }
 
-        connection.setIncomingMsgSeqNum(newSeqNo);
+        connection.setInMsgSeqNum(newSeqNo);
 
         FIXValue gapFillFlag = message.valueOf(GapFillFlag);
         boolean reset = gapFillFlag == null || gapFillFlag.asBoolean() == false;
@@ -241,13 +241,13 @@ class FIXConnectionStatusHandler implements FIXMessageListener {
         adminMessage.addField(GapFillFlag).setBoolean(true);
         adminMessage.addField(NewSeqNo).setInt(newSeqNo);
 
-        decrementOutgoingMsgSeqNum();
+        decrementOutMsgSeqNum();
 
         connection.send(adminMessage);
     }
 
-    private void decrementOutgoingMsgSeqNum() {
-        connection.setOutgoingMsgSeqNum(connection.getOutgoingMsgSeqNum() - 1);
+    private void decrementOutMsgSeqNum() {
+        connection.setOutMsgSeqNum(connection.getOutMsgSeqNum() - 1);
     }
 
     private void msgSeqNumNotFound() throws IOException {
