@@ -100,16 +100,23 @@ class FIXConnectionStatusHandler implements FIXMessageListener {
     private void handleMsgSeqNum(FIXMessage message, FIXValue msgType, long msgSeqNum) throws IOException {
         long rxMsgSeqNum = connection.getInMsgSeqNum();
 
-        if (msgSeqNum < rxMsgSeqNum)
+        if (msgSeqNum < rxMsgSeqNum) {
             handleTooLowMsgSeqNum(message, msgType, msgSeqNum);
-        else
-            sendResendRequest(rxMsgSeqNum);
+        } else {
+            if (msgType.contentEquals(Logon))
+                handleLogon(message);
+            else
+                connection.sendResendRequest(rxMsgSeqNum);
+        }
     }
 
     private void handleTooLowMsgSeqNum(FIXMessage message, FIXValue msgType, long msgSeqNum) throws IOException {
         long rxMsgSeqNum = connection.getInMsgSeqNum();
 
-        if (msgType.contentEquals(Logout)) {
+        if (msgType.contentEquals(Logon)) {
+            connection.sendLogout("MsgSeqNum(34) too low");
+            statusListener.close(connection, "MsgSeqNum(34) too low");
+        } else if (msgType.contentEquals(Logout)) {
             handleLogout(message);
         } else if (!msgType.contentEquals(SequenceReset)) {
             FIXValue possDupFlag = message.valueOf(PossDupFlag);
@@ -221,15 +228,6 @@ class FIXConnectionStatusHandler implements FIXMessageListener {
         connection.prepare(adminMessage, Heartbeat);
 
         adminMessage.addField(TestReqID).set(testReqId);
-
-        connection.send(adminMessage);
-    }
-
-    private void sendResendRequest(long beginSeqNo) throws IOException {
-        connection.prepare(adminMessage, ResendRequest);
-
-        adminMessage.addField(BeginSeqNo).setInt(beginSeqNo);
-        adminMessage.addField(EndSeqNo).setInt(0);
 
         connection.send(adminMessage);
     }
