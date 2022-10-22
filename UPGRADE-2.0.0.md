@@ -10,6 +10,21 @@ If you are upgrading from Philadelphia 1.2.0 or newer and have a Joda-Time 2.x
 dependency in your application just because of Philadelphia, you can now remove
 it.
 
+## Configuration
+
+Philadelphia 2.0.0 renames some of the `FIXConfig` and `FIXConfig.Builder`
+methods.
+
+  Old name                                   | New name
+  -------------------------------------------|--------------------------------------
+  `FIXConfig#getIncomingMsgSeqNum()`         | `FIXConfig#getInMsgSeqNum()`
+  `FIXConfig#getOutgoingMsgSeqNum()`         | `FIXConfig#setOutMsgSeqNum()`
+  `FIXConfig.Builder#setIncomingMsgSeqNum()` | `FIXConfig.Builder#setInMsgSeqNum()`
+  `FIXConfig.Builder#setOutgoingMsgSeqNum()` | `FIXConfig.Builder#setOutMsgSeqNum()`
+
+Philadelphia 2.0.0 also replaces the `FIXConfig#getVersion()` method with a
+`FIXConfig#getBeginString()` method.
+
 ## Values
 
 Philadelphia 2.0.0 introduces a number of changes to the `FIXValue` class.
@@ -126,6 +141,3 @@ int milli = timestamp.getMilli();
 Philadelphia 2.0.0 no longer provides the following classes: `FIXCheckSums`,
 `FIXTags`, and `FIXTimestamps`. Applications that rely on their functionality
 now need to provide it themselves.
-
-Philadelphia 2.0.0 replaces the `FIXConfig#getVersion()` method with a
-`FIXConfig#getBeginString()` method.
