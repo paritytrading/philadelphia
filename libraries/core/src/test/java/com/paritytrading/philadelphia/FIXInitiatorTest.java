@@ -375,6 +375,28 @@ class FIXInitiatorTest {
     }
 
     @Test
+    void receiveLogonWithTooLowMsgSeqNum() throws IOException {
+        initiator.setIncomingMsgSeqNum(2);
+
+        String message = "35=A|34=1|";
+        Event  status  = new Close("MsgSeqNum(34) too low");
+
+        String response = "8=FIX.4.2|9=85|35=5|49=initiator|56=acceptor|34=1|" +
+                "52=19700101-00:00:00.000|58=MsgSeqNum(34) too low|10=170|";
+
+        acceptor.send(message);
+
+        while (initiatorStatus.collect().size() < 1) {
+            initiator.receive();
+            acceptor.receive();
+        }
+
+        assertEquals(asList(response), acceptorMessages.collect());
+        assertEquals(asList(), initiatorMessages.collect());
+        assertEquals(asList(status), initiatorStatus.collect());
+    }
+
+    @Test
     void receiveLogout() throws IOException {
         String message = "35=5|34=1|";
         Event  status  = new Logout();

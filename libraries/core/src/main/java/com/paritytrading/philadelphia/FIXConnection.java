@@ -579,14 +579,21 @@ public class FIXConnection implements Closeable {
         }
 
         private void handleMsgSeqNum(FIXMessage message, FIXValue msgType, long msgSeqNum) throws IOException {
-            if (msgSeqNum < rxMsgSeqNum)
+            if (msgSeqNum < rxMsgSeqNum) {
                 handleTooLowMsgSeqNum(message, msgType, msgSeqNum);
-            else
-                sendResendRequest(rxMsgSeqNum);
+            } else {
+                if (msgType.contentEquals(Logon))
+                    handleLogon(message);
+                else
+                    sendResendRequest(rxMsgSeqNum);
+            }
         }
 
         private void handleTooLowMsgSeqNum(FIXMessage message, FIXValue msgType, long msgSeqNum) throws IOException {
-            if (msgType.contentEquals(Logout)) {
+            if (msgType.contentEquals(Logon)) {
+                sendLogout("MsgSeqNum(34) too low");
+                statusListener.close(FIXConnection.this, "MsgSeqNum(34) too low");
+            } else if (msgType.contentEquals(Logout)) {
                 handleLogout(message);
             } else if (msgType.length() != 1 || msgType.asChar() != SequenceReset) {
                 FIXValue possDupFlag = message.valueOf(PossDupFlag);
@@ -699,15 +706,6 @@ public class FIXConnection implements Closeable {
             send(txMessage);
         }
 
-        private void sendResendRequest(long beginSeqNo) throws IOException {
-            prepare(txMessage, ResendRequest);
-
-            txMessage.addField(BeginSeqNo).setInt(beginSeqNo);
-            txMessage.addField(EndSeqNo).setInt(0);
-
-            send(txMessage);
-        }
-
         private void sendSequenceReset(long msgSeqNum, long newSeqNo) throws IOException {
             prepare(txMessage, SequenceReset);
 
@@ -728,6 +726,21 @@ public class FIXConnection implements Closeable {
             statusListener.close(FIXConnection.this, "MsgType(35) not found");
         }
 
+    }
+
+    /**
+     * Send a ResendRequest(2) message.
+     *
+     * @param beginSeqNo the BeginSeqNo(7)
+     * @throws IOException if an I/O error occurs
+     */
+    public void sendResendRequest(long beginSeqNo) throws IOException {
+        prepare(txMessage, ResendRequest);
+
+        txMessage.addField(BeginSeqNo).setInt(beginSeqNo);
+        txMessage.addField(EndSeqNo).setInt(0);
+
+        send(txMessage);
     }
 
     private void sendHeartbeat() throws IOException {

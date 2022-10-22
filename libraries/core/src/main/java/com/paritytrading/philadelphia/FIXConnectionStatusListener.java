@@ -70,9 +70,15 @@ public interface FIXConnectionStatusListener {
     /**
      * Receive a Logon(A) message.
      *
-     * @param connection the connection 
+     * <p>Please note that the incoming Logon(A) message might have a MsgSeqNum(34)
+     * value that is higher than the next expected MsgSeqNum(34) value.
+     * In this case, the application should immediately follow the Logon(A)
+     * response with a ResendRequest(2) message.</p>
+     *
+     * @param connection the connection
      * @param message the Logon(A) message
      * @throws IOException if an I/O error occurs
+     * @see FIXConnection#sendResendRequest(long beginSeqNo)
      */
     void logon(FIXConnection connection, FIXMessage message) throws IOException;
 
