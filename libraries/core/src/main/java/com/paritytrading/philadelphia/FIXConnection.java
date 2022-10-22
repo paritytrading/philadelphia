@@ -44,8 +44,8 @@ public class FIXConnection implements Closeable {
     private String senderCompId;
     private String targetCompId;
 
-    private long rxMsgSeqNum;
-    private long txMsgSeqNum;
+    private long inMsgSeqNum;
+    private long outMsgSeqNum;
 
     private final ByteBuffer rxBuffer;
 
@@ -125,7 +125,7 @@ public class FIXConnection implements Closeable {
      * @param <CHANNEL> the underlying channel type, which must implement
      *   {@link ReadableByteChannel} and {@link GatheringByteChannel}
      * @see SocketChannel
-     * @see #incrementIncomingMsgSeqNum
+     * @see #incrementInMsgSeqNum
      */
     public <CHANNEL extends ReadableByteChannel & GatheringByteChannel>
     FIXConnection(CHANNEL channel, FIXConfig config, FIXMessageListener listener, long currentTimeMillis) {
@@ -136,19 +136,19 @@ public class FIXConnection implements Closeable {
      * Create a connection. The underlying channels can be either blocking or
      * non-blocking.
      *
-     * @param inboundChannel the underlying channel for reading
-     * @param outboundChannel the underlying channel for writing (can be the
-     *   same instance as {@code inboundChannel})
+     * @param rxChannel the underlying channel for receiving
+     * @param txChannel the underlying channel for transmitting (can be the
+     *   same instance as {@code rxChannel})
      * @param config the connection configuration
      * @param listener the inbound message listener
      * @param statusListener the inbound status event listener
      * @param currentTimeMillis the current time in milliseconds
      */
-    public FIXConnection(ReadableByteChannel inboundChannel, GatheringByteChannel outboundChannel,
+    public FIXConnection(ReadableByteChannel rxChannel, GatheringByteChannel txChannel,
             FIXConfig config, FIXMessageListener listener, FIXConnectionStatusListener statusListener,
             long currentTimeMillis) {
-        this.rxChannel = inboundChannel;
-        this.txChannel = outboundChannel;
+        this.rxChannel = rxChannel;
+        this.txChannel = txChannel;
 
         this.config = config;
 
@@ -165,8 +165,8 @@ public class FIXConnection implements Closeable {
 
         this.statusListener = statusListener;
 
-        this.rxMsgSeqNum = config.getIncomingMsgSeqNum();
-        this.txMsgSeqNum = config.getOutgoingMsgSeqNum();
+        this.inMsgSeqNum = config.getInMsgSeqNum();
+        this.outMsgSeqNum = config.getOutMsgSeqNum();
 
         this.rxBuffer = ByteBuffer.allocateDirect(config.getRxBufferCapacity());
 
@@ -217,17 +217,17 @@ public class FIXConnection implements Closeable {
      * these appropriately. At the very least, it must increment the incoming
      * MsgSeqNum(34) value.</p>
      *
-     * @param inboundChannel the underlying channel for reading
-     * @param outboundChannel the underlying channel for writing (can be the
-     *   same instance as {@code inboundChannel})
+     * @param rxChannel the underlying channel for receiving
+     * @param txChannel the underlying channel for transmitting (can be the
+     *   same instance as {@code rxChannel})
      * @param config the connection configuration
      * @param listener the inbound message listener
      * @param currentTimeMillis the current time in milliseconds
-     * @see #incrementIncomingMsgSeqNum
+     * @see #incrementInMsgSeqNum
      */
-    public FIXConnection(ReadableByteChannel inboundChannel, GatheringByteChannel outboundChannel,
+    public FIXConnection(ReadableByteChannel rxChannel, GatheringByteChannel txChannel,
             FIXConfig config, FIXMessageListener listener, long currentTimeMillis) {
-        this(inboundChannel, outboundChannel, config, listener, null, currentTimeMillis);
+        this(rxChannel, txChannel, config, listener, null, currentTimeMillis);
     }
 
     /**
@@ -235,24 +235,24 @@ public class FIXConnection implements Closeable {
      *
      * @return the next incoming MsgSeqNum(34)
      */
-    public long getIncomingMsgSeqNum() {
-        return rxMsgSeqNum;
+    public long getInMsgSeqNum() {
+        return inMsgSeqNum;
     }
 
     /**
      * Set the next incoming MsgSeqNum(34).
      *
-     * @param incomingMsgSeqNum the next incoming MsgSeqNum(34)
+     * @param inMsgSeqNum the next incoming MsgSeqNum(34)
      */
-    public void setIncomingMsgSeqNum(long incomingMsgSeqNum) {
-        rxMsgSeqNum = incomingMsgSeqNum;
+    public void setInMsgSeqNum(long inMsgSeqNum) {
+        this.inMsgSeqNum = inMsgSeqNum;
     }
 
     /**
      * Increment the incoming MsgSeqNum(34).
      */
-    public void incrementIncomingMsgSeqNum() {
-        rxMsgSeqNum++;
+    public void incrementInMsgSeqNum() {
+        inMsgSeqNum++;
     }
 
     /**
@@ -260,17 +260,17 @@ public class FIXConnection implements Closeable {
      *
      * @return the next outgoing MsgSeqNum(34)
      */
-    public long getOutgoingMsgSeqNum() {
-        return txMsgSeqNum;
+    public long getOutMsgSeqNum() {
+        return outMsgSeqNum;
     }
 
     /**
      * Set the next outgoing MsgSeqNum(34).
      *
-     * @param outgoingMsgSeqNum the next outgoing MsgSeqNum(34)
+     * @param outMsgSeqNum the next outgoing MsgSeqNum(34)
      */
-    public void setOutgoingMsgSeqNum(long outgoingMsgSeqNum) {
-        txMsgSeqNum = outgoingMsgSeqNum;
+    public void setOutMsgSeqNum(long outMsgSeqNum) {
+        this.outMsgSeqNum = outMsgSeqNum;
     }
 
     /**
@@ -359,7 +359,7 @@ public class FIXConnection implements Closeable {
     private void prepare(FIXMessage message) {
         message.addField(SenderCompID).setString(senderCompId);
         message.addField(TargetCompID).setString(targetCompId);
-        message.addField(MsgSeqNum).setInt(txMsgSeqNum);
+        message.addField(MsgSeqNum).setInt(outMsgSeqNum);
         message.addField(SendingTime).set(currentTimestamp);
     }
 
@@ -377,7 +377,7 @@ public class FIXConnection implements Closeable {
      *   not found
      */
     public void update(FIXMessage message) {
-        message.valueOf(MsgSeqNum).setInt(txMsgSeqNum);
+        message.valueOf(MsgSeqNum).setInt(outMsgSeqNum);
         message.valueOf(SendingTime).set(currentTimestamp);
     }
 
@@ -530,7 +530,7 @@ public class FIXConnection implements Closeable {
             remaining -= txChannel.write(txBuffers, 0, 2);
         } while (remaining > 0);
 
-        txMsgSeqNum++;
+        outMsgSeqNum++;
 
         lastTxMillis = currentTimeMillis;
     }

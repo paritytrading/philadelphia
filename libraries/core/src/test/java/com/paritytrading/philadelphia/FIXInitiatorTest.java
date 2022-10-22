@@ -79,7 +79,7 @@ abstract class FIXInitiatorTest {
         initiator.keepAlive();
 
         acceptor.send("35=0|34=1|");
-        while (initiator.getIncomingMsgSeqNum() != 2)
+        while (initiator.getInMsgSeqNum() != 2)
             initiator.receive();
 
         initiator.setCurrentTimeMillis(35_000);
@@ -117,7 +117,7 @@ abstract class FIXInitiatorTest {
 
         acceptor.send("35=0|34=1|");
 
-        while (initiator.getIncomingMsgSeqNum() != 2)
+        while (initiator.getInMsgSeqNum() != 2)
             initiator.receive();
 
         initiator.setCurrentTimeMillis(60_000);
@@ -175,7 +175,7 @@ abstract class FIXInitiatorTest {
 
     @Test
     void receiveMessageWithTooLowMsgSeqNum() throws IOException {
-        initiator.setIncomingMsgSeqNum(2);
+        initiator.setInMsgSeqNum(2);
 
         String message = "35=0|34=1|";
         Event status   = new TooLowMsgSeqNum(1, 2);
@@ -212,50 +212,50 @@ abstract class FIXInitiatorTest {
 
     @Test
     void receiveResendRequestWithEndSeqNoSmallerThanLastMsgSeqNum() throws IOException {
-        initiator.setOutgoingMsgSeqNum(5);
+        initiator.setOutMsgSeqNum(5);
 
         String request  = "35=2|34=1|7=2|16=3|";
         String response = "8=FIX.4.2|9=71|35=4|49=initiator|56=acceptor|34=2|" +
             "52=19700101-00:00:00.000|123=Y|36=4|10=230|";
 
         acceptorRequestInitiatorResponse(request, response);
-        assertEquals(5, initiator.getOutgoingMsgSeqNum());
+        assertEquals(5, initiator.getOutMsgSeqNum());
     }
 
     @Test
     void receiveResendRequestWithEndSeqNoEqualToLastMsgSeqNum() throws IOException {
-        initiator.setOutgoingMsgSeqNum(5);
+        initiator.setOutMsgSeqNum(5);
 
         String request  = "35=2|34=1|7=2|16=4|";
         String response = "8=FIX.4.2|9=71|35=4|49=initiator|56=acceptor|34=2|" +
             "52=19700101-00:00:00.000|123=Y|36=5|10=231|";
 
         acceptorRequestInitiatorResponse(request, response);
-        assertEquals(5, initiator.getOutgoingMsgSeqNum());
+        assertEquals(5, initiator.getOutMsgSeqNum());
     }
 
     @Test
     void receiveResendRequestWithEndSeqNoLargerThanLastMsgSeqNum() throws IOException {
-        initiator.setOutgoingMsgSeqNum(5);
+        initiator.setOutMsgSeqNum(5);
 
         String request  = "35=2|34=1|7=2|16=6|";
         String response = "8=FIX.4.2|9=71|35=4|49=initiator|56=acceptor|34=2|" +
             "52=19700101-00:00:00.000|123=Y|36=5|10=231|";
 
         acceptorRequestInitiatorResponse(request, response);
-        assertEquals(5, initiator.getOutgoingMsgSeqNum());
+        assertEquals(5, initiator.getOutMsgSeqNum());
     }
 
     @Test
     void receiveResendRequestWithZeroEndSeqNo() throws IOException {
-        initiator.setOutgoingMsgSeqNum(3);
+        initiator.setOutMsgSeqNum(3);
 
         String request  = "35=2|34=1|7=2|16=0|";
         String response = "8=FIX.4.2|9=71|35=4|49=initiator|56=acceptor|34=2|" +
             "52=19700101-00:00:00.000|123=Y|36=3|10=229|";
 
         acceptorRequestInitiatorResponse(request, response);
-        assertEquals(3, initiator.getOutgoingMsgSeqNum());
+        assertEquals(3, initiator.getOutMsgSeqNum());
     }
 
     @Test
@@ -287,7 +287,7 @@ abstract class FIXInitiatorTest {
 
     @Test
     void receiveResendRequestWithTooHighEndSeqNo() throws IOException {
-        initiator.setOutgoingMsgSeqNum(3);
+        initiator.setOutMsgSeqNum(3);
 
         String request  = "35=2|34=1|7=2|16=5|";
         String response = "8=FIX.4.2|9=71|35=4|49=initiator|56=acceptor|34=2|" +
@@ -306,7 +306,7 @@ abstract class FIXInitiatorTest {
 
     @Test
     void receiveSequenceResetResetWithTooLowMsgSeqNum() throws IOException {
-        initiator.setIncomingMsgSeqNum(2);
+        initiator.setInMsgSeqNum(2);
 
         String message = "35=4|34=1|36=5|";
         Event  status  = new SequenceReset();
@@ -335,7 +335,7 @@ abstract class FIXInitiatorTest {
     void receiveSequenceResetGapFill() throws IOException {
         acceptor.send("35=4|34=1|123=Y|36=5|");
 
-        while (initiator.getIncomingMsgSeqNum() != 5)
+        while (initiator.getInMsgSeqNum() != 5)
             initiator.receive();
     }
 
@@ -357,7 +357,7 @@ abstract class FIXInitiatorTest {
 
     @Test
     void receiveLogoutWithTooLowMsgSeqNum() throws IOException {
-        initiator.setIncomingMsgSeqNum(2);
+        initiator.setInMsgSeqNum(2);
 
         String message = "35=5|34=1|";
         Event  status  = new Logout();
@@ -379,7 +379,7 @@ abstract class FIXInitiatorTest {
         acceptor.send(asList("35=5|34=1|58=" + repeat('A', 512) + "|",
                 "35=5|34=2|58=" + repeat('A', 512) + "|"));
 
-        while (initiator.getIncomingMsgSeqNum() != 3)
+        while (initiator.getInMsgSeqNum() != 3)
             initiator.receive();
 
         assertEquals(asList(), acceptorMessages.collect());
