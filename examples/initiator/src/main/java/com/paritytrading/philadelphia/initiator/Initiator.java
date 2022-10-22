@@ -121,14 +121,17 @@ class Initiator implements FIXMessageListener, Closeable {
     }
 
     void sendAndReceive(FIXMessage message, FIXValue clOrdId, int orders) throws IOException {
+        int sendCount = 0;
+
         for (long sentAtNanoTime = System.nanoTime(); receiveCount < orders; connection.receive()) {
-            if (System.nanoTime() >= sentAtNanoTime) {
+            if (System.nanoTime() >= sentAtNanoTime && sendCount < orders) {
                 clOrdId.setInt(sentAtNanoTime);
 
                 connection.update(message);
                 connection.send(message);
 
                 sentAtNanoTime += intervalNanos;
+                sendCount++;
             }
         }
     }
