@@ -68,6 +68,15 @@ See the [upgrade instructions](UPGRADE-2.0.0.md).
   method to simplify `FIXConfig.Builder` construction. Add a
   `FIXConfig.DEFAULTS` constant to simplify default configuration usage.
 
+  Replace the `FIXConfig#getVersion` method with a `FIXConfig#getBeginString`
+  method.
+
+  Rename the `FIXConfig#getIncomingMsgSeqNum` method to
+  `FIXConfig#getInMsgSeqNum` and the `FIXConfig.Builder#getOutgoingMsgSeqNum`
+  method to `FIXConfig#getOutMsgSeqNum`. Rename the corresponding methods in
+  `FIXConfig.Builder` similarly to `FIXConfig.Builder#setInMsgSeqNum` and
+  `FIXConfig.Builder#setOutMsgSeqNum`.
+
 - Update FIX Latest support (Jussi Virtanen)
 
   Regenerate the FIX Latest support from the latest FIX Orchestra version,
