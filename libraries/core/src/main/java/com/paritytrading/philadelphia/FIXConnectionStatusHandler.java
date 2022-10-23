@@ -98,20 +98,20 @@ class FIXConnectionStatusHandler implements FIXMessageListener {
     }
 
     private void handleMsgSeqNum(FIXMessage message, FIXValue msgType, long msgSeqNum) throws IOException {
-        long rxMsgSeqNum = connection.getInMsgSeqNum();
+        long inMsgSeqNum = connection.getInMsgSeqNum();
 
-        if (msgSeqNum < rxMsgSeqNum) {
+        if (msgSeqNum < inMsgSeqNum) {
             handleTooLowMsgSeqNum(message, msgType, msgSeqNum);
         } else {
             if (msgType.contentEquals(Logon))
                 handleLogon(message);
             else
-                connection.sendResendRequest(rxMsgSeqNum);
+                connection.sendResendRequest(inMsgSeqNum);
         }
     }
 
     private void handleTooLowMsgSeqNum(FIXMessage message, FIXValue msgType, long msgSeqNum) throws IOException {
-        long rxMsgSeqNum = connection.getInMsgSeqNum();
+        long inMsgSeqNum = connection.getInMsgSeqNum();
 
         if (msgType.contentEquals(Logon)) {
             connection.sendLogout("MsgSeqNum(34) too low");
@@ -122,7 +122,7 @@ class FIXConnectionStatusHandler implements FIXMessageListener {
             FIXValue possDupFlag = message.valueOf(PossDupFlag);
 
             if (possDupFlag == null || possDupFlag.asBoolean() == false)
-                statusListener.tooLowMsgSeqNum(connection, msgSeqNum, rxMsgSeqNum);
+                statusListener.tooLowMsgSeqNum(connection, msgSeqNum, inMsgSeqNum);
         }
     }
 
@@ -154,14 +154,14 @@ class FIXConnectionStatusHandler implements FIXMessageListener {
         }
 
         long endSeqNo = value.asInt();
-        long txMsgSeqNum = connection.getOutMsgSeqNum();
+        long outMsgSeqNum = connection.getOutMsgSeqNum();
 
-        if (beginSeqNo > txMsgSeqNum) {
+        if (beginSeqNo > outMsgSeqNum) {
             connection.sendReject(message.getMsgSeqNum(), ValueIsIncorrect, "BeginSeqNo(7) too high");
             return;
         }
 
-        long newSeqNo = endSeqNo == 0 ? txMsgSeqNum : Math.min(endSeqNo + 1, txMsgSeqNum);
+        long newSeqNo = endSeqNo == 0 ? outMsgSeqNum : Math.min(endSeqNo + 1, outMsgSeqNum);
 
         sendSequenceReset(beginSeqNo, newSeqNo);
     }
@@ -171,7 +171,7 @@ class FIXConnectionStatusHandler implements FIXMessageListener {
     }
 
     private boolean handleSequenceReset(FIXMessage message) throws IOException {
-        long rxMsgSeqNum = connection.getInMsgSeqNum();
+        long inMsgSeqNum = connection.getInMsgSeqNum();
 
         FIXValue value = message.valueOf(NewSeqNo);
         if (value == null) {
@@ -180,7 +180,7 @@ class FIXConnectionStatusHandler implements FIXMessageListener {
         }
 
         long newSeqNo = value.asInt();
-        if (newSeqNo < rxMsgSeqNum) {
+        if (newSeqNo < inMsgSeqNum) {
             connection.sendReject(message.getMsgSeqNum(), ValueIsIncorrect, "NewSeqNo(36) too low");
             return true;
         }
