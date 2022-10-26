@@ -598,6 +598,21 @@ public class FIXConnection implements Closeable {
         send(adminMessage);
     }
 
+    /**
+     * Send a ResendRequest(2) message.
+     *
+     * @param beginSeqNo the BeginSeqNo(7)
+     * @throws IOException if an I/O error occurs
+     */
+    public void sendResendRequest(long beginSeqNo) throws IOException {
+        prepare(adminMessage, ResendRequest);
+
+        adminMessage.addField(BeginSeqNo).setInt(beginSeqNo);
+        adminMessage.addField(EndSeqNo).setInt(0);
+
+        send(adminMessage);
+    }
+
     private void sendHeartbeat() throws IOException {
         prepare(adminMessage, Heartbeat);
 
