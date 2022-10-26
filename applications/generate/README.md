@@ -15,7 +15,7 @@ Philadelphia Code Generator supports the following input sources:
 
   [FIX Orchestra]: https://www.fixtrading.org/standards/fix-orchestra/
   [FIX Repository]: https://www.fixtrading.org/standards/fix-repository/
-  [QuickFIX]: http://www.quickfixengine.org/
+  [QuickFIX]: https://github.com/quickfix/quickfix
 
 ## Development
 
