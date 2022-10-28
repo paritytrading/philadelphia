@@ -1,5 +1,13 @@
 # Release Notes
 
+## 1.3.2 (2022-10-28)
+
+- Improve Logon(A) handling (dmech)
+
+  Handle a Logon(A) message with too high MsgSeqNum(34) value, but send a
+  Logout(5) message when receiving a Logon(A) message with too low
+  MsgSeqNum(34) value.
+
 ## 1.3.1 (2022-05-21)
 
 - Fix MsgSeqNum(34) handling on SequenceReset(4) (Vadim Platonov, Jussi
