@@ -386,10 +386,11 @@ class FIXInitiatorTest {
 
         acceptor.send(message);
 
-        while (initiatorStatus.collect().size() < 1) {
+        while (initiatorStatus.collect().size() < 1)
             initiator.receive();
+
+        while (acceptorMessages.collect().size() < 1)
             acceptor.receive();
-        }
 
         assertEquals(asList(response), acceptorMessages.collect());
         assertEquals(asList(), initiatorMessages.collect());
