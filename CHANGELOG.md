@@ -1,6 +1,6 @@
 # Release Notes
 
-## 2.0.0 (????-??-??)
+## 2.0.0 (2022-10-29)
 
 See the [upgrade instructions](UPGRADE-2.0.0.md).
 
