@@ -21,10 +21,9 @@ See the [upgrade instructions](UPGRADE-2.0.0.md).
 - Improve `FIXValue` (Jussi Virtanen)
 
   Make the `FIXValue` class implement the `CharSequence` interface. Change the
-  return type of the `FIXValue#asString()` method from `String` to
-  `CharSequence` to avoid memory allocation, and remove the
-  `FIXValue#asString(Appendable)` and `FIXValue#asString(StringBuilder)`
-  methods as superfluous.
+  return type of the `FIXValue#asString` method from `String` to `CharSequence`
+  to avoid memory allocation, and remove the `FIXValue#asString(Appendable)`
+  and `FIXValue#asString(StringBuilder)` methods as superfluous.
 
   Split the `FIXValue#setTimeOnly` method into `FIXValue#setTimeOnlyMillis`
   and `FIXTimeOnly#setTimeOnlySecs`, and split the
@@ -32,6 +31,35 @@ See the [upgrade instructions](UPGRADE-2.0.0.md).
   `FIXValue#setTimestampSecs`.
 
   Remove the `FIXValue#asCheckSum` method.
+
+- Improve `FIXConnection` (Dimitar Dimitrov, dmech, Jussi Virtanen)
+
+  Remove the `Clock` interface, and make the `FIXConnection` constructors to
+  take the current timestamp in milliseconds instead. Replace the
+  `FIXConnection#updateCurrentTimestamp` method with
+  `FIXConnection#setCurrentTimeMillis`.
+
+  Remove the `FIXConnection#updateCompID` method. Use
+  `FIXConnection#getSenderCompID` and `FIXValue#getTargetCompID` together with
+  the `FIXValue` methods instead.
+
+  Add support for other channel types besides `SocketChannel`, and add support
+  for separate channels for receiving and transmitting data. Remove the
+  `FIXConnection#getChannel` method to facilitate this.
+
+  Remove the `FIXConnectionStatusListener#heartbeatTimeout` method, and add the
+  `FIXHeartbeatTimeoutException` class. Throw this exception when a heartbeat
+  timeout is detected in the `FIXConnection#keepAlive` method.
+
+  Make `FIXConnectionStatusListener`, and therefore the default administrative
+  message handling, optional. This makes it possible for applications to handle
+  inbound administrative messages themselves.
+
+  Add the methods `FIXConnection#setInMsgSeqNum`,
+  `FIXConnection#setOutMsgSeqNum`, `FIXConnection#setSenderCompID`, and
+  `FIXConnection#setTargetCompID`. Rename the
+  `FIXConnection#getIncomingMsgSeqNum` method to `getInMsgSeqNum`, and rename
+  the `FIXConnection#getOutgoingMsgSeqNum` method to `setOutMsgSeqNum`.
 
 - Add `FIXTimestamp` (Jussi Virtanen)
 

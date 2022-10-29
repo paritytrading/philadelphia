@@ -25,6 +25,99 @@ methods.
 Philadelphia 2.0.0 also replaces the `FIXConfig#getVersion()` method with a
 `FIXConfig#getBeginString()` method.
 
+## Connections
+
+The bulk of the changes in Philadelphia 2.0.0 concern the `FIXConnection`
+class.
+
+### Naming changes
+
+Philadelphia 2.0.0 renames some of the `FIXConnection` methods.
+
+  Old name                               | New name
+  ---------------------------------------|----------------------------------
+  `FIXConnection#getIncomingMsgSeqNum()` | `FIXConnection#getInMsgSeqNum()`
+  `FIXConnection#getOutgoingMsgSeqNum()` | `FIXConnection#getOutMsgSeqNum()`
+
+### Channel management
+
+Philadelphia 2.0.0 no longer provides the `FIXConnection#getChannel()` method.
+This is because it adds support for other channel types besides `SocketChannel`
+and even separate channels for receiving and transmitting data.
+
+### Time handling
+
+Philadelphia 2.0.0 no longer provides the `Clock` interface. Instead, the
+`FIXConnection` class now takes the current timestamp in milliseconds both in
+its constructors as well as in the `FIXConnection#setCurrentTimeMillis()`
+method, which replaces the `FIXConnection#updateCurrentTimestamp()` method.
+See below for examples on how to update your code to account for this change. 
+
+Before:
+```java
+// Construct an instance.
+FIXConnection connection = new FIXConnection(channel, config, listener,
+        statusListener);
+
+// Update the current time.
+connection.updateCurrentTimestamp();
+```
+
+After:
+```java
+// Construct an instance.
+FIXConnection connection = new FIXConnection(channel, config, listener,
+        statusListener, System.currentTimeMillis());
+
+// Update the current time.
+connection.setCurrentTimeMillis(System.currentTimeMillis());
+```
+
+### Keep-alive mechanism
+
+Philadelphia 2.0.0 replaces the
+`FIXConnectionStatusListener#heartbeatTimeout()` method with the
+`FIXHeartbeatTimeoutException` class. The `FIXConnection#keepAlive()` method
+throws this exception when it detects a heartbeat timeout. See below for an
+example on how to update your code to account for this change.
+
+Before:
+```java
+FIXConnectionStatusListener statusListener = new FIXConnectionStatusListener() {
+
+    @Override
+    public void heartbeatTimeout(FIXConnection connection) {
+        System.err.println("Heartbeat timeout");
+    }
+
+    ...
+```
+
+After:
+```java
+try {
+    connection.keepAlive();
+} catch (FIXHeartbeatTimeoutException e) {
+    System.err.println("Heartbeat timeout");
+}
+```
+
+### Message routing
+
+Philadelphia 2.0.0 removes the `FIXConnection#updateCompID()` method. See below
+for an example on how to update your code to account for this change.
+
+Before:
+```java
+connection.updateCompID(message);
+```
+
+After:
+```java
+message.valueOf(SenderCompID).setString(connection.getSenderCompID());
+message.valueOf(TargetCompID).setString(connection.getTargetCompID());
+```
+
 ## Values
 
 Philadelphia 2.0.0 introduces a number of changes to the `FIXValue` class.
