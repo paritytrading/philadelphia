@@ -29,11 +29,8 @@ class FIXMessageTest {
 
     @BeforeEach
     void setUp() {
-        message = new FIXMessage(32, 32);
-    }
+        message = new FIXMessage(1, 8, 32);
 
-    @Test
-    void format() {
         FIXTimestamp timestamp = new FIXTimestamp(2015, 9, 24, 9, 30, 5, 250);
 
         message.addField(ClOrdID).setString("123");
@@ -44,7 +41,10 @@ class FIXMessageTest {
         message.addField(OrderQty).setInt(100);
         message.addField(OrdType).setChar(OrdTypeValues.Limit);
         message.addField(Price).setFloat(150.25, 2);
+    }
 
+    @Test
+    void format() {
         ByteBuffer buffer = ByteBuffer.allocateDirect(256);
 
         message.put(buffer);
@@ -67,19 +67,29 @@ class FIXMessageTest {
 
     @Test
     void print() {
-        FIXTimestamp timestamp = new FIXTimestamp(2015, 9, 24, 9, 30, 5, 250);
-
-        message.addField(ClOrdID).setString("123");
-        message.addField(HandlInst).setChar(HandlInstValues.AutomatedExecutionNoIntervention);
-        message.addField(Symbol).setString("FOO");
-        message.addField(Side).setChar(SideValues.Buy);
-        message.addField(TransactTime).setTimestampMillis(timestamp);
-        message.addField(OrderQty).setInt(100);
-        message.addField(OrdType).setChar(OrdTypeValues.Limit);
-        message.addField(Price).setFloat(150.25, 2);
-
         assertEquals("11=123|21=1|55=FOO|54=1|60=20150924-09:30:05.250|" +
                 "38=100|40=2|44=150.25|", message.toString());
+    }
+
+    @Test
+    void exceedMaxCapacityOnAddField() {
+        assertThrows(IndexOutOfBoundsException.class, () -> message.addField(Account));
+    }
+
+    @Test
+    void exceedMaxCapacityOnGet() {
+        String input = "11=123\u000121=1\u000155=FOO\u000154=1\u0001" +
+                "60=20150924-09:30:05.250\u000138=100\u000140=2\u0001" +
+                "44=150.25\u00011=main\u0001";
+
+        ByteBuffer buffer = ByteBuffers.wrap(input);
+
+        assertThrows(FIXMessageOverflowException.class, () -> message.get(buffer));
+    }
+
+    @Test
+    void minCapacityExceedsMaxCapacity() {
+        assertThrows(IllegalArgumentException.class, () -> new FIXMessage(2, 1, 32));
     }
 
 }

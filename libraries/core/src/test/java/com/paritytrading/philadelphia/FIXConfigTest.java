@@ -40,7 +40,8 @@ class FIXConfigTest {
                 "heartBtInt=30," +
                 "inMsgSeqNum=1," +
                 "outMsgSeqNum=1," +
-                "maxFieldCount=64," +
+                "minMessageCapacity=64," +
+                "maxMessageCapacity=65536," +
                 "fieldCapacity=64," +
                 "rxBufferCapacity=1024," +
                 "txBufferCapacity=1024," +

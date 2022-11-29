@@ -156,7 +156,7 @@ class FIXMessageParserTest {
 
     private boolean parse(ByteBuffer buffer, boolean checkSumEnabled) throws IOException {
         FIXConfig config = FIXConfig.newBuilder()
-            .setMaxFieldCount(32)
+            .setMessageCapacity(32)
             .setFieldCapacity(32)
             .setCheckSumEnabled(checkSumEnabled)
             .build();

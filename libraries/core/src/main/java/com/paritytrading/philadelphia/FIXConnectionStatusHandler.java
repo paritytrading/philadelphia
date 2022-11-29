@@ -39,7 +39,7 @@ class FIXConnectionStatusHandler implements FIXMessageListener {
 
         this.statusListener = statusListener;
 
-        this.adminMessage = new FIXMessage(ADMIN_MESSAGE_MAX_FIELD_COUNT, config.getFieldCapacity());
+        this.adminMessage = new FIXMessage(ADMIN_MESSAGE_CAPACITY, config.getFieldCapacity());
     }
 
     @Override

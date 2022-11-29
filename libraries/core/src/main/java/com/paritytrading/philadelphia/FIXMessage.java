@@ -20,16 +20,25 @@ import static com.paritytrading.philadelphia.FIXTags.*;
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 import java.nio.ReadOnlyBufferException;
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 /**
- * A message container.
+ * <p>A message container.</p>
+ *
+ * <p>Message capacity refers to the number of fields a message container can
+ * hold. A message container starts at the initial message capacity and grows
+ * when necessary until it reaches the maximum message capacity.</p>
  */
 public class FIXMessage {
 
-    private final int[] tags;
+    private final int maxMessageCapacity;
 
-    private final FIXValue[] values;
+    private final int fieldCapacity;
+
+    private int[] tags;
+
+    private FIXValue[] values;
 
     private int count;
 
@@ -39,24 +48,44 @@ public class FIXMessage {
      * @param config the message configuration
      */
     public FIXMessage(FIXConfig config) {
-        this(config.getMaxFieldCount(), config.getFieldCapacity());
+        this(config.getMinMessageCapacity(), config.getMaxMessageCapacity(),
+                config.getFieldCapacity());
     }
 
     /**
      * Construct a new message container.
      *
-     * @param maxFieldCount the maximum number of fields
+     * @param messageCapacity the initial as well as the maximum message
+     *     capacity
      * @param fieldCapacity the field capacity
      */
-    public FIXMessage(int maxFieldCount, int fieldCapacity) {
-        tags = new int[maxFieldCount];
+    public FIXMessage(int messageCapacity, int fieldCapacity) {
+        this(messageCapacity, messageCapacity, fieldCapacity);
+    }
 
-        values = new FIXValue[maxFieldCount];
+    /**
+     * Construct a new message container.
+     *
+     * @param minMessageCapacity the initial message capacity
+     * @param maxMessageCapacity the maximum message capacity
+     * @param fieldCapacity the field capacity
+     */
+    public FIXMessage(int minMessageCapacity, int maxMessageCapacity, int fieldCapacity) {
+        if (minMessageCapacity > maxMessageCapacity)
+            throw new IllegalArgumentException("Maximum message capacity must be equal or larger than initial message capacity");
+
+        this.maxMessageCapacity = maxMessageCapacity;
+
+        this.fieldCapacity = fieldCapacity;
+
+        this.tags = new int[minMessageCapacity];
+
+        this.values = new FIXValue[minMessageCapacity];
 
         for (int i = 0; i < values.length; i++)
-            values[i] = new FIXValue(fieldCapacity);
+            this.values[i] = new FIXValue(fieldCapacity);
 
-        count = 0;
+        this.count = 0;
     }
 
     /**
@@ -195,10 +224,13 @@ public class FIXMessage {
      *
      * @param tag the tag
      * @return the value container
-     * @throws IndexOutOfBoundsException if maximum number of fields is
+     * @throws IndexOutOfBoundsException if the maximum message capacity is
      *   exceeded
      */
     public FIXValue addField(int tag) {
+        if (count == tags.length)
+            increaseCapacityOnAddField();
+
         tags[count] = tag;
 
         return values[count++];
@@ -228,7 +260,7 @@ public class FIXMessage {
 
         while (buffer.hasRemaining()) {
             if (count == tags.length)
-                tooManyFields();
+                increaseCapacityOnGet();
 
             int tag = FIXTags.get(buffer);
             if (tag == 0)
@@ -322,8 +354,28 @@ public class FIXMessage {
         }
     }
 
-    private static void tooManyFields() throws FIXMessageOverflowException {
-        throw new FIXMessageOverflowException("Too many fields");
+    private void increaseCapacityOnAddField() {
+        if (count == maxMessageCapacity)
+            throw new IndexOutOfBoundsException("Too many fields");
+
+        increaseCapacity();
+    }
+
+    private void increaseCapacityOnGet() throws FIXMessageOverflowException {
+        if (count == maxMessageCapacity)
+            throw new FIXMessageOverflowException("Too many fields");
+
+        increaseCapacity();
+    }
+
+    private void increaseCapacity() {
+        int messageCapacity = Math.min(2 * tags.length, maxMessageCapacity);
+
+        tags = Arrays.copyOf(tags, messageCapacity);
+        values = Arrays.copyOf(values, messageCapacity);
+
+        for (int i = count; i < values.length; i++)
+            values[i] = new FIXValue(fieldCapacity);
     }
 
 }
