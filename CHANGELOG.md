@@ -1,5 +1,12 @@
 # Release Notes
 
+## 2.1.0 (????-??-??)
+
+- Specify Java module names (Jussi Virtanen)
+
+  Introduce minimal Java module support by specifying module names for all
+  libraries corresponding to their package names.
+
 ## 2.0.0 (2022-10-29)
 
 See the [upgrade instructions](UPGRADE-2.0.0.md).
