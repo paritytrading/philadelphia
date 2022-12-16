@@ -2,6 +2,8 @@
 
 ## 2.1.0 (????-??-??)
 
+See the [upgrade instructions](UPGRADE-2.1.0.md).
+
 - Update FIX Latest support to EP273 (Jussi Virtanen)
 
 - Specify Java module names (Jussi Virtanen)
