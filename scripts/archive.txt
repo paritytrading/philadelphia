@@ -4,6 +4,7 @@ README.md
 UPGRADE-1.0.0.md
 UPGRADE-1.2.0.md
 UPGRADE-2.0.0.md
+UPGRADE-2.1.0.md
 applications/client/README.md
 applications/client/etc/example.conf
 applications/client/etc/example.txt
