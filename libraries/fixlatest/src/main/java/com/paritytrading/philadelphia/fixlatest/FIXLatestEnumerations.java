@@ -267,6 +267,7 @@ public class FIXLatestEnumerations {
         public static final String FidessaInstrumentMnemonic           = "V";
         public static final String IndexName                           = "W";
         public static final String UniformSymbol                       = "X";
+        public static final String DigitalTokenIdentifier              = "Y";
 
         private SecurityIDSourceValues() {
         }
@@ -1103,6 +1104,7 @@ public class FIXLatestEnumerations {
         public static final String Retired                                  = "RETIRED";
         public static final String MediumTermNotes                          = "MTN";
         public static final String TaxExemptCommercialPaper                 = "TECP";
+        public static final String DigitalAsset                             = "DIGITAL";
         public static final String OptionsOnFutures                         = "OOF";
         public static final String SovereignBond                            = "SOV";
         public static final String Overnight                                = "ONITE";
@@ -11836,6 +11838,87 @@ public class FIXLatestEnumerations {
         public static final int OrderSplit       = 2;
 
         private OrderRelationshipValues() {
+        }
+
+    }
+
+    /**
+     * Values for CurrencyCodeSource(2897).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>LegCurrencyCodeSource(2898)</li>
+     *   <li>SettlCurrencyCodeSource(2899)</li>
+     *   <li>LegSettlCurrencyCodeSource(2900)</li>
+     *   <li>SideCurrencyCodeSource(2901)</li>
+     *   <li>SideSettlCurrencyCodeSource(2902)</li>
+     *   <li>SettlementAmountCurrencyCodeSource(2903)</li>
+     *   <li>StrikeCurrencyCodeSource(2904)</li>
+     *   <li>UnitOfMeasureCurrencyCodeSource(2905)</li>
+     *   <li>PriceUnitOfMeasureCurrencyCodeSource(2906)</li>
+     *   <li>PriceQuoteCurrencyCodeSource(2907)</li>
+     *   <li>LegStrikeCurrencyCodeSource(2908)</li>
+     *   <li>LegUnitOfMeasureCurrencyCodeSource(2909)</li>
+     *   <li>LegPriceUnitOfMeasureCurrencyCodeSource(2910)</li>
+     *   <li>LegPriceQuoteCurrencyCodeSource(2911)</li>
+     *   <li>DerivativeStrikeCurrencyCodeSource(2912)</li>
+     *   <li>DerivativeUnitOfMeasureCurrencyCodeSource(2913)</li>
+     *   <li>DerivativePriceUnitOfMeasureCurrencyCodeSource(2914)</li>
+     *   <li>DerivativePriceQuoteCurrencyCodeSource(2915)</li>
+     *   <li>UnderlyingCurrencyCodeSource(2916)</li>
+     *   <li>UnderlyingStrikeCurrencyCodeSource(2917)</li>
+     *   <li>UnderlyingUnitOfMeasureCurrencyCodeSource(2918)</li>
+     *   <li>UnderlyingPriceUnitOfMeasureCurrencyCodeSource(2919)</li>
+     *   <li>UnderlyingPriceQuoteCurrencyCodeSource(2920)</li>
+     *   <li>UnderlyingNotionalCurrencyCodeSource(2921)</li>
+     *   <li>CommCurrencyCodeSource(2922)</li>
+     *   <li>CommissionCurrencyCodeSource(2923)</li>
+     *   <li>CommissionUnitOfMeasureCurrencyCodeSource(2924)</li>
+     *   <li>AllocCommissionCurrencyCodeSource(2925)</li>
+     *   <li>AllocCommissionUnitOfMeasureCurrencyCodeSource(2926)</li>
+     *   <li>AllocSettlCurrencyCodeSource(2927)</li>
+     *   <li>LegAllocSettlCurrencyCodeSource(2928)</li>
+     *   <li>CollateralCurrencyCodeSource(2929)</li>
+     *   <li>SideCollateralCurrencyCodeSource(2930)</li>
+     *   <li>CollateralReinvestmentCurrencyCodeSource(2931)</li>
+     *   <li>SideCollateralReinvestmentCurrencyCodeSource(2932)</li>
+     *   <li>TradeAllocCurrencyCodeSource(2933)</li>
+     *   <li>TradingCurrencyCodeSource(2934)</li>
+     *   <li>LimitAmtCurrencyCodeSource(2935)</li>
+     *   <li>PosQtyUnitOfMeasureCurrencyCodeSource(2936)</li>
+     *   <li>PositionCurrencyCodeSource(2937)</li>
+     *   <li>LegPosCurrencyCodeSource(2938)</li>
+     *   <li>RiskLimitCurrencyCodeSource(2939)</li>
+     *   <li>EntitlementAttribCurrencyCodeSource(2940)</li>
+     *   <li>ComplexOptPayoutCurrencyCodeSource(2941)</li>
+     *   <li>ComplexEventCurrencyOneCodeSource(2942)</li>
+     *   <li>ComplexEventCurrencyTwoCodeSource(2943)</li>
+     *   <li>LegComplexOptPayoutCurrencyCodeSource(2944)</li>
+     *   <li>LegComplexEventCurrencyOneCodeSource(2945)</li>
+     *   <li>LegComplexEventCurrencyTwoCodeSource(2946)</li>
+     *   <li>UnderlyingComplexOptPayoutCurrencyCodeSource(2947)</li>
+     *   <li>UnderlyingComplexEventCurrencyOneCodeSource(2948)</li>
+     *   <li>UnderlyingComplexEventCurrencyTwoCodeSource(2949)</li>
+     *   <li>BenchmarkCurveCurrencyCodeSource(2950)</li>
+     *   <li>LegBenchmarkCurveCurrencyCodeSource(2951)</li>
+     *   <li>AgreementCurrencyCodeSource(2952)</li>
+     *   <li>LegAgreementCurrencyCodeSource(2953)</li>
+     *   <li>FundingSourceCurrencyCodeSource(2954)</li>
+     *   <li>PayCollectCurrencyCodeSource(2955)</li>
+     *   <li>PostTradePaymentCurrencyCodeSource(2956)</li>
+     *   <li>SettlPriceUnitOfMeasureCurrencyCodeSource(2960)</li>
+     * </ul>
+     */
+    public static class CurrencyCodeSourceValues {
+
+        public static final String CUSIP                               = "1";
+        public static final String SEDOL                               = "2";
+        public static final String ISINNumber                          = "4";
+        public static final String ISOCurrencyCode                     = "6";
+        public static final String FinancialInstrumentGlobalIdentifier = "S";
+        public static final String DigitalTokenIdentifier              = "Y";
+
+        private CurrencyCodeSourceValues() {
         }
 
     }
