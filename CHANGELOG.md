@@ -2,6 +2,8 @@
 
 ## 2.1.0 (????-??-??)
 
+- Update FIX Latest support to EP273 (Jussi Virtanen)
+
 - Specify Java module names (Jussi Virtanen)
 
   Introduce minimal Java module support by specifying module names for all
