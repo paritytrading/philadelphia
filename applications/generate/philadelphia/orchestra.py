@@ -18,7 +18,6 @@ import typing
 
 from . import etree
 from . import model
-from . import source
 
 
 _NS = {
@@ -49,9 +48,6 @@ def read_enumerations(filename: str) -> typing.List[model.Enumeration]:
     code_sets = _read_code_sets(tree)
     return sorted([_make_enumeration(code_set, fields_by_type[code_set.name]) for code_set in code_sets if _has_values(code_set)],
                   key=lambda enumeration: int(enumeration.primary_field.tag))
-
-
-READER = source.Reader(read_enumerations, read_fields, read_messages)
 
 
 class _Code(typing.NamedTuple):

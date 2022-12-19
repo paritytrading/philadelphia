@@ -18,7 +18,13 @@ import typing
 from . import model
 
 
-class Reader(typing.NamedTuple):
-    read_enumerations: typing.Callable[[str], typing.List[model.Enumeration]]
-    read_fields: typing.Callable[[str], typing.List[model.Field]]
-    read_messages: typing.Callable[[str], typing.List[model.Message]]
+class Source(typing.Protocol):
+
+    def read_enumerations(self, filename: str) -> typing.List[model.Enumeration]:
+        ...
+
+    def read_fields(self, filename: str) -> typing.List[model.Field]:
+        ...
+
+    def read_messages(self, filename: str) -> typing.List[model.Message]:
+        ...

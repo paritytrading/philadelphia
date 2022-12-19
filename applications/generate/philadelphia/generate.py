@@ -33,27 +33,27 @@ Commands:
 '''
 
 
-def enumerations(dialect: model.Dialect, reader: source.Reader, path: str) -> None:
-    enumerations = reader.read_enumerations(path)
+def enumerations(dialect: model.Dialect, source: source.Source, path: str) -> None:
+    enumerations = source.read_enumerations(path)
     print(model.format_enumerations(enumerations, dialect))
 
 
-def msg_types(dialect: model.Dialect, reader: source.Reader, path: str) -> None:
-    messages = reader.read_messages(path)
+def msg_types(dialect: model.Dialect, source: source.Source, path: str) -> None:
+    messages = source.read_messages(path)
     print(model.format_msg_types(messages, dialect))
 
 
-def tags(dialect: model.Dialect, reader: source.Reader, path: str) -> None:
-    fields = reader.read_fields(path)
+def tags(dialect: model.Dialect, source: source.Source, path: str) -> None:
+    fields = source.read_fields(path)
     print(model.format_tags(fields, dialect))
 
 
-def find_reader(path: str) -> source.Reader:
+def find_source(path: str) -> source.Source:
     if os.path.isdir(path):
-        return repository.READER
+        return repository
     if 'fixr:repository' in read(path):
-        return orchestra.READER
-    return quickfix.READER
+        return orchestra
+    return quickfix
 
 
 def read(path: str) -> str:
@@ -80,9 +80,9 @@ def main():
     path = sys.argv[3]
 
     dialect = model.read_dialect(config)
-    reader = find_reader(path)
+    source = find_source(path)
 
-    command(dialect, reader, path)
+    command(dialect, source, path)
 
 
 if __name__ == '__main__':
