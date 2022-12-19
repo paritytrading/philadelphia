@@ -19,7 +19,6 @@ import typing
 
 from . import etree
 from . import model
-from . import source
 
 
 def read_messages(dirname: str) -> typing.List[model.Message]:
@@ -45,9 +44,6 @@ def read_enumerations(dirname: str) -> typing.List[model.Enumeration]:
     tags = set(fields_by_tag.keys()).intersection(enums_by_tag.keys())
     return sorted([_make_enumeration(fields_by_tag[tag], enums_by_tag[tag]) for tag in tags if _has_values(fields_by_tag[tag])],
                   key=lambda enumeration: int(enumeration.primary_field.tag))
-
-
-READER = source.Reader(read_enumerations, read_fields, read_messages)
 
 
 class _Enum(typing.NamedTuple):

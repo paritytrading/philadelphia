@@ -17,7 +17,6 @@ import typing
 
 from . import etree
 from . import model
-from . import source
 
 
 def read_messages(filename: str) -> typing.List[model.Message]:
@@ -44,9 +43,6 @@ def read_enumerations(filename: str) -> typing.List[model.Enumeration]:
     tree = etree.parse(filename)
     return sorted([enumeration(elem) for elem in tree.findall('./fields/field') if _has_values(elem)],
                   key=lambda enumeration: int(enumeration.primary_field.tag))
-
-
-READER = source.Reader(read_enumerations, read_fields, read_messages)
 
 
 _TYPES = {
