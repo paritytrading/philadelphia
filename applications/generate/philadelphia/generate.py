@@ -15,7 +15,6 @@
 #
 import os.path
 import sys
-import typing
 
 from . import model
 from . import orchestra
