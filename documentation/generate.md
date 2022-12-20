@@ -7,7 +7,7 @@ As Philadelphia already contains the output of the code generation process,
 users do not need to deal with code generation at all. Developers only need to
 deal with it if either the specifications change or the process itself changes.
 
-Code generation requires Bash and Python 3.7 or newer.
+Code generation requires Bash and Python 3.8 or newer.
 
 ## Generating code from FIX Repository
 
