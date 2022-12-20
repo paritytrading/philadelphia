@@ -34,18 +34,15 @@ Commands:
 
 
 def enumerations(dialect: model.Dialect, source: source.Source, path: str) -> None:
-    enumerations = source.read_enumerations(path)
-    print(model.format_enumerations(enumerations, dialect))
+    print(model.format_enumerations(source.read_enumerations(path), dialect))
 
 
 def msg_types(dialect: model.Dialect, source: source.Source, path: str) -> None:
-    messages = source.read_messages(path)
-    print(model.format_msg_types(messages, dialect))
+    print(model.format_msg_types(source.read_messages(path), dialect))
 
 
 def tags(dialect: model.Dialect, source: source.Source, path: str) -> None:
-    fields = source.read_fields(path)
-    print(model.format_tags(fields, dialect))
+    print(model.format_tags(source.read_fields(path), dialect))
 
 
 def find_source(path: str) -> source.Source:
