@@ -30,4 +30,4 @@ jobs:
       - name: Run Checkstyle
         run: mvn checkstyle:check
       - name: Generate Javadoc
-        run: mvn compile javadoc:javadoc
+        run: mvn javadoc:javadoc
