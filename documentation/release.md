@@ -4,8 +4,8 @@ Philadelphia releases are published to [Maven Central Repository][] via
 [Sonatype OSS Repository Hosting (OSSRH)][Sonatype OSSRH].
 
 Publishing a release requires access to the Parity project on Sonatype OSSRH,
-write permission to the Philadelphia repository on GitHub, access to the Parity
-project on Twitter, and Python 3.8 or newer.
+write permission to the Philadelphia repository on GitHub, and Python 3.8 or
+newer.
 
   [Maven Central Repository]: https://search.maven.org/
   [Sonatype OSSRH]: https://central.sonatype.org/publish/publish-guide/
@@ -55,8 +55,5 @@ Follow these steps to publish a release:
 
   7. [Add the release][GitHub] to GitHub.
 
-  8. Announce the release on [Twitter][].
-
   [Sonatype]: https://oss.sonatype.org/
   [GitHub]: https://github.com/paritytrading/philadelphia/releases/new
-  [Twitter]: https://twitter.com/paritytrading
