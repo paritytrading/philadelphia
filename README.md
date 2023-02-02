@@ -63,6 +63,8 @@ See [Philadelphia Extras][] for additional extensions.
 
 For more information on Philadelphia:
 
+- Follow [paritytrading@fosstodon.org](https://fosstodon.org/@paritytrading)
+  on Mastodon for news and announcements
 - Join [the community][GitHub Discussions] on GitHub for discussions
 
   [GitHub Discussions]: https://github.com/paritytrading/philadelphia/discussions
