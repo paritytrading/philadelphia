@@ -24,18 +24,19 @@ class WaitCommand implements Command {
 
     private static final long WAIT_TIME_MILLIS = 50;
 
+    private String msgType = null;
+
+    WaitCommand() {
+        this.msgType = msgType;
+    }
+
     @Override
     public void execute(TerminalClient client, Scanner arguments) {
-        if (!arguments.hasNext())
-            throw new IllegalArgumentException();
-
-        String msgType = arguments.next();
-
-        if (arguments.hasNext())
-            throw new IllegalArgumentException();
-
         int fromIndex = client.getMessages().collect().size();
+        waitUntilMsgTypeReceived(client, fromIndex, msgType);
+    }
 
+    private void waitUntilMsgTypeReceived(TerminalClient client, int fromIndex, String msgType) {
         while (true) {
             try {
                 Thread.sleep(WAIT_TIME_MILLIS);
@@ -66,10 +67,11 @@ class WaitCommand implements Command {
 
     private static List<String> getMsgTypes(Messages messages, int fromIndex) {
         return messages.collect()
-            .stream()
-            .skip(fromIndex)
-            .map(Message::getMsgType)
-            .collect(toList());
+                .stream()
+                .skip(fromIndex)
+                .map(Message::getMsgType)
+                .collect(toList());
     }
 
 }
+

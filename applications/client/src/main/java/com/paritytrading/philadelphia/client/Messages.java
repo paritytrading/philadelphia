@@ -24,19 +24,19 @@ import java.util.List;
 
 class Messages implements FIXMessageListener, FIXConnectionStatusListener {
 
-    private final List<Message> messages;
+    private final MessageCollection messageCollection;
 
     Messages() {
-        messages = new ArrayList<>();
+        messageCollection = new MessageCollection();
     }
 
     synchronized List<Message> collect() {
-        return new ArrayList<>(messages);
+        return messageCollection.collect();
     }
 
     @Override
     public void message(FIXMessage message) {
-        add(message);
+        messageCollection.add(message);
     }
 
     @Override
@@ -53,25 +53,38 @@ class Messages implements FIXMessageListener, FIXConnectionStatusListener {
 
     @Override
     public void reject(FIXConnection connection, FIXMessage message) {
-        add(message);
+        messageCollection.add(message);
     }
 
     @Override
     public void logon(FIXConnection connection, FIXMessage message) {
-        add(message);
+        messageCollection.add(message);
     }
 
     @Override
     public void logout(FIXConnection connection, FIXMessage message) {
-        add(message);
+        messageCollection.add(message);
+    }
+}
+
+class MessageCollection {
+    private final List<Message> messages;
+
+    MessageCollection() {
+        messages = new ArrayList<>();
     }
 
-    private void add(FIXMessage message) {
+    synchronized List<Message> collect() {
+        return new ArrayList<>(messages);
+    }
+
+    synchronized void add(FIXMessage message) {
         add(Message.get(message));
     }
 
-    private synchronized void add(Message message) {
+    synchronized void add(Message message) {
         messages.add(message);
     }
-
 }
+
+

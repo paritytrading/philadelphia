@@ -18,7 +18,7 @@ package com.paritytrading.philadelphia.client;
 import java.io.IOException;
 import java.util.Scanner;
 
-interface Command {
+public interface Command {
 
     void execute(TerminalClient client, Scanner arguments) throws IOException;
 
@@ -28,4 +28,10 @@ interface Command {
 
     String getUsage();
 
+    default void doExecute(TerminalClient client, Scanner arguments) throws IOException {
+        if (arguments.hasNext())
+            throw new IllegalArgumentException();
+
+        client.close();
+    }
 }

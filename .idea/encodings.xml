@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/applications/client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/applications/client/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/applications/generate/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/applications/generate/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/examples/acceptor/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/examples/acceptor/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/examples/initiator/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/examples/initiator/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/fix40/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/fix40/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/fix41/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/fix41/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/fix42/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/fix42/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/fix43/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/fix43/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/fix44/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/fix44/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/fix50/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/fix50/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/fix50sp1/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/fix50sp1/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/fix50sp2/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/fix50sp2/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/fixlatest/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/fixlatest/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/fixt11/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/fixt11/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tests/perf-test/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tests/perf-test/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
