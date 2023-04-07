@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 class SendCommand implements Command {
-
     @Override
     public void execute(TerminalClient client, Scanner arguments) throws IOException {
         String message = arguments.findInLine(".*");
@@ -43,5 +42,4 @@ class SendCommand implements Command {
     public String getUsage() {
         return "send <message>";
     }
-
 }
