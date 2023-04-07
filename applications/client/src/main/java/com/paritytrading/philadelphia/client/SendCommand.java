@@ -18,7 +18,34 @@ package com.paritytrading.philadelphia.client;
 import java.io.IOException;
 import java.util.Scanner;
 
-class SendCommand implements Command {
+//class SendCommand implements Command {
+//    @Override
+//    public void execute(TerminalClient client, Scanner arguments) throws IOException {
+//        String message = arguments.findInLine(".*");
+//        if (message == null)
+//            throw new IllegalArgumentException();
+//
+//        client.getSession().send(Message.get(message.trim()));
+//    }
+//
+//    @Override
+//    public String getName() {
+//        return "send";
+//    }
+//
+//    @Override
+//    public String getDescription() {
+//        return "Send a message";
+//    }
+//
+//    @Override
+//    public String getUsage() {
+//        return "send <message>";
+//    }
+//}
+
+public class SendCommand implements Command {
+
     @Override
     public void execute(TerminalClient client, Scanner arguments) throws IOException {
         String message = arguments.findInLine(".*");
@@ -38,7 +65,6 @@ class SendCommand implements Command {
         return "Send a message";
     }
 
-    @Override
     public String getUsage() {
         return "send <message>";
     }
