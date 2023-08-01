@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Philadelphia authors
+ * Copyright 2023 Philadelphia authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -2924,6 +2924,8 @@ public class FIXLatestTags {
     public static final int LegSymbolPositionNumber                                          = 2958;
     public static final int UnderlyingSymbolPositionNumber                                   = 2959;
     public static final int SettlPriceUnitOfMeasureCurrencyCodeSource                        = 2960;
+    public static final int AnonymousTradeIndicator                                          = 2961;
+    public static final int SecurityReferenceDataSupplement                                  = 2962;
     public static final int NoAdditionalTermBondRefs                                         = 40000;
     public static final int AdditionalTermBondSecurityID                                     = 40001;
     public static final int AdditionalTermBondSecurityIDSource                               = 40002;
