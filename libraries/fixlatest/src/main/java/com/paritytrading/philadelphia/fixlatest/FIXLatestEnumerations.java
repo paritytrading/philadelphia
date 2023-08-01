@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Philadelphia authors
+ * Copyright 2023 Philadelphia authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9268,6 +9268,24 @@ public class FIXLatestEnumerations {
         public static final int PostTrdVal        = 6;
 
         private RegulatoryTradeIDEventValues() {
+        }
+
+    }
+
+    /**
+     * Values for RegulatoryTradeIDSource(1905).
+     *
+     * <p>The following fields also use these values:</p>
+     * <ul>
+     *   <li>AllocRegulatoryTradeIDSource(1910)</li>
+     *   <li>SideRegulatoryTradeIDSource(1973)</li>
+     * </ul>
+     */
+    public static class RegulatoryTradeIDSourceValues {
+
+        public static final String UniqueTransactionIdentifier = "1";
+
+        private RegulatoryTradeIDSourceValues() {
         }
 
     }
