@@ -30,3 +30,4 @@ module example {
     requires com.paritytrading.philadelphia;
     requires com.paritytrading.philadelphia.fix42;
 }
+```
