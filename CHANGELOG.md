@@ -4,6 +4,13 @@
 
 See the [upgrade instructions](UPGRADE-2.1.0.md).
 
+- Introduce message capacity (Jussi Virtanen)
+
+  Simplify configuration by introducing the concept of message capacity: the
+  number of fields a message container can hold. A message container starts at
+  its initial message capacity and grows when necessary until it reaches its
+  maximum message capacity.
+
 - Update FIX Latest support to EP276 (Jussi Virtanen)
 
 - Specify Java module names (Jussi Virtanen)

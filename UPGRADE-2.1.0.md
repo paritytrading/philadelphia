@@ -2,6 +2,37 @@
 
 Philadelphia 2.1.0 contains minor API changes. See below for details.
 
+## Message capacity
+
+Philadelphia 2.1.0 introduces the concept of message capacity: the number
+of fields a message container can hold. It provides two new configuration
+parameters for this purpose: the initial message capacity and the maximum
+message capacity. A message container will grow when necessary, but its
+capacity will not exceed its maximum.
+
+The default initial message capacity is 64 fields, and the default maximum
+message capacity is 65536 fields. Use the `setMinMessageCapacity()` and
+`setMaxMessageCapacity()` methods in `FIXConfig.Builder` to alter these.
+
+The `FIXConfig.Builder#setMaxFieldCount()` method is now deprecated. If you
+want to retain the same behavior, use the `setMessageCapacity()` method
+instead. It sets both the initial and the maximum message capacity to the
+same value. See below for an example.
+
+Before:
+```java
+FIXConfig config = FIXConfig.newBuilder()
+        .setMaxFieldCount(128)
+        .build();
+```
+
+After:
+```java
+FIXConfig config = FIXConfig.newBuilder()
+        .setMessageCapacity(128)
+        .build();
+```
+
 ## Java modules
 
 Philadelphia 2.1.0 introduces rudimentary Java module support by setting module

@@ -195,7 +195,7 @@ public class FIXConnection implements Closeable {
 
         this.testRequestTxMillis = 0;
 
-        this.adminMessage = new FIXMessage(ADMIN_MESSAGE_MAX_FIELD_COUNT, config.getFieldCapacity());
+        this.adminMessage = new FIXMessage(ADMIN_MESSAGE_CAPACITY, config.getFieldCapacity());
 
         this.currentTimeMillis = currentTimeMillis;
 

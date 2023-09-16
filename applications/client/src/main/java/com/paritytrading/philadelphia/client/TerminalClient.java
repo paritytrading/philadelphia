@@ -202,7 +202,6 @@ class TerminalClient implements Closeable {
             .setSenderCompID(senderCompId)
             .setTargetCompID(targetCompId)
             .setHeartBtInt(heartBtInt)
-            .setMaxFieldCount(1024)
             .setFieldCapacity(1024)
             .setRxBufferCapacity(1024 * 1024)
             .setTxBufferCapacity(1024 * 1024);

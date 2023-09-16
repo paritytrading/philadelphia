@@ -55,8 +55,19 @@ public class FIXConfig {
     public static final int DEFAULT_OUT_MSG_SEQ_NUM = 1;
 
     /**
+     * The default minimum message capacity.
+     */
+    public static final int DEFAULT_MIN_MESSAGE_CAPACITY = 64;
+
+    /**
+     * The default maximum message capacity.
+     */
+    public static final int DEFAULT_MAX_MESSAGE_CAPACITY = 65536;
+
+    /**
      * The default maximum number of fields.
      */
+    @Deprecated
     public static final int DEFAULT_MAX_FIELD_COUNT = 64;
 
     /**
@@ -90,7 +101,8 @@ public class FIXConfig {
     private final int     heartBtInt;
     private final long    inMsgSeqNum;
     private final long    outMsgSeqNum;
-    private final int     maxFieldCount;
+    private final int     minMessageCapacity;
+    private final int     maxMessageCapacity;
     private final int     fieldCapacity;
     private final int     rxBufferCapacity;
     private final int     txBufferCapacity;
@@ -105,7 +117,8 @@ public class FIXConfig {
      * @param heartBtInt the HeartBtInt(108)
      * @param inMsgSeqNum the incoming MsgSeqNum(34)
      * @param outMsgSeqNum the outgoing MsgSeqNum(34)
-     * @param maxFieldCount the maximum number of fields in a message
+     * @param minMessageCapacity the initial message capacity
+     * @param maxMessageCapacity the maximum message capacity
      * @param fieldCapacity the field capacity
      * @param rxBufferCapacity the receive buffer capacity
      * @param txBufferCapacity the transmit buffer capacity
@@ -114,20 +127,22 @@ public class FIXConfig {
      */
     public FIXConfig(byte[] beginString, String senderCompId,
             String targetCompId, int heartBtInt, long inMsgSeqNum,
-            long outMsgSeqNum, int maxFieldCount, int fieldCapacity,
+            long outMsgSeqNum, int minMessageCapacity,
+            int maxMessageCapacity, int fieldCapacity,
             int rxBufferCapacity, int txBufferCapacity,
             boolean checkSumEnabled) {
-        this.beginString      = beginString;
-        this.senderCompId     = senderCompId;
-        this.targetCompId     = targetCompId;
-        this.heartBtInt       = heartBtInt;
-        this.inMsgSeqNum      = inMsgSeqNum;
-        this.outMsgSeqNum     = outMsgSeqNum;
-        this.maxFieldCount    = maxFieldCount;
-        this.fieldCapacity    = fieldCapacity;
-        this.rxBufferCapacity = rxBufferCapacity;
-        this.txBufferCapacity = txBufferCapacity;
-        this.checkSumEnabled  = checkSumEnabled;
+        this.beginString        = beginString;
+        this.senderCompId       = senderCompId;
+        this.targetCompId       = targetCompId;
+        this.heartBtInt         = heartBtInt;
+        this.inMsgSeqNum        = inMsgSeqNum;
+        this.outMsgSeqNum       = outMsgSeqNum;
+        this.minMessageCapacity = minMessageCapacity;
+        this.maxMessageCapacity = maxMessageCapacity;
+        this.fieldCapacity      = fieldCapacity;
+        this.rxBufferCapacity   = rxBufferCapacity;
+        this.txBufferCapacity   = txBufferCapacity;
+        this.checkSumEnabled    = checkSumEnabled;
     }
 
     /**
@@ -185,12 +200,32 @@ public class FIXConfig {
     }
 
     /**
+     * Get the initial message capacity.
+     *
+     * @return the initial message capacity
+     */
+    public int getMinMessageCapacity() {
+        return minMessageCapacity;
+    }
+
+    /**
+     * Get the maximum message capacity.
+     *
+     * @return the maximum message capacity
+     */
+    public int getMaxMessageCapacity() {
+        return maxMessageCapacity;
+    }
+
+    /**
      * Get the maximum number of fields in a message.
      *
      * @return the maximum number of fields in a message
+     * @see #getMaxMessageCapacity
      */
+    @Deprecated
     public int getMaxFieldCount() {
-        return maxFieldCount;
+        return getMaxMessageCapacity();
     }
 
     /**
@@ -245,7 +280,8 @@ public class FIXConfig {
             .append("heartBtInt=").append(heartBtInt).append(",")
             .append("inMsgSeqNum=").append(inMsgSeqNum).append(",")
             .append("outMsgSeqNum=").append(outMsgSeqNum).append(",")
-            .append("maxFieldCount=").append(maxFieldCount).append(",")
+            .append("minMessageCapacity=").append(minMessageCapacity).append(",")
+            .append("maxMessageCapacity=").append(maxMessageCapacity).append(",")
             .append("fieldCapacity=").append(fieldCapacity).append(",")
             .append("rxBufferCapacity=").append(rxBufferCapacity).append(",")
             .append("txBufferCapacity=").append(txBufferCapacity).append(",")
@@ -274,7 +310,8 @@ public class FIXConfig {
         private int     heartBtInt;
         private long    inMsgSeqNum;
         private long    outMsgSeqNum;
-        private int     maxFieldCount;
+        private int     minMessageCapacity;
+        private int     maxMessageCapacity;
         private int     fieldCapacity;
         private int     rxBufferCapacity;
         private int     txBufferCapacity;
@@ -284,17 +321,18 @@ public class FIXConfig {
          * Create a connection configuration builder.
          */
         public Builder() {
-            beginString      = DEFAULT_BEGIN_STRING;
-            senderCompId     = DEFAULT_SENDER_COMP_ID;
-            targetCompId     = DEFAULT_TARGET_COMP_ID;
-            heartBtInt       = DEFAULT_HEART_BT_INT;
-            inMsgSeqNum      = DEFAULT_IN_MSG_SEQ_NUM;
-            outMsgSeqNum     = DEFAULT_OUT_MSG_SEQ_NUM;
-            maxFieldCount    = DEFAULT_MAX_FIELD_COUNT;
-            fieldCapacity    = DEFAULT_FIELD_CAPACITY;
-            rxBufferCapacity = DEFAULT_RX_BUFFER_CAPACITY;
-            txBufferCapacity = DEFAULT_TX_BUFFER_CAPACITY;
-            checkSumEnabled  = DEFAULT_CHECK_SUM_ENABLED;
+            beginString        = DEFAULT_BEGIN_STRING;
+            senderCompId       = DEFAULT_SENDER_COMP_ID;
+            targetCompId       = DEFAULT_TARGET_COMP_ID;
+            heartBtInt         = DEFAULT_HEART_BT_INT;
+            inMsgSeqNum        = DEFAULT_IN_MSG_SEQ_NUM;
+            outMsgSeqNum       = DEFAULT_OUT_MSG_SEQ_NUM;
+            minMessageCapacity = DEFAULT_MIN_MESSAGE_CAPACITY;
+            maxMessageCapacity = DEFAULT_MAX_MESSAGE_CAPACITY;
+            fieldCapacity      = DEFAULT_FIELD_CAPACITY;
+            rxBufferCapacity   = DEFAULT_RX_BUFFER_CAPACITY;
+            txBufferCapacity   = DEFAULT_TX_BUFFER_CAPACITY;
+            checkSumEnabled    = DEFAULT_CHECK_SUM_ENABLED;
         }
 
         /**
@@ -392,15 +430,60 @@ public class FIXConfig {
         }
 
         /**
+         * Set the initial message capacity.
+         *
+         * @param minMessageCapacity the initial message capacity
+         * @return this instance
+         * @see #setMaxMessageCapacity
+         * @see #setMessageCapacity
+         */
+        public Builder setMinMessageCapacity(int minMessageCapacity) {
+            this.minMessageCapacity = minMessageCapacity;
+
+            return this;
+        }
+
+        /**
+         * Set the maximum message capacity.
+         *
+         * @param maxMessageCapacity the maximum message capacity
+         * @return this instance
+         * @see #setMinMessageCapacity
+         * @see #setMessageCapacity
+         */
+        public Builder setMaxMessageCapacity(int maxMessageCapacity) {
+            this.maxMessageCapacity = maxMessageCapacity;
+
+            return this;
+        }
+
+        /**
+         * Set both the initial message capacity and the maximum message
+         * capacity.
+         *
+         * @param messageCapacity the initial as well as the maximum message
+         *     capacity
+         * @return this instance
+         * @see #setMinMessageCapacity
+         * @see #setMaxMessageCapacity
+         */
+        public Builder setMessageCapacity(int messageCapacity) {
+            this.minMessageCapacity = messageCapacity;
+            this.maxMessageCapacity = messageCapacity;
+
+            return this;
+        }
+
+        /**
          * Set the maximum number of fields in a message.
          *
          * @param maxFieldCount the maximum number of fields in a message
          * @return this instance
+         * @see #setMessageCapacity
          */
+        @Deprecated
         public Builder setMaxFieldCount(int maxFieldCount) {
-            this.maxFieldCount = maxFieldCount;
-
-            return this;
+            return setMessageCapacity(maxFieldCount);
         }
 
         /**
@@ -459,9 +542,9 @@ public class FIXConfig {
          */
         public FIXConfig build() {
             return new FIXConfig(beginString, senderCompId, targetCompId,
-                    heartBtInt, inMsgSeqNum, outMsgSeqNum, maxFieldCount,
-                    fieldCapacity, rxBufferCapacity, txBufferCapacity,
-                    checkSumEnabled);
+                    heartBtInt, inMsgSeqNum, outMsgSeqNum, minMessageCapacity,
+                    maxMessageCapacity, fieldCapacity, rxBufferCapacity,
+                    txBufferCapacity, checkSumEnabled);
         }
 
     }
