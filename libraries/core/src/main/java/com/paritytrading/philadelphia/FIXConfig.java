@@ -25,68 +25,68 @@ import static java.nio.charset.StandardCharsets.*;
 public class FIXConfig {
 
     /**
-     * The default BeginString(8).
+     * The default BeginString(8): "FIX.4.2".
      */
     public static final byte[] DEFAULT_BEGIN_STRING = FIXVersion.FIX_4_2.getBeginString().getBytes(US_ASCII);
 
     /**
-     * The default SenderCompID(49).
+     * The default SenderCompID(49): "".
      */
     public static final String DEFAULT_SENDER_COMP_ID = "";
 
     /**
-     * The default TargetCompID(56).
+     * The default TargetCompID(56): "".
      */
     public static final String DEFAULT_TARGET_COMP_ID = "";
 
     /**
-     * The default HeartBtInt(108).
+     * The default HeartBtInt(108): 30.
      */
     public static final int DEFAULT_HEART_BT_INT = 30;
 
     /**
-     * The default incoming MsgSeqNum(34).
+     * The default incoming MsgSeqNum(34): 1.
      */
     public static final int DEFAULT_IN_MSG_SEQ_NUM = 1;
 
     /**
-     * The default outgoing MsgSeqNum(34).
+     * The default outgoing MsgSeqNum(34): 1.
      */
     public static final int DEFAULT_OUT_MSG_SEQ_NUM = 1;
 
     /**
-     * The default minimum message capacity.
+     * The default minimum message capacity: 64.
      */
     public static final int DEFAULT_MIN_MESSAGE_CAPACITY = 64;
 
     /**
-     * The default maximum message capacity.
+     * The default maximum message capacity: 65536.
      */
     public static final int DEFAULT_MAX_MESSAGE_CAPACITY = 65536;
 
     /**
-     * The default maximum number of fields.
+     * The default maximum number of fields: 65536.
      */
     @Deprecated
     public static final int DEFAULT_MAX_FIELD_COUNT = DEFAULT_MAX_MESSAGE_CAPACITY;
 
     /**
-     * The default field capacity.
+     * The default field capacity: 64.
      */
     public static final int DEFAULT_FIELD_CAPACITY = 64;
 
     /**
-     * The default receive buffer capacity.
+     * The default receive buffer capacity: 1 KiB.
      */
     public static final int DEFAULT_RX_BUFFER_CAPACITY = 1024;
 
     /**
-     * The default transmit buffer capacity.
+     * The default transmit buffer capacity: 1 KiB.
      */
     public static final int DEFAULT_TX_BUFFER_CAPACITY = 1024;
 
     /**
-     * The default incoming CheckSum(10) check status.
+     * The default incoming CheckSum(10) check status: enabled.
      */
     public static final boolean DEFAULT_CHECK_SUM_ENABLED = true;
 
