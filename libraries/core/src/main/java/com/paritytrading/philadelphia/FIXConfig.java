@@ -68,7 +68,7 @@ public class FIXConfig {
      * The default maximum number of fields.
      */
     @Deprecated
-    public static final int DEFAULT_MAX_FIELD_COUNT = 64;
+    public static final int DEFAULT_MAX_FIELD_COUNT = DEFAULT_MAX_MESSAGE_CAPACITY;
 
     /**
      * The default field capacity.
