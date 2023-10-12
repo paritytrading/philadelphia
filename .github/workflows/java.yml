@@ -16,6 +16,7 @@ jobs:
           - 8
           - 11
           - 17
+          - 21
     steps:
       - name: Check out GitHub repository
         uses: actions/checkout@v4
