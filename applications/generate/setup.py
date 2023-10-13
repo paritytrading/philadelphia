@@ -21,7 +21,8 @@ import xml.etree.ElementTree
 def find_version():
     tree = xml.etree.ElementTree.parse('pom.xml')
     ns = {'POM': 'http://maven.apache.org/POM/4.0.0'}
-    return tree.find('./POM:parent/POM:version', ns).text
+    version = tree.find('./POM:parent/POM:version', ns).text
+    return version.replace('-SNAPSHOT', 'a1')
 
 
 setup(
