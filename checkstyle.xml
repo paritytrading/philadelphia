@@ -53,5 +53,8 @@
 
     <!-- No unused imports. -->
     <module name="UnusedImports" />
+
+    <!-- No unused local variables. -->
+    <module name="UnusedLocalVariable" />
   </module>
 </module>
