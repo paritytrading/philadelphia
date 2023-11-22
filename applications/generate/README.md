@@ -38,7 +38,7 @@ mypy philadelphia
 
 Install Philadelphia Code Generator:
 ```
-python setup.py install
+pip install .
 ```
 
 Run Philadelphia Code Generator:
