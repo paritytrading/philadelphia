@@ -1,2 +1,2 @@
-mypy==1.7.0
+mypy==1.7.1
 setuptools==69.0.2
