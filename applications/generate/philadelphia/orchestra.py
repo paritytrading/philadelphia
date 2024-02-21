@@ -25,7 +25,7 @@ _NS = {
 }
 
 
-def read_messages(filename: str) -> typing.List[model.Message]:
+def read_messages(filename: str) -> list[model.Message]:
     def message(elem: etree.Element) -> model.Message:
         name = etree.get(elem, 'name')
         msg_type = etree.get(elem, 'msgType')
@@ -34,14 +34,14 @@ def read_messages(filename: str) -> typing.List[model.Message]:
     return [message(elem) for elem in tree.findall('.//fixr:message', _NS)]
 
 
-def read_fields(filename: str) -> typing.List[model.Field]:
+def read_fields(filename: str) -> list[model.Field]:
     tree = etree.parse(filename)
     fields = _read_fields(tree)
     return sorted([_make_field(field) for field in fields],
                   key=lambda field: int(field.tag))
 
 
-def read_enumerations(filename: str) -> typing.List[model.Enumeration]:
+def read_enumerations(filename: str) -> list[model.Enumeration]:
     tree = etree.parse(filename)
     fields = _read_fields(tree)
     fields_by_type = _group_fields_by_type(fields)
@@ -60,10 +60,10 @@ class _CodeSet(typing.NamedTuple):
     name: str
     id_: str
     type_: str
-    codes: typing.List[_Code]
+    codes: list[_Code]
 
 
-def _read_code_sets(tree: etree.ElementTree) -> typing.List[_CodeSet]:
+def _read_code_sets(tree: etree.ElementTree) -> list[_CodeSet]:
     def code(elem: etree.Element) -> _Code:
         name = etree.get(elem, 'name')
         value = etree.get(elem, 'value')
@@ -84,7 +84,7 @@ class _Field(typing.NamedTuple):
     type_: str
 
 
-def _read_fields(tree: etree.ElementTree) -> typing.List[_Field]:
+def _read_fields(tree: etree.ElementTree) -> list[_Field]:
     def field(elem: etree.Element) -> _Field:
         id_ = etree.get(elem, 'id')
         name = etree.get(elem, 'name')
@@ -97,7 +97,7 @@ def _make_field(field: _Field) -> model.Field:
     return model.Field(tag=field.id_, name=field.name)
 
 
-def _make_enumeration(code_set: _CodeSet, fields: typing.List[_Field]) -> model.Enumeration:
+def _make_enumeration(code_set: _CodeSet, fields: list[_Field]) -> model.Enumeration:
     primary_fields = [field for field in fields if code_set.id_ == field.id_]
     primary_field = primary_fields[0]
     secondary_fields = sorted([field for field in fields if code_set.id_ != field.id_],
@@ -132,14 +132,14 @@ _NAME_REPLACEMENTS = {
 }
 
 
-def _make_values(code_set: _CodeSet) -> typing.List[model.Value]:
+def _make_values(code_set: _CodeSet) -> list[model.Value]:
     def value(id_: str, code: _Code) -> model.Value:
         name = _NAME_REPLACEMENTS.get((id_, code.value), code.name)
         return model.Value(name=name, value=code.value)
     return [value(code_set.id_, code) for code in code_set.codes]
 
 
-def _group_fields_by_type(fields: typing.List[_Field]) -> typing.Dict[str, typing.List[_Field]]:
+def _group_fields_by_type(fields: list[_Field]) -> dict[str, list[_Field]]:
     sorted_by_type = sorted(fields, key=lambda field: field.type_)
     return {type_: list(grouped_by_type) for type_, grouped_by_type in itertools.groupby(sorted_by_type, lambda field: field.type_)}
 
@@ -154,7 +154,7 @@ def _has_values(code_set: _CodeSet) -> bool:
     return not code_set.id_ in _NO_VALUES and not code_set.type_ == 'Boolean'
 
 
-def _sorted_codes(codes: typing.List[_Code]) -> typing.List[_Code]:
+def _sorted_codes(codes: list[_Code]) -> list[_Code]:
     if all(code.sort is not None for code in codes):
         return sorted(codes, key=lambda code: code.sort or 0)
     return codes
