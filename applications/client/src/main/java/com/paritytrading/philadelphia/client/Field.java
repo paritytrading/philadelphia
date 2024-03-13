@@ -45,7 +45,7 @@ class Field {
         return tag;
     }
 
-    String getValue() {
+    String getFieldValue() {
         return value;
     }
 

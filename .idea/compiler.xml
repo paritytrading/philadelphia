@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="philadelphia-client" />
+        <module name="philadelphia-acceptor" />
+        <module name="philadelphia-initiator" />
+        <module name="philadelphia-fixt11" />
+        <module name="philadelphia-fix41" />
+        <module name="philadelphia-fix42" />
+        <module name="philadelphia-fix50" />
+        <module name="philadelphia-fix50sp1" />
+        <module name="philadelphia-fix40" />
+        <module name="philadelphia-fix50sp2" />
+        <module name="philadelphia-core" />
+        <module name="philadelphia-perf-test" />
+        <module name="philadelphia-fix43" />
+        <module name="philadelphia-fixlatest" />
+        <module name="philadelphia-fix44" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="philadelphia-acceptor" options="-Xlint:deprecation -Xlint:unchecked" />
+      <module name="philadelphia-client" options="-Xlint:deprecation -Xlint:unchecked" />
+      <module name="philadelphia-core" options="-Xlint:deprecation -Xlint:unchecked" />
+      <module name="philadelphia-fix40" options="-Xlint:deprecation -Xlint:unchecked" />
+      <module name="philadelphia-fix41" options="-Xlint:deprecation -Xlint:unchecked" />
+      <module name="philadelphia-fix42" options="-Xlint:deprecation -Xlint:unchecked" />
+      <module name="philadelphia-fix43" options="-Xlint:deprecation -Xlint:unchecked" />
+      <module name="philadelphia-fix44" options="-Xlint:deprecation -Xlint:unchecked" />
+      <module name="philadelphia-fix50" options="-Xlint:deprecation -Xlint:unchecked" />
+      <module name="philadelphia-fix50sp1" options="-Xlint:deprecation -Xlint:unchecked" />
+      <module name="philadelphia-fix50sp2" options="-Xlint:deprecation -Xlint:unchecked" />
+      <module name="philadelphia-fixlatest" options="-Xlint:deprecation -Xlint:unchecked" />
+      <module name="philadelphia-fixt11" options="-Xlint:deprecation -Xlint:unchecked" />
+      <module name="philadelphia-generate" options="-Xlint:deprecation -Xlint:unchecked" />
+      <module name="philadelphia-initiator" options="-Xlint:deprecation -Xlint:unchecked" />
+      <module name="philadelphia-parent" options="-Xlint:deprecation -Xlint:unchecked" />
+      <module name="philadelphia-perf-test" options="-Xlint:deprecation -Xlint:unchecked" />
+    </option>
+  </component>
+</project>

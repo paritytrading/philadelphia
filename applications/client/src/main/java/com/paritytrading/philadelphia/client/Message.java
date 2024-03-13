@@ -32,7 +32,8 @@ class Message {
         UNPRINTED_TAGS.add(52); // SendingTime
     }
 
-    private static final int MsgType = 35;
+    static int msg = 35;
+    private static final int MsgType = msg;
 
     private final String msgType;
 
@@ -52,7 +53,7 @@ class Message {
             Field field = Field.get(part);
 
             if (field.getTag() == MsgType)
-                msgType = field.getValue();
+                msgType = field.getFieldValue();
             else
                 fields.add(field);
         }
@@ -90,7 +91,7 @@ class Message {
 
     void put(FIXMessage message) {
         for (Field field : fields)
-            message.addField(field.getTag()).setString(field.getValue());
+            message.addField(field.getTag()).setString(field.getFieldValue());
     }
 
     @Override

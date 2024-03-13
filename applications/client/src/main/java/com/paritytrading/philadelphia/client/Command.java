@@ -18,7 +18,7 @@ package com.paritytrading.philadelphia.client;
 import java.io.IOException;
 import java.util.Scanner;
 
-interface Command {
+public interface Command {
 
     void execute(TerminalClient client, Scanner arguments) throws IOException;
 
@@ -27,5 +27,5 @@ interface Command {
     String getDescription();
 
     String getUsage();
-
 }
+

@@ -15,16 +15,14 @@
  */
 package com.paritytrading.philadelphia.client;
 
+import java.io.IOException;
 import java.util.Scanner;
 
-class ExitCommand implements Command {
+public class ExitCommand implements Command {
 
     @Override
-    public void execute(TerminalClient client, Scanner arguments) {
-        if (arguments.hasNext())
-            throw new IllegalArgumentException();
-
-        client.close();
+    public void execute(TerminalClient client, Scanner arguments) throws IOException {
+        doExecute(client, arguments);
     }
 
     @Override
@@ -43,3 +41,5 @@ class ExitCommand implements Command {
     }
 
 }
+
+
