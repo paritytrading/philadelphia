@@ -55,7 +55,7 @@
   </distributionManagement>
 
   <properties>
-    <java.version>8</java.version>
+    <java.version>11</java.version>
     <jmh.version>1.37</jmh.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -226,8 +226,7 @@
             <arg>-Xlint:deprecation</arg>
             <arg>-Xlint:unchecked</arg>
           </compilerArgs>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
+          <release>${java.version}</release>
         </configuration>
       </plugin>
       <plugin>
@@ -254,23 +253,6 @@
   </build>
 
   <profiles>
-    <profile>
-      <id>jdk-9-or-newer</id>
-      <activation>
-        <jdk>[9,)</jdk>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-              <release>${java.version}</release>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
     <profile>
       <id>jdk-21-or-newer</id>
       <activation>
