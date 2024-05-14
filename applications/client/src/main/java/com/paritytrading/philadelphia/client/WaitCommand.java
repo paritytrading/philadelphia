@@ -29,7 +29,7 @@ class WaitCommand implements Command {
         if (!arguments.hasNext())
             throw new IllegalArgumentException();
 
-        String msgType = arguments.next();
+        var msgType = arguments.next();
 
         if (arguments.hasNext())
             throw new IllegalArgumentException();
