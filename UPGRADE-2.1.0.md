@@ -1,6 +1,10 @@
 # Upgrading to Philadelphia 2.1.0
 
-Philadelphia 2.1.0 contains minor API changes. See below for details.
+Philadelphia 2.1.0 requires Java Runtime Environment (JRE) 11 or newer. If
+you are still on JRE 8, feel free to continue using Philadelphia 2.0.x or
+earlier.
+
+Philadelphia 2.1.0 also contains minor API changes. See below for details.
 
 ## Message capacity
 
