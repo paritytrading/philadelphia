@@ -16,7 +16,6 @@
 package com.paritytrading.philadelphia.client;
 
 import static java.nio.charset.StandardCharsets.*;
-import static java.util.Collections.*;
 
 import com.paritytrading.philadelphia.FIXConfig;
 import com.paritytrading.philadelphia.FIXVersion;
@@ -35,7 +34,6 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.util.stream.Stream;
 import org.jline.reader.EndOfFileException;
-import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
 import org.jline.reader.UserInterruptException;
 import org.jline.reader.impl.completer.ArgumentCompleter;
@@ -67,13 +65,12 @@ class TerminalClient implements Closeable {
 
     private TerminalClient(Messages messages, Session session) {
         this.messages = messages;
-        this.session  = session;
+        this.session = session;
     }
 
     static TerminalClient open(InetSocketAddress address, FIXConfig config) throws IOException {
-        Messages messages = new Messages();
-
-        Session session = Session.open(address, config, messages, messages);
+        var messages = new Messages();
+        var session = Session.open(address, config, messages, messages);
 
         return new TerminalClient(messages, session);
     }
@@ -87,7 +84,7 @@ class TerminalClient implements Closeable {
     }
 
     void run(List<String> lines) throws IOException {
-        LineReader reader = LineReaderBuilder.builder()
+        var reader = LineReaderBuilder.builder()
             .completer(new ArgumentCompleter(
                         new StringsCompleter(COMMAND_NAMES),
                         new NullCompleter()))
@@ -96,7 +93,7 @@ class TerminalClient implements Closeable {
         if (lines.isEmpty())
             printf("Type 'help' for help.\n");
 
-        for (String line : lines) {
+        for (var line : lines) {
             if (closed)
                 break;
 
@@ -106,7 +103,7 @@ class TerminalClient implements Closeable {
         }
 
         while (!closed) {
-            String line = reader.readLine("> ");
+            var line = reader.readLine("> ");
             if (line == null)
                 break;
 
@@ -120,12 +117,11 @@ class TerminalClient implements Closeable {
         if (line.trim().startsWith("#"))
             return;
 
-        Scanner scanner = scan(line);
-
+        var scanner = scan(line);
         if (!scanner.hasNext())
             return;
 
-        Command command = findCommand(scanner.next());
+        var command = findCommand(scanner.next());
         if (command == null) {
             printf("error: Unknown command\n");
             return;
@@ -148,7 +144,7 @@ class TerminalClient implements Closeable {
     }
 
     static Command findCommand(String name) {
-        for (Command command : COMMANDS) {
+        for (var command : COMMANDS) {
             if (name.equals(command.getName()))
                 return command;
         }
@@ -161,7 +157,7 @@ class TerminalClient implements Closeable {
     }
 
     private Scanner scan(String text) {
-        Scanner scanner = new Scanner(text);
+        var scanner = new Scanner(text);
         scanner.useLocale(LOCALE);
 
         return scanner;
@@ -172,9 +168,9 @@ class TerminalClient implements Closeable {
             usage();
 
         try {
-            Config config = config(args[0]);
+            var config = config(args[0]);
 
-            List<String> lines = emptyList();
+            List<String> lines = List.of();
 
             if (args.length == 2)
                 lines = readAllLines(args[1]);
@@ -190,14 +186,14 @@ class TerminalClient implements Closeable {
     }
 
     private static void main(Config config, List<String> lines) throws IOException {
-        String version      = config.getString("fix.version");
-        String senderCompId = config.getString("fix.sender-comp-id");
-        String targetCompId = config.getString("fix.target-comp-id");
-        int    heartBtInt   = config.getInt("fix.heart-bt-int");
-        String address      = config.getString("fix.address");
-        int    port         = config.getInt("fix.port");
+        var version = config.getString("fix.version");
+        var senderCompId = config.getString("fix.sender-comp-id");
+        var targetCompId = config.getString("fix.target-comp-id");
+        int heartBtInt = config.getInt("fix.heart-bt-int");
+        var address = config.getString("fix.address");
+        int port = config.getInt("fix.port");
 
-        FIXConfig.Builder builder = FIXConfig.newBuilder()
+        var builder = FIXConfig.newBuilder()
             .setVersion(FIXVersion.valueOf(version))
             .setSenderCompID(senderCompId)
             .setTargetCompID(targetCompId)
@@ -214,7 +210,7 @@ class TerminalClient implements Closeable {
     }
 
     private static Config config(String filename) throws FileNotFoundException {
-        File file = new File(filename);
+        var file = new File(filename);
         if (!file.exists() || !file.isFile())
             throw new FileNotFoundException(filename + ": No such file");
 
