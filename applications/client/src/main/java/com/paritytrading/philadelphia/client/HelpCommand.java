@@ -25,7 +25,7 @@ class HelpCommand implements Command {
     @Override
     public void execute(TerminalClient client, Scanner arguments) {
         if (arguments.hasNext()) {
-            Command command = findCommand(arguments.next());
+            var command = findCommand(arguments.next());
 
             if (arguments.hasNext())
                 throw new IllegalArgumentException();
@@ -44,7 +44,7 @@ class HelpCommand implements Command {
 
         int maxCommandNameLength = calculateMaxCommandNameLength();
 
-        for (Command command : COMMANDS)
+        for (var command : COMMANDS)
             printf("  %-" + maxCommandNameLength + "s  %s\n", command.getName(), command.getDescription());
 
         printf("\nType 'help <command>' for command specific help.\n");
