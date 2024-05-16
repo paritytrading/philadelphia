@@ -22,7 +22,7 @@ class SendCommand implements Command {
 
     @Override
     public void execute(TerminalClient client, Scanner arguments) throws IOException {
-        String message = arguments.findInLine(".*");
+        var message = arguments.findInLine(".*");
         if (message == null)
             throw new IllegalArgumentException();
 
