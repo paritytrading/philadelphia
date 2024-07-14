@@ -66,7 +66,7 @@ public class FIXMessageParser {
                 return false;
 
             // Garbled message
-            garbled = buffer.get() != '8' || buffer.get() != '=';
+            garbled = buffer.getShort() != BEGIN_STRING_SHORT;
 
             // Partial message
             if (!skipValue(buffer)) {
@@ -89,7 +89,7 @@ public class FIXMessageParser {
             }
 
             // Garbled message
-            garbled = buffer.get() != '9' || buffer.get() != '=';
+            garbled = buffer.getShort() != BODY_LENGTH_SHORT;
 
             int bodyLength = getInt(buffer);
 

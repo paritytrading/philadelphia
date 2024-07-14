@@ -172,10 +172,10 @@ public class FIXConnection implements Closeable {
 
         this.txHeaderBuffer = ByteBuffer.allocateDirect(config.getTxBufferCapacity());
 
-        this.txHeaderBuffer.put(BEGIN_STRING);
+        this.txHeaderBuffer.put(BEGIN_STRING_BYTES);
         this.txHeaderBuffer.put(config.getBeginString());
         this.txHeaderBuffer.put(SOH);
-        this.txHeaderBuffer.put(BODY_LENGTH);
+        this.txHeaderBuffer.put(BODY_LENGTH_BYTES);
 
         this.bodyLengthOffset = this.txHeaderBuffer.position();
 
@@ -518,7 +518,7 @@ public class FIXConnection implements Closeable {
         checkSum.setCheckSum(FIXCheckSums.sum(txHeaderBuffer, 0, txHeaderBuffer.position()) +
                 FIXCheckSums.sum(txBodyBuffer, 0, txBodyBuffer.position()));
 
-        txBodyBuffer.put(CHECK_SUM);
+        txBodyBuffer.put(CHECK_SUM_BYTES);
         checkSum.put(txBodyBuffer);
 
         txHeaderBuffer.flip();
