@@ -30,7 +30,7 @@ class FIX {
     static final byte[] BODY_LENGTH_BYTES = { '9', '=' };
 
     static final byte[] CHECK_SUM_BYTES = { '1', '0', '=' };
-    
+
     static final short BEGIN_STRING_SHORT = '8' << 8 | '=';
 
     static final short BODY_LENGTH_SHORT = '9' << 8 | '=';

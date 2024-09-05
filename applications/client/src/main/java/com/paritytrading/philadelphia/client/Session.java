@@ -50,7 +50,7 @@ class Session implements Closeable {
 
         this.lock = new Object();
 
-        Thread receiver = new Thread(new Receiver());
+        var receiver = new Thread(new Receiver());
 
         receiver.setDaemon(true);
         receiver.start();
@@ -59,16 +59,16 @@ class Session implements Closeable {
     static Session open(InetSocketAddress address,
             FIXConfig config, FIXMessageListener listener,
             FIXConnectionStatusListener statusListener) throws IOException {
-        SocketChannel channel = SocketChannel.open();
+        var channel = SocketChannel.open();
 
         channel.connect(address);
         channel.configureBlocking(false);
 
-        Selector selector = Selector.open();
+        var selector = Selector.open();
 
         channel.register(selector, SelectionKey.OP_READ);
 
-        FIXConnection connection = new FIXConnection(channel, config, listener, statusListener, System.currentTimeMillis());
+        var connection = new FIXConnection(channel, config, listener, statusListener, System.currentTimeMillis());
 
         return new Session(selector, connection);
     }

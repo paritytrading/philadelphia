@@ -11,7 +11,7 @@ Philadelphia is designed to exhibit low and predictable latency. To achieve
 this, it supports non-blocking networking and does not allocate memory on
 message reception or transmission.
 
-Philadelphia requires Java Runtime Environment (JRE) 8 or newer.
+Philadelphia requires Java Runtime Environment (JRE) 11 or newer.
 
 ## Download
 
