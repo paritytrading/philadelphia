@@ -21,7 +21,7 @@ from . import etree
 from . import model
 
 
-def read_messages(dirname: str) -> typing.List[model.Message]:
+def read_messages(dirname: str) -> list[model.Message]:
     def message(elem: etree.Element) -> model.Message:
         name = _find(elem, 'Name')
         msg_type = _find(elem, 'MsgType')
@@ -31,12 +31,12 @@ def read_messages(dirname: str) -> typing.List[model.Message]:
     return [message(elem) for elem in tree.findall('Message')]
 
 
-def read_fields(dirname: str) -> typing.List[model.Field]:
+def read_fields(dirname: str) -> list[model.Field]:
     fields = _read_fields(dirname)
     return sorted([_make_field(field) for field in fields], key=lambda field: int(field.tag))
 
 
-def read_enumerations(dirname: str) -> typing.List[model.Enumeration]:
+def read_enumerations(dirname: str) -> list[model.Enumeration]:
     fields = _read_fields(dirname)
     fields_by_tag = {field.tag: field for field in fields}
     enums = _read_enums(dirname)
@@ -63,14 +63,14 @@ def _make_field(field: _Field) -> model.Field:
     return model.Field(tag=field.tag, name=field.name)
 
 
-def _make_enumeration(field: _Field, enums: typing.List[_Enum]) -> model.Enumeration:
+def _make_enumeration(field: _Field, enums: list[_Enum]) -> model.Enumeration:
     values = _make_values(enums)
     type_ = _make_type(field.type_, values)
     return model.Enumeration(primary_field=_make_field(field), secondary_fields=[],
             type_=type_, values=values)
 
 
-def _make_values(enums: typing.List[_Enum]) -> typing.List[model.Value]:
+def _make_values(enums: list[_Enum]) -> list[model.Value]:
     def value(enum: _Enum) -> model.Value:
         return model.Value(name=enum.symbolic_name, value=enum.value)
     return [value(enum) for enum in _sorted_enums(enums)]
@@ -86,7 +86,7 @@ _TYPES = {
 }
 
 
-def _make_type(field_type: str, values: typing.List[model.Value]) -> str:
+def _make_type(field_type: str, values: list[model.Value]) -> str:
     type_ = _TYPES.get(field_type, field_type)
     if type_ == 'char' and values and max(len(value.value) for value in values) > 1:
         return 'String'
@@ -97,7 +97,7 @@ def _has_values(field: _Field) -> bool:
     return not field.type_ == 'Boolean' and not field.name == 'MsgType'
 
 
-def _read_fields(dirname: str) -> typing.List[_Field]:
+def _read_fields(dirname: str) -> list[_Field]:
     def field(elem: etree.Element) -> _Field:
         tag = _find(elem, 'Tag')
         name = _find(elem, 'Name')
@@ -108,8 +108,8 @@ def _read_fields(dirname: str) -> typing.List[_Field]:
     return [field(elem) for elem in tree.findall('Field')]
 
 
-def _read_enums(dirname: str) -> typing.List[_Enum]:
-    def enums(elem: etree.Element) -> typing.List[_Enum]:
+def _read_enums(dirname: str) -> list[_Enum]:
+    def enums(elem: etree.Element) -> list[_Enum]:
         tag = _find(elem, 'Tag')
         value = _read_value(elem, tag)
         symbolic_names = _read_symbolic_names(elem, tag, value)
@@ -122,7 +122,7 @@ def _read_enums(dirname: str) -> typing.List[_Enum]:
                   key=lambda enum: int(enum.tag))
 
 
-def _sorted_enums(enums: typing.List[_Enum]) -> typing.List[_Enum]:
+def _sorted_enums(enums: list[_Enum]) -> list[_Enum]:
     if all(enum.sort is not None for enum in enums):
         return sorted(enums, key=lambda enum: enum.sort or 0)
     return enums
@@ -159,7 +159,7 @@ _SYMBOLIC_NAME_ALIASES = {
 }
 
 
-def _read_symbolic_names(elem: etree.Element, tag: str, value: str) -> typing.List[str]:
+def _read_symbolic_names(elem: etree.Element, tag: str, value: str) -> list[str]:
     symbolic_name = _find(elem, 'SymbolicName')
     primary = _SYMBOLIC_NAMES.get((tag, value), symbolic_name)
     aliases = _SYMBOLIC_NAME_ALIASES.get((tag, value), [])
