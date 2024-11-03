@@ -3,7 +3,7 @@
 Philadelphia Code Generator is a simple console application for generating
 Philadelphia profiles for FIX dialects.
 
-Philadelphia Code Generator requires Python 3.8 or newer.
+Philadelphia Code Generator requires Python 3.9 or newer.
 
 ## Features
 
