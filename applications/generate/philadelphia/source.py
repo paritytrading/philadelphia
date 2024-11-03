@@ -20,11 +20,11 @@ from . import model
 
 class Source(typing.Protocol):
 
-    def read_enumerations(self, filename: str) -> typing.List[model.Enumeration]:
+    def read_enumerations(self, filename: str) -> list[model.Enumeration]:
         ...
 
-    def read_fields(self, filename: str) -> typing.List[model.Field]:
+    def read_fields(self, filename: str) -> list[model.Field]:
         ...
 
-    def read_messages(self, filename: str) -> typing.List[model.Message]:
+    def read_messages(self, filename: str) -> list[model.Message]:
         ...

@@ -13,13 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import typing
-
 from . import etree
 from . import model
 
 
-def read_messages(filename: str) -> typing.List[model.Message]:
+def read_messages(filename: str) -> list[model.Message]:
     def message(elem: etree.Element) -> model.Message:
         name = etree.get(elem, 'name')
         msgtype = etree.get(elem, 'msgtype')
@@ -28,13 +26,13 @@ def read_messages(filename: str) -> typing.List[model.Message]:
     return [message(elem) for elem in tree.findall('./messages/message')]
 
 
-def read_fields(filename: str) -> typing.List[model.Field]:
+def read_fields(filename: str) -> list[model.Field]:
     tree = etree.parse(filename)
     return sorted([_read_field(elem) for elem in tree.findall('./fields/field')],
                   key=lambda field: int(field.tag))
 
 
-def read_enumerations(filename: str) -> typing.List[model.Enumeration]:
+def read_enumerations(filename: str) -> list[model.Enumeration]:
     def enumeration(elem: etree.Element) -> model.Enumeration:
         field = _read_field(elem)
         values = _read_values(elem)
@@ -61,7 +59,7 @@ def _read_field(elem: etree.Element) -> model.Field:
     return model.Field(tag=number, name=name)
 
 
-def _read_type(elem: etree.Element, values: typing.List[model.Value]) -> str:
+def _read_type(elem: etree.Element, values: list[model.Value]) -> str:
     type_ = _TYPES.get(etree.get(elem, 'type'), 'String')
     if type_ == 'char' and values and max(len(value.value) for value in values) > 1:
         return 'String'
@@ -72,7 +70,7 @@ def _has_values(elem: etree.Element) -> bool:
     return etree.get(elem, 'name') != 'MsgType' and elem.find('value') is not None
 
 
-def _read_values(root: etree.Element) -> typing.List[model.Value]:
+def _read_values(root: etree.Element) -> list[model.Value]:
     def value(elem: etree.Element) -> model.Value:
         enum = etree.get(elem, 'enum')
         description = etree.get(elem, 'description')

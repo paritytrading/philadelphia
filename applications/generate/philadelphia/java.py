@@ -18,7 +18,7 @@ import textwrap
 import typing
 
 
-_TYPE_FORMATTERS: typing.Dict[str, typing.Callable[[str], str]] = {
+_TYPE_FORMATTERS: dict[str, typing.Callable[[str], str]] = {
     'char': lambda value: '\'' + value + '\'',
     'int': str,
     'String': lambda value: '"' + value + '"',
@@ -31,7 +31,7 @@ class ConstantField(typing.NamedTuple):
     value: str
 
 
-def _format_constant_fields(fields: typing.List[ConstantField]) -> str:
+def _format_constant_fields(fields: list[ConstantField]) -> str:
     type_width = max(len(field.type_) for field in fields)
     name_width = max(len(field.name) for field in fields)
     return '\n'.join(_format_constant_field(field, type_width, name_width)
@@ -48,7 +48,7 @@ def _format_constant_field(field: ConstantField, type_width: int,
 class InnerClass:
 
     def __init__(self, name: str, javadoc: str,
-            fields: typing.List[ConstantField]) -> None:
+            fields: list[ConstantField]) -> None:
         self.name = name
         self.javadoc = javadoc
         self.fields = fields
@@ -81,8 +81,8 @@ ${body}
 class Class:
 
     def __init__(self, name: str, javadoc: str,
-            classes: typing.Optional[typing.List[InnerClass]] = None,
-            fields: typing.Optional[typing.List[ConstantField]] = None) -> None:
+            classes: typing.Optional[list[InnerClass]] = None,
+            fields: typing.Optional[list[ConstantField]] = None) -> None:
         self.name = name
         self.javadoc = javadoc
         self.classes = classes if classes else []

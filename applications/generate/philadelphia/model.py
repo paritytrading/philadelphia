@@ -37,9 +37,9 @@ class Value(typing.NamedTuple):
 
 class Enumeration(typing.NamedTuple):
     primary_field: Field
-    secondary_fields: typing.List[Field]
+    secondary_fields: list[Field]
     type_: str
-    values: typing.List[Value]
+    values: list[Value]
 
 
 class Message(typing.NamedTuple):
@@ -56,7 +56,7 @@ def read_dialect(filename: str) -> Dialect:
     return Dialect(package_name, class_name_prefix, name)
 
 
-def format_enumerations(enumerations: typing.List[Enumeration], dialect: Dialect) -> java.CompilationUnit:
+def format_enumerations(enumerations: list[Enumeration], dialect: Dialect) -> java.CompilationUnit:
     name = '{}Enumerations'.format(dialect.class_name_prefix)
     javadoc = 'Enumerations for {}.'.format(dialect.name)
     classes = [_format_enumeration(enumeration) for enumeration in enumerations]
@@ -91,7 +91,7 @@ def _format_secondary_fields_javadoc(enumeration: Enumeration) -> typing.Optiona
     return '{}{}{}'.format(header, items, footer)
 
 
-def format_msg_types(messages: typing.List[Message], dialect: Dialect) -> java.CompilationUnit:
+def format_msg_types(messages: list[Message], dialect: Dialect) -> java.CompilationUnit:
     name = '{}MsgTypes'.format(dialect.class_name_prefix)
     javadoc = 'Message types for {}.'.format(dialect.name)
     fields = [_format_msg_type(message) for message in messages]
@@ -103,7 +103,7 @@ def _format_msg_type(message: Message) -> java.ConstantField:
     return java.ConstantField(type_=type_, name=message.name, value=message.msg_type)
 
 
-def format_tags(fields: typing.List[Field], dialect: Dialect) -> java.CompilationUnit:
+def format_tags(fields: list[Field], dialect: Dialect) -> java.CompilationUnit:
     name = '{}Tags'.format(dialect.class_name_prefix)
     javadoc = 'Tags for {}.'.format(dialect.name)
     constant_fields = [_format_tag(field) for field in fields]
@@ -115,7 +115,7 @@ def _format_tag(field: Field) -> java.ConstantField:
 
 
 def _format_constant_fields(name: str, javadoc: str,
-        fields: typing.List[java.ConstantField], dialect: Dialect) -> java.CompilationUnit:
+        fields: list[java.ConstantField], dialect: Dialect) -> java.CompilationUnit:
     package = java.Package(name=dialect.package_name)
     class_ = java.Class(name=name, javadoc=javadoc, fields=fields)
     return java.CompilationUnit(package, class_)
