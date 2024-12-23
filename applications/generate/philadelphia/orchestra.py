@@ -151,7 +151,7 @@ _NO_VALUES = [
 
 
 def _has_values(code_set: _CodeSet) -> bool:
-    return not code_set.id_ in _NO_VALUES and not code_set.type_ == 'Boolean'
+    return code_set.id_ not in _NO_VALUES and not code_set.type_ == 'Boolean'
 
 
 def _sorted_codes(codes: list[_Code]) -> list[_Code]:
