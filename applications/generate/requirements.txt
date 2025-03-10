@@ -1,2 +1,2 @@
 mypy==1.15.0
-setuptools==75.8.2
+setuptools==76.0.0
