@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import typing
 import xml.etree.ElementTree
 
 
@@ -22,7 +23,7 @@ Element = xml.etree.ElementTree.Element
 
 
 def parse(filename: str) -> ElementTree:
-    return xml.etree.ElementTree.parse(filename)
+    return typing.cast(ElementTree, xml.etree.ElementTree.parse(filename))
 
 
 def get(elem: Element, key: str) -> str:
