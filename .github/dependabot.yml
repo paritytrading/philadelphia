@@ -7,6 +7,8 @@ updates:
     ignore:
       - dependency-name: 'com.puppycrawl.tools:checkstyle'
         update-types: ['version-update:semver-major']
+      - dependency-name: 'org.junit.jupiter:junit-jupiter'
+        update-types: ['version-update:semver-major']
   - package-ecosystem: 'pip'
     directory: '/applications/generate'
     schedule:
