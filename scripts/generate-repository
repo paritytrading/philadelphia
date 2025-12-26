@@ -22,7 +22,7 @@
 #   https://www.fixtrading.org/standards/fix-repository/
 #
 # This script uses Philadelphia Code Generator and therefore requires Python
-# 3.9 or newer.
+# 3.10 or newer.
 #
 # As this repository already contains the generated FIX protocol versions, you
 # only need to run this script if you change Philadelphia Code Generator or add
