@@ -13,9 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from dataclasses import dataclass
+
 import itertools
 import os
-import typing
 
 from . import etree
 from . import model
@@ -46,14 +47,16 @@ def read_enumerations(dirname: str) -> list[model.Enumeration]:
                   key=lambda enumeration: int(enumeration.primary_field.tag))
 
 
-class _Enum(typing.NamedTuple):
+@dataclass(frozen=True)
+class _Enum:
     tag: str
     value: str
     symbolic_name: str
-    sort: typing.Optional[int]
+    sort: int | None
 
 
-class _Field(typing.NamedTuple):
+@dataclass(frozen=True)
+class _Field:
     tag: str
     name: str
     type_: str
@@ -138,7 +141,7 @@ def _read_value(elem: etree.Element, tag: str) -> str:
     return _VALUES.get((tag, value), value)
 
 
-def _read_sort(root: etree.Element) -> typing.Optional[int]:
+def _read_sort(root: etree.Element) -> int | None:
     elem = root.find('Sort')
     if elem is None or elem.text is None:
         return None

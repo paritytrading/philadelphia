@@ -13,8 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from dataclasses import dataclass
+
 import itertools
-import typing
 
 from . import etree
 from . import model
@@ -50,13 +51,15 @@ def read_enumerations(filename: str) -> list[model.Enumeration]:
                   key=lambda enumeration: int(enumeration.primary_field.tag))
 
 
-class _Code(typing.NamedTuple):
+@dataclass(frozen=True)
+class _Code:
     name: str
     value: str
-    sort: typing.Optional[int]
+    sort: int | None
 
 
-class _CodeSet(typing.NamedTuple):
+@dataclass(frozen=True)
+class _CodeSet:
     name: str
     id_: str
     type_: str
@@ -78,7 +81,8 @@ def _read_code_sets(tree: etree.ElementTree) -> list[_CodeSet]:
     return [code_set(elem) for elem in tree.findall('.//fixr:codeSet', _NS)]
 
 
-class _Field(typing.NamedTuple):
+@dataclass(frozen=True)
+class _Field:
     id_: str
     name: str
     type_: str
@@ -115,7 +119,7 @@ _TYPES = {
 }
 
 
-def _make_type(field: _Field, code_set: typing.Optional[_CodeSet]) -> str:
+def _make_type(field: _Field, code_set: _CodeSet | None) -> str:
     if not code_set:
         return _TYPES.get(field.type_, field.type_)
     type_ = _TYPES.get(code_set.type_, code_set.type_)

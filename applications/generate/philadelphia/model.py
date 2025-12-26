@@ -13,36 +13,41 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from dataclasses import dataclass
+
 import configparser
-import typing
 
 from . import java
 
 
-class Dialect(typing.NamedTuple):
+@dataclass(frozen=True)
+class Dialect:
     package_name: str
     class_name_prefix: str
     name: str
 
 
-class Field(typing.NamedTuple):
+@dataclass(frozen=True)
+class Field:
     tag: str
     name: str
 
-
-class Value(typing.NamedTuple):
+@dataclass(frozen=True)
+class Value:
     name: str
     value: str
 
 
-class Enumeration(typing.NamedTuple):
+@dataclass(frozen=True)
+class Enumeration:
     primary_field: Field
     secondary_fields: list[Field]
     type_: str
     values: list[Value]
 
 
-class Message(typing.NamedTuple):
+@dataclass(frozen=True)
+class Message:
     name: str
     msg_type: str
 
@@ -81,7 +86,7 @@ def _format_primary_field_javadoc(enumeration: Enumeration) -> str:
     return 'Values for {}({}).'.format(field.name, field.tag)
 
 
-def _format_secondary_fields_javadoc(enumeration: Enumeration) -> typing.Optional[str]:
+def _format_secondary_fields_javadoc(enumeration: Enumeration) -> str | None:
     fields = enumeration.secondary_fields
     if not fields:
         return None
