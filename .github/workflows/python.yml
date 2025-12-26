@@ -31,6 +31,10 @@ jobs:
       - name: Run type check
         run: mypy philadelphia
         working-directory: ./applications/generate
+      - name: Run linter
+        uses: astral-sh/ruff-action@v3
+        with:
+          src: ./applications/generate
       - name: Install application
         run: pip install .
         working-directory: ./applications/generate
