@@ -81,7 +81,7 @@ def _format_primary_field_javadoc(enumeration: Enumeration) -> str:
     return 'Values for {}({}).'.format(field.name, field.tag)
 
 
-def _format_secondary_fields_javadoc(enumeration: Enumeration) -> typing.Optional[str]:
+def _format_secondary_fields_javadoc(enumeration: Enumeration) -> str | None:
     fields = enumeration.secondary_fields
     if not fields:
         return None

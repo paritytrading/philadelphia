@@ -53,7 +53,7 @@ def read_enumerations(filename: str) -> list[model.Enumeration]:
 class _Code(typing.NamedTuple):
     name: str
     value: str
-    sort: typing.Optional[int]
+    sort: int | None
 
 
 class _CodeSet(typing.NamedTuple):
@@ -115,7 +115,7 @@ _TYPES = {
 }
 
 
-def _make_type(field: _Field, code_set: typing.Optional[_CodeSet]) -> str:
+def _make_type(field: _Field, code_set: _CodeSet | None) -> str:
     if not code_set:
         return _TYPES.get(field.type_, field.type_)
     type_ = _TYPES.get(code_set.type_, code_set.type_)

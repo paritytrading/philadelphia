@@ -50,7 +50,7 @@ class _Enum(typing.NamedTuple):
     tag: str
     value: str
     symbolic_name: str
-    sort: typing.Optional[int]
+    sort: int | None
 
 
 class _Field(typing.NamedTuple):
@@ -138,7 +138,7 @@ def _read_value(elem: etree.Element, tag: str) -> str:
     return _VALUES.get((tag, value), value)
 
 
-def _read_sort(root: etree.Element) -> typing.Optional[int]:
+def _read_sort(root: etree.Element) -> int | None:
     elem = root.find('Sort')
     if elem is None or elem.text is None:
         return None

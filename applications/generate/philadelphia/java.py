@@ -80,9 +80,8 @@ ${body}
 
 class Class:
 
-    def __init__(self, name: str, javadoc: str,
-            classes: typing.Optional[list[InnerClass]] = None,
-            fields: typing.Optional[list[ConstantField]] = None) -> None:
+    def __init__(self, name: str, javadoc: str, classes: list[InnerClass] | None=None,
+            fields: list[ConstantField] | None=None):
         self.name = name
         self.javadoc = javadoc
         self.classes = classes if classes else []
