@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from dataclasses import dataclass
+
 import string
 import textwrap
 import typing
@@ -25,7 +27,8 @@ _TYPE_FORMATTERS: dict[str, typing.Callable[[str], str]] = {
 }
 
 
-class ConstantField(typing.NamedTuple):
+@dataclass(frozen=True)
+class ConstantField:
     type_: str
     name: str
     value: str
