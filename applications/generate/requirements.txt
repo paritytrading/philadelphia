@@ -1,2 +1,2 @@
 mypy==1.19.1
-setuptools==80.10.2
+setuptools==82.0.0
