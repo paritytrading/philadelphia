@@ -32,7 +32,7 @@ jobs:
         run: mypy philadelphia
         working-directory: ./applications/generate
       - name: Run linter
-        uses: astral-sh/ruff-action@v3.6.1
+        uses: astral-sh/ruff-action@v4.0.0
         with:
           src: ./applications/generate
       - name: Install application
