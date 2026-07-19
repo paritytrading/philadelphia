@@ -18,15 +18,14 @@ package com.paritytrading.philadelphia;
 class FIXIntDecoder {
 
     static long decode(byte[] bytes, int offset, int length) {
-        boolean negative = false;
+        if (bytes[offset] == '-')
+            return decodeNegative(bytes, offset, length);
+        else
+            return decodePositive(bytes, offset, length);
+    }
 
+    private static long decodePositive(byte[] bytes, int offset, int length) {
         int i = offset;
-
-        if (bytes[i] == '-') {
-            negative = true;
-
-            i++;
-        }
 
         long x = 0;
 
@@ -39,7 +38,24 @@ class FIXIntDecoder {
             x = 10 * x + b - '0';
         }
 
-        return negative ? -x : +x;
+        return x;
+    }
+
+    private static long decodeNegative(byte[] bytes, int offset, int length) {
+        int i = offset + 1;
+
+        long x = 0;
+
+        while (i < offset + length) {
+            byte b = bytes[i++];
+
+            if (b < '0' || b > '9')
+                notInt();
+
+            x = 10 * x + '0' - b;
+        }
+
+        return x;
     }
 
     private static void notInt() throws FIXValueFormatException {
