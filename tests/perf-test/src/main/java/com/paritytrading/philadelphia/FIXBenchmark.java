@@ -30,6 +30,6 @@ import org.openjdk.jmh.annotations.Warmup;
 @Fork(value = 3)
 @State(Scope.Benchmark)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
-@BenchmarkMode(Mode.SampleTime)
+@BenchmarkMode(Mode.AverageTime)
 abstract class FIXBenchmark {
 }
