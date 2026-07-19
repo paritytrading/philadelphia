@@ -27,9 +27,11 @@ class FIXIntDecoder {
     private static long decodePositive(byte[] bytes, int offset, int length) {
         int i = offset;
 
+        int endIndex = offset + length;
+
         long x = 0;
 
-        while (i < offset + length) {
+        while (i < endIndex) {
             byte b = bytes[i++];
 
             if (b < '0' || b > '9')
@@ -44,9 +46,11 @@ class FIXIntDecoder {
     private static long decodeNegative(byte[] bytes, int offset, int length) {
         int i = offset + 1;
 
+        int endIndex = offset + length;
+
         long x = 0;
 
-        while (i < offset + length) {
+        while (i < endIndex) {
             byte b = bytes[i++];
 
             if (b < '0' || b > '9')
