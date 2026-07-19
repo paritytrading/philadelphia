@@ -21,6 +21,9 @@ class FIXIntDecoder {
     private static final int MAX_POSITIVE_LENGTH = 19;
 
     static long decode(byte[] bytes, int offset, int length) {
+        if (length == 0)
+            notInt();
+
         if (bytes[offset] == '-') {
             if (length >= MAX_NEGATIVE_LENGTH)
                 return decodeNegativeExact(bytes, offset, length);
@@ -80,6 +83,9 @@ class FIXIntDecoder {
     }
 
     private static long decodeNegative(byte[] bytes, int offset, int length) {
+        if (length < 2)
+            notInt();
+
         int i = offset + 1;
 
         int endIndex = offset + length;

@@ -64,8 +64,18 @@ class FIXIntDecoderTest {
     }
 
     @Test
+    void empty() {
+        assertNotInt("");
+    }
+
+    @Test
+    void minus() {
+        assertNotInt("-");
+    }
+
+    @Test
     void notInt() {
-        assertThrows(FIXValueFormatException.class, () -> decode("FOO"));
+        assertNotInt("FOO");
     }
 
     @Test
@@ -102,6 +112,10 @@ class FIXIntDecoderTest {
         byte[] bytes = (">" + value + "<").getBytes(US_ASCII);
 
         return FIXIntDecoder.decode(bytes, 1, bytes.length - 2);
+    }
+
+    private static void assertNotInt(String value) {
+        assertMessage("Not an integer", value);
     }
 
     private static void assertTooLargeInt(BigInteger value) {
