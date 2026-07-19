@@ -265,28 +265,7 @@ public class FIXValue implements CharSequence {
      * @throws FIXValueFormatException if the value is not an integer
      */
     public long asInt() {
-        boolean negative = false;
-
-        int i = offset;
-
-        if (bytes[i] == '-') {
-            negative = true;
-
-            i++;
-        }
-
-        long x = 0;
-
-        while (i < offset + length) {
-            byte b = bytes[i++];
-
-            if (b < '0' || b > '9')
-                notInt();
-
-            x = 10 * x + b - '0';
-        }
-
-        return negative ? -x : +x;
+        return FIXIntDecoder.decode(bytes, offset, length);
     }
 
     /**
@@ -759,10 +738,6 @@ public class FIXValue implements CharSequence {
 
     private static void notFloat() throws FIXValueFormatException {
         throw new FIXValueFormatException("Not a float");
-    }
-
-    private static void notInt() throws FIXValueFormatException {
-        throw new FIXValueFormatException("Not an integer");
     }
 
     private static void notTimeOnly() throws FIXValueFormatException {
