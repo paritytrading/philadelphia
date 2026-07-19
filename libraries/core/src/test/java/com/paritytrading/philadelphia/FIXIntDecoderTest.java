@@ -18,6 +18,7 @@ package com.paritytrading.philadelphia;
 import static java.nio.charset.StandardCharsets.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigInteger;
 import org.junit.jupiter.api.Test;
 
 class FIXIntDecoderTest {
@@ -67,10 +68,55 @@ class FIXIntDecoderTest {
         assertThrows(FIXValueFormatException.class, () -> decode("FOO"));
     }
 
+    @Test
+    void positiveAdditionOverflow() {
+        assertTooLargeInt(BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE));
+    }
+
+    @Test
+    void positiveMultiplicationOverflow() {
+        assertTooLargeInt(BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.TEN));
+    }
+
+    @Test
+    void positiveLengthOverflow() {
+        assertTooLargeInt(BigInteger.valueOf(Long.MAX_VALUE).multiply(BigInteger.TEN));
+    }
+
+    @Test
+    void negativeAdditionOverflow() {
+        assertTooSmallInt(BigInteger.valueOf(Long.MIN_VALUE).subtract(BigInteger.ONE));
+    }
+
+    @Test
+    void negativeMultiplicationOverflow() {
+        assertTooSmallInt(BigInteger.valueOf(Long.MIN_VALUE).subtract(BigInteger.TEN));
+    }
+
+    @Test
+    void negativeLengthOverflow() {
+        assertTooSmallInt(BigInteger.valueOf(Long.MIN_VALUE).multiply(BigInteger.TEN));
+    }
+
     private static long decode(String value) {
         byte[] bytes = (">" + value + "<").getBytes(US_ASCII);
 
         return FIXIntDecoder.decode(bytes, 1, bytes.length - 2);
+    }
+
+    private static void assertTooLargeInt(BigInteger value) {
+        assertMessage("Too large integer", value.toString());
+    }
+
+    private static void assertTooSmallInt(BigInteger value) {
+        assertMessage("Too small integer", value.toString());
+    }
+
+    private static void assertMessage(String message, String value) {
+        FIXValueFormatException exception = assertThrows(FIXValueFormatException.class,
+                () -> decode(value));
+
+        assertEquals(message, exception.getMessage());
     }
 
 }

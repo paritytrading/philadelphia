@@ -17,11 +17,21 @@ package com.paritytrading.philadelphia;
 
 class FIXIntDecoder {
 
+    private static final int MAX_NEGATIVE_LENGTH = 20;
+    private static final int MAX_POSITIVE_LENGTH = 19;
+
     static long decode(byte[] bytes, int offset, int length) {
-        if (bytes[offset] == '-')
-            return decodeNegative(bytes, offset, length);
-        else
-            return decodePositive(bytes, offset, length);
+        if (bytes[offset] == '-') {
+            if (length >= MAX_NEGATIVE_LENGTH)
+                return decodeNegativeExact(bytes, offset, length);
+            else
+                return decodeNegative(bytes, offset, length);
+        } else {
+            if (length >= MAX_POSITIVE_LENGTH)
+                return decodePositiveExact(bytes, offset, length);
+            else
+                return decodePositive(bytes, offset, length);
+        }
     }
 
     private static long decodePositive(byte[] bytes, int offset, int length) {
@@ -38,6 +48,32 @@ class FIXIntDecoder {
                 notInt();
 
             x = 10 * x + b - '0';
+        }
+
+        return x;
+    }
+
+    private static long decodePositiveExact(byte[] bytes, int offset, int length) {
+        if (length > MAX_POSITIVE_LENGTH)
+            tooLargeInt();
+
+        int i = offset;
+
+        int endIndex = offset + length;
+
+        long x = 0;
+
+        while (i < endIndex) {
+            byte b = bytes[i++];
+
+            if (b < '0' || b > '9')
+                notInt();
+
+            try {
+                x = Math.addExact(Math.multiplyExact(x, 10), b - '0');
+            } catch (ArithmeticException e) {
+                tooLargeInt();
+            }
         }
 
         return x;
@@ -62,8 +98,42 @@ class FIXIntDecoder {
         return x;
     }
 
+    private static long decodeNegativeExact(byte[] bytes, int offset, int length) {
+        if (length > MAX_NEGATIVE_LENGTH)
+            tooSmallInt();
+
+        int i = offset + 1;
+
+        int endIndex = offset + length;
+
+        long x = 0;
+
+        while (i < endIndex) {
+            byte b = bytes[i++];
+
+            if (b < '0' || b > '9')
+                notInt();
+
+            try {
+                x = Math.addExact(Math.multiplyExact(x, 10), '0' - b);
+            } catch (ArithmeticException e) {
+                tooSmallInt();
+            }
+        }
+
+        return x;
+    }
+
     private static void notInt() throws FIXValueFormatException {
         throw new FIXValueFormatException("Not an integer");
+    }
+
+    private static void tooLargeInt() throws FIXValueFormatException {
+        throw new FIXValueFormatException("Too large integer");
+    }
+
+    private static void tooSmallInt() throws FIXValueFormatException {
+        throw new FIXValueFormatException("Too small integer");
     }
 
 }
