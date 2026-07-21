@@ -4,6 +4,15 @@
 
 See the [upgrade instructions](UPGRADE-2.1.0.md).
 
+- Improve `FIXValue#asInt()` (Jussi Virtanen)
+
+  Previously the method returned zero if the value consisted of zero bytes or
+  a single `-` byte, and previously the return value overflowed if it did not
+  fit into a `long`. Now the method throws a `FIXValueFormatException` instead
+  in both cases. These changes have a negligible negative performance impact of
+  less than 0.1 ns/op on the fast path based on the benchmark results on Apple
+  MacBook Pro (M1 Pro, 2021).
+
 - Introduce message capacity (Jussi Virtanen)
 
   Simplify configuration by introducing the concept of message capacity: the

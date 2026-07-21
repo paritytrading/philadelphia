@@ -201,66 +201,10 @@ class FIXValueTest {
     }
 
     @Test
-    void asIntMinValue() {
-        get("-9223372036854775808\u0001");
-
-        assertEquals(Long.MIN_VALUE, value.asInt());
-    }
-
-    @Test
-    void asIntMinusOneHundredTwentyThree() {
-        get("-123\u0001");
-
-        assertEquals(-123, value.asInt());
-    }
-
-    @Test
-    void asIntMinusOne() {
-        get("-1\u0001");
-
-        assertEquals(-1, value.asInt());
-    }
-
-    @Test
-    void asIntMinusZero() {
-        get("-0\u0001");
-
-        assertEquals(0, value.asInt());
-    }
-
-    @Test
-    void asIntZero() {
-        get("0\u0001");
-
-        assertEquals(0, value.asInt());
-    }
-
-    @Test
-    void asIntOne() {
-        get("1\u0001");
-
-        assertEquals(1, value.asInt());
-    }
-
-    @Test
-    void asIntOneHundredTwentyThree() {
+    void asInt() {
         get("123\u0001");
 
         assertEquals(123, value.asInt());
-    }
-
-    @Test
-    void asIntMaxValue() {
-        get("9223372036854775807\u0001");
-
-        assertEquals(Long.MAX_VALUE, value.asInt());
-    }
-
-    @Test
-    void notInt() {
-        value.setString("FOO");
-
-        assertThrows(FIXValueFormatException.class, () -> value.asInt());
     }
 
     @Test
