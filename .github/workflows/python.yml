@@ -20,21 +20,20 @@ jobs:
     steps:
       - name: Check out GitHub repository
         uses: actions/checkout@v7.0.0
-      - name: Set up Python
-        uses: actions/setup-python@v6.3.0
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v9.0.0
         with:
           python-version: ${{ matrix.python-version }}
-          cache: 'pip'
-      - name: Install development dependencies
-        run: pip install -r requirements.txt
+      - name: Install dependencies
+        run: uv sync
         working-directory: ./applications/generate
       - name: Run type check
-        run: mypy philadelphia
+        run: uv run mypy philadelphia
         working-directory: ./applications/generate
       - name: Run linter
         uses: astral-sh/ruff-action@v4.0.0
         with:
           src: ./applications/generate
-      - name: Install application
-        run: pip install .
+      - name: Build application
+        run: uv build --wheel
         working-directory: ./applications/generate

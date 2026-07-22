@@ -21,8 +21,8 @@
 #
 #   https://www.fixtrading.org/standards/fix-orchestra/
 #
-# This script uses Philadelphia Code Generator and therefore requires Python
-# 3.10 or newer.
+# This script uses Philadelphia Code Generator and requires Python 3.10 or
+# newer and uv.
 #
 # As this repository already contains the generated FIX protocol versions, you
 # only need to run this script if FIX Latest or FIXT 1.1 updates or you change
@@ -44,7 +44,7 @@ generate() {
     fi
 
     (cd applications/generate; \
-            python -m philadelphia.generate "$command" "../../$config_file" "$input_path" \
+            uv run philadelphia-generate "$command" "../../$config_file" "$input_path" \
                     >> "../../$output_path")
 }
 
