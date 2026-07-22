@@ -1,4 +1,5 @@
 __pycache__/
+/.venv/
 /build/
 /dist/
 /philadelphia.egg-info/

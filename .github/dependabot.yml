@@ -11,7 +11,7 @@ updates:
         update-types: ['version-update:semver-major']
       - dependency-name: 'org.junit.jupiter:junit-jupiter'
         update-types: ['version-update:semver-major']
-  - package-ecosystem: 'pip'
+  - package-ecosystem: 'uv'
     directory: '/applications/generate'
     schedule:
       interval: 'weekly'

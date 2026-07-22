@@ -19,26 +19,36 @@ Philadelphia Code Generator supports the following input sources:
 
 ## Development
 
-Run Philadelphia Code Generator with Python:
+Install dependencies:
 ```
-python -m philadelphia.generate <command> <configuration-file> <input-path>
+uv sync
 ```
 
-Install development dependencies:
+Run Philadelphia Code Generator:
 ```
-pip install -r requirements.txt
+uv run philadelphia-generate <command> <configuration-file> <input-path>
 ```
 
 Run type check:
 ```
-mypy philadelphia
+uv run mypy philadelphia
+```
+
+Run linter:
+```
+uv run ruff check
 ```
 
 ## Installation
 
+Build Philadelphia Code Generator:
+```
+uv build --wheel
+```
+
 Install Philadelphia Code Generator:
 ```
-pip install .
+pip install philadelphia-*.whl
 ```
 
 Run Philadelphia Code Generator:

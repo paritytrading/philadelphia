@@ -21,8 +21,8 @@
 #
 #   https://www.fixtrading.org/standards/fix-repository/
 #
-# This script uses Philadelphia Code Generator and therefore requires Python
-# 3.10 or newer.
+# This script uses Philadelphia Code Generator and requires Python 3.10 or
+# newer and uv.
 #
 # As this repository already contains the generated FIX protocol versions, you
 # only need to run this script if you change Philadelphia Code Generator or add
@@ -44,7 +44,7 @@ generate() {
     ./scripts/generate-license > "$output_path"
 
     (cd applications/generate; \
-            python -m philadelphia.generate "$command" "../../$config_path" "$input_path" >> "../../$output_path")
+            uv run philadelphia-generate "$command" "../../$config_path" "$input_path" >> "../../$output_path")
 }
 
 generate_version() {

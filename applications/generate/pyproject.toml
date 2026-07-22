@@ -1,5 +1,5 @@
 #
-# Copyright 2015 Philadelphia authors
+# Copyright 2026 Philadelphia authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,18 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-from setuptools import setup
+[build-system]
+requires = ["setuptools==82.0.1"]
+build-backend = "setuptools.build_meta"
 
-import xml.etree.ElementTree
+[project]
+name = "philadelphia"
+requires-python = ">=3.10"
+dynamic = ["version"]
 
+[project.scripts]
+philadelphia-generate = "philadelphia.generate:main"
 
-def find_version():
-    tree = xml.etree.ElementTree.parse('pom.xml')
-    ns = {'POM': 'http://maven.apache.org/POM/4.0.0'}
-    version = tree.find('./POM:parent/POM:version', ns).text
-    return version.replace('-SNAPSHOT', 'a1')
+[dependency-groups]
+dev = [
+    "mypy==2.1.0",
+    "ruff==0.15.22",
+]
 
-
-setup(
-    version=find_version(),
-)
+[tool.setuptools.packages.find]
+include = ["philadelphia*"]
