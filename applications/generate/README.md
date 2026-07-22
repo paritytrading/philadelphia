@@ -34,6 +34,11 @@ Run type check:
 uv run mypy philadelphia
 ```
 
+Run linter:
+```
+uv run ruff check
+```
+
 ## Installation
 
 Build Philadelphia Code Generator:

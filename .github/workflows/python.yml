@@ -31,9 +31,8 @@ jobs:
         run: uv run mypy philadelphia
         working-directory: ./applications/generate
       - name: Run linter
-        uses: astral-sh/ruff-action@v4.0.0
-        with:
-          src: ./applications/generate
+        run: uv run ruff check
+        working-directory: ./applications/generate
       - name: Build application
         run: uv build --wheel
         working-directory: ./applications/generate
