@@ -95,7 +95,7 @@ def _make_type(field_type: str, values: list[model.Value]) -> str:
 
 
 def _has_values(field: _Field) -> bool:
-    return not field.type_ == 'Boolean' and not field.name == 'MsgType'
+    return field.type_ != 'Boolean' and field.name != 'MsgType'
 
 
 def _read_fields(dirname: str) -> list[_Field]:
