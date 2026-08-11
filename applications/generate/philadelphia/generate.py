@@ -16,12 +16,7 @@
 import os.path
 import sys
 
-from . import model
-from . import orchestra
-from . import quickfix
-from . import repository
-from . import source
-
+from . import model, orchestra, quickfix, repository, source
 
 USAGE = '''\
 Usage: philadelphia-generate <command> <configuration-file> <input-path>

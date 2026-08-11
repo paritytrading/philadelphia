@@ -13,13 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-from dataclasses import dataclass
-
 import itertools
 import os
+from dataclasses import dataclass
 
-from . import etree
-from . import model
+from . import etree, model
 
 
 def read_messages(dirname: str) -> list[model.Message]:

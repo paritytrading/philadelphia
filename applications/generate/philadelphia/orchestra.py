@@ -13,13 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import itertools
 from dataclasses import dataclass
 
-import itertools
-
-from . import etree
-from . import model
-
+from . import etree, model
 
 _NS = {
     'fixr': 'http://fixprotocol.io/2020/orchestra/repository',

@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-from . import etree
-from . import model
+from . import etree, model
 
 
 def read_messages(filename: str) -> list[model.Message]:
