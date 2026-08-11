@@ -16,7 +16,6 @@
 import typing
 import xml.etree.ElementTree
 
-
 ElementTree = xml.etree.ElementTree.ElementTree
 
 Element = xml.etree.ElementTree.Element
