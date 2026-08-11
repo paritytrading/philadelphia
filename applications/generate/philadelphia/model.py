@@ -61,8 +61,8 @@ def read_dialect(filename: str) -> Dialect:
 
 
 def format_enumerations(enumerations: list[Enumeration], dialect: Dialect) -> java.CompilationUnit:
-    name = '{}Enumerations'.format(dialect.class_name_prefix)
-    javadoc = 'Enumerations for {}.'.format(dialect.name)
+    name = f'{dialect.class_name_prefix}Enumerations'
+    javadoc = f'Enumerations for {dialect.name}.'
     classes = [_format_enumeration(enumeration) for enumeration in enumerations]
     class_ = java.Class(name=name, javadoc=javadoc, classes=classes)
     package = java.Package(name=dialect.package_name)
@@ -71,10 +71,10 @@ def format_enumerations(enumerations: list[Enumeration], dialect: Dialect) -> ja
 
 def _format_enumeration(enumeration: Enumeration) -> java.InnerClass:
     primary_field = enumeration.primary_field
-    name = '{}Values'.format(primary_field.name)
+    name = f'{primary_field.name}Values'
     primary_field_javadoc = _format_primary_field_javadoc(enumeration)
     secondary_fields_javadoc = _format_secondary_fields_javadoc(enumeration) or ''
-    javadoc = '{}{}'.format(primary_field_javadoc, secondary_fields_javadoc)
+    javadoc = f'{primary_field_javadoc}{secondary_fields_javadoc}'
     fields = [java.ConstantField(type_=enumeration.type_, name=value.name, value=value.value)
               for value in enumeration.values]
     return java.InnerClass(name=name, javadoc=javadoc, fields=fields)
@@ -82,7 +82,7 @@ def _format_enumeration(enumeration: Enumeration) -> java.InnerClass:
 
 def _format_primary_field_javadoc(enumeration: Enumeration) -> str:
     field = enumeration.primary_field
-    return 'Values for {}({}).'.format(field.name, field.tag)
+    return f'Values for {field.name}({field.tag}).'
 
 
 def _format_secondary_fields_javadoc(enumeration: Enumeration) -> str | None:
@@ -90,14 +90,14 @@ def _format_secondary_fields_javadoc(enumeration: Enumeration) -> str | None:
     if not fields:
         return None
     header = '\n\n<p>The following fields also use these values:</p>\n<ul>\n'
-    items = ''.join('  <li>{}({})</li>\n'.format(field.name, field.tag) for field in fields)
+    items = ''.join(f'  <li>{field.name}({field.tag})</li>\n' for field in fields)
     footer = '</ul>\n'
-    return '{}{}{}'.format(header, items, footer)
+    return f'{header}{items}{footer}'
 
 
 def format_msg_types(messages: list[Message], dialect: Dialect) -> java.CompilationUnit:
-    name = '{}MsgTypes'.format(dialect.class_name_prefix)
-    javadoc = 'Message types for {}.'.format(dialect.name)
+    name = f'{dialect.class_name_prefix}MsgTypes'
+    javadoc = f'Message types for {dialect.name}.'
     fields = [_format_msg_type(message) for message in messages]
     return _format_constant_fields(name, javadoc, fields, dialect)
 
@@ -108,8 +108,8 @@ def _format_msg_type(message: Message) -> java.ConstantField:
 
 
 def format_tags(fields: list[Field], dialect: Dialect) -> java.CompilationUnit:
-    name = '{}Tags'.format(dialect.class_name_prefix)
-    javadoc = 'Tags for {}.'.format(dialect.name)
+    name = f'{dialect.class_name_prefix}Tags'
+    javadoc = f'Tags for {dialect.name}.'
     constant_fields = [_format_tag(field) for field in fields]
     return _format_constant_fields(name, javadoc, constant_fields, dialect)
 

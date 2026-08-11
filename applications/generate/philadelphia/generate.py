@@ -66,7 +66,7 @@ def main():
 
     command = COMMANDS.get(sys.argv[1])
     if not command:
-        sys.exit('error: {}: Unknown command'.format(sys.argv[1]))
+        sys.exit(f'error: {sys.argv[1]}: Unknown command')
 
     config = sys.argv[2]
     path = sys.argv[3]

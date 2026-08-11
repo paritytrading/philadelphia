@@ -122,7 +122,7 @@ class Package:
         self.name = name
 
     def __str__(self):
-        return 'package {};'.format(self.name)
+        return f'package {self.name};'
 
 
 class CompilationUnit:
@@ -132,8 +132,7 @@ class CompilationUnit:
         self.class_ = class_
 
     def __str__(self):
-        return '{}\n\n{}\n\n{}'.format(self.package, COMPILATION_UNIT_COMMENT,
-                                       self.class_)
+        return f'{self.package}\n\n{COMPILATION_UNIT_COMMENT}\n\n{self.class_}'
 
 
 COMPILATION_UNIT_COMMENT = '''\
@@ -155,8 +154,8 @@ _JAVADOC_FOOTER = ' */'
 
 def _format_javadoc(javadoc: str) -> str:
     lines = javadoc.splitlines()
-    body = ''.join('{}{}{}\n'.format(_JAVADOC_PREFIX, ' ' if line else '', line) for line in lines)
-    return '{}{}{}'.format(_JAVADOC_HEADER, body, _JAVADOC_FOOTER)
+    body = ''.join(f'{_JAVADOC_PREFIX}{" " if line else ""}{line}\n' for line in lines)
+    return f'{_JAVADOC_HEADER}{body}{_JAVADOC_FOOTER}'
 
 
 def _indent(text: str) -> str:
