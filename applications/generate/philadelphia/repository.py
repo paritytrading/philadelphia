@@ -13,13 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-from dataclasses import dataclass
-
 import itertools
 import os
+from dataclasses import dataclass
 
-from . import etree
-from . import model
+from . import etree, model
 
 
 def read_messages(dirname: str) -> list[model.Message]:
@@ -97,7 +95,7 @@ def _make_type(field_type: str, values: list[model.Value]) -> str:
 
 
 def _has_values(field: _Field) -> bool:
-    return not field.type_ == 'Boolean' and not field.name == 'MsgType'
+    return field.type_ != 'Boolean' and field.name != 'MsgType'
 
 
 def _read_fields(dirname: str) -> list[_Field]:

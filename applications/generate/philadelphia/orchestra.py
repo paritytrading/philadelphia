@@ -13,13 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import itertools
 from dataclasses import dataclass
 
-import itertools
-
-from . import etree
-from . import model
-
+from . import etree, model
 
 _NS = {
     'fixr': 'http://fixprotocol.io/2020/orchestra/repository',
@@ -155,7 +152,7 @@ _NO_VALUES = [
 
 
 def _has_values(code_set: _CodeSet) -> bool:
-    return code_set.id_ not in _NO_VALUES and not code_set.type_ == 'Boolean'
+    return code_set.id_ not in _NO_VALUES and code_set.type_ != 'Boolean'
 
 
 def _sorted_codes(codes: list[_Code]) -> list[_Code]:

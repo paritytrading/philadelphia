@@ -16,12 +16,7 @@
 import os.path
 import sys
 
-from . import model
-from . import orchestra
-from . import quickfix
-from . import repository
-from . import source
-
+from . import model, orchestra, quickfix, repository, source
 
 USAGE = '''\
 Usage: philadelphia-generate <command> <configuration-file> <input-path>
@@ -71,7 +66,7 @@ def main():
 
     command = COMMANDS.get(sys.argv[1])
     if not command:
-        sys.exit('error: {}: Unknown command'.format(sys.argv[1]))
+        sys.exit(f'error: {sys.argv[1]}: Unknown command')
 
     config = sys.argv[2]
     path = sys.argv[3]

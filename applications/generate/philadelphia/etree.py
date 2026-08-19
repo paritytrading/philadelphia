@@ -16,7 +16,6 @@
 import typing
 import xml.etree.ElementTree
 
-
 ElementTree = xml.etree.ElementTree.ElementTree
 
 Element = xml.etree.ElementTree.Element
@@ -29,5 +28,5 @@ def parse(filename: str) -> ElementTree:
 def get(elem: Element, key: str) -> str:
     value = elem.get(key)
     if not value:
-        raise KeyError('Attribute not found: {}'.format(key))
+        raise KeyError(f'Attribute not found: {key}')
     return value
